@@ -7,7 +7,7 @@ using UnityEngine.Tilemaps;
 public enum TileType
 {
     Hole,
-    Sand,
+    Dirt,
     Rock,
     Green,
     Door,
@@ -16,7 +16,9 @@ public enum TileType
 
 public class TerrainTile : RuleTile
 {
-    public TileType type;
+    public TileType tileType;
+    public bool canSowSeed;
+    public bool canStepOn=true;
 
 #if UNITY_EDITOR
     // The following is a helper that adds a menu item to create a RoadTile Asset

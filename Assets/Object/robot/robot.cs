@@ -24,21 +24,12 @@ public class robot : MonoBehaviour
         
     }
 
-    void Update()
-    {
-        if (Vector3.Distance(transform.position, player.position) > nearDistance)
-        {
-            var add = (player.position-transform.position).normalized;
 
-            transform.position += add* speed;
-        }
-    }
-
-    public void Attack(Vector3 dir)
+    public void CollectFruit(Vector3 dir)
     {
-        StartCoroutine(WaitAttackEnd(dir));
+        StartCoroutine(WaitCollectFruit(dir));
     }
-    IEnumerator WaitAttackEnd(Vector3 dir)
+    IEnumerator WaitCollectFruit(Vector3 dir)
     {
         isAttacked = true;
         GetComponent<Collider2D>().isTrigger = true;
@@ -58,6 +49,14 @@ public class robot : MonoBehaviour
 
         isAttacked = false;
         GetComponent<Collider2D>().isTrigger = false;
+
+
+        if (Vector3.Distance(transform.position, player.position) > nearDistance)
+        {
+            var add = (player.position - transform.position).normalized;
+
+            transform.position += add * speed;
+        }
     }
 
     private void OnTriggerEnter2D(Collider2D collision)

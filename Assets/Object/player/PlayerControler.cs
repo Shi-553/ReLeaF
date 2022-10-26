@@ -6,29 +6,23 @@ using UnityEngine.Tilemaps;
 public class PlayerControler : MonoBehaviour
 {
     [SerializeField]
-        Tilemap tilemap;
-    [SerializeField]
-    TerrainTile tile;
+    DungeonManager dungeonManager;
 
     [SerializeField]
-    float speed=1.0f;
+    float speed = 1.0f;
 
     [SerializeField]
     robot robot;
 
+    Transform footTransform;
+
     void Start()
     {
-        //tilemap=
+        footTransform=transform.Find("Foot");
     }
 
-    // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Space))
-        {
-            tilemap.SetTile(tilemap.WorldToCell(transform.position), tile);
-            
-        }
 
         Vector2 add = Vector2.zero;
         if (Input.GetKey(KeyCode.W))
@@ -52,16 +46,18 @@ public class PlayerControler : MonoBehaviour
             var pos = transform.position;
 
             add.Normalize();
-            pos.x += add.x * tilemap.cellSize.x * speed*Time.deltaTime ;
-            pos.y += add.y * tilemap.cellSize.x * speed * Time.deltaTime;
+            pos.x += add.x * dungeonManager.GetCellSize().x * speed * Time.deltaTime;
+            pos.y += add.y * dungeonManager.GetCellSize().x * speed * Time.deltaTime;
 
             transform.position = pos;
 
 
             if (Input.GetKeyDown(KeyCode.Return))
             {
-                robot.Attack(add);
+                robot.CollectFruit(add);
             }
+
+            dungeonManager.SowSeed(footTransform.position, SeedType.Normal);
         }
     }
 }
