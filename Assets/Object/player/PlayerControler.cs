@@ -36,7 +36,7 @@ public class PlayerControler : MonoBehaviour
 
     void Start()
     {
-        footTransform=transform.Find("Foot");
+        footTransform = transform.Find("Foot");
         hp = hpMax;
         TryGetComponent(out rigid);
     }
@@ -92,21 +92,25 @@ public class PlayerControler : MonoBehaviour
         {
             droneManager.Harvest();
         }
-        if (fruitContainer!=null&&Input.GetMouseButton(0))
+        if (shotTimeCounter > 0.0f)
         {
-            shotTimeCounter+=Time.deltaTime*shotSpeed;
-            if (shotTimeCounter >= 1.0f)
+            shotTimeCounter -= Time.deltaTime * shotSpeed;
+        }
+        else
+        {
+            if (fruitContainer != null && Input.GetMouseButton(0))
             {
-                shotTimeCounter = 0.0f;
+                shotTimeCounter = 1.0f;
 
                 if (fruitContainer.Pop(out var f))
                 {
-                    f.position= transform.position;
-                    var dir = (Camera.main.ScreenToWorldPoint(Input.mousePosition)- transform.position ).normalized;
+                    f.position = transform.position;
+                    Vector2 dir = Camera.main.ScreenToWorldPoint(Input.mousePosition) - transform.position;
+                    dir.Normalize();
 
-                    f.GetComponent<Fruit>().Shot( dir);
+                    f.GetComponent<Fruit>().Shot(dir);
                 }
-                if (fruitContainer.IsEmpty()) 
+                if (fruitContainer.IsEmpty())
                 {
                     Destroy(fruitContainer.gameObject);
                     fruitContainer = null;
@@ -115,12 +119,12 @@ public class PlayerControler : MonoBehaviour
         }
     }
 
-    public void Damaged(int damage,Vector3 impulse)
+    public void Damaged(int damage, Vector3 impulse)
     {
-        if(hp==0)
+        if (hp == 0)
             return;
 
-        hp-=damage;
+        hp -= damage;
         StartCoroutine(KnockBack(impulse));
         if (hp <= 0)
         {
@@ -148,7 +152,7 @@ public class PlayerControler : MonoBehaviour
     IEnumerator Death()
     {
         GetComponentInChildren<SpriteRenderer>().enabled = false;
-        yield return new WaitUntil(()=>Input.GetKeyDown(KeyCode.Return));
+        yield return new WaitUntil(() => Input.GetKeyDown(KeyCode.Return));
         SceneManager.LoadScene(0);
     }
 
@@ -157,6 +161,6 @@ public class PlayerControler : MonoBehaviour
         fruitContainer = container;
         fruitContainer.transform.position = transform.position;
         fruitContainer.Connect(transform);
-        
+
     }
 }

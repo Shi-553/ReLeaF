@@ -151,6 +151,13 @@ public class DungeonManager : MonoBehaviour
             fruit.SteppedOn();
             groundTilemap.SetTile(stackedPos2, treeTile);
         }
+        else
+        {
+            if (groundTilemap.GetTile<TerrainTile>(tilePos) == wetSandTile)
+            {
+                groundTilemap.SetTile(tilePos,sandTile);
+            }
+        }
     }
     IEnumerator CureMessy(Vector3Int tilePos)
     {

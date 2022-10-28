@@ -22,7 +22,7 @@ public class Fruit : MonoBehaviour
 
     public bool IsAttack { get; private set; }
 
-    Vector3 dir;
+    Vector2 dir;
     void Start()
     {
         IsAttack = false;
@@ -38,7 +38,7 @@ public class Fruit : MonoBehaviour
     {
         transform.GetChild(0).gameObject.SetActive(sw);
     }
-    public void Shot(Vector3 dir)
+    public void Shot(Vector2 dir)
     {
         this.dir = Quaternion.Euler(0, 0, Random.Range(-diffusion, diffusion)) * dir;
         IsAttack = true;
