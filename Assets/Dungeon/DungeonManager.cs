@@ -4,8 +4,6 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Tilemaps;
 using System.Linq;
-using static UnityEditor.PlayerSettings;
-using static Cinemachine.CinemachineFreeLook;
 
 public enum SeedType
 {
@@ -111,6 +109,7 @@ public class DungeonManager : MonoBehaviour
         }
         StartCoroutine(GrowGreenTile(pos, type));
     }
+
     IEnumerator GrowGreenTile(Vector3Int tilePos, SeedType type)
     {
         groundTilemap.SetTile(tilePos, wetSandTile);
@@ -146,10 +145,10 @@ public class DungeonManager : MonoBehaviour
 
 
 
-        // ÉtÉãÅ[ÉcÇñÿÇ…Ç∑ÇÈ
-        if (fruitDic.Remove(tilePos))
+        if (fruit != null && fruitDic.Remove(tilePos))
         {
-            if (fruit != null && !fruit.IsHarvested)
+            // Ç‹Çæé˚änÇ≥ÇÍÇƒÇ»Ç¢ÇÃÇ≈ñÿÇ…Ç∑ÇÈ
+            if (!fruit.IsHarvested)
             {
                 fruit.Destroy();
                 groundTilemap.SetTile(stackedPos2, treeTile);
@@ -168,8 +167,5 @@ public class DungeonManager : MonoBehaviour
         Debug.Log("CureMessy");
     }
 
-    public Vector3 GetCellSize()
-    {
-        return grid.cellSize;
-    }
+    static public readonly Vector3 CELL_SIZE = new Vector3(0.5f, 0.5f, 0);
 }

@@ -130,22 +130,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 1499278675591006142, guid: 8c22987fd0a97f943b08fcd3c9bdf8af, type: 3}
-      propertyPath: treeTile
-      value: 
-      objectReference: {fileID: 11400000, guid: cdc1563c4dd2fa64fa745cd71c45a806, type: 2}
-    - target: {fileID: 1499278675591006142, guid: 8c22987fd0a97f943b08fcd3c9bdf8af, type: 3}
-      propertyPath: growFruitTime
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 1499278675591006142, guid: 8c22987fd0a97f943b08fcd3c9bdf8af, type: 3}
-      propertyPath: messyCuredTime
-      value: 10
-      objectReference: {fileID: 0}
-    - target: {fileID: 1499278675591006142, guid: 8c22987fd0a97f943b08fcd3c9bdf8af, type: 3}
-      propertyPath: untilWithersTime
-      value: 5
-      objectReference: {fileID: 0}
     - target: {fileID: 5023065968575969387, guid: 8c22987fd0a97f943b08fcd3c9bdf8af, type: 3}
       propertyPath: m_RootOrder
       value: 6
@@ -194,8 +178,7 @@ PrefabInstance:
       propertyPath: m_Name
       value: TestDungeon
       objectReference: {fileID: 0}
-    m_RemovedComponents:
-    - {fileID: 7878335721381089998, guid: 8c22987fd0a97f943b08fcd3c9bdf8af, type: 3}
+    m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 8c22987fd0a97f943b08fcd3c9bdf8af, type: 3}
 --- !u!1 &519420028
 GameObject:

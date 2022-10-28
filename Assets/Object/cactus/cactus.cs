@@ -9,22 +9,52 @@ public class cactus : MonoBehaviour
     int hpMax = 3;
     [SerializeField]
     int hp = 3;
-    [SerializeField]
-    int explosionRange = 2;
 
     [SerializeField]
-    Tilemap tilemap;
+    bool shouldAimTarget;
+
     [SerializeField]
-    Tile tile;
+    int attackSpinesNum = 1;
+
+    [SerializeField]
+    GameObject spinesPrefab;
+    [SerializeField]
+    float attackTime = 2.0f;
+
+    Vision vision;
+
+    float attackTimeCounter = 0;
     void Start()
     {
+        attackTimeCounter = 0;
         hp = hpMax;
+        vision = GetComponentInChildren<Vision>();
     }
 
-    // Update is called once per frame
+
     void Update()
     {
+        if (vision.ShouldFoundTarget || attackTimeCounter > 0)
+        {
+            attackTimeCounter += Time.deltaTime;
 
+
+            transform.localScale =Vector3.one*MathExtension.LerpPairs(new SortedList<float, float>{ {0,1 }, { 0.8f, 1 },{ 0.95f, 0.8f }, { 1, 1 } },attackTimeCounter/attackTime);
+            
+
+            if (attackTimeCounter >= attackTime)
+            {
+                attackTimeCounter = 0;
+
+                var rotation = shouldAimTarget ?
+                    Quaternion.FromToRotation(Vector3.up, vision.Target.position - transform.position) :
+                    Quaternion.identity;
+                for (int i = 0; i < attackSpinesNum; i++)
+                {
+                    Instantiate(spinesPrefab, transform.position, rotation * Quaternion.Euler(0, 0, 360.0f * i / attackSpinesNum));
+                }
+            }
+        }
     }
 
     public void Damaged(int damage)
@@ -32,14 +62,6 @@ public class cactus : MonoBehaviour
         hp -= damage;
         if (hp <= 0)
         {
-
-            for (int i = -explosionRange; i < explosionRange; i++)
-            {
-                for (int j = -explosionRange; j < explosionRange; j++)
-                {
-                    tilemap.SetTile(tilemap.WorldToCell(transform.position) + new Vector3Int(i, j, 0), tile);
-                }
-            }
             Destroy(gameObject);
         }
     }
