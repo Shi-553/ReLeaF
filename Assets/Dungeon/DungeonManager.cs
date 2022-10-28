@@ -54,6 +54,7 @@ public class DungeonManager : MonoBehaviour
 
     Dictionary<Vector3Int, Fruit> fruitDic = new Dictionary<Vector3Int, Fruit>();
 
+    Transform fruitsParent;
     public Fruit Harvest(Vector3 worldPos)
     {
         fruitDic.Remove(grid.WorldToCell(worldPos), out var fruit);
@@ -63,6 +64,7 @@ public class DungeonManager : MonoBehaviour
     private void Start()
     {
         fruitDic.Clear();
+        fruitsParent = transform.Find("Fruits");
     }
 
     public void SowSeed(Vector3 worldPos, SeedType type)
@@ -134,7 +136,7 @@ public class DungeonManager : MonoBehaviour
         Debug.Log("fruit");
 
 
-        var fruitObj = Instantiate(fruits[(int)type], grid.CellToWorld(tilePos) + groundTilemap.cellSize / 2, Quaternion.identity);
+        var fruitObj = Instantiate(fruits[(int)type], grid.CellToWorld(tilePos) + groundTilemap.cellSize / 2, Quaternion.identity, fruitsParent);
         var fruit = fruitObj.GetComponent<Fruit>();
         fruitDic.Add(tilePos, fruit);
 
