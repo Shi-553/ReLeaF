@@ -15,7 +15,7 @@ public class Drone : MonoBehaviour
     [SerializeField]
     float collectionRadius = 0.5f;
     [SerializeField]
-    GameObject fruitContainerPrefab;
+    FruitContainer fruitContainer;
 
     void Start()
     {
@@ -25,10 +25,8 @@ public class Drone : MonoBehaviour
     {
         transform.position = player.transform.position;
 
-        var containerObj=Instantiate(fruitContainerPrefab);
-        containerObj.transform.position = transform.position;
-        var container = containerObj.GetComponent<FruitContainer>();
-        container.Connect(transform);
+        fruitContainer.transform.position = transform.position;
+        fruitContainer.Connect(transform);
 
 
         var fruitTransforms = fEnumerable.ToList();
@@ -46,7 +44,7 @@ public class Drone : MonoBehaviour
 
                 if ((transform.position - nearFruit.position).sqrMagnitude < collectionRadius* collectionRadius)
                 {
-                    container.Push(nearFruit);
+                    fruitContainer.Push(nearFruit);
                     break;
                 }
                 yield return null;
@@ -64,6 +62,6 @@ public class Drone : MonoBehaviour
             }
             yield return null;
         }
-        player.Harvested(container);
+        player.Harvested(fruitContainer);
     }
 }

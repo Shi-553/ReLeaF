@@ -195,6 +195,10 @@ PrefabInstance:
       propertyPath: dungeonManager
       value: 
       objectReference: {fileID: 1200048981}
+    - target: {fileID: 252597926, guid: 9ca94c9a53b7d29438d0dcc04c15f6ff, type: 3}
+      propertyPath: fruitContainer
+      value: 
+      objectReference: {fileID: 508561262}
     - target: {fileID: 817023885529566100, guid: 9ca94c9a53b7d29438d0dcc04c15f6ff, type: 3}
       propertyPath: m_RootOrder
       value: 4
@@ -245,6 +249,17 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 9ca94c9a53b7d29438d0dcc04c15f6ff, type: 3}
+--- !u!114 &508561262 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 8262983134650453015, guid: 9ca94c9a53b7d29438d0dcc04c15f6ff, type: 3}
+  m_PrefabInstance: {fileID: 508561261}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0ba7c5fa36a37c744b4a02f95dfc4fec, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &519420028
 GameObject:
   m_ObjectHideFlags: 0
