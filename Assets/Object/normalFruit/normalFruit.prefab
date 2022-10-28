@@ -101,9 +101,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   lifeTime: 2
-  speed: 30
+  speed: 10
   atk: 1
   attackKnockBackPower: 4
+  diffusion: 10
 --- !u!58 &909575218943297932
 CircleCollider2D:
   m_ObjectHideFlags: 0
