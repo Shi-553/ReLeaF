@@ -1,0 +1,18 @@
+{
+  "requireUpstream": false,
+  "requireCleanWorkingDir": false,
+  "github": {
+    "release": true,
+    "assets": ["*.zip"]
+  },
+  "git": {
+    "commit": false,
+    "push": false,
+    "requireUpstream": false,
+    "requireCleanWorkingDir": false
+  },
+  "npm": {
+    "publish": false,
+    "ignoreVersion": true
+  }
+}
