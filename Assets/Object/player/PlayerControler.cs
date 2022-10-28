@@ -48,6 +48,18 @@ public class PlayerControler : MonoBehaviour
     }
     void Update()
     {
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+#if UNITY_EDITOR
+            UnityEditor.EditorApplication.isPlaying = false;
+#elif UNITY_STANDALONE
+      UnityEngine.Application.Quit();
+#endif
+        }
+        if (Input.GetKeyDown(KeyCode.F1))
+        {
+            SceneManager.LoadScene(0);
+        }
         if (hp == 0)
         {
             return;
@@ -156,7 +168,7 @@ public class PlayerControler : MonoBehaviour
     IEnumerator Death()
     {
         GetComponentInChildren<SpriteRenderer>().enabled = false;
-        yield return new WaitUntil(() => Input.GetKeyDown(KeyCode.Return));
+        yield return new WaitUntil(() => Input.GetMouseButtonDown(0));
         SceneManager.LoadScene(0);
     }
 
