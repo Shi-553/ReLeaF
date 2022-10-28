@@ -84,14 +84,19 @@ public class PlayerControler : MonoBehaviour
 
             dungeonManager.SowSeed(footTransform.position, SeedType.Normal);
         }
-        if (Input.GetMouseButtonDown(1))
+
+        if (fruitContainer == null)
         {
-            droneManager.SetupRange(transform);
+            if (Input.GetMouseButtonDown(1))
+            {
+                droneManager.SetupRange(transform);
+            }
+            if (Input.GetMouseButtonUp(1))
+            {
+                droneManager.Harvest();
+            }
         }
-        if (Input.GetMouseButtonUp(1))
-        {
-            droneManager.Harvest();
-        }
+
         if (shotTimeCounter > 0.0f)
         {
             shotTimeCounter -= Time.deltaTime * shotSpeed;
