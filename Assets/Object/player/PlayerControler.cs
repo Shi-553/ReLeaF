@@ -117,7 +117,6 @@ public class PlayerControler : MonoBehaviour
                 }
                 if (fruitContainer.IsEmpty())
                 {
-                    Destroy(fruitContainer.gameObject);
                     fruitContainer = null;
                 }
             }
