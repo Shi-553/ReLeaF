@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.Tilemaps;
@@ -10,10 +11,15 @@ public class PlayerControler : MonoBehaviour
     DungeonManager dungeonManager;
 
     [SerializeField]
-    float speed = 1.0f;
+    float moveSpeed = 5;
+    [SerializeField]
+    float shotMoveSpeed = 2;
+    [SerializeField]
+    float shotSpeed = 3;
+    float shotTimeCounter = 0;
 
     [SerializeField]
-    robot robot;
+    DroneManager droneManager;
 
     Transform footTransform;
 
@@ -26,6 +32,8 @@ public class PlayerControler : MonoBehaviour
 
     Vector2 move;
     Rigidbody2D rigid;
+    FruitContainer fruitContainer;
+
     void Start()
     {
         footTransform=transform.Find("Foot");
@@ -66,17 +74,44 @@ public class PlayerControler : MonoBehaviour
         {
 
             add.Normalize();
+            var speed = fruitContainer == null ? moveSpeed : shotMoveSpeed;
+
             move.x += add.x * DungeonManager.CELL_SIZE.x * speed * Time.deltaTime;
             move.y += add.y * DungeonManager.CELL_SIZE.y * speed * Time.deltaTime;
 
 
 
-            if (Input.GetKeyDown(KeyCode.Return))
-            {
-                robot.CollectFruit(add);
-            }
 
             dungeonManager.SowSeed(footTransform.position, SeedType.Normal);
+        }
+        if (Input.GetMouseButtonDown(1))
+        {
+            droneManager.SetupRange(transform);
+        }
+        if (Input.GetMouseButtonUp(1))
+        {
+            droneManager.Harvest();
+        }
+        if (fruitContainer!=null&&Input.GetMouseButton(0))
+        {
+            shotTimeCounter+=Time.deltaTime*shotSpeed;
+            if (shotTimeCounter >= 1.0f)
+            {
+                shotTimeCounter = 0.0f;
+
+                if (fruitContainer.Pop(out var f))
+                {
+                    f.position= transform.position;
+                    var dir = (Camera.main.ScreenToWorldPoint(Input.mousePosition)- transform.position ).normalized;
+
+                    f.GetComponent<Fruit>().Shot( dir);
+                }
+                if (fruitContainer.IsEmpty()) 
+                {
+                    Destroy(fruitContainer.gameObject);
+                    fruitContainer = null;
+                }
+            }
         }
     }
 
@@ -97,8 +132,6 @@ public class PlayerControler : MonoBehaviour
     {
         while (true)
         {
-
-
             move.x += impulse.x * DungeonManager.CELL_SIZE.x * Time.deltaTime;
             move.y += impulse.y * DungeonManager.CELL_SIZE.y * Time.deltaTime;
 
@@ -117,5 +150,13 @@ public class PlayerControler : MonoBehaviour
         GetComponentInChildren<SpriteRenderer>().enabled = false;
         yield return new WaitUntil(()=>Input.GetKeyDown(KeyCode.Return));
         SceneManager.LoadScene(0);
+    }
+
+    public void Harvested(FruitContainer container)
+    {
+        fruitContainer = container;
+        fruitContainer.transform.position = transform.position;
+        fruitContainer.Connect(transform);
+        
     }
 }

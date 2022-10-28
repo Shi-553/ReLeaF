@@ -164,8 +164,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   dungeonManager: {fileID: 0}
-  speed: 5
-  robot: {fileID: 0}
+  moveSpeed: 5
+  shotMoveSpeed: 2
+  shotSpeed: 10
+  droneManager: {fileID: 0}
   hpMax: 10
   hp: 10
   knockBackDampingRate: 0.9

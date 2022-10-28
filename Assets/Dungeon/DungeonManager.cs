@@ -54,10 +54,10 @@ public class DungeonManager : MonoBehaviour
 
     Dictionary<Vector3Int, Fruit> fruitDic = new Dictionary<Vector3Int, Fruit>();
 
-    public void Harvest(Vector3 worldPos)
+    public Fruit Harvest(Vector3 worldPos)
     {
         fruitDic.Remove(grid.WorldToCell(worldPos), out var fruit);
-        fruit.Harvest();
+        return fruit;
     }
 
     private void Start()
@@ -92,7 +92,7 @@ public class DungeonManager : MonoBehaviour
             // ÉtÉãÅ[ÉcÇÇ»Ç≠Ç∑
             if (fruitDic.Remove(pos, out var fruit))
             {
-                fruit.Destroy();
+                fruit.SteppedOn();
             }
             return;
         }
@@ -148,16 +148,8 @@ public class DungeonManager : MonoBehaviour
         if (fruit != null && fruitDic.Remove(tilePos))
         {
             // Ç‹Çæé˚änÇ≥ÇÍÇƒÇ»Ç¢ÇÃÇ≈ñÿÇ…Ç∑ÇÈ
-            if (!fruit.IsHarvested)
-            {
-                fruit.Destroy();
-                groundTilemap.SetTile(stackedPos2, treeTile);
-            }
-            else
-            {
-
-                groundTilemap.SetTile(tilePos, sandTile);
-            }
+            fruit.SteppedOn();
+            groundTilemap.SetTile(stackedPos2, treeTile);
         }
     }
     IEnumerator CureMessy(Vector3Int tilePos)

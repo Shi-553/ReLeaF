@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &6607658231324527203
+--- !u!1 &112042263302005053
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -8,39 +8,38 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 5366246639667915720}
-  - component: {fileID: 6740564933535960600}
-  - component: {fileID: 1514156189}
-  - component: {fileID: 760924316268743110}
+  - component: {fileID: 7974366082469217137}
+  - component: {fileID: 5121006966109246178}
+  - component: {fileID: 757438333}
   m_Layer: 0
-  m_Name: robot
+  m_Name: drone
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &5366246639667915720
+--- !u!4 &7974366082469217137
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6607658231324527203}
+  m_GameObject: {fileID: 112042263302005053}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 1.6405494, y: 1.625304, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!212 &6740564933535960600
+--- !u!212 &5121006966109246178
 SpriteRenderer:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6607658231324527203}
+  m_GameObject: {fileID: 112042263302005053}
   m_Enabled: 1
   m_CastShadows: 0
   m_ReceiveShadows: 0
@@ -75,58 +74,31 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 101
-  m_Sprite: {fileID: 21300000, guid: ad752cfbe1814cf4dbf5a2bf3ab11cf5, type: 3}
+  m_Sprite: {fileID: 21300000, guid: e13b9f2ab3a5c624da464926d5b94be7, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 2.66, y: 2.56}
+  m_Size: {x: 1.0390625, y: 1}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &1514156189
+--- !u!114 &757438333
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6607658231324527203}
+  m_GameObject: {fileID: 112042263302005053}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 57ceaf9fe267b444f931848f8d4f8713, type: 3}
+  m_Script: {fileID: 11500000, guid: 76f102cdb70483f47a188ca89e9016a9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  dungeonManager: {fileID: 0}
   player: {fileID: 0}
-  nearDistance: 1.5
-  speed: 0.02
-  atk: 3
-  atkSpeed: 5
-  atkDuration: 1
---- !u!61 &760924316268743110
-BoxCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6607658231324527203}
-  m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
-  m_SpriteTilingProperty:
-    border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 1.0390625, y: 1}
-    newSize: {x: 2.66, y: 2.56}
-    adaptiveTilingThreshold: 0.5
-    drawMode: 0
-    adaptiveTiling: 0
-  m_AutoTiling: 0
-  serializedVersion: 2
-  m_Size: {x: 1.0390625, y: 1}
-  m_EdgeRadius: 0
+  speed: 5
+  collectionRadius: 0.5
+  fruitContainerPrefab: {fileID: 0}
