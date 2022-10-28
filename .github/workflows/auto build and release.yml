@@ -1,0 +1,77 @@
+name: auto build and release
+
+on:
+  workflow_dispatch:
+  
+  pull_request:
+    types:
+      - closed
+    branches:
+      - master
+
+concurrency:
+  group: ${{ github.ref }}-${{ github.workflow }}
+  cancel-in-progress: true
+  
+jobs:
+  build:
+    if: github.event_name == 'workflow_dispatch' || github.event.pull_request.merged == true
+    name: Build my project ✨
+    runs-on: ubuntu-latest
+    env:
+      GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      RELEASE_IT_VERSION: 14
+    steps:
+        
+      # Checkout
+      - name: Checkout repository
+        uses: actions/checkout@v2
+        with:
+          fetch-depth: 0
+
+      # Cache
+      - uses: actions/cache@v2
+        with:
+          path: Library
+          key: Library-${{ hashFiles('Assets/**', 'Packages/**', 'ProjectSettings/**') }}
+          restore-keys: |
+            Library-
+      # Build
+      - name: Build project
+        uses: game-ci/unity-builder@v2
+        env:
+          UNITY_LICENSE: ${{ secrets.UNITY_LICENSE }}
+          UNITY_EMAIL: ${{ secrets.UNITY_EMAIL }}
+          UNITY_PASSWORD: ${{ secrets.UNITY_PASSWORD }}
+        with:
+          targetPlatform: StandaloneWindows64
+          buildName: ReLeaF
+          versioning: None
+
+      - name: rename
+        run: sudo mv "./build/StandaloneWindows64" "./build/ReLeaF"
+        shell: bash
+        
+      - name: Zip
+        run: 7z a "./ReLeaF.zip" "./build/ReLeaF" -tzip
+
+      - name: Set releaser settings
+        run: |
+          git config --global user.name release-machine
+          git config --global user.email email@example.com
+          
+      - name: Major release
+        id: major
+        if: contains(toJSON(github.event.commits.*.message), 'major update')
+        run:  npx release-it@${RELEASE_IT_VERSION} -- major --ci
+        
+      - name: Minor release
+        id: minor
+        # メジャーバージョンアップをしていないときマイナーバージョンアップを行なうか
+        if: steps.major.conclusion == 'skipped'  && contains(toJSON(github.event.commits.*.message), 'minor update')
+        run:  npx release-it@${RELEASE_IT_VERSION} -- minor --ci
+        
+      - name: Patch release
+        # コミットメッセージに特に指定がない場合はパッチバージョンを更新する
+        if: "!(steps.major.conclusion == 'success' || steps.minor.conclusion == 'success')"
+        run: npx release-it@${RELEASE_IT_VERSION} -- patch --ci
