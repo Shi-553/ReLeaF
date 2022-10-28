@@ -12,11 +12,21 @@ public class Spines : MonoBehaviour
     float speed = 1.0f;
     [SerializeField]
     int atk = 1;
+    [SerializeField]
+    float attackKnockBackPower = 4.0f;
+    Rigidbody2D rigid;
+    Vector2 move;
     void Start()
     {
         lifeTimeCounter = 0;
+        TryGetComponent(out rigid);
     }
 
+    private void FixedUpdate()
+    {
+        rigid.MovePosition(rigid.position + move);
+        move = Vector2.zero;
+    }
     void Update()
     {
         lifeTimeCounter += Time.deltaTime;
@@ -26,7 +36,7 @@ public class Spines : MonoBehaviour
             Destroy(gameObject);
         }
 
-        transform.position += new Vector3(
+        move += new Vector2(
             transform.up.x * speed * DungeonManager.CELL_SIZE.x * Time.deltaTime,
             transform.up.y * speed * DungeonManager.CELL_SIZE.y * Time.deltaTime);
     }
@@ -37,7 +47,7 @@ public class Spines : MonoBehaviour
         {
             if (collision.TryGetComponent<PlayerControler>(out var player))
             {
-                player.Damaged(atk);
+                player.Damaged(atk, transform.up* attackKnockBackPower);
                 Destroy(gameObject);
             }
         }

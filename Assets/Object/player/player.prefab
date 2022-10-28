@@ -168,6 +168,7 @@ MonoBehaviour:
   robot: {fileID: 0}
   hpMax: 10
   hp: 10
+  knockBackDampingRate: 0.9
 --- !u!58 &1150814128717608690
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -194,7 +195,7 @@ Rigidbody2D:
   m_GameObject: {fileID: 8467192124429001911}
   m_BodyType: 0
   m_Simulated: 1
-  m_UseFullKinematicContacts: 0
+  m_UseFullKinematicContacts: 1
   m_UseAutoMass: 0
   m_Mass: 1
   m_LinearDrag: 0

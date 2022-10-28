@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 4283714514119123101}
   - component: {fileID: 3777994689184293161}
   - component: {fileID: 4618218269431818276}
+  - component: {fileID: 5941124005257574131}
   m_Layer: 0
   m_Name: spines
   m_TagString: Untagged
@@ -98,7 +99,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e4032d80043464f45a08f83ea17e87de, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  lifeTime: 4
   speed: 5
+  atk: 1
+  attackKnockBackPower: 10
 --- !u!70 &4618218269431818276
 CapsuleCollider2D:
   m_ObjectHideFlags: 0
@@ -115,3 +119,24 @@ CapsuleCollider2D:
   m_Offset: {x: -0.0101835765, y: -0.039847873}
   m_Size: {x: 0.107779704, y: 0.20324148}
   m_Direction: 0
+--- !u!50 &5941124005257574131
+Rigidbody2D:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8863224938936071657}
+  m_BodyType: 1
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 1
+  m_LinearDrag: 0
+  m_AngularDrag: 0.05
+  m_GravityScale: 1
+  m_Material: {fileID: 0}
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 0
+  m_Constraints: 0

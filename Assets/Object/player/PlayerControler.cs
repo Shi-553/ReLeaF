@@ -21,13 +21,23 @@ public class PlayerControler : MonoBehaviour
     int hpMax = 10;
     [SerializeField]
     int hp = 10;
+    [SerializeField]
+    float knockBackDampingRate = 0.9f;
 
+    Vector2 move;
+    Rigidbody2D rigid;
     void Start()
     {
         footTransform=transform.Find("Foot");
         hp = hpMax;
+        TryGetComponent(out rigid);
     }
 
+    private void FixedUpdate()
+    {
+        rigid.MovePosition(rigid.position + move);
+        move = Vector2.zero;
+    }
     void Update()
     {
         if (hp == 0)
@@ -54,13 +64,11 @@ public class PlayerControler : MonoBehaviour
         }
         if (add != Vector2.zero)
         {
-            var pos = transform.position;
 
             add.Normalize();
-            pos.x += add.x * DungeonManager.CELL_SIZE.x * speed * Time.deltaTime;
-            pos.y += add.y * DungeonManager.CELL_SIZE.y * speed * Time.deltaTime;
+            move.x += add.x * DungeonManager.CELL_SIZE.x * speed * Time.deltaTime;
+            move.y += add.y * DungeonManager.CELL_SIZE.y * speed * Time.deltaTime;
 
-            transform.position = pos;
 
 
             if (Input.GetKeyDown(KeyCode.Return))
@@ -72,21 +80,41 @@ public class PlayerControler : MonoBehaviour
         }
     }
 
-    public void Damaged(int damage)
+    public void Damaged(int damage,Vector3 impulse)
     {
         if(hp==0)
             return;
 
         hp-=damage;
+        StartCoroutine(KnockBack(impulse));
         if (hp <= 0)
         {
             hp = 0;
             StartCoroutine(Death());
         }
     }
+    IEnumerator KnockBack(Vector3 impulse)
+    {
+        while (true)
+        {
+
+
+            move.x += impulse.x * DungeonManager.CELL_SIZE.x * Time.deltaTime;
+            move.y += impulse.y * DungeonManager.CELL_SIZE.y * Time.deltaTime;
+
+
+            impulse *= knockBackDampingRate;
+
+            if (impulse.sqrMagnitude < 0.01f)
+            {
+                yield break;
+            }
+            yield return null;
+        }
+    }
     IEnumerator Death()
     {
-        GetComponent<SpriteRenderer>().enabled = false;
+        GetComponentInChildren<SpriteRenderer>().enabled = false;
         yield return new WaitUntil(()=>Input.GetKeyDown(KeyCode.Return));
         SceneManager.LoadScene(0);
     }

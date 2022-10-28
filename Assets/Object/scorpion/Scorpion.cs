@@ -21,19 +21,34 @@ public class Scorpion : MonoBehaviour
     float attackDuration = 1.0f;
     [SerializeField]
     float attackSpeed = 4.0f;
+    [SerializeField]
+    float attackKnockBackPower = 4.0f;
 
     Vision searchVision;
     Vision attackVision;
 
+    [SerializeField]
+    float knockBackDampingRate = 0.9f;
     bool isAttack = false;
+    bool isAttackDamageNow = false;
+    Vector3 attackDir;
+
+    Vector2 move;
+
+    Rigidbody2D rigid;
     void Start()
     {
         hp = hpMax;
         isAttack = false;
         transform.Find("AttackVision").TryGetComponent(out attackVision);
         transform.Find("SearchVision").TryGetComponent(out searchVision);
+        TryGetComponent(out rigid);
     }
-
+    private void FixedUpdate()
+    {
+        rigid.MovePosition(rigid.position+ move);
+        move = Vector2.zero;
+    }
     void Update()
     {
         if (attackCoolTimeCounter > 0)
@@ -58,7 +73,7 @@ public class Scorpion : MonoBehaviour
         }
         var dir = (searchVision.Target.position - transform.position).normalized;
 
-        transform.position += new Vector3(
+        move += new Vector2(
             dir.x * speed * DungeonManager.CELL_SIZE.x * Time.deltaTime,
             dir.y * speed * DungeonManager.CELL_SIZE.y * Time.deltaTime);
     }
@@ -77,40 +92,71 @@ public class Scorpion : MonoBehaviour
         counter = 0;
 
 
-        var dir = (searchVision.Target.position - transform.position).normalized;
+        attackDir = (searchVision.Target.position - transform.position).normalized;
+        isAttackDamageNow = true;
 
-        while (attackDuration > counter)
+        while (attackDuration > counter&& isAttackDamageNow)
         {
+            if (!isAttack)
+            {
+                yield break;
+            }
             transform.localScale = Vector3.one * MathExtension.LerpPairs(
                     new SortedList<float, float> { { 0, 0.8f }, { 0.1f, 1.0f }, { 1, 1 } }, counter / attackDuration);
 
-            transform.position += new Vector3(
-                dir.x * attackSpeed * DungeonManager.CELL_SIZE.x * Time.deltaTime,
-                dir.y * attackSpeed * DungeonManager.CELL_SIZE.y * Time.deltaTime);
+            move += new Vector2(
+                attackDir.x * attackSpeed * DungeonManager.CELL_SIZE.x * Time.deltaTime,
+                attackDir.y * attackSpeed * DungeonManager.CELL_SIZE.y * Time.deltaTime);
 
             counter += Time.deltaTime;
             yield return null;
         }
+        isAttackDamageNow = false;
         isAttack = false;
         attackCoolTimeCounter = attackCoolTime;
     }
-    private void OnTriggerEnter2D(Collider2D collision)
+    private void OnCollisionEnter2D(Collision2D collision)
     {
-        if (collision.CompareTag("Player"))
+        if (!isAttackDamageNow) {
+            return;
+        }
+        if (collision.gameObject.CompareTag("Player"))
         {
-            if (collision.TryGetComponent<PlayerControler>(out var player))
+            if (collision.gameObject.TryGetComponent<PlayerControler>(out var player))
             {
-                player.Damaged(atk);
-                Destroy(gameObject);
+                player.Damaged(atk,attackDir*attackKnockBackPower);
+                isAttackDamageNow = false;
             }
         }
     }
-    public void Damaged(int damage)
+    public void Damaged(int damage, Vector3 impulse)
     {
         hp -= damage;
+        StartCoroutine(KnockBack(impulse));
         if (hp <= 0)
         {
             Destroy(gameObject);
+        }
+    }
+    IEnumerator KnockBack(Vector3 impulse)
+    {
+        while (true)
+        {
+
+            var pos = transform.position;
+
+            pos.x += impulse.x * DungeonManager.CELL_SIZE.x * Time.deltaTime;
+            pos.y += impulse.y * DungeonManager.CELL_SIZE.y * Time.deltaTime;
+
+            transform.position = pos;
+
+            impulse *= knockBackDampingRate;
+
+            if (impulse.sqrMagnitude<0.01f)
+            {
+                yield break;
+            }
+            yield return null;
         }
     }
 }
