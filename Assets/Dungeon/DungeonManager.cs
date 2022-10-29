@@ -174,7 +174,7 @@ public class DungeonManager : MonoBehaviour
         // ‚à‚¤ˆê“xŽÀ‚ð•t‚¯‚é‚Ü‚Å
         yield return new WaitForSeconds(regrowFruitTime);
 
-        if (groundTilemap.GetTile<TerrainTile>(tilePos) != treeTile)
+        if (groundTilemap.GetTile<TerrainTile>(tilePos + new Vector3Int(0, 0, 1)) != treeTile)
         {
             yield break;
         }

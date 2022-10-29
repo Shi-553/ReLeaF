@@ -30,10 +30,10 @@ public class Drone : MonoBehaviour
 
 
         var fruitTransforms = fEnumerable.ToList();
-        var fruits = fruitTransforms.Select(f => dungeonManager.Harvest(f.position)).ToArray();
 
         while (fruitTransforms.Count > 0)
         {
+            fruitTransforms = fruitTransforms.Where(f => f != null).ToList();
             var nearFruit = fruitTransforms.MinBy(f => (f.position - transform.position).sqrMagnitude);
             fruitTransforms.Remove(nearFruit);
 
@@ -44,6 +44,7 @@ public class Drone : MonoBehaviour
 
                 if ((transform.position - nearFruit.position).sqrMagnitude < collectionRadius* collectionRadius)
                 {
+                    dungeonManager.Harvest(nearFruit.position);
                     fruitContainer.Push(nearFruit);
                     break;
                 }
