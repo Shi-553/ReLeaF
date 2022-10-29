@@ -9,11 +9,11 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8798506536159048268}
-  - component: {fileID: 905085192655327871}
   - component: {fileID: -5069435676532952267}
+  - component: {fileID: 905085192655327871}
   - component: {fileID: 909575218943297932}
   - component: {fileID: 326703523405260161}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: normalFruit
   m_TagString: Fruit
   m_Icon: {fileID: 0}
@@ -36,6 +36,24 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &-5069435676532952267
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3158373612437488347}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f9dd7cc5e42ab824c9e462a0cf988143, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  seedType: 0
+  lifeTime: 2
+  speed: 10
+  atk: 1
+  attackKnockBackPower: 4
+  diffusion: 10
 --- !u!212 &905085192655327871
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -88,23 +106,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &-5069435676532952267
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3158373612437488347}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f9dd7cc5e42ab824c9e462a0cf988143, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  lifeTime: 2
-  speed: 10
-  atk: 1
-  attackKnockBackPower: 4
-  diffusion: 10
 --- !u!58 &909575218943297932
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -152,7 +153,7 @@ GameObject:
   m_Component:
   - component: {fileID: 378493090400108760}
   - component: {fileID: 3793808817121441899}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: normalFruitHighlight
   m_TagString: Untagged
   m_Icon: {fileID: 0}

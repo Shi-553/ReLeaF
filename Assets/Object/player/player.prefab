@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8466514786794790092}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Foot
   m_TagString: Player
   m_Icon: {fileID: 0}
@@ -41,7 +41,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1885619581900236545}
   - component: {fileID: 1237700018166482866}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Core
   m_TagString: Player
   m_Icon: {fileID: 0}
@@ -127,7 +127,7 @@ GameObject:
   - component: {fileID: 8467192124429001914}
   - component: {fileID: 1150814128717608690}
   - component: {fileID: 7234929495377642534}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: player
   m_TagString: Player
   m_Icon: {fileID: 0}
@@ -165,12 +165,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   dungeonManager: {fileID: 0}
   moveSpeed: 5
-  shotMoveSpeed: 2
+  shotMoveSpeed: 5
   shotSpeed: 10
   droneManager: {fileID: 0}
   hpMax: 10
   hp: 10
   knockBackDampingRate: 0.9
+  text: {fileID: 0}
 --- !u!58 &1150814128717608690
 CircleCollider2D:
   m_ObjectHideFlags: 0

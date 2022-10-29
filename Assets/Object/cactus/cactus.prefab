@@ -9,9 +9,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5655856754444111543}
+  - component: {fileID: 401563240}
   - component: {fileID: 3052677130235689122}
   - component: {fileID: -6409446412356268494}
-  - component: {fileID: 401563240}
   - component: {fileID: 1339569019790534134}
   m_Layer: 0
   m_Name: cactus
@@ -36,6 +36,24 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &401563240
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8009949012043305574}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 82f0761d387d3234c873605ac98d1358, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  hpMax: 3
+  hp: 3
+  shouldAimTarget: 0
+  attackSpinesNum: 5
+  spinesPrefab: {fileID: 8863224938936071657, guid: 57febd4db17a6df4b90662b52e98935e, type: 3}
+  attackTime: 2
 --- !u!212 &3052677130235689122
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -114,24 +132,6 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1.0390625, y: 1}
   m_EdgeRadius: 0
---- !u!114 &401563240
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8009949012043305574}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 82f0761d387d3234c873605ac98d1358, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  hpMax: 3
-  hp: 3
-  shouldAimTarget: 0
-  attackSpinesNum: 5
-  spinesPrefab: {fileID: 8863224938936071657, guid: 57febd4db17a6df4b90662b52e98935e, type: 3}
-  attackTime: 5
 --- !u!50 &1339569019790534134
 Rigidbody2D:
   serializedVersion: 4
@@ -210,7 +210,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3474659517999308638, guid: 439121564870f344ab5e1de42c966e97, type: 3}
       propertyPath: m_Radius
-      value: 10
+      value: 20
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 439121564870f344ab5e1de42c966e97, type: 3}

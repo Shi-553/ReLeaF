@@ -31,6 +31,10 @@ public class FruitContainer : MonoBehaviour
             yield return transform.GetChild(i);
         }
     }
+    public int FruitCount()
+    {
+        return transform.childCount;
+    }
     public bool IsEmpty()
     {
         return transform.childCount == 0;

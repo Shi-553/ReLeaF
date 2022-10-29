@@ -19,6 +19,8 @@ public class DungeonManager : MonoBehaviour
     Tilemap objectTilemap;
     [SerializeField]
     Tilemap wallTilemap;
+    [SerializeField]
+    Tilemap plantTilemap;
 
     [SerializeField]
     GameObject[] fruits;
@@ -39,9 +41,9 @@ public class DungeonManager : MonoBehaviour
     [SerializeField]
     float growGrassTime = 0.5f;
     [SerializeField]
-    float growFruitTime = 0.5f;
+    float growTreeTime = 10.0f;
     [SerializeField]
-    float untilWithersTime = 10.0f;
+    float regrowFruitTime = 0.5f;
 
     [SerializeField]
     float messyCuredTime = 5.0f;
@@ -57,7 +59,11 @@ public class DungeonManager : MonoBehaviour
     Transform fruitsParent;
     public Fruit Harvest(Vector3 worldPos)
     {
-        fruitDic.Remove(grid.WorldToCell(worldPos), out var fruit);
+        var pos = grid.WorldToCell(worldPos);
+        if (fruitDic.Remove(pos, out var fruit))
+        {
+           // StartCoroutine(RegrowFruit(pos, fruit.SeedType));
+        }
         return fruit;
     }
 
@@ -121,45 +127,49 @@ public class DungeonManager : MonoBehaviour
         yield return new WaitForSeconds(growGrassTime);
 
         var stackedPos1 = new Vector3Int(tilePos.x, tilePos.y, tilePos.z + 1);
-        var stackedPos2 = new Vector3Int(tilePos.x, tilePos.y, tilePos.z + 2);
 
         groundTilemap.SetTile(stackedPos1, grassTile);
         Debug.Log("grass");
 
-        // 実を付けるまで
-        yield return new WaitForSeconds(growFruitTime);
+
+        // 完全に成長するまで
+        yield return new WaitForSeconds(growTreeTime);
 
         if (groundTilemap.GetTile<TerrainTile>(stackedPos1) != grassTile)
         {
             yield break;
         }
-        Debug.Log("fruit");
+
+        groundTilemap.SetTile(stackedPos1, null);
+        plantTilemap.SetTile(tilePos, treeTile);
+        Debug.Log("tree");
+
 
 
         var fruitObj = Instantiate(fruits[(int)type], grid.CellToWorld(tilePos) + groundTilemap.cellSize / 2, Quaternion.identity, fruitsParent);
         var fruit = fruitObj.GetComponent<Fruit>();
         fruitDic.Add(tilePos, fruit);
 
-        // 完全に成長するまで
-        yield return new WaitForSeconds(untilWithersTime);
+    }
 
-        groundTilemap.SetTile(stackedPos1, null);
+    IEnumerator RegrowFruit(Vector3Int tilePos, SeedType type)
+    {
+        // もう一度実を付けるまで
+        yield return new WaitForSeconds(regrowFruitTime);
 
-
-
-        if (fruit != null && fruitDic.Remove(tilePos))
+        if (plantTilemap.GetTile<TerrainTile>(tilePos) != treeTile)
         {
-            // まだ収穫されてないので木にする
-            fruit.SteppedOn();
-            groundTilemap.SetTile(stackedPos2, treeTile);
+            yield break;
         }
-        else
-        {
-            if (groundTilemap.GetTile<TerrainTile>(tilePos) == wetSandTile)
-            {
-                groundTilemap.SetTile(tilePos,sandTile);
-            }
-        }
+
+        var fruitObj = Instantiate(fruits[(int)type], grid.CellToWorld(tilePos) + groundTilemap.cellSize / 2, Quaternion.identity, fruitsParent);
+        var fruit = fruitObj.GetComponent<Fruit>();
+        fruitDic.Add(tilePos, fruit);
+
+
+
+        Debug.Log("fruit");
+
     }
     IEnumerator CureMessy(Vector3Int tilePos)
     {

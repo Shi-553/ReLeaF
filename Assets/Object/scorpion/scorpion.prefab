@@ -9,8 +9,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8780205405150213191}
-  - component: {fileID: 8332720749487745156}
   - component: {fileID: -5171749595196955111}
+  - component: {fileID: 8332720749487745156}
   - component: {fileID: 7484773499943557005}
   - component: {fileID: 5455965294282161094}
   m_Layer: 0
@@ -37,6 +37,28 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &-5171749595196955111
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5442024061459843501}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4d7dea4577dc2474aa16f9a50433aeca, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  hpMax: 5
+  hp: 5
+  speed: 4
+  atk: 2
+  attackCoolTime: 1
+  attackAimTime: 1
+  attackDuration: 0.3
+  attackSpeed: 10
+  attackKnockBackPower: 20
+  knockBackDampingRate: 0.9
 --- !u!212 &8332720749487745156
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -89,28 +111,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &-5171749595196955111
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5442024061459843501}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4d7dea4577dc2474aa16f9a50433aeca, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  hpMax: 4
-  hp: 4
-  speed: 2
-  atk: 1
-  attackCoolTime: 1
-  attackAimTime: 1
-  attackDuration: 0.3
-  attackSpeed: 10
-  attackKnockBackPower: 20
-  knockBackDampingRate: 0.9
 --- !u!50 &7484773499943557005
 Rigidbody2D:
   serializedVersion: 4
@@ -271,7 +271,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3474659517999308638, guid: 439121564870f344ab5e1de42c966e97, type: 3}
       propertyPath: m_Radius
-      value: 8
+      value: 20
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 439121564870f344ab5e1de42c966e97, type: 3}

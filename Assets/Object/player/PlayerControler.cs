@@ -4,6 +4,7 @@ using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.Tilemaps;
+using UnityEngine.UI;
 
 public class PlayerControler : MonoBehaviour
 {
@@ -33,6 +34,9 @@ public class PlayerControler : MonoBehaviour
     Vector2 move;
     Rigidbody2D rigid;
     FruitContainer fruitContainer;
+
+    [SerializeField]
+    Text text;
 
     void Start()
     {
@@ -126,6 +130,7 @@ public class PlayerControler : MonoBehaviour
                     dir.Normalize();
 
                     f.GetComponent<Fruit>().Shot(dir);
+                    text.text = fruitContainer.FruitCount().ToString();
                 }
                 if (fruitContainer.IsEmpty())
                 {
@@ -178,5 +183,6 @@ public class PlayerControler : MonoBehaviour
         fruitContainer.transform.position = transform.position;
         fruitContainer.Connect(transform);
 
+        text.text = fruitContainer.FruitCount().ToString();
     }
 }

@@ -51,5 +51,13 @@ public class Spines : MonoBehaviour
                 Destroy(gameObject);
             }
         }
+        if (collision.CompareTag("Plant"))
+        {
+            Destroy(gameObject);
+        }
+        if (collision.CompareTag("Wall"))
+        {
+            Destroy(gameObject);
+        }
     }
 }

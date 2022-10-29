@@ -9,9 +9,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4381094192969914646}
+  - component: {fileID: 8264499165828106697}
   - component: {fileID: 6407548705359343363}
   - component: {fileID: 6177940633089956243}
-  - component: {fileID: 8264499165828106697}
   - component: {fileID: 7770148875196150798}
   m_Layer: 0
   m_Name: cactus2
@@ -36,6 +36,24 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &8264499165828106697
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2132568791249847751}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 82f0761d387d3234c873605ac98d1358, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  hpMax: 2
+  hp: 2
+  shouldAimTarget: 1
+  attackSpinesNum: 1
+  spinesPrefab: {fileID: 8863224938936071657, guid: 57febd4db17a6df4b90662b52e98935e, type: 3}
+  attackTime: 1
 --- !u!212 &6407548705359343363
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -114,24 +132,6 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 0.42639613, y: 0.49161}
   m_EdgeRadius: 0
---- !u!114 &8264499165828106697
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2132568791249847751}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 82f0761d387d3234c873605ac98d1358, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  hpMax: 2
-  hp: 2
-  shouldAimTarget: 1
-  attackSpinesNum: 1
-  spinesPrefab: {fileID: 8863224938936071657, guid: 57febd4db17a6df4b90662b52e98935e, type: 3}
-  attackTime: 2
 --- !u!50 &7770148875196150798
 Rigidbody2D:
   serializedVersion: 4
@@ -210,7 +210,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3474659517999308638, guid: 439121564870f344ab5e1de42c966e97, type: 3}
       propertyPath: m_Radius
-      value: 14
+      value: 20
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 439121564870f344ab5e1de42c966e97, type: 3}
