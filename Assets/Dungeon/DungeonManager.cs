@@ -62,7 +62,7 @@ public class DungeonManager : MonoBehaviour
         var pos = grid.WorldToCell(worldPos);
         if (fruitDic.Remove(pos, out var fruit))
         {
-           // StartCoroutine(RegrowFruit(pos, fruit.SeedType));
+            StartCoroutine(RegrowFruit(pos, fruit.SeedType));
         }
         return fruit;
     }
