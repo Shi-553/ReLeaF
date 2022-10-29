@@ -14,7 +14,7 @@ public enum TileType
     Wall,
 };
 
-public class TerrainTile : RuleTile
+public class TerrainTile : Tile
 {
     public TileType tileType;
     public bool canSowSeed;

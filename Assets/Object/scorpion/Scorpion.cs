@@ -36,6 +36,8 @@ public class Scorpion : MonoBehaviour
     Vector2 move;
 
     Rigidbody2D rigid;
+
+    HashSet<Vector3Int> attackedTilePos=new HashSet<Vector3Int>();
     void Start()
     {
         hp = hpMax;
@@ -43,6 +45,7 @@ public class Scorpion : MonoBehaviour
         transform.Find("AttackVision").TryGetComponent(out attackVision);
         transform.Find("SearchVision").TryGetComponent(out searchVision);
         TryGetComponent(out rigid);
+        attackedTilePos.Clear();
     }
     private void FixedUpdate()
     {
@@ -71,7 +74,7 @@ public class Scorpion : MonoBehaviour
         {
             return;
         }
-        var dir = (searchVision.Target.position - transform.position).normalized;
+        var dir = (searchVision.Targets.MinBy(t => (t.transform.position - transform.position).sqrMagnitude).position - transform.position).normalized;
 
         move += new Vector2(
             dir.x * speed * DungeonManager.CELL_SIZE.x * Time.deltaTime,
@@ -92,8 +95,9 @@ public class Scorpion : MonoBehaviour
         counter = 0;
 
 
-        attackDir = (searchVision.Target.position - transform.position).normalized;
+        attackDir = (searchVision.Targets.MinBy(t => (t.transform.position - transform.position).sqrMagnitude).position - transform.position).normalized;
         isAttackDamageNow = true;
+        attackedTilePos.Clear();
 
         while (attackDuration > counter&& isAttackDamageNow)
         {
@@ -115,7 +119,7 @@ public class Scorpion : MonoBehaviour
         isAttack = false;
         attackCoolTimeCounter = attackCoolTime;
     }
-    private void OnCollisionEnter2D(Collision2D collision)
+    private void OnCollisionStay2D(Collision2D collision)
     {
         if (!isAttackDamageNow) {
             return;
@@ -126,6 +130,12 @@ public class Scorpion : MonoBehaviour
             {
                 player.Damaged(atk,attackDir*attackKnockBackPower);
                 isAttackDamageNow = false;
+            }
+        }
+        if (collision.gameObject.CompareTag("Plant"))
+        {
+            if (collision.gameObject.TryGetComponent<Plant>(out var plant)){
+                plant.Damaged(atk);
             }
         }
     }

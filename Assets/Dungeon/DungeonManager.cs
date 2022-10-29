@@ -19,11 +19,11 @@ public class DungeonManager : MonoBehaviour
     Tilemap objectTilemap;
     [SerializeField]
     Tilemap wallTilemap;
-    [SerializeField]
-    Tilemap plantTilemap;
 
     [SerializeField]
     GameObject[] fruits;
+    [SerializeField]
+    int[] treeHP;
     [SerializeField]
     TerrainTile wetSandTile;
     [SerializeField]
@@ -66,27 +66,38 @@ public class DungeonManager : MonoBehaviour
         }
         return fruit;
     }
-
+    public static DungeonManager Instance { get; private set; }
+    private void Awake()
+    {
+        if (Instance == null)
+        {
+            Instance = this;
+        }
+        else
+        {
+            Destroy(gameObject);
+            return;
+        }
+    }
     private void Start()
     {
         fruitDic.Clear();
         fruitsParent = transform.Find("Fruits");
     }
-
-    public void SowSeed(Vector3 worldPos, SeedType type)
+    public Vector3Int WorldToTilePos(Vector3 worldPos)
     {
-        if (type < 0 || fruits.Length <= (int)type)
-        {
-            return;
-        }
-        var pos = grid.WorldToCell(worldPos);
+        return grid.WorldToCell(worldPos);
+    }
 
+    public void Messy(Vector3 worldPos)
+    {
+        var pos= WorldToTilePos(worldPos);
         // z軸上の全てのタイルを見る
         int count = groundTilemap.GetTilesRangeNonAlloc(pos, pos + new Vector3Int(0, 0, TILE_STACK_MAX - 1), possBuffer, tilesBuffer);
 
-        // どれかが踏んじゃいけないやつならmessyTileだけにする
-        if (tilesBuffer.Any(t => t != null && !t.canStepOn))
-        {
+        //どれかが踏んじゃいけないやつならmessyTileだけにする
+        //if (tilesBuffer.Any(t => t != null && !t.canStepOn))
+        //{
             for (int i = 0; i < count; i++)
             {
                 groundTilemap.SetTile(possBuffer[i], null);
@@ -103,8 +114,17 @@ public class DungeonManager : MonoBehaviour
                 fruit.SteppedOn();
             }
             return;
+       // }
+    }
+    public void SowSeed(Vector3 worldPos, SeedType type)
+    {
+        if (type < 0 || fruits.Length <= (int)type)
+        {
+            return;
         }
+        var pos = grid.WorldToCell(worldPos);
 
+        
 
         var tile = groundTilemap.GetTile<TerrainTile>(pos);
         if (tile == null)
@@ -140,11 +160,8 @@ public class DungeonManager : MonoBehaviour
             yield break;
         }
 
-        groundTilemap.SetTile(stackedPos1, null);
-        plantTilemap.SetTile(tilePos, treeTile);
+        groundTilemap.SetTile(stackedPos1, treeTile);
         Debug.Log("tree");
-
-
 
         var fruitObj = Instantiate(fruits[(int)type], grid.CellToWorld(tilePos) + groundTilemap.cellSize / 2, Quaternion.identity, fruitsParent);
         var fruit = fruitObj.GetComponent<Fruit>();
@@ -157,7 +174,7 @@ public class DungeonManager : MonoBehaviour
         // もう一度実を付けるまで
         yield return new WaitForSeconds(regrowFruitTime);
 
-        if (plantTilemap.GetTile<TerrainTile>(tilePos) != treeTile)
+        if (groundTilemap.GetTile<TerrainTile>(tilePos) != treeTile)
         {
             yield break;
         }

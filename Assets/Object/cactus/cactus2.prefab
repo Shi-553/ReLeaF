@@ -48,10 +48,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 82f0761d387d3234c873605ac98d1358, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  hpMax: 2
+  hpMax: 5
   hp: 2
   shouldAimTarget: 1
-  attackSpinesNum: 1
+  attackSpinesNum: 3
   spinesPrefab: {fileID: 8863224938936071657, guid: 57febd4db17a6df4b90662b52e98935e, type: 3}
   attackTime: 1
 --- !u!212 &6407548705359343363

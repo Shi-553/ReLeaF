@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Tilemaps;
+using System.Linq;
 
 public class cactus : MonoBehaviour
 {
@@ -42,12 +43,12 @@ public class cactus : MonoBehaviour
             transform.localScale =Vector3.one*MathExtension.LerpPairs(new SortedList<float, float>{ {0,1 }, { 0.8f, 1 },{ 0.95f, 0.8f }, { 1, 1 } },attackTimeCounter/attackTime);
             
 
-            if (attackTimeCounter >= attackTime)
+            if (vision.ShouldFoundTarget&&attackTimeCounter >= attackTime)
             {
                 attackTimeCounter = 0;
 
                 var rotation = shouldAimTarget ?
-                    Quaternion.FromToRotation(Vector3.up, vision.Target.position - transform.position) :
+                    Quaternion.FromToRotation(Vector3.up, vision.Targets.MinBy(t=>(t.transform.position-transform.position).sqrMagnitude).position - transform.position) :
                     Quaternion.identity;
                 for (int i = 0; i < attackSpinesNum; i++)
                 {

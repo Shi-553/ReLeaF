@@ -4,23 +4,34 @@ using UnityEngine;
 
 public class Vision : MonoBehaviour
 {
-    public bool ShouldFoundTarget { get; private set; }
+    public bool ShouldFoundTarget => Targets.Count != 0;
 
-    public Transform Target { get; private set; }
+    [SerializeField]
+    string[] targetTags = {"Player" };
+    public HashSet<Transform> Targets { get; private set; }=new HashSet<Transform>();
+    private void Start()
+    {
+        Targets.Clear();
+    }
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.CompareTag("Player"))
+        foreach (var tag in targetTags)
         {
-            ShouldFoundTarget = true;
-            Target=collision.transform;
+            if (collision.CompareTag(tag))
+            {
+                Targets.Add( collision.transform);
+            }
         }
     }
     private void OnTriggerExit2D(Collider2D collision)
     {
-        if (collision.CompareTag("Player"))
+        foreach (var tag in targetTags)
         {
-            ShouldFoundTarget = false;
+            if (collision.CompareTag(tag))
+            {
+                Targets.Remove(collision.transform);
+            }
         }
     }
 }

@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Drawing;
 using UnityEngine;
 
 public class Spines : MonoBehaviour
@@ -40,24 +41,31 @@ public class Spines : MonoBehaviour
             transform.up.x * speed * DungeonManager.CELL_SIZE.x * Time.deltaTime,
             transform.up.y * speed * DungeonManager.CELL_SIZE.y * Time.deltaTime);
     }
-
-    private void OnTriggerEnter2D(Collider2D collision)
+    private void OnCollisionEnter2D(Collision2D collision)
     {
-        if (collision.CompareTag("Player"))
+
+        if (collision.gameObject.CompareTag("Player"))
         {
-            if (collision.TryGetComponent<PlayerControler>(out var player))
+            if (collision.gameObject.TryGetComponent<PlayerControler>(out var player))
             {
-                player.Damaged(atk, transform.up* attackKnockBackPower);
+                player.Damaged(atk, transform.up * attackKnockBackPower);
                 Destroy(gameObject);
             }
         }
-        if (collision.CompareTag("Plant"))
+        if (collision.gameObject.CompareTag("Plant"))
+        {
+            if (collision.gameObject.TryGetComponent<Plant>(out var plant))
+            {
+                plant.Damaged(atk);
+                Destroy(gameObject);
+            }
+        }
+        if (collision.gameObject.CompareTag("Wall"))
         {
             Destroy(gameObject);
         }
-        if (collision.CompareTag("Wall"))
-        {
-            Destroy(gameObject);
-        }
+    }
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
     }
 }
