@@ -15,6 +15,7 @@ public class FruitContainer : MonoBehaviour
             return _positionConstraint;
         }
     }
+
     public void Connect(Transform source)
     {
         for (int i = 0; i < PositionConstraint.sourceCount; i++)
@@ -23,13 +24,6 @@ public class FruitContainer : MonoBehaviour
         }
         PositionConstraint.AddSource(new ConstraintSource() { sourceTransform = source, weight = 1 });
         
-    }
-    public IEnumerable<Transform> FruitEnumerable()
-    {
-        for (int i = 0; i < transform.childCount; i++)
-        {
-            yield return transform.GetChild(i);
-        }
     }
     public int FruitCount()
     {
@@ -64,5 +58,12 @@ public class FruitContainer : MonoBehaviour
     Vector3 GetFruitPos(int index)
     {
         return new Vector3(0,index* margin, 0);
+    }
+    public void Clear()
+    {
+        foreach (Transform t in transform)
+        {
+            UnityEngine.Object.Destroy(t.gameObject);
+        }
     }
 }

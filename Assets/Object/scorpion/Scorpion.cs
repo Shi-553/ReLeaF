@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Scorpion : MonoBehaviour
+public class Scorpion : MonoBehaviour, IRoomEnemy
 {
     [SerializeField]
     int hpMax = 3;
@@ -38,6 +38,9 @@ public class Scorpion : MonoBehaviour
     Rigidbody2D rigid;
 
     HashSet<Vector3Int> attackedTilePos=new HashSet<Vector3Int>();
+
+    public bool CanAttackPlayer { get; set; }
+
     void Start()
     {
         hp = hpMax;
@@ -54,6 +57,10 @@ public class Scorpion : MonoBehaviour
     }
     void Update()
     {
+        if (!CanAttackPlayer)
+        {
+            return;
+        }
         if (attackCoolTimeCounter > 0)
         {
             attackCoolTimeCounter -= Time.deltaTime;

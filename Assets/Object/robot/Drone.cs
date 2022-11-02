@@ -39,6 +39,10 @@ public class Drone : MonoBehaviour
 
             while (true)
             {
+                if (nearFruit == null)
+                {
+                    break;
+                }
                 transform.position=Vector3.MoveTowards(transform.position, nearFruit.position, speed * DungeonManager.CELL_SIZE.x * Time.deltaTime);
                
 
@@ -64,5 +68,10 @@ public class Drone : MonoBehaviour
             yield return null;
         }
         player.Harvested(fruitContainer);
+    }
+
+    public void Cancel()
+    {
+        fruitContainer.Clear();
     }
 }

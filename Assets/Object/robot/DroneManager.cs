@@ -11,6 +11,9 @@ public class DroneManager : MonoBehaviour
 
     [SerializeField]
     DroneRange range;
+
+    Coroutine waitHarvest;
+
     private void Start()
     {
         IsHarvest = false;
@@ -27,7 +30,15 @@ public class DroneManager : MonoBehaviour
     }
     public void Cancel()
     {
-        range.EndTarget();
+        range.EndTarget(true);
+        if (waitHarvest != null)
+        {
+            StopCoroutine(waitHarvest);
+            IsHarvest = false;
+            waitHarvest = null;
+            drone.GetComponent<Drone>().Cancel();
+            drone.gameObject.SetActive(false);
+        }
     }
     public void Harvest()
     {
@@ -35,8 +46,8 @@ public class DroneManager : MonoBehaviour
         {
             return;
         }
-        range.EndTarget();
-        StartCoroutine(WaitHarvest());
+        range.EndTarget(false);
+        waitHarvest=StartCoroutine(WaitHarvest());
 
     }
     IEnumerator WaitHarvest()
@@ -50,6 +61,7 @@ public class DroneManager : MonoBehaviour
 
         drone.gameObject.SetActive(false);
         IsHarvest = false;
+        waitHarvest = null;
     }
 
 }

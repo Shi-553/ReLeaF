@@ -185,4 +185,13 @@ public class PlayerControler : MonoBehaviour
 
         text.text = fruitContainer.FruitCount().ToString();
     }
+    public void EnterRoom()
+    {
+        if (fruitContainer != null)
+        {
+            fruitContainer.Clear();
+            fruitContainer = null;
+        }
+        droneManager.Cancel();
+    }
 }

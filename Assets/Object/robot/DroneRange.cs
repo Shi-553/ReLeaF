@@ -22,11 +22,21 @@ public class DroneRange : MonoBehaviour
         IsTargeting = true;
         GetComponent<PositionConstraint>().AddSource(new ConstraintSource() { sourceTransform = center, weight = 1 });
     }
-    public void EndTarget()
+    public void EndTarget(bool removeHighlight)
     {
-        IsTargeting = false;
-        GetComponent<PositionConstraint>().RemoveSource(0);
-        gameObject.SetActive(false);
+        if (IsTargeting)
+        {
+            IsTargeting = false;
+            GetComponent<PositionConstraint>().RemoveSource(0);
+            gameObject.SetActive(false);
+            if (removeHighlight)
+            {
+                foreach (var t in fruits)
+                {
+                    t.GetComponent<Fruit>().Highlight(false);
+                }
+            }
+        }
     }
     private void OnTriggerEnter2D(Collider2D collision)
     {

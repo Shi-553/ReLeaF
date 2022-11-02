@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.Tilemaps;
 using System.Linq;
 
-public class cactus : MonoBehaviour
+public class cactus : MonoBehaviour, IRoomEnemy
 {
     [SerializeField]
     int hpMax = 3;
@@ -25,6 +25,7 @@ public class cactus : MonoBehaviour
     Vision vision;
 
     float attackTimeCounter = 0;
+    public bool CanAttackPlayer { get; set; }
     void Start()
     {
         attackTimeCounter = 0;
@@ -35,6 +36,10 @@ public class cactus : MonoBehaviour
 
     void Update()
     {
+        if (!CanAttackPlayer)
+        {
+            return;
+        }
         if (vision.ShouldFoundTarget || attackTimeCounter > 0)
         {
             attackTimeCounter += Time.deltaTime;

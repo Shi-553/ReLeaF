@@ -12,6 +12,7 @@ public enum TileType
     Green,
     Door,
     Wall,
+    DoorSwitch,
 };
 
 public class TerrainTile : Tile
