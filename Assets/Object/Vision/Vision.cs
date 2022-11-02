@@ -9,6 +9,7 @@ public class Vision : MonoBehaviour
     [SerializeField]
     string[] targetTags = {"Player" };
     public HashSet<Transform> Targets { get; private set; }=new HashSet<Transform>();
+    public Transform LastTargets { get; private set; }
     private void Start()
     {
         Targets.Clear();
@@ -21,6 +22,7 @@ public class Vision : MonoBehaviour
             if (collision.CompareTag(tag))
             {
                 Targets.Add( collision.transform);
+                LastTargets= collision.transform;
             }
         }
     }

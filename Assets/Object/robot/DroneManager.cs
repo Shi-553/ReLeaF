@@ -47,7 +47,7 @@ public class DroneManager : MonoBehaviour
             return;
         }
         range.EndTarget(false);
-        waitHarvest=StartCoroutine(WaitHarvest());
+        waitHarvest = StartCoroutine(WaitHarvest());
 
     }
     IEnumerator WaitHarvest()

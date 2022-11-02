@@ -48,7 +48,7 @@ public class Drone : MonoBehaviour
 
                 if ((transform.position - nearFruit.position).sqrMagnitude < collectionRadius* collectionRadius)
                 {
-                    dungeonManager.Harvest(nearFruit.position);
+                    //dungeonManager.Harvest(nearFruit.position);
                     fruitContainer.Push(nearFruit);
                     break;
                 }

@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class Scorpion : MonoBehaviour, IRoomEnemy
@@ -41,6 +42,7 @@ public class Scorpion : MonoBehaviour, IRoomEnemy
 
     public bool CanAttackPlayer { get; set; }
 
+
     void Start()
     {
         hp = hpMax;
@@ -81,7 +83,8 @@ public class Scorpion : MonoBehaviour, IRoomEnemy
         {
             return;
         }
-        var dir = (searchVision.Targets.MinBy(t => (t.transform.position - transform.position).sqrMagnitude).position - transform.position).normalized;
+
+        var dir = (searchVision.LastTargets.position - transform.position).normalized;
 
         move += new Vector2(
             dir.x * speed * DungeonManager.CELL_SIZE.x * Time.deltaTime,
@@ -102,7 +105,7 @@ public class Scorpion : MonoBehaviour, IRoomEnemy
         counter = 0;
 
 
-        attackDir = (searchVision.Targets.MinBy(t => (t.transform.position - transform.position).sqrMagnitude).position - transform.position).normalized;
+        attackDir = (searchVision.LastTargets.position - transform.position).normalized;
         isAttackDamageNow = true;
         attackedTilePos.Clear();
 
@@ -142,7 +145,7 @@ public class Scorpion : MonoBehaviour, IRoomEnemy
         if (collision.gameObject.CompareTag("Plant"))
         {
             if (collision.gameObject.TryGetComponent<Plant>(out var plant)){
-                plant.Damaged(atk);
+                plant.Damaged(atk,DamageType.Direct);
             }
         }
     }

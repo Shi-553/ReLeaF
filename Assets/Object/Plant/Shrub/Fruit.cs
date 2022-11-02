@@ -5,8 +5,8 @@ using UnityEngine;
 public class Fruit : MonoBehaviour
 {
     [SerializeField]
-    SeedType seedType;
-    public SeedType SeedType => seedType;
+    PlantType seedType;
+    public PlantType SeedType => seedType;
 
     [SerializeField]
     float lifeTime = 2.0f;

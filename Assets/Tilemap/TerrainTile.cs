@@ -9,7 +9,7 @@ public enum TileType
     Hole,
     Dirt,
     Rock,
-    Green,
+    Plant                   ,
     Door,
     Wall,
     DoorSwitch,
@@ -18,8 +18,7 @@ public enum TileType
 public class TerrainTile : Tile
 {
     public TileType tileType;
-    public bool canSowSeed;
-    public bool canStepOn=true;
+    public bool canSowGrass;
 
 #if UNITY_EDITOR
     // The following is a helper that adds a menu item to create a RoadTile Asset

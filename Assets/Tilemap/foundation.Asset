@@ -10,9 +10,9 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: cf0ca5a09e079a642b3654fa43dbf6d7, type: 3}
-  m_Name: green
+  m_Name: foundation
   m_EditorClassIdentifier: 
-  m_Sprite: {fileID: 21300000, guid: 5e529162ea9b9514bb3ef1c0b205e074, type: 3}
+  m_Sprite: {fileID: 0}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_Transform:
     e00: 1
@@ -31,9 +31,8 @@ MonoBehaviour:
     e31: 0
     e32: 0
     e33: 1
-  m_InstancedGameObject: {fileID: 0}
-  m_Flags: 1
-  m_ColliderType: 2
+  m_InstancedGameObject: {fileID: 1463589238644328539, guid: 7d2dbdfb501b7b044ae8ef237778f103, type: 3}
+  m_Flags: 9
+  m_ColliderType: 0
   tileType: 3
-  canSowSeed: 0
-  canStepOn: 0
+  canSowGrass: 0

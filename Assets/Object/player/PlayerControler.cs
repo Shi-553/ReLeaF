@@ -98,7 +98,7 @@ public class PlayerControler : MonoBehaviour
 
 
 
-            dungeonManager.SowSeed(footTransform.position, SeedType.Normal);
+            dungeonManager.SowGrass(footTransform.position);
         }
 
         if (fruitContainer == null)

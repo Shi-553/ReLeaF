@@ -41,9 +41,8 @@ public class Spines : MonoBehaviour
             transform.up.x * speed * DungeonManager.CELL_SIZE.x * Time.deltaTime,
             transform.up.y * speed * DungeonManager.CELL_SIZE.y * Time.deltaTime);
     }
-    private void OnCollisionEnter2D(Collision2D collision)
+    private void OnTriggerEnter2D(Collider2D collision)
     {
-
         if (collision.gameObject.CompareTag("Player"))
         {
             if (collision.gameObject.TryGetComponent<PlayerControler>(out var player))
@@ -56,7 +55,8 @@ public class Spines : MonoBehaviour
         {
             if (collision.gameObject.TryGetComponent<Plant>(out var plant))
             {
-                plant.Damaged(atk);
+                plant.Damaged(atk, DamageType.Shooting);
+
                 Destroy(gameObject);
             }
         }
@@ -64,8 +64,5 @@ public class Spines : MonoBehaviour
         {
             Destroy(gameObject);
         }
-    }
-    private void OnTriggerEnter2D(Collider2D collision)
-    {
     }
 }

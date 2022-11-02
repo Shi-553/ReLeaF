@@ -35,5 +35,4 @@ MonoBehaviour:
   m_Flags: 1
   m_ColliderType: 2
   tileType: 1
-  canSowSeed: 1
-  canStepOn: 1
+  canSowGrass: 1
