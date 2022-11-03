@@ -5,55 +5,83 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
-public class DroneManager : MonoBehaviour
+namespace ReLeaf
 {
-    [SerializeField]
-    Drone dronePrefab;
-
-    [SerializeField]
-    DroneRoute droneRoute;
-
-    Coroutine droneCo;
-    [SerializeField]
-    CinemachineBrain brain;
-    [SerializeField]
-    SelectSeed selectSeed;
-    public bool IsSowRouting { get; private set; }
-    public void BeginSowRoute(Vector3 startPos)
+    public class DroneManager : MonoBehaviour
     {
-        transform.position = startPos;
-        IsSowRouting = true;
-        droneRoute.transform.localPosition = Vector3.zero;
-        droneRoute.Begin();
+        [SerializeField]
+        Drone dronePrefab;
 
-        Time.timeScale = 0.1f;
+        [SerializeField]
+        DroneRoute droneRoute;
 
-        brain.m_UpdateMethod = CinemachineBrain.UpdateMethod.LateUpdate;
-        brain.m_IgnoreTimeScale = true;
-    }
-    public void MoveSowRoute(Vector2Int dir)
-    {
-        droneRoute.SetDir(dir);
-    }
-    public void EndSowRoute()
-    {
-        brain.m_UpdateMethod = CinemachineBrain.UpdateMethod.SmartUpdate;
-        brain.m_IgnoreTimeScale = false;
-        Time.timeScale = 1;
+        [SerializeField]
+        CinemachineBrain brain;
+        [SerializeField]
+        SelectSeed selectSeed;
+        public bool IsSowRouting { get; private set; }
 
-        droneRoute.End();
-        IsSowRouting = false;
+        [SerializeField]
+        Transform droneRoot;
 
-        var drone=Instantiate(dronePrefab, transform.position, Quaternion.identity, transform);
-        drone.transform.localPosition = Vector3.zero;
-        droneCo = StartCoroutine(drone.SowSeed(new List<Foundation>(droneRoute.LastTargets), selectSeed.CurrentSeed.PlantType));
-    }
-    public void Cancel()
-    {
-        if (droneCo != null)
+        Vector3 startPos;
+
+        public static DroneManager Instance { get; private set; }
+        private void Awake()
         {
-            StopCoroutine(droneCo);
-            droneCo = null;
+            if (Instance == null)
+            {
+                Instance = this;
+            }
+            else
+            {
+                Destroy(gameObject);
+                return;
+            }
+        }
+
+        public void BeginSowRoute(Vector3 startPos)
+        {
+            this.startPos = startPos;
+            droneRoute.transform.position = startPos;
+            IsSowRouting = true;
+            droneRoute.Begin();
+
+            Time.timeScale = 0.1f;
+
+            brain.m_UpdateMethod = CinemachineBrain.UpdateMethod.LateUpdate;
+            brain.m_IgnoreTimeScale = true;
+        }
+        public void MoveSowRoute(Vector2Int dir)
+        {
+            droneRoute.SetDir(dir);
+        }
+        public void EndSowRoute(bool isCollect = true)
+        {
+            brain.m_UpdateMethod = CinemachineBrain.UpdateMethod.SmartUpdate;
+            brain.m_IgnoreTimeScale = false;
+            Time.timeScale = 1;
+
+            droneRoute.End(!isCollect);
+            IsSowRouting = false;
+
+            if (isCollect)
+            {
+                var drone = Instantiate(dronePrefab, transform.position, Quaternion.identity, droneRoot);
+                drone.transform.position = startPos;
+                 StartCoroutine(drone.SowSeed(new List<Foundation>(droneRoute.LastTargets), selectSeed.CurrentSeed.PlantType));
+            }
+        }
+        public void Cancel()
+        {
+            foreach (Transform t in droneRoot)
+            {
+                Destroy(t.gameObject);
+            }
+            if (IsSowRouting)
+            {
+                EndSowRoute(false);
+            }
         }
     }
 }

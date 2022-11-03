@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5859499771225748792}
   - component: {fileID: 448955988984095229}
-  - component: {fileID: 2529009372497916164}
+  - component: {fileID: 6397562350901866167}
   m_Layer: 0
   m_Name: FruitContainer
   m_TagString: Untagged
@@ -46,7 +46,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   margin: 0.1
---- !u!1818360608 &2529009372497916164
+--- !u!1818360608 &6397562350901866167
 PositionConstraint:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -56,10 +56,12 @@ PositionConstraint:
   m_Enabled: 1
   m_Weight: 1
   m_TranslationAtRest: {x: 0, y: 0, z: 0}
-  m_TranslationOffset: {x: 0, y: 0, z: 0}
+  m_TranslationOffset: {x: -0.03, y: 12.21, z: 0}
   m_AffectTranslationX: 1
   m_AffectTranslationY: 1
   m_AffectTranslationZ: 1
   m_IsContraintActive: 1
   m_IsLocked: 0
-  m_Sources: []
+  m_Sources:
+  - sourceTransform: {fileID: 0}
+    weight: 1

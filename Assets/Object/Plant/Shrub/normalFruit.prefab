@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 905085192655327871}
   - component: {fileID: 909575218943297932}
   - component: {fileID: 326703523405260161}
+  - component: {fileID: -4835517711720836332}
   m_Layer: 7
   m_Name: normalFruit
   m_TagString: Fruit
@@ -143,6 +144,18 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 4
+--- !u!114 &-4835517711720836332
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3158373612437488347}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 64714d671c1810846a3e94725bb83612, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &8052460897907815176
 GameObject:
   m_ObjectHideFlags: 0
@@ -224,6 +237,6 @@ SpriteRenderer:
   m_Size: {x: 2.56, y: 2.56}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
-  m_WasSpriteAssigned: 1
+  m_WasSpriteAssigned: 0
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0

@@ -3,60 +3,63 @@ using System.Collections.Generic;
 using System.Drawing;
 using UnityEngine;
 
-public class Spines : MonoBehaviour
+namespace ReLeaf
 {
-    [SerializeField]
-    float lifeTime = 2.0f;
-    float lifeTimeCounter;
-
-    [SerializeField]
-    float speed = 1.0f;
-    [SerializeField]
-    int atk = 1;
-    [SerializeField]
-    float attackKnockBackPower = 4.0f;
-
-
-    Rigidbody2DMover mover;
-
-    private void Awake()
+    public class Spines : MonoBehaviour
     {
-        TryGetComponent(out mover);
-        lifeTimeCounter = 0;
-    }
-    void Update()
-    {
-        lifeTimeCounter += Time.deltaTime;
+        [SerializeField]
+        float lifeTime = 2.0f;
+        float lifeTimeCounter;
 
-        if (lifeTimeCounter >= lifeTime)
+        [SerializeField]
+        float speed = 1.0f;
+        [SerializeField]
+        int atk = 1;
+        [SerializeField]
+        float attackKnockBackPower = 4.0f;
+
+
+        Rigidbody2DMover mover;
+
+        private void Awake()
         {
-            Destroy(gameObject);
+            TryGetComponent(out mover);
+            lifeTimeCounter = 0;
         }
-
-        mover.Move( transform.up * speed);
-    }
-    private void OnTriggerEnter2D(Collider2D collision)
-    {
-        if (collision.gameObject.CompareTag("Player"))
+        void Update()
         {
-            if (collision.gameObject.TryGetComponent<PlayerControler>(out var player))
+            lifeTimeCounter += Time.deltaTime;
+
+            if (lifeTimeCounter >= lifeTime)
             {
-                player.Damaged(atk, transform.up * attackKnockBackPower);
                 Destroy(gameObject);
             }
-        }
-        if (collision.gameObject.CompareTag("Plant"))
-        {
-            if (collision.gameObject.TryGetComponent<Plant>(out var plant))
-            {
-                plant.Damaged(atk, DamageType.Shooting);
 
+            mover.Move(transform.up * speed);
+        }
+        private void OnTriggerEnter2D(Collider2D collision)
+        {
+            if (collision.gameObject.CompareTag("Player"))
+            {
+                if (collision.gameObject.TryGetComponent<PlayerController>(out var player))
+                {
+                    player.Damaged(atk, transform.up * attackKnockBackPower);
+                    Destroy(gameObject);
+                }
+            }
+            if (collision.gameObject.CompareTag("Plant"))
+            {
+                if (collision.gameObject.TryGetComponent<Plant>(out var plant))
+                {
+                    plant.Damaged(atk, DamageType.Shooting);
+
+                    Destroy(gameObject);
+                }
+            }
+            if (collision.gameObject.CompareTag("Wall"))
+            {
                 Destroy(gameObject);
             }
-        }
-        if (collision.gameObject.CompareTag("Wall"))
-        {
-            Destroy(gameObject);
         }
     }
 }

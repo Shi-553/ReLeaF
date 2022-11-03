@@ -3,91 +3,94 @@ using System.Collections.Generic;
 using System.Security.Cryptography;
 using UnityEngine;
 
-public class Fruit : MonoBehaviour
+namespace ReLeaf
 {
-    [SerializeField]
-    PlantType seedType;
-    public PlantType SeedType => seedType;
-
-    [SerializeField]
-    float lifeTime = 2.0f;
-    float lifeTimeCounter;
-
-    [SerializeField]
-    float speed = 1.0f;
-    [SerializeField]
-    int atk = 1;
-    [SerializeField]
-    float attackKnockBackPower = 4.0f;
-
-    [SerializeField]
-    float diffusion = 10;
-
-    public bool IsAttack { get; private set; }
-
-    Vector2 dir;
-    Rigidbody2DMover mover;
-
-    private void Awake()
+    public class Fruit : MonoBehaviour
     {
-        TryGetComponent(out mover);
-        IsAttack = false;
-        lifeTimeCounter = 0;
-    }
 
-    public void SteppedOn()
-    {
-        Destroy(gameObject);
-    }
-    public void Highlight(bool sw)
-    {
-        transform.GetChild(0).gameObject.SetActive(sw);
-    }
-    public void Shot(Vector2 dir)
-    {
-        this.dir = Quaternion.Euler(0, 0, Random.Range(-diffusion, diffusion)) * dir;
-        IsAttack = true;
-    }
+        [SerializeField]
+        float lifeTime = 2.0f;
+        float lifeTimeCounter;
 
-    void Update()
-    {
-        if (!IsAttack)
+        [SerializeField]
+        float speed = 1.0f;
+        [SerializeField]
+        int atk = 1;
+        [SerializeField]
+        float attackKnockBackPower = 4.0f;
+
+        [SerializeField]
+        float diffusion = 10;
+        [SerializeField]
+        float shotInterval = 1;
+
+        public bool IsAttack { get; private set; }
+
+        Vector2 dir;
+        Rigidbody2DMover mover;
+
+        private void Awake()
         {
-            return;
+            TryGetComponent(out mover);
+            IsAttack = false;
+            lifeTimeCounter = 0;
         }
 
-        lifeTimeCounter += Time.deltaTime;
-
-        if (lifeTimeCounter >= lifeTime)
+        public void SteppedOn()
         {
             Destroy(gameObject);
         }
-
-        mover.Move(speed*dir);
-    }
-
-    private void OnTriggerEnter2D(Collider2D collision)
-    {
-        if (!IsAttack)
+        public void Highlight(bool sw)
         {
-            return;
+            transform.GetChild(0).gameObject.SetActive(sw);
         }
-        if (collision.CompareTag("Enemy"))
+        public float Shot(Vector2 dir)
         {
-            if (collision.TryGetComponent<cactus>(out var c))
+            this.dir = Quaternion.Euler(0, 0, Random.Range(-diffusion, diffusion)) * dir;
+            IsAttack = true;
+            return shotInterval;
+        }
+
+        void Update()
+        {
+            if (!IsAttack)
             {
-                c.Damaged(atk);
+                return;
+            }
+
+            lifeTimeCounter += Time.deltaTime;
+
+            if (lifeTimeCounter >= lifeTime)
+            {
                 Destroy(gameObject);
             }
-            if (collision.TryGetComponent<Scorpion>(out var s))
+
+            mover.Move(speed * dir);
+        }
+
+        private void OnTriggerEnter2D(Collider2D collision)
+        {
+            if (!IsAttack)
             {
-                s.Damaged(atk, dir * attackKnockBackPower);
+                return;
+            }
+            if (collision.CompareTag("Enemy"))
+            {
+                if (collision.TryGetComponent<cactus>(out var c))
+                {
+                    c.Damaged(atk);
+                    Destroy(gameObject);
+                }
+                if (collision.TryGetComponent<Scorpion>(out var s))
+                {
+                    s.Damaged(atk, dir * attackKnockBackPower);
+                    Destroy(gameObject);
+                }
+            }
+            if (collision.gameObject.CompareTag("Wall"))
+            {
                 Destroy(gameObject);
             }
-        }
-        if (collision.gameObject.CompareTag("Wall"))
-        {
-            Destroy(gameObject);
         }
     }
 }

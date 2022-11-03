@@ -2,37 +2,40 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Vision : MonoBehaviour
+namespace ReLeaf
 {
-    public bool ShouldFoundTarget => Targets.Count != 0;
-
-    [SerializeField]
-    string[] targetTags = {"Player" };
-    public HashSet<Transform> Targets { get; private set; }=new HashSet<Transform>();
-    public Transform LastTargets { get; private set; }
-    private void Start()
+    public class Vision : MonoBehaviour
     {
-        Targets.Clear();
-    }
+        public bool ShouldFoundTarget => Targets.Count != 0;
 
-    private void OnTriggerEnter2D(Collider2D collision)
-    {
-        foreach (var tag in targetTags)
+        [SerializeField]
+        string[] targetTags = { "Player" };
+        public HashSet<Transform> Targets { get; private set; } = new HashSet<Transform>();
+        public Transform LastTarget { get; private set; }
+        private void Start()
         {
-            if (collision.CompareTag(tag))
+            Targets.Clear();
+        }
+
+        private void OnTriggerEnter2D(Collider2D collision)
+        {
+            foreach (var tag in targetTags)
             {
-                Targets.Add( collision.transform);
-                LastTargets= collision.transform;
+                if (collision.CompareTag(tag))
+                {
+                    Targets.Add(collision.transform);
+                    LastTarget = collision.transform;
+                }
             }
         }
-    }
-    private void OnTriggerExit2D(Collider2D collision)
-    {
-        foreach (var tag in targetTags)
+        private void OnTriggerExit2D(Collider2D collision)
         {
-            if (collision.CompareTag(tag))
+            foreach (var tag in targetTags)
             {
-                Targets.Remove(collision.transform);
+                if (collision.CompareTag(tag))
+                {
+                    Targets.Remove(collision.transform);
+                }
             }
         }
     }

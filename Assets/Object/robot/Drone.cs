@@ -3,48 +3,50 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
-public class Drone : MonoBehaviour
+namespace ReLeaf
 {
-    [SerializeField]
-    float speed = 3;
-    [SerializeField]
-    float range = 0.1f;
-
-    PlantType plantType;
-
-
-    public IEnumerator SowSeed(IEnumerable<Foundation> fs, PlantType type)
+    public class Drone : MonoBehaviour
     {
-        plantType = type;
-        gameObject.SetActive(true);
+        [SerializeField]
+        float speed = 3;
+        [SerializeField]
+        float range = 0.1f;
 
-        foreach (var f in fs)
+        PlantType plantType;
+
+
+        public IEnumerator SowSeed(IEnumerable<Foundation> fs, PlantType type)
         {
-            while (true)
+            plantType = type;
+
+            foreach (var f in fs)
             {
-                if (f == null)
+                while (true)
                 {
-                    break;
-                }
+                    if (f == null)
+                    {
+                        break;
+                    }
 
-                transform.position=Vector3.MoveTowards(transform.position,f.transform.position, speed*Time.deltaTime*DungeonManager.CELL_SIZE);
+                    transform.position = Vector3.MoveTowards(transform.position, f.transform.position, speed * Time.deltaTime * DungeonManager.CELL_SIZE);
 
-                yield return null;
+                    yield return null;
 
-                if (f == null)
-                {
-                    break;
-                }
+                    if (f == null)
+                    {
+                        break;
+                    }
 
-                if ((f.transform.position - transform.position).sqrMagnitude < range * range)
-                {
-                    f.SetHighlight(false);
-                    DungeonManager.Instance.SowSeed(f.transform.position, plantType);
-                    break;
+                    if ((f.transform.position - transform.position).sqrMagnitude < range * range)
+                    {
+                        f.SetHighlight(false);
+                        DungeonManager.Instance.SowSeed(f.transform.position, plantType);
+                        break;
+                    }
                 }
             }
+            Destroy(gameObject);
         }
-        gameObject.SetActive(false);
-    }
 
+    }
 }

@@ -2,12 +2,15 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Tree : Plant
+namespace ReLeaf
 {
-    private void Start()
+    public class Tree : Plant
     {
-        Init();
+        private void Start()
+        {
+            Init();
+        }
+
+
     }
-
-
 }

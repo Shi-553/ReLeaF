@@ -4,86 +4,89 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using UnityEngine;
 
-public enum DamageType
+namespace ReLeaf
 {
-    Direct,
-    Shooting,
-    Explosion
-}
-[Serializable]
-public struct DamageMagnification
-{
-    public DamageType damageType;
-    public float magnification;
-}
-
-public abstract class Plant : MonoBehaviour
-{
-    [SerializeField]
-    PlantInfo plantInfo;
-
-    [SerializeField, ReadOnly]
-    float hp;
-    public float Hp => hp;
-
-    [SerializeField]
-    protected GameObject seedObjRoot;
-    [SerializeField]
-    protected GameObject plantObjRoot;
-
-    public bool IsFullGrowth  { get; private set; }
-
-    public Vector3Int TilePos { get; private set; }
-
-    protected void Init()
+    public enum DamageType
     {
-        IsFullGrowth = false;
-        hp = plantInfo.HpMax;
-        TilePos = DungeonManager.Instance.WorldToTilePos(transform.position);
-
-        StartCoroutine(Growing());
+        Direct,
+        Shooting,
+        Explosion
     }
-    IEnumerator Growing()
+    [Serializable]
+    public struct DamageMagnification
     {
-        // äÆëSÇ…ê¨í∑Ç∑ÇÈÇ‹Ç≈
-        yield return new WaitForSeconds(plantInfo.GrowTime);
-
-        IsFullGrowth = true;
-        FullGrowed();
+        public DamageType damageType;
+        public float magnification;
     }
 
-    virtual protected void FullGrowed()
+    public abstract class Plant : MonoBehaviour
     {
-        seedObjRoot.SetActive(false);
-        plantObjRoot.SetActive(true);
-    }
+        [SerializeField]
+        PlantInfo plantInfo;
 
-    public virtual void Damaged(float damage, DamageType type)
-    {
-        if (!IsFullGrowth)
+        [SerializeField, ReadOnly]
+        float hp;
+        public float Hp => hp;
+
+        [SerializeField]
+        protected GameObject seedObjRoot;
+        [SerializeField]
+        protected GameObject plantObjRoot;
+
+        public bool IsFullGrowth { get; private set; }
+
+        public Vector3Int TilePos { get; private set; }
+
+        protected void Init()
         {
-            hp = 0;
-            Withered();
-            return;
+            IsFullGrowth = false;
+            hp = plantInfo.HpMax;
+            TilePos = DungeonManager.Instance.WorldToTilePos(transform.position);
+
+            StartCoroutine(Growing());
+        }
+        IEnumerator Growing()
+        {
+            // äÆëSÇ…ê¨í∑Ç∑ÇÈÇ‹Ç≈
+            yield return new WaitForSeconds(plantInfo.GrowTime);
+
+            IsFullGrowth = true;
+            FullGrowed();
         }
 
-        foreach (var magnification in plantInfo.DamageMagnifications)
+        virtual protected void FullGrowed()
         {
-            if (magnification.damageType == type)
+            seedObjRoot.SetActive(false);
+            plantObjRoot.SetActive(true);
+        }
+
+        public virtual void Damaged(float damage, DamageType type)
+        {
+            if (!IsFullGrowth)
             {
-                damage *= magnification.magnification;
+                hp = 0;
+                Withered();
+                return;
+            }
+
+            foreach (var magnification in plantInfo.DamageMagnifications)
+            {
+                if (magnification.damageType == type)
+                {
+                    damage *= magnification.magnification;
+                }
+            }
+            hp -= damage;
+            if (hp <= 0)
+            {
+                Withered();
             }
         }
-        hp -= damage;
-        if (hp <= 0)
+        protected virtual void Withered()
         {
-            Withered();
+            DungeonManager.Instance.Messy(this);
+            Destroy(gameObject);
         }
-    }
-    protected virtual void Withered()
-    {
-        DungeonManager.Instance.Messy(this);
-        Destroy(gameObject);
-    }
 
+    }
 }

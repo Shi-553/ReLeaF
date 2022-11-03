@@ -2,19 +2,22 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class DoorSwitch : MonoBehaviour
+namespace ReLeaf
 {
-    private void OnTriggerEnter2D(Collider2D other)
+    public class DoorSwitch : MonoBehaviour
     {
-        if (other.gameObject.CompareTag("Player"))
+        private void OnTriggerEnter2D(Collider2D other)
         {
-            GetComponentInParent<Room>().EnterRoom();
-            other.GetComponent<PlayerControler>().EnterRoom();
-            Destroy(gameObject);
-        }
-        else if (other.gameObject.CompareTag("Fruit"))
-        {
-            Destroy(other.gameObject);
+            if (other.gameObject.CompareTag("Player"))
+            {
+                GetComponentInParent<Room>().EnterRoom();
+                other.GetComponent<PlayerController>().EnterRoom();
+                Destroy(gameObject);
+            }
+            else if (other.gameObject.CompareTag("Fruit")&&other.TryGetComponent<Fruit>(out var fruit)&&fruit.IsAttack)
+            {
+                Destroy(other.gameObject);
+            }
         }
     }
 }

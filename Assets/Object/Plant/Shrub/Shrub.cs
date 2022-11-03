@@ -6,53 +6,56 @@ using System.Text;
 using System.Threading.Tasks;
 using UnityEngine;
 
-public class Shrub : Plant
+namespace ReLeaf
 {
-    [SerializeField]
-    GameObject fruitPrefab;
-
-    [SerializeField]
-    float regrowFruitTime=8;
-
-    Fruit fruit;
-
-    private void Start()
+    public class Shrub : Plant
     {
-        Init();
-    }
+        [SerializeField]
+        GameObject fruitPrefab;
 
-    protected override void FullGrowed()
-    {
-        seedObjRoot.SetActive(false);
-        plantObjRoot.SetActive(true);
-        InstanceFruit();
-    }
-    public bool Harvest(out Fruit f)
-    {
-        if (fruit == null)
+        [SerializeField]
+        float regrowFruitTime = 8;
+
+        Fruit fruit;
+
+        private void Start()
         {
-            f = null;
-            return false;
+            Init();
         }
 
-        StartCoroutine(RegrowFruit());
-        f = fruit;
-        fruit = null;
+        protected override void FullGrowed()
+        {
+            seedObjRoot.SetActive(false);
+            plantObjRoot.SetActive(true);
+            InstanceFruit();
+        }
+        public bool Harvest(out Fruit f)
+        {
+            if (fruit == null)
+            {
+                f = null;
+                return false;
+            }
 
-        return true;
+            StartCoroutine(RegrowFruit());
+            f = fruit;
+            fruit = null;
+
+            return true;
+        }
+
+        // もう一度実を付けるまで
+        IEnumerator RegrowFruit()
+        {
+            yield return new WaitForSeconds(regrowFruitTime);
+            InstanceFruit();
+        }
+
+        void InstanceFruit()
+        {
+            var fruitObj = Instantiate(fruitPrefab, transform.position, Quaternion.identity);
+            fruitObj.TryGetComponent(out fruit);
+        }
+
     }
-
-    // もう一度実を付けるまで
-    IEnumerator RegrowFruit()
-    {
-        yield return new WaitForSeconds(regrowFruitTime);
-        InstanceFruit();
-    }
-
-    void InstanceFruit()
-    {
-         var fruitObj = Instantiate(fruitPrefab, transform.position, Quaternion.identity);
-        fruitObj.TryGetComponent(out fruit);
-    }
-
 }

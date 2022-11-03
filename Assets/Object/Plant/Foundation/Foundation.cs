@@ -2,27 +2,30 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Foundation : Plant
+namespace ReLeaf
 {
-    [SerializeField]
-    GameObject highLightObj;
-
-    public bool IsHighlighting => highLightObj.activeSelf;
-
-    private void Start()
+    public class Foundation : Plant
     {
-        Init();
+        [SerializeField]
+        GameObject highLightObj;
+
+        public bool IsHighlighting => highLightObj.activeSelf;
+
+        private void Start()
+        {
+            Init();
+        }
+
+        protected override void FullGrowed()
+        {
+            plantObjRoot.SetActive(true);
+        }
+
+        public void SetHighlight(bool sw)
+        {
+            highLightObj.SetActive(sw);
+        }
+
+
     }
-
-    protected override void FullGrowed()
-    {
-        plantObjRoot.SetActive(true);
-    }
-
-    public void SetHighlight(bool sw)
-    {
-        highLightObj.SetActive(sw);
-    }
-
-
 }

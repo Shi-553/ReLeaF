@@ -2,22 +2,25 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-[CreateAssetMenu]
-public class PlantInfo : ScriptableObject
+namespace ReLeaf
 {
-    [SerializeField]
-    PlantType plantType;
-    public PlantType PlantType => plantType;
+    [CreateAssetMenu]
+    public class PlantInfo : ScriptableObject
+    {
+        [SerializeField]
+        PlantType plantType;
+        public PlantType PlantType => plantType;
 
-    [SerializeField]
-    float hpMax;
-    public float HpMax => hpMax;
+        [SerializeField]
+        float hpMax;
+        public float HpMax => hpMax;
 
-    [SerializeField]
-    float growTime = 10.0f;
-    public float GrowTime => growTime;
+        [SerializeField]
+        float growTime = 10.0f;
+        public float GrowTime => growTime;
 
-    [SerializeField]
-    DamageMagnification[] damageMagnifications;
-    public IReadOnlyCollection<DamageMagnification> DamageMagnifications=> damageMagnifications;
+        [SerializeField]
+        DamageMagnification[] damageMagnifications;
+        public IReadOnlyCollection<DamageMagnification> DamageMagnifications => damageMagnifications;
+    }
 }

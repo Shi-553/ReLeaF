@@ -52,7 +52,7 @@ MonoBehaviour:
   seedObjRoot: {fileID: 2512924786209038246}
   plantObjRoot: {fileID: 8299964300620496489}
   fruitPrefab: {fileID: 3158373612437488347, guid: ad0b78ed695946941a3c3a0316c8bcf7, type: 3}
-  regrowFruitTime: 4
+  regrowFruitTime: 8
 --- !u!61 &-3087161009963491585
 BoxCollider2D:
   m_ObjectHideFlags: 0

@@ -2,20 +2,23 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class GenerateDungeon : MonoBehaviour
+namespace ReLeaf
 {
-    [SerializeField]
-    GameObject initPattern;
-    [SerializeField]
-    List<GameObject> patterns;
-
-    void Start()
+    public class GenerateDungeon : MonoBehaviour
     {
-        
-    }
+        [SerializeField]
+        GameObject initPattern;
+        [SerializeField]
+        List<GameObject> patterns;
 
-    void Update()
-    {
-        
+        void Start()
+        {
+
+        }
+
+        void Update()
+        {
+
+        }
     }
 }
