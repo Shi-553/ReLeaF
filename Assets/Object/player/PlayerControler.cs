@@ -31,25 +31,22 @@ public class PlayerControler : MonoBehaviour
     [SerializeField]
     float knockBackDampingRate = 0.9f;
 
-    Vector2 move;
-    Rigidbody2D rigid;
     FruitContainer fruitContainer;
 
     [SerializeField]
     Text text;
 
+    Rigidbody2DMover mover;
+    private void Awake()
+    {
+        TryGetComponent(out mover);
+        hp = hpMax;
+    }
     void Start()
     {
         footTransform = transform.Find("Foot");
-        hp = hpMax;
-        TryGetComponent(out rigid);
     }
 
-    private void FixedUpdate()
-    {
-        rigid.MovePosition(rigid.position + move);
-        move = Vector2.zero;
-    }
     void Update()
     {
         if (Input.GetKeyDown(KeyCode.Escape))
@@ -67,6 +64,15 @@ public class PlayerControler : MonoBehaviour
         if (hp == 0)
         {
             return;
+        }
+
+        if (Input.GetMouseButtonDown(1))
+        {
+            droneManager.BeginSowRoute(transform.position);
+        }
+        if (Input.GetMouseButtonUp(1))
+        {
+            droneManager.EndSowRoute();
         }
 
         Vector2 add = Vector2.zero;
@@ -88,30 +94,23 @@ public class PlayerControler : MonoBehaviour
         }
         if (add != Vector2.zero)
         {
+            if (droneManager.IsSowRouting)
+            {
+                droneManager.MoveSowRoute(Vector2Int.CeilToInt(add));
+                return;
+            }
 
             add.Normalize();
+
+
             var speed = fruitContainer == null ? moveSpeed : shotMoveSpeed;
 
-            move.x += add.x * DungeonManager.CELL_SIZE.x * speed * Time.deltaTime;
-            move.y += add.y * DungeonManager.CELL_SIZE.y * speed * Time.deltaTime;
 
+            mover.Move( speed * add);
 
-
-
-            dungeonManager.SowGrass(footTransform.position);
+            dungeonManager.SowSeed(footTransform.position,PlantType.Foundation);
         }
 
-        if (fruitContainer == null)
-        {
-            if (Input.GetMouseButtonDown(1))
-            {
-                droneManager.SetupRange(transform);
-            }
-            if (Input.GetMouseButtonUp(1))
-            {
-                droneManager.Harvest();
-            }
-        }
 
         if (shotTimeCounter > 0.0f)
         {
@@ -157,8 +156,7 @@ public class PlayerControler : MonoBehaviour
     {
         while (true)
         {
-            move.x += impulse.x * DungeonManager.CELL_SIZE.x * Time.deltaTime;
-            move.y += impulse.y * DungeonManager.CELL_SIZE.y * Time.deltaTime;
+            mover.Move(impulse );
 
 
             impulse *= knockBackDampingRate;
@@ -192,6 +190,5 @@ public class PlayerControler : MonoBehaviour
             fruitContainer.Clear();
             fruitContainer = null;
         }
-        droneManager.Cancel();
     }
 }

@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 3777994689184293161}
   - component: {fileID: 4618218269431818276}
   - component: {fileID: 5941124005257574131}
+  - component: {fileID: 862847400286525175}
   m_Layer: 0
   m_Name: spines
   m_TagString: Untagged
@@ -140,3 +141,15 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
+--- !u!114 &862847400286525175
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8863224938936071657}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 64714d671c1810846a3e94725bb83612, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

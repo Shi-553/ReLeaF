@@ -34,5 +34,5 @@ MonoBehaviour:
   m_InstancedGameObject: {fileID: 1463589238644328539, guid: 7d2dbdfb501b7b044ae8ef237778f103, type: 3}
   m_Flags: 9
   m_ColliderType: 0
-  tileType: 3
+  tileType: 1
   canSowGrass: 0

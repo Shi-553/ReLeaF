@@ -6,72 +6,45 @@ using UnityEngine;
 public class Drone : MonoBehaviour
 {
     [SerializeField]
-    DungeonManager dungeonManager;
-    [SerializeField]
-    PlayerControler player;
-
-    [SerializeField]
     float speed = 3;
     [SerializeField]
-    float collectionRadius = 0.5f;
-    [SerializeField]
-    FruitContainer fruitContainer;
+    float range = 0.1f;
 
-    void Start()
+    PlantType plantType;
+
+
+    public IEnumerator SowSeed(IEnumerable<Foundation> fs, PlantType type)
     {
+        plantType = type;
+        gameObject.SetActive(true);
 
-    }
-    public IEnumerator Harvest(IEnumerable<Transform> fEnumerable)
-    {
-        transform.position = player.transform.position;
-
-        fruitContainer.transform.position = transform.position;
-        fruitContainer.Connect(transform);
-
-
-        var fruitTransforms = fEnumerable.ToList();
-
-        while (fruitTransforms.Count > 0)
+        foreach (var f in fs)
         {
-            fruitTransforms = fruitTransforms.Where(f => f != null).ToList();
-            var nearFruit = fruitTransforms.MinBy(f => (f.position - transform.position).sqrMagnitude);
-            fruitTransforms.Remove(nearFruit);
-
             while (true)
             {
-                if (nearFruit == null)
+                if (f == null)
                 {
                     break;
                 }
-                transform.position=Vector3.MoveTowards(transform.position, nearFruit.position, speed * DungeonManager.CELL_SIZE.x * Time.deltaTime);
-               
 
-                if ((transform.position - nearFruit.position).sqrMagnitude < collectionRadius* collectionRadius)
-                {
-                    //dungeonManager.Harvest(nearFruit.position);
-                    fruitContainer.Push(nearFruit);
-                    break;
-                }
+                transform.position=Vector3.MoveTowards(transform.position,f.transform.position, speed*Time.deltaTime*DungeonManager.CELL_SIZE);
+
                 yield return null;
+
+                if (f == null)
+                {
+                    break;
+                }
+
+                if ((f.transform.position - transform.position).sqrMagnitude < range * range)
+                {
+                    f.SetHighlight(false);
+                    DungeonManager.Instance.SowSeed(f.transform.position, plantType);
+                    break;
+                }
             }
         }
-
-        while (true)
-        {
-            transform.position = Vector3.MoveTowards(transform.position, player.transform.position, speed * DungeonManager.CELL_SIZE.x * Time.deltaTime);
-
-
-            if ((transform.position == player.transform.position))
-            {
-                break;
-            }
-            yield return null;
-        }
-        player.Harvested(fruitContainer);
+        gameObject.SetActive(false);
     }
 
-    public void Cancel()
-    {
-        fruitContainer.Clear();
-    }
 }

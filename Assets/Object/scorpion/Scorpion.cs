@@ -34,14 +34,16 @@ public class Scorpion : MonoBehaviour, IRoomEnemy
     bool isAttackDamageNow = false;
     Vector3 attackDir;
 
-    Vector2 move;
 
-    Rigidbody2D rigid;
-
-    HashSet<Vector3Int> attackedTilePos=new HashSet<Vector3Int>();
+    HashSet<Vector3Int> attackedTilePos = new HashSet<Vector3Int>();
 
     public bool CanAttackPlayer { get; set; }
 
+    Rigidbody2DMover mover;
+    private void Awake()
+    {
+        TryGetComponent(out mover);
+    }
 
     void Start()
     {
@@ -49,13 +51,7 @@ public class Scorpion : MonoBehaviour, IRoomEnemy
         isAttack = false;
         transform.Find("AttackVision").TryGetComponent(out attackVision);
         transform.Find("SearchVision").TryGetComponent(out searchVision);
-        TryGetComponent(out rigid);
         attackedTilePos.Clear();
-    }
-    private void FixedUpdate()
-    {
-        rigid.MovePosition(rigid.position+ move);
-        move = Vector2.zero;
     }
     void Update()
     {
@@ -86,9 +82,7 @@ public class Scorpion : MonoBehaviour, IRoomEnemy
 
         var dir = (searchVision.LastTargets.position - transform.position).normalized;
 
-        move += new Vector2(
-            dir.x * speed * DungeonManager.CELL_SIZE.x * Time.deltaTime,
-            dir.y * speed * DungeonManager.CELL_SIZE.y * Time.deltaTime);
+        mover.Move(speed * dir);
     }
 
     IEnumerator Attack()
@@ -109,7 +103,7 @@ public class Scorpion : MonoBehaviour, IRoomEnemy
         isAttackDamageNow = true;
         attackedTilePos.Clear();
 
-        while (attackDuration > counter&& isAttackDamageNow)
+        while (attackDuration > counter && isAttackDamageNow)
         {
             if (!isAttack)
             {
@@ -118,9 +112,7 @@ public class Scorpion : MonoBehaviour, IRoomEnemy
             transform.localScale = Vector3.one * MathExtension.LerpPairs(
                     new SortedList<float, float> { { 0, 0.8f }, { 0.1f, 1.0f }, { 1, 1 } }, counter / attackDuration);
 
-            move += new Vector2(
-                attackDir.x * attackSpeed * DungeonManager.CELL_SIZE.x * Time.deltaTime,
-                attackDir.y * attackSpeed * DungeonManager.CELL_SIZE.y * Time.deltaTime);
+            mover.Move(attackSpeed * attackDir);
 
             counter += Time.deltaTime;
             yield return null;
@@ -131,21 +123,23 @@ public class Scorpion : MonoBehaviour, IRoomEnemy
     }
     private void OnCollisionStay2D(Collision2D collision)
     {
-        if (!isAttackDamageNow) {
+        if (!isAttackDamageNow)
+        {
             return;
         }
         if (collision.gameObject.CompareTag("Player"))
         {
             if (collision.gameObject.TryGetComponent<PlayerControler>(out var player))
             {
-                player.Damaged(atk,attackDir*attackKnockBackPower);
+                player.Damaged(atk, attackDir * attackKnockBackPower);
                 isAttackDamageNow = false;
             }
         }
         if (collision.gameObject.CompareTag("Plant"))
         {
-            if (collision.gameObject.TryGetComponent<Plant>(out var plant)){
-                plant.Damaged(atk,DamageType.Direct);
+            if (collision.gameObject.TryGetComponent<Plant>(out var plant))
+            {
+                plant.Damaged(atk, DamageType.Direct);
             }
         }
     }
@@ -162,17 +156,11 @@ public class Scorpion : MonoBehaviour, IRoomEnemy
     {
         while (true)
         {
-
-            var pos = transform.position;
-
-            pos.x += impulse.x * DungeonManager.CELL_SIZE.x * Time.deltaTime;
-            pos.y += impulse.y * DungeonManager.CELL_SIZE.y * Time.deltaTime;
-
-            transform.position = pos;
+            mover.Move(impulse);
 
             impulse *= knockBackDampingRate;
 
-            if (impulse.sqrMagnitude<0.01f)
+            if (impulse.sqrMagnitude < 0.01f)
             {
                 yield break;
             }

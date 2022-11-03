@@ -26,6 +26,7 @@ public class cactus : MonoBehaviour, IRoomEnemy
 
     float attackTimeCounter = 0;
     public bool CanAttackPlayer { get; set; }
+
     void Start()
     {
         attackTimeCounter = 0;

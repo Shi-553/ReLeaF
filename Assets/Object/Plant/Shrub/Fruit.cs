@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Security.Cryptography;
 using UnityEngine;
 
 public class Fruit : MonoBehaviour
@@ -18,8 +19,6 @@ public class Fruit : MonoBehaviour
     int atk = 1;
     [SerializeField]
     float attackKnockBackPower = 4.0f;
-    Rigidbody2D rigid;
-    Vector2 move;
 
     [SerializeField]
     float diffusion = 10;
@@ -27,11 +26,13 @@ public class Fruit : MonoBehaviour
     public bool IsAttack { get; private set; }
 
     Vector2 dir;
-    void Start()
+    Rigidbody2DMover mover;
+
+    private void Awake()
     {
+        TryGetComponent(out mover);
         IsAttack = false;
         lifeTimeCounter = 0;
-        TryGetComponent(out rigid);
     }
 
     public void SteppedOn()
@@ -48,12 +49,6 @@ public class Fruit : MonoBehaviour
         IsAttack = true;
     }
 
-
-    private void FixedUpdate()
-    {
-        rigid.MovePosition(rigid.position + move);
-        move = Vector2.zero;
-    }
     void Update()
     {
         if (!IsAttack)
@@ -68,9 +63,7 @@ public class Fruit : MonoBehaviour
             Destroy(gameObject);
         }
 
-        move += new Vector2(
-            dir.x * speed * DungeonManager.CELL_SIZE.x * Time.deltaTime,
-            dir.y * speed * DungeonManager.CELL_SIZE.y * Time.deltaTime);
+        mover.Move(speed*dir);
     }
 
     private void OnTriggerEnter2D(Collider2D collision)

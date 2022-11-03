@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 8332720749487745156}
   - component: {fileID: 7484773499943557005}
   - component: {fileID: 5455965294282161094}
+  - component: {fileID: -4858720575995891945}
   m_Layer: 0
   m_Name: scorpion
   m_TagString: Enemy
@@ -148,6 +149,18 @@ CircleCollider2D:
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
   m_Radius: 0.4
+--- !u!114 &-4858720575995891945
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5442024061459843501}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 64714d671c1810846a3e94725bb83612, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &190449186048594000
 PrefabInstance:
   m_ObjectHideFlags: 0

@@ -18,15 +18,7 @@ public class DungeonManager : MonoBehaviour
 {
     [SerializeField]
     Tilemap groundTilemap;
-    [SerializeField]
-    Tilemap objectTilemap;
-    [SerializeField]
-    Tilemap wallTilemap;
 
-    [SerializeField]
-    TerrainTile wetSandTile;
-    [SerializeField]
-    TerrainTile grassTile;
     [SerializeField]
     TerrainTile messyTile;
     [SerializeField]
@@ -36,9 +28,6 @@ public class DungeonManager : MonoBehaviour
 
     [SerializeField]
     Grid grid;
-
-    [SerializeField]
-    float growGrassTime = 0.5f;
 
     [SerializeField]
     float messyCuredTime = 5.0f;
@@ -65,7 +54,14 @@ public class DungeonManager : MonoBehaviour
     {
         return grid.WorldToCell(worldPos);
     }
-
+    public Vector3 TilePosToWorld(Vector3Int tilePos)
+    {
+        return grid.CellToWorld(tilePos) + new Vector3(CELL_SIZE, CELL_SIZE) / 2;
+    }
+    public GameObject GetGroundTileObject(Vector3Int tilePos)
+    {
+        return groundTilemap.GetInstantiatedObject(tilePos);
+    }
     public void Messy(Plant plant)
     {
         var pos = plant.TilePos;
@@ -84,33 +80,6 @@ public class DungeonManager : MonoBehaviour
 
     }
 
-    public void SowGrass(Vector3 worldPos)
-    {
-        var pos = grid.WorldToCell(worldPos);
-
-        var tile = groundTilemap.GetTile<TerrainTile>(pos);
-        if (tile == null)
-        {
-            return;
-        }
-        if (!tile.canSowGrass)
-        {
-            return;
-        }
-        StartCoroutine(GrowGrass(pos));
-    }
-    IEnumerator GrowGrass(Vector3Int tilePos)
-    {
-        groundTilemap.SetTile(tilePos, wetSandTile);
-
-        // ëêÇ™ê∂Ç¶ÇÈÇ‹Ç≈
-        yield return new WaitForSeconds(growGrassTime);
-
-        var stackedPos1 = new Vector3Int(tilePos.x, tilePos.y, tilePos.z + 1);
-
-        groundTilemap.SetTile(stackedPos1, grassTile);
-
-    }
     public void SowSeed(Vector3 worldPos, PlantType type)
     {
         if (type < 0 || seedTiles.Length <= (int)type)
@@ -124,9 +93,15 @@ public class DungeonManager : MonoBehaviour
         {
             return;
         }
-        if (!tile.canSowGrass)
+        if (type == PlantType.Foundation && !tile.canSowGrass)
         {
             return;
+        }
+        if (type != PlantType.Foundation){
+            if (tile.tileType != TileType.Foundation)
+            {
+                return;
+            }
         }
         groundTilemap.SetTile(pos, seedTiles[(int)type]);
     }
@@ -138,5 +113,5 @@ public class DungeonManager : MonoBehaviour
         groundTilemap.SetTile(tilePos, sandTile);
     }
 
-    static public readonly Vector3 CELL_SIZE = new Vector3(0.5f, 0.5f, 0);
+    static public readonly float CELL_SIZE = 0.5f;
 }

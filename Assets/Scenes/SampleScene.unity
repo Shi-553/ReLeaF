@@ -198,18 +198,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 252597926, guid: 9ca94c9a53b7d29438d0dcc04c15f6ff, type: 3}
-      propertyPath: player
-      value: 
-      objectReference: {fileID: 2001751948}
-    - target: {fileID: 252597926, guid: 9ca94c9a53b7d29438d0dcc04c15f6ff, type: 3}
-      propertyPath: dungeonManager
-      value: 
-      objectReference: {fileID: 1499278675461636017}
-    - target: {fileID: 252597926, guid: 9ca94c9a53b7d29438d0dcc04c15f6ff, type: 3}
-      propertyPath: fruitContainer
-      value: 
-      objectReference: {fileID: 508561262}
     - target: {fileID: 817023885529566100, guid: 9ca94c9a53b7d29438d0dcc04c15f6ff, type: 3}
       propertyPath: m_RootOrder
       value: 4
@@ -254,23 +242,20 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1171829601549190661, guid: 9ca94c9a53b7d29438d0dcc04c15f6ff, type: 3}
+      propertyPath: brain
+      value: 
+      objectReference: {fileID: 519420033}
+    - target: {fileID: 1171829601549190661, guid: 9ca94c9a53b7d29438d0dcc04c15f6ff, type: 3}
+      propertyPath: virtualCamera
+      value: 
+      objectReference: {fileID: 919157324}
     - target: {fileID: 7700699683069939654, guid: 9ca94c9a53b7d29438d0dcc04c15f6ff, type: 3}
       propertyPath: m_Name
       value: droneManager
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 9ca94c9a53b7d29438d0dcc04c15f6ff, type: 3}
---- !u!114 &508561262 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 8262983134650453015, guid: 9ca94c9a53b7d29438d0dcc04c15f6ff, type: 3}
-  m_PrefabInstance: {fileID: 508561261}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0ba7c5fa36a37c744b4a02f95dfc4fec, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &515882770
 GameObject:
   m_ObjectHideFlags: 0
@@ -2582,17 +2567,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 8467192124429001913, guid: 7145dcadd5ab20341bfef2b0cf89dc63, type: 3}
   m_PrefabInstance: {fileID: 8467192124113365808}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &2001751948 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 8467192124429001914, guid: 7145dcadd5ab20341bfef2b0cf89dc63, type: 3}
-  m_PrefabInstance: {fileID: 8467192124113365808}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 90014a5f3538f5d43ab5217edc56253d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &203121253767136247
 GameObject:
   m_ObjectHideFlags: 0
@@ -2720,15 +2694,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   groundTilemap: {fileID: 9020821008736504434}
-  objectTilemap: {fileID: 3737193101417096830}
-  wallTilemap: {fileID: 4790990061369731534}
-  wetSandTile: {fileID: 11400000, guid: 0303a80c1397c764e98a5907d934f8cd, type: 2}
-  grassTile: {fileID: 11400000, guid: b00aed80cf00d214b82dc1924dadcaec, type: 2}
   messyTile: {fileID: 11400000, guid: f70a428284a8dab4ba980baef0e5548c, type: 2}
   sandTile: {fileID: 11400000, guid: 001da747823b07f45a2ab13eb1073cbe, type: 2}
-  seedTiles: []
+  seedTiles:
+  - {fileID: 11400000, guid: 0303a80c1397c764e98a5907d934f8cd, type: 2}
+  - {fileID: 11400000, guid: cdc1563c4dd2fa64fa745cd71c45a806, type: 2}
+  - {fileID: 11400000, guid: cdc1563c4dd2fa64fa745cd71c45a806, type: 2}
   grid: {fileID: 1753051927015289242}
-  growGrassTime: 1
   messyCuredTime: 10
 --- !u!19719996 &1519171843703095969
 TilemapCollider2D:
@@ -5723,6 +5695,10 @@ PrefabInstance:
     - target: {fileID: 5442024061459843501, guid: 2a7de3647c92d20429b93cd67b201cf0, type: 3}
       propertyPath: m_Name
       value: scorpion
+      objectReference: {fileID: 0}
+    - target: {fileID: 5442024061459843501, guid: 2a7de3647c92d20429b93cd67b201cf0, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8780205405150213191, guid: 2a7de3647c92d20429b93cd67b201cf0, type: 3}
       propertyPath: m_RootOrder
@@ -17343,6 +17319,10 @@ PrefabInstance:
     - target: {fileID: 5442024061459843501, guid: 2a7de3647c92d20429b93cd67b201cf0, type: 3}
       propertyPath: m_Name
       value: scorpion
+      objectReference: {fileID: 0}
+    - target: {fileID: 5442024061459843501, guid: 2a7de3647c92d20429b93cd67b201cf0, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8780205405150213191, guid: 2a7de3647c92d20429b93cd67b201cf0, type: 3}
       propertyPath: m_RootOrder

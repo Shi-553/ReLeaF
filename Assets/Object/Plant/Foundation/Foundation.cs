@@ -4,6 +4,11 @@ using UnityEngine;
 
 public class Foundation : Plant
 {
+    [SerializeField]
+    GameObject highLightObj;
+
+    public bool IsHighlighting => highLightObj.activeSelf;
+
     private void Start()
     {
         Init();
@@ -13,4 +18,11 @@ public class Foundation : Plant
     {
         plantObjRoot.SetActive(true);
     }
+
+    public void SetHighlight(bool sw)
+    {
+        highLightObj.SetActive(sw);
+    }
+
+
 }

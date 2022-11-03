@@ -15,18 +15,14 @@ public class Spines : MonoBehaviour
     int atk = 1;
     [SerializeField]
     float attackKnockBackPower = 4.0f;
-    Rigidbody2D rigid;
-    Vector2 move;
-    void Start()
-    {
-        lifeTimeCounter = 0;
-        TryGetComponent(out rigid);
-    }
 
-    private void FixedUpdate()
+
+    Rigidbody2DMover mover;
+
+    private void Awake()
     {
-        rigid.MovePosition(rigid.position + move);
-        move = Vector2.zero;
+        TryGetComponent(out mover);
+        lifeTimeCounter = 0;
     }
     void Update()
     {
@@ -37,9 +33,7 @@ public class Spines : MonoBehaviour
             Destroy(gameObject);
         }
 
-        move += new Vector2(
-            transform.up.x * speed * DungeonManager.CELL_SIZE.x * Time.deltaTime,
-            transform.up.y * speed * DungeonManager.CELL_SIZE.y * Time.deltaTime);
+        mover.Move( transform.up * speed);
     }
     private void OnTriggerEnter2D(Collider2D collision)
     {

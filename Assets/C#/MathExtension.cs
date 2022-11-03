@@ -30,4 +30,5 @@ public static class MathExtension
 
         return pairs.Last().Value;
     }
+    
 }

@@ -7,12 +7,13 @@ using UnityEngine.Tilemaps;
 public enum TileType
 {
     Hole,
-    Dirt,
+    Foundation,
     Rock,
-    Plant                   ,
+    Plant,
     Door,
     Wall,
     DoorSwitch,
+    Sand,
 };
 
 public class TerrainTile : Tile
