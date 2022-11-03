@@ -23,6 +23,8 @@ public class Shrub : Plant
 
     protected override void FullGrowed()
     {
+        seedObjRoot.SetActive(false);
+        plantObjRoot.SetActive(true);
         InstanceFruit();
     }
     public bool Harvest(out Fruit f)

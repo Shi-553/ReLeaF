@@ -146,3 +146,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   dronePrefab: {fileID: 2318582545962549861, guid: c46c0eaf8cec17d48bb957cc1114a5c3, type: 3}
   droneRoute: {fileID: 1770552022137012853}
+  brain: {fileID: 0}
+  selectSeed: {fileID: 0}

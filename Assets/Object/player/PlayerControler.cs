@@ -35,6 +35,7 @@ public class PlayerControler : MonoBehaviour
 
     [SerializeField]
     Text text;
+    
 
     Rigidbody2DMover mover;
     private void Awake()

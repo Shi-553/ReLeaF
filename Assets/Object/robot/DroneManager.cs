@@ -16,6 +16,8 @@ public class DroneManager : MonoBehaviour
     Coroutine droneCo;
     [SerializeField]
     CinemachineBrain brain;
+    [SerializeField]
+    SelectSeed selectSeed;
     public bool IsSowRouting { get; private set; }
     public void BeginSowRoute(Vector3 startPos)
     {
@@ -44,7 +46,7 @@ public class DroneManager : MonoBehaviour
 
         var drone=Instantiate(dronePrefab, transform.position, Quaternion.identity, transform);
         drone.transform.localPosition = Vector3.zero;
-        droneCo = StartCoroutine(drone.SowSeed(new List<Foundation>(droneRoute.LastTargets), PlantType.Tree));
+        droneCo = StartCoroutine(drone.SowSeed(new List<Foundation>(droneRoute.LastTargets), selectSeed.CurrentSeed.PlantType));
     }
     public void Cancel()
     {
