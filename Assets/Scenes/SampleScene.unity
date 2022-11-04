@@ -19376,6 +19376,18 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 5839813641606943567, guid: 7145dcadd5ab20341bfef2b0cf89dc63, type: 3}
+      propertyPath: slider
+      value: 
+      objectReference: {fileID: 2033298499}
+    - target: {fileID: 5839813641606943567, guid: 7145dcadd5ab20341bfef2b0cf89dc63, type: 3}
+      propertyPath: recoverySpeed
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 7810232181920566239, guid: 7145dcadd5ab20341bfef2b0cf89dc63, type: 3}
+      propertyPath: slider
+      value: 
+      objectReference: {fileID: 2105551476}
     - target: {fileID: 8467192124429001911, guid: 7145dcadd5ab20341bfef2b0cf89dc63, type: 3}
       propertyPath: m_Name
       value: player
