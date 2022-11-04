@@ -40,6 +40,9 @@ namespace ReLeaf
         ValueGaugeManager staminaGauge;
 
         Rigidbody2DMover mover;
+
+        Vector3Int FootTilePos => DungeonManager.Instance.WorldToTilePos(footTransform.position);
+
         private void Awake()
         {
             TryGetComponent(out mover);
@@ -115,7 +118,7 @@ namespace ReLeaf
 
                 mover.Move(speed * add);
 
-                DungeonManager.Instance.SowSeed(footTransform.position, PlantType.Foundation);
+                DungeonManager.Instance.SowSeed(FootTilePos, PlantType.Foundation);
             }
 
 

@@ -41,4 +41,5 @@ public static class LinqExtension
             return min;
         }
     }
+
 }

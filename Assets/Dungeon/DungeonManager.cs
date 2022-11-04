@@ -82,15 +82,14 @@ namespace ReLeaf
 
         }
 
-        public void SowSeed(Vector3 worldPos, PlantType type)
+        public void SowSeed(Vector3Int tilePos, PlantType type)
         {
             if (type < 0 || seedTiles.Length <= (int)type)
             {
                 return;
             }
-            var pos = grid.WorldToCell(worldPos);
 
-            var tile = groundTilemap.GetTile<TerrainTile>(pos);
+            var tile = groundTilemap.GetTile<TerrainTile>(tilePos);
             if (tile == null)
             {
                 return;
@@ -106,7 +105,7 @@ namespace ReLeaf
                     return;
                 }
             }
-            groundTilemap.SetTile(pos, seedTiles[(int)type]);
+            groundTilemap.SetTile(tilePos, seedTiles[(int)type]);
         }
 
 
@@ -114,6 +113,27 @@ namespace ReLeaf
         {
             yield return new WaitForSeconds(messyCuredTime);
             groundTilemap.SetTile(tilePos, sandTile);
+        }
+
+        public void ForceChange(Vector3Int tilePos, PlantType type, bool allowPlant)
+        {
+            var tile = groundTilemap.GetTile<TerrainTile>(tilePos);
+            if (tile == null)
+            {
+                return;
+            }
+            if (tile.tileType == TileType.Sand || (allowPlant && tile.tileType == TileType.Plant)){
+
+                var beforeObj = groundTilemap.GetInstantiatedObject(tilePos);
+                if (beforeObj != null)
+                {
+                    Destroy(beforeObj);
+                }
+
+                groundTilemap.SetTile(tilePos, seedTiles[(int)type]);
+                var obj = groundTilemap.GetInstantiatedObject(tilePos);
+                obj.GetComponent<Plant>().FouceGrowing();
+            }
         }
 
         static public readonly float CELL_SIZE = 0.5f;

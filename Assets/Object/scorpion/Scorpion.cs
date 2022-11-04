@@ -8,9 +8,9 @@ namespace ReLeaf
     public class Scorpion : MonoBehaviour, IRoomEnemy
     {
         [SerializeField]
-        int hpMax = 3;
+        float hpMax = 3;
         [SerializeField]
-        int hp = 3;
+        float hp = 3;
         [SerializeField]
         float speed = 2.0f;
         [SerializeField]
@@ -145,7 +145,7 @@ namespace ReLeaf
                 }
             }
         }
-        public void Damaged(int damage, Vector3 impulse)
+        public void Damaged(float damage, Vector3 impulse)
         {
             hp -= damage;
             StartCoroutine(KnockBack(impulse));

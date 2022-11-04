@@ -9,9 +9,9 @@ namespace ReLeaf
     public class cactus : MonoBehaviour, IRoomEnemy
     {
         [SerializeField]
-        int hpMax = 3;
+        float hpMax = 3;
         [SerializeField]
-        int hp = 3;
+        float hp = 3;
 
         [SerializeField]
         bool shouldAimTarget;
@@ -56,7 +56,7 @@ namespace ReLeaf
                     attackTimeCounter = 0;
 
                     var rotation = shouldAimTarget ?
-                        Quaternion.FromToRotation(Vector3.up, vision.Targets.MinBy(t => (t.transform.position - transform.position).sqrMagnitude).position - transform.position) :
+                        Quaternion.FromToRotation(Vector3.up, vision.LastTarget.position - transform.position) :
                         Quaternion.identity;
                     for (int i = 0; i < attackSpinesNum; i++)
                     {
@@ -66,7 +66,7 @@ namespace ReLeaf
             }
         }
 
-        public void Damaged(int damage)
+        public void Damaged(float damage)
         {
             hp -= damage;
             if (hp <= 0)

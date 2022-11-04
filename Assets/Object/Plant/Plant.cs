@@ -37,19 +37,25 @@ namespace ReLeaf
 
         public Vector3Int TilePos { get; private set; }
 
+        Coroutine growCo;
+        public bool IsFouceGrowing { get; private set; }
+
         protected void Init()
         {
             IsFullGrowth = false;
             hp = plantInfo.HpMax;
             TilePos = DungeonManager.Instance.WorldToTilePos(transform.position);
 
-            StartCoroutine(Growing());
+            growCo= StartCoroutine(Growing());
         }
         IEnumerator Growing()
         {
-            // äÆëSÇ…ê¨í∑Ç∑ÇÈÇ‹Ç≈
-            yield return new WaitForSeconds(plantInfo.GrowTime);
-
+            if (!IsFouceGrowing)
+            {
+                // äÆëSÇ…ê¨í∑Ç∑ÇÈÇ‹Ç≈
+                yield return new WaitForSeconds(plantInfo.GrowTime);
+            }
+            growCo = null;
             IsFullGrowth = true;
             FullGrowed();
         }
@@ -86,6 +92,20 @@ namespace ReLeaf
         {
             DungeonManager.Instance.Messy(this);
             Destroy(gameObject);
+        }
+
+        public void FouceGrowing()
+        {
+                IsFouceGrowing = true;
+            if (growCo != null)
+            {
+                Debug.Log("StopAndFullGrowed");
+                StopCoroutine(growCo);
+                growCo = null;
+                IsFullGrowth = true;
+                FullGrowed();
+            }
+
         }
 
     }

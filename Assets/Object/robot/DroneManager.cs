@@ -19,7 +19,7 @@ namespace ReLeaf
         CinemachineBrain brain;
         [SerializeField]
         SelectSeed selectSeed;
-        public bool IsSowRouting=> droneRoute.IsRouting;
+        public bool IsSowRouting => droneRoute.IsRouting;
 
         [SerializeField]
         Transform droneRoot;
@@ -60,10 +60,11 @@ namespace ReLeaf
         }
         public void EndSowRoute(bool isCollect = true)
         {
-            if (!IsSowRouting)
+            if (Time.timeScale == 1)
             {
                 return;
             }
+
             brain.m_UpdateMethod = CinemachineBrain.UpdateMethod.SmartUpdate;
             brain.m_IgnoreTimeScale = false;
             Time.timeScale = 1;
@@ -74,14 +75,14 @@ namespace ReLeaf
             {
                 var drone = Instantiate(dronePrefab, transform.position, Quaternion.identity, droneRoot);
                 drone.transform.position = startPos;
-                 StartCoroutine(drone.SowSeed(new List<Foundation>(droneRoute.LastTargets), selectSeed.CurrentSeed.PlantType));
+                drone.SowSeed(new List<Foundation>(droneRoute.LastTargets), selectSeed.CurrentSeed.PlantType);
             }
         }
         public void Cancel()
         {
             foreach (Transform t in droneRoot)
             {
-                Destroy(t.gameObject);
+                t.GetComponent<Drone>().Stop();
             }
             if (IsSowRouting)
             {

@@ -14,8 +14,22 @@ namespace ReLeaf
 
         PlantType plantType;
 
+        Coroutine co;
+        public void SowSeed(IEnumerable<Foundation> fs, PlantType type)
+        {
+            co=StartCoroutine(SowSeedEnumerator(fs, type));
+        }
 
-        public IEnumerator SowSeed(IEnumerable<Foundation> fs, PlantType type)
+        public void Stop()
+        {
+            if (co != null)
+            {
+                StopCoroutine(co);
+                co = null;
+            }
+            Destroy(gameObject);
+        }
+        public IEnumerator SowSeedEnumerator(IEnumerable<Foundation> fs, PlantType type)
         {
             plantType = type;
 
@@ -40,7 +54,7 @@ namespace ReLeaf
                     if ((f.transform.position - transform.position).sqrMagnitude < range * range)
                     {
                         f.SetHighlight(false);
-                        DungeonManager.Instance.SowSeed(f.transform.position, plantType);
+                        DungeonManager.Instance.SowSeed(f.TilePos, plantType);
                         break;
                     }
                 }
