@@ -46,6 +46,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 5
+  routingConsumeEnergy: 0.1
+  sowSeedConsumeEnergy: 5
 --- !u!212 &5963374163987832415
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -139,6 +141,7 @@ GameObject:
   m_Component:
   - component: {fileID: 817023885529566100}
   - component: {fileID: 1171829601549190661}
+  - component: {fileID: 1478080891262839866}
   m_Layer: 0
   m_Name: droneManager
   m_TagString: Untagged
@@ -180,3 +183,20 @@ MonoBehaviour:
   brain: {fileID: 0}
   selectSeed: {fileID: 0}
   droneRoot: {fileID: 5077596512915897066}
+--- !u!114 &1478080891262839866
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7700699683069939654}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8eebd593b30cf524d91d557607cd0420, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  valueMax: 100
+  recoverySpeed: 5
+  value: 0
+  canOverConsumeOnlyOnce: 0
+  slider: {fileID: 0}

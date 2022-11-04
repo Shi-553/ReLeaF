@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 namespace ReLeaf
 {
@@ -8,6 +9,8 @@ namespace ReLeaf
     {
         [SerializeField]
         float margin = 0.5f;
+        [SerializeField]
+        Text text;
         public int FruitCount()
         {
             return transform.childCount;
@@ -20,6 +23,7 @@ namespace ReLeaf
         {
             fruit.SetParent(transform);
             fruit.localPosition = GetFruitPos(transform.childCount - 1);
+            text.text = FruitCount().ToString();
         }
         public bool Pop(out Transform f)
         {
@@ -35,6 +39,7 @@ namespace ReLeaf
             {
                 transform.GetChild(i).localPosition = GetFruitPos(i);
             }
+            text.text = FruitCount().ToString();
             return true;
         }
 
@@ -46,8 +51,9 @@ namespace ReLeaf
         {
             foreach (Transform t in transform)
             {
-                UnityEngine.Object.Destroy(t.gameObject);
+                Destroy(t.gameObject);
             }
+            text.text = FruitCount().ToString();
         }
     }
 }

@@ -1,5 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
+using Unity.VisualScripting;
 using UnityEngine;
 
 namespace ReLeaf
@@ -12,11 +14,17 @@ namespace ReLeaf
         float speed = 5;
 
         Vector2Int dir;
-        public void Begin()
+        public bool IsRouting { get; private set; }
+
+        [SerializeField]
+        float routingConsumeEnergy = 0.1f;
+        [SerializeField]
+        float sowSeedConsumeEnergy = 1;
+
+        ValueGaugeManager energyPointManager;
+        private void Awake()
         {
-            gameObject.SetActive(true);
-            lastTargets.Clear();
-            StartCoroutine(Move());
+            energyPointManager = GetComponentInParent<ValueGaugeManager>();
         }
         public void SetDir(Vector2Int dir)
         {
@@ -25,6 +33,7 @@ namespace ReLeaf
         }
         public void End(bool resetHighlight)
         {
+            IsRouting = false;
             gameObject.SetActive(false);
             if (resetHighlight)
             {
@@ -34,8 +43,26 @@ namespace ReLeaf
                 }
             }
         }
-        private IEnumerator Move()
+        public IEnumerator Begin()
         {
+            IsRouting = true;
+            gameObject.SetActive(true);
+            lastTargets.Clear();
+            yield return StartCoroutine(Move());
+        }
+        private void Update()
+        {
+            if (IsRouting)
+            {
+                if (!energyPointManager.ConsumeValue(routingConsumeEnergy))
+                {
+                    IsRouting = false;
+                }
+            }
+        }
+        IEnumerator Move()
+        {
+
             dir = Vector2Int.zero;
             var targetTilePos = DungeonManager.Instance.WorldToTilePos(transform.position);
             while (true)
@@ -44,6 +71,10 @@ namespace ReLeaf
                 var target = DungeonManager.Instance.GetGroundTileObject(targetTilePos);
                 while (true)
                 {
+                    if (!IsRouting)
+                    {
+                        yield break;
+                    }
                     transform.position = Vector3.MoveTowards(transform.position, targetWorldPos, DungeonManager.CELL_SIZE * Time.unscaledDeltaTime * speed);
 
                     yield return null;
@@ -52,15 +83,22 @@ namespace ReLeaf
                     {
                         if (target != null && target.TryGetComponent<Foundation>(out var foundation) && foundation.IsFullGrowth && !foundation.IsHighlighting)
                         {
-                            foundation.SetHighlight(true);
-                            lastTargets.Add(foundation);
+                            if (energyPointManager.ConsumeValue(sowSeedConsumeEnergy))
+                            {
+                                foundation.SetHighlight(true);
+                                lastTargets.Add(foundation);
+                            }
+                            else
+                            {
+                                yield break;
+                            }
                         }
                         break;
                     }
                 }
 
                 dir = Vector2Int.zero;
-                yield return new WaitWhile(() => dir == Vector2Int.zero);
+                yield return new WaitWhile(() => dir == Vector2Int.zero&& IsRouting);
 
                 targetTilePos += (Vector3Int)dir;
             }

@@ -16,16 +16,14 @@ namespace ReLeaf
         [SerializeField]
         float shotMoveSpeed = 2;
         [SerializeField]
+        float dashSpeedMagnification = 2;
+        [SerializeField]
         float shotSpeed = 3;
         float shotTimeCounter = 0;
 
 
         Transform footTransform;
 
-        [SerializeField]
-        int hpMax = 10;
-        [SerializeField]
-        int hp = 10;
         [SerializeField]
         float knockBackDampingRate = 0.9f;
 
@@ -34,14 +32,17 @@ namespace ReLeaf
         public FruitContainer FruitContainer => fruitContainer;
 
         [SerializeField]
-        Text text;
+        float dashConsumeStamina = 0.1f;
 
+        [SerializeField]
+        ValueGaugeManager hpGauge;
+        [SerializeField]
+        ValueGaugeManager staminaGauge;
 
         Rigidbody2DMover mover;
         private void Awake()
         {
             TryGetComponent(out mover);
-            hp = hpMax;
         }
         void Start()
         {
@@ -50,6 +51,7 @@ namespace ReLeaf
 
         void Update()
         {
+
             if (Input.GetKeyDown(KeyCode.Escape))
             {
 #if UNITY_EDITOR
@@ -62,14 +64,14 @@ namespace ReLeaf
             {
                 SceneManager.LoadScene(0);
             }
-            if (hp == 0)
+            if (hpGauge.Value == 0)
             {
                 return;
             }
 
             if (Input.GetMouseButtonDown(1))
             {
-                DroneManager.Instance.BeginSowRoute(transform.position);
+                StartCoroutine(DroneManager.Instance.BeginSowRoute(transform.position));
             }
             if (Input.GetMouseButtonUp(1))
             {
@@ -106,6 +108,10 @@ namespace ReLeaf
 
                 var speed = fruitContainer.IsEmpty() ? moveSpeed : shotMoveSpeed;
 
+                if ((Input.GetKey(KeyCode.LeftShift)|| Input.GetKey(KeyCode.Space)) &&staminaGauge.ConsumeValue(dashConsumeStamina))
+                {
+                    speed *= dashSpeedMagnification;
+                }
 
                 mover.Move(speed * add);
 
@@ -131,20 +137,18 @@ namespace ReLeaf
                     }
                 }
             }
-            text.text = fruitContainer.FruitCount().ToString();
         }
 
-        public void Damaged(int damage, Vector3 impulse)
+        public void Damaged(float damage, Vector3 impulse)
         {
-            if (hp == 0)
-                return;
-
-            hp -= damage;
-            StartCoroutine(KnockBack(impulse));
-            if (hp <= 0)
+            if (hpGauge.ConsumeValue(damage))
             {
-                hp = 0;
-                StartCoroutine(Death());
+                StartCoroutine(KnockBack(impulse));
+
+                if (hpGauge.Value == 0)
+                {
+                    StartCoroutine(Death());
+                }
             }
         }
         IEnumerator KnockBack(Vector3 impulse)
@@ -154,7 +158,7 @@ namespace ReLeaf
                 mover.Move(impulse);
 
 
-                impulse *= knockBackDampingRate;
+                impulse *= knockBackDampingRate * Time.deltaTime * 60.0f;
 
                 if (impulse.sqrMagnitude < 0.01f)
                 {

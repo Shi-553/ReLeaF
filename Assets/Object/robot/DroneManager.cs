@@ -19,12 +19,13 @@ namespace ReLeaf
         CinemachineBrain brain;
         [SerializeField]
         SelectSeed selectSeed;
-        public bool IsSowRouting { get; private set; }
+        public bool IsSowRouting=> droneRoute.IsRouting;
 
         [SerializeField]
         Transform droneRoot;
 
         Vector3 startPos;
+
 
         public static DroneManager Instance { get; private set; }
         private void Awake()
@@ -40,17 +41,18 @@ namespace ReLeaf
             }
         }
 
-        public void BeginSowRoute(Vector3 startPos)
+        public IEnumerator BeginSowRoute(Vector3 startPos)
         {
             this.startPos = startPos;
             droneRoute.transform.position = startPos;
-            IsSowRouting = true;
-            droneRoute.Begin();
-
             Time.timeScale = 0.1f;
 
             brain.m_UpdateMethod = CinemachineBrain.UpdateMethod.LateUpdate;
             brain.m_IgnoreTimeScale = true;
+
+            yield return StartCoroutine(droneRoute.Begin());
+
+            EndSowRoute();
         }
         public void MoveSowRoute(Vector2Int dir)
         {
@@ -58,12 +60,15 @@ namespace ReLeaf
         }
         public void EndSowRoute(bool isCollect = true)
         {
+            if (!IsSowRouting)
+            {
+                return;
+            }
             brain.m_UpdateMethod = CinemachineBrain.UpdateMethod.SmartUpdate;
             brain.m_IgnoreTimeScale = false;
             Time.timeScale = 1;
 
             droneRoute.End(!isCollect);
-            IsSowRouting = false;
 
             if (isCollect)
             {

@@ -115,6 +115,104 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!1 &4013356209018127977
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2119979141078945298}
+  - component: {fileID: 5839813641606943567}
+  m_Layer: 7
+  m_Name: Stamina
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2119979141078945298
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4013356209018127977}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 8467192124429001913}
+  m_RootOrder: 4
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &5839813641606943567
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4013356209018127977}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8eebd593b30cf524d91d557607cd0420, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  valueMax: 10
+  recoverySpeed: 1
+  value: 0
+  canOverConsumeOnlyOnce: 0
+  slider: {fileID: 0}
+--- !u!1 &8230203047254606076
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2589269773782570094}
+  - component: {fileID: 7810232181920566239}
+  m_Layer: 7
+  m_Name: HP
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2589269773782570094
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8230203047254606076}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 8467192124429001913}
+  m_RootOrder: 3
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &7810232181920566239
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8230203047254606076}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8eebd593b30cf524d91d557607cd0420, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  valueMax: 10
+  recoverySpeed: 0
+  value: 0
+  canOverConsumeOnlyOnce: 1
+  slider: {fileID: 0}
 --- !u!1 &8467192124429001911
 GameObject:
   m_ObjectHideFlags: 0
@@ -151,6 +249,8 @@ Transform:
   - {fileID: 8466514786794790092}
   - {fileID: 1885619581900236545}
   - {fileID: 4770138603950201353}
+  - {fileID: 2589269773782570094}
+  - {fileID: 2119979141078945298}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -168,12 +268,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   moveSpeed: 5
   shotMoveSpeed: 5
+  dashSpeedMagnification: 2
   shotSpeed: 10
-  hpMax: 10
-  hp: 10
   knockBackDampingRate: 0.9
   fruitContainer: {fileID: 0}
-  text: {fileID: 0}
+  dashConsumeStamina: 0.1
+  hpGauge: {fileID: 7810232181920566239}
+  staminaGauge: {fileID: 5839813641606943567}
 --- !u!58 &1150814128717608690
 CircleCollider2D:
   m_ObjectHideFlags: 0
