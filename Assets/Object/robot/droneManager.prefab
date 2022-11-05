@@ -46,7 +46,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 5
-  routingConsumeEnergy: 0.1
+  routingConsumeEnergy: 50
   sowSeedConsumeEnergy: 5
 --- !u!212 &5963374163987832415
 SpriteRenderer:

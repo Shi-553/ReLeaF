@@ -54,7 +54,7 @@ namespace ReLeaf
         {
             if (IsRouting)
             {
-                if (!energyPointManager.ConsumeValue(routingConsumeEnergy))
+                if (!energyPointManager.ConsumeValue(routingConsumeEnergy*Time.deltaTime))
                 {
                     IsRouting = false;
                 }

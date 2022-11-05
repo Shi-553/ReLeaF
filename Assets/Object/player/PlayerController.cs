@@ -111,7 +111,7 @@ namespace ReLeaf
 
                 var speed = fruitContainer.IsEmpty() ? moveSpeed : shotMoveSpeed;
 
-                if ((Input.GetKey(KeyCode.LeftShift)|| Input.GetKey(KeyCode.Space)) &&staminaGauge.ConsumeValue(dashConsumeStamina))
+                if ((Input.GetKey(KeyCode.LeftShift)|| Input.GetKey(KeyCode.Space)) &&staminaGauge.ConsumeValue(dashConsumeStamina*Time.deltaTime))
                 {
                     speed *= dashSpeedMagnification;
                 }

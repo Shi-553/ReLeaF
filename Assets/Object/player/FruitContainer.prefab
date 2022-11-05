@@ -46,6 +46,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   margin: 0.1
+  text: {fileID: 0}
 --- !u!1818360608 &6397562350901866167
 PositionConstraint:
   m_ObjectHideFlags: 0
@@ -55,13 +56,13 @@ PositionConstraint:
   m_GameObject: {fileID: 5579469362024508095}
   m_Enabled: 1
   m_Weight: 1
-  m_TranslationAtRest: {x: 0, y: 0, z: 0}
-  m_TranslationOffset: {x: -0.03, y: 12.21, z: 0}
+  m_TranslationAtRest: {x: 0.03, y: -12.21, z: 0}
+  m_TranslationOffset: {x: 0, y: 0, z: 0}
   m_AffectTranslationX: 1
   m_AffectTranslationY: 1
   m_AffectTranslationZ: 1
   m_IsContraintActive: 1
-  m_IsLocked: 0
+  m_IsLocked: 1
   m_Sources:
   - sourceTransform: {fileID: 0}
     weight: 1

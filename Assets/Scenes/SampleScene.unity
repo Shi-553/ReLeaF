@@ -19615,26 +19615,6 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6397562350901866167, guid: 6ea666b35a927b74db7121eca0b9d091, type: 3}
-      propertyPath: m_IsLocked
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 6397562350901866167, guid: 6ea666b35a927b74db7121eca0b9d091, type: 3}
-      propertyPath: m_TranslationAtRest.x
-      value: 0.03
-      objectReference: {fileID: 0}
-    - target: {fileID: 6397562350901866167, guid: 6ea666b35a927b74db7121eca0b9d091, type: 3}
-      propertyPath: m_TranslationAtRest.y
-      value: -12.21
-      objectReference: {fileID: 0}
-    - target: {fileID: 6397562350901866167, guid: 6ea666b35a927b74db7121eca0b9d091, type: 3}
-      propertyPath: m_TranslationOffset.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6397562350901866167, guid: 6ea666b35a927b74db7121eca0b9d091, type: 3}
-      propertyPath: m_TranslationOffset.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6397562350901866167, guid: 6ea666b35a927b74db7121eca0b9d091, type: 3}
       propertyPath: m_Sources.Array.data[0].sourceTransform
       value: 
       objectReference: {fileID: 2001751945}
@@ -19662,10 +19642,6 @@ PrefabInstance:
       propertyPath: slider
       value: 
       objectReference: {fileID: 2033298499}
-    - target: {fileID: 5839813641606943567, guid: 7145dcadd5ab20341bfef2b0cf89dc63, type: 3}
-      propertyPath: recoverySpeed
-      value: 2
-      objectReference: {fileID: 0}
     - target: {fileID: 7810232181920566239, guid: 7145dcadd5ab20341bfef2b0cf89dc63, type: 3}
       propertyPath: slider
       value: 
@@ -19718,10 +19694,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 8467192124429001914, guid: 7145dcadd5ab20341bfef2b0cf89dc63, type: 3}
-      propertyPath: text
-      value: 
-      objectReference: {fileID: 826440740}
     - target: {fileID: 8467192124429001914, guid: 7145dcadd5ab20341bfef2b0cf89dc63, type: 3}
       propertyPath: fruitContainer
       value: 

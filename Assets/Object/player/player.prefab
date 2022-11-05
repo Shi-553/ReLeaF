@@ -160,7 +160,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   valueMax: 10
-  recoverySpeed: 1
+  recoverySpeed: 2
   value: 0
   canOverConsumeOnlyOnce: 0
   slider: {fileID: 0}
@@ -272,7 +272,7 @@ MonoBehaviour:
   shotSpeed: 10
   knockBackDampingRate: 0.9
   fruitContainer: {fileID: 0}
-  dashConsumeStamina: 0.1
+  dashConsumeStamina: 6
   hpGauge: {fileID: 7810232181920566239}
   staminaGauge: {fileID: 5839813641606943567}
 --- !u!58 &1150814128717608690

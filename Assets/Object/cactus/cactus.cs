@@ -10,7 +10,7 @@ namespace ReLeaf
     {
         [SerializeField]
         float hpMax = 3;
-        [SerializeField]
+        [SerializeField,ReadOnly]
         float hp = 3;
 
         [SerializeField]
