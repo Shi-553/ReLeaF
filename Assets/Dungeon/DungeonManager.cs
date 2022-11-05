@@ -105,6 +105,12 @@ namespace ReLeaf
                     return;
                 }
             }
+
+            var obj=groundTilemap.GetInstantiatedObject(tilePos);
+            if (obj != null)
+            {
+                Destroy(obj);
+            }
             groundTilemap.SetTile(tilePos, seedTiles[(int)type]);
         }
 
