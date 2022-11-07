@@ -11,15 +11,25 @@ namespace ReLeaf
 
         public bool IsHighlighting => highLightObj.activeSelf;
 
+        public PlantType SowScheduledPlantType { private set; get; }
+        public bool IsSowScheduled => SowScheduledPlantType != PlantType.None;
+
         private void Start()
         {
             Init();
+            SowScheduledPlantType = PlantType.None;
         }
 
 
-        public void SetHighlight(bool sw)
+        public void SetSowSchedule(PlantType type)
         {
-            highLightObj.SetActive(sw);
+            SowScheduledPlantType=type;
+            highLightObj.SetActive(true);
+        }
+        public void ReSetSowSchedule()
+        {
+            SowScheduledPlantType = PlantType.None;
+            highLightObj.SetActive(false);
         }
 
 

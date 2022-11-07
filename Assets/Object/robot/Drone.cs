@@ -12,51 +12,49 @@ namespace ReLeaf
         [SerializeField]
         float range = 0.1f;
 
-        PlantType plantType;
-
+        IEnumerable<Foundation> foundations;
         Coroutine co;
-        public void SowSeed(IEnumerable<Foundation> fs, PlantType type)
+        public void SowSeed(IEnumerable<Foundation> fs)
         {
-            co=StartCoroutine(SowSeedEnumerator(fs, type));
+            foundations = fs;
+            co = StartCoroutine(SowSeedEnumerator());
         }
 
         public void Stop()
         {
             if (co != null)
             {
+                foreach (var f in foundations.Where(f=>f!=null))
+                {
+                    f.ReSetSowSchedule();
+                }
                 StopCoroutine(co);
                 co = null;
             }
             Destroy(gameObject);
         }
-        public IEnumerator SowSeedEnumerator(IEnumerable<Foundation> fs, PlantType type)
+        public IEnumerator SowSeedEnumerator()
         {
-            plantType = type;
 
-            foreach (var f in fs)
+            foreach (var f in foundations)
             {
                 while (true)
                 {
-                    if (f == null)
+                    if (f == null || !f.IsSowScheduled)
                     {
                         break;
                     }
 
                     transform.position = Vector3.MoveTowards(transform.position, f.transform.position, speed * Time.deltaTime * DungeonManager.CELL_SIZE);
 
-                    yield return null;
-
-                    if (f == null)
-                    {
-                        break;
-                    }
-
                     if ((f.transform.position - transform.position).sqrMagnitude < range * range)
                     {
-                        f.SetHighlight(false);
-                        DungeonManager.Instance.SowSeed(f.TilePos, plantType);
+                        DungeonManager.Instance.SowSeed(f.TilePos, f.SowScheduledPlantType);
                         break;
                     }
+
+                    yield return null;
+
                 }
             }
             Destroy(gameObject);

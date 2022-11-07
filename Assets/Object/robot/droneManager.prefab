@@ -48,6 +48,7 @@ MonoBehaviour:
   speed: 5
   routingConsumeEnergy: 50
   sowSeedConsumeEnergy: 5
+  selectSeed: {fileID: 0}
 --- !u!212 &5963374163987832415
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -181,7 +182,6 @@ MonoBehaviour:
   dronePrefab: {fileID: 2318582545962549861, guid: c46c0eaf8cec17d48bb957cc1114a5c3, type: 3}
   droneRoute: {fileID: 1770552022137012853}
   brain: {fileID: 0}
-  selectSeed: {fileID: 0}
   droneRoot: {fileID: 5077596512915897066}
 --- !u!114 &1478080891262839866
 MonoBehaviour:

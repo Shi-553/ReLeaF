@@ -14,5 +14,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   plantType: 3
   hpMax: 1
-  growTime: 5
+  growTime: 3
   damageMagnifications: []

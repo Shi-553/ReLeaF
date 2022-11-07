@@ -22,6 +22,10 @@ namespace ReLeaf
         float sowSeedConsumeEnergy = 1;
 
         ValueGaugeManager energyPointManager;
+
+        [SerializeField]
+        SelectSeed selectSeed;
+
         private void Awake()
         {
             energyPointManager = GetComponentInParent<ValueGaugeManager>();
@@ -39,7 +43,7 @@ namespace ReLeaf
             {
                 foreach (var t in lastTargets)
                 {
-                    t.SetHighlight(false);
+                    t.ReSetSowSchedule();
                 }
             }
         }
@@ -85,7 +89,7 @@ namespace ReLeaf
                         {
                             if (energyPointManager.ConsumeValue(sowSeedConsumeEnergy))
                             {
-                                foundation.SetHighlight(true);
+                                foundation.SetSowSchedule(selectSeed.CurrentSeed.PlantType);
                                 lastTargets.Add(foundation);
                             }
                             else

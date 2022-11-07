@@ -17,15 +17,12 @@ namespace ReLeaf
 
         [SerializeField]
         CinemachineBrain brain;
-        [SerializeField]
-        SelectSeed selectSeed;
         public bool IsSowRouting => droneRoute.IsRouting;
 
         [SerializeField]
         Transform droneRoot;
 
         Vector3 startPos;
-
 
         public static DroneManager Instance { get; private set; }
         private void Awake()
@@ -75,7 +72,7 @@ namespace ReLeaf
             {
                 var drone = Instantiate(dronePrefab, transform.position, Quaternion.identity, droneRoot);
                 drone.transform.position = startPos;
-                drone.SowSeed(new List<Foundation>(droneRoute.LastTargets), selectSeed.CurrentSeed.PlantType);
+                drone.SowSeed(new List<Foundation>(droneRoute.LastTargets));
             }
         }
         public void Cancel()

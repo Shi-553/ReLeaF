@@ -913,14 +913,14 @@ PrefabInstance:
       propertyPath: brain
       value: 
       objectReference: {fileID: 519420033}
-    - target: {fileID: 1171829601549190661, guid: 9ca94c9a53b7d29438d0dcc04c15f6ff, type: 3}
-      propertyPath: selectSeed
-      value: 
-      objectReference: {fileID: 1920076670}
     - target: {fileID: 1478080891262839866, guid: 9ca94c9a53b7d29438d0dcc04c15f6ff, type: 3}
       propertyPath: slider
       value: 
       objectReference: {fileID: 810163595}
+    - target: {fileID: 1770552022137012853, guid: 9ca94c9a53b7d29438d0dcc04c15f6ff, type: 3}
+      propertyPath: selectSeed
+      value: 
+      objectReference: {fileID: 1920076670}
     - target: {fileID: 7700699683069939654, guid: 9ca94c9a53b7d29438d0dcc04c15f6ff, type: 3}
       propertyPath: m_Name
       value: droneManager
