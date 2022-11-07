@@ -139,3 +139,20 @@ Assets/Object/Tile/Plant/Shrub/ShrubInfo
     DamageMagnifications[]      | 攻撃タイプに応じた被ダメージ倍率
         DamageType              | 攻撃タイプ
         Magnifications          | 被ダメージ倍率(n倍)
+
+
+・花
+Assets/Object/Tile/Plant/Flower/FlowerInfo
+    float HpMax                 | 最大HP
+    float GrowTime              | 成長にかかる時間（秒）
+    DamageMagnifications[]      | 攻撃タイプに応じた被ダメージ倍率
+        DamageType              | 攻撃タイプ
+        Magnifications          | 被ダメージ倍率(n倍)
+
+Assets/Object/Tile/Plant/Flower/Flower->Flower
+    GameObject fruitPrefab      | この花になる実のプレハブ
+    float reGrowTime            | 発射から再び実を付けるまでの時間（秒）
+
+・花の攻撃視野
+Assets/Object/Tile/Plant/Flower/Flower-CircleVision->CircleCollider2D
+    float Radius                | 攻撃を始める範囲(半径nマス)

@@ -16,7 +16,7 @@ GameObject:
   - component: {fileID: 862847400286525175}
   m_Layer: 0
   m_Name: spines
-  m_TagString: Enemy
+  m_TagString: Bullet
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
