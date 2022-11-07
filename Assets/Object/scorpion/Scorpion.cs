@@ -160,7 +160,7 @@ namespace ReLeaf
             {
                 mover.Move(impulse);
 
-                impulse *= knockBackDampingRate * Time.deltaTime * 60.0f;
+                impulse *= knockBackDampingRate;
 
                 if (impulse.sqrMagnitude < 0.01f)
                 {
