@@ -16,10 +16,6 @@ namespace ReLeaf
             Init();
         }
 
-        protected override void FullGrowed()
-        {
-            plantObjRoot.SetActive(true);
-        }
 
         public void SetHighlight(bool sw)
         {
