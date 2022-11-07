@@ -50,7 +50,7 @@ jobs:
           
       - name: FileMove
         run: |
-             pwsh -command "Move-Item "./build/StandaloneWindows64" "./build/ReLeaF"
+             pwsh -command "Move-Item ./build/StandaloneWindows64 ./build/ReLeaF"
         
       - name: Zip
         run: 7z a "./ReLeaF.zip" "./build/ReLeaF" -tzip
