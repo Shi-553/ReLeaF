@@ -2,13 +2,15 @@ using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.InputSystem;
+using UnityEngine.InputSystem.Utilities;
 using UnityEngine.SceneManagement;
 using UnityEngine.Tilemaps;
 using UnityEngine.UI;
 
 namespace ReLeaf
 {
-    public class PlayerController : MonoBehaviour
+    public class PlayerController : MonoBehaviour, ReLeafInputAction.IPlayerActions
     {
 
         [SerializeField]
@@ -42,20 +44,104 @@ namespace ReLeaf
         Rigidbody2DMover mover;
 
         Vector3Int FootTilePos => DungeonManager.Instance.WorldToTilePos(footTransform.position);
+        PlayerInput playerInput;
+        ReLeafInputAction reLeafInputAction;
+
+        [SerializeField]
+        SelectSeed selectSeed;
 
         private void Awake()
         {
             TryGetComponent(out mover);
+            reLeafInputAction = new ReLeafInputAction();
+            TryGetComponent(out playerInput);
+            playerInput.defaultActionMap = reLeafInputAction.Player.Get().name;
+            playerInput.actions = reLeafInputAction.asset;
+            reLeafInputAction.Player.SetCallbacks(this);
+
         }
+        void OnEnable()
+        {
+            playerInput.ActivateInput();
+        }
+
         void Start()
         {
             footTransform = transform.Find("Foot");
         }
 
+        Vector2 move;
+        Vector2Int sowSeedMove;
+        Vector2 fireDir;
+        bool onFire;
+        bool onDash;
+
+        public void OnMove(InputAction.CallbackContext context)
+        {
+            move = context.ReadValue<Vector2>().normalized;
+        }
+
+        public void OnFire(InputAction.CallbackContext context)
+        {
+            onFire = context.ReadValue<float>() != 0;
+        }
+
+        public void OnDash(InputAction.CallbackContext context)
+        {
+            onDash = context.ReadValue<float>() != 0;
+        }
+
+        public void OnAim(InputAction.CallbackContext context)
+        {
+            Vector3 mouseScreenPos = context.ReadValue<Vector2>();
+            mouseScreenPos.z = 10.0f;
+            fireDir = Camera.main.ScreenToWorldPoint(mouseScreenPos) - transform.position;
+            fireDir.Normalize();
+        }
+
+        public void OnSowSeedMove(InputAction.CallbackContext context)
+        {
+            var move = context.ReadValue<Vector2>();
+            if (move == Vector2.zero)
+            {
+                sowSeedMove = Vector2Int.zero;
+                return;
+            }
+            if (Mathf.Abs(move.x) < Mathf.Abs(move.y))
+            {
+                sowSeedMove = new Vector2Int(0, move.y < 0 ? -1 : 1);
+            }
+            else
+            {
+                sowSeedMove = new Vector2Int(move.x < 0 ? -1 : 1, 0);
+            }
+        }
+
+        public void OnSelectSeed(InputAction.CallbackContext context)
+        {
+            selectSeed.MoveSelect(context.ReadValue<float>());
+        }
+
+        public void OnHarvest(InputAction.CallbackContext context)
+        {
+            if (context.started)
+            {
+                StartCoroutine(DroneManager.Instance.BeginSowRoute(transform.position));
+            }
+            if (context.canceled)
+            {
+                DroneManager.Instance.EndSowRoute();
+            }
+        }
+
+        public void OnLook(InputAction.CallbackContext context)
+        {
+            fireDir = context.ReadValue<Vector2>().normalized;
+        }
+
         void Update()
         {
-
-            if (Input.GetKeyDown(KeyCode.Escape))
+            if (Keyboard.current.escapeKey.isPressed)
             {
 #if UNITY_EDITOR
                 UnityEditor.EditorApplication.isPlaying = false;
@@ -63,7 +149,7 @@ namespace ReLeaf
       UnityEngine.Application.Quit();
 #endif
             }
-            if (Input.GetKeyDown(KeyCode.F1))
+            if (Keyboard.current.f1Key.isPressed)
             {
                 SceneManager.LoadScene(0);
             }
@@ -72,54 +158,25 @@ namespace ReLeaf
                 return;
             }
 
-            if (Input.GetMouseButtonDown(1))
+            if (DroneManager.Instance.IsSowRouting)
             {
-                StartCoroutine(DroneManager.Instance.BeginSowRoute(transform.position));
-            }
-            if (Input.GetMouseButtonUp(1))
-            {
-                DroneManager.Instance.EndSowRoute();
+                DroneManager.Instance.MoveSowRoute(Vector2Int.CeilToInt(sowSeedMove));
+                return;
             }
 
-            Vector2 add = Vector2.zero;
-            if (Input.GetKey(KeyCode.W))
+
+
+            var speed = fruitContainer.IsEmpty() ? moveSpeed : shotMoveSpeed;
+
+            if (onDash && staminaGauge.ConsumeValue(dashConsumeStamina * Time.deltaTime))
             {
-                add += Vector2.up;
+                speed *= dashSpeedMagnification;
             }
-            if (Input.GetKey(KeyCode.A))
-            {
-                add += Vector2.left;
-            }
-            if (Input.GetKey(KeyCode.S))
-            {
-                add += Vector2.down;
-            }
-            if (Input.GetKey(KeyCode.D))
-            {
-                add += Vector2.right;
-            }
-            if (add != Vector2.zero)
-            {
-                if (DroneManager.Instance.IsSowRouting)
-                {
-                    DroneManager.Instance.MoveSowRoute(Vector2Int.CeilToInt(add));
-                    return;
-                }
 
-                add.Normalize();
+            mover.Move(speed * move);
 
+            DungeonManager.Instance.SowSeed(FootTilePos, PlantType.Foundation);
 
-                var speed = fruitContainer.IsEmpty() ? moveSpeed : shotMoveSpeed;
-
-                if ((Input.GetKey(KeyCode.LeftShift)|| Input.GetKey(KeyCode.Space)) &&staminaGauge.ConsumeValue(dashConsumeStamina*Time.deltaTime))
-                {
-                    speed *= dashSpeedMagnification;
-                }
-
-                mover.Move(speed * add);
-
-                DungeonManager.Instance.SowSeed(FootTilePos, PlantType.Foundation);
-            }
 
 
             if (shotTimeCounter > 0.0f)
@@ -128,15 +185,13 @@ namespace ReLeaf
             }
             else
             {
-                if (!fruitContainer.IsEmpty() && Input.GetMouseButton(0))
+                if (!fruitContainer.IsEmpty() && onFire)
                 {
                     if (fruitContainer.Pop(out var f))
                     {
                         f.position = transform.position;
-                        Vector2 dir = Camera.main.ScreenToWorldPoint(Input.mousePosition) - transform.position;
-                        dir.Normalize();
 
-                        shotTimeCounter = f.GetComponent<Fruit>().Shot(dir);
+                        shotTimeCounter = f.GetComponent<Fruit>().Shot(fireDir);
                     }
                 }
             }
@@ -182,5 +237,6 @@ namespace ReLeaf
             fruitContainer.Clear();
             DroneManager.Instance.Cancel();
         }
+
     }
 }

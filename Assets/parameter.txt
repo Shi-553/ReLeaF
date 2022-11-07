@@ -1,0 +1,141 @@
+----プレイヤー----
+
+・プレイヤー  
+Assets/Object/player/player->PlayerController
+    float moveSpeed             | 移動スピード（nマス/秒）
+    float shotMoveSpeed         | 実の発射中の移動スピード（nマス/秒）
+    float dashSpeedMagnification| ダッシュ中の移動スピード倍率（n倍）   
+    float shotSpeed             | 実の発射レート（n/秒 × 実の発射間隔）
+    float knockBackDampingRate  | ノックバックの減衰率（0でノックバックしない、1.0でノックバックし続ける）
+    float dashConsumeStamina    | ダッシュで消費するスタミナ(n/秒)
+
+・プレイヤーHP 
+Assets/Object/player/player-HP->ValueGaugeManager
+    float valueMax              | 最大HP
+    float recoverySpeed         | 回復スピード(n/秒)
+    bool CanOverConsumeOnlyOnce | 0をちょうど下回ったときtrueを返すか（On固定でお願いします）
+
+・プレイヤースタミナ 
+Assets/Object/player/player-Stamina->ValueGaugeManager
+    float valueMax              | 最大スタミナ
+    float recoverySpeed         | 回復スピード(n/秒)
+    bool CanOverConsumeOnlyOnce | 0をちょうど下回ったフレームにダッシュできるか（OnOffどっちでもOK）
+
+・プレイヤー実の回収範囲 
+Assets/Object/player/player-CircleVision->CircleCollider2D
+    float Radius                | 回収範囲(半径nマス)
+
+
+
+
+----ロボット----
+
+・ロボットエネルギー
+Assets/Object/robbot/droneManager->ValueGaugeManager
+    float valueMax              | 最大エネルギー
+    float recoverySpeed         | 回復スピード(n/秒)
+    bool CanOverConsumeOnlyOnce | 0をちょうど下回ったときはエネルギー切れにならないか（OnOffどっちでもOK）
+
+・ロボットの経路選択
+Assets/Object/robbot/droneManager-droneRoute->DroneRoute
+    float speed                 | 移動スピード
+    float routingConsumeEnergy  | 持続消費エネルギー量(n/秒)（経路選択中はタイムスケールを0.1倍にするため実際は1/10になる）
+    float sowSeedConsumeEnergy  | 種を植える予定になったときのエネルギー消費量(n/回数)
+
+
+
+
+
+----敵----
+
+・サボテン
+Assets/Object/cactus/(cactusかcactus2)->cactus
+        float hpMax             | 最大HP
+        bool shouldAimTarget    | プレイヤー狙いで弾を出すかどうか
+        int attackSpinesNum     | 一回の発射での同時発射数（n個をn/360度毎に発射する）
+        GameObject spinesPrefab | 発射するオブジェクト
+        float attackTime        | 何秒毎に発射するか（n秒）
+
+・サボテンの視野
+Assets/Object/cactus/(cactusかcactus2)-CircleVision->CircleCollider2D
+    float Radius                | 攻撃を始める範囲(半径nマス)
+
+
+・サボテンの弾
+Assets/Object/cactus/spines->Spines
+    float LifeTime              | 発射されてから消えるまでの時間（秒）
+    float Speed                 | 移動スピード（nマス/秒）
+    float Atk                   | 攻撃力
+    float AttackKnockBackPower  | 攻撃のノックバック力（nマス/秒）(減衰するのでいまいち設定しにくい)
+
+
+
+・サソリ
+Assets/Object/cactus/(cactusかcactus2)->cactus
+    float hpMax                 | 最大HP
+    float speed                 | 移動スピード（nマス/秒）
+    int atk                     | 攻撃力
+    float attackCoolTime        | 攻撃後のクールタイム（秒）
+    float attackAimTime         | 攻撃前の狙う時間（秒）
+    float attackDuration        | 攻撃持続時間（秒）
+    float attackSpeed           | 攻撃時の移動スピード（nマス/秒）
+    float attackKnockBackPower  | 攻撃のノックバック力（nマス/秒）(減衰するのでいまいち設定しにくい)
+    float knockBackDampingRate  | ノックバックの減衰率（0でノックバックしない、1.0でノックバックし続ける）
+
+・サソリの視野
+Assets/Object/scorpion/scorpion-CircleVision->CircleCollider2D
+    float Radius                | プレイヤーに近づき始める範囲(半径nマス)
+
+・サソリの攻撃を始める視野
+Assets/Object/scorpion/scorpion-AttackVision->CircleCollider2D
+    float Radius                | 攻撃を始める範囲(半径nマス)
+    
+
+
+    
+----植物関係----
+
+・ぐちゃぐちゃな地面(これだけプレハブ化してない)
+SampleScene-TestDungeon->DungeonManager
+    float MessyCuredTime        | ぐちゃぐちゃな地面が砂になるまでの時間（秒）
+
+
+・下地
+Assets/Object/Tile/Plant/Foundation/FoundationInfo
+    float HpMax                 | 最大HP
+    float GrowTime              | 成長にかかる時間（秒）
+    DamageMagnifications[]      | 攻撃タイプに応じた被ダメージ倍率
+        DamageType              | 攻撃タイプ
+        Magnifications          | 被ダメージ倍率(n倍)
+
+
+・低木
+Assets/Object/Tile/Plant/Shrub/ShrubInfo
+    float HpMax                 | 最大HP
+    float GrowTime              | 成長にかかる時間（秒）
+    DamageMagnifications[]      | 攻撃タイプに応じた被ダメージ倍率
+        DamageType              | 攻撃タイプ
+        Magnifications          | 被ダメージ倍率(n倍)
+
+Assets/Object/Tile/Plant/Shrub/Shrub->Shrub
+    GameObject FruitPrefab      | この低木になる実のプレハブ
+    float regrowFruitTime       | 収穫から再び実を付けるまでの時間（秒）
+
+
+・実
+Assets/Object/Tile/Plant/Shrub/normalFruit->Fruit
+    float lifeTime              | 発射されてから消えるまでの時間（秒）
+    float speed                 | 移動スピード（nマス/秒）
+    int atk                     | 攻撃力
+    float attackKnockBackPower  | 攻撃のノックバック力（nマス/秒）(減衰するのでいまいち設定しにくい)
+    float diffusion             | 攻撃のぶれ（左右に最大n度ぶれる）
+    float shotInterval          | 発射間隔 (秒)
+
+
+・木
+Assets/Object/Tile/Plant/Shrub/ShrubInfo
+    float HpMax                 | 最大HP
+    float GrowTime              | 成長にかかる時間（秒）
+    DamageMagnifications[]      | 攻撃タイプに応じた被ダメージ倍率
+        DamageType              | 攻撃タイプ
+        Magnifications          | 被ダメージ倍率(n倍)

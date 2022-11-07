@@ -17,6 +17,13 @@ namespace ReLeaf
 
         public SeedUI CurrentSeed => seeds[selectIndex];
 
+
+        public void MoveSelect(float move)
+        {
+            selectIndex = (selectIndex - Mathf.CeilToInt(move) + seeds.Count) % seeds.Count;
+            UpdatePointer();
+        }
+
         void Start()
         {
             for (int i = 0; i < root.childCount; i++)
@@ -27,20 +34,6 @@ namespace ReLeaf
             UpdatePointer();
         }
 
-        void Update()
-        {
-            if (Input.GetKeyDown(KeyCode.Q))
-            {
-                selectIndex = (selectIndex - 1 + seeds.Count) % seeds.Count;
-                UpdatePointer();
-            }
-            if (Input.GetKeyDown(KeyCode.E))
-            {
-                selectIndex = (selectIndex + 1) % seeds.Count;
-                UpdatePointer();
-
-            }
-        }
         void UpdatePointer()
         {
             pointer.position = seeds[selectIndex].transform.position;
