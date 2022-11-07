@@ -17,7 +17,7 @@ jobs:
   build:
     if: github.event_name == 'workflow_dispatch' || github.event.pull_request.merged == true
     name: Build my project ✨
-    runs-on: ubuntu-latest
+    runs-on: windows-2019
     env:
       GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       RELEASE_IT_VERSION: 14
@@ -47,10 +47,10 @@ jobs:
           targetPlatform: StandaloneWindows64
           buildName: ReLeaF
           versioning: None
-
-      - name: rename
-        run: sudo mv "./build/StandaloneWindows64" "./build/ReLeaF"
-        shell: bash
+          
+      - name: FileMove
+        run: |
+             pwsh -command "Move-Item "./build/StandaloneWindows64" "./build/ReLeaF"
         
       - name: Zip
         run: 7z a "./ReLeaF.zip" "./build/ReLeaF" -tzip
