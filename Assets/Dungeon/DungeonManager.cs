@@ -39,6 +39,8 @@ namespace ReLeaf
         TerrainTile[] tilesBuffer = new TerrainTile[TILE_STACK_MAX];
         Vector3Int[] possBuffer = new Vector3Int[TILE_STACK_MAX];
 
+        public int MaxGreeningCount { get; private set; }
+
         public static DungeonManager Instance { get; private set; }
         private void Awake()
         {
@@ -51,6 +53,15 @@ namespace ReLeaf
                 Destroy(gameObject);
                 return;
             }
+
+            foreach (var pos in groundTilemap.cellBounds.allPositionsWithin)
+            {
+                var tile=groundTilemap.GetTile<TerrainTile>(pos);
+                if (tile != null && tile.canSowGrass)
+                {
+                    MaxGreeningCount++;
+                }
+            }
         }
         public Vector3Int WorldToTilePos(Vector3 worldPos)
         {
@@ -60,10 +71,7 @@ namespace ReLeaf
         {
             return grid.CellToWorld(tilePos) + new Vector3(CELL_SIZE, CELL_SIZE) / 2;
         }
-        public GameObject GetGroundTileObject(Vector3Int tilePos)
-        {
-            return groundTilemap.GetInstantiatedObject(tilePos);
-        }
+
         public void Messy(Plant plant)
         {
             var pos = plant.TilePos;
@@ -121,26 +129,6 @@ namespace ReLeaf
             groundTilemap.SetTile(tilePos, sandTile);
         }
 
-        public void ForceChange(Vector3Int tilePos, PlantType type, bool allowPlant)
-        {
-            var tile = groundTilemap.GetTile<TerrainTile>(tilePos);
-            if (tile == null)
-            {
-                return;
-            }
-            if (tile.tileType == TileType.Sand || (allowPlant && tile.tileType == TileType.Plant)){
-
-                var beforeObj = groundTilemap.GetInstantiatedObject(tilePos);
-                if (beforeObj != null)
-                {
-                    Destroy(beforeObj);
-                }
-
-                groundTilemap.SetTile(tilePos, seedTiles[(int)type]);
-                var obj = groundTilemap.GetInstantiatedObject(tilePos);
-                obj.GetComponent<Plant>().FouceGrowing();
-            }
-        }
 
         static public readonly float CELL_SIZE = 0.5f;
     }
