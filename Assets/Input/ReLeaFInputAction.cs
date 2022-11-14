@@ -39,15 +39,6 @@ namespace ReLeaf
                     ""initialStateCheck"": true
                 },
                 {
-                    ""name"": ""Fire"",
-                    ""type"": ""Button"",
-                    ""id"": ""d2caf2d9-9040-4b64-86ba-f698fd1b014a"",
-                    ""expectedControlType"": ""Button"",
-                    ""processors"": """",
-                    ""interactions"": """",
-                    ""initialStateCheck"": false
-                },
-                {
                     ""name"": ""Dash"",
                     ""type"": ""Button"",
                     ""id"": ""9c8bd226-d739-4c36-a202-efa74edd1a13"",
@@ -55,51 +46,6 @@ namespace ReLeaf
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
-                },
-                {
-                    ""name"": ""Aim"",
-                    ""type"": ""Value"",
-                    ""id"": ""31ea25c6-4afa-4470-9c2b-bcd4f30a22ff"",
-                    ""expectedControlType"": ""Vector2"",
-                    ""processors"": """",
-                    ""interactions"": """",
-                    ""initialStateCheck"": true
-                },
-                {
-                    ""name"": ""SowSeedMove"",
-                    ""type"": ""Value"",
-                    ""id"": ""1c175f3e-e444-4a72-9e0b-c3e0fb8a291c"",
-                    ""expectedControlType"": ""Vector2"",
-                    ""processors"": ""StickDeadzone"",
-                    ""interactions"": """",
-                    ""initialStateCheck"": true
-                },
-                {
-                    ""name"": ""SelectSeed"",
-                    ""type"": ""Value"",
-                    ""id"": ""fbd3d87e-da19-46df-ab34-8723a4d8290a"",
-                    ""expectedControlType"": ""Axis"",
-                    ""processors"": """",
-                    ""interactions"": """",
-                    ""initialStateCheck"": true
-                },
-                {
-                    ""name"": ""Harvest"",
-                    ""type"": ""Button"",
-                    ""id"": ""8d95233d-b837-4eda-ae53-efbd2099922d"",
-                    ""expectedControlType"": ""Button"",
-                    ""processors"": """",
-                    ""interactions"": """",
-                    ""initialStateCheck"": false
-                },
-                {
-                    ""name"": ""Look"",
-                    ""type"": ""Value"",
-                    ""id"": ""11906a31-7302-4241-af6e-796c42ed414b"",
-                    ""expectedControlType"": ""Vector2"",
-                    ""processors"": """",
-                    ""interactions"": """",
-                    ""initialStateCheck"": true
                 }
             ],
             ""bindings"": [
@@ -171,28 +117,6 @@ namespace ReLeaf
                 },
                 {
                     ""name"": """",
-                    ""id"": ""143bb1cd-cc10-4eca-a2f0-a3664166fe91"",
-                    ""path"": ""<Gamepad>/rightTrigger"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": "";Gamepad"",
-                    ""action"": ""Fire"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""05f6913d-c316-48b2-a6bb-e225f14c7960"",
-                    ""path"": ""<Mouse>/leftButton"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": "";Keyboard&Mouse"",
-                    ""action"": ""Fire"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
                     ""id"": ""70bcd3ee-3681-4450-b401-9331a5303a99"",
                     ""path"": ""<Keyboard>/space"",
                     ""interactions"": """",
@@ -221,160 +145,6 @@ namespace ReLeaf
                     ""processors"": """",
                     ""groups"": ""Gamepad"",
                     ""action"": ""Dash"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""071d2d67-39e2-4814-9ac6-46aee6ad879a"",
-                    ""path"": ""<Mouse>/position"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": ""Keyboard&Mouse"",
-                    ""action"": ""Aim"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""556a0aee-0b3a-43ff-b5f8-3b9664fe2c5b"",
-                    ""path"": ""<Gamepad>/rightStick"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": ""Gamepad"",
-                    ""action"": ""SowSeedMove"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": ""WASD"",
-                    ""id"": ""45c1f10c-d064-4cf5-a330-830baf190421"",
-                    ""path"": ""Dpad"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""SowSeedMove"",
-                    ""isComposite"": true,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": ""up"",
-                    ""id"": ""d5df241f-00b4-4ab0-9ca0-aa2983335bfc"",
-                    ""path"": ""<Keyboard>/w"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": ""Keyboard&Mouse"",
-                    ""action"": ""SowSeedMove"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": true
-                },
-                {
-                    ""name"": ""down"",
-                    ""id"": ""63c15634-e3d4-4db3-8329-775b833c42ce"",
-                    ""path"": ""<Keyboard>/s"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": ""Keyboard&Mouse"",
-                    ""action"": ""SowSeedMove"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": true
-                },
-                {
-                    ""name"": ""left"",
-                    ""id"": ""33a5ed44-3943-48ed-a6df-c67af4d3c8ec"",
-                    ""path"": ""<Keyboard>/a"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": ""Keyboard&Mouse"",
-                    ""action"": ""SowSeedMove"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": true
-                },
-                {
-                    ""name"": ""right"",
-                    ""id"": ""5b313134-c368-46e7-b4e7-76da4d5f7247"",
-                    ""path"": ""<Keyboard>/d"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": ""Keyboard&Mouse"",
-                    ""action"": ""SowSeedMove"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": true
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""7a0046cf-bfe1-4609-aca0-cca0fe8da9b5"",
-                    ""path"": ""<Gamepad>/dpad/x"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": ""Gamepad"",
-                    ""action"": ""SelectSeed"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": ""QE"",
-                    ""id"": ""00d39e13-66ff-4c09-8cdf-658b6facc63f"",
-                    ""path"": ""1DAxis"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""SelectSeed"",
-                    ""isComposite"": true,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": ""negative"",
-                    ""id"": ""4a26f738-85ae-43ce-b2c4-a84c1901bcda"",
-                    ""path"": ""<Keyboard>/q"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": ""Keyboard&Mouse"",
-                    ""action"": ""SelectSeed"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": true
-                },
-                {
-                    ""name"": ""positive"",
-                    ""id"": ""198b0112-570b-4126-a714-39e43f86f097"",
-                    ""path"": ""<Keyboard>/e"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": ""Keyboard&Mouse"",
-                    ""action"": ""SelectSeed"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": true
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""aed7fe9a-4ff5-42b9-9be9-4c6e5bc15266"",
-                    ""path"": ""<Gamepad>/leftShoulder"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": ""Gamepad"",
-                    ""action"": ""Harvest"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""79b8631b-3576-482c-8706-28dd3161788a"",
-                    ""path"": ""<Mouse>/rightButton"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": ""Keyboard&Mouse"",
-                    ""action"": ""Harvest"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""fb666a7b-f924-4a30-9824-8ccce4871960"",
-                    ""path"": ""<Gamepad>/rightStick"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": ""Gamepad"",
-                    ""action"": ""Look"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -963,13 +733,7 @@ namespace ReLeaf
             // Player
             m_Player = asset.FindActionMap("Player", throwIfNotFound: true);
             m_Player_Move = m_Player.FindAction("Move", throwIfNotFound: true);
-            m_Player_Fire = m_Player.FindAction("Fire", throwIfNotFound: true);
             m_Player_Dash = m_Player.FindAction("Dash", throwIfNotFound: true);
-            m_Player_Aim = m_Player.FindAction("Aim", throwIfNotFound: true);
-            m_Player_SowSeedMove = m_Player.FindAction("SowSeedMove", throwIfNotFound: true);
-            m_Player_SelectSeed = m_Player.FindAction("SelectSeed", throwIfNotFound: true);
-            m_Player_Harvest = m_Player.FindAction("Harvest", throwIfNotFound: true);
-            m_Player_Look = m_Player.FindAction("Look", throwIfNotFound: true);
             // UI
             m_UI = asset.FindActionMap("UI", throwIfNotFound: true);
             m_UI_Navigate = m_UI.FindAction("Navigate", throwIfNotFound: true);
@@ -1042,25 +806,13 @@ namespace ReLeaf
         private readonly InputActionMap m_Player;
         private IPlayerActions m_PlayerActionsCallbackInterface;
         private readonly InputAction m_Player_Move;
-        private readonly InputAction m_Player_Fire;
         private readonly InputAction m_Player_Dash;
-        private readonly InputAction m_Player_Aim;
-        private readonly InputAction m_Player_SowSeedMove;
-        private readonly InputAction m_Player_SelectSeed;
-        private readonly InputAction m_Player_Harvest;
-        private readonly InputAction m_Player_Look;
         public struct PlayerActions
         {
             private @ReLeafInputAction m_Wrapper;
             public PlayerActions(@ReLeafInputAction wrapper) { m_Wrapper = wrapper; }
             public InputAction @Move => m_Wrapper.m_Player_Move;
-            public InputAction @Fire => m_Wrapper.m_Player_Fire;
             public InputAction @Dash => m_Wrapper.m_Player_Dash;
-            public InputAction @Aim => m_Wrapper.m_Player_Aim;
-            public InputAction @SowSeedMove => m_Wrapper.m_Player_SowSeedMove;
-            public InputAction @SelectSeed => m_Wrapper.m_Player_SelectSeed;
-            public InputAction @Harvest => m_Wrapper.m_Player_Harvest;
-            public InputAction @Look => m_Wrapper.m_Player_Look;
             public InputActionMap Get() { return m_Wrapper.m_Player; }
             public void Enable() { Get().Enable(); }
             public void Disable() { Get().Disable(); }
@@ -1073,27 +825,9 @@ namespace ReLeaf
                     @Move.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnMove;
                     @Move.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnMove;
                     @Move.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnMove;
-                    @Fire.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnFire;
-                    @Fire.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnFire;
-                    @Fire.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnFire;
                     @Dash.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnDash;
                     @Dash.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnDash;
                     @Dash.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnDash;
-                    @Aim.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnAim;
-                    @Aim.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnAim;
-                    @Aim.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnAim;
-                    @SowSeedMove.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnSowSeedMove;
-                    @SowSeedMove.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnSowSeedMove;
-                    @SowSeedMove.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnSowSeedMove;
-                    @SelectSeed.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnSelectSeed;
-                    @SelectSeed.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnSelectSeed;
-                    @SelectSeed.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnSelectSeed;
-                    @Harvest.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnHarvest;
-                    @Harvest.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnHarvest;
-                    @Harvest.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnHarvest;
-                    @Look.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnLook;
-                    @Look.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnLook;
-                    @Look.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnLook;
                 }
                 m_Wrapper.m_PlayerActionsCallbackInterface = instance;
                 if (instance != null)
@@ -1101,27 +835,9 @@ namespace ReLeaf
                     @Move.started += instance.OnMove;
                     @Move.performed += instance.OnMove;
                     @Move.canceled += instance.OnMove;
-                    @Fire.started += instance.OnFire;
-                    @Fire.performed += instance.OnFire;
-                    @Fire.canceled += instance.OnFire;
                     @Dash.started += instance.OnDash;
                     @Dash.performed += instance.OnDash;
                     @Dash.canceled += instance.OnDash;
-                    @Aim.started += instance.OnAim;
-                    @Aim.performed += instance.OnAim;
-                    @Aim.canceled += instance.OnAim;
-                    @SowSeedMove.started += instance.OnSowSeedMove;
-                    @SowSeedMove.performed += instance.OnSowSeedMove;
-                    @SowSeedMove.canceled += instance.OnSowSeedMove;
-                    @SelectSeed.started += instance.OnSelectSeed;
-                    @SelectSeed.performed += instance.OnSelectSeed;
-                    @SelectSeed.canceled += instance.OnSelectSeed;
-                    @Harvest.started += instance.OnHarvest;
-                    @Harvest.performed += instance.OnHarvest;
-                    @Harvest.canceled += instance.OnHarvest;
-                    @Look.started += instance.OnLook;
-                    @Look.performed += instance.OnLook;
-                    @Look.canceled += instance.OnLook;
                 }
             }
         }
@@ -1279,13 +995,7 @@ namespace ReLeaf
         public interface IPlayerActions
         {
             void OnMove(InputAction.CallbackContext context);
-            void OnFire(InputAction.CallbackContext context);
             void OnDash(InputAction.CallbackContext context);
-            void OnAim(InputAction.CallbackContext context);
-            void OnSowSeedMove(InputAction.CallbackContext context);
-            void OnSelectSeed(InputAction.CallbackContext context);
-            void OnHarvest(InputAction.CallbackContext context);
-            void OnLook(InputAction.CallbackContext context);
         }
         public interface IUIActions
         {

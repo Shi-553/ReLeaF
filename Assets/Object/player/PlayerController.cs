@@ -16,22 +16,13 @@ namespace ReLeaf
         [SerializeField]
         float moveSpeed = 5;
         [SerializeField]
-        float shotMoveSpeed = 2;
-        [SerializeField]
         float dashSpeedMagnification = 2;
-        [SerializeField]
-        float shotSpeed = 3;
-        float shotTimeCounter = 0;
 
 
         Transform footTransform;
 
         [SerializeField]
         float knockBackDampingRate = 0.9f;
-
-        [SerializeField]
-        FruitContainer fruitContainer;
-        public FruitContainer FruitContainer => fruitContainer;
 
         [SerializeField]
         float dashConsumeStamina = 0.1f;
@@ -47,8 +38,6 @@ namespace ReLeaf
         PlayerInput playerInput;
         ReLeafInputAction reLeafInputAction;
 
-        [SerializeField]
-        SelectSeed selectSeed;
 
         private void Awake()
         {
@@ -71,9 +60,6 @@ namespace ReLeaf
         }
 
         Vector2 move;
-        Vector2Int sowSeedMove;
-        Vector2 fireDir;
-        bool onFire;
         bool onDash;
 
         public void OnMove(InputAction.CallbackContext context)
@@ -81,62 +67,10 @@ namespace ReLeaf
             move = context.ReadValue<Vector2>().normalized;
         }
 
-        public void OnFire(InputAction.CallbackContext context)
-        {
-            onFire = context.ReadValue<float>() != 0;
-        }
 
         public void OnDash(InputAction.CallbackContext context)
         {
             onDash = context.ReadValue<float>() != 0;
-        }
-
-        public void OnAim(InputAction.CallbackContext context)
-        {
-            Vector3 mouseScreenPos = context.ReadValue<Vector2>();
-            mouseScreenPos.z = 10.0f;
-            fireDir = Camera.main.ScreenToWorldPoint(mouseScreenPos) - transform.position;
-            fireDir.Normalize();
-        }
-
-        public void OnSowSeedMove(InputAction.CallbackContext context)
-        {
-            var move = context.ReadValue<Vector2>();
-            if (move == Vector2.zero)
-            {
-                sowSeedMove = Vector2Int.zero;
-                return;
-            }
-            if (Mathf.Abs(move.x) < Mathf.Abs(move.y))
-            {
-                sowSeedMove = new Vector2Int(0, move.y < 0 ? -1 : 1);
-            }
-            else
-            {
-                sowSeedMove = new Vector2Int(move.x < 0 ? -1 : 1, 0);
-            }
-        }
-
-        public void OnSelectSeed(InputAction.CallbackContext context)
-        {
-            selectSeed.MoveSelect(context.ReadValue<float>());
-        }
-
-        public void OnHarvest(InputAction.CallbackContext context)
-        {
-            if (context.started)
-            {
-                StartCoroutine(DroneManager.Instance.BeginSowRoute(transform.position));
-            }
-            if (context.canceled)
-            {
-                DroneManager.Instance.EndSowRoute();
-            }
-        }
-
-        public void OnLook(InputAction.CallbackContext context)
-        {
-            fireDir = context.ReadValue<Vector2>().normalized;
         }
 
         void Update()
@@ -158,15 +92,8 @@ namespace ReLeaf
                 return;
             }
 
-            if (DroneManager.Instance.IsSowRouting)
-            {
-                DroneManager.Instance.MoveSowRoute(Vector2Int.CeilToInt(sowSeedMove));
-                return;
-            }
 
-
-
-            var speed = fruitContainer.IsEmpty() ? moveSpeed : shotMoveSpeed;
+            var speed = moveSpeed;
 
             if (onDash && staminaGauge.ConsumeValue(dashConsumeStamina * Time.deltaTime))
             {
@@ -177,24 +104,6 @@ namespace ReLeaf
 
             DungeonManager.Instance.SowSeed(FootTilePos, PlantType.Foundation);
 
-
-
-            if (shotTimeCounter > 0.0f)
-            {
-                shotTimeCounter -= Time.deltaTime * shotSpeed;
-            }
-            else
-            {
-                if (!fruitContainer.IsEmpty() && onFire)
-                {
-                    if (fruitContainer.Pop(out var f))
-                    {
-                        f.position = transform.position;
-
-                        shotTimeCounter = f.GetComponent<Fruit>().Shot(fireDir);
-                    }
-                }
-            }
         }
 
         public void Damaged(float damage, Vector3 impulse)
@@ -232,11 +141,6 @@ namespace ReLeaf
             SceneManager.LoadScene(0);
         }
 
-        public void EnterRoom()
-        {
-            fruitContainer.Clear();
-            DroneManager.Instance.Cancel();
-        }
 
     }
 }

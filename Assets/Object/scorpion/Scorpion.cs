@@ -5,7 +5,7 @@ using UnityEngine;
 
 namespace ReLeaf
 {
-    public class Scorpion : MonoBehaviour, IRoomEnemy
+    public class Scorpion : MonoBehaviour
     {
         [SerializeField]
         float hpMax = 3;
@@ -39,7 +39,6 @@ namespace ReLeaf
 
         HashSet<Vector3Int> attackedTilePos = new HashSet<Vector3Int>();
 
-        public bool CanAttackPlayer { get; set; }
 
         Rigidbody2DMover mover;
         private void Awake()
@@ -57,10 +56,6 @@ namespace ReLeaf
         }
         void Update()
         {
-            if (!CanAttackPlayer)
-            {
-                return;
-            }
             if (attackCoolTimeCounter > 0)
             {
                 attackCoolTimeCounter -= Time.deltaTime;

@@ -6,7 +6,7 @@ using System.Linq;
 
 namespace ReLeaf
 {
-    public class cactus : MonoBehaviour, IRoomEnemy
+    public class cactus : MonoBehaviour
     {
         [SerializeField]
         float hpMax = 3;
@@ -27,7 +27,6 @@ namespace ReLeaf
         Vision vision;
 
         float attackTimeCounter = 0;
-        public bool CanAttackPlayer { get; set; }
 
         void Start()
         {
@@ -39,10 +38,6 @@ namespace ReLeaf
 
         void Update()
         {
-            if (!CanAttackPlayer)
-            {
-                return;
-            }
             if (vision.ShouldFoundTarget || attackTimeCounter > 0)
             {
                 attackTimeCounter += Time.deltaTime;
