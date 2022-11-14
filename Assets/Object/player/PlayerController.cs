@@ -25,12 +25,12 @@ namespace ReLeaf
         float knockBackDampingRate = 0.9f;
 
         [SerializeField]
-        float dashConsumeStamina = 0.1f;
+        float dashConsumeEnergy = 0.1f;
 
         [SerializeField]
         ValueGaugeManager hpGauge;
         [SerializeField]
-        ValueGaugeManager staminaGauge;
+        ValueGaugeManager energyGauge;
 
         Rigidbody2DMover mover;
 
@@ -95,7 +95,7 @@ namespace ReLeaf
 
             var speed = moveSpeed;
 
-            if (onDash && staminaGauge.ConsumeValue(dashConsumeStamina * Time.deltaTime))
+            if (onDash && energyGauge.ConsumeValue(dashConsumeEnergy * Time.deltaTime))
             {
                 speed *= dashSpeedMagnification;
             }

@@ -638,7 +638,7 @@ GameObject:
   - component: {fileID: 397966031}
   - component: {fileID: 397966030}
   m_Layer: 5
-  m_Name: StaminaText
+  m_Name: EnergyText
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2801,7 +2801,7 @@ GameObject:
   - component: {fileID: 2033298498}
   - component: {fileID: 2033298499}
   m_Layer: 5
-  m_Name: Stamina
+  m_Name: Energy
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -17691,6 +17691,10 @@ PrefabInstance:
     - target: {fileID: 1885619581900236545, guid: 7145dcadd5ab20341bfef2b0cf89dc63, type: 3}
       propertyPath: m_LocalPosition.y
       value: 0.235
+      objectReference: {fileID: 0}
+    - target: {fileID: 4013356209018127977, guid: 7145dcadd5ab20341bfef2b0cf89dc63, type: 3}
+      propertyPath: m_Name
+      value: Energy
       objectReference: {fileID: 0}
     - target: {fileID: 5839813641606943567, guid: 7145dcadd5ab20341bfef2b0cf89dc63, type: 3}
       propertyPath: slider
