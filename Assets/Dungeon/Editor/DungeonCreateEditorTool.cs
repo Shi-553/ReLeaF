@@ -40,7 +40,7 @@ public class DungeonEditor : EditorWindow
             }
             if (isReGenerate)
             {
-                wallTilemap.RefreshAllTiles();
+                wallTilemap.ClearAllTiles();
             }
             foreach (var tilePos in groundTilemap.cellBounds.allPositionsWithin)
             {
