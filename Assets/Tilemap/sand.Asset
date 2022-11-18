@@ -14,27 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Sprite: {fileID: 0}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_Transform:
-    e00: 1
-    e01: 0
-    e02: 0
-    e03: 0
-    e10: 0
-    e11: 1
-    e12: 0
-    e13: 0
-    e20: 0
-    e21: 0
-    e22: 1
-    e23: 0
-    e30: 0
-    e31: 0
-    e32: 0
-    e33: 1
-  m_InstancedGameObject: {fileID: 0}
-  m_Flags: 2
+  m_Flags: 3
   m_ColliderType: 0
   tileType: 7
   canSowGrass: 1
   gameobject: {fileID: 3556380978872311179, guid: 0a23d3c8b511bb24f8f933f85e9e5160, type: 3}
-  spriteInEditor: {fileID: 21300000, guid: 1cc1df47795c48248bbc46f0e966e0cc, type: 3}

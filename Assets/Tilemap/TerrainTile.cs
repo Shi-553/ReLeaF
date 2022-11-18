@@ -20,12 +20,29 @@ namespace ReLeaf
         Sand,
     };
 
-    public class TerrainTile : Tile
+    public class TerrainTile : TileBase
     {
+
+        [SerializeField]
+        private Sprite m_Sprite;
+
+        [SerializeField]
+        private Color m_Color = Color.white;
+
+        private Matrix4x4 m_Transform = Matrix4x4.identity;
+
+
+        [SerializeField]
+        private TileFlags m_Flags = TileFlags.LockColor;
+
+        [SerializeField]
+        private Tile.ColliderType m_ColliderType = Tile.ColliderType.Sprite;
+
+        [Header("Custom")]
         public TileType tileType;
         public bool canSowGrass;
-        [SerializeField]
-        GameObject gameobject;
+        public GameObject gameobject;
+        virtual public GameObject Obj => gameobject;
 
         static public Dictionary<Vector2Int, GameObject> tiles = new Dictionary<Vector2Int, GameObject>();
 
@@ -40,14 +57,14 @@ namespace ReLeaf
                 {
                     Destroy(g);
                 }
-                if (gameobject != null)
+                if (Obj != null)
                 {
                     if (tiles.TryGetValue((Vector2Int)position, out var tile) && tile != null)
                     {
                         return true;
                     }
                     var pos = tilemap.GetComponent<Tilemap>().CellToWorld(position) + new Vector3(DungeonManager.CELL_SIZE, DungeonManager.CELL_SIZE) / 2;
-                    var newTile = Instantiate(gameobject, pos,
+                    var newTile = Instantiate(Obj, pos,
                         Quaternion.identity,
                         tilemap.GetComponent<Transform>());
 
@@ -60,10 +77,15 @@ namespace ReLeaf
         }
         public override void GetTileData(Vector3Int position, ITilemap tilemap, ref TileData tileData)
         {
-            base.GetTileData(position, tilemap, ref tileData);
+            tileData.sprite = m_Sprite;
+            tileData.color = m_Color;
+            tileData.transform = m_Transform;
+            tileData.flags = m_Flags;
+            tileData.colliderType = m_ColliderType;
+
 #if UNITY_EDITOR
-              if (Application.isEditor)
-                  tileData.gameObject = gameobject;
+            if (Application.isEditor)
+                tileData.gameObject = Obj;
 #endif
         }
 #if UNITY_EDITOR

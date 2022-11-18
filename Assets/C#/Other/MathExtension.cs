@@ -30,5 +30,19 @@ public static class MathExtension
 
         return pairs.Last().Value;
     }
-    
+    public static int GetRandomIndex(params float[] weightTable)
+    {
+        var totalWeight = weightTable.Sum();
+        var value = Random.Range(0, totalWeight );
+        for (var i = 0; i < weightTable.Length; ++i)
+        {
+            if (weightTable[i] >= value)
+            {
+                return i;
+            }
+            value -= weightTable[i];
+        }
+
+        throw new System.Exception("‚ ‚è‚¦‚ñ‚í");
+    }
 }
