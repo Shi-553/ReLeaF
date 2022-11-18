@@ -33,7 +33,7 @@ MonoBehaviour:
     e33: 1
   m_InstancedGameObject: {fileID: 0}
   m_Flags: 2
-  m_ColliderType: 0
+  m_ColliderType: 2
   tileType: 2
   canSowGrass: 0
   gameobject: {fileID: 0}
