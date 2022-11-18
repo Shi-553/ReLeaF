@@ -32,12 +32,15 @@ namespace ReLeaf
                 Destroy(gameObject);
                 return;
             }
+        }
+        private void Start()
+        {
             value = 0;
             slider.value = ValueRate;
-            var sliderRect=slider.GetComponent<RectTransform>();
+            var sliderRect = slider.GetComponent<RectTransform>();
 
-            var targetRatePos=targetRateTransform.position;
-            targetRatePos.x=Mathf.Lerp(sliderRect.position.x - sliderRect.sizeDelta.x, sliderRect.position.x - sliderRect.sizeDelta.x, targetRate);
+            var targetRatePos = targetRateTransform.position;
+            targetRatePos.x = Mathf.Lerp(sliderRect.position.x - sliderRect.sizeDelta.x, sliderRect.position.x - sliderRect.sizeDelta.x, targetRate);
             targetRateTransform.position = targetRatePos;
         }
 

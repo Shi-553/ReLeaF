@@ -32,8 +32,7 @@ MonoBehaviour:
     e32: 0
     e33: 1
   m_InstancedGameObject: {fileID: 0}
-  m_Flags: 1
+  m_Flags: 11
   m_ColliderType: 2
   tileType: 0
-  canSowSeed: 0
-  canStepOn: 1
+  canSowGrass: 0

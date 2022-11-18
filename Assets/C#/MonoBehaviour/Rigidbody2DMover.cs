@@ -12,6 +12,7 @@ namespace ReLeaf
 
         public bool UseUnScaledTime { get; set; } = false;
         float DeltaTime => UseUnScaledTime ? Time.unscaledDeltaTime : Time.deltaTime;
+        public Vector3 Position => rigid.position;
 
         private void Awake()
         {
@@ -29,7 +30,7 @@ namespace ReLeaf
         private void FixedUpdate()
         {
             rigid.MovePosition(rigid.position + move);
-            move = Vector2.zero;
+            move = Vector2.zero;;
         }
     }
 }

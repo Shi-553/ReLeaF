@@ -35,7 +35,7 @@ namespace ReLeaf
 
         public bool IsFullGrowth { get; private set; }
 
-        public Vector3Int TilePos { get; private set; }
+        public Vector2Int TilePos { get; private set; }
 
         Coroutine growCo;
         public bool IsFouceGrowing { get; private set; }

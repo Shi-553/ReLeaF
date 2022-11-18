@@ -9,6 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8466514786794790092}
+  - component: {fileID: 9173830992234748086}
   m_Layer: 7
   m_Name: Foot
   m_TagString: Player
@@ -31,6 +32,22 @@ Transform:
   m_Father: {fileID: 8467192124429001913}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!58 &9173830992234748086
+CircleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 534286125225264348}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  serializedVersion: 2
+  m_Radius: 0.25
 --- !u!1 &3115017788594648513
 GameObject:
   m_ObjectHideFlags: 0
@@ -56,7 +73,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3115017788594648513}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.297, z: 0}
+  m_LocalPosition: {x: 0.017, y: 0.334, z: -0.01}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -126,7 +143,7 @@ GameObject:
   - component: {fileID: 2119979141078945298}
   - component: {fileID: 5839813641606943567}
   m_Layer: 7
-  m_Name: Stamina
+  m_Name: Energy
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -223,7 +240,6 @@ GameObject:
   m_Component:
   - component: {fileID: 8467192124429001913}
   - component: {fileID: 8467192124429001914}
-  - component: {fileID: 1150814128717608690}
   - component: {fileID: 7234929495377642534}
   - component: {fileID: 2633302138327209971}
   - component: {fileID: 2001751951}
@@ -268,25 +284,9 @@ MonoBehaviour:
   moveSpeed: 5
   dashSpeedMagnification: 2
   knockBackDampingRate: 0.9
-  dashConsumeStamina: 6
+  dashConsumeEnergy: 0.1
   hpGauge: {fileID: 7810232181920566239}
-  staminaGauge: {fileID: 5839813641606943567}
---- !u!58 &1150814128717608690
-CircleCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8467192124429001911}
-  m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
-  serializedVersion: 2
-  m_Radius: 0.24
+  energyGauge: {fileID: 5839813641606943567}
 --- !u!50 &7234929495377642534
 Rigidbody2D:
   serializedVersion: 4

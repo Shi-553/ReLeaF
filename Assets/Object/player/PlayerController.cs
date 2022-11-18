@@ -34,7 +34,7 @@ namespace ReLeaf
 
         Rigidbody2DMover mover;
 
-        Vector3Int FootTilePos => DungeonManager.Instance.WorldToTilePos(footTransform.position);
+        Vector2Int FootTilePos => DungeonManager.Instance.WorldToTilePos(footTransform.position);
         PlayerInput playerInput;
         ReLeafInputAction reLeafInputAction;
 

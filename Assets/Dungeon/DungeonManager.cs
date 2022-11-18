@@ -4,6 +4,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Tilemaps;
 using System.Linq;
+using UnityEngine.WSA;
+using static UnityEditor.PlayerSettings;
 
 namespace ReLeaf
 {
@@ -11,9 +13,6 @@ namespace ReLeaf
     {
         None = -1,
         Foundation,
-        Tree,
-        Shrub,
-        Flower,
         Max
     };
     public class DungeonManager : MonoBehaviour
@@ -34,12 +33,24 @@ namespace ReLeaf
         [SerializeField]
         float messyCuredTime = 5.0f;
 
-        static readonly public int TILE_STACK_MAX = 3;
 
-        TerrainTile[] tilesBuffer = new TerrainTile[TILE_STACK_MAX];
-        Vector3Int[] possBuffer = new Vector3Int[TILE_STACK_MAX];
 
         public int MaxGreeningCount { get; private set; }
+
+        public struct TileChangedInfo
+        {
+            public Vector2Int tilePos;
+            public TerrainTile beforeTile;
+            public TerrainTile afterTile;
+
+            public TileChangedInfo(Vector2Int tilePos, TerrainTile beforeTile, TerrainTile afterTile)
+            {
+                this.tilePos = tilePos;
+                this.beforeTile = beforeTile;
+                this.afterTile = afterTile;
+            }
+        }
+        public event Action<TileChangedInfo> OnTileChanged;
 
         public static DungeonManager Instance { get; private set; }
         private void Awake()
@@ -56,48 +67,41 @@ namespace ReLeaf
 
             foreach (var pos in groundTilemap.cellBounds.allPositionsWithin)
             {
-                var tile=groundTilemap.GetTile<TerrainTile>(pos);
+                var tile = groundTilemap.GetTile<TerrainTile>(pos);
                 if (tile != null && tile.canSowGrass)
                 {
                     MaxGreeningCount++;
                 }
             }
         }
-        public Vector3Int WorldToTilePos(Vector3 worldPos)
+        public Vector2Int WorldToTilePos(Vector3 worldPos)
         {
-            return grid.WorldToCell(worldPos);
+            return (Vector2Int)grid.WorldToCell(worldPos);
         }
-        public Vector3 TilePosToWorld(Vector3Int tilePos)
+        public Vector3 TilePosToWorld(Vector2Int tilePos)
         {
-            return grid.CellToWorld(tilePos) + new Vector3(CELL_SIZE, CELL_SIZE) / 2;
+            return grid.CellToWorld((Vector3Int)tilePos) + new Vector3(CELL_SIZE, CELL_SIZE) / 2;
+        }
+        public TerrainTile GetGroundTile(Vector2Int pos)
+        {
+            return groundTilemap.GetTile<TerrainTile>((Vector3Int)pos);
         }
 
         public void Messy(Plant plant)
         {
-            var pos = plant.TilePos;
-            // zé≤è„ÇÃëSÇƒÇÃÉ^ÉCÉãÇå©ÇÈ
-            int count = groundTilemap.GetTilesRangeNonAlloc(pos, pos + new Vector3Int(0, 0, TILE_STACK_MAX - 1), possBuffer, tilesBuffer);
-
-
-            for (int i = 0; i < count; i++)
-            {
-                groundTilemap.SetTile(possBuffer[i], null);
-                tilesBuffer[i] = null;
-            }
-
-            groundTilemap.SetTile(pos, messyTile);
-            StartCoroutine(CureMessy(pos));
-
+            var tilePos = plant.TilePos;
+            ChangeTile(tilePos, null, messyTile);
+            StartCoroutine(CureMessy(tilePos));
         }
 
-        public void SowSeed(Vector3Int tilePos, PlantType type)
+        public void SowSeed(Vector2Int tilePos, PlantType type)
         {
             if (type < 0 || seedTiles.Length <= (int)type)
             {
                 return;
             }
 
-            var tile = groundTilemap.GetTile<TerrainTile>(tilePos);
+            var tile = groundTilemap.GetTile<TerrainTile>((Vector3Int)tilePos);
             if (tile == null)
             {
                 return;
@@ -114,21 +118,32 @@ namespace ReLeaf
                 }
             }
 
-            var obj=groundTilemap.GetInstantiatedObject(tilePos);
+            ChangeTile(tilePos, tile, seedTiles[(int)type]);
+        }
+
+        void ChangeTile(Vector2Int pos, TerrainTile before, TerrainTile after)
+        {
+            var obj = groundTilemap.GetInstantiatedObject((Vector3Int)pos);
             if (obj != null)
             {
                 Destroy(obj);
             }
-            groundTilemap.SetTile(tilePos, seedTiles[(int)type]);
+            before = before == null ? groundTilemap.GetTile<TerrainTile>((Vector3Int)pos) : before;
+
+            groundTilemap.SetTile((Vector3Int)pos, after);
+            OnTileChanged?.Invoke(new TileChangedInfo(pos, before, after));
         }
 
-
-        IEnumerator CureMessy(Vector3Int tilePos)
+        IEnumerator CureMessy(Vector2Int tilePos)
         {
             yield return new WaitForSeconds(messyCuredTime);
-            groundTilemap.SetTile(tilePos, sandTile);
+            ChangeTile(tilePos,messyTile, sandTile);
         }
 
+        public void ToSand(Vector2Int tilePos)
+        {
+            ChangeTile(tilePos, null, sandTile);
+        }
 
         static public readonly float CELL_SIZE = 0.5f;
     }
