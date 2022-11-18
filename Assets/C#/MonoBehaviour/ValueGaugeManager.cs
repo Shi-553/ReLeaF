@@ -13,11 +13,17 @@ namespace ReLeaf
         [SerializeField]
         float valueMax = 10;
         [SerializeField]
-        float recoverySpeed = 1;
+        float recoveryBaseSpeed = 1;
 
         [SerializeField,ReadOnly]
         float value;
-        public float Value => value;
+        public float Value { get => value;
+            set
+            {
+                this.value= value;
+                slider.value = ValueRate;
+            }
+        }
         public float ValueRate => value / valueMax;
 
         [SerializeField]
@@ -27,35 +33,39 @@ namespace ReLeaf
         Slider slider;
         private void Awake()
         {
-            value = valueMax;
-            slider.value = ValueRate;
+            Value = valueMax;
         }
 
         // ぽいんと消費
         public bool ConsumeValue(float consume)
         {
-            if(value==0)
+            if(Value == 0)
                 return false;
 
-            if (value - consume < 0)
+            if (Value - consume < 0)
             {
-                value = 0;
+                Value = 0;
                 return canOverConsumeOnlyOnce;
             }
-            value -= consume;
+            Value -= consume;
+            
+            return true;
+        }
+        public bool RecoveryValue(float recovery)
+        {
+            recovery *= recoveryBaseSpeed;
+
+            if (Value == valueMax)
+                return false;
+
+            if (Value + recovery > valueMax)
+            {
+                Value = valueMax;
+                return true;
+            }
+            Value += recovery;
 
             return true;
         }
-
-        private void Update()
-        {
-            value += recoverySpeed * Time.deltaTime;
-            if (value > valueMax)
-            {
-                value = valueMax;
-            }
-            slider.value = ValueRate;
-        }
-
     }
 }

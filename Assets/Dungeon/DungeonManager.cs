@@ -91,31 +91,25 @@ namespace ReLeaf
             StartCoroutine(CureMessy(tilePos));
         }
 
-        public void SowSeed(Vector2Int tilePos, PlantType type)
+        public bool SowSeed(Vector2Int tilePos, PlantType type)
         {
             if (type < 0 || seedTiles.Length <= (int)type)
             {
-                return;
+                return false;
             }
 
             var tile = groundTilemap.GetTile<TerrainTile>((Vector3Int)tilePos);
             if (tile == null)
             {
-                return;
+                return false;
             }
             if (type == PlantType.Foundation && !tile.canSowGrass)
             {
-                return;
-            }
-            if (type != PlantType.Foundation)
-            {
-                if (tile.tileType != TileType.Foundation)
-                {
-                    return;
-                }
+                return false;
             }
 
             ChangeTile(tilePos, tile, seedTiles[(int)type]);
+            return true;
         }
 
         void ChangeTile(Vector2Int pos, TerrainTile before, TerrainTile after)

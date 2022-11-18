@@ -177,7 +177,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   valueMax: 10
-  recoverySpeed: 2
+  recoverySpeed: 0
   value: 0
   canOverConsumeOnlyOnce: 0
   slider: {fileID: 0}

@@ -26,6 +26,8 @@ namespace ReLeaf
 
         [SerializeField]
         float dashConsumeEnergy = 0.1f;
+        [SerializeField]
+        float energyRecoveryPoint = 1.0f;
 
         [SerializeField]
         ValueGaugeManager hpGauge;
@@ -102,7 +104,10 @@ namespace ReLeaf
 
             mover.Move(speed * move);
 
-            DungeonManager.Instance.SowSeed(FootTilePos, PlantType.Foundation);
+            if (DungeonManager.Instance.SowSeed(FootTilePos, PlantType.Foundation))
+            {
+                energyGauge.RecoveryValue(energyRecoveryPoint);
+            }
 
         }
 
