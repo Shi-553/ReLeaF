@@ -137,7 +137,7 @@ namespace ReLeaf
         IEnumerator Death()
         {
             GetComponentInChildren<SpriteRenderer>().enabled = false;
-            yield return new WaitUntil(() => Input.GetMouseButtonDown(0));
+            yield return new WaitUntil(() =>Mouse.current.leftButton.isPressed);
             SceneManager.LoadScene(0);
         }
 

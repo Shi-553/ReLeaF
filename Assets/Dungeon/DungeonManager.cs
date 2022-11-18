@@ -3,9 +3,6 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Tilemaps;
-using System.Linq;
-using UnityEngine.WSA;
-using static UnityEditor.PlayerSettings;
 
 namespace ReLeaf
 {
@@ -123,10 +120,9 @@ namespace ReLeaf
 
         void ChangeTile(Vector2Int pos, TerrainTile before, TerrainTile after)
         {
-            var obj = groundTilemap.GetInstantiatedObject((Vector3Int)pos);
-            if (obj != null)
+            if (TerrainTile.tiles.Remove(pos, out var go))
             {
-                Destroy(obj);
+                Destroy(go);
             }
             before = before == null ? groundTilemap.GetTile<TerrainTile>((Vector3Int)pos) : before;
 

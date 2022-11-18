@@ -35,7 +35,10 @@ namespace ReLeaf
                 if (tile != null && (tile.tileType == TileType.Foundation || tile.tileType == TileType.Plant || tile.tileType == TileType.Sand))
                 {
                     var marker = SetMarker(worldTilePos, transform);
-                    marker.Init(this);
+                    if (marker != null)
+                    {
+                        marker.Init(this);
+                    }
                 }
 
             }

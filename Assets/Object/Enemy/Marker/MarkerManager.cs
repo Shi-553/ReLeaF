@@ -29,6 +29,10 @@ namespace ReLeaf
         protected T SetMarker(Vector2Int worldTilePos, Transform parent)
         {
             var worldPos = DungeonManager.Instance.TilePosToWorld(worldTilePos);
+            if (markers.TryGetValue(worldTilePos,out var _))
+            {
+                return null;
+            }
             var marker = Instantiate(markerPrefab, worldPos, Quaternion.identity, parent);
             markers.Add(worldTilePos, marker);
             marker.Init(worldTilePos);

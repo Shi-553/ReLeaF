@@ -32,7 +32,9 @@ MonoBehaviour:
     e32: 0
     e33: 1
   m_InstancedGameObject: {fileID: 0}
-  m_Flags: 11
-  m_ColliderType: 2
+  m_Flags: 2
+  m_ColliderType: 0
   tileType: 0
   canSowGrass: 0
+  gameobject: {fileID: 0}
+  spriteInEditor: {fileID: 0}
