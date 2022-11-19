@@ -17,7 +17,7 @@ GameObject:
   - component: {fileID: 1197057677586801177}
   - component: {fileID: 3317804854321118935}
   m_Layer: 0
-  m_Name: scorpion
+  m_Name: Shark
   m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -134,6 +134,7 @@ MonoBehaviour:
   markerPrefab: {fileID: -2048128077216658571, guid: c0af75f48203c6349863ead5d0ce2904, type: 3}
   enemyBaseInfo: {fileID: 11400000, guid: 1ab4d09cbce90c748894f2696b68fc3d, type: 2}
   <HP>k__BackingField: 0
+  specialPowerPrefab: {fileID: 7682479516954604330, guid: 110ed167187e534479bf9ad6f98fa9d6, type: 3}
 --- !u!114 &3317804854321118935
 MonoBehaviour:
   m_ObjectHideFlags: 0

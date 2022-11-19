@@ -14,22 +14,28 @@ namespace ReLeaf
         public float HP { get; private set; }
 
         EnemyMover enemyMover;
+
+        [SerializeField]
+        GameObject specialPowerPrefab;
+
         private void Start()
         {
             TryGetComponent(out enemyMover);
             Init(true);
             HP = enemyBaseInfo.HPMax;
         }
-        private void OnDestroy()
+        private void Death()
         {
+            Instantiate(specialPowerPrefab, transform.position, Quaternion.identity, transform.parent);
             Uninit();
+            Destroy(gameObject);
         }
 
         public void BeginWeekMarker()
         {
             foreach (var defaultLocalPos in enemyBaseInfo.WeakLocalTilePos)
             {
-                var worldTilePos = enemyMover.TilePos + enemyMover.GetRotatedLocalPos(defaultLocalPos);
+                var worldTilePos = enemyMover.TilePos + MathExtension.GetRotatedLocalPos(enemyMover.Dir,defaultLocalPos);
                 var tile = DungeonManager.Instance.GetGroundTile(worldTilePos);
 
                 if (tile != null && (tile.tileType == TileType.Foundation || tile.tileType == TileType.Plant || tile.tileType == TileType.Sand))
@@ -66,7 +72,7 @@ namespace ReLeaf
             if (HP - atk <= 0)
             {
                 HP = 0;
-                Destroy(gameObject);
+                Death();
                 return;
             }
             HP -= atk;

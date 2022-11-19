@@ -54,32 +54,5 @@ namespace ReLeaf
 
             return false;
         }
-
-        // 下向きをデフォルトとするローカル座標を向きに応じて回転
-        public Vector3 GetRotatedLocalPos(Vector3 defaultLocal)
-        {
-            return Quaternion.Euler(Dir.x, Dir.y + 1, 0) * defaultLocal;
-        }
-        public Vector2Int GetRotatedLocalPos(Vector2Int defaultLocal)
-        {
-            if (Dir == Vector2Int.down)
-            {
-                return defaultLocal;
-            }
-            if (Dir == Vector2Int.up)
-            {
-                return -defaultLocal;
-            }
-            if (Dir == Vector2Int.left)
-            {
-                return new Vector2Int(defaultLocal.y, defaultLocal.x);
-            }
-            if (Dir == Vector2Int.right)
-            {
-                return -new Vector2Int(defaultLocal.y, defaultLocal.x);
-            }
-
-            return defaultLocal;
-        }
     }
 }

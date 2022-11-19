@@ -45,4 +45,27 @@ public static class MathExtension
 
         throw new System.Exception("ありえんわ");
     }
+
+    // 下向きをデフォルトとするローカル座標を向きに応じて回転
+    public static Vector2Int GetRotatedLocalPos(Vector2Int dir, Vector2Int defaultLocal)
+    {
+        if (dir == Vector2Int.down)
+        {
+            return defaultLocal;
+        }
+        if (dir == Vector2Int.up)
+        {
+            return -defaultLocal;
+        }
+        if (dir == Vector2Int.left)
+        {
+            return new Vector2Int(defaultLocal.y, defaultLocal.x);
+        }
+        if (dir == Vector2Int.right)
+        {
+            return -new Vector2Int(defaultLocal.y, defaultLocal.x);
+        }
+
+        return defaultLocal;
+    }
 }

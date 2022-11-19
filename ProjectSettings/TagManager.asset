@@ -8,7 +8,7 @@ TagManager:
   - Enemy
   - Plant
   - Wall
-  - Bullet
+  - Item
   layers:
   - Default
   - TransparentFX
