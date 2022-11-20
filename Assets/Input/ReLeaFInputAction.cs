@@ -46,6 +46,42 @@ namespace ReLeaf
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Aim"",
+                    ""type"": ""Value"",
+                    ""id"": ""490fa231-4182-4d86-804f-34e108e07d80"",
+                    ""expectedControlType"": ""Vector2"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": true
+                },
+                {
+                    ""name"": ""Look"",
+                    ""type"": ""Value"",
+                    ""id"": ""338ec84b-eb8a-44ab-81e9-62ec147ff96d"",
+                    ""expectedControlType"": ""Vector2"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": true
+                },
+                {
+                    ""name"": ""UseItem"",
+                    ""type"": ""Button"",
+                    ""id"": ""9415beaf-bc75-4627-91f7-8f2a6cb04e6f"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""SelectItem"",
+                    ""type"": ""Value"",
+                    ""id"": ""b3a34529-b4ff-413d-960e-364ed1fd3643"",
+                    ""expectedControlType"": ""Axis"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": true
                 }
             ],
             ""bindings"": [
@@ -147,6 +183,138 @@ namespace ReLeaf
                     ""action"": ""Dash"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""417d7d59-6b4c-489f-b678-6faf85bda2a7"",
+                    ""path"": ""<Mouse>/position"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard&Mouse"",
+                    ""action"": ""Aim"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""d776264c-9065-4d3b-9346-5713e1ffabe0"",
+                    ""path"": ""<Gamepad>/rightStick"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Gamepad"",
+                    ""action"": ""Look"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""97743463-0293-4041-8b72-00ac6de8d0c7"",
+                    ""path"": ""<Gamepad>/rightTrigger"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Gamepad"",
+                    ""action"": ""UseItem"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""55371b69-4713-4168-a9af-2f2c504182ea"",
+                    ""path"": ""<Mouse>/leftButton"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard&Mouse"",
+                    ""action"": ""UseItem"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""884e1798-f806-44fb-8007-b946aa763da9"",
+                    ""path"": ""<Mouse>/rightButton"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""UseItem"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""84d552f9-0410-4835-9755-f54576e927fc"",
+                    ""path"": ""<Mouse>/scroll/y"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard&Mouse"",
+                    ""action"": ""SelectItem"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": ""LR"",
+                    ""id"": ""89d39777-3d76-4a94-bcf2-bb740432cc86"",
+                    ""path"": ""1DAxis"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""SelectItem"",
+                    ""isComposite"": true,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": ""negative"",
+                    ""id"": ""413396e3-df21-4861-8d01-0f341e5c8b30"",
+                    ""path"": ""<Gamepad>/leftShoulder"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Gamepad"",
+                    ""action"": ""SelectItem"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""positive"",
+                    ""id"": ""f29fa866-f43d-4e54-9c0e-5cb288498d4f"",
+                    ""path"": ""<Gamepad>/rightShoulder"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Gamepad"",
+                    ""action"": ""SelectItem"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""QE"",
+                    ""id"": ""c3013633-2fbf-4747-9287-580e5e368ddd"",
+                    ""path"": ""1DAxis"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""SelectItem"",
+                    ""isComposite"": true,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": ""negative"",
+                    ""id"": ""cf7e9ca6-f614-4b81-9678-6f1059a55c6c"",
+                    ""path"": ""<Keyboard>/q"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard&Mouse"",
+                    ""action"": ""SelectItem"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""positive"",
+                    ""id"": ""0207d123-5e31-4a70-b529-ecfdf903fd2a"",
+                    ""path"": ""<Keyboard>/e"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard&Mouse"",
+                    ""action"": ""SelectItem"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
                 }
             ]
         },
@@ -734,6 +902,10 @@ namespace ReLeaf
             m_Player = asset.FindActionMap("Player", throwIfNotFound: true);
             m_Player_Move = m_Player.FindAction("Move", throwIfNotFound: true);
             m_Player_Dash = m_Player.FindAction("Dash", throwIfNotFound: true);
+            m_Player_Aim = m_Player.FindAction("Aim", throwIfNotFound: true);
+            m_Player_Look = m_Player.FindAction("Look", throwIfNotFound: true);
+            m_Player_UseItem = m_Player.FindAction("UseItem", throwIfNotFound: true);
+            m_Player_SelectItem = m_Player.FindAction("SelectItem", throwIfNotFound: true);
             // UI
             m_UI = asset.FindActionMap("UI", throwIfNotFound: true);
             m_UI_Navigate = m_UI.FindAction("Navigate", throwIfNotFound: true);
@@ -807,12 +979,20 @@ namespace ReLeaf
         private IPlayerActions m_PlayerActionsCallbackInterface;
         private readonly InputAction m_Player_Move;
         private readonly InputAction m_Player_Dash;
+        private readonly InputAction m_Player_Aim;
+        private readonly InputAction m_Player_Look;
+        private readonly InputAction m_Player_UseItem;
+        private readonly InputAction m_Player_SelectItem;
         public struct PlayerActions
         {
             private @ReLeafInputAction m_Wrapper;
             public PlayerActions(@ReLeafInputAction wrapper) { m_Wrapper = wrapper; }
             public InputAction @Move => m_Wrapper.m_Player_Move;
             public InputAction @Dash => m_Wrapper.m_Player_Dash;
+            public InputAction @Aim => m_Wrapper.m_Player_Aim;
+            public InputAction @Look => m_Wrapper.m_Player_Look;
+            public InputAction @UseItem => m_Wrapper.m_Player_UseItem;
+            public InputAction @SelectItem => m_Wrapper.m_Player_SelectItem;
             public InputActionMap Get() { return m_Wrapper.m_Player; }
             public void Enable() { Get().Enable(); }
             public void Disable() { Get().Disable(); }
@@ -828,6 +1008,18 @@ namespace ReLeaf
                     @Dash.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnDash;
                     @Dash.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnDash;
                     @Dash.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnDash;
+                    @Aim.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnAim;
+                    @Aim.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnAim;
+                    @Aim.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnAim;
+                    @Look.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnLook;
+                    @Look.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnLook;
+                    @Look.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnLook;
+                    @UseItem.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnUseItem;
+                    @UseItem.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnUseItem;
+                    @UseItem.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnUseItem;
+                    @SelectItem.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnSelectItem;
+                    @SelectItem.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnSelectItem;
+                    @SelectItem.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnSelectItem;
                 }
                 m_Wrapper.m_PlayerActionsCallbackInterface = instance;
                 if (instance != null)
@@ -838,6 +1030,18 @@ namespace ReLeaf
                     @Dash.started += instance.OnDash;
                     @Dash.performed += instance.OnDash;
                     @Dash.canceled += instance.OnDash;
+                    @Aim.started += instance.OnAim;
+                    @Aim.performed += instance.OnAim;
+                    @Aim.canceled += instance.OnAim;
+                    @Look.started += instance.OnLook;
+                    @Look.performed += instance.OnLook;
+                    @Look.canceled += instance.OnLook;
+                    @UseItem.started += instance.OnUseItem;
+                    @UseItem.performed += instance.OnUseItem;
+                    @UseItem.canceled += instance.OnUseItem;
+                    @SelectItem.started += instance.OnSelectItem;
+                    @SelectItem.performed += instance.OnSelectItem;
+                    @SelectItem.canceled += instance.OnSelectItem;
                 }
             }
         }
@@ -996,6 +1200,10 @@ namespace ReLeaf
         {
             void OnMove(InputAction.CallbackContext context);
             void OnDash(InputAction.CallbackContext context);
+            void OnAim(InputAction.CallbackContext context);
+            void OnLook(InputAction.CallbackContext context);
+            void OnUseItem(InputAction.CallbackContext context);
+            void OnSelectItem(InputAction.CallbackContext context);
         }
         public interface IUIActions
         {

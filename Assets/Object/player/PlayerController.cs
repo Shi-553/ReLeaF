@@ -3,77 +3,106 @@ using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
-using UnityEngine.InputSystem.Utilities;
 using UnityEngine.SceneManagement;
-using UnityEngine.Tilemaps;
-using UnityEngine.UI;
 
 namespace ReLeaf
 {
     public class PlayerController : MonoBehaviour, ReLeafInputAction.IPlayerActions
     {
 
-        [SerializeField]
-        float moveSpeed = 5;
-        [SerializeField]
-        float dashSpeedMagnification = 2;
-
-
-        Transform footTransform;
-
-        [SerializeField]
-        float knockBackDampingRate = 0.9f;
-
-        [SerializeField]
-        float dashConsumeEnergy = 0.1f;
-        [SerializeField]
-        float energyRecoveryPoint = 1.0f;
 
         [SerializeField]
         ValueGaugeManager hpGauge;
-        [SerializeField]
-        ValueGaugeManager energyGauge;
 
-        Rigidbody2DMover mover;
 
-        Vector2Int FootTilePos => DungeonManager.Instance.WorldToTilePos(footTransform.position);
         PlayerInput playerInput;
         ReLeafInputAction reLeafInputAction;
 
+        ItemManager itemManager;
+
+        PlayerMover mover;
 
         private void Awake()
         {
             TryGetComponent(out mover);
+
             reLeafInputAction = new ReLeafInputAction();
             TryGetComponent(out playerInput);
             playerInput.defaultActionMap = reLeafInputAction.Player.Get().name;
             playerInput.actions = reLeafInputAction.asset;
             reLeafInputAction.Player.SetCallbacks(this);
 
-        }
-        void OnEnable()
-        {
-            playerInput.ActivateInput();
+            itemManager = GetComponentInChildren<ItemManager>();
+
         }
 
-        void Start()
+        void OnDisable()
         {
-            footTransform = transform.Find("Foot");
+            reLeafInputAction.Disable();
         }
-
-        Vector2 move;
-        bool onDash;
+        void SetItemDir(Vector2 value)
+        {
+            if (Mathf.Abs(value.x) < Mathf.Abs(value.y))
+            {
+               itemManager.ItemDir= new Vector2Int(0, (value.y < 0 ? -1 : 1));
+            }
+            else
+            {
+                itemManager.ItemDir = new Vector2Int((value.x < 0 ? -1 : 1), 0);
+            }
+        }
 
         public void OnMove(InputAction.CallbackContext context)
         {
-            move = context.ReadValue<Vector2>().normalized;
+            mover.Move = context.ReadValue<Vector2>().normalized;
         }
-
 
         public void OnDash(InputAction.CallbackContext context)
         {
-            onDash = context.ReadValue<float>() != 0;
+            mover.IsDash = context.ReadValue<float>() != 0;
         }
+
+        public void OnUseItem(InputAction.CallbackContext context)
+        {
+            if (!context.started)
+                return;
+            if (context.ReadValue<float>() != 0)
+            {
+                itemManager.UseItem();
+            }
+        }
+
+        public void OnAim(InputAction.CallbackContext context)
+        {
+            if (!context.performed)
+                return;
+            Vector3 mouseScreenPos = context.ReadValue<Vector2>();
+            mouseScreenPos.z = 10.0f;
+            SetItemDir(Camera.main.ScreenToWorldPoint(mouseScreenPos) - transform.position);
+        }
+
+        public void OnSelectItem(InputAction.CallbackContext context)
+        {
+            if (!context.started)
+                return;
+            var selectMove = context.ReadValue<float>();
+            if (selectMove < 0)
+            {
+                itemManager.SelectMoveLeft();
+            }
+            else
+            {
+                itemManager.SelectMoveRight();
+            }
+        }
+
+        public void OnLook(InputAction.CallbackContext context)
+        {
+            if (!context.performed)
+                return;
+            SetItemDir(context.ReadValue<Vector2>());
+        }
+
 
         void Update()
         {
@@ -89,25 +118,8 @@ namespace ReLeaf
             {
                 SceneManager.LoadScene(0);
             }
-            if (hpGauge.Value == 0)
-            {
-                return;
-            }
 
 
-            var speed = moveSpeed;
-
-            if (onDash && energyGauge.ConsumeValue(dashConsumeEnergy * Time.deltaTime))
-            {
-                speed *= dashSpeedMagnification;
-            }
-
-            mover.Move(speed * move);
-
-            if (DungeonManager.Instance.SowSeed(FootTilePos, PlantType.Foundation))
-            {
-                energyGauge.RecoveryValue(energyRecoveryPoint);
-            }
 
         }
 
@@ -115,7 +127,7 @@ namespace ReLeaf
         {
             if (hpGauge.ConsumeValue(damage))
             {
-                StartCoroutine(KnockBack(impulse));
+                StartCoroutine(mover.KnockBack(impulse));
 
                 if (hpGauge.Value == 0)
                 {
@@ -123,26 +135,10 @@ namespace ReLeaf
                 }
             }
         }
-        IEnumerator KnockBack(Vector3 impulse)
-        {
-            while (true)
-            {
-                mover.Move(impulse);
-
-
-                impulse *= knockBackDampingRate;
-
-                if (impulse.sqrMagnitude < 0.01f)
-                {
-                    yield break;
-                }
-                yield return null;
-            }
-        }
         IEnumerator Death()
         {
             GetComponentInChildren<SpriteRenderer>().enabled = false;
-            yield return new WaitUntil(() =>Mouse.current.leftButton.isPressed);
+            yield return new WaitUntil(() => Mouse.current.leftButton.isPressed);
             SceneManager.LoadScene(0);
         }
 

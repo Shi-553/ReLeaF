@@ -4,6 +4,7 @@ using UnityEngine;
 
 namespace ReLeaf
 {
+    // オブジェクトプール実装したい
     public class MarkerManager<T> : MonoBehaviour where T : MarkerBase
     {
 
@@ -40,6 +41,11 @@ namespace ReLeaf
         }
         protected void ResetAllMarker()
         {
+            if (markers.Count == 0)
+            {
+                return;
+            }
+
             foreach (var weakMarker in markers)
             {
                 if (weakMarker.Value != null)

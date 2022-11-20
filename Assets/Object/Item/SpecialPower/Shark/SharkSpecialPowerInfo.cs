@@ -7,7 +7,7 @@ namespace ReLeaf
     {
 
         [SerializeField]
-        Vector2Int[] weakLocalTilePos;
-        public Vector2Int[] WeakLocalTilePos => weakLocalTilePos;
+        Vector2Int[] seedLocalTilePos;
+        public Vector2Int[] SeedLocalTilePos => seedLocalTilePos;
     }
 }

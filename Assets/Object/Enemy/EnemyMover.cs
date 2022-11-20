@@ -16,7 +16,7 @@ namespace ReLeaf
         void Start()
         {
             TryGetComponent(out mover);
-            TilePos = (Vector2Int)DungeonManager.Instance.WorldToTilePos(mover.Position);
+            TilePos = DungeonManager.Instance.WorldToTilePos(mover.Position);
             Dir = Vector2Int.down;
         }
         public Vector2Int GetDir(Vector2Int targetTilePos)
