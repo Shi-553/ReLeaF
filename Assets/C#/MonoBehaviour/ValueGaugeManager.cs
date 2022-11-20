@@ -8,12 +8,11 @@ using UnityEngine.UI;
 
 namespace ReLeaf
 {
+    [ClassSummary("{gameObject.name}ゲージの管理")]
     public class ValueGaugeManager : MonoBehaviour
     {
-        [SerializeField]
+        [SerializeField, Rename("{gameObject.name}の最大値")]
         float valueMax = 10;
-        [SerializeField]
-        float recoveryBaseSpeed = 1;
 
         [SerializeField,ReadOnly]
         float value;
@@ -26,7 +25,7 @@ namespace ReLeaf
         }
         public float ValueRate => value / valueMax;
 
-        [SerializeField]
+        [SerializeField, Rename("0をちょうど下回ったフレームにtrueを返すか")]
         bool canOverConsumeOnlyOnce=false;
 
         [SerializeField]
@@ -53,7 +52,6 @@ namespace ReLeaf
         }
         public bool RecoveryValue(float recovery)
         {
-            recovery *= recoveryBaseSpeed;
 
             if (Value == valueMax)
                 return false;

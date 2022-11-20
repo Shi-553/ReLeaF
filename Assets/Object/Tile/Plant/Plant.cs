@@ -15,7 +15,9 @@ namespace ReLeaf
     [Serializable]
     public struct DamageMagnification
     {
+        [SerializeField, Rename("ダメージタイプ")]
         public DamageType damageType;
+        [SerializeField, Rename("倍率")]
         public float magnification;
     }
 

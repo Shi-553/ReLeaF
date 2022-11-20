@@ -6,6 +6,7 @@ using UnityEngine.UI;
 
 namespace ReLeaf
 {
+    [ClassSummary("緑化率マネージャー")]
     public class GreeningRate : MonoBehaviour
     {
         [SerializeField, ReadOnly]
@@ -26,7 +27,7 @@ namespace ReLeaf
         }
         public float ValueRate => value / DungeonManager.Instance.MaxGreeningCount;
 
-        [SerializeField]
+        [SerializeField,Rename("クリアに必要な緑化率")]
         float targetRate = 0.8f;
         [SerializeField]
         Transform targetRateTransform ;

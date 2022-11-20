@@ -6,13 +6,15 @@ using UnityEngine;
 namespace ReLeaf
 {
 
+    [ClassSummary("アイテムを引き寄せて回収する")]
     public class ItemCollector : MonoBehaviour
     {
         HashSet<ItemBase> floatItems = new HashSet<ItemBase>();
 
-        [SerializeField]
+        [SerializeField, Rename("アイテム引き寄せ速度(nマス/秒)")]
         float floatItemMoveSpeed = 1;
-        [SerializeField]
+
+        [SerializeField, Rename("アイテムを回収して使えるようにする範囲(nマス)")]
         float collectRange = 0.1f;
 
         [SerializeField]

@@ -4,22 +4,23 @@ using UnityEngine;
 
 namespace ReLeaf
 {
+    [ClassSummary("植物({asset.dirname})のパラメータ")]
     [CreateAssetMenu]
     public class PlantInfo : ScriptableObject
     {
-        [SerializeField]
+        [SerializeField, Rename("植物タイプ")]
         PlantType plantType;
         public PlantType PlantType => plantType;
 
-        [SerializeField]
+        [SerializeField, Rename("最大HP")]
         float hpMax;
         public float HpMax => hpMax;
 
-        [SerializeField]
+        [SerializeField, Rename("成長にかかる時間(秒)")]
         float growTime = 10.0f;
         public float GrowTime => growTime;
 
-        [SerializeField]
+        [SerializeField, Rename("ダメージタイプごとの被ダメージ倍率")]
         DamageMagnification[] damageMagnifications;
         public IReadOnlyCollection<DamageMagnification> DamageMagnifications => damageMagnifications;
     }

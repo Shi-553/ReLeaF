@@ -10,23 +10,25 @@ using UnityEngine;
 
 namespace ReLeaf
 {
+    [ClassSummary("プレイヤーの移動")]
     public class PlayerMover : MonoBehaviour
     {
 
-        [SerializeField]
+        [SerializeField,Rename("プレイヤーの移動スピード(nマス/秒)")]
         float moveSpeed = 5;
-        [SerializeField]
+
+        [SerializeField, Rename("ダッシュ中の移動スピード倍率(n倍)")]
         float dashSpeedMagnification = 2;
 
-
-
-        [SerializeField]
+        [SerializeField, Rename("ノックバックの減衰率（0でノックバックしない、1.0でノックバックし続ける）")]
         float knockBackDampingRate = 0.9f;
 
-        [SerializeField]
+        [SerializeField, Rename("ダッシュで消費するスタミナ(n/秒)")]
         float dashConsumeEnergy = 0.1f;
-        [SerializeField]
+
+        [SerializeField, Rename("1マス緑化したときのエネルギー回復量(n/マス)")]
         float energyRecoveryPoint = 1.0f;
+
         [SerializeField]
         ValueGaugeManager energyGauge;
         Rigidbody2DMover mover;

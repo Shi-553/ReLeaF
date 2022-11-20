@@ -1,0 +1,53 @@
+	Assets\Object\Enemy\Shark
+0	"Sharkの攻撃パラメータ
+Assets\Object\Enemy\Shark\SharkAttackInfo"	atk	float	1	"攻撃力"
+0		speed	float	20	"攻撃時の移動スピード(nマス/秒)"
+0		range	int	5	"攻撃範囲(前方nマス)"
+0		knockBackPower	float	4	"攻撃のノックバック力(nマス/秒)　減衰あり"
+1	"敵(Shark)の被ダメージパラメータ
+Assets\Object\Enemy\Shark\SharkDamageableInfo"	hpMax	float	10	"最大HP"
+1		weakLocalTilePos	Vector2Int[]	(0, -1)(0, -2)(0, -3)(0, -4)(0, -5)	"緑化でダメージを受けるマス
+(上向きが基準のローカルポジション)"
+2	"敵(Shark)の移動パラメータ
+Assets\Object\Enemy\Shark\SharkMoverInfo"	speed	float	4	"移動スピード(nマス/秒)"
+
+	Assets\Object\Item
+0	"アイテムのUI
+Assets\Object\Item\Item->ItemUI"	smoothTime	float	0.2	"正しい位置へ到達するまでのおおよその時間"
+0		maxSpeed	float	10000	"最大速度"
+
+	Assets\Object\Item\SpecialPower\Shark
+0	"Sharkのスペシャルパワーパラメータ
+Assets\Object\Item\SpecialPower\Shark\SharkSpecialPowerInfo"	seedLocalTilePos	Vector2Int[]	(0, 1)(0, 2)(0, 3)(0, 4)(0, 5)	"種をまくマス
+(上向きが基準のローカルポジション)"
+
+	Assets\Object\player
+0	"プレイヤーの移動
+Assets\Object\player\player->PlayerMover"	moveSpeed	float	5	"プレイヤーの移動スピード(nマス/秒)"
+0		dashSpeedMagnification	float	2	"ダッシュ中の移動スピード倍率(n倍)"
+0		knockBackDampingRate	float	0.9	"ノックバックの減衰率（0でノックバックしない、1.0でノックバックし続ける）"
+0		dashConsumeEnergy	float	5	"ダッシュで消費するスタミナ(n/秒)"
+0		energyRecoveryPoint	float	0.2	"1マス緑化したときのエネルギー回復量(n/マス)"
+1	"HPゲージの管理
+Assets\Object\player\player-HP->ValueGaugeManager"	valueMax	float	10	"HPの最大値"
+1		canOverConsumeOnlyOnce	bool	True	"0をちょうど下回ったフレームにtrueを返すか"
+2	"Energyゲージの管理
+Assets\Object\player\player-Energy->ValueGaugeManager"	valueMax	float	10	"Energyの最大値"
+2		canOverConsumeOnlyOnce	bool	False	"0をちょうど下回ったフレームにtrueを返すか"
+3	"アイテムを引き寄せて回収する
+Assets\Object\player\player-Item->ItemCollector"	floatItemMoveSpeed	float	5	"アイテム引き寄せ速度(nマス/秒)"
+3		collectRange	float	0.1	"アイテムを回収して使えるようにする範囲(nマス)"
+
+	Assets\Object\Tile\Plant\Foundation
+0	"植物(Foundation)のパラメータ
+Assets\Object\Tile\Plant\Foundation\FoundationInfo"	plantType	Enum	Foundation	"植物タイプ"
+0		hpMax	float	1	"最大HP"
+0		growTime	float	0.5	"成長にかかる時間(秒)"
+0		damageMagnifications	DamageMagnification[]		"ダメージタイプごとの被ダメージ倍率"
+
+	Assets\Scenes
+0	"タイルマップマネージャー
+Assets\Scenes\SampleScene\TestDungeon->DungeonManager"	messyCuredTime	float	10	"ぐちゃぐちゃな地面が砂になるまでの時間(秒)"
+1	"緑化率マネージャー
+Assets\Scenes\SampleScene\Canvas-GreeningRate->GreeningRate"	targetRate	float	0.7	"クリアに必要な緑化率"
+

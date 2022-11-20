@@ -12,6 +12,7 @@ namespace ReLeaf
         Foundation,
         Max
     };
+    [ClassSummary("タイルマップマネージャー")]
     public class DungeonManager : MonoBehaviour
     {
         [SerializeField]
@@ -27,7 +28,7 @@ namespace ReLeaf
         [SerializeField]
         Grid grid;
 
-        [SerializeField]
+        [SerializeField,Rename("ぐちゃぐちゃな地面が砂になるまでの時間(秒)")]
         float messyCuredTime = 5.0f;
 
 

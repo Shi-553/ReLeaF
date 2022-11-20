@@ -3,15 +3,16 @@ using UnityEngine.UI;
 
 namespace ReLeaf
 {
+    [ClassSummary("アイテムのUI")]
     public class ItemUI : MonoBehaviour
     {
         public ItemBase Item { get; private set; }
         [SerializeField]
         Image image;
 
-        [SerializeField]
+        [SerializeField,Rename("正しい位置へ到達するまでのおおよその時間")]
         float smoothTime =1.0f;
-        [SerializeField]
+        [SerializeField,Rename("最大速度")]
         float maxSpeed =1.0f;
 
         private Vector3 velocity = Vector3.zero;
