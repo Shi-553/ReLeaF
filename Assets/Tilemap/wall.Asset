@@ -12,10 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cf0ca5a09e079a642b3654fa43dbf6d7, type: 3}
   m_Name: wall
   m_EditorClassIdentifier: 
-  m_Sprite: {fileID: 21300000, guid: e3e18b624e1e8d140ac91d5176c37d56, type: 3}
+  m_Sprite: {fileID: 0}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_Flags: 3
   m_ColliderType: 2
   tileType: 5
   canSowGrass: 0
-  gameobject: {fileID: 0}
+  gameobject: {fileID: 1463589238644328539, guid: 8d6ea43fa261c0649a74f6841f4ca1c0, type: 3}
