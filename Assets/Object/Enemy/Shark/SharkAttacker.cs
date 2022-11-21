@@ -53,7 +53,8 @@ namespace ReLeaf
 
             while (true)
             {
-                if (enemyMover.MoveTo(attackTargetPos, SharkAttackInfo.Speed,false))
+                enemyMover.UpdateDir(attackTargetPos, false);
+                if (enemyMover.Move(SharkAttackInfo.Speed,false))
                 {
                     break;
                 }

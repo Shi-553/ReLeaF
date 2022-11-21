@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: -4858720575995891945}
   - component: {fileID: 3040785535924531099}
   - component: {fileID: 1197057677586801177}
-  - component: {fileID: 3317804854321118935}
+  - component: {fileID: 7609214511921149064}
   m_Layer: 0
   m_Name: Shark
   m_TagString: Enemy
@@ -135,7 +135,7 @@ MonoBehaviour:
   enemyBaseInfo: {fileID: 11400000, guid: 1ab4d09cbce90c748894f2696b68fc3d, type: 2}
   <HP>k__BackingField: 0
   specialPowerPrefab: {fileID: 7682479516954604330, guid: 110ed167187e534479bf9ad6f98fa9d6, type: 3}
---- !u!114 &3317804854321118935
+--- !u!114 &7609214511921149064
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -148,6 +148,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   <TilePos>k__BackingField: {x: 0, y: 0}
+  <OldTilePos>k__BackingField: {x: 0, y: 0}
+  <Target>k__BackingField: {x: 0, y: 0}
+  <OldTarget>k__BackingField: {x: 0, y: 0}
   <Dir>k__BackingField: {x: 0, y: 0}
 --- !u!1 &5759868525542624290
 GameObject:

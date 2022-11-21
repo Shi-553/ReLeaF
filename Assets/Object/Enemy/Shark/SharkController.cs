@@ -12,12 +12,12 @@ namespace ReLeaf
 
         [SerializeField]
         EnemyMoverInfo enemyMoverInfo;
-        EnemyMover movable;
+        EnemyMover mover;
         IEnemyAttacker attacker;
         void Start()
         {
             TryGetComponent(out attacker);
-            TryGetComponent(out movable);
+            TryGetComponent(out mover);
         }
         void Update()
         {
@@ -25,14 +25,16 @@ namespace ReLeaf
             {
                 return;
             }
-            if (attacker.IsAttack) { 
+            if (attacker.IsAttack)
+            {
                 return;
             }
             var target = searchVision.Targets.MinBy(t => (t.position - transform.position).sqrMagnitude);
-            var targetTilePos = (Vector2Int)DungeonManager.Instance.WorldToTilePos(target.position);
+            var targetTilePos = DungeonManager.Instance.WorldToTilePos(target.position);
 
+            mover.UpdateDir(targetTilePos, true);
 
-            if (movable.MoveTo(targetTilePos, enemyMoverInfo.Speed,true)) 
+            if (mover.Move(enemyMoverInfo.Speed, true))
             {
                 StartCoroutine(attacker.Attack());
             }
