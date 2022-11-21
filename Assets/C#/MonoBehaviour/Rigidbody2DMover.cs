@@ -29,10 +29,5 @@ namespace ReLeaf
             move = Vector2.zero;
         }
 
-        public void MovePotision(Vector2 pos)
-        {
-            rigid.MovePosition(pos);
-            move = Vector2.zero;
-        }
     }
 }

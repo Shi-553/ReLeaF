@@ -4399,22 +4399,6 @@ MonoBehaviour:
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls: []
---- !u!1 &203121253767136247
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 2494862212706365797}
-  m_Layer: 0
-  m_Name: Fruits
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
 --- !u!1001 &478676284181339247
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -4670,21 +4654,6 @@ TilemapCollider2D:
   m_Offset: {x: 0, y: 0}
   m_MaximumTileChangeCount: 1000
   m_ExtrusionFactor: 0.00001
---- !u!4 &2494862212706365797
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 203121253767136247}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 5023065968764256356}
-  m_RootOrder: 1
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2786831096062069585
 GameObject:
   m_ObjectHideFlags: 0
@@ -4910,8 +4879,6 @@ Tilemap:
   m_TileObjectToInstantiateArray:
   - m_RefCount: 3
     m_Data: {fileID: 3556380978872311179, guid: 0a23d3c8b511bb24f8f933f85e9e5160, type: 3}
-  - m_RefCount: 0
-    m_Data: {fileID: 0}
   m_AnimationFrameRate: 1
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_Origin: {x: -41, y: -37, z: 0}
@@ -8425,9 +8392,7 @@ Tilemap:
     m_Data: {fileID: 0}
   - m_RefCount: 344
     m_Data: {fileID: 11400000, guid: 91e63bea85a0d134383a89075a5e72a0, type: 2}
-  m_TileSpriteArray:
-  - m_RefCount: 0
-    m_Data: {fileID: 0}
+  m_TileSpriteArray: []
   m_TileMatrixArray:
   - m_RefCount: 344
     m_Data:
@@ -8491,7 +8456,6 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 593113328784407098}
-  - {fileID: 2494862212706365797}
   m_Father: {fileID: 0}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -8759,18 +8723,10 @@ PrefabInstance:
       propertyPath: slider
       value: 
       objectReference: {fileID: 2033298499}
-    - target: {fileID: 7234929495377642534, guid: 7145dcadd5ab20341bfef2b0cf89dc63, type: 3}
-      propertyPath: m_BodyType
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 7810232181920566239, guid: 7145dcadd5ab20341bfef2b0cf89dc63, type: 3}
       propertyPath: slider
       value: 
       objectReference: {fileID: 2105551476}
-    - target: {fileID: 7810232181920566239, guid: 7145dcadd5ab20341bfef2b0cf89dc63, type: 3}
-      propertyPath: recoveryBaseSpeed
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 8467192124429001911, guid: 7145dcadd5ab20341bfef2b0cf89dc63, type: 3}
       propertyPath: m_Name
       value: player

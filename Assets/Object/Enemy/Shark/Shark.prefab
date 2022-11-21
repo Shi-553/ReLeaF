@@ -55,6 +55,7 @@ MonoBehaviour:
   markerPrefab: {fileID: -4394657167183029528, guid: 3a9b88e6c6368b04f9611c18dbfef098, type: 3}
   <SharkAttackInfo>k__BackingField: {fileID: 11400000, guid: 573058ee99460034396cb62d41c559c4, type: 2}
   <Transition>k__BackingField: 0
+  attackStartPos: {x: 0, y: 0}
   attackTargetPos: {x: 0, y: 0}
 --- !u!50 &7484773499943557005
 Rigidbody2D:
@@ -66,7 +67,7 @@ Rigidbody2D:
   m_GameObject: {fileID: 5442024061459843501}
   m_BodyType: 1
   m_Simulated: 1
-  m_UseFullKinematicContacts: 1
+  m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
   m_Mass: 1
   m_LinearDrag: 0
@@ -310,7 +311,7 @@ MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 7153099274174081556, guid: 439121564870f344ab5e1de42c966e97, type: 3}
   m_PrefabInstance: {fileID: 5893834315183712026}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
+  m_GameObject: {fileID: 9162476697458848972}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: f8369d4027efd4648a3c2dd21539ba90, type: 3}
@@ -321,3 +322,29 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 1314939321027332112, guid: 439121564870f344ab5e1de42c966e97, type: 3}
   m_PrefabInstance: {fileID: 5893834315183712026}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &9162476697458848972 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 3381274335361389526, guid: 439121564870f344ab5e1de42c966e97, type: 3}
+  m_PrefabInstance: {fileID: 5893834315183712026}
+  m_PrefabAsset: {fileID: 0}
+--- !u!50 &8548002192404463906
+Rigidbody2D:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9162476697458848972}
+  m_BodyType: 1
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 1
+  m_LinearDrag: 0
+  m_AngularDrag: 0.05
+  m_GravityScale: 1
+  m_Material: {fileID: 0}
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 0
+  m_Constraints: 4
