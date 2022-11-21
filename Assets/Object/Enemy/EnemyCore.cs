@@ -5,7 +5,7 @@ using UnityEngine.Events;
 
 namespace ReLeaf
 {
-    public class EnemyCore : MarkerManager<WeakMarker>, IEnemyDamageable
+    public class EnemyCore : MonoBehaviour, IEnemyDamageable
     {
         [SerializeField]
         EnemyDamageableInfo enemyBaseInfo;
@@ -17,17 +17,21 @@ namespace ReLeaf
 
         [SerializeField]
         GameObject specialPowerPrefab;
+        [SerializeField]
+        MarkerManager weakMarkerManager;
+
+        [SerializeField]
+        WeakMarker weakMarkerPrefab;
 
         private void Start()
         {
             TryGetComponent(out enemyMover);
-            Init(true);
             HP = enemyBaseInfo.HPMax;
+            weakMarkerManager.InitPool(weakMarkerPrefab);
         }
         private void Death()
         {
             Instantiate(specialPowerPrefab, transform.position, Quaternion.identity, transform.parent);
-            Uninit();
             Destroy(gameObject);
         }
 
@@ -40,7 +44,7 @@ namespace ReLeaf
 
                 if (tile != null && (tile.tileType == TileType.Foundation || tile.tileType == TileType.Plant || tile.tileType == TileType.Sand))
                 {
-                    var marker = SetMarker(worldTilePos, transform);
+                    var marker = weakMarkerManager.SetMarker<WeakMarker>(worldTilePos);
                     if (marker != null)
                     {
                         marker.Init(this);
@@ -51,15 +55,15 @@ namespace ReLeaf
         }
         public void EndWeekMarker()
         {
-            ResetAllMarker();
+            weakMarkerManager.ResetAllMarker();
         }
         public void DamagedGreening(Vector2Int tilePos, float atk)
         {
             if (HP == 0)
                 return;
-            if (markers.Remove(tilePos))
+            if (weakMarkerManager.ResetMarker(tilePos))
             {
-                Damaged(atk * (enemyBaseInfo.WeakLocalTilePos.Length - (markers.Count )));
+                Damaged(atk * (enemyBaseInfo.WeakLocalTilePos.Length - (weakMarkerManager.Markers.Count )));
                 return;
             }
         }

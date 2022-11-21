@@ -23,7 +23,6 @@ namespace ReLeaf
             if (info.tilePos==tilePos&&(info.afterTile.tileType == TileType.Plant || info.afterTile.tileType == TileType.Foundation))
             {
                 enemyDamageable.DamagedGreening(tilePos, 1);
-                Uninit();
             }
         }
     }

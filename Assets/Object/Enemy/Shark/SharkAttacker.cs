@@ -6,7 +6,7 @@ using UnityEngine;
 
 namespace ReLeaf
 {
-    public class SharkAttacker : MarkerManager<AttackMarker>, IEnemyAttacker
+    public class SharkAttacker : MonoBehaviour, IEnemyAttacker
     {
 
 
@@ -25,10 +25,17 @@ namespace ReLeaf
         [SerializeField, ReadOnly]
         Vector2Int attackTargetPos;
 
+        [SerializeField]
+        MarkerManager attackMarkerManager;
+        [SerializeField]
+        AttackMarker attackMarkerPrefab;
+
         private void Awake()
         {
             TryGetComponent(out enemyMover);
             TryGetComponent(out enemyDamageable);
+
+            attackMarkerManager.InitPool(attackMarkerPrefab);
         }
 
         void IEnemyAttacker.OnStartAiming()
@@ -43,7 +50,7 @@ namespace ReLeaf
 
                 if (tile != null && (tile.tileType == TileType.Foundation || tile.tileType == TileType.Plant || tile.tileType == TileType.Sand))
                 {
-                    SetMarker(worldTilePos, null);
+                    attackMarkerManager.SetMarker(worldTilePos);
                     attackTargetPos = worldTilePos;
                     continue;
                 }
@@ -63,11 +70,11 @@ namespace ReLeaf
                 }
                 yield return null;
             }
-            ResetAllMarker();
+            attackMarkerManager.ResetAllMarker();
         }
         private void OnDestroy()
         {
-            ResetAllMarker();
+            attackMarkerManager.ResetAllMarker();
         }
 
         private void OnCollisionStay2D(Collision2D collision)

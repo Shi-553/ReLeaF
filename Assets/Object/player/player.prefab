@@ -97,6 +97,7 @@ GameObject:
   - component: {fileID: 6203716136439494101}
   - component: {fileID: 4052387953760838874}
   - component: {fileID: 354325909066514047}
+  - component: {fileID: 8685453909214998006}
   m_Layer: 7
   m_Name: Item
   m_TagString: Untagged
@@ -162,9 +163,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d3ef9ce04b6979640804763c78b3895e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  markerPrefab: {fileID: 3219640911387259323, guid: 32569a780da112443bfc86fecabc2323, type: 3}
   itemUIRoot: {fileID: 0}
   selectFrame: {fileID: 0}
+  seedMarkerManager: {fileID: 8685453909214998006}
+  seedMarkerPrefab: {fileID: 3219640911387259323, guid: 32569a780da112443bfc86fecabc2323, type: 3}
 --- !u!50 &354325909066514047
 Rigidbody2D:
   serializedVersion: 4
@@ -186,6 +188,19 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 7
+--- !u!114 &8685453909214998006
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3674659289469681737}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8edec6174e9630244ae6e11ad4edd6ec, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  subscribeOnTileChanged: 0
 --- !u!1 &4013356209018127977
 GameObject:
   m_ObjectHideFlags: 0

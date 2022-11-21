@@ -3,13 +3,17 @@ using UnityEngine;
 
 namespace ReLeaf
 {
-    public class ItemManager : MarkerManager<SeedMarker>
+    public class ItemManager :MonoBehaviour
     {
         List<ItemUI> itemUIs = new List<ItemUI>();
         [SerializeField]
         RectTransform itemUIRoot;
         [SerializeField]
         Transform selectFrame;
+        [SerializeField]
+        MarkerManager seedMarkerManager;
+        [SerializeField]
+        SeedMarker seedMarkerPrefab;
 
         int itemCount = 0;
         int ItemCount
@@ -60,6 +64,8 @@ namespace ReLeaf
             mainCamera = Camera.main;
 
             mover=GetComponentInParent<PlayerMover>();
+
+            seedMarkerManager.InitPool(seedMarkerPrefab);
         }
 
         public void AddItem(ItemBase itemBase)
@@ -120,7 +126,7 @@ namespace ReLeaf
 
             if (mover.WasChangedTilePosThisFrame || WasChangedItemDirThisFrame || previewd!=Current.Item)
             {
-                ResetAllMarker();
+                seedMarkerManager.ResetAllMarker();
                 if (ItemCount == 0)
                 {
                     return;
@@ -130,7 +136,7 @@ namespace ReLeaf
 
                 foreach (var p in previews)
                 {
-                    SetMarker(p, null);
+                    seedMarkerManager.SetMarker(p);
                 }
             }
             OldItemDir = ItemDir;
