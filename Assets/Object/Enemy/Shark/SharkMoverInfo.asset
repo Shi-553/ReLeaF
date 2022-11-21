@@ -12,4 +12,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 536f945cc47fd274981559d61d8a0db7, type: 3}
   m_Name: SharkMoverInfo
   m_EditorClassIdentifier: 
-  speed: 5
+  speed: 4

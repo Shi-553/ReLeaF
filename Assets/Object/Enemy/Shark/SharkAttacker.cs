@@ -21,6 +21,8 @@ namespace ReLeaf
         EnemyCore enemyDamageable;
 
         [SerializeField, ReadOnly]
+        Vector2Int attackStartPos;
+        [SerializeField, ReadOnly]
         Vector2Int attackTargetPos;
 
         private void Awake()
@@ -31,12 +33,13 @@ namespace ReLeaf
 
         void IEnemyAttacker.OnStartAiming()
         {
+            attackStartPos = enemyMover.TilePos;
             enemyDamageable.BeginWeekMarker();
 
             for (int i = 0; i < SharkAttackInfo.Range; i++)
             {
                 var worldTilePos = enemyMover.TilePos + enemyMover.Dir * (i + 1);
-                var tile=DungeonManager.Instance.GetGroundTile(worldTilePos);
+                var tile = DungeonManager.Instance.GetGroundTile(worldTilePos);
 
                 if (tile != null && (tile.tileType == TileType.Foundation || tile.tileType == TileType.Plant || tile.tileType == TileType.Sand))
                 {
@@ -54,7 +57,7 @@ namespace ReLeaf
             while (true)
             {
                 enemyMover.UpdateDir(attackTargetPos, false);
-                if (enemyMover.Move(SharkAttackInfo.Speed,false))
+                if (enemyMover.Move(SharkAttackInfo.Speed, false))
                 {
                     break;
                 }
@@ -91,7 +94,19 @@ namespace ReLeaf
             {
                 if (collider.gameObject.TryGetComponent<Plant>(out var plant))
                 {
-                    plant.Damaged(SharkAttackInfo.ATK, SharkAttackInfo.DamageType);
+                    var v = MathExtension.MinMax(attackStartPos, attackTargetPos);
+
+                    for (int x = v.Item1.x; x <= v.Item2.x; x++)
+                    {
+                        for (int y = v.Item1.y; y <= v.Item2.y; y++)
+                        {
+                            if (plant.TilePos.x == x && plant.TilePos.y == y)
+                            {
+                                plant.Damaged(SharkAttackInfo.ATK, SharkAttackInfo.DamageType);
+                                return;
+                            }
+                        }
+                    }
                 }
             }
         }

@@ -67,4 +67,33 @@ public static class MathExtension
 
         return defaultLocal;
     }
+
+    public static (float, float) MinMax(float value1, float value2)
+    {
+        if (value1 < value2)
+            return (value1, value2);
+        else
+            return (value2, value1);
+    }
+    public static (int, int) MinMax(int value1, int value2)
+    {
+        if (value1 < value2)
+            return (value1, value2);
+        else
+            return (value2, value1);
+    }
+    public static (Vector2, Vector2) MinMax(Vector2 value1, Vector2 value2)
+    {
+        var x=MinMax(value1.x,value2.x);
+        var y=MinMax(value1.y,value2.y);
+
+        return (new Vector2(x.Item1, y.Item1), new Vector2(x.Item2, y.Item2));
+    }
+    public static (Vector2Int, Vector2Int) MinMax(Vector2Int value1, Vector2Int value2)
+    {
+        var x=MinMax(value1.x,value2.x);
+        var y=MinMax(value1.y,value2.y);
+
+        return (new Vector2Int(x.Item1, y.Item1), new Vector2Int(x.Item2, y.Item2));
+    }
 }

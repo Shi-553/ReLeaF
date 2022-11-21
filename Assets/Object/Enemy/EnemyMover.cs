@@ -36,25 +36,38 @@ namespace ReLeaf
         }
 
 
-        public bool Move( float speed, bool isStopInNear)
+        public bool Move(float speed, bool isStopInNear)
         {
             var nextTilePos = TilePos + Dir;
 
-            var adjustNextTargetPos = DungeonManager.Instance.TilePosToWorld(nextTilePos);
+            Vector2 worldNextTargetPos = DungeonManager.Instance.TilePosToWorld(nextTilePos);
+
+            var distance = worldNextTargetPos - mover.Position;
+            var worldDir = distance.normalized;
+
+            var isFinish = (isStopInNear && (Target - nextTilePos).sqrMagnitude <= 1) || Target == nextTilePos;
+
 
             if (isStopInNear && (Target - TilePos).sqrMagnitude <= 1)
             {
                 Dir = Target - TilePos;
                 return true;
             }
-            if (((Vector2)adjustNextTargetPos - mover.Position).sqrMagnitude < (((isStopInNear && (Target - nextTilePos).sqrMagnitude <=1) ||Target == nextTilePos) ? 0.001f : 0.01f))
+
+            if (Vector2.Dot(worldDir, (Vector2)Dir) < 0|| ( distance.sqrMagnitude<0.001f))
             {
+                if (isFinish)
+                {
+                    mover.Position = worldNextTargetPos;
+                }
+
                 OldTilePos = TilePos;
                 TilePos = nextTilePos;
 
                 return Target == nextTilePos;
             }
-            mover.MoveTowards(adjustNextTargetPos, speed);
+
+            mover.Move(worldDir * speed);
 
             return false;
         }
@@ -104,7 +117,7 @@ namespace ReLeaf
 
         Vector2Int temp;
 
-         void UpdateDirRouting()
+        void UpdateDirRouting()
         {
             // ターゲットが同じタイル とりあえず↑
             if (Target == TilePos)

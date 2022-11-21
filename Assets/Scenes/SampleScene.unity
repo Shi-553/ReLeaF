@@ -8511,7 +8511,7 @@ PrefabInstance:
       objectReference: {fileID: 2033298499}
     - target: {fileID: 7234929495377642534, guid: 7145dcadd5ab20341bfef2b0cf89dc63, type: 3}
       propertyPath: m_BodyType
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7810232181920566239, guid: 7145dcadd5ab20341bfef2b0cf89dc63, type: 3}
       propertyPath: slider
