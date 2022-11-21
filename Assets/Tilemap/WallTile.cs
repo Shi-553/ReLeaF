@@ -53,8 +53,7 @@ namespace ReLeaf
         }
         bool HasWallTile(ITilemap tilemap, Vector3Int pos)
         {
-            var tile = tilemap.GetTile<WallTile>(pos);
-            return tile!=null;
+            return tilemap.GetTile(pos)==this;
         }
 
 

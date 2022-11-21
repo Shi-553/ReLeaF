@@ -44,16 +44,10 @@ namespace ReLeaf
         public GameObject gameobject;
         virtual public GameObject Obj => gameobject;
 
-        static public Dictionary<Vector2Int, GameObject> tiles = new Dictionary<Vector2Int, GameObject>();
+        static DungeonManager dungeonManager;
 
-        static Transform tileParent;
-        static Transform TileParent
-        {
-            get
-            {
-                return tileParent = (tileParent == null) ? new GameObject("TileParent").transform : tileParent;
-            }
-        }
+         Transform tileParent;
+
         static Tilemap tilemap;
 
         public override bool StartUp(Vector3Int position, ITilemap tm, GameObject go)
@@ -69,7 +63,11 @@ namespace ReLeaf
                 {
                     return true;
                 }
-                if (tiles.ContainsKey((Vector2Int)position))
+
+                if(dungeonManager==null)
+                    dungeonManager=tm.GetComponent<Transform>().GetComponentInParent<DungeonManager>();
+
+                if (dungeonManager.tiles.ContainsKey((Vector2Int)position))
                 {
                     return true;
                 }
@@ -77,13 +75,17 @@ namespace ReLeaf
                 if (tilemap == null)
                     tilemap = tm.GetComponent<Tilemap>();
 
+                if (tileParent == null)
+                {
+                    tileParent = tm.GetComponent<Transform>();
+                }
                 var pos = tilemap.CellToWorld(position) + new Vector3(DungeonManager.CELL_SIZE, DungeonManager.CELL_SIZE) / 2;
 
                 var newTile = Instantiate(Obj, pos,
                     Quaternion.identity,
-                    TileParent);
+                    tileParent);
 
-                tiles[(Vector2Int)position] = newTile;
+                dungeonManager.tiles[(Vector2Int)position] = newTile;
             }
             return true;
         }

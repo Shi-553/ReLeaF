@@ -31,7 +31,7 @@ namespace ReLeaf
         [SerializeField,Rename("ÇÆÇøÇ·ÇÆÇøÇ·Ç»ínñ Ç™çªÇ…Ç»ÇÈÇ‹Ç≈ÇÃéûä‘(ïb)")]
         float messyCuredTime = 5.0f;
 
-
+        public Dictionary<Vector2Int, GameObject> tiles = new Dictionary<Vector2Int, GameObject>();
 
         public int MaxGreeningCount { get; private set; }
 
@@ -130,7 +130,7 @@ namespace ReLeaf
 
         void ChangeTile(Vector2Int pos, TerrainTile before, TerrainTile after)
         {
-            if (TerrainTile.tiles.Remove(pos, out var go))
+            if (tiles.Remove(pos, out var go))
             {
                 Destroy(go);
             }
