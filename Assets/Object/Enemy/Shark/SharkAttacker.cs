@@ -80,9 +80,16 @@ namespace ReLeaf
                     player.Damaged(SharkAttackInfo.ATK, (Vector2)enemyMover.Dir * SharkAttackInfo.KnockBackPower);
                 }
             }
-            if (collision.gameObject.CompareTag("Plant"))
+        }
+        private void OnTriggerEnter2D(Collider2D collider)
+        {
+            if (Transition != AttackTransition.Damageing)
             {
-                if (collision.gameObject.TryGetComponent<Plant>(out var plant))
+                return;
+            }
+            if (collider.gameObject.CompareTag("Plant"))
+            {
+                if (collider.gameObject.TryGetComponent<Plant>(out var plant))
                 {
                     plant.Damaged(SharkAttackInfo.ATK, SharkAttackInfo.DamageType);
                 }

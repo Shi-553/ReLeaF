@@ -83,11 +83,17 @@ namespace ReLeaf
             tileData.flags = m_Flags;
             tileData.colliderType = m_ColliderType;
 
+            tileData.gameObject = Obj;
+
 #if UNITY_EDITOR
-            if (Application.isEditor)
-                tileData.gameObject = Obj;
+            if (!tilemap.GetComponent<Tilemap>().gameObject.CompareTag("EditorOnly") && Obj != null)
+                tileData.sprite = null;
+#else
+            if(Obj!=null)
+                tileData.sprite = null;
 #endif
         }
+
 #if UNITY_EDITOR
         // The following is a helper that adds a menu item to create a RoadTile Asset
         [MenuItem("Assets/Create/2D/Tiles/TerrainTile")]

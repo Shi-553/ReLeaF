@@ -47,7 +47,7 @@ namespace ReLeaf
                 Dir = Target - TilePos;
                 return true;
             }
-            if ((adjustNextTargetPos - mover.Position).sqrMagnitude < 0.001f)
+            if ((adjustNextTargetPos - mover.Position).sqrMagnitude < (((isStopInNear && (Target - nextTilePos).sqrMagnitude <=1) ||Target == nextTilePos) ? 0.001f : 0.01f))
             {
                 OldTilePos = TilePos;
                 TilePos = nextTilePos;
@@ -106,18 +106,19 @@ namespace ReLeaf
 
          void UpdateDirRouting()
         {
-            // ターゲットが同じタイル とりあえず↑を返す
+            // ターゲットが同じタイル とりあえず↑
             if (Target == TilePos)
             {
                 Dir = Vector2Int.up;
                 return;
             }
 
-            // 移動中でターゲットも変更なし とりあえず今のDirを返す
+            // 移動中でターゲットも変更なし とりあえず変更なし
             if (!WasChangedTilePosPrevFrame && !WasChangedTargetThisFrame)
             {
                 return;
             }
+
 
             routingBuffer.Clear();
             mapQueue.Clear();

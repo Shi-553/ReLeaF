@@ -25,12 +25,12 @@ namespace ReLeaf
         }
         public void MoveTowards(Vector2 target, float speed)
         {
-            move += Vector2.MoveTowards(Vector2.zero, target - (Vector2)transform.position, DeltaTime * speed * DungeonManager.CELL_SIZE);
+            move = Vector2.MoveTowards(rigid.position, target , DeltaTime * speed * DungeonManager.CELL_SIZE)- rigid.position;
         }
         private void FixedUpdate()
         {
             rigid.MovePosition(rigid.position + move);
-            move = Vector2.zero;;
+            move = Vector2.zero;
         }
     }
 }
