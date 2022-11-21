@@ -48,6 +48,11 @@ jobs:
           buildName: ReLeaF
           versioning: None
           
+      - name: atr
+        uses: actions/upload-artifact@v3
+        with:
+          name: Build
+          path: build      
     #  - name: FileMove
     #    run: |
     #         pwsh -command "Move-Item ./build/StandaloneWindows64 ./build/ReLeaF"
