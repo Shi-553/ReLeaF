@@ -23,7 +23,6 @@ namespace ReLeaf
                 HasWallTile(tilemap, position + Vector3Int.right))
             {
                 current = fill;
-                Debug.Log("f");
             }
             else
             {
