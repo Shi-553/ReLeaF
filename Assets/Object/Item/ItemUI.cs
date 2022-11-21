@@ -29,6 +29,8 @@ namespace ReLeaf
 
         public void Uninit()
         {
+            Destroy(Item.gameObject);
+
             Item= null;
             image.sprite=null;
             gameObject.SetActive(false);

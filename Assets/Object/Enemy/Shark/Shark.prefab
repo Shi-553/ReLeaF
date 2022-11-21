@@ -10,12 +10,12 @@ GameObject:
   m_Component:
   - component: {fileID: 8780205405150213191}
   - component: {fileID: -5171749595196955111}
-  - component: {fileID: 7484773499943557005}
   - component: {fileID: 5455965294282161094}
   - component: {fileID: -4858720575995891945}
   - component: {fileID: 3040785535924531099}
   - component: {fileID: 1197057677586801177}
   - component: {fileID: 7609214511921149064}
+  - component: {fileID: 7484773499943557005}
   m_Layer: 0
   m_Name: Shark
   m_TagString: Enemy
@@ -57,27 +57,6 @@ MonoBehaviour:
   <Transition>k__BackingField: 0
   attackStartPos: {x: 0, y: 0}
   attackTargetPos: {x: 0, y: 0}
---- !u!50 &7484773499943557005
-Rigidbody2D:
-  serializedVersion: 4
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5442024061459843501}
-  m_BodyType: 1
-  m_Simulated: 1
-  m_UseFullKinematicContacts: 0
-  m_UseAutoMass: 0
-  m_Mass: 1
-  m_LinearDrag: 0
-  m_AngularDrag: 0.05
-  m_GravityScale: 0
-  m_Material: {fileID: 0}
-  m_Interpolate: 0
-  m_SleepingMode: 0
-  m_CollisionDetection: 0
-  m_Constraints: 4
 --- !u!58 &5455965294282161094
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -153,6 +132,27 @@ MonoBehaviour:
   <Target>k__BackingField: {x: 0, y: 0}
   <OldTarget>k__BackingField: {x: 0, y: 0}
   <Dir>k__BackingField: {x: 0, y: 0}
+--- !u!50 &7484773499943557005
+Rigidbody2D:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5442024061459843501}
+  m_BodyType: 1
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 1
+  m_LinearDrag: 0
+  m_AngularDrag: 0.05
+  m_GravityScale: 0
+  m_Material: {fileID: 0}
+  m_Interpolate: 0
+  m_SleepingMode: 0
+  m_CollisionDetection: 0
+  m_Constraints: 4
 --- !u!1 &5759868525542624290
 GameObject:
   m_ObjectHideFlags: 0

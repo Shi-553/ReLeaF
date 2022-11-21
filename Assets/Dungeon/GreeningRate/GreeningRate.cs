@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Tilemaps;
 using UnityEngine.UI;
+using UnityEngine.UIElements;
+using Slider = UnityEngine.UI.Slider;
 
 namespace ReLeaf
 {
@@ -56,7 +58,7 @@ namespace ReLeaf
             var sliderRect = slider.GetComponent<RectTransform>();
 
             var targetRatePos = targetRateTransform.localPosition;
-            targetRatePos.x = Mathf.Lerp(sliderRect.position.x - sliderRect.sizeDelta.x, sliderRect.position.x - sliderRect.sizeDelta.x, targetRate);
+            targetRatePos.x = Mathf.Lerp(-sliderRect.sizeDelta.x / 2, sliderRect.sizeDelta.x/2, targetRate);
             targetRateTransform.localPosition = targetRatePos;
 
             DungeonManager.Instance.OnTileChanged += OnTileChanged;
