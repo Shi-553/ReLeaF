@@ -89,7 +89,6 @@ GameObject:
   - component: {fileID: 2529937838769286842}
   - component: {fileID: 5902854425073533738}
   - component: {fileID: 6116600109345378226}
-  - component: {fileID: 7381647228899769980}
   m_Layer: 0
   m_Name: wetSand
   m_TagString: Untagged
@@ -162,20 +161,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!64 &7381647228899769980
-MeshCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2418581233525524103}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 4
-  m_Convex: 0
-  m_CookingOptions: 30
-  m_Mesh: {fileID: 4300000, guid: 72598814d2e6fc94ba74c4862cfa29b5, type: 2}
 --- !u!1 &8532531564102778469
 GameObject:
   m_ObjectHideFlags: 0
@@ -187,7 +172,6 @@ GameObject:
   - component: {fileID: 2857972057979173507}
   - component: {fileID: 4682056327689215543}
   - component: {fileID: 8569164234464671347}
-  - component: {fileID: 6475665375505169139}
   m_Layer: 0
   m_Name: grass
   m_TagString: Untagged
@@ -260,17 +244,3 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!64 &6475665375505169139
-MeshCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8532531564102778469}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 4
-  m_Convex: 0
-  m_CookingOptions: 30
-  m_Mesh: {fileID: 4300000, guid: 72598814d2e6fc94ba74c4862cfa29b5, type: 2}

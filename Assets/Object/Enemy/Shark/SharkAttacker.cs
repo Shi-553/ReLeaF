@@ -94,18 +94,9 @@ namespace ReLeaf
             {
                 if (collider.gameObject.TryGetComponent<Plant>(out var plant))
                 {
-                    var v = MathExtension.MinMax(attackStartPos, attackTargetPos);
-
-                    for (int x = v.Item1.x; x <= v.Item2.x; x++)
+                    if (MathExtension.DuringExists(plant.TilePos, attackStartPos, attackTargetPos))
                     {
-                        for (int y = v.Item1.y; y <= v.Item2.y; y++)
-                        {
-                            if (plant.TilePos.x == x && plant.TilePos.y == y)
-                            {
-                                plant.Damaged(SharkAttackInfo.ATK, SharkAttackInfo.DamageType);
-                                return;
-                            }
-                        }
+                        plant.Damaged(SharkAttackInfo.ATK, DamageType.Direct);
                     }
                 }
             }

@@ -76,9 +76,9 @@ namespace ReLeaf
         {
             return (Vector2Int)grid.WorldToCell(worldPos);
         }
-        public Vector3 TilePosToWorld(Vector2Int tilePos)
+        public Vector2 TilePosToWorld(Vector2Int tilePos)
         {
-            return grid.CellToWorld((Vector3Int)tilePos) + new Vector3(CELL_SIZE, CELL_SIZE) / 2;
+            return (Vector2)grid.CellToWorld((Vector3Int)tilePos) + new Vector2(CELL_SIZE, CELL_SIZE) / 2;
         }
         public TerrainTile GetGroundTile(Vector2Int pos)
         {

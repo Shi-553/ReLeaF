@@ -1,3 +1,4 @@
+using ReLeaf;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
@@ -68,32 +69,21 @@ public static class MathExtension
         return defaultLocal;
     }
 
-    public static (float, float) MinMax(float value1, float value2)
+    public static bool DuringExists(Vector2Int target,Vector2Int start,Vector2Int end)
     {
-        if (value1 < value2)
-            return (value1, value2);
-        else
-            return (value2, value1);
-    }
-    public static (int, int) MinMax(int value1, int value2)
-    {
-        if (value1 < value2)
-            return (value1, value2);
-        else
-            return (value2, value1);
-    }
-    public static (Vector2, Vector2) MinMax(Vector2 value1, Vector2 value2)
-    {
-        var x=MinMax(value1.x,value2.x);
-        var y=MinMax(value1.y,value2.y);
+        var xt = start.x < end.x ? (start.x ,end.x) : ( end.x, start.x);
+        var yt = start.y < end.y ? (start.y ,end.y) : ( end.y, start.y);
 
-        return (new Vector2(x.Item1, y.Item1), new Vector2(x.Item2, y.Item2));
-    }
-    public static (Vector2Int, Vector2Int) MinMax(Vector2Int value1, Vector2Int value2)
-    {
-        var x=MinMax(value1.x,value2.x);
-        var y=MinMax(value1.y,value2.y);
-
-        return (new Vector2Int(x.Item1, y.Item1), new Vector2Int(x.Item2, y.Item2));
+        for (int x = xt.Item1; x <= xt.Item2; x ++)
+        {
+            for (int y = yt.Item1; y <= yt.Item2; y ++)
+            {
+                if (target.x == x && target.y == y)
+                {
+                    return true;
+                }
+            }
+        }
+        return false;
     }
 }

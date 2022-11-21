@@ -46,35 +46,48 @@ namespace ReLeaf
 
         static public Dictionary<Vector2Int, GameObject> tiles = new Dictionary<Vector2Int, GameObject>();
 
-        public override bool StartUp(Vector3Int position, ITilemap tilemap, GameObject go)
+        static Transform tileParent;
+        static Transform TileParent
+        {
+            get
+            {
+                return tileParent = (tileParent == null) ? new GameObject("TileParent").transform : tileParent;
+            }
+        }
+        static Tilemap tilemap;
+
+        public override bool StartUp(Vector3Int position, ITilemap tm, GameObject go)
         {
             if (Application.isPlaying)
             {
                 if (go != null)
+                {
+                    Debug.LogWarning(go.name);
                     Destroy(go);
-
-                if (tiles.Remove((Vector2Int)position, out var g))
-                {
-                    Destroy(g);
                 }
-                if (Obj != null)
+                if (Obj == null)
                 {
-                    if (tiles.TryGetValue((Vector2Int)position, out var tile) && tile != null)
-                    {
-                        return true;
-                    }
-                    var pos = tilemap.GetComponent<Tilemap>().CellToWorld(position) + new Vector3(DungeonManager.CELL_SIZE, DungeonManager.CELL_SIZE) / 2;
-                    var newTile = Instantiate(Obj, pos,
-                        Quaternion.identity,
-                        tilemap.GetComponent<Transform>());
-
-
-                    tiles[(Vector2Int)position] = newTile;
-
+                    return true;
                 }
+                if (tiles.ContainsKey((Vector2Int)position))
+                {
+                    return true;
+                }
+
+                if (tilemap == null)
+                    tilemap = tm.GetComponent<Tilemap>();
+
+                var pos = tilemap.CellToWorld(position) + new Vector3(DungeonManager.CELL_SIZE, DungeonManager.CELL_SIZE) / 2;
+
+                var newTile = Instantiate(Obj, pos,
+                    Quaternion.identity,
+                    TileParent);
+
+                tiles[(Vector2Int)position] = newTile;
             }
             return true;
         }
+
         public override void GetTileData(Vector3Int position, ITilemap tilemap, ref TileData tileData)
         {
             tileData.sprite = m_Sprite;
@@ -83,13 +96,14 @@ namespace ReLeaf
             tileData.flags = m_Flags;
             tileData.colliderType = m_ColliderType;
 
-            tileData.gameObject = Obj;
+            if (!Application.isPlaying)
+                tileData.gameObject = Obj;
 
 #if UNITY_EDITOR
-            if (!tilemap.GetComponent<Tilemap>().gameObject.CompareTag("EditorOnly") && Obj != null)
+            if (!tilemap.GetComponent<Tilemap>().gameObject.CompareTag("EditorOnly") && (Obj != null))
                 tileData.sprite = null;
 #else
-            if(Obj!=null)
+            if(Obj != null)
                 tileData.sprite = null;
 #endif
         }
