@@ -9,7 +9,7 @@ Assets\Object\Enemy\Shark\SharkDamageableInfo"	hpMax	float	10	"最大HP"
 1		weakLocalTilePos	Vector2Int[]	(0, -1)(0, -2)(0, -3)(0, -4)(0, -5)	"緑化でダメージを受けるマス
 (上向きが基準のローカルポジション)"
 2	"敵(Shark)の移動パラメータ
-Assets\Object\Enemy\Shark\SharkMoverInfo"	speed	float	4	"移動スピード(nマス/秒)"
+Assets\Object\Enemy\Shark\SharkMoverInfo"	speed	float	5	"移動スピード(nマス/秒)"
 
 	Assets\Object\Item
 0	"アイテムのUI

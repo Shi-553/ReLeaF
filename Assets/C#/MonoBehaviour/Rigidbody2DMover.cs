@@ -12,7 +12,7 @@ namespace ReLeaf
 
         public bool UseUnScaledTime { get; set; } = false;
         float DeltaTime => UseUnScaledTime ? Time.unscaledDeltaTime : Time.deltaTime;
-        public Vector3 Position => rigid.position;
+        public Vector2 Position => rigid.position;
 
         private void Awake()
         {
@@ -25,11 +25,11 @@ namespace ReLeaf
         }
         public void MoveTowards(Vector2 target, float speed)
         {
-            move = Vector2.MoveTowards(rigid.position, target , DeltaTime * speed * DungeonManager.CELL_SIZE)- rigid.position;
+            move = Vector2.MoveTowards(Position, target , DeltaTime * speed * DungeonManager.CELL_SIZE)- Position;
         }
         private void FixedUpdate()
         {
-            rigid.MovePosition(rigid.position + move);
+            rigid.MovePosition(Position + move);
             move = Vector2.zero;
         }
     }

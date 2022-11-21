@@ -47,7 +47,7 @@ namespace ReLeaf
                 Dir = Target - TilePos;
                 return true;
             }
-            if ((adjustNextTargetPos - mover.Position).sqrMagnitude < (((isStopInNear && (Target - nextTilePos).sqrMagnitude <=1) ||Target == nextTilePos) ? 0.001f : 0.01f))
+            if (((Vector2)adjustNextTargetPos - mover.Position).sqrMagnitude < (((isStopInNear && (Target - nextTilePos).sqrMagnitude <=1) ||Target == nextTilePos) ? 0.001f : 0.01f))
             {
                 OldTilePos = TilePos;
                 TilePos = nextTilePos;
