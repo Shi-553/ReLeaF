@@ -47,13 +47,19 @@ jobs:
           targetPlatform: StandaloneWindows64
           buildName: ReLeaF
           versioning: None
+          unityVersion: 2021.3.11f1
           
-      - name: FileMove
-        run: |
-             pwsh -command "Move-Item ./build/StandaloneWindows64 ./build/ReLeaF"
+      - name: atr
+        uses: actions/upload-artifact@v3
+        with:
+          name: Build
+          path: build      
+    #  - name: FileMove
+    #    run: |
+    #         pwsh -command "Move-Item ./build/StandaloneWindows64 ./build/ReLeaF"
         
       - name: Zip
-        run: 7z a "./ReLeaF.zip" "./build/ReLeaF" -tzip
+        run: 7z a "./ReLeaF.zip" "./build" -tzip
 
       - name: Set releaser settings
         run: |
