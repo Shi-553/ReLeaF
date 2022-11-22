@@ -79,8 +79,11 @@ namespace ReLeaf
             this.parent = parent;
             this.prefab = prefab;
 
+#if UNITY_EDITOR
             var test= Object.Instantiate(this.prefab, this.parent);
             Debug.Log(test.name);
+            Object.Destroy(test);
+#endif
 
             pool = new ObjectPool<Component>(
                              createFunc:()=> Object.Instantiate(this.prefab, this.parent),                               // プールが空のときに新しいインスタンスを生成する処理
