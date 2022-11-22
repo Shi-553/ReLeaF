@@ -106,7 +106,7 @@ namespace ReLeaf
 
         void Update()
         {
-            if (Keyboard.current.escapeKey.isPressed)
+            if (Keyboard.current.escapeKey.wasPressedThisFrame)
             {
 #if UNITY_EDITOR
                 UnityEditor.EditorApplication.isPlaying = false;
@@ -114,7 +114,7 @@ namespace ReLeaf
       UnityEngine.Application.Quit();
 #endif
             }
-            if (Keyboard.current.f1Key.isPressed)
+            if (Keyboard.current.f1Key.wasPressedThisFrame)
             {
                 SceneManager.LoadScene(0);
             }
@@ -138,7 +138,7 @@ namespace ReLeaf
         IEnumerator Death()
         {
             GetComponentInChildren<SpriteRenderer>().enabled = false;
-            yield return new WaitUntil(() => Mouse.current.leftButton.isPressed);
+            yield return new WaitUntil(() => Mouse.current.leftButton.wasPressedThisFrame);
             SceneManager.LoadScene(0);
         }
 
