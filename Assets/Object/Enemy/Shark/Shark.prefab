@@ -103,7 +103,6 @@ MonoBehaviour:
   <Transition>k__BackingField: 0
   attackStartPos: {x: 0, y: 0}
   attackTargetPos: {x: 0, y: 0}
-  attackMarkerManager: {fileID: 0}
 --- !u!58 &5455965294282161094
 CircleCollider2D:
   m_ObjectHideFlags: 0
