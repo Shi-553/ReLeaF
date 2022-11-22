@@ -17,16 +17,15 @@ namespace ReLeaf
         bool subscribeOnTileChanged;
 
         Pool pool;
+        [SerializeField]
+        MarkerBase marker;
 
         private void Awake()
         {
             Markers = new ReadOnlyDictionary<Vector2Int, MarkerBase>(markers);
+            pool = ComponentPool.Instance.GetPool(marker);
         }
 
-        public void InitPool<T>(T markerPrefab) where T : MarkerBase
-        {
-            pool = ComponentPool.Instance.GetPool(markerPrefab);
-        }
 
         private void Start()
         {

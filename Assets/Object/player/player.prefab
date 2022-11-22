@@ -166,7 +166,6 @@ MonoBehaviour:
   itemUIRoot: {fileID: 0}
   selectFrame: {fileID: 0}
   seedMarkerManager: {fileID: 8685453909214998006}
-  seedMarkerPrefab: {fileID: 3219640911387259323, guid: 32569a780da112443bfc86fecabc2323, type: 3}
 --- !u!50 &354325909066514047
 Rigidbody2D:
   serializedVersion: 4
@@ -201,6 +200,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   subscribeOnTileChanged: 0
+  marker: {fileID: 3219640911387259323, guid: 32569a780da112443bfc86fecabc2323, type: 3}
 --- !u!1 &4013356209018127977
 GameObject:
   m_ObjectHideFlags: 0

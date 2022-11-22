@@ -27,15 +27,12 @@ namespace ReLeaf
 
         [SerializeField]
         MarkerManager attackMarkerManager;
-        [SerializeField]
-        AttackMarker attackMarkerPrefab;
 
         private void Awake()
         {
             TryGetComponent(out enemyMover);
             TryGetComponent(out enemyDamageable);
 
-            attackMarkerManager.InitPool(attackMarkerPrefab);
         }
 
         void IEnemyAttacker.OnStartAiming()

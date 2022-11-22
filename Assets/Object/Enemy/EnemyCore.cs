@@ -20,14 +20,11 @@ namespace ReLeaf
         [SerializeField]
         MarkerManager weakMarkerManager;
 
-        [SerializeField]
-        WeakMarker weakMarkerPrefab;
 
         private void Start()
         {
             TryGetComponent(out enemyMover);
             HP = enemyBaseInfo.HPMax;
-            weakMarkerManager.InitPool(weakMarkerPrefab);
         }
         private void Death()
         {

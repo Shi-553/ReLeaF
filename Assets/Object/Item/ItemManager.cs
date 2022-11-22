@@ -12,8 +12,6 @@ namespace ReLeaf
         Transform selectFrame;
         [SerializeField]
         MarkerManager seedMarkerManager;
-        [SerializeField]
-        SeedMarker seedMarkerPrefab;
 
         int itemCount = 0;
         int ItemCount
@@ -65,7 +63,6 @@ namespace ReLeaf
 
             mover=GetComponentInParent<PlayerMover>();
 
-            seedMarkerManager.InitPool(seedMarkerPrefab);
         }
 
         public void AddItem(ItemBase itemBase)
