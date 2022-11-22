@@ -23,7 +23,7 @@ Assets\Object\Item\SpecialPower\Shark\SharkSpecialPowerInfo"	seedLocalTilePos	Ve
 
 	Assets\Object\player
 0	"プレイヤーの移動
-Assets\Object\player\player->PlayerMover"	moveSpeed	float	5	"プレイヤーの移動スピード(nマス/秒)"
+Assets\Object\player\player->PlayerMover"	moveSpeed	float	6	"プレイヤーの移動スピード(nマス/秒)"
 0		dashSpeedMagnification	float	2	"ダッシュ中の移動スピード倍率(n倍)"
 0		knockBackDampingRate	float	0.9	"ノックバックの減衰率（0でノックバックしない、1.0でノックバックし続ける）"
 0		dashConsumeEnergy	float	5	"ダッシュで消費するスタミナ(n/秒)"
