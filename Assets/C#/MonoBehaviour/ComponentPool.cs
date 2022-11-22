@@ -82,7 +82,7 @@ namespace ReLeaf
 #if UNITY_EDITOR
             var test= Object.Instantiate(this.prefab, this.parent);
             Debug.Log(test.name);
-            Object.Destroy(test);
+            Object.Destroy(test.gameObject);
 #endif
 
             pool = new ObjectPool<Component>(
