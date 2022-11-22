@@ -39,6 +39,7 @@ namespace ReLeaf
             if (nextTile != null && nextTile.tileType == TileType.Foundation && mover.Dir != Vector2Int.zero)
             {
                 StartCoroutine(attacker.Attack());
+                target = null;
                 return;
             }
 
@@ -52,6 +53,7 @@ namespace ReLeaf
             if (mover.Move(enemyMoverInfo.Speed, true))
             {
                 StartCoroutine(attacker.Attack());
+                target = null;
             }
         }
     }
