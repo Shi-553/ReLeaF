@@ -15,7 +15,6 @@ namespace ReLeaf
             if (tile != null && (tile.tileType == TileType.Plant || tile.tileType == TileType.Foundation))
             {
                 DungeonManager.Instance.ToSand(tilePos);
-                enemyDamageable.Damaged(1);
             }
         }
         public override void TileChanged(DungeonManager.TileChangedInfo info)
