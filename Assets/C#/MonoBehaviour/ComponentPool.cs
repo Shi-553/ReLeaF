@@ -34,10 +34,21 @@ namespace ReLeaf
             if (isDontDestroyOnLoad)
                 DontDestroyOnLoad(gameObject);
         }
-
+        private void OnDestroy()
+        {
+            foreach (var pool in pools.Values)
+            {
+                pool.Clear();
+            }
+            pools.Clear();
+        }
         public Pool GetPool<T>(T prefab) where T : Component
         {
             var type = typeof(T);
+            return GetPool(type, prefab);
+        }
+        public Pool GetPool(Type type,Component prefab) 
+        {
             if (pools.TryGetValue(type, out var pool))
             {
                 return pool;
@@ -68,6 +79,8 @@ namespace ReLeaf
             this.parent = parent;
             this.prefab = prefab;
 
+            var test= Object.Instantiate(this.prefab, this.parent);
+            Debug.Log(test.name);
 
             pool = new ObjectPool<Component>(
                              createFunc:()=> Object.Instantiate(this.prefab, this.parent),                               // プールが空のときに新しいインスタンスを生成する処理

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
+using Unity.VisualScripting;
 using UnityEngine;
 
 namespace ReLeaf
@@ -23,14 +24,13 @@ namespace ReLeaf
         private void Awake()
         {
             Markers = new ReadOnlyDictionary<Vector2Int, MarkerBase>(markers);
-            pool = ComponentPool.Instance.GetPool(marker);
         }
-
-
+        
         private void Start()
         {
             if (subscribeOnTileChanged)
                 DungeonManager.Instance.OnTileChanged += OnTileChanged;
+            pool = ComponentPool.Instance.GetPool(marker.GetType(),marker);
         }
         
         private void OnDestroy()

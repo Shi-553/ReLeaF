@@ -14,6 +14,9 @@ namespace ReLeaf
         EnemyMoverInfo enemyMoverInfo;
         EnemyMover mover;
         IEnemyAttacker attacker;
+
+        Transform target;
+
         void Start()
         {
             TryGetComponent(out attacker);
@@ -39,7 +42,8 @@ namespace ReLeaf
                 return;
             }
 
-            var target = searchVision.Targets.MinBy(t => (t.position - transform.position).sqrMagnitude);
+            if (target == null)
+                target = searchVision.Targets.MinBy(t => (t.position - transform.position).sqrMagnitude);
 
             var targetTilePos = DungeonManager.Instance.WorldToTilePos(target.position);
 

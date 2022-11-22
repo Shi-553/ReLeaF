@@ -25,8 +25,6 @@ namespace ReLeaf
         [SerializeField, ReadOnly]
         Vector2Int attackTargetPos;
 
-        [SerializeField]
-        MarkerManager attackMarkerManager;
 
         private void Awake()
         {
@@ -47,7 +45,6 @@ namespace ReLeaf
 
                 if (tile != null && (tile.tileType == TileType.Foundation || tile.tileType == TileType.Plant || tile.tileType == TileType.Sand))
                 {
-                    attackMarkerManager.SetMarker(worldTilePos);
                     attackTargetPos = worldTilePos;
                     continue;
                 }
@@ -67,11 +64,6 @@ namespace ReLeaf
                 }
                 yield return null;
             }
-            attackMarkerManager.ResetAllMarker();
-        }
-        private void OnDestroy()
-        {
-            attackMarkerManager.ResetAllMarker();
         }
 
         private void OnCollisionStay2D(Collision2D collision)
