@@ -113,7 +113,11 @@ namespace ReLeaf
         // そのマスに到達したとき、来た方向を記録
         Dictionary<Vector2Int, Direction> routingBuffer = new Dictionary<Vector2Int, Direction>();
 
-        Queue<Vector2Int> mapQueue = new Queue<Vector2Int>();
+        Queue<Vector2Int> tempMapQueue = new Queue<Vector2Int>();
+
+        // スタートしたマスからゴールの手前のマスまで
+        List<Vector2Int> routing = new List<Vector2Int>();
+        public IReadOnlyList<Vector2Int> Routing => routing;
 
         Vector2Int temp;
 
@@ -134,7 +138,7 @@ namespace ReLeaf
 
 
             routingBuffer.Clear();
-            mapQueue.Clear();
+            tempMapQueue.Clear();
 
             if (!FindShortestPath())
             {
@@ -142,6 +146,7 @@ namespace ReLeaf
                 UpdateDirStraight();
                 return;
             }
+            routing.Clear();
 
             // ターゲットから戻って経路を確認する
             var currnet = Target;
@@ -153,6 +158,7 @@ namespace ReLeaf
                 // 一つ戻る
                 currnet -= dir;
 
+                routing.Add(currnet);
                 if (currnet == TilePos)
                 {
                     Dir = dir;
@@ -168,13 +174,13 @@ namespace ReLeaf
         /// <returns>到達可能か</returns>
         bool FindShortestPath()
         {
-            mapQueue.Enqueue(TilePos);
+            tempMapQueue.Enqueue(TilePos);
 
             routingBuffer[TilePos] = Direction.NONE;
 
-            while (mapQueue.Count != 0)
+            while (tempMapQueue.Count != 0)
             {
-                temp = mapQueue.Dequeue();
+                temp = tempMapQueue.Dequeue();
 
                 if (TryEnqueueAndCheckTarget(Direction.UP))
                 {
@@ -217,7 +223,7 @@ namespace ReLeaf
             // 通れるか
             if ((tile != null && tile.tileType == TileType.Sand) || nextPos == Target)
             {
-                mapQueue.Enqueue(nextPos);
+                tempMapQueue.Enqueue(nextPos);
 
                 routingBuffer[nextPos] = dir;
             }

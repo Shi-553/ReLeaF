@@ -25,14 +25,14 @@ namespace ReLeaf
         {
             Markers = new ReadOnlyDictionary<Vector2Int, MarkerBase>(markers);
         }
-        
+
         private void Start()
         {
             if (subscribeOnTileChanged)
                 DungeonManager.Instance.OnTileChanged += OnTileChanged;
-            pool = ComponentPool.Instance.GetPool(marker.GetType(),marker);
+            pool = ComponentPool.Instance.GetPool(marker.GetType(), marker);
         }
-        
+
         private void OnDestroy()
         {
             if (subscribeOnTileChanged)
@@ -79,14 +79,15 @@ namespace ReLeaf
 
             foreach (var marker in markers.Values)
             {
-                pool.Release(marker);
+                if (marker != null)
+                    pool.Release(marker);
             }
             markers.Clear();
 
         }
         private void OnTileChanged(DungeonManager.TileChangedInfo info)
         {
-            if (this!=null&&!gameObject.activeSelf)
+            if (this != null && !gameObject.activeSelf)
                 return;
 
             foreach (var key in markers.ToArray())

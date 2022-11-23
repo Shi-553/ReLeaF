@@ -38,18 +38,7 @@ namespace ReLeaf
             attackStartPos = enemyMover.TilePos;
             enemyDamageable.BeginWeekMarker();
 
-            for (int i = 0; i < SharkAttackInfo.Range; i++)
-            {
-                var worldTilePos = enemyMover.TilePos + enemyMover.Dir * (i + 1);
-                var tile = DungeonManager.Instance.GetGroundTile(worldTilePos);
-
-                if (tile != null && (tile.tileType == TileType.Foundation || tile.tileType == TileType.Plant || tile.tileType == TileType.Sand))
-                {
-                    attackTargetPos = worldTilePos;
-                    continue;
-                }
-                break;
-            }
+            attackTargetPos = GetAttackRange(enemyMover.TilePos,enemyMover.Dir,false).Last();
         }
         IEnumerator IEnemyAttacker.OnStartDamageing()
         {
@@ -64,6 +53,44 @@ namespace ReLeaf
                 }
                 yield return null;
             }
+        }
+
+        public IEnumerable<Vector2Int> GetAttackRange(Vector2Int pos, Vector2Int dir, bool isDamagableOnly)
+        {
+            for (int i = 0; i < SharkAttackInfo.Range; i++)
+            {
+                var worldTilePos = enemyMover.TilePos + enemyMover.Dir * (i + 1);
+                var tile = DungeonManager.Instance.GetGroundTile(worldTilePos);
+
+                if (tile == null || (tile.tileType != TileType.Foundation && tile.tileType != TileType.Sand))
+                {
+                    yield break;
+                }
+                if (tile.tileType == TileType.Foundation || (!isDamagableOnly && tile.tileType == TileType.Sand))
+                {
+                    yield return worldTilePos;
+                }
+                
+            }
+        }
+        public int GetAttackRangeCount(Vector2Int pos, Vector2Int dir, bool isDamagableOnly)
+        {
+            int count = 0;
+            for (int i = 0; i < SharkAttackInfo.Range; i++)
+            {
+                var worldTilePos = enemyMover.TilePos + enemyMover.Dir * (i + 1);
+                var tile = DungeonManager.Instance.GetGroundTile(worldTilePos);
+
+                if (tile == null || (tile.tileType != TileType.Foundation && tile.tileType != TileType.Sand))
+                {
+                    return count;
+                }
+                if (tile.tileType == TileType.Foundation|| (!isDamagableOnly&& tile.tileType == TileType.Sand))
+                {
+                    count++;
+                }
+            }
+            return count;
         }
 
         private void OnCollisionStay2D(Collision2D collision)

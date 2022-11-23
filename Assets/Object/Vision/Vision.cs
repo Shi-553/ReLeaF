@@ -7,7 +7,7 @@ namespace ReLeaf
 {
     public class Vision : MonoBehaviour
     {
-        public bool ShouldFoundTarget => targets.Count != 0;
+        public bool ShouldFoundTarget => Targets.Any();
 
         [SerializeField]
         string[] targetTags = { "Player" };

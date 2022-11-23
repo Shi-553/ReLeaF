@@ -1,5 +1,7 @@
+using LinqExtension;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 namespace ReLeaf
@@ -15,7 +17,11 @@ namespace ReLeaf
         EnemyMover mover;
         IEnemyAttacker attacker;
 
-        Transform target;
+
+        [SerializeField]
+        MarkerManager targetMarkerManager;
+
+        Vector2Int? targetTilePos;
 
         void Start()
         {
@@ -30,30 +36,58 @@ namespace ReLeaf
             }
             if (attacker.IsAttack)
             {
+                if(attacker.Transition==AttackTransition.Damageing)
+                    targetMarkerManager.ResetAllMarker();
+
                 return;
             }
 
-            var nextTile = DungeonManager.Instance.GetGroundTile(mover.TilePos + mover.Dir);
 
-            // 今の方向に進んだ場合、次の位置がFoundationなら
-            if (nextTile != null && nextTile.tileType == TileType.Foundation && mover.Dir != Vector2Int.zero)
+            if (mover.WasChangedTilePosPrevFrame || targetTilePos == null)
             {
-                StartCoroutine(attacker.Attack());
-                target = null;
-                return;
+
+                var targetTilePoss = searchVision.Targets.Select(p => DungeonManager.Instance.WorldToTilePos(p.position)).ToArray();
+                // 一番近い直線距離
+                var minDistanceSq = targetTilePoss.Min(t => (t - mover.TilePos).sqrMagnitude);
+
+                // ターゲットがないか今のターゲットより3マス以上近いとき
+                if (targetTilePos == null || minDistanceSq+2 < (targetTilePos.Value - mover.TilePos).sqrMagnitude)
+                {
+
+                    // 直線距離が一番近いやつら（複数）
+                    var minDistanceElements = targetTilePoss.Where(t => minDistanceSq == (t - mover.TilePos).sqrMagnitude).ToArray();
+
+                    var (element, index) = minDistanceElements
+                        .Select(targetPos =>
+                        {
+                            // 経路探索して
+                            mover.UpdateDir(targetPos, true);
+                            return (targetPos, beforeTargetPos: mover.Routing.First());
+                        })
+                        .MaxBy(tuple => attacker.GetAttackRangeCount(tuple.targetPos, tuple.targetPos - tuple.beforeTargetPos, true));
+
+
+                    // ターゲットマーカー更新
+                    targetMarkerManager.ResetAllMarker();
+                    targetMarkerManager.SetMarker(element.targetPos);
+
+                    targetTilePos = element.targetPos;
+                }
             }
 
-            if (target == null)
-                target = searchVision.Targets.MinBy(t => (t.position - transform.position).sqrMagnitude);
+            if (targetTilePos == null)
+                return;
 
-            var targetTilePos = DungeonManager.Instance.WorldToTilePos(target.position);
-
-            mover.UpdateDir(targetTilePos, true);
+            // 経路探索更新
+            if (mover.WasChangedTilePosPrevFrame)
+            {
+                mover.UpdateDir(targetTilePos.Value, true);
+            }
 
             if (mover.Move(enemyMoverInfo.Speed, true))
             {
+                targetTilePos = null;
                 StartCoroutine(attacker.Attack());
-                target = null;
             }
         }
     }

@@ -95,7 +95,7 @@ GameObject:
   - component: {fileID: 4916515684674583021}
   - component: {fileID: -4394657167183029528}
   m_Layer: 0
-  m_Name: AttackMarker
+  m_Name: TargetMarker
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

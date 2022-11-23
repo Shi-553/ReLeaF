@@ -1,4 +1,5 @@
 ﻿using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 
 namespace ReLeaf
@@ -17,6 +18,8 @@ namespace ReLeaf
         bool IsAttack => Transition != AttackTransition.None;
         EnemyAttackInfo EnemyAttackInfo { get; }
 
+        int GetAttackRangeCount(Vector2Int pos,Vector2Int dir,bool isDamagableOnly);
+        IEnumerable<Vector2Int> GetAttackRange(Vector2Int pos,Vector2Int dir, bool isDamagableOnly);
 
          protected void OnStartAiming()
         {
