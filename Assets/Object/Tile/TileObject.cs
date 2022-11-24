@@ -15,13 +15,10 @@ namespace ReLeaf
         protected TileType tileType=TileType.None;
         public TileType TileType => tileType;
 
-        public bool CanEnemyMove => TileType == TileType.Plant|| TileType == TileType.Sand;
-        public bool CanEnemyAttack(bool isDamagableOnly) => TileType == TileType.Plant || (isDamagableOnly && TileType == TileType.Sand);
+        public bool CanEnemyMove => TileType == TileType.Plant|| TileType == TileType.Sand|| TileType == TileType.Messy;
+        public bool CanEnemyAttack(bool isDamagableOnly) => TileType == TileType.Plant || (isDamagableOnly &&( TileType == TileType.Sand || TileType == TileType.Messy));
 
         public Vector2Int TilePos { get;  set; }
-        private void OnEnable()
-        {
-        }
         public virtual void Init(bool isCreated)
         {
         }
