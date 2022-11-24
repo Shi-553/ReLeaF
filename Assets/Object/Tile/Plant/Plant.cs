@@ -1,8 +1,10 @@
+using Pickle;
 using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel;
 using UnityEngine;
+using static UnityEngine.Tilemaps.Tilemap;
 
 namespace ReLeaf
 {
@@ -21,7 +23,7 @@ namespace ReLeaf
         public float magnification;
     }
 
-    public abstract class Plant : MonoBehaviour
+    public abstract class Plant : TileObject, IMultipleVisual
     {
         [SerializeField]
         PlantInfo plantInfo;
@@ -34,21 +36,29 @@ namespace ReLeaf
         protected GameObject seedObjRoot;
         [SerializeField]
         protected GameObject plantObjRoot;
+        [SerializeField,Pickle(LookupType =ObjectProviderType.Assets)]
+        protected TileObject messyObj;
 
         public bool IsFullGrowth { get; private set; }
 
-        public Vector2Int TilePos { get; private set; }
 
         Coroutine growCo;
         public bool IsFouceGrowing { get; private set; }
 
-        protected void Init()
+        public override void Init(bool isCreated)
         {
-            IsFullGrowth = false;
-            hp = plantInfo.HpMax;
-            TilePos = DungeonManager.Instance.WorldToTilePos(transform.position);
+            base.Init(isCreated);
 
-            growCo= StartCoroutine(Growing());
+            hp = plantInfo.HpMax;
+            if (IsFullGrowth)
+            {
+                IsFullGrowth = false;
+
+                seedObjRoot.SetActive(true);
+                plantObjRoot.SetActive(false);
+            }
+
+            growCo = StartCoroutine(Growing());
         }
         IEnumerator Growing()
         {
@@ -61,6 +71,20 @@ namespace ReLeaf
             IsFullGrowth = true;
             FullGrowed();
         }
+
+        public enum VisualType
+        {
+            Normal,
+            BlackGrass,
+            BlockCover,
+            Max
+        }
+
+        [SerializeField, Rename("Œ©‚½–Ú")]
+        VisualType visualType;
+
+        public int VisualTypeMax => (int)VisualType.Max;
+        int IMultipleVisual.VisualType => (int)visualType;
 
         virtual protected void FullGrowed()
         {
@@ -92,22 +116,7 @@ namespace ReLeaf
         }
         protected virtual void Withered()
         {
-            DungeonManager.Instance.Messy(this);
-            Destroy(gameObject);
-        }
-
-        public void FouceGrowing()
-        {
-                IsFouceGrowing = true;
-            if (growCo != null)
-            {
-                Debug.Log("StopAndFullGrowed");
-                StopCoroutine(growCo);
-                growCo = null;
-                IsFullGrowth = true;
-                FullGrowed();
-            }
-
+            DungeonManager.Instance.Messy(TilePos, this);
         }
 
     }

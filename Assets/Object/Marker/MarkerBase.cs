@@ -3,22 +3,19 @@ using UnityEngine;
 
 namespace ReLeaf
 {
-    public abstract class MarkerBase : MonoBehaviour
+    public abstract class MarkerBase : MonoBehaviour,IPoolable
     {
         protected Vector2Int tilePos;
 
-        // マネージャーが呼ぶ
-        public virtual void Init(Vector2Int tilePos)
+        public void Init(bool isCreate)
         {
-            this.tilePos = tilePos;
+            tilePos = DungeonManager.Instance.WorldToTilePos(transform.position);
+        }
+        public void Uninit()
+        {
         }
 
         public virtual void TileChanged(DungeonManager.TileChangedInfo info) { }
 
-        // マネージャーが呼ぶ
-        public virtual void Uninit()
-        {
-            Destroy(gameObject);
-        }
     }
 }

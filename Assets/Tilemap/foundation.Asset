@@ -16,13 +16,11 @@ MonoBehaviour:
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_Flags: 3
   m_ColliderType: 0
-  tileType: 1
-  canSowGrass: 0
-  gameobject: {fileID: 0}
+  currentTileObject: {fileID: -1407817353737737465, guid: bab971c5311ce5b4183a5f273699c24c, type: 3}
   randomInfos:
   - probability: 80
-    obj: {fileID: 1463589238644328539, guid: 7d2dbdfb501b7b044ae8ef237778f103, type: 3}
+    multipleVisualTile: {fileID: -1407817353737737465, guid: 7d2dbdfb501b7b044ae8ef237778f103, type: 3}
   - probability: 17
-    obj: {fileID: 1463589238644328539, guid: bab971c5311ce5b4183a5f273699c24c, type: 3}
+    multipleVisualTile: {fileID: -1407817353737737465, guid: bab971c5311ce5b4183a5f273699c24c, type: 3}
   - probability: 3
-    obj: {fileID: 1463589238644328539, guid: c12933d5e135aa843956b9d99e69eac5, type: 3}
+    multipleVisualTile: {fileID: -1407817353737737465, guid: c12933d5e135aa843956b9d99e69eac5, type: 3}

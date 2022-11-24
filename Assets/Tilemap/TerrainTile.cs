@@ -1,3 +1,4 @@
+using Pickle;
 using System.Collections;
 using System.Collections.Generic;
 #if UNITY_EDITOR
@@ -10,14 +11,15 @@ namespace ReLeaf
 {
     public enum TileType
     {
-        Hole,
-        Foundation,
-        Rock,
-        Plant,
-        Door,
-        Wall,
-        DoorSwitch,
+        None = -1,
         Sand,
+        Hole,
+        Rock,
+
+        Plant,
+        Wall,
+        Messy,
+        Max
     };
 
     public class TerrainTile : TileBase
@@ -39,16 +41,21 @@ namespace ReLeaf
         private Tile.ColliderType m_ColliderType = Tile.ColliderType.Sprite;
 
         [Header("Custom")]
-        public TileType tileType;
-        public bool canSowGrass;
-        public GameObject gameobject;
-        virtual public GameObject Obj => gameobject;
+        [Pickle]
+        [SerializeField]
+        protected TileObject currentTileObject;
+        public TileObject CurrentTileObject => currentTileObject;
+
+        virtual protected void UpdateTileObject(Vector3Int position, ITilemap tilemap) { }
 
         static DungeonManager dungeonManager;
-
-         Transform tileParent;
+        static ComponentPool componentPool;
 
         static Tilemap tilemap;
+
+        protected PoolArray Pools;
+
+        protected virtual IPool Pool { get; }
 
         public override bool StartUp(Vector3Int position, ITilemap tm, GameObject go)
         {
@@ -59,31 +66,35 @@ namespace ReLeaf
                     Debug.LogWarning(go.name);
                     Destroy(go);
                 }
-                if (Obj == null)
-                {
-                    return true;
-                }
 
-                if(dungeonManager==null)
-                    dungeonManager=tm.GetComponent<Transform>().GetComponentInParent<DungeonManager>();
+                if (tilemap == null)
+                    tilemap = tm.GetComponent<Tilemap>();
+
+                if (dungeonManager == null)
+                    dungeonManager = FindObjectOfType<DungeonManager>();
+                if (componentPool == null)
+                    componentPool = FindObjectOfType<ComponentPool>();
 
                 if (dungeonManager.tiles.ContainsKey((Vector2Int)position))
                 {
                     return true;
                 }
 
-                if (tilemap == null)
-                    tilemap = tm.GetComponent<Tilemap>();
-
-                if (tileParent == null)
+                UpdateTileObject(position, tm);
+                if (currentTileObject == null)
                 {
-                    tileParent = tm.GetComponent<Transform>();
+                    return true;
                 }
-                var pos = tilemap.CellToWorld(position) + new Vector3(DungeonManager.CELL_SIZE, DungeonManager.CELL_SIZE) / 2;
 
-                var newTile = Instantiate(Obj, pos,
-                    Quaternion.identity,
-                    tileParent);
+                Pools ??= componentPool.SetPoolArray<TileObject>(TileType.Max.ToInt32());
+
+                var p = Pool ?? Pools.SetPool(CurrentTileObject.TileType.ToInt32(), CurrentTileObject);
+
+                var newTile = p.Get<TileObject>(tile => tile.transform.position = tilemap.CellToWorld(position) + new Vector3(DungeonManager.CELL_SIZE, DungeonManager.CELL_SIZE) / 2);
+
+
+                newTile.TilePos = dungeonManager.WorldToTilePos(newTile.transform.position);
+
 
                 dungeonManager.tiles[(Vector2Int)position] = newTile;
             }
@@ -99,13 +110,12 @@ namespace ReLeaf
             tileData.colliderType = m_ColliderType;
 
             if (!Application.isPlaying)
-                tileData.gameObject = Obj;
+                tileData.gameObject = currentTileObject.gameObject;
 
 #if UNITY_EDITOR
-            if (!tilemap.GetComponent<Tilemap>().gameObject.CompareTag("EditorOnly") && (Obj != null))
+            if (!tilemap.GetComponent<Tilemap>().gameObject.CompareTag("EditorOnly") && (currentTileObject != null))
                 tileData.sprite = null;
 #else
-            if(Obj != null)
                 tileData.sprite = null;
 #endif
         }

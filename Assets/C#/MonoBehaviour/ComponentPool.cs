@@ -7,13 +7,14 @@ using System.Threading.Tasks;
 using UnityEngine;
 using UnityEngine.Pool;
 using Object = UnityEngine.Object;
+using Transform = UnityEngine.Transform;
 
 namespace ReLeaf
 {
 
     public class ComponentPool : MonoBehaviour
     {
-        Dictionary<Type, Pool> pools = new Dictionary<Type, Pool>();
+        readonly Dictionary<Type, IPool> pools = new();
 
         [SerializeField]
         bool isDontDestroyOnLoad;
@@ -42,13 +43,18 @@ namespace ReLeaf
             }
             pools.Clear();
         }
-        public Pool GetPool<T>(T prefab) where T : Component
+        public IPool GetPool<T>() where T : Component, IPoolable
         {
             var type = typeof(T);
-            return GetPool(type, prefab);
+            if (pools.TryGetValue(type, out var pool))
+            {
+                return pool;
+            }
+            return null;
         }
-        public Pool GetPool(Type type,Component prefab) 
+        public IPool SetPool<T>(T prefab) where T : Component, IPoolable
         {
+            var type = typeof(T);
             if (pools.TryGetValue(type, out var pool))
             {
                 return pool;
@@ -64,61 +70,163 @@ namespace ReLeaf
 
             return newPool;
         }
+        public PoolArray GetPoolArray<T>() where T : Component, IPoolable
+        {
+            var type = typeof(T);
+            if (pools.TryGetValue(type, out var pool) && pool is PoolArray array)
+            {
+                return array;
+            }
+            return null;
+        }
+
+        public PoolArray SetPoolArray<T>(int size) where T : Component, IPoolable
+        {
+            var type = typeof(T);
+            if (pools.TryGetValue(type, out var pool))
+            {
+                if (pool is PoolArray array)
+                    return array;
+
+                return null;
+            }
+
+            var poolParent = new GameObject(type.Name).transform;
+            poolParent.parent = transform;
+
+            var newPool = new PoolArray(poolParent, size);
+
+
+            pools[type] = newPool;
+
+            return newPool;
+        }
     }
 
-    public class Pool
+    public interface IPool
     {
-        ObjectPool<Component> pool;
+        ObjectPool<IPoolable> ObjectPool { get; }
+
+        public T Get<T>(Action<T> action) where T : Component, IPoolable
+        {
+            bool isCreated = ObjectPool.CountInactive==0;
+            var t = ObjectPool.Get() as T;
+            action(t);
+            t.Init(isCreated);
+            return t;
+        }
+
+        public void Release<T>(T element) where T : IPoolable {
+            element.Uninit();
+            ObjectPool.Release(element);
+        }
+
+        public void Clear() => ObjectPool.Clear();
+
+    }
+
+    public class Pool : IPool
+    {
+        protected ObjectPool<IPoolable> pool;
+        ObjectPool<IPoolable> IPool.ObjectPool => pool;
 
         // thisでキャプチャ
         readonly Transform parent;
-        readonly Component prefab;
+        readonly IPoolable prefab;
 
-        public Pool(Transform parent, Component prefab)
+        public Pool(Transform parent, IPoolable p)
         {
             this.parent = parent;
-            this.prefab = prefab;
+            prefab = p;
 
 #if UNITY_EDITOR
-            var test= Object.Instantiate(this.prefab, this.parent);
-            Debug.Log(test.name);
-            Object.Destroy(test.gameObject);
+            if (p == null)
+                Debug.LogError("Pool Prefab null!!!");
 #endif
 
-            pool = new ObjectPool<Component>(
-                             createFunc:()=> Object.Instantiate(this.prefab, this.parent),                               // プールが空のときに新しいインスタンスを生成する処理
-                             actionOnGet: target => target.gameObject.SetActive(true),                  // プールから取り出されたときの処理 
-                             actionOnRelease: target => target.gameObject.SetActive(false),             // プールに戻したときの処理
-                             actionOnDestroy: target => Object.Destroy(target),                                // プールがmaxSizeを超えたときの処理
+            pool = new ObjectPool<IPoolable>(
+                             createFunc: () =>
+                             {
+                                 var instance = prefab.Create(this.parent);
+                                 if (instance is IPoolableSelfRelease poolableSelfRelease)
+                                     poolableSelfRelease.SetPool(this);
+
+                                 return instance;
+                             },
+                             actionOnGet: target => target.OnGetPool(),
+                             actionOnRelease: target => target.OnReleasePool(),
+                             actionOnDestroy: target => target.OnDestroyPool(),
                              collectionCheck: true,                                                     // 同一インスタンスが登録されていないかチェックするかどうか
                              defaultCapacity: 10,                                                       // デフォルトの容量
                              maxSize: 100);
 
         }
 
-        public T Get<T>() where T : Component => pool.Get() as T;
+    }
 
-        public void Release<T>(T element) where T : Component => pool.Release(element);
+    public class PoolArray : IPool
+    {
+        readonly IPool[] pools;
 
-        public void Clear() => pool.Clear();
+        // thisでキャプチャ
+        readonly Transform parent;
 
+        ObjectPool<IPoolable> IPool.ObjectPool => pools[0].ObjectPool;
 
-        public PoolHelper<T> GetHelper<T>() where T : Component => new PoolHelper<T>(pool);
-
-        public class PoolHelper<T> where T : Component
+        public PoolArray(Transform parent, int size)
         {
-            ObjectPool<Component> pool;
-            public PoolHelper(ObjectPool<Component> pool)
+            this.parent = parent;
+
+            pools = new IPool[size];
+        }
+
+        public IPool GetPool(int index)
+        {
+            if (pools[index] != null)
+                return pools[index];
+
+            return null;
+        }
+
+        public IPool SetPool<T>(int index, T prefab) where T : Component, IPoolable
+        {
+            if (pools[index] != null)
+                return pools[index];
+
+            var newPool = new Pool(parent, prefab);
+
+            pools[index] = newPool;
+
+            return newPool;
+        }
+
+        public PoolArray GetPoolArray(int index)
+        {
+            if (pools[index] is PoolArray array)
             {
-                this.pool = pool;
+                return array;
+            }
+            return null;
+        }
+
+        public PoolArray SetPoolArray(int index, int size)
+        {
+            if (pools[index] != null)
+            {
+                if (pools[index] is PoolArray array)
+                    return array;
+
+                return null;
             }
 
+            var poolParent = new GameObject(index.ToString()).transform;
+            poolParent.parent = parent;
 
-            public T Get() => pool.Get() as T;
+            var newPool = new PoolArray(poolParent, size);
 
-            public void Release(T element) => pool.Release(element);
+            pools[index] = newPool;
 
-            public void Clear() => pool.Clear();
+            return newPool;
         }
     }
 }

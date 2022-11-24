@@ -19,29 +19,25 @@ namespace ReLeaf
         Tilemap groundTilemap;
 
         [SerializeField]
-        TerrainTile messyTile;
-        [SerializeField]
         TerrainTile sandTile;
         [SerializeField]
         TerrainTile[] seedTiles;
 
         [SerializeField]
-        Grid grid;
+        SelectTile messyTile;
 
-        [SerializeField,Rename("ÇÆÇøÇ·ÇÆÇøÇ·Ç»ínñ Ç™çªÇ…Ç»ÇÈÇ‹Ç≈ÇÃéûä‘(ïb)")]
-        float messyCuredTime = 5.0f;
+        public Dictionary<Vector2Int, TileObject> tiles = new Dictionary<Vector2Int, TileObject>();
 
-        public Dictionary<Vector2Int, GameObject> tiles = new Dictionary<Vector2Int, GameObject>();
-
+        [field: SerializeField, ReadOnly]
         public int MaxGreeningCount { get; private set; }
 
-        public struct TileChangedInfo
+        public readonly struct TileChangedInfo
         {
-            public Vector2Int tilePos;
-            public TerrainTile beforeTile;
-            public TerrainTile afterTile;
+            readonly public Vector2Int tilePos;
+            readonly public TileObject beforeTile;
+            readonly public TileObject afterTile;
 
-            public TileChangedInfo(Vector2Int tilePos, TerrainTile beforeTile, TerrainTile afterTile)
+            public TileChangedInfo(Vector2Int tilePos, TileObject beforeTile, TileObject afterTile)
             {
                 this.tilePos = tilePos;
                 this.beforeTile = beforeTile;
@@ -66,7 +62,7 @@ namespace ReLeaf
             foreach (var pos in groundTilemap.cellBounds.allPositionsWithin)
             {
                 var tile = groundTilemap.GetTile<TerrainTile>(pos);
-                if (tile != null && tile.canSowGrass)
+                if (tile != null && tile.CurrentTileObject.CanSowGrass)
                 {
                     MaxGreeningCount++;
                 }
@@ -74,25 +70,30 @@ namespace ReLeaf
         }
         public Vector2Int WorldToTilePos(Vector3 worldPos)
         {
-            return (Vector2Int)grid.WorldToCell(worldPos);
+            return (Vector2Int)groundTilemap.WorldToCell(worldPos);
         }
         public Vector2 TilePosToWorld(Vector2Int tilePos)
         {
-            return (Vector2)grid.CellToWorld((Vector3Int)tilePos) + new Vector2(CELL_SIZE, CELL_SIZE) / 2;
+            return (Vector2)groundTilemap.CellToWorld((Vector3Int)tilePos) + new Vector2(CELL_SIZE, CELL_SIZE) / 2;
         }
-        public TerrainTile GetGroundTile(Vector2Int pos)
-        {
-            return groundTilemap.GetTile<TerrainTile>((Vector3Int)pos);
-        }
+        public bool TryGetTile(Vector2Int pos, out TileObject tile) => tiles.TryGetValue(pos, out tile);
+        public TileObject GetTile(Vector2Int pos) => tiles.GetValueOrDefault(pos, null);
 
-        public void Messy(Plant plant)
-        {
-            var tilePos = plant.TilePos;
-            ChangeTile(tilePos, null, messyTile);
-            StartCoroutine(CureMessy(tilePos));
-        }
 
-        public bool CanSowSeed(TerrainTile tile, PlantType type)
+        public bool TryGetTile<T>(Vector2Int pos, out T tile) where T : TileObject
+        {
+            tiles.TryGetValue(pos, out var tileBase);
+            if (tileBase is T t)
+            {
+                tile = t;
+                return true;
+            }
+            tile = null;
+            return false;
+        }
+        public TileObject GetTile<T>(Vector2Int pos)where T: TileObject => tiles.GetValueOrDefault(pos, null) as T;
+
+        public bool CanSowSeed(TileObject tile, PlantType type)
         {
             if (type < 0 || seedTiles.Length <= (int)type)
             {
@@ -103,7 +104,7 @@ namespace ReLeaf
             {
                 return false;
             }
-            if (type == PlantType.Foundation && !tile.canSowGrass)
+            if (type == PlantType.Foundation && !tile.CanSowGrass)
             {
                 return false;
             }
@@ -112,43 +113,44 @@ namespace ReLeaf
         }
         public bool CanSowSeed(Vector2Int tilePos, PlantType type)
         {
-            var tile = groundTilemap.GetTile<TerrainTile>((Vector3Int)tilePos);
-            return CanSowSeed(tile,type);
+            if (TryGetTile(tilePos, out var tile))
+                return CanSowSeed(tile, type);
+            return false;
         }
 
         public bool SowSeed(Vector2Int tilePos, PlantType type)
         {
-            var tile = groundTilemap.GetTile<TerrainTile>((Vector3Int)tilePos);
-            if (!CanSowSeed(tile, type))
+            if (!CanSowSeed(tilePos, type))
             {
                 return false;
             }
 
-            ChangeTile(tilePos, tile, seedTiles[(int)type]);
+            ChangeTile(tilePos, seedTiles[(int)type]);
             return true;
         }
 
-        void ChangeTile(Vector2Int pos, TerrainTile before, TerrainTile after)
+        void ChangeTile(Vector2Int pos, TerrainTile after)
         {
-            if (tiles.Remove(pos, out var go))
+
+            if (tiles.Remove(pos, out var before))
+                before.StaticCast<IPoolableSelfRelease>().Release();
+            else
             {
-                Destroy(go);
+                before = TileObject.NullTile;
             }
-            before = before == null ? groundTilemap.GetTile<TerrainTile>((Vector3Int)pos) : before;
-
+            OnTileChanged?.Invoke(new TileChangedInfo(pos, before, after.CurrentTileObject));
             groundTilemap.SetTile((Vector3Int)pos, after);
-            OnTileChanged?.Invoke(new TileChangedInfo(pos, before, after));
         }
 
-        IEnumerator CureMessy(Vector2Int tilePos)
+
+        public void Messy(Vector2Int tilePos, IMultipleVisual visual)
         {
-            yield return new WaitForSeconds(messyCuredTime);
-            ChangeTile(tilePos,messyTile, sandTile);
+            messyTile.Selected = visual;
+            ChangeTile(tilePos, messyTile);
         }
-
         public void ToSand(Vector2Int tilePos)
         {
-            ChangeTile(tilePos, null, sandTile);
+            ChangeTile(tilePos, sandTile);
         }
 
         static public readonly float CELL_SIZE = 0.5f;

@@ -69,7 +69,7 @@ namespace ReLeaf
 
                     // ターゲットマーカー更新
                     targetMarkerManager.ResetAllMarker();
-                    targetMarkerManager.SetMarker(element.targetPos);
+                    targetMarkerManager.SetMarker<TargetMarker>(element.targetPos);
 
                     targetTilePos = element.targetPos;
                 }

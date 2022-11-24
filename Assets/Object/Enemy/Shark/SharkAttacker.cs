@@ -38,7 +38,7 @@ namespace ReLeaf
             attackStartPos = enemyMover.TilePos;
             enemyDamageable.BeginWeekMarker();
 
-            attackTargetPos = GetAttackRange(enemyMover.TilePos,enemyMover.Dir,false).Last();
+            attackTargetPos = GetAttackRange(enemyMover.TilePos,enemyMover.Dir,true).Last();
         }
         IEnumerator IEnemyAttacker.OnStartDamageing()
         {
@@ -60,13 +60,11 @@ namespace ReLeaf
             for (int i = 0; i < SharkAttackInfo.Range; i++)
             {
                 var worldTilePos = enemyMover.TilePos + enemyMover.Dir * (i + 1);
-                var tile = DungeonManager.Instance.GetGroundTile(worldTilePos);
-
-                if (tile == null || (tile.tileType != TileType.Foundation && tile.tileType != TileType.Sand))
+                if (!DungeonManager.Instance.TryGetTile(worldTilePos, out var tile) || !tile.CanEnemyMove)
                 {
                     yield break;
                 }
-                if (tile.tileType == TileType.Foundation || (!isDamagableOnly && tile.tileType == TileType.Sand))
+                if (tile.CanEnemyAttack(isDamagableOnly))
                 {
                     yield return worldTilePos;
                 }
@@ -79,13 +77,13 @@ namespace ReLeaf
             for (int i = 0; i < SharkAttackInfo.Range; i++)
             {
                 var worldTilePos = enemyMover.TilePos + enemyMover.Dir * (i + 1);
-                var tile = DungeonManager.Instance.GetGroundTile(worldTilePos);
 
-                if (tile == null || (tile.tileType != TileType.Foundation && tile.tileType != TileType.Sand))
+                if (!DungeonManager.Instance.TryGetTile(worldTilePos, out var tile)|| !tile.CanEnemyMove)
                 {
                     return count;
                 }
-                if (tile.tileType == TileType.Foundation|| (!isDamagableOnly&& tile.tileType == TileType.Sand))
+
+                if (tile.CanEnemyAttack(isDamagableOnly))
                 {
                     count++;
                 }

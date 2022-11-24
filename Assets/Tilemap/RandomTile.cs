@@ -4,6 +4,8 @@ using System.Linq;
 using UnityEditor;
 using UnityEngine;
 using System;
+using Pickle;
+using UnityEngine.Tilemaps;
 
 namespace ReLeaf
 {
@@ -12,19 +14,31 @@ namespace ReLeaf
         [Serializable]
         public class RandomInfo
         {
-            public float probability=50.0f;
-            public GameObject obj;
+            public float probability = 50.0f;
+            [Pickle(typeof(IMultipleVisual))]
+            public TileObject multipleVisualTile;
         }
-        
+
         public RandomInfo[] randomInfos;
-        override public GameObject Obj
+        IMultipleVisual selected;
+
+        PoolArray poolArray;
+        override protected void UpdateTileObject(Vector3Int position, ITilemap tilemap)
+        {
+            var index = MathExtension.GetRandomIndex(randomInfos.Select(r => r.probability).ToArray());
+            currentTileObject = randomInfos[index].multipleVisualTile;
+            selected = currentTileObject as IMultipleVisual;
+        }
+        protected override IPool Pool
         {
             get
             {
-                var index = MathExtension.GetRandomIndex(randomInfos.Select(r => r.probability).ToArray());
-                return randomInfos[index].obj;
+                poolArray ??= Pools.SetPoolArray((int)currentTileObject.TileType, selected.VisualTypeMax);
+
+                return poolArray.SetPool(selected.VisualType,currentTileObject);
             }
         }
+
 
 #if UNITY_EDITOR
         // The following is a helper that adds a menu item to create a RoadTile Asset

@@ -41,5 +41,15 @@ namespace ReLeaf
             yield return null;
             Destroy(gameObject);
         }
+
+        public static  Coroutine WaitNextFrame(Action action)
+        {
+            return StartCoroutine(WaitNextFrameImpl(action));
+        }
+        static IEnumerator WaitNextFrameImpl(Action action)
+        {
+            yield return null;
+            action();
+        }
     }
 }

@@ -16,6 +16,4 @@ MonoBehaviour:
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_Flags: 3
   m_ColliderType: 0
-  tileType: 7
-  canSowGrass: 1
-  gameobject: {fileID: 3556380978872311179, guid: 0a23d3c8b511bb24f8f933f85e9e5160, type: 3}
+  currentTileObject: {fileID: -6393445247202387413, guid: 0a23d3c8b511bb24f8f933f85e9e5160, type: 3}

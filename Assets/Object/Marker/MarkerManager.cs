@@ -17,7 +17,9 @@ namespace ReLeaf
         [SerializeField]
         bool subscribeOnTileChanged;
 
-        Pool pool;
+        IPool pool;
+        IPool GetPool<T>()where T:MarkerBase => pool ??= ComponentPool.Instance.SetPool(marker as T);
+
         [SerializeField]
         MarkerBase marker;
 
@@ -30,7 +32,6 @@ namespace ReLeaf
         {
             if (subscribeOnTileChanged)
                 DungeonManager.Instance.OnTileChanged += OnTileChanged;
-            pool = ComponentPool.Instance.GetPool(marker.GetType(), marker);
         }
 
         private void OnDestroy()
@@ -41,7 +42,6 @@ namespace ReLeaf
         }
 
 
-        public MarkerBase SetMarker(Vector2Int worldTilePos) => SetMarker<MarkerBase>(worldTilePos);
 
         public T SetMarker<T>(Vector2Int worldTilePos) where T : MarkerBase
         {
@@ -50,14 +50,12 @@ namespace ReLeaf
             {
                 return null;
             }
-            var marker = pool.Get<T>();
-
-            marker.transform.position = worldPos;
+            var marker= GetPool<T>().Get<T>(marker=> marker.transform.position = worldPos);
 
             markers.Add(worldTilePos, marker);
-            marker.Init(worldTilePos);
 
-            return marker as T;
+
+            return marker;
         }
 
         public bool ResetMarker(Vector2Int worldTilePos)

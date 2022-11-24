@@ -218,10 +218,7 @@ namespace ReLeaf
                 return false;
             }
 
-            var tile = DungeonManager.Instance.GetGroundTile(nextPos);
-
-            // ’Ê‚ê‚é‚©
-            if ((tile != null && tile.tileType == TileType.Sand) || nextPos == Target)
+            if((DungeonManager.Instance.TryGetTile(nextPos,out var tile) && tile.CanEnemyMove) || nextPos == Target)
             {
                 tempMapQueue.Enqueue(nextPos);
 

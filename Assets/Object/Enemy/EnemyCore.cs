@@ -37,14 +37,13 @@ namespace ReLeaf
             foreach (var defaultLocalPos in enemyBaseInfo.WeakLocalTilePos)
             {
                 var worldTilePos = enemyMover.TilePos + MathExtension.GetRotatedLocalPos(enemyMover.Dir,defaultLocalPos);
-                var tile = DungeonManager.Instance.GetGroundTile(worldTilePos);
 
-                if (tile != null && (tile.tileType == TileType.Foundation || tile.tileType == TileType.Plant || tile.tileType == TileType.Sand))
+                if (DungeonManager.Instance.TryGetTile(worldTilePos,out var tile) && tile.CanEnemyMove)
                 {
                     var marker = weakMarkerManager.SetMarker<WeakMarker>(worldTilePos);
                     if (marker != null)
                     {
-                        marker.Init(this);
+                        marker.SetEnemyDamageable(this);
                     }
                 }
 

@@ -1,5 +1,12 @@
 {
   "dependencies": {
+    "com.mpozek.pickle": {
+      "version": "https://github.com/MPozek/Pickle.git",
+      "depth": 0,
+      "source": "git",
+      "dependencies": {},
+      "hash": "9f0c240f72aeed038819683f1d303f4bca097709"
+    },
     "com.unity.2d.animation": {
       "version": "7.0.7",
       "depth": 1,

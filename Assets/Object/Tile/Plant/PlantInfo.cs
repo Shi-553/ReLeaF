@@ -20,6 +20,7 @@ namespace ReLeaf
         float growTime = 10.0f;
         public float GrowTime => growTime;
 
+
         [SerializeField, Rename("ダメージタイプごとの被ダメージ倍率")]
         DamageMagnification[] damageMagnifications;
         public IReadOnlyCollection<DamageMagnification> DamageMagnifications => damageMagnifications;

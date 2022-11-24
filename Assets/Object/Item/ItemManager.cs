@@ -133,7 +133,7 @@ namespace ReLeaf
 
                 foreach (var p in previews)
                 {
-                    seedMarkerManager.SetMarker(p);
+                    seedMarkerManager.SetMarker<SeedMarker>(p);
                 }
             }
             OldItemDir = ItemDir;

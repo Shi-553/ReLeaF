@@ -6,31 +6,43 @@ using UnityEngine;
 using System;
 using UnityEngine.Tilemaps;
 using UnityEngine.UIElements;
+using Pickle;
 
 namespace ReLeaf
 {
     public class WallTile : TerrainTile
     {
-        public GameObject fill;
-        GameObject current;
-        override public GameObject Obj => current;
+        [Pickle]
+        public TileObject block;
+        [Pickle]
+        public TileObject fill;
 
-        public override bool StartUp(Vector3Int position, ITilemap tilemap, GameObject go)
+        PoolArray poolArray;
+
+        protected override void UpdateTileObject(Vector3Int position, ITilemap tilemap)
         {
             if (HasWallTile(tilemap, position + Vector3Int.up) &&
                 HasWallTile(tilemap, position + Vector3Int.down) &&
                 HasWallTile(tilemap, position + Vector3Int.left) &&
                 HasWallTile(tilemap, position + Vector3Int.right))
             {
-                current = fill;
+                currentTileObject = fill;
             }
             else
             {
-                current = gameobject;
+                currentTileObject = block;
             }
-            return base.StartUp(position, tilemap, go);
         }
 
+        protected override IPool Pool
+        {
+            get
+            {
+                poolArray ??= Pools.SetPoolArray((int)currentTileObject.TileType, 2);
+
+                return poolArray.SetPool(currentTileObject == block ? 0 : 1,CurrentTileObject);
+            }
+        }
         public override void RefreshTile(Vector3Int position, ITilemap tilemap)
         {
             tilemap.RefreshTile(position);
@@ -53,7 +65,7 @@ namespace ReLeaf
         }
         bool HasWallTile(ITilemap tilemap, Vector3Int pos)
         {
-            return tilemap.GetTile(pos)==this;
+            return tilemap.GetTile(pos) == this;
         }
 
 
