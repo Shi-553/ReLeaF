@@ -95,6 +95,7 @@ namespace ReLeaf
 
                 newTile.TilePos = dungeonManager.WorldToTilePos(newTile.transform.position);
 
+                newTile.transform.parent = tilemap.transform;
 
                 dungeonManager.tiles[(Vector2Int)position] = newTile;
             }
