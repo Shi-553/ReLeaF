@@ -14,7 +14,7 @@ public static class MathExtension
     static public float LerpPairs(SortedList<float, float> pairs, float t)
     {
         var old = pairs.First();
-        t = Mathf.Clamp(t,old.Key,pairs.Last().Key);
+        t = Mathf.Clamp(t, old.Key, pairs.Last().Key);
 
 
         foreach (var p in pairs)
@@ -30,20 +30,29 @@ public static class MathExtension
 
         return pairs.Last().Value;
     }
-    public static int GetRandomIndex(params float[] weightTable)
+    public class RandomIndex
     {
-        var totalWeight = weightTable.Sum();
-        var value = Random.Range(0, totalWeight );
-        for (var i = 0; i < weightTable.Length; ++i)
+        readonly float totalWeight;
+        readonly float[] weightTable;
+        public RandomIndex(params float[] weightTable)
         {
-            if (weightTable[i] >= value)
-            {
-                return i;
-            }
-            value -= weightTable[i];
+            totalWeight = weightTable.Sum();
+            this.weightTable = weightTable;
         }
+        public int Get()
+        {
+            var value = Random.Range(0, totalWeight);
+            for (var i = 0; i < weightTable.Length; ++i)
+            {
+                if (weightTable[i] >= value)
+                {
+                    return i;
+                }
+                value -= weightTable[i];
+            }
 
-        throw new System.Exception("ありえんわ");
+            throw new System.Exception("ありえんわ");
+        }
     }
 
     // 下向きをデフォルトとするローカル座標を向きに応じて回転
@@ -69,14 +78,14 @@ public static class MathExtension
         return defaultLocal;
     }
 
-    public static bool DuringExists(Vector2Int target,Vector2Int start,Vector2Int end)
+    public static bool DuringExists(Vector2Int target, Vector2Int start, Vector2Int end)
     {
-        var xt = start.x < end.x ? (start.x ,end.x) : ( end.x, start.x);
-        var yt = start.y < end.y ? (start.y ,end.y) : ( end.y, start.y);
+        var xt = start.x < end.x ? (start.x, end.x) : (end.x, start.x);
+        var yt = start.y < end.y ? (start.y, end.y) : (end.y, start.y);
 
-        for (int x = xt.Item1; x <= xt.Item2; x ++)
+        for (int x = xt.Item1; x <= xt.Item2; x++)
         {
-            for (int y = yt.Item1; y <= yt.Item2; y ++)
+            for (int y = yt.Item1; y <= yt.Item2; y++)
             {
                 if (target.x == x && target.y == y)
                 {

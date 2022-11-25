@@ -118,6 +118,10 @@ namespace ReLeaf
             {
                 SceneManager.LoadScene(0);
             }
+            if (Keyboard.current.f2Key.wasPressedThisFrame)
+            {
+                FindObjectOfType<AllGreening>().StartGreening(mover.TilePos);
+            }
 
 
 

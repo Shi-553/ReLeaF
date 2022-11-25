@@ -50,10 +50,11 @@ namespace ReLeaf
             {
                 return null;
             }
-            var marker= GetPool<T>().Get<T>(marker=> marker.transform.position = worldPos);
+            using var _=GetPool<T>().Get<T>(out var marker);
+
+            marker.transform.position = worldPos;
 
             markers.Add(worldTilePos, marker);
-
 
             return marker;
         }

@@ -21,10 +21,6 @@ namespace ReLeaf
                 this.value = value;
                 slider.value = ValueRate;
 
-                if (ValueRate >= targetRate)
-                {
-                    gameclearText.gameObject.SetActive(true);
-                }
             }
         }
         public float ValueRate => value / DungeonManager.Instance.MaxGreeningCount;
@@ -38,6 +34,9 @@ namespace ReLeaf
         Slider slider;
         [SerializeField]
         GameObject gameclearText;
+        [SerializeField]
+        AllGreening allGreening;
+
         public static GreeningRate Instance { get; private set; }
         private void Awake()
         {
@@ -73,6 +72,12 @@ namespace ReLeaf
             if (obj.beforeTile.TileType == TileType.Plant &&
                 obj.afterTile.TileType != TileType.Plant)
                 Value--;
+
+            if (ValueRate >= targetRate)
+            {
+                gameclearText.gameObject.SetActive(true);
+                allGreening.StartGreening(GameObject.FindObjectOfType<PlayerMover>().TilePos);
+            }
         }
     }
 }

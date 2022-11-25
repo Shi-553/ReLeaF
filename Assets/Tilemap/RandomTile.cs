@@ -6,6 +6,7 @@ using UnityEngine;
 using System;
 using Pickle;
 using UnityEngine.Tilemaps;
+using static MathExtension;
 
 namespace ReLeaf
 {
@@ -23,22 +24,30 @@ namespace ReLeaf
         IMultipleVisual selected;
 
         PoolArray poolArray;
-        override protected void UpdateTileObject(Vector3Int position, ITilemap tilemap)
-        {
-            var index = MathExtension.GetRandomIndex(randomInfos.Select(r => r.probability).ToArray());
-            currentTileObject = randomInfos[index].multipleVisualTile;
-            selected = currentTileObject as IMultipleVisual;
-        }
-        protected override IPool Pool
-        {
-            get
-            {
-                poolArray ??= Pools.SetPoolArray((int)currentTileObject.TileType, selected.VisualTypeMax);
+        RandomIndex randomIndex;
 
-                return poolArray.SetPool(selected.VisualType,currentTileObject);
+        protected override void Init(Vector3Int position, ITilemap tm)
+        {
+            base.Init(position, tm);
+
+            randomIndex = new RandomIndex(randomInfos.Select(r => r.probability).ToArray());
+
+            poolArray = Pools.SetPoolArray((int)currentTileObject.TileType, randomInfos.Length);
+
+            foreach (var info in randomInfos)
+            {
+                var v = info.multipleVisualTile as IMultipleVisual;
+                poolArray.SetPool(v.VisualType, info.multipleVisualTile, defaultCapacity, maxSize);
             }
         }
 
+        override protected void UpdateTileObject(Vector3Int position, ITilemap tilemap)
+        {
+            currentTileObject = randomInfos[randomIndex.Get()].multipleVisualTile;
+            selected = currentTileObject as IMultipleVisual;
+        }
+
+        protected override IPool Pool => poolArray.GetPool(selected.VisualType);
 
 #if UNITY_EDITOR
         // The following is a helper that adds a menu item to create a RoadTile Asset

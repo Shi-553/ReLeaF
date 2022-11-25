@@ -77,5 +77,16 @@ namespace ReLeaf
             }
             HP -= atk;
         }
+
+        private void OnTriggerEnter2D(Collider2D collision)
+        {
+            if (collision.CompareTag("Plant"))
+            {
+                if (collision.TryGetComponent<Plant>(out var plant)&& plant.IsInvincible)
+                {
+                    Damaged(1);
+                }
+            }
+        }
     }
 }

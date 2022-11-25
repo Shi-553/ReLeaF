@@ -94,6 +94,9 @@ namespace ReLeaf
 
         public virtual void Damaged(float damage, DamageType type)
         {
+            if (IsInvincible)
+                return;
+
             if (!IsFullGrowth)
             {
                 hp = 0;
@@ -119,5 +122,5 @@ namespace ReLeaf
             DungeonManager.Instance.Messy(TilePos, this);
         }
 
+        }
     }
-}

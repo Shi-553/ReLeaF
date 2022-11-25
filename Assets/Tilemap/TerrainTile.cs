@@ -1,6 +1,7 @@
 using Pickle;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 #if UNITY_EDITOR
 using UnityEditor;
 #endif
@@ -38,7 +39,7 @@ namespace ReLeaf
         private TileFlags m_Flags = TileFlags.LockColor;
 
         [SerializeField]
-        private Tile.ColliderType m_ColliderType = Tile.ColliderType.Sprite;
+        private Tile.ColliderType m_ColliderType = UnityEngine.Tilemaps.Tile.ColliderType.Sprite;
 
         [Header("Custom")]
         [Pickle]
@@ -48,14 +49,31 @@ namespace ReLeaf
 
         virtual protected void UpdateTileObject(Vector3Int position, ITilemap tilemap) { }
 
-        static DungeonManager dungeonManager;
-        static ComponentPool componentPool;
+        DungeonManager dungeonManager;
+        ComponentPool componentPool;
 
-        static Tilemap tilemap;
+        Tilemap tilemap;
 
         protected PoolArray Pools;
 
-        protected virtual IPool Pool { get; }
+        IPool pool;
+        protected virtual IPool Pool => pool;
+
+        public bool IsInvincible { get; set; }
+
+        public int defaultCapacity = 10;
+        public int maxSize = 100;
+
+
+        protected virtual void Init(Vector3Int position, ITilemap tm)
+        {
+            tilemap = tm.GetComponent<Tilemap>();
+
+            dungeonManager = FindObjectOfType<DungeonManager>();
+            componentPool = FindObjectOfType<ComponentPool>();
+
+            Pools = componentPool.SetPoolArray<TileObject>(TileType.Max.ToInt32());
+        }
 
         public override bool StartUp(Vector3Int position, ITilemap tm, GameObject go)
         {
@@ -66,14 +84,12 @@ namespace ReLeaf
                     Debug.LogWarning(go.name);
                     Destroy(go);
                 }
-
-                if (tilemap == null)
-                    tilemap = tm.GetComponent<Tilemap>();
-
-                if (dungeonManager == null)
-                    dungeonManager = FindObjectOfType<DungeonManager>();
-                if (componentPool == null)
-                    componentPool = FindObjectOfType<ComponentPool>();
+                if (Pools == null)
+                {
+                    Init(position, tm);
+                    UpdateTileObject(position, tm);
+                    pool = Pool ?? Pools.SetPool(CurrentTileObject.TileType.ToInt32(), CurrentTileObject, defaultCapacity, maxSize);
+                }
 
                 if (dungeonManager.tiles.ContainsKey((Vector2Int)position))
                 {
@@ -86,16 +102,13 @@ namespace ReLeaf
                     return true;
                 }
 
-                Pools ??= componentPool.SetPoolArray<TileObject>(TileType.Max.ToInt32());
+                using var _ = Pool.Get<TileObject>(out var newTile);
 
-                var p = Pool ?? Pools.SetPool(CurrentTileObject.TileType.ToInt32(), CurrentTileObject);
-
-                var newTile = p.Get<TileObject>(tile => tile.transform.position = tilemap.CellToWorld(position) + new Vector3(DungeonManager.CELL_SIZE, DungeonManager.CELL_SIZE) / 2);
-
-
+                newTile.IsInvincible = IsInvincible;
+                newTile.transform.position = tilemap.CellToWorld(position) + new Vector3(DungeonManager.CELL_SIZE, DungeonManager.CELL_SIZE) / 2;
                 newTile.TilePos = dungeonManager.WorldToTilePos(newTile.transform.position);
-
                 newTile.transform.parent = tilemap.transform;
+
 
                 dungeonManager.tiles[(Vector2Int)position] = newTile;
             }
@@ -111,8 +124,9 @@ namespace ReLeaf
             tileData.colliderType = m_ColliderType;
 
             if (!Application.isPlaying)
+            {
                 tileData.gameObject = currentTileObject.gameObject;
-
+            }
 #if UNITY_EDITOR
             if (!tilemap.GetComponent<Tilemap>().gameObject.CompareTag("EditorOnly") && (currentTileObject != null))
                 tileData.sprite = null;

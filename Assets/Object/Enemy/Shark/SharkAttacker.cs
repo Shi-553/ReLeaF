@@ -52,6 +52,9 @@ namespace ReLeaf
                     break;
                 }
                 yield return null;
+
+                if (this == null)
+                    yield break;
             }
         }
 

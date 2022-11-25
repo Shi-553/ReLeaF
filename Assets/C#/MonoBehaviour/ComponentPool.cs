@@ -6,6 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using UnityEngine;
 using UnityEngine.Pool;
+using static ReLeaf.IPool;
 using Object = UnityEngine.Object;
 using Transform = UnityEngine.Transform;
 
@@ -52,7 +53,7 @@ namespace ReLeaf
             }
             return null;
         }
-        public IPool SetPool<T>(T prefab) where T : Component, IPoolable
+        public IPool SetPool<T>(T prefab, int defaultCapacity = 10, int maxSize = 100) where T : Component, IPoolable
         {
             var type = typeof(T);
             if (pools.TryGetValue(type, out var pool))
@@ -63,7 +64,7 @@ namespace ReLeaf
             var poolParent = new GameObject(type.Name).transform;
             poolParent.parent = transform;
 
-            var newPool = new Pool(poolParent, prefab);
+            var newPool = new Pool(poolParent, prefab, defaultCapacity, maxSize);
 
 
             pools[type] = newPool;
@@ -107,16 +108,34 @@ namespace ReLeaf
     {
         ObjectPool<IPoolable> ObjectPool { get; }
 
-        public T Get<T>(Action<T> action) where T : Component, IPoolable
+        public readonly struct PoolInitializeHelper<T> : IDisposable where T : Component, IPoolable
         {
-            bool isCreated = ObjectPool.CountInactive==0;
-            var t = ObjectPool.Get() as T;
-            action(t);
-            t.Init(isCreated);
-            return t;
+            readonly bool isCreated;
+            readonly T value;
+            public PoolInitializeHelper(T value,bool isCreated)
+            {
+                this.value = value;
+                this.isCreated = isCreated;
+            }
+            public void Dispose()
+            {
+                value.Init(isCreated);
+            }
         }
-
-        public void Release<T>(T element) where T : IPoolable {
+        public T Get<T>() where T : Component, IPoolable
+        {
+            bool isCreated = ObjectPool.CountInactive == 0;
+            var val  = ObjectPool.Get() as T;
+            val.Init(isCreated);
+            return val ;
+        }
+        public PoolInitializeHelper<T> Get<T>(out T val) where T : Component, IPoolable
+        {
+            bool isCreated = ObjectPool.CountInactive == 0;
+            return new PoolInitializeHelper<T>(val = ObjectPool.Get() as T, isCreated);
+        }
+        public void Release<T>(T element) where T : IPoolable
+        {
             element.Uninit();
             ObjectPool.Release(element);
         }
@@ -134,7 +153,7 @@ namespace ReLeaf
         readonly Transform parent;
         readonly IPoolable prefab;
 
-        public Pool(Transform parent, IPoolable p)
+        public Pool(Transform parent, IPoolable p, int defaultCapacity = 10, int maxSize = 100)
         {
             this.parent = parent;
             prefab = p;
@@ -157,8 +176,8 @@ namespace ReLeaf
                              actionOnRelease: target => target.OnReleasePool(),
                              actionOnDestroy: target => target.OnDestroyPool(),
                              collectionCheck: true,                                                     // 同一インスタンスが登録されていないかチェックするかどうか
-                             defaultCapacity: 10,                                                       // デフォルトの容量
-                             maxSize: 100);
+                             defaultCapacity: defaultCapacity,                                                       // デフォルトの容量
+                             maxSize: maxSize);
 
         }
 
@@ -188,12 +207,12 @@ namespace ReLeaf
             return null;
         }
 
-        public IPool SetPool<T>(int index, T prefab) where T : Component, IPoolable
+        public IPool SetPool<T>(int index, T prefab, int defaultCapacity = 10, int maxSize = 100) where T : Component, IPoolable
         {
             if (pools[index] != null)
                 return pools[index];
 
-            var newPool = new Pool(parent, prefab);
+            var newPool = new Pool(parent, prefab, defaultCapacity, maxSize);
 
             pools[index] = newPool;
 

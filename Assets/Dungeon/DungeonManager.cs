@@ -91,7 +91,7 @@ namespace ReLeaf
             tile = null;
             return false;
         }
-        public TileObject GetTile<T>(Vector2Int pos)where T: TileObject => tiles.GetValueOrDefault(pos, null) as T;
+        public TileObject GetTile<T>(Vector2Int pos) where T : TileObject => tiles.GetValueOrDefault(pos, null) as T;
 
         public bool CanSowSeed(TileObject tile, PlantType type)
         {
@@ -100,10 +100,6 @@ namespace ReLeaf
                 return false;
             }
 
-            if (tile == null)
-            {
-                return false;
-            }
             if (type == PlantType.Foundation && !tile.CanSowGrass)
             {
                 return false;
@@ -118,12 +114,14 @@ namespace ReLeaf
             return false;
         }
 
-        public bool SowSeed(Vector2Int tilePos, PlantType type)
+        public bool SowSeed(Vector2Int tilePos, PlantType type, bool isFouce = false)
         {
-            if (!CanSowSeed(tilePos, type))
+            if (!isFouce && !CanSowSeed(tilePos, type))
             {
                 return false;
             }
+
+            seedTiles[(int)type].IsInvincible = isFouce;
 
             ChangeTile(tilePos, seedTiles[(int)type]);
             return true;
