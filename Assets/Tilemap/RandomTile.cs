@@ -27,9 +27,9 @@ namespace ReLeaf
         PoolArray poolArray;
         RandomIndex randomIndex;
 
-        protected override void Init(Vector3Int position, ITilemap tm)
+        protected override void Init()
         {
-            base.Init(position, tm);
+            base.Init();
 
             randomIndex = new RandomIndex(randomInfos.Select(r => r.probability).ToArray());
 
@@ -38,7 +38,7 @@ namespace ReLeaf
             foreach (var info in randomInfos)
             {
                 var v = info.multipleVisualTile as IMultipleVisual;
-                poolArray.SetPool(v.VisualType, info.multipleVisualTile, (defaultSize* info.probability/ randomIndex.totalWeight).ConvertTo<int>(), (maxSize * info.probability / randomIndex.totalWeight).ConvertTo<int>());
+                poolArray.SetPool(v.VisualType, info.multipleVisualTile, (defaultCapacity* info.probability/ randomIndex.totalWeight).ConvertTo<int>(), (maxSize * info.probability / randomIndex.totalWeight).ConvertTo<int>());
             }
         }
 

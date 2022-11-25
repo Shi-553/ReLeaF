@@ -7,6 +7,7 @@ using UnityEditor;
 #endif
 using UnityEngine;
 using UnityEngine.Tilemaps;
+using static UnityEngine.UI.CanvasScaler;
 
 namespace ReLeaf
 {
@@ -61,19 +62,20 @@ namespace ReLeaf
 
         public bool IsInvincible { get; set; }
 
-        public int defaultSize = 10;
+        public int defaultCapacity = 10;
         public int maxSize = 100;
 
-
-        protected virtual void Init(Vector3Int position, ITilemap tm)
+        void OnEnable()
         {
-            tilemap = tm.GetComponent<Tilemap>();
-
+            tilemap = null;
+        }
+        protected virtual void Init()
+        {
             dungeonManager = FindObjectOfType<DungeonManager>();
             componentPool = FindObjectOfType<ComponentPool>();
-
             Pools = componentPool.SetPoolArray<TileObject>(TileType.Max.ToInt32());
         }
+
 
         public override bool StartUp(Vector3Int position, ITilemap tm, GameObject go)
         {
@@ -84,11 +86,13 @@ namespace ReLeaf
                     Debug.LogWarning(go.name);
                     Destroy(go);
                 }
-                if (Pools == null)
+                if (tilemap == null)
                 {
-                    Init(position, tm);
+                    tilemap = tm.GetComponent<Tilemap>();
+                    Init();
                     UpdateTileObject(position, tm);
-                    pool = Pool ?? Pools.SetPool(CurrentTileObject.TileType.ToInt32(), CurrentTileObject, defaultSize, maxSize);
+                    pool = Pool ?? Pools.SetPool(CurrentTileObject.TileType.ToInt32(), CurrentTileObject, defaultCapacity, maxSize);
+                    pool.Resize(defaultCapacity);
                 }
 
                 if (dungeonManager.tiles.ContainsKey((Vector2Int)position))

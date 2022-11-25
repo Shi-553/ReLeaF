@@ -7,6 +7,7 @@ using UnityEngine;
 using System;
 using Pickle;
 using UnityEngine.Tilemaps;
+using UnityEngine.UIElements;
 
 namespace ReLeaf
 {
@@ -19,15 +20,16 @@ namespace ReLeaf
 
         PoolArray poolArray;
 
-        protected override void Init(Vector3Int position, ITilemap tm)
+        protected override void Init()
         {
-            base.Init(position, tm);
+            base.Init();
+
             poolArray = Pools.SetPoolArray((int)currentTileObject.TileType, selectTile.Length);
 
             foreach (var info in selectTile)
             {
                 var v = info as IMultipleVisual;
-                poolArray.SetPool(v.VisualType, info,defaultSize,maxSize);
+                poolArray.SetPool(v.VisualType, info, defaultCapacity, maxSize);
             }
         }
 

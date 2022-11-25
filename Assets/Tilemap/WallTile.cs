@@ -19,6 +19,14 @@ namespace ReLeaf
 
         PoolArray poolArray;
 
+        protected override void Init()
+        {
+            base.Init();
+
+            poolArray = Pools.SetPoolArray((int)currentTileObject.TileType, 2);
+            poolArray.SetPool(0, block);
+            poolArray.SetPool(1, fill);
+        }
         protected override void UpdateTileObject(Vector3Int position, ITilemap tilemap)
         {
             if (HasWallTile(tilemap, position + Vector3Int.up) &&
@@ -34,15 +42,7 @@ namespace ReLeaf
             }
         }
 
-        protected override IPool Pool
-        {
-            get
-            {
-                poolArray ??= Pools.SetPoolArray((int)currentTileObject.TileType, 2);
-
-                return poolArray.SetPool(currentTileObject == block ? 0 : 1,CurrentTileObject);
-            }
-        }
+        protected override IPool Pool=> poolArray.GetPool(currentTileObject == block ? 0 : 1);
         public override void RefreshTile(Vector3Int position, ITilemap tilemap)
         {
             tilemap.RefreshTile(position);
