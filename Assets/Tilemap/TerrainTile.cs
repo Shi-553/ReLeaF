@@ -61,7 +61,7 @@ namespace ReLeaf
 
         public bool IsInvincible { get; set; }
 
-        public int defaultCapacity = 10;
+        public int defaultSize = 10;
         public int maxSize = 100;
 
 
@@ -88,7 +88,7 @@ namespace ReLeaf
                 {
                     Init(position, tm);
                     UpdateTileObject(position, tm);
-                    pool = Pool ?? Pools.SetPool(CurrentTileObject.TileType.ToInt32(), CurrentTileObject, defaultCapacity, maxSize);
+                    pool = Pool ?? Pools.SetPool(CurrentTileObject.TileType.ToInt32(), CurrentTileObject, defaultSize, maxSize);
                 }
 
                 if (dungeonManager.tiles.ContainsKey((Vector2Int)position))

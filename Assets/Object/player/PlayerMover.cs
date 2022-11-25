@@ -66,7 +66,7 @@ namespace ReLeaf
             }
 
 
-            mover.Move(speed * Move);
+            mover.MoveDelta(DungeonManager.CELL_SIZE * speed * Move);
 
             if (DungeonManager.Instance.SowSeed(TilePos, PlantType.Foundation))
             {
@@ -78,7 +78,7 @@ namespace ReLeaf
         {
             while (true)
             {
-                mover.Move(impulse);
+                mover.MoveDelta(DungeonManager.CELL_SIZE * impulse);
 
 
                 impulse *= knockBackDampingRate;

@@ -27,7 +27,7 @@ namespace ReLeaf
             foreach (var info in selectTile)
             {
                 var v = info as IMultipleVisual;
-                poolArray.SetPool(v.VisualType, info,defaultCapacity,maxSize);
+                poolArray.SetPool(v.VisualType, info,defaultSize,maxSize);
             }
         }
 

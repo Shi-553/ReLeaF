@@ -17,6 +17,8 @@ MonoBehaviour:
   m_Flags: 3
   m_ColliderType: 0
   currentTileObject: {fileID: -1407817353737737465, guid: 7d2dbdfb501b7b044ae8ef237778f103, type: 3}
+  defaultSize: 900
+  maxSize: 1000
   randomInfos:
   - probability: 80
     multipleVisualTile: {fileID: -1407817353737737465, guid: 7d2dbdfb501b7b044ae8ef237778f103, type: 3}

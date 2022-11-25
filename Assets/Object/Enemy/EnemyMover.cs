@@ -67,7 +67,7 @@ namespace ReLeaf
                 return Target == nextTilePos;
             }
 
-            mover.Move(worldDir * speed);
+            mover.MoveDelta(DungeonManager.CELL_SIZE * worldDir * speed);
 
             return false;
         }

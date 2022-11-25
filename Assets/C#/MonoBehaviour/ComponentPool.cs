@@ -153,7 +153,7 @@ namespace ReLeaf
         readonly Transform parent;
         readonly IPoolable prefab;
 
-        public Pool(Transform parent, IPoolable p, int defaultCapacity = 10, int maxSize = 100)
+        public Pool(Transform parent, IPoolable p, int defaultSize = 10, int maxSize = 100)
         {
             this.parent = parent;
             prefab = p;
@@ -176,9 +176,14 @@ namespace ReLeaf
                              actionOnRelease: target => target.OnReleasePool(),
                              actionOnDestroy: target => target.OnDestroyPool(),
                              collectionCheck: true,                                                     // 同一インスタンスが登録されていないかチェックするかどうか
-                             defaultCapacity: defaultCapacity,                                                       // デフォルトの容量
+                             defaultCapacity: defaultSize,                                                       // デフォルトの容量
                              maxSize: maxSize);
 
+
+            Enumerable.Repeat(pool, defaultSize)
+                .Select(p => p.Get())
+                .ToArray()
+                .ForEach(poolable => pool.Release(poolable));
         }
 
     }
@@ -207,12 +212,12 @@ namespace ReLeaf
             return null;
         }
 
-        public IPool SetPool<T>(int index, T prefab, int defaultCapacity = 10, int maxSize = 100) where T : Component, IPoolable
+        public IPool SetPool<T>(int index, T prefab, int defaultSize = 10, int maxSize = 100) where T : Component, IPoolable
         {
             if (pools[index] != null)
                 return pools[index];
 
-            var newPool = new Pool(parent, prefab, defaultCapacity, maxSize);
+            var newPool = new Pool(parent, prefab, defaultSize, maxSize);
 
             pools[index] = newPool;
 

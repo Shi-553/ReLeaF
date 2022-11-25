@@ -32,7 +32,8 @@ public static class MathExtension
     }
     public class RandomIndex
     {
-        readonly float totalWeight;
+        readonly public float totalWeight;
+        public float TotalWeight => totalWeight;
         readonly float[] weightTable;
         public RandomIndex(params float[] weightTable)
         {
@@ -41,7 +42,7 @@ public static class MathExtension
         }
         public int Get()
         {
-            var value = Random.Range(0, totalWeight);
+            var value = Random.Range(0, TotalWeight);
             for (var i = 0; i < weightTable.Length; ++i)
             {
                 if (weightTable[i] >= value)

@@ -7,6 +7,7 @@ using System;
 using Pickle;
 using UnityEngine.Tilemaps;
 using static MathExtension;
+using Unity.VisualScripting;
 
 namespace ReLeaf
 {
@@ -37,7 +38,7 @@ namespace ReLeaf
             foreach (var info in randomInfos)
             {
                 var v = info.multipleVisualTile as IMultipleVisual;
-                poolArray.SetPool(v.VisualType, info.multipleVisualTile, defaultCapacity, maxSize);
+                poolArray.SetPool(v.VisualType, info.multipleVisualTile, (defaultSize* info.probability/ randomIndex.totalWeight).ConvertTo<int>(), (maxSize * info.probability / randomIndex.totalWeight).ConvertTo<int>());
             }
         }
 

@@ -19,9 +19,9 @@ namespace ReLeaf
             TryGetComponent(out rigid);
         }
 
-        public void Move(Vector2 m)
+        public void MoveDelta(Vector2 m)
         {
-            move += DungeonManager.CELL_SIZE * DeltaTime * m;
+            move +=  DeltaTime * m;
         }
         private void FixedUpdate()
         {
