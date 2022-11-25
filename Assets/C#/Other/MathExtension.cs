@@ -96,4 +96,19 @@ public static class MathExtension
         }
         return false;
     }
+    public static Vector2Int ClampOneMagnitude(this Vector2 value)
+    {
+        if (Mathf.Abs(value.x) < Mathf.Abs(value.y))
+        {
+            return new Vector2Int(0, (value.y < 0 ? -1 : 1));
+        }
+        else
+        {
+            return new Vector2Int((value.x < 0 ? -1 : 1), 0);
+        }
+    }
+    public static Vector2Int ClampOneMagnitude(this Vector2Int value)
+    {
+       return ClampOneMagnitude((Vector2)value);
+    }
 }

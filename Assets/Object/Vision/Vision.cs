@@ -7,12 +7,19 @@ namespace ReLeaf
 {
     public class Vision : MonoBehaviour
     {
-        public bool ShouldFoundTarget => Targets.Any();
+        public bool ShouldFoundTarget => Targets().Any();
 
         [SerializeField]
         string[] targetTags = { "Player" };
         HashSet<Transform> targets = new HashSet<Transform>();
-        public IEnumerable<Transform> Targets => targets.Where(t => t != null);
+        public IEnumerable<Transform> Targets()
+        {
+            foreach (var item in targets)
+            {
+                if (item != null)
+                    yield return item;
+            }
+        }
 
         public Transform LastTarget { get; private set; }
         private void Start()

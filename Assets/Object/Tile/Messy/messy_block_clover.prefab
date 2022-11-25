@@ -48,6 +48,7 @@ MonoBehaviour:
   tileType: 5
   canSowGrass: 0
   messyInfo: {fileID: 11400000, guid: b01629e79170c07429ec0469ee837a55, type: 2}
+  visualType: 2
 --- !u!1 &2418581233525524103
 GameObject:
   m_ObjectHideFlags: 0

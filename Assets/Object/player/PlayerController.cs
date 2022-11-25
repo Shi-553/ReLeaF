@@ -42,14 +42,7 @@ namespace ReLeaf
         }
         void SetItemDir(Vector2 value)
         {
-            if (Mathf.Abs(value.x) < Mathf.Abs(value.y))
-            {
-               itemManager.ItemDir= new Vector2Int(0, (value.y < 0 ? -1 : 1));
-            }
-            else
-            {
-                itemManager.ItemDir = new Vector2Int((value.x < 0 ? -1 : 1), 0);
-            }
+            itemManager.ItemDir = value.ClampOneMagnitude();
         }
 
         public void OnMove(InputAction.CallbackContext context)

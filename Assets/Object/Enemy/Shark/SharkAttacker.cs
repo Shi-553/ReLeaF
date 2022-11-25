@@ -38,7 +38,7 @@ namespace ReLeaf
             attackStartPos = enemyMover.TilePos;
             enemyDamageable.BeginWeekMarker();
 
-            attackTargetPos = GetAttackRange(enemyMover.TilePos,enemyMover.Dir,true).Last();
+            attackTargetPos = GetAttackRange(enemyMover.TilePos, enemyMover.Dir, true).Last();
         }
         IEnumerator IEnemyAttacker.OnStartDamageing()
         {
@@ -62,7 +62,7 @@ namespace ReLeaf
         {
             for (int i = 0; i < SharkAttackInfo.Range; i++)
             {
-                var worldTilePos = enemyMover.TilePos + enemyMover.Dir * (i + 1);
+                var worldTilePos = pos + dir * (i + 1);
                 if (!DungeonManager.Instance.TryGetTile(worldTilePos, out var tile) || !tile.CanEnemyMove)
                 {
                     yield break;
@@ -71,7 +71,7 @@ namespace ReLeaf
                 {
                     yield return worldTilePos;
                 }
-                
+
             }
         }
         public int GetAttackRangeCount(Vector2Int pos, Vector2Int dir, bool isDamagableOnly)
@@ -79,9 +79,9 @@ namespace ReLeaf
             int count = 0;
             for (int i = 0; i < SharkAttackInfo.Range; i++)
             {
-                var worldTilePos = enemyMover.TilePos + enemyMover.Dir * (i + 1);
+                var worldTilePos = pos + dir * (i + 1);
 
-                if (!DungeonManager.Instance.TryGetTile(worldTilePos, out var tile)|| !tile.CanEnemyMove)
+                if (!DungeonManager.Instance.TryGetTile(worldTilePos, out var tile) || !tile.CanEnemyMove)
                 {
                     return count;
                 }

@@ -115,7 +115,7 @@ namespace ReLeaf
 
         Queue<Vector2Int> tempMapQueue = new Queue<Vector2Int>();
 
-        // スタートしたマスからゴールの手前のマスまで
+        // ゴールの手前のマスからスタートしたマスまで
         List<Vector2Int> routing = new List<Vector2Int>();
         public IReadOnlyList<Vector2Int> Routing => routing;
 

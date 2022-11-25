@@ -1,3 +1,4 @@
+using DebugLogExtension;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
@@ -21,6 +22,7 @@ namespace ReLeaf
         MarkerManager targetMarkerManager;
 
         Vector2Int? targetTilePos;
+        Vector2Int? targetTileBeferePos;
 
         void Start()
         {
@@ -35,7 +37,7 @@ namespace ReLeaf
             }
             if (attacker.IsAttack)
             {
-                if(attacker.Transition==AttackTransition.Damageing)
+                if (attacker.Transition == AttackTransition.Damageing)
                     targetMarkerManager.ResetAllMarker();
 
                 return;
@@ -45,32 +47,62 @@ namespace ReLeaf
             if (mover.WasChangedTilePosPrevFrame || targetTilePos == null)
             {
 
-                var targetTilePoss = searchVision.Targets.Select(p => DungeonManager.Instance.WorldToTilePos(p.position)).ToArray();
                 // 一番近い直線距離
-                var minDistanceSq = targetTilePoss.Min(t => (t - mover.TilePos).sqrMagnitude);
+                var minDistanceSq = float.MaxValue;
+                // 直線距離が一番近いやつら（複数）
+                var minElements = new List<Vector2Int>();
+                foreach (var target in searchVision.Targets())
+                {
+                    var tilePos = DungeonManager.Instance.WorldToTilePos(target.position);
+                    var distanceSq = (tilePos - mover.TilePos).sqrMagnitude;
+                    if (distanceSq < minDistanceSq)
+                    {
+                        minDistanceSq = distanceSq;
+                        minElements.Clear();
+                        minElements.Add(tilePos);
+                    }
+                    if (distanceSq == minDistanceSq)
+                        minElements.Add(tilePos);
+                }
 
                 // ターゲットがないか今のターゲットより3マス以上近いとき
-                if (targetTilePos == null || minDistanceSq+2 < (targetTilePos.Value - mover.TilePos).sqrMagnitude)
+                if (targetTilePos == null || minDistanceSq + 2 < (targetTileBeferePos.Value - mover.TilePos).sqrMagnitude)
                 {
-
-                    // 直線距離が一番近いやつら（複数）
-                    var minDistanceElements = targetTilePoss.Where(t => minDistanceSq == (t - mover.TilePos).sqrMagnitude).ToArray();
-
-                    var (element, index) = minDistanceElements
+                    var tuples = minElements
                         .Select(targetPos =>
                         {
-                            // 経路探索して
+                            var before = targetPos + (mover.TilePos - targetPos).ClampOneMagnitude();
+                            if (DungeonManager.Instance.TryGetTile(before, out var tile) && tile.CanEnemyMove)
+                            {
+                                return (targetPos, beforeTargetPos: before);
+                            }
                             mover.UpdateDir(targetPos, true);
-                            return (targetPos, beforeTargetPos: mover.Routing.First());
+                            if (mover.Routing.Count == 0)
+                            {
+                                return (targetPos, beforeTargetPos: targetPos);
+                            }
+                            return (targetPos, beforeTargetPos: targetPos - mover.Routing.First());
                         })
-                        .MaxBy(tuple => attacker.GetAttackRangeCount(tuple.targetPos, tuple.targetPos - tuple.beforeTargetPos, true));
+                        .Where(t => t.targetPos != t.beforeTargetPos)
+                        .ToArray();
+
+                    if (tuples.Length != 0)
+                    {
+
+                        var (element, index) = tuples.MaxBy(tuple => attacker.GetAttackRangeCount(tuple.targetPos, tuple.targetPos - tuple.beforeTargetPos, true));
 
 
-                    // ターゲットマーカー更新
-                    targetMarkerManager.ResetAllMarker();
-                    targetMarkerManager.SetMarker<TargetMarker>(element.targetPos);
+                        // ターゲットマーカー更新
+                        targetMarkerManager.ResetAllMarker();
+                        targetMarkerManager.SetMarker<TargetMarker>(element.targetPos);
 
-                    targetTilePos = element.targetPos;
+                        targetTileBeferePos = element.beforeTargetPos;
+                        targetTilePos = element.targetPos;
+                    }
+                    else
+                    {
+                        Debug.Log("0");
+                    }
                 }
             }
 
@@ -85,6 +117,7 @@ namespace ReLeaf
 
             if (mover.Move(enemyMoverInfo.Speed, true))
             {
+                mover.UpdateDir(targetTilePos.Value, false);
                 targetTilePos = null;
                 StartCoroutine(attacker.Attack());
             }

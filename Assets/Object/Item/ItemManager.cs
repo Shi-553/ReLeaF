@@ -62,7 +62,7 @@ namespace ReLeaf
             mainCamera = Camera.main;
 
             mover=GetComponentInParent<PlayerMover>();
-
+            ItemCount = 0;
         }
 
         public void AddItem(ItemBase itemBase)

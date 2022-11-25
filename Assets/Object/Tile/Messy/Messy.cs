@@ -1,13 +1,18 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using static ReLeaf.Plant;
 
 namespace ReLeaf
 {
-    public class Messy : TileObject
+    public class Messy : TileObject, IMultipleVisual
     {
         [SerializeField]
         MessyInfo messyInfo;
+
+        public VisualType visualType;
+        public int VisualType => visualType.ToInt32();
+
         public override void Init(bool isCreated)
         {
             base.Init(isCreated);
