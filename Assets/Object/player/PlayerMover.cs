@@ -7,14 +7,17 @@ using System.Threading.Tasks;
 using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
 using UnityEngine;
+using UnityEditor.Animations;
+using Animancer;
+using Unity.VisualScripting;
 
 namespace ReLeaf
 {
     [ClassSummary("プレイヤーの移動")]
-    public class PlayerMover : MonoBehaviour
+    public partial class PlayerMover : MonoBehaviour
     {
 
-        [SerializeField,Rename("プレイヤーの移動スピード(nマス/秒)")]
+        [SerializeField, Rename("プレイヤーの移動スピード(nマス/秒)")]
         float moveSpeed = 5;
 
         [SerializeField, Rename("ダッシュ中の移動スピード倍率(n倍)")]
@@ -34,6 +37,7 @@ namespace ReLeaf
         Rigidbody2DMover mover;
 
         public Vector2 Move { get; set; }
+        public bool IsLeft { get; private set; }
         public bool IsDash { get; set; }
 
         public Vector2Int OldTilePos { get; private set; }
@@ -50,12 +54,17 @@ namespace ReLeaf
             OldTilePos = TilePos;
             TilePos = DungeonManager.Instance.WorldToTilePos(transform.position);
 
+            if (Move.x != 0)
+                IsLeft = Move.x < 0;
+
             var speed = moveSpeed;
 
             if (IsDash && energyGauge.ConsumeValue(dashConsumeEnergy * Time.deltaTime))
             {
                 speed *= dashSpeedMagnification;
+
             }
+
 
             mover.Move(speed * Move);
 
