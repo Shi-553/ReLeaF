@@ -5,8 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using UnityEngine;
 
-namespace ReLeaf
-{
+namespace Utility{
     public static class TransformExtension
     {
         public static string GetFullPath(this Transform t,string separator)

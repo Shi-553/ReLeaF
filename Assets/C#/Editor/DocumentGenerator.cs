@@ -11,8 +11,7 @@ using UnityEditor.SceneManagement;
 using UnityEngine;
 using Object = UnityEngine.Object;
 
-namespace ReLeaf
-{
+namespace Utility{
 
     public class DocumantGenerator : EditorWindow
     {

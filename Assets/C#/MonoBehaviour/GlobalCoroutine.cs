@@ -6,8 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using UnityEngine;
 
-namespace ReLeaf
-{
+namespace Utility{
     // https://shamaton.orz.hm/blog/archives/448
     public class GlobalCoroutine : MonoBehaviour
     {

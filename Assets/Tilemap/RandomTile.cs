@@ -6,8 +6,9 @@ using UnityEngine;
 using System;
 using Pickle;
 using UnityEngine.Tilemaps;
-using static MathExtension;
+using Utility;
 using Unity.VisualScripting;
+using static Utility.MathExtension;
 
 namespace ReLeaf
 {

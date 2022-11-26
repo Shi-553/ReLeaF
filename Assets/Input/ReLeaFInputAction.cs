@@ -15,8 +15,7 @@ using System.Collections.Generic;
 using UnityEngine.InputSystem;
 using UnityEngine.InputSystem.Utilities;
 
-namespace ReLeaf
-{
+namespace ReLeaf{
     public partial class @ReLeafInputAction : IInputActionCollection2, IDisposable
     {
         public InputActionAsset asset { get; }

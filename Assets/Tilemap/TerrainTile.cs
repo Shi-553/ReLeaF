@@ -7,6 +7,7 @@ using UnityEditor;
 #endif
 using UnityEngine;
 using UnityEngine.Tilemaps;
+using Utility;
 using static UnityEngine.UI.CanvasScaler;
 
 namespace ReLeaf

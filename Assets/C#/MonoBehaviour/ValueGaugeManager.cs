@@ -6,8 +6,7 @@ using System.Threading.Tasks;
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace ReLeaf
-{
+namespace Utility{
     [ClassSummary("{gameObject.name}ゲージの管理")]
     public class ValueGaugeManager : MonoBehaviour
     {

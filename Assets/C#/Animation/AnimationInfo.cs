@@ -5,8 +5,7 @@ using System.Linq;
 using UnityEditor;
 using UnityEngine;
 
-namespace ReLeaf
-{
+namespace Utility{
     public class AnimationInfoBase<T> : ScriptableObject where T:Enum
     {
         [Serializable]

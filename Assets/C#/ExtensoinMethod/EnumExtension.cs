@@ -4,8 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ReLeaf
-{
+namespace Utility{
     public static class EnumExtension
     {
         public static int ToInt32(this Enum value)

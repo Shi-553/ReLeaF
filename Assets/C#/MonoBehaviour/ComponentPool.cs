@@ -7,12 +7,10 @@ using System.Text;
 using System.Threading.Tasks;
 using UnityEngine;
 using UnityEngine.Pool;
-using static ReLeaf.IPool;
 using Object = UnityEngine.Object;
 using Transform = UnityEngine.Transform;
 
-namespace ReLeaf
-{
+namespace Utility{
 
     public class ComponentPool : MonoBehaviour
     {

@@ -4,8 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ReLeaf
-{
+namespace Utility{
     public static class LinqExtension
     {
         public static IEnumerable<T> ForEach<T>(this IEnumerable<T> source, Action<T> action)

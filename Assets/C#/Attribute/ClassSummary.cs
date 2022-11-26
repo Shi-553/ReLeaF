@@ -6,8 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using UnityEngine;
 
-namespace ReLeaf
-{
+namespace Utility{
     [AttributeUsage(AttributeTargets.Class, Inherited = true, AllowMultiple = false)]
     public class ClassSummary:Attribute
     {
