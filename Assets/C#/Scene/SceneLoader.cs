@@ -3,7 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-namespace Utility{
+namespace Utility
+{
     public class SceneLoader : SingletonBase<SceneLoader>
     {
 
@@ -53,8 +54,8 @@ namespace Utility{
             loading.SetActive(true);
             audioListener.enabled = false;
 
-            Singleton.Get<BGMManager>().StopAll();
-            Singleton.Get<SEManager>().StopAll();
+            BGMManager.Singleton.StopAll();
+            SEManager.Singleton.StopAll();
 
             // とりあえずマネージャーシーンをアクティブに
             SceneManager.SetActiveScene(gameObject.scene);
@@ -78,8 +79,6 @@ namespace Utility{
 
             Current = SceneManager.GetSceneByBuildIndex(type.GetBuildIndex());
             SceneManager.SetActiveScene(Current);
-
-            Select();
 
             Debug.Log($"Changed to <b>{CurrentType}</b>");
 
@@ -117,8 +116,6 @@ namespace Utility{
 
             Debug.Log($"Override to <b>{CurrentType}</b>");
 
-            Select();
-
             changeing = null;
         }
 
@@ -135,19 +132,11 @@ namespace Utility{
             SceneManager.SetActiveScene(Current);
 
 
-            Select();
-
             Time.timeScale = 1;
 
             changeing = null;
         }
 
-        void Select()
-        {
-            var select = FindObjectOfType<FirstSelect>();
-            if (select != null)
-                select.Select();
-        }
 #endif
     }
 }

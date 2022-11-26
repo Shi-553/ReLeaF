@@ -535,7 +535,8 @@ PlayerSettings:
   webGLLinkerTarget: 1
   webGLThreadsSupport: 0
   webGLDecompressionFallback: 0
-  scriptingDefineSymbols: {}
+  scriptingDefineSymbols:
+    Standalone: DEFINE_SCENE_TYPE_ENUM
   additionalCompilerArguments: {}
   platformArchitecture: {}
   scriptingBackend: {}

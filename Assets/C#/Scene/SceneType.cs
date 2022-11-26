@@ -1,10 +1,11 @@
-﻿#define DEFINE_SCENE_TYPE_ENUM
-/// <summary>
+﻿/// <summary>
 /// シーンの種類を管理する列挙型
 /// <summary>
 public enum SceneType
 {
     SampleScene = 0,
+
+    Manager = 1,
 
 }
 public static class SceneTypeExtension
@@ -14,6 +15,7 @@ public static class SceneTypeExtension
       return type switch                         
       {                                          
           SceneType.SampleScene => 0,              
+          SceneType.Manager => 1,              
           _ => 0,                                
       };                                         
    }

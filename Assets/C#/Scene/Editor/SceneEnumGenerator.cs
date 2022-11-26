@@ -58,6 +58,11 @@ namespace Utility{
                 EditorApplication.playModeStateChanged += ChangedToRefresh;
             }
             Debug.Log($"SceneTypeを生成しました。{scriptPath}");
+
+            var target = EditorUserBuildSettings.activeBuildTarget;
+            var group = BuildPipeline.GetBuildTargetGroup(target);
+            PlayerSettings.SetScriptingDefineSymbolsForGroup(group, "DEFINE_SCENE_TYPE_ENUM");
+
         }
 
         private static void ChangedToRefresh(PlayModeStateChange state)
@@ -79,7 +84,6 @@ namespace Utility{
             var sceneNames = new List<string>(sceneNamesOriginal);
 
             var builder = new StringBuilder()
-                .AppendLine("#define DEFINE_SCENE_TYPE_ENUM")
                 .AppendLine("/// <summary>")
                 .AppendLine("/// シーンの種類を管理する列挙型")
                 .AppendLine("/// <summary>")

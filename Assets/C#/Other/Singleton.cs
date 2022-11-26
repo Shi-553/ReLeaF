@@ -42,20 +42,4 @@ namespace Utility
 
     }
 
-    public static class SingletonSceneInitializer
-    {
-        [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.BeforeSceneLoad)]
-        private static void SingletonSceneInitialize()
-        {
-            string managerSceneName = "Manager";
-            if (SceneManager.GetSceneByName(managerSceneName).IsValid())
-            {
-                SceneManager.LoadScene(managerSceneName, LoadSceneMode.Additive);
-            }
-            else
-            {
-                Debug.LogWarning("Manager scene not found.");
-            }
-        }
-    }
 }
