@@ -16,6 +16,8 @@ namespace ReLeaf
         CinemachineVirtualCamera virtualCamera;
         CinemachineTargetGroup targetGroup;
 
+        [SerializeField]
+        GameObject gameclearText;
 
         bool isStartGreening = false;
 
@@ -105,6 +107,7 @@ namespace ReLeaf
                 yield return greeningWait;
             }
 
+            gameclearText.SetActive(true);
         }
     }
 }

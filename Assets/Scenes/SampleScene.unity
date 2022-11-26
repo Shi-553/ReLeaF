@@ -2257,6 +2257,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   greeningTime: 0.1
   virtualCamera: {fileID: 919157324}
+  gameclearText: {fileID: 1709581110}
 --- !u!4 &806003221
 Transform:
   m_ObjectHideFlags: 0
@@ -2904,7 +2905,6 @@ MonoBehaviour:
   targetRate: 0.7
   targetRateTransform: {fileID: 114856932}
   slider: {fileID: 2118467201}
-  gameclearText: {fileID: 1709581110}
   allGreening: {fileID: 806003220}
 --- !u!1 &1108755539
 GameObject:

@@ -33,8 +33,6 @@ namespace ReLeaf
         [SerializeField]
         Slider slider;
         [SerializeField]
-        GameObject gameclearText;
-        [SerializeField]
         AllGreening allGreening;
 
         public static GreeningRate Instance { get; private set; }
@@ -75,7 +73,6 @@ namespace ReLeaf
 
             if (ValueRate >= targetRate)
             {
-                gameclearText.gameObject.SetActive(true);
                 allGreening.StartGreening(GameObject.FindObjectOfType<PlayerMover>().TilePos);
             }
         }
