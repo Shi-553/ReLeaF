@@ -39,7 +39,7 @@ namespace ReLeaf
             {
                 var worldTilePos = enemyMover.TilePos + MathExtension.GetRotatedLocalPos(enemyMover.Dir,defaultLocalPos);
 
-                if (DungeonManager.Instance.TryGetTile(worldTilePos,out var tile) && tile.CanEnemyMove)
+                if (DungeonManager.Singleton.TryGetTile(worldTilePos,out var tile) && tile.CanEnemyMove)
                 {
                     var marker = weakMarkerManager.SetMarker<WeakMarker>(worldTilePos);
                     if (marker != null)

@@ -11,9 +11,9 @@ namespace ReLeaf
         public void SetEnemyDamageable(IEnemyDamageable damageable)
         {
             enemyDamageable = damageable;
-            if (DungeonManager.Instance.TryGetTile(tilePos, out var tile) && tile.TileType == TileType.Plant)
+            if (DungeonManager.Singleton.TryGetTile(tilePos, out var tile) && tile.TileType == TileType.Plant)
             {
-                DungeonManager.Instance.ToSand(tilePos);
+                DungeonManager.Singleton.ToSand(tilePos);
             }
         }
         public override void TileChanged(DungeonManager.TileChangedInfo info)

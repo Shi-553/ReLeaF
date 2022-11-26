@@ -24,7 +24,7 @@ namespace ReLeaf
 
             }
         }
-        public float ValueRate => value / DungeonManager.Instance.MaxGreeningCount;
+        public float ValueRate => value / DungeonManager.Singleton.MaxGreeningCount;
 
         [SerializeField,Rename("クリアに必要な緑化率")]
         float targetRate = 0.8f;
@@ -57,7 +57,7 @@ namespace ReLeaf
             targetRatePos.x = Mathf.Lerp(-sliderRect.sizeDelta.x / 2, sliderRect.sizeDelta.x/2, targetRate);
             targetRateTransform.localPosition = targetRatePos;
 
-            DungeonManager.Instance.OnTileChanged += OnTileChanged;
+            DungeonManager.Singleton.OnTileChanged += OnTileChanged;
         }
 
         private void OnTileChanged(DungeonManager.TileChangedInfo obj)
@@ -72,7 +72,7 @@ namespace ReLeaf
 
             if (ValueRate >= targetRate)
             {
-                GameRuleManager.Instance.Finish(true);
+                GameRuleManager.Singleton.Finish(true);
             }
         }
     }

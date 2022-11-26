@@ -65,7 +65,7 @@ namespace ReLeaf
                 {
                     Vector2Int pos = target[i];
 
-                    if (!greenMap.TryAdd(pos, true) || !DungeonManager.Instance.TryGetTile(pos, out var tile))
+                    if (!greenMap.TryAdd(pos, true) || !DungeonManager.Singleton.TryGetTile(pos, out var tile))
                     {
                         continue;
                     }
@@ -83,7 +83,7 @@ namespace ReLeaf
                     // —Î‰»‚Å‚«‚é
                     if (tile.TileType == TileType.Sand || tile.TileType == TileType.Messy)
                     {
-                        DungeonManager.Instance.SowSeed(pos, PlantType.Foundation, true);
+                        DungeonManager.Singleton.SowSeed(pos, PlantType.Foundation, true);
                     }
 
 

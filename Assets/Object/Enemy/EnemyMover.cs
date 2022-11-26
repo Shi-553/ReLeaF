@@ -32,7 +32,7 @@ namespace ReLeaf
         void Start()
         {
             TryGetComponent(out mover);
-            TilePos = DungeonManager.Instance.WorldToTilePos(mover.Position);
+            TilePos = DungeonManager.Singleton.WorldToTilePos(mover.Position);
             Dir = Vector2Int.down;
         }
 
@@ -41,7 +41,7 @@ namespace ReLeaf
         {
             var nextTilePos = TilePos + Dir;
 
-            Vector2 worldNextTargetPos = DungeonManager.Instance.TilePosToWorld(nextTilePos);
+            Vector2 worldNextTargetPos = DungeonManager.Singleton.TilePosToWorld(nextTilePos);
 
             var distance = worldNextTargetPos - mover.Position;
             var worldDir = distance.normalized;
@@ -219,7 +219,7 @@ namespace ReLeaf
                 return false;
             }
 
-            if((DungeonManager.Instance.TryGetTile(nextPos,out var tile) && tile.CanEnemyMove) || nextPos == Target)
+            if((DungeonManager.Singleton.TryGetTile(nextPos,out var tile) && tile.CanEnemyMove) || nextPos == Target)
             {
                 tempMapQueue.Enqueue(nextPos);
 

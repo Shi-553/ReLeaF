@@ -22,7 +22,7 @@ namespace ReLeaf
         IEnumerator WaitCure()
         {
             yield return new WaitForSeconds(messyInfo.CureTime);
-            DungeonManager.Instance.ToSand(TilePos);
+            DungeonManager.Singleton.ToSand(TilePos);
         }
     }
 }

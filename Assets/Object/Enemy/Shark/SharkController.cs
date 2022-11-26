@@ -32,7 +32,7 @@ namespace ReLeaf
         }
         void Update()
         {
-            if (GameRuleManager.Instance.IsPrepare)
+            if (GameRuleManager.Singleton.IsPrepare)
                 return;
             if (!searchVision.ShouldFoundTarget)
             {
@@ -56,7 +56,7 @@ namespace ReLeaf
                 var minElements = new List<Vector2Int>();
                 foreach (var target in searchVision.Targets())
                 {
-                    var tilePos = DungeonManager.Instance.WorldToTilePos(target.position);
+                    var tilePos = DungeonManager.Singleton.WorldToTilePos(target.position);
                     var distanceSq = (tilePos - mover.TilePos).sqrMagnitude;
                     if (distanceSq < minDistanceSq)
                     {
@@ -75,7 +75,7 @@ namespace ReLeaf
                         .Select(targetPos =>
                         {
                             var before = targetPos + (mover.TilePos - targetPos).ClampOneMagnitude();
-                            if (DungeonManager.Instance.TryGetTile(before, out var tile) && tile.CanEnemyMove)
+                            if (DungeonManager.Singleton.TryGetTile(before, out var tile) && tile.CanEnemyMove)
                             {
                                 return (targetPos, beforeTargetPos: before);
                             }

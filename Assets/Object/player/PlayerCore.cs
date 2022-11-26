@@ -39,7 +39,7 @@ namespace ReLeaf
 
         public void Damaged(float damage, Vector3 impulse)
         {
-            if (!GameRuleManager.Instance.IsPlaying)
+            if (!GameRuleManager.Singleton.IsPlaying)
                 return;
             if (IsInvincible)
                 return;
@@ -83,7 +83,7 @@ namespace ReLeaf
         void Death()
         {
             spriteRenderer.enabled = false;
-            GameRuleManager.Instance.Finish(false);
+            GameRuleManager.Singleton.Finish(false);
         }
 
 

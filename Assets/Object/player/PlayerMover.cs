@@ -52,11 +52,11 @@ namespace ReLeaf
         }
         void Update()
         {
-            if (GameRuleManager.Instance.IsPrepare)
+            if (GameRuleManager.Singleton.IsPrepare)
                 return;
 
             OldTilePos = TilePos;
-            TilePos = DungeonManager.Instance.WorldToTilePos(transform.position);
+            TilePos = DungeonManager.Singleton.WorldToTilePos(transform.position);
 
             if (Move.x != 0)
                 IsLeft = Move.x < 0;
@@ -72,7 +72,7 @@ namespace ReLeaf
 
             mover.MoveDelta(DungeonManager.CELL_SIZE * speed * Move);
 
-            if (DungeonManager.Instance.SowSeed(TilePos, PlantType.Foundation))
+            if (DungeonManager.Singleton.SowSeed(TilePos, PlantType.Foundation))
             {
                 energyGauge.RecoveryValue(energyRecoveryPoint);
             }

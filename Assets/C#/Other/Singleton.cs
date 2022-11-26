@@ -2,39 +2,47 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
-using Utility.Impl;
+using Utility.Definition;
 
 namespace Utility
 {
-    namespace Impl
+    namespace Definition
     {
-        public abstract class SingletonBase : MonoBehaviour
+        public abstract class DefinitionSingletonBase : MonoBehaviour
         {
             protected abstract void Awake();
         }
     }
-    public abstract class SingletonBase<T> : SingletonBase where T : SingletonBase<T>
+    public abstract class SingletonBase<T> : DefinitionSingletonBase where T : SingletonBase<T>
     {
         static T singletonInstance;
         public static T Singleton
         {
             get
             {
-                if (singletonInstance == null)
+                if (!isInit)
                 {
+                    isInit = true;
                     singletonInstance = FindObjectOfType<T>();
-                    singletonInstance.Awake();
+                    singletonInstance.Init();
                 }
                 return singletonInstance;
             }
         }
 
-        bool isInit = false;
+        static bool isInit = false;
         sealed protected override void Awake()
         {
+            if (singletonInstance != null && singletonInstance != this)
+            {
+                Destroy(this);
+                return;
+            }
+
             if (!isInit)
             {
                 isInit = true;
+                singletonInstance = this as T;
                 Init();
             }
         }

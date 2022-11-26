@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Utility;
 
 namespace ReLeaf
 {
@@ -11,7 +12,7 @@ namespace ReLeaf
         GameClear,
         GameOver
     }
-    public class GameRuleManager : MonoBehaviour
+    public class GameRuleManager : SingletonBase<GameRuleManager>
     {
         public GameRuleState State { get; private set; }
 
@@ -32,19 +33,11 @@ namespace ReLeaf
         [SerializeField]
         GameObject gameclearText;
 
-        public static GameRuleManager Instance { get; private set; }
-        private void Awake()
+
+        protected override void Init()
         {
-            if (Instance == null)
-            {
-                Instance = this;
-            }
-            else
-            {
-                Destroy(gameObject);
-                return;
-            }
         }
+
         private IEnumerator Start()
         {
             gameReadyText.SetActive(true);
@@ -72,5 +65,6 @@ namespace ReLeaf
             yield return StartCoroutine(allGreening.StartGreening());
             gameclearText.SetActive(true);
         }
+
     }
 }

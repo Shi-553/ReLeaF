@@ -118,7 +118,7 @@ namespace ReLeaf
         }
         protected virtual void Withered()
         {
-            DungeonManager.Instance.Messy(TilePos, this);
+            DungeonManager.Singleton.Messy(TilePos, this);
         }
 
         }

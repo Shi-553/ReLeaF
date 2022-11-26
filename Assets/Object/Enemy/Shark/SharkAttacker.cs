@@ -64,7 +64,7 @@ namespace ReLeaf
             for (int i = 0; i < SharkAttackInfo.Range; i++)
             {
                 var worldTilePos = pos + dir * (i + 1);
-                if (!DungeonManager.Instance.TryGetTile(worldTilePos, out var tile) || !tile.CanEnemyMove)
+                if (!DungeonManager.Singleton.TryGetTile(worldTilePos, out var tile) || !tile.CanEnemyMove)
                 {
                     yield break;
                 }
@@ -82,7 +82,7 @@ namespace ReLeaf
             {
                 var worldTilePos = pos + dir * (i + 1);
 
-                if (!DungeonManager.Instance.TryGetTile(worldTilePos, out var tile) || !tile.CanEnemyMove)
+                if (!DungeonManager.Singleton.TryGetTile(worldTilePos, out var tile) || !tile.CanEnemyMove)
                 {
                     return count;
                 }

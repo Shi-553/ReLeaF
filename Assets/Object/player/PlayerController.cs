@@ -94,7 +94,7 @@ namespace ReLeaf
 
         void Update()
         {
-            if (GameRuleManager.Instance.IsPrepare)
+            if (GameRuleManager.Singleton.IsPrepare)
                 return;
 
             if (Keyboard.current.escapeKey.wasPressedThisFrame)
@@ -111,7 +111,7 @@ namespace ReLeaf
             }
             if (Keyboard.current.f2Key.wasPressedThisFrame)
             {
-                GameRuleManager.Instance.Finish(true);
+                GameRuleManager.Singleton.Finish(true);
             }
 
         }

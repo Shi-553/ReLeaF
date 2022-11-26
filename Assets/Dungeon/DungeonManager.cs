@@ -14,7 +14,7 @@ namespace ReLeaf
         Max
     };
     [ClassSummary("タイルマップマネージャー")]
-    public class DungeonManager : MonoBehaviour
+    public class DungeonManager : SingletonBase<DungeonManager>
     {
         [SerializeField]
         Tilemap groundTilemap;
@@ -47,19 +47,8 @@ namespace ReLeaf
         }
         public event Action<TileChangedInfo> OnTileChanged;
 
-        public static DungeonManager Instance { get; private set; }
-        private void Awake()
+        protected override void Init()
         {
-            if (Instance == null)
-            {
-                Instance = this;
-            }
-            else
-            {
-                Destroy(gameObject);
-                return;
-            }
-
             foreach (var pos in groundTilemap.cellBounds.allPositionsWithin)
             {
                 var tile = groundTilemap.GetTile<TerrainTile>(pos);
@@ -73,6 +62,7 @@ namespace ReLeaf
             seedTiles.ForEach(t => t.Init());
             messyTile.Init();
         }
+
         public Vector2Int WorldToTilePos(Vector3 worldPos)
         {
             return (Vector2Int)groundTilemap.WorldToCell(worldPos);
@@ -155,6 +145,7 @@ namespace ReLeaf
         {
             ChangeTile(tilePos, sandTile);
         }
+
 
         static public readonly float CELL_SIZE = 0.5f;
     }

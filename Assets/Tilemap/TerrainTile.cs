@@ -51,9 +51,6 @@ namespace ReLeaf
 
         virtual protected void UpdateTileObject(Vector3Int position, ITilemap tilemap) { }
 
-        DungeonManager dungeonManager;
-        ComponentPool componentPool;
-
         Tilemap tilemap;
 
         protected PoolArray Pools;
@@ -80,9 +77,7 @@ namespace ReLeaf
         protected virtual void InitImpl()
         {
             isInit = true;
-            dungeonManager = FindObjectOfType<DungeonManager>();
-            componentPool = FindObjectOfType<ComponentPool>();
-            Pools = componentPool.SetPoolArray<TileObject>(TileType.Max.ToInt32());
+            Pools = ComponentPool.Singleton.SetPoolArray<TileObject>(TileType.Max.ToInt32());
         }
 
 
@@ -103,7 +98,7 @@ namespace ReLeaf
                     pool = Pool ?? Pools.SetPool(CurrentTileObject.TileType.ToInt32(), CurrentTileObject, defaultCapacity, maxSize);
                 }
 
-                if (dungeonManager.tiles.ContainsKey((Vector2Int)position))
+                if (DungeonManager.Singleton.tiles.ContainsKey((Vector2Int)position))
                 {
                     return true;
                 }
@@ -118,11 +113,11 @@ namespace ReLeaf
 
                 newTile.IsInvincible = IsInvincible;
                 newTile.transform.position = tilemap.CellToWorld(position) + new Vector3(DungeonManager.CELL_SIZE, DungeonManager.CELL_SIZE) / 2;
-                newTile.TilePos = dungeonManager.WorldToTilePos(newTile.transform.position);
+                newTile.TilePos = DungeonManager.Singleton.WorldToTilePos(newTile.transform.position);
                 newTile.transform.parent = tilemap.transform;
 
 
-                dungeonManager.tiles[(Vector2Int)position] = newTile;
+                DungeonManager.Singleton.tiles[(Vector2Int)position] = newTile;
             }
             return true;
         }

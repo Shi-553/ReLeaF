@@ -10,7 +10,7 @@ namespace ReLeaf
 
         public void Init(bool isCreate)
         {
-            tilePos = DungeonManager.Instance.WorldToTilePos(transform.position);
+            tilePos = DungeonManager.Singleton.WorldToTilePos(transform.position);
         }
         public void Uninit()
         {

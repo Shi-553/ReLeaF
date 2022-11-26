@@ -12,29 +12,13 @@ using Transform = UnityEngine.Transform;
 
 namespace Utility{
 
-    public class ComponentPool : MonoBehaviour
+    public class ComponentPool : SingletonBase<ComponentPool>
     {
         readonly Dictionary<Type, IPool> pools = new();
         public IReadOnlyDictionary<Type, IPool> Pools => pools;
 
-        [SerializeField]
-        bool isDontDestroyOnLoad;
-
-        public static ComponentPool Instance { get; private set; }
-
-        private void Awake()
+        protected override void Init()
         {
-            if (Instance == null)
-            {
-                Instance = this;
-            }
-            else
-            {
-                Destroy(gameObject);
-                return;
-            }
-            if (isDontDestroyOnLoad)
-                DontDestroyOnLoad(gameObject);
         }
         private void OnDestroy()
         {
