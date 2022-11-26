@@ -16,8 +16,6 @@ namespace ReLeaf
         CinemachineVirtualCamera virtualCamera;
         CinemachineTargetGroup targetGroup;
 
-        [SerializeField]
-        GameObject gameclearText;
 
         bool isStartGreening = false;
 
@@ -26,10 +24,10 @@ namespace ReLeaf
             TryGetComponent(out targetGroup);
         }
 
-        public void StartGreening()
+        public IEnumerator StartGreening()
         {
             if (isStartGreening)
-                return;
+                yield break;
 
             isStartGreening = true;
 
@@ -37,9 +35,8 @@ namespace ReLeaf
             virtualCamera.Follow = transform;
 
             var player =FindObjectOfType<PlayerMover>();
-            player.GetComponent<PlayerController>().IsInvincible = true;
 
-            StartCoroutine(Greening(player.TilePos));
+           yield return StartCoroutine(Greening(player.TilePos));
         }
 
         IEnumerator Greening(Vector2Int startPos)
@@ -110,8 +107,6 @@ namespace ReLeaf
 
                 yield return greeningWait;
             }
-
-            gameclearText.SetActive(true);
         }
     }
 }

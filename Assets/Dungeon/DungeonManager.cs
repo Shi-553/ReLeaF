@@ -67,6 +67,10 @@ namespace ReLeaf
                     MaxGreeningCount++;
                 }
             }
+
+            sandTile.Init();
+            seedTiles.ForEach(t => t.Init());
+            messyTile.Init();
         }
         public Vector2Int WorldToTilePos(Vector3 worldPos)
         {

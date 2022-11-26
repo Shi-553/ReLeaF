@@ -9,12 +9,6 @@ namespace ReLeaf
 {
     public class PlayerController : MonoBehaviour, ReLeafInputAction.IPlayerActions
     {
-
-
-        [SerializeField]
-        ValueGaugeManager hpGauge;
-
-
         PlayerInput playerInput;
         ReLeafInputAction reLeafInputAction;
 
@@ -22,11 +16,8 @@ namespace ReLeaf
 
         PlayerMover mover;
 
-        public bool IsInvincible { get; set; }
-
         private void Awake()
         {
-            IsInvincible = false;
             TryGetComponent(out mover);
 
             reLeafInputAction = new ReLeafInputAction();
@@ -102,6 +93,9 @@ namespace ReLeaf
 
         void Update()
         {
+            if (GameRuleManager.Instance.IsPrepare)
+                return;
+
             if (Keyboard.current.escapeKey.wasPressedThisFrame)
             {
 #if UNITY_EDITOR
@@ -116,35 +110,9 @@ namespace ReLeaf
             }
             if (Keyboard.current.f2Key.wasPressedThisFrame)
             {
-                FindObjectOfType<AllGreening>().StartGreening();
+                GameRuleManager.Instance.Finish(true);
             }
 
-
-
         }
-
-        public void Damaged(float damage, Vector3 impulse)
-        {
-            if (IsInvincible)
-                return;
-
-            if (hpGauge.ConsumeValue(damage))
-            {
-                StartCoroutine(mover.KnockBack(impulse));
-
-                if (hpGauge.Value == 0)
-                {
-                    StartCoroutine(Death());
-                }
-            }
-        }
-        IEnumerator Death()
-        {
-            GetComponentInChildren<SpriteRenderer>().enabled = false;
-            yield return new WaitUntil(() => Mouse.current.leftButton.wasPressedThisFrame);
-            SceneManager.LoadScene(0);
-        }
-
-
     }
 }

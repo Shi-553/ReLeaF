@@ -65,12 +65,20 @@ namespace ReLeaf
         public int defaultCapacity = 10;
         public int maxSize = 100;
 
+        bool isInit = false;
         void OnEnable()
         {
             tilemap = null;
+            isInit = false;
         }
-        protected virtual void Init()
+        public void Init()
         {
+            if (!isInit)
+                InitImpl();
+        }
+        protected virtual void InitImpl()
+        {
+            isInit = true;
             dungeonManager = FindObjectOfType<DungeonManager>();
             componentPool = FindObjectOfType<ComponentPool>();
             Pools = componentPool.SetPoolArray<TileObject>(TileType.Max.ToInt32());

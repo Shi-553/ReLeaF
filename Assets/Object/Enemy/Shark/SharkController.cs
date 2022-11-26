@@ -31,6 +31,8 @@ namespace ReLeaf
         }
         void Update()
         {
+            if (GameRuleManager.Instance.IsPrepare)
+                return;
             if (!searchVision.ShouldFoundTarget)
             {
                 return;

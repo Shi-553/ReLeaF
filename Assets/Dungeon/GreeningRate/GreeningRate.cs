@@ -32,8 +32,6 @@ namespace ReLeaf
 
         [SerializeField]
         Slider slider;
-        [SerializeField]
-        AllGreening allGreening;
 
         public static GreeningRate Instance { get; private set; }
         private void Awake()
@@ -73,7 +71,7 @@ namespace ReLeaf
 
             if (ValueRate >= targetRate)
             {
-                allGreening.StartGreening();
+                GameRuleManager.Instance.Finish(true);
             }
         }
     }

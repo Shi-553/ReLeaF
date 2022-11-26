@@ -102,7 +102,7 @@ namespace ReLeaf
             }
             if (collision.gameObject.CompareTag("Player"))
             {
-                if (collision.gameObject.TryGetComponent<PlayerController>(out var player))
+                if (collision.gameObject.TryGetComponent<PlayerCore>(out var player))
                 {
                     player.Damaged(SharkAttackInfo.ATK, (Vector2)enemyMover.Dir * SharkAttackInfo.KnockBackPower);
                 }

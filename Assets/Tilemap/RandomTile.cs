@@ -27,9 +27,9 @@ namespace ReLeaf
         PoolArray poolArray;
         RandomIndex randomIndex;
 
-        protected override void Init()
+        protected override void InitImpl()
         {
-            base.Init();
+            base.InitImpl();
 
             randomIndex = new RandomIndex(randomInfos.Select(r => r.probability).ToArray());
 

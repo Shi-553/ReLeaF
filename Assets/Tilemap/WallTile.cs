@@ -19,9 +19,9 @@ namespace ReLeaf
 
         PoolArray poolArray;
 
-        protected override void Init()
+        protected override void InitImpl()
         {
-            base.Init();
+            base.InitImpl();
 
             poolArray = Pools.SetPoolArray((int)currentTileObject.TileType, 2);
             poolArray.SetPool(0, block);

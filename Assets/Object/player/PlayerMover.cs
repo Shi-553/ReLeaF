@@ -51,6 +51,9 @@ namespace ReLeaf
         }
         void Update()
         {
+            if (GameRuleManager.Instance.IsPrepare)
+                return;
+
             OldTilePos = TilePos;
             TilePos = DungeonManager.Instance.WorldToTilePos(transform.position);
 
