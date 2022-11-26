@@ -9092,14 +9092,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 3289195857310044243, guid: 7145dcadd5ab20341bfef2b0cf89dc63, type: 3}
-      propertyPath: damagedInvicibleTime
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 3289195857310044243, guid: 7145dcadd5ab20341bfef2b0cf89dc63, type: 3}
-      propertyPath: damagedFlashingInterval
-      value: 0.1
-      objectReference: {fileID: 0}
     - target: {fileID: 4052387953760838874, guid: 7145dcadd5ab20341bfef2b0cf89dc63, type: 3}
       propertyPath: itemUIRoot
       value: 
