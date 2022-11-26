@@ -25,7 +25,8 @@ namespace ReLeaf
         }
 
         public virtual void Uninit()
-        { 
+        {
+            IsInvincible = false;
         }
 
         [SerializeField, Rename("種をまけるかどうか")]

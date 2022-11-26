@@ -73,7 +73,7 @@ namespace ReLeaf
 
             if (ValueRate >= targetRate)
             {
-                allGreening.StartGreening(GameObject.FindObjectOfType<PlayerMover>().TilePos);
+                allGreening.StartGreening();
             }
         }
     }

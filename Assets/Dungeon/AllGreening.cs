@@ -26,7 +26,7 @@ namespace ReLeaf
             TryGetComponent(out targetGroup);
         }
 
-        public void StartGreening(Vector2Int pos)
+        public void StartGreening()
         {
             if (isStartGreening)
                 return;
@@ -35,7 +35,11 @@ namespace ReLeaf
 
             virtualCamera.LookAt = transform;
             virtualCamera.Follow = transform;
-            StartCoroutine(Greening(pos));
+
+            var player =FindObjectOfType<PlayerMover>();
+            player.GetComponent<PlayerController>().IsInvincible = true;
+
+            StartCoroutine(Greening(player.TilePos));
         }
 
         IEnumerator Greening(Vector2Int startPos)

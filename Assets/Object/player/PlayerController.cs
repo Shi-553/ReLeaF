@@ -22,8 +22,11 @@ namespace ReLeaf
 
         PlayerMover mover;
 
+        public bool IsInvincible { get; set; }
+
         private void Awake()
         {
+            IsInvincible = false;
             TryGetComponent(out mover);
 
             reLeafInputAction = new ReLeafInputAction();
@@ -113,7 +116,7 @@ namespace ReLeaf
             }
             if (Keyboard.current.f2Key.wasPressedThisFrame)
             {
-                FindObjectOfType<AllGreening>().StartGreening(mover.TilePos);
+                FindObjectOfType<AllGreening>().StartGreening();
             }
 
 
@@ -122,6 +125,9 @@ namespace ReLeaf
 
         public void Damaged(float damage, Vector3 impulse)
         {
+            if (IsInvincible)
+                return;
+
             if (hpGauge.ConsumeValue(damage))
             {
                 StartCoroutine(mover.KnockBack(impulse));
