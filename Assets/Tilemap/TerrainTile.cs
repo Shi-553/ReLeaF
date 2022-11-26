@@ -92,7 +92,6 @@ namespace ReLeaf
                     Init();
                     UpdateTileObject(position, tm);
                     pool = Pool ?? Pools.SetPool(CurrentTileObject.TileType.ToInt32(), CurrentTileObject, defaultCapacity, maxSize);
-                    pool.Resize(defaultCapacity);
                 }
 
                 if (dungeonManager.tiles.ContainsKey((Vector2Int)position))

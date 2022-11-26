@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
@@ -16,6 +17,7 @@ namespace ReLeaf
     public class ComponentPool : MonoBehaviour
     {
         readonly Dictionary<Type, IPool> pools = new();
+        public IReadOnlyDictionary<Type, IPool> Pools => pools;
 
         [SerializeField]
         bool isDontDestroyOnLoad;
@@ -53,7 +55,7 @@ namespace ReLeaf
             }
             return null;
         }
-        public IPool SetPool<T>(T prefab, int defaultCapacity = 10, int maxSize = 100) where T : Component, IPoolable
+        public IPool SetPool<T>(T prefab, int defaultCapacity = 10, int maxSize = 100, bool setSizeWithCapacity = false) where T : Component, IPoolable
         {
             var type = typeof(T);
             if (pools.TryGetValue(type, out var pool))
@@ -64,7 +66,7 @@ namespace ReLeaf
             var poolParent = new GameObject(type.Name).transform;
             poolParent.parent = transform;
 
-            var newPool = new Pool(poolParent, prefab, defaultCapacity, maxSize);
+            var newPool = new Pool(poolParent, prefab, defaultCapacity, maxSize, setSizeWithCapacity);
 
 
             pools[type] = newPool;
@@ -104,7 +106,7 @@ namespace ReLeaf
         }
     }
 
-    public interface IPool
+    public interface IPool : IEnumerable<IPool>
     {
         ObjectPool<IPoolable> ObjectPool { get; }
 
@@ -148,7 +150,7 @@ namespace ReLeaf
 
             for (int i = 0; i < size; i++)
             {
-                poolables[i]= ObjectPool.Get();
+                poolables[i] = ObjectPool.Get();
             }
             for (int i = 0; i < size; i++)
             {
@@ -167,7 +169,7 @@ namespace ReLeaf
         readonly Transform parent;
         readonly IPoolable prefab;
 
-        public Pool(Transform parent, IPoolable p, int defaultCapacity = 10, int maxSize = 100)
+        public Pool(Transform parent, IPoolable p, int defaultCapacity = 10, int maxSize = 100, bool setSizeWithCapacity = false)
         {
             this.parent = parent;
             prefab = p;
@@ -193,9 +195,18 @@ namespace ReLeaf
                              defaultCapacity: defaultCapacity,                                                       // デフォルトの容量
                              maxSize: maxSize);
 
-
+            if (setSizeWithCapacity)
+            {
+                this.StaticCast<IPool>().Resize(defaultCapacity);
+            }
         }
 
+        public IEnumerator<IPool> GetEnumerator()
+        {
+            yield return this;
+        }
+
+        IEnumerator IEnumerable.GetEnumerator() => GetEnumerator();
     }
 
     public class PoolArray : IPool
@@ -222,12 +233,12 @@ namespace ReLeaf
             return null;
         }
 
-        public IPool SetPool<T>(int index, T prefab, int defaultCapacity = 10, int maxSize = 100) where T : Component, IPoolable
+        public IPool SetPool<T>(int index, T prefab, int defaultCapacity = 10, int maxSize = 100, bool setSizeWithCapacity = false) where T : Component, IPoolable
         {
             if (pools[index] != null)
                 return pools[index];
 
-            var newPool = new Pool(parent, prefab, defaultCapacity, maxSize);
+            var newPool = new Pool(parent, prefab, defaultCapacity, maxSize, setSizeWithCapacity);
 
             pools[index] = newPool;
 
@@ -262,5 +273,15 @@ namespace ReLeaf
 
             return newPool;
         }
+
+        public IEnumerator<IPool> GetEnumerator()
+        {
+            foreach (var p in pools)
+            {
+                yield return p;
+            }
+        }
+
+        IEnumerator IEnumerable.GetEnumerator() => GetEnumerator();
     }
 }

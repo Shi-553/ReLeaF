@@ -84,7 +84,7 @@ namespace ReLeaf
             {
                 if (collision.TryGetComponent<Plant>(out var plant)&& plant.IsInvincible)
                 {
-                    Damaged(1);
+                    Death();
                 }
             }
         }
