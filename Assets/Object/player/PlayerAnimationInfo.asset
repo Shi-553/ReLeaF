@@ -19,3 +19,6 @@ MonoBehaviour:
   - type: 1
     left: {fileID: 7400000, guid: a82047d6b032ef6418e429b87e245462, type: 2}
     right: {fileID: 7400000, guid: 437cbf3ecc603d9498f8edaf1a9cc22f, type: 2}
+  - type: 2
+    left: {fileID: 7400000, guid: 9135f4f668304c14fbf4e98c21af61ef, type: 2}
+    right: {fileID: 7400000, guid: aa9205005682e8f48b904b92130d35d2, type: 2}

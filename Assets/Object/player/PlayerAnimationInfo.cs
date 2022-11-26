@@ -5,7 +5,8 @@ namespace ReLeaf
     public enum PlayerAnimationType
     {
         Standby,
-        Walk
+        Walk,
+        Run
     }
     [CreateAssetMenu(menuName ="Player/AnimationInfo")]
     public class PlayerAnimationInfo : AnimationInfoBase<PlayerAnimationType>

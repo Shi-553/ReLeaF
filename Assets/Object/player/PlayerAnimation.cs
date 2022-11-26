@@ -27,10 +27,11 @@ namespace ReLeaf
 
         private void Update()
         {
-            //if (mover.IsDash)
-            //{
-            //    return;
-            //}
+            if (mover.IsDash)
+            {
+                AnimationPlay(info.GetPair(PlayerAnimationType.Run).GetClip(mover.IsLeft));
+                return;
+            }
             if (mover.Move != Vector2.zero)
             {
                 AnimationPlay(info.GetPair(PlayerAnimationType.Walk).GetClip(mover.IsLeft));
