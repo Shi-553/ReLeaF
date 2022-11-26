@@ -11,10 +11,13 @@ namespace Utility
         public abstract class DefinitionSingletonBase : MonoBehaviour
         {
             protected abstract void Awake();
+            protected abstract void OnDestroy();
         }
     }
     public abstract class SingletonBase<T> : DefinitionSingletonBase where T : SingletonBase<T>
     {
+        static bool isInit = false;
+
         static T singletonInstance;
         public static T Singleton
         {
@@ -30,10 +33,9 @@ namespace Utility
             }
         }
 
-        static bool isInit = false;
         sealed protected override void Awake()
         {
-            if (singletonInstance != null && singletonInstance != this)
+            if (isInit && singletonInstance != this)
             {
                 Destroy(this);
                 return;
@@ -46,7 +48,19 @@ namespace Utility
                 Init();
             }
         }
+
+        protected sealed override void OnDestroy()
+        {
+            singletonInstance = null;
+            isInit = false;
+            Uninit();
+        }
+
+        /// <summary>
+        /// Awakeかさらに早く呼ばれる
+        /// </summary>
         protected abstract void Init();
+        protected virtual void Uninit() { }
 
     }
 
