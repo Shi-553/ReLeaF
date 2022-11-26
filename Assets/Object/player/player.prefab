@@ -511,5 +511,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   hpGauge: {fileID: 7810232181920566239}
-  damagedInvicibleTime: 3
+  damagedInvicibleTime: 1
   damagedFlashingInterval: 0.1
+  damagedFlashingAlpha: 0.5
