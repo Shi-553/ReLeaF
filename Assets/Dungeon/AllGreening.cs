@@ -34,6 +34,7 @@ namespace ReLeaf
             virtualCamera.Follow = transform;
 
             var player = FindObjectOfType<PlayerMover>();
+            targetGroup.AddMember(player.transform, 1, 1);
 
             yield return StartCoroutine(Greening(player.TilePos));
         }
@@ -55,6 +56,8 @@ namespace ReLeaf
 
             var greeningWait = new WaitForSeconds(greeningTime);
 
+            int greeningCount = 0;
+
             while (targetCount > 0)
             {
                 int bufferIndex = 0;
@@ -63,27 +66,33 @@ namespace ReLeaf
                 {
                     Vector2Int pos = target[i];
 
-                    if (!greenMap.TryAdd(pos, true) || !DungeonManager.Singleton.TryGetTile(pos, out var tile))
+                    if (!greenMap.TryAdd(pos, true))
                     {
                         continue;
                     }
-
-                    if (targetGroup.m_Targets.Length > 100)
+                    if (DungeonManager.Singleton.TryGetTile(pos, out var tile))
                     {
-                        targetGroup.m_Targets[targetGroupIndex].target = tile.transform;
-                        targetGroupIndex = (targetGroupIndex + 1) % 100;
+                        if (targetGroup.m_Targets.Length > 100)
+                        {
+                            targetGroup.m_Targets[targetGroupIndex].target = tile.transform;
+                            targetGroupIndex = (targetGroupIndex + 1) % 99;
+                        }
+                        else
+                        {
+                            targetGroup.AddMember(tile.transform, 1, 1);
+                        }
+
+                        // —Î‰»‚Å‚«‚é
+                        if (tile.TileType == TileType.Sand || tile.TileType == TileType.Messy)
+                        {
+                            DungeonManager.Singleton.SowSeed(pos, PlantType.Foundation, true);
+                        }
                     }
                     else
                     {
-                        targetGroup.AddMember(tile.transform, 1, 1);
+                        if (greeningCount > 10)
+                            continue;
                     }
-
-                    // —Î‰»‚Å‚«‚é
-                    if (tile.TileType == TileType.Sand || tile.TileType == TileType.Messy)
-                    {
-                        DungeonManager.Singleton.SowSeed(pos, PlantType.Foundation, true);
-                    }
-
 
                     void BufferAdd(Vector2Int nextPos)
                     {
@@ -101,6 +110,7 @@ namespace ReLeaf
                     BufferAdd(pos + Vector2Int.left);
                 }
 
+                greeningCount++;
                 targetCount = bufferIndex;
                 (buffer, target) = (target, buffer);
 
