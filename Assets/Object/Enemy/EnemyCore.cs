@@ -71,7 +71,7 @@ namespace ReLeaf
             if (HP - atk <= 0)
             {
                 HP = 0;
-                SEManager.Singleton.Play(seEnemyDeath, new Vector3(0, 0, 0));
+                SEManager.Singleton.Play(seEnemyDeath, transform.position);
                 Death();
                 return;
             }

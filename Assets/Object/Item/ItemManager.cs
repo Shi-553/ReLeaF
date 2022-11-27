@@ -17,6 +17,8 @@ namespace ReLeaf
         [SerializeField]
         AudioClip seGetItem;
 
+        [SerializeField]
+        AudioClip seUseItem;
 
         int itemCount = 0;
         int ItemCount
@@ -86,7 +88,7 @@ namespace ReLeaf
             }
             item.Index = ItemCount;
 
-            SEManager.Singleton.Play(seGetItem, new Vector3(0, 0, 0));
+            SEManager.Singleton.Play(seGetItem, transform.position);
             ItemCount++;
         }
 
@@ -101,6 +103,7 @@ namespace ReLeaf
             itemUIs.Add(useItem);
 
             useItem.Item.Use(mover.TilePos, ItemDir);
+            SEManager.Singleton.Play(seUseItem, transform.position);
 
             useItem.Uninit();
             ItemCount--;

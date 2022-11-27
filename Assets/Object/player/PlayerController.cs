@@ -14,8 +14,7 @@ namespace ReLeaf
 
         PlayerMover mover;
 
-        [SerializeField]
-        AudioClip seUseItem;
+
         [SerializeField]
         AudioClip sePlayerSandWalk;
         [SerializeField]
@@ -79,7 +78,6 @@ namespace ReLeaf
                 return;
             if (context.ReadValue<float>() != 0)
             {
-                SEManager.Singleton.Play(seUseItem, new Vector3(0, 0, 0));
                 itemManager.UseItem();
             }
         }

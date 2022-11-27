@@ -45,7 +45,7 @@ namespace ReLeaf
             {
                 StartCoroutine(mover.KnockBack(impulse));
                 StartCoroutine(Damaged());
-                SEManager.Singleton.Play(seDamaged, new Vector3(0, 0, 0));
+                SEManager.Singleton.Play(seDamaged, transform.position);
 
                 if (hpGauge.Value == 0)
                 {
