@@ -1,8 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
-using Unity.VisualScripting;
 using UnityEngine;
 using Utility;
 
@@ -19,7 +17,7 @@ namespace ReLeaf
         bool subscribeOnTileChanged;
 
         IPool pool;
-        IPool GetPool<T>()where T:MarkerBase => pool ??= ComponentPool.Singleton.SetPool(marker as T);
+        IPool GetPool<T>() where T : MarkerBase => pool ??= ComponentPool.Singleton.SetPool(marker as T);
 
         [SerializeField]
         MarkerBase marker;
@@ -51,7 +49,7 @@ namespace ReLeaf
             {
                 return null;
             }
-            using var _=GetPool<T>().Get<T>(out var marker);
+            using var _ = GetPool<T>().Get<T>(out var marker);
 
             marker.transform.position = worldPos;
 

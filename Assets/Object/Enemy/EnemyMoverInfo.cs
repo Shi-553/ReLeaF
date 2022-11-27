@@ -7,8 +7,8 @@ namespace ReLeaf
     [CreateAssetMenu(menuName = "Enemy/EnemyMoverInfo")]
     public class EnemyMoverInfo : ScriptableObject
     {
-        [SerializeField,Rename("移動スピード(nマス/秒)")]
-         float speed = 4;
+        [SerializeField, Rename("移動スピード(nマス/秒)")]
+        float speed = 4;
         public float Speed => speed;
 
     }

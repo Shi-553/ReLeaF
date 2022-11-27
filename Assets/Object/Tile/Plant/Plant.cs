@@ -1,7 +1,6 @@
 using Pickle;
 using System;
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using Utility;
 
@@ -35,7 +34,7 @@ namespace ReLeaf
         protected GameObject seedObjRoot;
         [SerializeField]
         protected GameObject plantObjRoot;
-        [SerializeField,Pickle(LookupType =ObjectProviderType.Assets)]
+        [SerializeField, Pickle(LookupType = ObjectProviderType.Assets)]
         protected TileObject messyObj;
 
         public bool IsFullGrowth { get; private set; }
@@ -121,5 +120,5 @@ namespace ReLeaf
             DungeonManager.Singleton.Messy(TilePos, this);
         }
 
-        }
     }
+}

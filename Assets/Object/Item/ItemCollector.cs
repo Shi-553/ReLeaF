@@ -1,6 +1,4 @@
-using System.Collections;
 using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
 using Utility;
 
@@ -19,7 +17,7 @@ namespace ReLeaf
         float collectRange = 0.1f;
 
         [SerializeField]
-        ItemManager itemManager ;
+        ItemManager itemManager;
 
 
         private void OnTriggerEnter2D(Collider2D other)
@@ -36,12 +34,12 @@ namespace ReLeaf
         {
             foreach (var item in floatItems)
             {
-                item.transform.position = Vector3.MoveTowards(item.transform.position, transform.position, floatItemMoveSpeed * Time.deltaTime*DungeonManager.CELL_SIZE);
+                item.transform.position = Vector3.MoveTowards(item.transform.position, transform.position, floatItemMoveSpeed * Time.deltaTime * DungeonManager.CELL_SIZE);
             }
 
             floatItems.RemoveWhere(item =>
             {
-                if ((item.transform.position - transform.position).sqrMagnitude < collectRange* collectRange * DungeonManager.CELL_SIZE && item.Fetch())
+                if ((item.transform.position - transform.position).sqrMagnitude < collectRange * collectRange * DungeonManager.CELL_SIZE && item.Fetch())
                 {
                     itemManager.AddItem(item);
                     return true;

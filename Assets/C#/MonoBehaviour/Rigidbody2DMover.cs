@@ -1,8 +1,7 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
-namespace Utility{
+namespace Utility
+{
     [RequireComponent(typeof(Rigidbody2D))]
     public class Rigidbody2DMover : MonoBehaviour
     {
@@ -20,7 +19,7 @@ namespace Utility{
 
         public void MoveDelta(Vector2 m)
         {
-            move +=  DeltaTime * m;
+            move += DeltaTime * m;
         }
         private void FixedUpdate()
         {

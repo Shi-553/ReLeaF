@@ -1,9 +1,9 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using UnityEngine;
 
-namespace Utility{
-    public abstract class SoundManager<T> : SingletonBase<T> where T: SingletonBase<T>
+namespace Utility
+{
+    public abstract class SoundManager<T> : SingletonBase<T> where T : SingletonBase<T>
     {
         [SerializeField]
         GameObject audioSourcePrefab;

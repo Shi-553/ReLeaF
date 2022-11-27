@@ -1,11 +1,6 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.Tilemaps;
-using UnityEngine.UI;
-using UnityEngine.UIElements;
-using Slider = UnityEngine.UI.Slider;
 using Utility;
+using Slider = UnityEngine.UI.Slider;
 
 namespace ReLeaf
 {
@@ -26,10 +21,10 @@ namespace ReLeaf
         }
         public float ValueRate => value / DungeonManager.Singleton.MaxGreeningCount;
 
-        [SerializeField,Rename("クリアに必要な緑化率")]
+        [SerializeField, Rename("クリアに必要な緑化率")]
         float targetRate = 0.8f;
         [SerializeField]
-        Transform targetRateTransform ;
+        Transform targetRateTransform;
 
         [SerializeField]
         Slider slider;
@@ -54,7 +49,7 @@ namespace ReLeaf
             var sliderRect = slider.GetComponent<RectTransform>();
 
             var targetRatePos = targetRateTransform.localPosition;
-            targetRatePos.x = Mathf.Lerp(-sliderRect.sizeDelta.x / 2, sliderRect.sizeDelta.x/2, targetRate);
+            targetRatePos.x = Mathf.Lerp(-sliderRect.sizeDelta.x / 2, sliderRect.sizeDelta.x / 2, targetRate);
             targetRateTransform.localPosition = targetRatePos;
 
             DungeonManager.Singleton.OnTileChanged += OnTileChanged;

@@ -1,12 +1,9 @@
 ﻿using System;
 using System.Collections;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using UnityEngine;
 
-namespace Utility{
+namespace Utility
+{
     // https://shamaton.orz.hm/blog/archives/448
     public class GlobalCoroutine : MonoBehaviour
     {
@@ -26,12 +23,12 @@ namespace Utility{
                 }
                 return instance;
             }
-            }
+        }
         public static new Coroutine StartCoroutine(IEnumerator routine)
         {
             return Instance.StaticCast<MonoBehaviour>().StartCoroutine(routine);
         }
-        public static  Coroutine DestroyNextFrame(GameObject gameObject)
+        public static Coroutine DestroyNextFrame(GameObject gameObject)
         {
             return StartCoroutine(DestroyNextFrameImpl(gameObject));
         }
@@ -41,7 +38,7 @@ namespace Utility{
             Destroy(gameObject);
         }
 
-        public static  Coroutine WaitNextFrame(Action action)
+        public static Coroutine WaitNextFrame(Action action)
         {
             return StartCoroutine(WaitNextFrameImpl(action));
         }

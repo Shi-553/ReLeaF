@@ -1,9 +1,6 @@
 using System;
-using System.Collections;
 using System.Collections.Generic;
-using System.Data.SqlTypes;
 using System.IO;
-using System.IO.Pipes;
 using System.Linq;
 using System.Reflection;
 using UnityEditor;
@@ -11,7 +8,8 @@ using UnityEditor.SceneManagement;
 using UnityEngine;
 using Object = UnityEngine.Object;
 
-namespace Utility{
+namespace Utility
+{
 
     public class DocumantGenerator : EditorWindow
     {

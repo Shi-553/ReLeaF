@@ -1,7 +1,7 @@
 ﻿using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using Utility.Definition;
 
 namespace Utility
 {
@@ -28,7 +28,7 @@ namespace Utility
         GameObject loading;
         [SerializeField]
         AudioListener audioListener;
-        
+
 #endif
         protected override void Init()
         {
@@ -38,7 +38,7 @@ namespace Utility
                 Debug.LogWarning("ビルド設定にないので上手く遷移しないかも");
             }
         }
-        
+
 #if DEFINE_SCENE_TYPE_ENUM
         public void ChangeScene(SceneType scene)
         {
@@ -57,6 +57,8 @@ namespace Utility
             BGMManager.Singleton.StopAll();
             SEManager.Singleton.StopAll();
 
+            var singletons = FindObjectsOfType<DefinitionSingletonBase>();
+
             // とりあえずマネージャーシーンをアクティブに
             SceneManager.SetActiveScene(gameObject.scene);
 
@@ -67,6 +69,8 @@ namespace Utility
                 yield return SceneManager.UnloadSceneAsync(Background.Value.buildIndex);
                 Background = null;
             }
+
+            singletons.ForEach(s => s.Destroy());
 
             audioListener.enabled = true;
 

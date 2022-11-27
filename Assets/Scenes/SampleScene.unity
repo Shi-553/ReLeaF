@@ -2411,7 +2411,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 68698067a2de44b4b924120b3fb837f4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  greeningTime: 0.1
+  greeningTime: 0.7
   virtualCamera: {fileID: 919157324}
 --- !u!4 &806003221
 Transform:
@@ -3186,7 +3186,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   value: 0
-  targetRate: 0.7
+  targetRate: 0.1
   targetRateTransform: {fileID: 114856932}
   slider: {fileID: 2118467201}
 --- !u!1 &1108755539
@@ -5148,6 +5148,7 @@ MonoBehaviour:
   seedTiles:
   - {fileID: 11400000, guid: 166d001927ca49442b7b421b1722cf0f, type: 2}
   messyTile: {fileID: 11400000, guid: 0990de19b010e804cbbe751cea55c8be, type: 2}
+  enemyPlant: {fileID: 11400000, guid: 1263c40a7eae41447bd0359878251824, type: 2}
   <MaxGreeningCount>k__BackingField: 0
 --- !u!483693784 &1669264805538347063
 TilemapRenderer:

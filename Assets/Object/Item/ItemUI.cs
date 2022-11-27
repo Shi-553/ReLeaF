@@ -11,10 +11,10 @@ namespace ReLeaf
         [SerializeField]
         Image image;
 
-        [SerializeField,Rename("正しい位置へ到達するまでのおおよその時間")]
-        float smoothTime =1.0f;
-        [SerializeField,Rename("最大速度")]
-        float maxSpeed =1.0f;
+        [SerializeField, Rename("正しい位置へ到達するまでのおおよその時間")]
+        float smoothTime = 1.0f;
+        [SerializeField, Rename("最大速度")]
+        float maxSpeed = 1.0f;
 
         private Vector3 velocity = Vector3.zero;
         public bool IsValid => Item != null;
@@ -32,15 +32,15 @@ namespace ReLeaf
         {
             Destroy(Item.gameObject);
 
-            Item= null;
-            image.sprite=null;
+            Item = null;
+            image.sprite = null;
             gameObject.SetActive(false);
         }
 
-         void Update()
+        void Update()
         {
             var targetPos = GetItemLocalPos(Index);
-            transform.localPosition = Vector3.SmoothDamp(transform.localPosition, targetPos, ref velocity,smoothTime,maxSpeed);
+            transform.localPosition = Vector3.SmoothDamp(transform.localPosition, targetPos, ref velocity, smoothTime, maxSpeed);
 
         }
 

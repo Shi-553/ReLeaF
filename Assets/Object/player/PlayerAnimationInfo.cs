@@ -9,7 +9,7 @@ namespace ReLeaf
         Walk,
         Run
     }
-    [CreateAssetMenu(menuName ="Player/AnimationInfo")]
+    [CreateAssetMenu(menuName = "Player/AnimationInfo")]
     public class PlayerAnimationInfo : AnimationInfoBase<PlayerAnimationType>
     {
 

@@ -1,8 +1,7 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using static ReLeaf.Plant;
 using Utility;
+using static ReLeaf.Plant;
 
 namespace ReLeaf
 {

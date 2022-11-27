@@ -1,4 +1,3 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Utility;
@@ -20,7 +19,7 @@ namespace ReLeaf
                 {
                     continue;
                 }
-                returns.Add( pos);
+                returns.Add(pos);
             }
             return returns;
         }

@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using UnityEngine;
-using UnityEngine.SceneManagement;
+﻿using UnityEngine;
 using Utility.Definition;
 
 namespace Utility
@@ -11,7 +8,7 @@ namespace Utility
         public abstract class DefinitionSingletonBase : MonoBehaviour
         {
             protected abstract void Awake();
-            protected abstract void OnDestroy();
+            public abstract void Destroy();
         }
     }
     public abstract class SingletonBase<T> : DefinitionSingletonBase where T : SingletonBase<T>
@@ -49,10 +46,10 @@ namespace Utility
             }
         }
 
-        protected sealed override void OnDestroy()
+        public sealed override void Destroy()
         {
-            singletonInstance = null;
             isInit = false;
+            singletonInstance = null;
             Uninit();
         }
 
