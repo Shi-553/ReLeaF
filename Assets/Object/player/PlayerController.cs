@@ -52,7 +52,7 @@ namespace ReLeaf
             mover.Move = context.ReadValue<Vector2>().normalized;
             if (context.started == true)
             {
-                asPlayerSandWalk = SEManager.Singleton.Play(sePlayerSandWalk, new Vector3(0, 0, 0), 1.0f, true);
+                asPlayerSandWalk = SEManager.Singleton.PlayLoop(sePlayerSandWalk, transform, 1.0f);
             }
             if (context.canceled == true)
             {
@@ -65,7 +65,7 @@ namespace ReLeaf
             mover.IsDash = context.ReadValue<float>() != 0;
             if (context.started == true)
             {
-                asPlayerSandDash = SEManager.Singleton.Play(sePlayerSandDash, new Vector3(0, 0, 0), 1.0f, true);
+                asPlayerSandDash = SEManager.Singleton.PlayLoop(sePlayerSandDash, transform, 1.0f);
             }
             if (context.canceled == true)
             {
