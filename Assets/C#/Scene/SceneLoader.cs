@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using Utility.Definition;
 
 namespace Utility
 {
@@ -56,6 +57,8 @@ namespace Utility
             BGMManager.Singleton.StopAll();
             SEManager.Singleton.StopAll();
 
+            var singletons = FindObjectsOfType<DefinitionSingletonBase>();
+
             // とりあえずマネージャーシーンをアクティブに
             SceneManager.SetActiveScene(gameObject.scene);
 
@@ -66,6 +69,8 @@ namespace Utility
                 yield return SceneManager.UnloadSceneAsync(Background.Value.buildIndex);
                 Background = null;
             }
+
+            singletons.ForEach(s => s.Destroy());
 
             audioListener.enabled = true;
 
