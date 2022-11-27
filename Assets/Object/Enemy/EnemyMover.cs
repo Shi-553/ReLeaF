@@ -1,7 +1,5 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UIElements;
 using Utility;
 
 namespace ReLeaf
@@ -55,7 +53,7 @@ namespace ReLeaf
                 return true;
             }
 
-            if (Vector2.Dot(worldDir, (Vector2)Dir) < 0|| ( distance.sqrMagnitude<0.001f))
+            if (Vector2.Dot(worldDir, (Vector2)Dir) < 0 || (distance.sqrMagnitude < 0.001f))
             {
                 if (isFinish)
                 {
@@ -219,7 +217,7 @@ namespace ReLeaf
                 return false;
             }
 
-            if((DungeonManager.Singleton.TryGetTile(nextPos,out var tile) && tile.CanEnemyMove) || nextPos == Target)
+            if ((DungeonManager.Singleton.TryGetTile(nextPos, out var tile) && tile.CanEnemyMove) || nextPos == Target)
             {
                 tempMapQueue.Enqueue(nextPos);
 

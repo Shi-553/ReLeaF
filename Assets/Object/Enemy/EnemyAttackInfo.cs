@@ -7,7 +7,7 @@ namespace ReLeaf
     [CreateAssetMenu(menuName = "Enemy/EnemyAttackInfo")]
     public class EnemyAttackInfo : ScriptableObject
     {
-        [SerializeField,Rename("攻撃した後の待機時間(秒)")]
+        [SerializeField, Rename("攻撃した後の待機時間(秒)")]
         float coolTime = 1.0f;
         public float CoolTime => coolTime;
         [SerializeField, Rename("攻撃前の準備時間(秒)")]

@@ -1,31 +1,29 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.UI;
 
-namespace Utility{
+namespace Utility
+{
     [ClassSummary("{gameObject.name}ゲージの管理")]
     public class ValueGaugeManager : MonoBehaviour
     {
         [SerializeField, Rename("{gameObject.name}の最大値")]
         float valueMax = 10;
 
-        [SerializeField,ReadOnly]
+        [SerializeField, ReadOnly]
         float value;
-        public float Value { get => value;
+        public float Value
+        {
+            get => value;
             set
             {
-                this.value= value;
+                this.value = value;
                 slider.value = ValueRate;
             }
         }
         public float ValueRate => value / valueMax;
 
         [SerializeField, Rename("0をちょうど下回ったフレームにtrueを返すか")]
-        bool canOverConsumeOnlyOnce=false;
+        bool canOverConsumeOnlyOnce = false;
 
         [SerializeField]
         Slider slider;
@@ -37,7 +35,7 @@ namespace Utility{
         // ぽいんと消費
         public bool ConsumeValue(float consume)
         {
-            if(Value == 0)
+            if (Value == 0)
                 return false;
 
             if (Value - consume < 0)
@@ -46,7 +44,7 @@ namespace Utility{
                 return canOverConsumeOnlyOnce;
             }
             Value -= consume;
-            
+
             return true;
         }
         public bool RecoveryValue(float recovery)

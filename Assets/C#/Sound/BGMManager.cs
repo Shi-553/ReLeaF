@@ -1,8 +1,7 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
-namespace Utility{
+namespace Utility
+{
     public class BGMManager : SoundManager<BGMManager>
     {
         protected override int InitSourceCount => 1;

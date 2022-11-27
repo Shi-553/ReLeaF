@@ -1,15 +1,5 @@
-﻿using System;
-using System.Collections;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using UnityEngine.InputSystem;
-using UnityEngine.SceneManagement;
+﻿using System.Collections;
 using UnityEngine;
-using UnityEditor.Animations;
-using Animancer;
-using Unity.VisualScripting;
 using Utility;
 
 namespace ReLeaf

@@ -1,13 +1,7 @@
-﻿
-using System.Collections;
-using System.Collections.Generic;
-using System.Linq;
+﻿using Pickle;
 using UnityEditor;
 using UnityEngine;
-using System;
-using Pickle;
 using UnityEngine.Tilemaps;
-using UnityEngine.UIElements;
 using Utility;
 
 namespace ReLeaf
@@ -39,7 +33,7 @@ namespace ReLeaf
             currentTileObject = selectTile[Selected.VisualType];
         }
 
-        protected override IPool Pool=> poolArray.GetPool(Selected.VisualType);
+        protected override IPool Pool => poolArray.GetPool(Selected.VisualType);
 
 
 #if UNITY_EDITOR

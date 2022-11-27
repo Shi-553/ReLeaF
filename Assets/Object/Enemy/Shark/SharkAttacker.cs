@@ -1,9 +1,8 @@
-using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
-using Utility;
 using UnityEngine;
+using Utility;
 
 namespace ReLeaf
 {

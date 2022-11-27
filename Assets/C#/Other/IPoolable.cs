@@ -1,13 +1,12 @@
-﻿using System.Collections;
-using Unity.VisualScripting;
-using UnityEngine;
+﻿using UnityEngine;
 
-namespace Utility{
+namespace Utility
+{
     public interface IPoolable
     {
         Component Component => this as Component;
 
-        public virtual IPoolable Create(Transform parent)=> Object.Instantiate(Component, parent) as IPoolable;
+        public virtual IPoolable Create(Transform parent) => Object.Instantiate(Component, parent) as IPoolable;
         public virtual void OnDestroyPool() => Object.Destroy(Component);
         public virtual void OnGetPool() => Component.gameObject.SetActive(true);
         public virtual void OnReleasePool() => Component.gameObject.SetActive(false);

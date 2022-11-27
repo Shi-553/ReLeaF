@@ -14,22 +14,22 @@ namespace ReLeaf
     }
     public interface IEnemyAttacker
     {
-        AttackTransition Transition { get;  set; }
+        AttackTransition Transition { get; set; }
         bool IsAttackDamageing => Transition == AttackTransition.Damageing;
         bool IsAttack => Transition != AttackTransition.None;
         EnemyAttackInfo EnemyAttackInfo { get; }
 
-        int GetAttackRangeCount(Vector2Int pos,Vector2Int dir,bool isDamagableOnly);
-        IEnumerable<Vector2Int> GetAttackRange(Vector2Int pos,Vector2Int dir, bool isDamagableOnly);
+        int GetAttackRangeCount(Vector2Int pos, Vector2Int dir, bool isDamagableOnly);
+        IEnumerable<Vector2Int> GetAttackRange(Vector2Int pos, Vector2Int dir, bool isDamagableOnly);
 
-         protected void OnStartAiming()
+        protected void OnStartAiming()
         {
         }
         protected IEnumerator OnStartDamageing();
-         protected void OnStartCoolTime()
+        protected void OnStartCoolTime()
         {
         }
-         protected void OnEndCoolTime()
+        protected void OnEndCoolTime()
         {
         }
 

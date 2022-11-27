@@ -1,12 +1,7 @@
-using System.Collections;
-using System.Collections.Generic;
-using System.Linq;
+using Pickle;
 using UnityEditor;
 using UnityEngine;
-using System;
 using UnityEngine.Tilemaps;
-using UnityEngine.UIElements;
-using Pickle;
 using Utility;
 
 namespace ReLeaf
@@ -43,7 +38,7 @@ namespace ReLeaf
             }
         }
 
-        protected override IPool Pool=> poolArray.GetPool(currentTileObject == block ? 0 : 1);
+        protected override IPool Pool => poolArray.GetPool(currentTileObject == block ? 0 : 1);
         public override void RefreshTile(Vector3Int position, ITilemap tilemap)
         {
             tilemap.RefreshTile(position);

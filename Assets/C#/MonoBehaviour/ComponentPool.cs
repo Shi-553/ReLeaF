@@ -1,16 +1,12 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using UnityEngine;
 using UnityEngine.Pool;
-using Object = UnityEngine.Object;
 using Transform = UnityEngine.Transform;
 
-namespace Utility{
+namespace Utility
+{
 
     public class ComponentPool : SingletonBase<ComponentPool>
     {
@@ -20,7 +16,7 @@ namespace Utility{
         protected override void Init()
         {
         }
-        private void OnDestroy()
+        protected override void Uninit()
         {
             foreach (var pool in pools.Values)
             {

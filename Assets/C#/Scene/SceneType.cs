@@ -10,13 +10,13 @@ public enum SceneType
 }
 public static class SceneTypeExtension
 {
-   public static int GetBuildIndex(this SceneType type)
-   {
-      return type switch                         
-      {                                          
-          SceneType.SampleScene => 0,              
-          SceneType.Manager => 1,              
-          _ => 0,                                
-      };                                         
-   }
+    public static int GetBuildIndex(this SceneType type)
+    {
+        return type switch
+        {
+            SceneType.SampleScene => 0,
+            SceneType.Manager => 1,
+            _ => 0,
+        };
+    }
 }

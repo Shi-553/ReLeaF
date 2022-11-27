@@ -1,8 +1,6 @@
 using Cinemachine;
-using DebugLogExtension;
 using System.Collections;
 using System.Collections.Generic;
-using System.Linq;
 using UnityEngine;
 using Utility;
 
@@ -35,9 +33,9 @@ namespace ReLeaf
             virtualCamera.LookAt = transform;
             virtualCamera.Follow = transform;
 
-            var player =FindObjectOfType<PlayerMover>();
+            var player = FindObjectOfType<PlayerMover>();
 
-           yield return StartCoroutine(Greening(player.TilePos));
+            yield return StartCoroutine(Greening(player.TilePos));
         }
 
         IEnumerator Greening(Vector2Int startPos)

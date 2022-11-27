@@ -1,10 +1,9 @@
-﻿using System.Collections;
-using UnityEngine;
+﻿using UnityEngine;
 using Utility;
 
 namespace ReLeaf
 {
-    public abstract class MarkerBase : MonoBehaviour,IPoolable
+    public abstract class MarkerBase : MonoBehaviour, IPoolable
     {
         protected Vector2Int tilePos;
 

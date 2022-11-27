@@ -1,13 +1,13 @@
-﻿using UnityEngine;
-using System.Reflection;
-using UnityEditor;
-using System.Linq;
-using System.IO;
-using System;
-using System.Text;
+﻿using System;
 using System.Collections.Generic;
+using System.IO;
+using System.Linq;
+using System.Text;
+using UnityEditor;
+using UnityEngine;
 
-namespace Utility{
+namespace Utility
+{
     // 参考 https://github.com/risaki-masa/unity_sample/blob/master/Scripts/SceneTypeScriptCreator.cs
     [InitializeOnLoad]
     public static class SceneEnumGenerator

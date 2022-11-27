@@ -1,5 +1,4 @@
 ﻿using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -28,7 +27,7 @@ namespace Utility
         GameObject loading;
         [SerializeField]
         AudioListener audioListener;
-        
+
 #endif
         protected override void Init()
         {
@@ -38,7 +37,7 @@ namespace Utility
                 Debug.LogWarning("ビルド設定にないので上手く遷移しないかも");
             }
         }
-        
+
 #if DEFINE_SCENE_TYPE_ENUM
         public void ChangeScene(SceneType scene)
         {

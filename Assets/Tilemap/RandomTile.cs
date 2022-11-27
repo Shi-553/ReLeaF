@@ -1,13 +1,11 @@
-using System.Collections;
-using System.Collections.Generic;
+using Pickle;
+using System;
 using System.Linq;
+using Unity.VisualScripting;
 using UnityEditor;
 using UnityEngine;
-using System;
-using Pickle;
 using UnityEngine.Tilemaps;
 using Utility;
-using Unity.VisualScripting;
 using static Utility.MathExtension;
 
 namespace ReLeaf
@@ -39,8 +37,8 @@ namespace ReLeaf
             foreach (var info in randomInfos)
             {
                 var v = info.multipleVisualTile as IMultipleVisual;
-                poolArray.SetPool(v.VisualType, info.multipleVisualTile, 
-                    (defaultCapacity* info.probability/ randomIndex.totalWeight).ConvertTo<int>(), 
+                poolArray.SetPool(v.VisualType, info.multipleVisualTile,
+                    (defaultCapacity * info.probability / randomIndex.totalWeight).ConvertTo<int>(),
                     (maxSize * info.probability / randomIndex.totalWeight).ConvertTo<int>(),
                     true);
             }
