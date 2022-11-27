@@ -13,17 +13,24 @@ namespace Utility
         readonly Dictionary<Type, IPool> pools = new();
         public IReadOnlyDictionary<Type, IPool> Pools => pools;
 
+        public override bool DontDestroyOnLoad => true;
         protected override void Init()
         {
         }
-        protected override void Uninit()
+        protected override void UninitAfterSceneUnload(bool isDestroy)
         {
             foreach (var pool in pools.Values)
             {
-                pool.Clear();
+                foreach (var p in pool)
+                {
+                    p?.Clear();
+                }
             }
             pools.Clear();
+            transform.GetChildren()
+                .ForEach(t => Destroy(t.gameObject));
         }
+
         public IPool GetPool<T>() where T : Component, IPoolable
         {
             var type = typeof(T);

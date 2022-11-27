@@ -15,6 +15,8 @@ namespace ReLeaf
     [ClassSummary("タイルマップマネージャー")]
     public class DungeonManager : SingletonBase<DungeonManager>
     {
+        public override bool DontDestroyOnLoad => false;
+
         [SerializeField]
         Tilemap groundTilemap;
 

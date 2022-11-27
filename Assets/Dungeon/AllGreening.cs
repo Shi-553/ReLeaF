@@ -17,26 +17,50 @@ namespace ReLeaf
 
 
         bool isStartGreening = false;
+        bool useCamera = false;
+
+        Coroutine co;
 
         void Start()
         {
+            isStartGreening = false;
             TryGetComponent(out targetGroup);
         }
 
-        public IEnumerator StartGreening()
+        public IEnumerator StartGreening(Vector2Int tilePos, bool useCamera, bool isFouce = false)
+        {
+            if (isStartGreening)
+            {
+                if (isFouce)
+                {
+                    isStartGreening = false;
+                    if (co != null)
+                        StopCoroutine(co);
+
+                }
+                else
+                    yield break;
+            }
+            isStartGreening = true;
+
+            this.useCamera = useCamera;
+            if (useCamera)
+            {
+                virtualCamera.LookAt = transform;
+                virtualCamera.Follow = transform;
+            }
+            co = StartCoroutine(Greening(tilePos));
+            yield return co;
+        }
+        public IEnumerator StartGreeningWithPlayer()
         {
             if (isStartGreening)
                 yield break;
 
-            isStartGreening = true;
-
-            virtualCamera.LookAt = transform;
-            virtualCamera.Follow = transform;
-
             var player = FindObjectOfType<PlayerMover>();
             targetGroup.AddMember(player.transform, 1, 1);
 
-            yield return StartCoroutine(Greening(player.TilePos));
+            yield return StartGreening(player.TilePos, true);
         }
 
         IEnumerator Greening(Vector2Int startPos)
@@ -72,14 +96,17 @@ namespace ReLeaf
                     }
                     if (DungeonManager.Singleton.TryGetTile(pos, out var tile))
                     {
-                        if (targetGroup.m_Targets.Length > 100)
+                        if (useCamera)
                         {
-                            targetGroup.m_Targets[targetGroupIndex].target = tile.transform;
-                            targetGroupIndex = (targetGroupIndex + 1) % 99;
-                        }
-                        else
-                        {
-                            targetGroup.AddMember(tile.transform, 1, 1);
+                            if (targetGroup.m_Targets.Length > 100)
+                            {
+                                targetGroup.m_Targets[targetGroupIndex].target = tile.transform;
+                                targetGroupIndex = (targetGroupIndex + 1) % 99;
+                            }
+                            else
+                            {
+                                targetGroup.AddMember(tile.transform, 1, 1);
+                            }
                         }
 
                         // —Î‰»‚Å‚«‚é
@@ -116,6 +143,7 @@ namespace ReLeaf
 
                 yield return greeningWait;
             }
+            co = null;
         }
     }
 }

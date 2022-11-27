@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 using Utility.Definition;
 
 namespace Utility
@@ -8,6 +9,7 @@ namespace Utility
     public class SceneLoader : SingletonBase<SceneLoader>
     {
 
+        public override bool DontDestroyOnLoad => true;
         // アクティブなシーン
         public Scene Current { get; private set; }
 #if DEFINE_SCENE_TYPE_ENUM
@@ -29,6 +31,10 @@ namespace Utility
         [SerializeField]
         AudioListener audioListener;
 
+        Image fadeImage;
+
+
+
 #endif
         protected override void Init()
         {
@@ -37,27 +43,44 @@ namespace Utility
             {
                 Debug.LogWarning("ビルド設定にないので上手く遷移しないかも");
             }
+            fadeImage = loading.GetComponentInChildren<Image>();
         }
 
 #if DEFINE_SCENE_TYPE_ENUM
-        public void ChangeScene(SceneType scene)
+        public void LoadScene(SceneType scene, float fadeoutTime = 0, float fadeinTime = 0)
         {
             if (changeing == null)
             {
-                changeing = StartCoroutine(ChangeSceneAsync(scene));
+                changeing = StartCoroutine(LoadSceneAsync(scene, fadeoutTime, fadeinTime));
             }
         }
 
-        IEnumerator ChangeSceneAsync(SceneType type)
+        IEnumerator LoadSceneAsync(SceneType type, float fadeoutTime = 0, float fadeinTime = 0)
         {
-            Time.timeScale = 0;
-            loading.SetActive(true);
             audioListener.enabled = false;
+            loading.SetActive(true);
+            if (fadeoutTime > 0)
+            {
+                float counter = 0;
+                while (true)
+                {
+                    fadeImage.color = new Color(0, 0, 0, (counter / fadeoutTime) * (counter / fadeoutTime));
+                    if (fadeoutTime <= counter)
+                        break;
+                    counter += Time.deltaTime;
+
+                    yield return null;
+                }
+            }
+            fadeImage.color = new Color(0, 0, 0, 1);
+
+            Time.timeScale = 0;
 
             BGMManager.Singleton.StopAll();
             SEManager.Singleton.StopAll();
 
-            var singletons = FindObjectsOfType<DefinitionSingletonBase>();
+            var definitionSingletonBases = FindObjectsOfType<DefinitionSingletonBase>();
+            definitionSingletonBases.ForEach(s => s.UninitBeforeSceneUnloadDefinition());
 
             // とりあえずマネージャーシーンをアクティブに
             SceneManager.SetActiveScene(gameObject.scene);
@@ -70,15 +93,19 @@ namespace Utility
                 Background = null;
             }
 
-            singletons.ForEach(s => s.Destroy());
+            definitionSingletonBases.ForEach(s => s.UninitAfterSceneUnloadDefinition());
 
-            audioListener.enabled = true;
+            // audioListener.enabled = true;
+
+            audioListener.enabled = false;
+            yield return SceneManager.LoadSceneAsync(type.GetBuildIndex(), LoadSceneMode.Additive);
 
             yield return Resources.UnloadUnusedAssets();
 
-            yield return SceneManager.LoadSceneAsync(type.GetBuildIndex(), LoadSceneMode.Additive);
 
-            audioListener.enabled = false;
+
+
+
 
 
             Current = SceneManager.GetSceneByBuildIndex(type.GetBuildIndex());
@@ -86,9 +113,24 @@ namespace Utility
 
             Debug.Log($"Changed to <b>{CurrentType}</b>");
 
-            loading.SetActive(false);
             Time.timeScale = 1;
 
+            if (fadeinTime > 0)
+            {
+                float counter = 0;
+                while (true)
+                {
+                    fadeImage.color = new Color(0, 0, 0, (1 - (counter / fadeinTime)) * (1 - (counter / fadeinTime)));
+                    if (fadeinTime <= counter)
+                        break;
+                    counter += Time.deltaTime;
+
+                    yield return null;
+                }
+            }
+            fadeImage.color = new Color(0, 0, 0, 0);
+
+            loading.SetActive(false);
             changeing = null;
         }
 
