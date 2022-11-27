@@ -13,6 +13,8 @@ namespace ReLeaf
     }
     public class GameRuleManager : SingletonBase<GameRuleManager>
     {
+        public override bool DontDestroyOnLoad => false;
+
         public GameRuleState State { get; protected set; }
 
         public bool IsPlaying => State == GameRuleState.Playing;
@@ -39,6 +41,7 @@ namespace ReLeaf
 
         protected virtual IEnumerator Start()
         {
+            yield return new WaitForSeconds(1);
             gameReadyText.SetActive(true);
             yield return new WaitForSeconds(1);
             gameReadyText.SetActive(false);

@@ -10,6 +10,8 @@ namespace Utility
 
         List<AudioSource> audioSources = new();
 
+        public override bool DontDestroyOnLoad => true;
+
         protected abstract int InitSourceCount { get; }
 
 

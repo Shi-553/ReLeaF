@@ -23,6 +23,7 @@ namespace ReLeaf
 
         void Start()
         {
+            isStartGreening = false;
             TryGetComponent(out targetGroup);
         }
 
@@ -55,8 +56,6 @@ namespace ReLeaf
         {
             if (isStartGreening)
                 yield break;
-
-            isStartGreening = true;
 
             var player = FindObjectOfType<PlayerMover>();
             targetGroup.AddMember(player.transform, 1, 1);

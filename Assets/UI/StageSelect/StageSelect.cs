@@ -30,7 +30,7 @@ namespace ReLeaf
 
                     button.onClick.AddListener(() =>
                     {
-                        SceneLoader.Singleton.ChangeScene(info.Scene, fadeoutTime, fadeinTime);
+                        SceneLoader.Singleton.LoadScene(info.Scene, fadeoutTime, fadeinTime);
                     });
                 }
                 else

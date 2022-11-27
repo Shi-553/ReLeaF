@@ -7,7 +7,7 @@ namespace Utility
     // https://shamaton.orz.hm/blog/archives/448
     public class GlobalCoroutine : SingletonBase<GlobalCoroutine>
     {
-
+        public override bool DontDestroyOnLoad => true;
         protected override void Init()
         {
         }

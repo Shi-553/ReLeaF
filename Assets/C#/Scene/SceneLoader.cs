@@ -9,6 +9,7 @@ namespace Utility
     public class SceneLoader : SingletonBase<SceneLoader>
     {
 
+        public override bool DontDestroyOnLoad => true;
         // アクティブなシーン
         public Scene Current { get; private set; }
 #if DEFINE_SCENE_TYPE_ENUM
@@ -31,6 +32,9 @@ namespace Utility
         AudioListener audioListener;
 
         Image fadeImage;
+
+
+
 #endif
         protected override void Init()
         {
@@ -43,15 +47,15 @@ namespace Utility
         }
 
 #if DEFINE_SCENE_TYPE_ENUM
-        public void ChangeScene(SceneType scene, float fadeoutTime = 0, float fadeinTime = 0)
+        public void LoadScene(SceneType scene, float fadeoutTime = 0, float fadeinTime = 0)
         {
             if (changeing == null)
             {
-                changeing = StartCoroutine(ChangeSceneAsync(scene, fadeoutTime, fadeinTime));
+                changeing = StartCoroutine(LoadSceneAsync(scene, fadeoutTime, fadeinTime));
             }
         }
 
-        IEnumerator ChangeSceneAsync(SceneType type, float fadeoutTime = 0, float fadeinTime = 0)
+        IEnumerator LoadSceneAsync(SceneType type, float fadeoutTime = 0, float fadeinTime = 0)
         {
             audioListener.enabled = false;
             loading.SetActive(true);
@@ -60,7 +64,7 @@ namespace Utility
                 float counter = 0;
                 while (true)
                 {
-                    fadeImage.color = new Color(0, 0, 0, counter / fadeoutTime);
+                    fadeImage.color = new Color(0, 0, 0, (counter / fadeoutTime) * (counter / fadeoutTime));
                     if (fadeoutTime <= counter)
                         break;
                     counter += Time.deltaTime;
@@ -75,7 +79,8 @@ namespace Utility
             BGMManager.Singleton.StopAll();
             SEManager.Singleton.StopAll();
 
-            var singletons = FindObjectsOfType<DefinitionSingletonBase>();
+            var definitionSingletonBases = FindObjectsOfType<DefinitionSingletonBase>();
+            definitionSingletonBases.ForEach(s => s.UninitBeforeSceneUnloadDefinition());
 
             // とりあえずマネージャーシーンをアクティブに
             SceneManager.SetActiveScene(gameObject.scene);
@@ -88,15 +93,19 @@ namespace Utility
                 Background = null;
             }
 
-            singletons.ForEach(s => s.Destroy());
+            definitionSingletonBases.ForEach(s => s.UninitAfterSceneUnloadDefinition());
 
-            audioListener.enabled = true;
+            // audioListener.enabled = true;
+
+            audioListener.enabled = false;
+            yield return SceneManager.LoadSceneAsync(type.GetBuildIndex(), LoadSceneMode.Additive);
 
             yield return Resources.UnloadUnusedAssets();
 
-            yield return SceneManager.LoadSceneAsync(type.GetBuildIndex(), LoadSceneMode.Additive);
 
-            audioListener.enabled = false;
+
+
+
 
 
             Current = SceneManager.GetSceneByBuildIndex(type.GetBuildIndex());
@@ -111,7 +120,7 @@ namespace Utility
                 float counter = 0;
                 while (true)
                 {
-                    fadeImage.color = new Color(0, 0, 0, 1 - (counter / fadeinTime));
+                    fadeImage.color = new Color(0, 0, 0, (1 - (counter / fadeinTime)) * (1 - (counter / fadeinTime)));
                     if (fadeinTime <= counter)
                         break;
                     counter += Time.deltaTime;
