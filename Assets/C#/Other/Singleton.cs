@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using UnityEngine.SceneManagement;
 using Utility.Definition;
 
 namespace Utility
@@ -14,6 +15,7 @@ namespace Utility
     public abstract class SingletonBase<T> : DefinitionSingletonBase where T : SingletonBase<T>
     {
         static bool isInit = false;
+        static protected bool isDontDestroy = false;
 
         static T singletonInstance;
         public static T Singleton
@@ -30,6 +32,7 @@ namespace Utility
             }
         }
 
+
         sealed protected override void Awake()
         {
             if (isInit && singletonInstance != this)
@@ -43,6 +46,13 @@ namespace Utility
                 isInit = true;
                 singletonInstance = this as T;
                 Init();
+            }
+
+            if (isDontDestroy)
+            {
+#if DEFINE_SCENE_TYPE_ENUM
+                SceneManager.MoveGameObjectToScene(gameObject, SceneManager.GetSceneByBuildIndex(SceneType.Manager.GetBuildIndex()));
+#endif
             }
         }
 

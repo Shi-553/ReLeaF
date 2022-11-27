@@ -15,6 +15,7 @@ namespace Utility
 
         protected override void Init()
         {
+            isDontDestroy = true;
         }
         protected override void Uninit()
         {
