@@ -17,6 +17,14 @@ namespace ReLeaf
 
         PlayerMover mover;
 
+        public AudioClip seUseItem;
+        public AudioClip sePlayerSandWalk;
+        public AudioClip sePlayerSandDash;
+
+        AudioSource asUseItem;
+        AudioSource asPlayerSandWalk;
+        AudioSource asPlayerSandDash;
+
         private void Awake()
         {
             TryGetComponent(out mover);
@@ -43,11 +51,27 @@ namespace ReLeaf
         public void OnMove(InputAction.CallbackContext context)
         {
             mover.Move = context.ReadValue<Vector2>().normalized;
+            if(context.started==true)
+            {
+                asPlayerSandWalk = SEManager.Singleton.Play(sePlayerSandWalk, new Vector3(0, 0, 0), 1.0f, true);
+            }
+            if(context.canceled==true)
+            {
+                asPlayerSandWalk.Stop();
+            }
         }
 
         public void OnDash(InputAction.CallbackContext context)
         {
             mover.IsDash = context.ReadValue<float>() != 0;
+            if (context.started == true)
+            {
+                asPlayerSandDash = SEManager.Singleton.Play(sePlayerSandDash, new Vector3(0, 0, 0), 1.0f, true);
+            }
+            if (context.canceled == true)
+            {
+                asPlayerSandDash.Stop();
+            }
         }
 
         public void OnUseItem(InputAction.CallbackContext context)
@@ -56,6 +80,7 @@ namespace ReLeaf
                 return;
             if (context.ReadValue<float>() != 0)
             {
+                asUseItem = SEManager.Singleton.Play(seUseItem, new Vector3(0, 0, 0));
                 itemManager.UseItem();
             }
         }

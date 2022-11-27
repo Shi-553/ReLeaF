@@ -21,6 +21,9 @@ namespace ReLeaf
         [SerializeField]
         MarkerManager weakMarkerManager;
 
+        public AudioClip seEnemyDeath;
+
+        AudioSource asEnemyDeath;
 
         private void Start()
         {
@@ -73,6 +76,7 @@ namespace ReLeaf
             if (HP - atk <= 0)
             {
                 HP = 0;
+                asEnemyDeath = SEManager.Singleton.Play(seEnemyDeath, new Vector3(0, 0, 0));
                 Death();
                 return;
             }

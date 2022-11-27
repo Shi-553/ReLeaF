@@ -28,6 +28,10 @@ namespace ReLeaf
 
         public bool IsInvincible { get; set; }
 
+        public AudioClip seDamaged;
+
+        AudioSource asDamaged;
+
         private void Awake()
         {
             IsInvincible = false;
@@ -48,6 +52,7 @@ namespace ReLeaf
             {
                 StartCoroutine(mover.KnockBack(impulse));
                 StartCoroutine(Damaged());
+                asDamaged = SEManager.Singleton.Play(seDamaged, new Vector3(0, 0, 0));
 
                 if (hpGauge.Value == 0)
                 {

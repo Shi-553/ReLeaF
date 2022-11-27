@@ -7,11 +7,23 @@ namespace Utility{
     {
         protected override int InitSourceCount => 5;
 
-        public void Play(AudioClip clip, Vector3 pos, float volumeScale = 1.0f)
+        public AudioSource Play(AudioClip clip, Vector3 pos, float volumeScale = 1.0f, bool loop = false)
         {
             var source = GetSource(true);
+            source.clip = clip;
             source.transform.position = pos;
-            source.PlayOneShot(clip, volumeScale);
+            source.loop = loop;
+            source.volume = volumeScale;
+            source.Play();
+
+            return source;
+        }
+
+        public void Stop(AudioClip clip)
+        {
+            var source = GetSource(false);
+            source.clip = clip;
+            source.Stop();
         }
     }
 }

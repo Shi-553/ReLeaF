@@ -2461,6 +2461,7 @@ MonoBehaviour:
   gameReadyText: {fileID: 281115132}
   gamestartText: {fileID: 242249647}
   gameclearText: {fileID: 1709581110}
+  bgmStage1: {fileID: 8300000, guid: 321b61c274358ba43b4e717e8e4f762e, type: 3}
 --- !u!4 &812973352
 Transform:
   m_ObjectHideFlags: 0
@@ -3650,7 +3651,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9fcd3eebf60598745ab38f8dd015b379, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  isDontDestroyOnLoad: 0
 --- !u!114 &1241052443
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3852,6 +3852,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 3867404719554941120}
     m_Modifications:
+    - target: {fileID: 1197057677586801177, guid: 2a7de3647c92d20429b93cd67b201cf0, type: 3}
+      propertyPath: seEnemyDeath
+      value: 
+      objectReference: {fileID: 8300000, guid: f9ff2d65c19ed1e4ca5ae62e8597c11f, type: 3}
     - target: {fileID: 5442024061459843501, guid: 2a7de3647c92d20429b93cd67b201cf0, type: 3}
       propertyPath: m_Name
       value: scorpion (2)
@@ -4452,6 +4456,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 3867404719554941120}
     m_Modifications:
+    - target: {fileID: 1197057677586801177, guid: 2a7de3647c92d20429b93cd67b201cf0, type: 3}
+      propertyPath: seEnemyDeath
+      value: 
+      objectReference: {fileID: 8300000, guid: f9ff2d65c19ed1e4ca5ae62e8597c11f, type: 3}
     - target: {fileID: 5442024061459843501, guid: 2a7de3647c92d20429b93cd67b201cf0, type: 3}
       propertyPath: m_Name
       value: scorpion (1)
@@ -9031,6 +9039,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 3867404719554941120}
     m_Modifications:
+    - target: {fileID: 1197057677586801177, guid: 2a7de3647c92d20429b93cd67b201cf0, type: 3}
+      propertyPath: seEnemyDeath
+      value: 
+      objectReference: {fileID: 8300000, guid: f9ff2d65c19ed1e4ca5ae62e8597c11f, type: 3}
     - target: {fileID: 5442024061459843501, guid: 2a7de3647c92d20429b93cd67b201cf0, type: 3}
       propertyPath: m_Name
       value: scorpion
@@ -9092,6 +9104,22 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 358065531368087245, guid: 7145dcadd5ab20341bfef2b0cf89dc63, type: 3}
+      propertyPath: sePlayerSandDash
+      value: 
+      objectReference: {fileID: 8300000, guid: 9ab4089a124b8164b9ae9c84c311ccc0, type: 3}
+    - target: {fileID: 358065531368087245, guid: 7145dcadd5ab20341bfef2b0cf89dc63, type: 3}
+      propertyPath: sePlayerSandWalk
+      value: 
+      objectReference: {fileID: 8300000, guid: 7038f4ee472f65445ba1d2603528011a, type: 3}
+    - target: {fileID: 3289195857310044243, guid: 7145dcadd5ab20341bfef2b0cf89dc63, type: 3}
+      propertyPath: seDamaged
+      value: 
+      objectReference: {fileID: 8300000, guid: 529400733ba432e458c816377c311806, type: 3}
+    - target: {fileID: 4052387953760838874, guid: 7145dcadd5ab20341bfef2b0cf89dc63, type: 3}
+      propertyPath: seGetItem
+      value: 
+      objectReference: {fileID: 8300000, guid: 6c07cdf4a0a6efc4ab55503683fdee1e, type: 3}
     - target: {fileID: 4052387953760838874, guid: 7145dcadd5ab20341bfef2b0cf89dc63, type: 3}
       propertyPath: itemUIRoot
       value: 
@@ -9156,6 +9184,30 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8467192124429001914, guid: 7145dcadd5ab20341bfef2b0cf89dc63, type: 3}
+      propertyPath: acUseItem
+      value: 
+      objectReference: {fileID: 8300000, guid: f005ebe6306b0d147bc81514bc3febd9, type: 3}
+    - target: {fileID: 8467192124429001914, guid: 7145dcadd5ab20341bfef2b0cf89dc63, type: 3}
+      propertyPath: seUseItem
+      value: 
+      objectReference: {fileID: 8300000, guid: f005ebe6306b0d147bc81514bc3febd9, type: 3}
+    - target: {fileID: 8467192124429001914, guid: 7145dcadd5ab20341bfef2b0cf89dc63, type: 3}
+      propertyPath: acPlayerSandDash
+      value: 
+      objectReference: {fileID: 8300000, guid: 32bd894d56450524c937de073726f251, type: 3}
+    - target: {fileID: 8467192124429001914, guid: 7145dcadd5ab20341bfef2b0cf89dc63, type: 3}
+      propertyPath: acPlayerSandWalk
+      value: 
+      objectReference: {fileID: 8300000, guid: 7038f4ee472f65445ba1d2603528011a, type: 3}
+    - target: {fileID: 8467192124429001914, guid: 7145dcadd5ab20341bfef2b0cf89dc63, type: 3}
+      propertyPath: sePlayerSandDash
+      value: 
+      objectReference: {fileID: 8300000, guid: 9ab4089a124b8164b9ae9c84c311ccc0, type: 3}
+    - target: {fileID: 8467192124429001914, guid: 7145dcadd5ab20341bfef2b0cf89dc63, type: 3}
+      propertyPath: sePlayerSandWalk
+      value: 
+      objectReference: {fileID: 8300000, guid: 7038f4ee472f65445ba1d2603528011a, type: 3}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 7145dcadd5ab20341bfef2b0cf89dc63, type: 3}
 --- !u!483693784 &8985967051658155041

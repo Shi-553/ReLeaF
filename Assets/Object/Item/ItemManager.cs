@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
+using Utility;
 
 namespace ReLeaf
 {
@@ -12,6 +13,10 @@ namespace ReLeaf
         Transform selectFrame;
         [SerializeField]
         MarkerManager seedMarkerManager;
+
+        public AudioClip seGetItem;
+
+        AudioSource asGetItem;
 
         int itemCount = 0;
         int ItemCount
@@ -81,6 +86,7 @@ namespace ReLeaf
             }
             item.Index = ItemCount;
 
+            asGetItem = SEManager.Singleton.Play(seGetItem, new Vector3(0, 0, 0));
             ItemCount++;
         }
 
