@@ -4,7 +4,7 @@ using Utility;
 
 namespace ReLeaf
 {
-    public class SelectToGreening : MonoBehaviour
+    public class ClickToGreening : MonoBehaviour
     {
         void Start()
         {
