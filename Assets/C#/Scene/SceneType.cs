@@ -7,16 +7,19 @@ public enum SceneType
 
     Manager = 1,
 
+    Title = 2,
+
 }
 public static class SceneTypeExtension
 {
-    public static int GetBuildIndex(this SceneType type)
-    {
-        return type switch
-        {
-            SceneType.SampleScene => 0,
-            SceneType.Manager => 1,
-            _ => 0,
-        };
-    }
+   public static int GetBuildIndex(this SceneType type)
+   {
+      return type switch                         
+      {                                          
+          SceneType.Title => 0,              
+          SceneType.SampleScene => 1,              
+          SceneType.Manager => 2,              
+          _ => 0,                                
+      };                                         
+   }
 }
