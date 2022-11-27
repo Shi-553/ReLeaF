@@ -9,7 +9,10 @@ namespace Utility
         public void Play(AudioClip clip, float volumeScale = 1.0f)
         {
             StopAll();
-            GetSource(false).PlayOneShot(clip, volumeScale);
+            var source = GetSource(false);
+            source.clip = clip;
+            source.volume = volumeScale;
+            source.Play();
         }
     }
 }

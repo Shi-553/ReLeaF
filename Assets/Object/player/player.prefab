@@ -202,6 +202,8 @@ MonoBehaviour:
   itemUIRoot: {fileID: 0}
   selectFrame: {fileID: 0}
   seedMarkerManager: {fileID: 8685453909214998006}
+  seGetItem: {fileID: 8300000, guid: 6c07cdf4a0a6efc4ab55503683fdee1e, type: 3}
+  seUseItem: {fileID: 8300000, guid: f005ebe6306b0d147bc81514bc3febd9, type: 3}
 --- !u!50 &354325909066514047
 Rigidbody2D:
   serializedVersion: 4
@@ -388,6 +390,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1b610d6421e5e5742a2bca35ea99c347, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  sePlayerSandWalk: {fileID: 8300000, guid: 7038f4ee472f65445ba1d2603528011a, type: 3}
+  sePlayerSandDash: {fileID: 8300000, guid: 9ab4089a124b8164b9ae9c84c311ccc0, type: 3}
 --- !u!114 &358065531368087245
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -514,3 +518,4 @@ MonoBehaviour:
   damagedInvicibleTime: 1
   damagedFlashingInterval: 0.1
   damagedFlashingAlpha: 0.5
+  seDamaged: {fileID: 8300000, guid: 529400733ba432e458c816377c311806, type: 3}

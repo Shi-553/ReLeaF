@@ -35,7 +35,7 @@ namespace ReLeaf
         public Vector2Int TilePos { get; private set; }
 
         public bool WasChangedTilePosThisFrame => OldTilePos != TilePos;
-
+        
         private void Awake()
         {
             TryGetComponent(out mover);

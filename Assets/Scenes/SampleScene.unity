@@ -2461,6 +2461,7 @@ MonoBehaviour:
   gameReadyText: {fileID: 281115132}
   gamestartText: {fileID: 242249647}
   gameclearText: {fileID: 1709581110}
+  bgmStage1: {fileID: 8300000, guid: 321b61c274358ba43b4e717e8e4f762e, type: 3}
 --- !u!4 &812973352
 Transform:
   m_ObjectHideFlags: 0
@@ -3855,10 +3856,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: scorpion (2)
       objectReference: {fileID: 0}
-    - target: {fileID: 5442024061459843501, guid: 2a7de3647c92d20429b93cd67b201cf0, type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 8780205405150213191, guid: 2a7de3647c92d20429b93cd67b201cf0, type: 3}
       propertyPath: m_RootOrder
       value: 2
@@ -4454,10 +4451,6 @@ PrefabInstance:
     - target: {fileID: 5442024061459843501, guid: 2a7de3647c92d20429b93cd67b201cf0, type: 3}
       propertyPath: m_Name
       value: scorpion (1)
-      objectReference: {fileID: 0}
-    - target: {fileID: 5442024061459843501, guid: 2a7de3647c92d20429b93cd67b201cf0, type: 3}
-      propertyPath: m_IsActive
-      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8780205405150213191, guid: 2a7de3647c92d20429b93cd67b201cf0, type: 3}
       propertyPath: m_RootOrder
@@ -9034,10 +9027,6 @@ PrefabInstance:
     - target: {fileID: 5442024061459843501, guid: 2a7de3647c92d20429b93cd67b201cf0, type: 3}
       propertyPath: m_Name
       value: scorpion
-      objectReference: {fileID: 0}
-    - target: {fileID: 5442024061459843501, guid: 2a7de3647c92d20429b93cd67b201cf0, type: 3}
-      propertyPath: m_IsActive
-      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8780205405150213191, guid: 2a7de3647c92d20429b93cd67b201cf0, type: 3}
       propertyPath: m_RootOrder

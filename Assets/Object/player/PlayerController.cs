@@ -14,6 +14,15 @@ namespace ReLeaf
 
         PlayerMover mover;
 
+
+        [SerializeField]
+        AudioClip sePlayerSandWalk;
+        [SerializeField]
+        AudioClip sePlayerSandDash;
+
+        AudioSource asPlayerSandWalk;
+        AudioSource asPlayerSandDash;
+
         private void Awake()
         {
             TryGetComponent(out mover);
@@ -40,11 +49,27 @@ namespace ReLeaf
         public void OnMove(InputAction.CallbackContext context)
         {
             mover.Move = context.ReadValue<Vector2>().normalized;
+            if (context.started == true)
+            {
+                asPlayerSandWalk = SEManager.Singleton.PlayLoop(sePlayerSandWalk, transform, 1.0f);
+            }
+            if (context.canceled == true)
+            {
+                asPlayerSandWalk.Stop();
+            }
         }
 
         public void OnDash(InputAction.CallbackContext context)
         {
             mover.IsDash = context.ReadValue<float>() != 0;
+            if (context.started == true)
+            {
+                asPlayerSandDash = SEManager.Singleton.PlayLoop(sePlayerSandDash, transform, 1.0f);
+            }
+            if (context.canceled == true)
+            {
+                asPlayerSandDash.Stop();
+            }
         }
 
         public void OnUseItem(InputAction.CallbackContext context)

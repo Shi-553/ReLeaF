@@ -17,7 +17,8 @@ namespace ReLeaf
         GameObject specialPowerPrefab;
         [SerializeField]
         MarkerManager weakMarkerManager;
-
+        [SerializeField]
+        AudioClip seEnemyDeath;
 
         private void Start()
         {
@@ -71,6 +72,7 @@ namespace ReLeaf
             if (HP - atk <= 0)
             {
                 HP = 0;
+                SEManager.Singleton.Play(seEnemyDeath, transform.position);
                 Death();
                 return;
             }

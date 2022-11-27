@@ -21,6 +21,10 @@ namespace ReLeaf
 
         public bool IsInvincible { get; set; }
 
+        [SerializeField]
+        AudioClip seDamaged;
+
+
         private void Awake()
         {
             IsInvincible = false;
@@ -41,6 +45,7 @@ namespace ReLeaf
             {
                 StartCoroutine(mover.KnockBack(impulse));
                 StartCoroutine(Damaged());
+                SEManager.Singleton.Play(seDamaged, transform.position);
 
                 if (hpGauge.Value == 0)
                 {
