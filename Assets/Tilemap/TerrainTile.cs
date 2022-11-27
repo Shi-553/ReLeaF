@@ -59,6 +59,8 @@ namespace ReLeaf
 
         public int defaultCapacity = 10;
         public int maxSize = 100;
+        public bool cantUseTileManager = false;
+
 
         bool isInit = false;
         void OnEnable()
@@ -95,7 +97,7 @@ namespace ReLeaf
                     pool = Pool ?? Pools.SetPool(CurrentTileObject.TileType.ToInt32(), CurrentTileObject, defaultCapacity, maxSize);
                 }
 
-                if (DungeonManager.Singleton.tiles.ContainsKey((Vector2Int)position))
+                if (!cantUseTileManager && DungeonManager.Singleton.tiles.ContainsKey((Vector2Int)position))
                 {
                     return true;
                 }
@@ -109,12 +111,13 @@ namespace ReLeaf
                 using var _ = Pool.Get<TileObject>(out var newTile);
 
                 newTile.IsInvincible = IsInvincible;
-                newTile.transform.position = tilemap.CellToWorld(position) + new Vector3(DungeonManager.CELL_SIZE, DungeonManager.CELL_SIZE) / 2;
+                newTile.transform.parent = tm.GetComponent<Transform>();
+                newTile.transform.localPosition = tm.GetComponent<Tilemap>().CellToLocal(position) + new Vector3(DungeonManager.CELL_SIZE, DungeonManager.CELL_SIZE) / 2;
                 newTile.TilePos = DungeonManager.Singleton.WorldToTilePos(newTile.transform.position);
-                newTile.transform.parent = tilemap.transform;
 
 
-                DungeonManager.Singleton.tiles[(Vector2Int)position] = newTile;
+                if (!cantUseTileManager)
+                    DungeonManager.Singleton.tiles[(Vector2Int)position] = newTile;
             }
             return true;
         }

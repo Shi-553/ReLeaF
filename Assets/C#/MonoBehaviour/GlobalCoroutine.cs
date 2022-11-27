@@ -5,28 +5,15 @@ using UnityEngine;
 namespace Utility
 {
     // https://shamaton.orz.hm/blog/archives/448
-    public class GlobalCoroutine : MonoBehaviour
+    public class GlobalCoroutine : SingletonBase<GlobalCoroutine>
     {
 
-        // singleton
-        private static GlobalCoroutine instance;
-        private static GlobalCoroutine Instance
+        protected override void Init()
         {
-            get
-            {
-                if (instance == null)
-                {
-                    GameObject obj = new GameObject();
-                    obj.name = "GlobalCoroutine";
-                    instance = obj.AddComponent<GlobalCoroutine>();
-                    DontDestroyOnLoad(obj);
-                }
-                return instance;
-            }
         }
         public static new Coroutine StartCoroutine(IEnumerator routine)
         {
-            return Instance.StaticCast<MonoBehaviour>().StartCoroutine(routine);
+            return Singleton.StaticCast<MonoBehaviour>().StartCoroutine(routine);
         }
         public static Coroutine DestroyNextFrame(GameObject gameObject)
         {
@@ -47,5 +34,6 @@ namespace Utility
             yield return null;
             action();
         }
+
     }
 }

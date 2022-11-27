@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System.Collections.Generic;
+using UnityEngine;
 
 namespace Utility
 {
@@ -14,6 +15,16 @@ namespace Utility
                 parent = parent.parent;
             }
             return path;
+        }
+        public static IEnumerable<Transform> GetChildren(this Transform t)
+        {
+            var children = new Transform[t.childCount];
+
+            for (int i = 0; i < t.childCount; i++)
+            {
+                children[i] = t.GetChild(i);
+            }
+            return children;
         }
     }
 }

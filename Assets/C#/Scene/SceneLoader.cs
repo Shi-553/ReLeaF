@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 using Utility.Definition;
 
 namespace Utility
@@ -29,6 +30,7 @@ namespace Utility
         [SerializeField]
         AudioListener audioListener;
 
+        Image fadeImage;
 #endif
         protected override void Init()
         {
@@ -37,22 +39,38 @@ namespace Utility
             {
                 Debug.LogWarning("ビルド設定にないので上手く遷移しないかも");
             }
+            fadeImage = loading.GetComponentInChildren<Image>();
         }
 
 #if DEFINE_SCENE_TYPE_ENUM
-        public void ChangeScene(SceneType scene)
+        public void ChangeScene(SceneType scene, float fadeoutTime = 0, float fadeinTime = 0)
         {
             if (changeing == null)
             {
-                changeing = StartCoroutine(ChangeSceneAsync(scene));
+                changeing = StartCoroutine(ChangeSceneAsync(scene, fadeoutTime, fadeinTime));
             }
         }
 
-        IEnumerator ChangeSceneAsync(SceneType type)
+        IEnumerator ChangeSceneAsync(SceneType type, float fadeoutTime = 0, float fadeinTime = 0)
         {
-            Time.timeScale = 0;
-            loading.SetActive(true);
             audioListener.enabled = false;
+            loading.SetActive(true);
+            if (fadeoutTime > 0)
+            {
+                float counter = 0;
+                while (true)
+                {
+                    fadeImage.color = new Color(0, 0, 0, counter / fadeoutTime);
+                    if (fadeoutTime <= counter)
+                        break;
+                    counter += Time.deltaTime;
+
+                    yield return null;
+                }
+            }
+            fadeImage.color = new Color(0, 0, 0, 1);
+
+            Time.timeScale = 0;
 
             BGMManager.Singleton.StopAll();
             SEManager.Singleton.StopAll();
@@ -86,9 +104,24 @@ namespace Utility
 
             Debug.Log($"Changed to <b>{CurrentType}</b>");
 
-            loading.SetActive(false);
             Time.timeScale = 1;
 
+            if (fadeinTime > 0)
+            {
+                float counter = 0;
+                while (true)
+                {
+                    fadeImage.color = new Color(0, 0, 0, 1 - (counter / fadeinTime));
+                    if (fadeinTime <= counter)
+                        break;
+                    counter += Time.deltaTime;
+
+                    yield return null;
+                }
+            }
+            fadeImage.color = new Color(0, 0, 0, 0);
+
+            loading.SetActive(false);
             changeing = null;
         }
 

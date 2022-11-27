@@ -10,15 +10,16 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 04e40aee266472849ac5b881afd0f7cb, type: 3}
-  m_Name: foundation
+  m_Name: title_foundation
   m_EditorClassIdentifier: 
   m_Sprite: {fileID: 21300000, guid: 17d9c64d5139a734781fa288da534609, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_Flags: 3
   m_ColliderType: 0
   currentTileObject: {fileID: -1407817353737737465, guid: 7d2dbdfb501b7b044ae8ef237778f103, type: 3}
-  defaultCapacity: 800
-  maxSize: 1000
+  defaultCapacity: 8000
+  maxSize: 8000
+  cantUseTileManager: 0
   randomInfos:
   - probability: 80
     multipleVisualTile: {fileID: -1407817353737737465, guid: 7d2dbdfb501b7b044ae8ef237778f103, type: 3}

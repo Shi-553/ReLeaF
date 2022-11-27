@@ -13,7 +13,7 @@ namespace ReLeaf
     }
     public class GameRuleManager : SingletonBase<GameRuleManager>
     {
-        public GameRuleState State { get; private set; }
+        public GameRuleState State { get; protected set; }
 
         public bool IsPlaying => State == GameRuleState.Playing;
         public bool IsPrepare => State == GameRuleState.Prepare;
@@ -37,7 +37,7 @@ namespace ReLeaf
         {
         }
 
-        private IEnumerator Start()
+        protected virtual IEnumerator Start()
         {
             gameReadyText.SetActive(true);
             yield return new WaitForSeconds(1);
@@ -61,7 +61,7 @@ namespace ReLeaf
         }
         IEnumerator WaitGreening()
         {
-            yield return StartCoroutine(allGreening.StartGreening());
+            yield return StartCoroutine(allGreening.StartGreeningWithPlayer());
             gameclearText.SetActive(true);
         }
 
