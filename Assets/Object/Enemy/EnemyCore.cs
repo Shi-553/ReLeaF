@@ -1,7 +1,4 @@
-using System;
-using System.Collections;
 using UnityEngine;
-using UnityEngine.Events;
 using Utility;
 
 namespace ReLeaf
@@ -11,7 +8,7 @@ namespace ReLeaf
         [SerializeField]
         EnemyDamageableInfo enemyBaseInfo;
 
-        [field:SerializeField,ReadOnly]
+        [field: SerializeField, ReadOnly]
         public float HP { get; private set; }
 
         EnemyMover enemyMover;
@@ -20,10 +17,8 @@ namespace ReLeaf
         GameObject specialPowerPrefab;
         [SerializeField]
         MarkerManager weakMarkerManager;
-
-        public AudioClip seEnemyDeath;
-
-        AudioSource asEnemyDeath;
+        [SerializeField]
+        AudioClip seEnemyDeath;
 
         private void Start()
         {
@@ -40,9 +35,9 @@ namespace ReLeaf
         {
             foreach (var defaultLocalPos in enemyBaseInfo.WeakLocalTilePos)
             {
-                var worldTilePos = enemyMover.TilePos + MathExtension.GetRotatedLocalPos(enemyMover.Dir,defaultLocalPos);
+                var worldTilePos = enemyMover.TilePos + MathExtension.GetRotatedLocalPos(enemyMover.Dir, defaultLocalPos);
 
-                if (DungeonManager.Singleton.TryGetTile(worldTilePos,out var tile) && tile.CanEnemyMove)
+                if (DungeonManager.Singleton.TryGetTile(worldTilePos, out var tile) && tile.CanEnemyMove)
                 {
                     var marker = weakMarkerManager.SetMarker<WeakMarker>(worldTilePos);
                     if (marker != null)
@@ -63,7 +58,7 @@ namespace ReLeaf
                 return;
             if (weakMarkerManager.ResetMarker(tilePos))
             {
-                Damaged(atk * (enemyBaseInfo.WeakLocalTilePos.Length - (weakMarkerManager.Markers.Count )));
+                Damaged(atk * (enemyBaseInfo.WeakLocalTilePos.Length - (weakMarkerManager.Markers.Count)));
                 return;
             }
         }
@@ -71,12 +66,12 @@ namespace ReLeaf
         {
             if (HP == 0)
                 return;
-            Debug.Log(atk+"ダメージ!");
+            Debug.Log(atk + "ダメージ!");
 
             if (HP - atk <= 0)
             {
                 HP = 0;
-                asEnemyDeath = SEManager.Singleton.Play(seEnemyDeath, new Vector3(0, 0, 0));
+                SEManager.Singleton.Play(seEnemyDeath, new Vector3(0, 0, 0));
                 Death();
                 return;
             }
@@ -87,7 +82,7 @@ namespace ReLeaf
         {
             if (collision.CompareTag("Plant"))
             {
-                if (collision.TryGetComponent<Plant>(out var plant)&& plant.IsInvincible)
+                if (collision.TryGetComponent<Plant>(out var plant) && plant.IsInvincible)
                 {
                     Death();
                 }

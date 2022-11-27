@@ -1,5 +1,4 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using Utility;
 
@@ -33,8 +32,8 @@ namespace ReLeaf
         [SerializeField]
         GameObject gameclearText;
 
-        public AudioClip bgmStage1;
-        AudioSource asStage1;
+        [SerializeField]
+        AudioClip bgmStage1;
 
         protected override void Init()
         {
@@ -51,6 +50,7 @@ namespace ReLeaf
 
             yield return new WaitForSeconds(1);
             gamestartText.SetActive(false);
+
             BGMManager.Singleton.Play(bgmStage1, 0.2f);
         }
 

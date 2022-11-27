@@ -1,11 +1,4 @@
-﻿using System;
-using System.Collections;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using UnityEngine.InputSystem;
-using UnityEngine.SceneManagement;
+﻿using System.Collections;
 using UnityEngine;
 using Utility;
 
@@ -28,9 +21,9 @@ namespace ReLeaf
 
         public bool IsInvincible { get; set; }
 
-        public AudioClip seDamaged;
+        [SerializeField]
+        AudioClip seDamaged;
 
-        AudioSource asDamaged;
 
         private void Awake()
         {
@@ -52,7 +45,7 @@ namespace ReLeaf
             {
                 StartCoroutine(mover.KnockBack(impulse));
                 StartCoroutine(Damaged());
-                asDamaged = SEManager.Singleton.Play(seDamaged, new Vector3(0, 0, 0));
+                SEManager.Singleton.Play(seDamaged, new Vector3(0, 0, 0));
 
                 if (hpGauge.Value == 0)
                 {

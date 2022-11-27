@@ -4,7 +4,7 @@ using Utility;
 
 namespace ReLeaf
 {
-    public class ItemManager :MonoBehaviour
+    public class ItemManager : MonoBehaviour
     {
         List<ItemUI> itemUIs = new List<ItemUI>();
         [SerializeField]
@@ -14,9 +14,9 @@ namespace ReLeaf
         [SerializeField]
         MarkerManager seedMarkerManager;
 
-        public AudioClip seGetItem;
+        [SerializeField]
+        AudioClip seGetItem;
 
-        AudioSource asGetItem;
 
         int itemCount = 0;
         int ItemCount
@@ -45,7 +45,7 @@ namespace ReLeaf
         {
             set
             {
-                index = (ItemCount != 0) ? ((value+ ItemCount) % ItemCount) : 0;
+                index = (ItemCount != 0) ? ((value + ItemCount) % ItemCount) : 0;
 
             }
             get => index;
@@ -66,7 +66,7 @@ namespace ReLeaf
             itemUIRoot.GetComponentsInChildren(true, itemUIs);
             mainCamera = Camera.main;
 
-            mover=GetComponentInParent<PlayerMover>();
+            mover = GetComponentInParent<PlayerMover>();
             ItemCount = 0;
         }
 
@@ -82,17 +82,17 @@ namespace ReLeaf
             var screen = mainCamera.WorldToScreenPoint(itemBase.transform.position);
             if (RectTransformUtility.ScreenPointToLocalPointInRectangle(itemUIRoot, screen, mainCamera, out var local))
             {
-                item.transform.localPosition= local;
+                item.transform.localPosition = local;
             }
             item.Index = ItemCount;
 
-            asGetItem = SEManager.Singleton.Play(seGetItem, new Vector3(0, 0, 0));
+            SEManager.Singleton.Play(seGetItem, new Vector3(0, 0, 0));
             ItemCount++;
         }
 
         public void UseItem()
         {
-            if (ItemCount == 0) 
+            if (ItemCount == 0)
                 return;
 
             var useItem = Current;
@@ -127,7 +127,7 @@ namespace ReLeaf
         private void Update()
         {
 
-            if (mover.WasChangedTilePosThisFrame || WasChangedItemDirThisFrame || previewd!=Current.Item)
+            if (mover.WasChangedTilePosThisFrame || WasChangedItemDirThisFrame || previewd != Current.Item)
             {
                 seedMarkerManager.ResetAllMarker();
                 if (ItemCount == 0)

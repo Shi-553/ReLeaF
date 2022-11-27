@@ -1,6 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
@@ -17,11 +14,13 @@ namespace ReLeaf
 
         PlayerMover mover;
 
-        public AudioClip seUseItem;
-        public AudioClip sePlayerSandWalk;
-        public AudioClip sePlayerSandDash;
+        [SerializeField]
+        AudioClip seUseItem;
+        [SerializeField]
+        AudioClip sePlayerSandWalk;
+        [SerializeField]
+        AudioClip sePlayerSandDash;
 
-        AudioSource asUseItem;
         AudioSource asPlayerSandWalk;
         AudioSource asPlayerSandDash;
 
@@ -51,11 +50,11 @@ namespace ReLeaf
         public void OnMove(InputAction.CallbackContext context)
         {
             mover.Move = context.ReadValue<Vector2>().normalized;
-            if(context.started==true)
+            if (context.started == true)
             {
                 asPlayerSandWalk = SEManager.Singleton.Play(sePlayerSandWalk, new Vector3(0, 0, 0), 1.0f, true);
             }
-            if(context.canceled==true)
+            if (context.canceled == true)
             {
                 asPlayerSandWalk.Stop();
             }
@@ -80,7 +79,7 @@ namespace ReLeaf
                 return;
             if (context.ReadValue<float>() != 0)
             {
-                asUseItem = SEManager.Singleton.Play(seUseItem, new Vector3(0, 0, 0));
+                SEManager.Singleton.Play(seUseItem, new Vector3(0, 0, 0));
                 itemManager.UseItem();
             }
         }
