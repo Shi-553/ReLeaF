@@ -54,12 +54,16 @@ jobs:
         with:
           name: Build
           path: build      
-    #  - name: FileMove
-    #    run: |
-    #         pwsh -command "Move-Item ./build/StandaloneWindows64 ./build/ReLeaF"
+          
+      - name: FileMove
+        run: |
+             pwsh -command "Move-Item ./build/StandaloneWindows64 ./build/ReLeaF"
+        
+      - name: Check
+        run: pwsh -command "If( -not ( Test-Path ./build/ReLeaF/* )){ exit 1 }"
         
       - name: Zip
-        run: 7z a "./ReLeaF.zip" "./build" -tzip
+        run: 7z a "./ReLeaF.zip" "./build/ReLeaf" -tzip
 
       - name: Set releaser settings
         run: |
