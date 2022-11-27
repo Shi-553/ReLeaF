@@ -26,6 +26,9 @@ namespace ReLeaf
         [SerializeField]
         SelectTile messyTile;
 
+        [SerializeField]
+        TerrainTile enemyPlant;
+
         public Dictionary<Vector2Int, TileObject> tiles = new Dictionary<Vector2Int, TileObject>();
 
         [field: SerializeField, ReadOnly]
@@ -143,6 +146,10 @@ namespace ReLeaf
         public void ToSand(Vector2Int tilePos)
         {
             ChangeTile(tilePos, sandTile);
+        }
+        public void ToEnemyPlant(Vector2Int tilePos)
+        {
+            ChangeTile(tilePos, enemyPlant);
         }
 
 

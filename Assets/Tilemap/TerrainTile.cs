@@ -18,6 +18,7 @@ namespace ReLeaf
         Plant,
         Wall,
         Messy,
+        EnemyPlant,
         Max
     };
 
@@ -34,10 +35,10 @@ namespace ReLeaf
 
 
         [SerializeField]
-        private TileFlags m_Flags = TileFlags.LockColor;
+        private TileFlags m_Flags = TileFlags.LockAll;
 
         [SerializeField]
-        private Tile.ColliderType m_ColliderType = UnityEngine.Tilemaps.Tile.ColliderType.Sprite;
+        private Tile.ColliderType m_ColliderType = UnityEngine.Tilemaps.Tile.ColliderType.None;
 
         [Header("Custom")]
         [Pickle]

@@ -3650,7 +3650,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9fcd3eebf60598745ab38f8dd015b379, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  isDontDestroyOnLoad: 0
 --- !u!114 &1241052443
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5156,6 +5155,7 @@ MonoBehaviour:
   seedTiles:
   - {fileID: 11400000, guid: 166d001927ca49442b7b421b1722cf0f, type: 2}
   messyTile: {fileID: 11400000, guid: 0990de19b010e804cbbe751cea55c8be, type: 2}
+  enemyPlant: {fileID: 11400000, guid: 1263c40a7eae41447bd0359878251824, type: 2}
   <MaxGreeningCount>k__BackingField: 0
 --- !u!483693784 &1669264805538347063
 TilemapRenderer:
