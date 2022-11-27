@@ -60,9 +60,9 @@ namespace ReLeaf
 
         public IEnumerable<Vector2Int> GetAttackRange(Vector2Int pos, Vector2Int dir, bool isDamagableOnly)
         {
-            for (int i = 0; i < SharkAttackInfo.Range; i++)
+            for (int i = 0; i < SharkAttackInfo.Range + 1; i++)
             {
-                var worldTilePos = pos + dir * (i + 1);
+                var worldTilePos = pos + dir * i;
                 if (!DungeonManager.Singleton.TryGetTile(worldTilePos, out var tile) || !tile.CanEnemyMove)
                 {
                     yield break;
@@ -77,9 +77,9 @@ namespace ReLeaf
         public int GetAttackRangeCount(Vector2Int pos, Vector2Int dir, bool isDamagableOnly)
         {
             int count = 0;
-            for (int i = 0; i < SharkAttackInfo.Range; i++)
+            for (int i = 0; i < SharkAttackInfo.Range + 1; i++)
             {
-                var worldTilePos = pos + dir * (i + 1);
+                var worldTilePos = pos + dir * i;
 
                 if (!DungeonManager.Singleton.TryGetTile(worldTilePos, out var tile) || !tile.CanEnemyMove)
                 {
