@@ -11,6 +11,7 @@ namespace Utility
             StopAll();
             var source = GetSource(false);
             source.clip = clip;
+            source.loop = true;
             source.volume = volumeScale;
             source.Play();
         }
