@@ -9,8 +9,6 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a395ec5eab51d534994e4abcffd019dd, type: 3}
-  m_Name: BGM1.mp3
+  m_Script: {fileID: 11500000, guid: 03cf50ccf860b2f4383ebeb3f9d5053d, type: 3}
+  m_Name: Audio Info Source Location
   m_EditorClassIdentifier: 
-  clip: {fileID: 8300000, guid: dbe867a2a6c3e7a47ac1b375cbb96a48, type: 3}
-  volume: 1

@@ -1,4 +1,5 @@
 using DebugLogExtension;
+using System;
 using System.IO;
 using System.Linq;
 using UnityEditor;
@@ -6,18 +7,46 @@ using UnityEngine;
 
 namespace Utility
 {
-    public class GenerateAudioInfo : EditorWindow
+    public class GenerateAudioInfo : AssetPostprocessor
     {
-        private DefaultAsset targetFolder = null;
-
-        [MenuItem("Window/AudioInfoGenerater")]
-        static void Open()
+        static string GetSourcePath()
         {
-            var window = GetWindow<GenerateAudioInfo>();
-            window.titleContent = new GUIContent("AudioInfoGenerater");
+            var audioSoruceTargetLocations = AssetDatabase.FindAssets("t:AudioInfoSourceLocation");
+            var target = audioSoruceTargetLocations.FirstOrDefault();
+            if (target == null)
+            {
+                throw new System.Exception("AudioSoruceTargetLocation  Not Found !");
+            }
+            return AssetDatabase.GUIDToAssetPath(target);
         }
+        static bool CheckBaseOf(Uri parentUri, string[] children)
+        {
+            foreach (var child in children)
+            {
+                var childUri = new Uri(Path.GetFullPath(child));
+                if (parentUri != childUri && parentUri.IsBaseOf(childUri))
+                {
+                    return true;
+                }
 
-        void CreateSubFolder(string path, string dirName, string newDirName)
+            }
+            return false;
+        }
+        static void OnPostprocessAllAssets(string[] importedAssets, string[] deletedAssets, string[] movedAssets, string[] movedFromAssetPaths, bool didDomainReload)
+        {
+
+            var path = GetSourcePath();
+
+            var parentUri = new Uri(new DirectoryInfo(Path.GetFullPath(path)).Parent.FullName + "/");
+
+            if (CheckBaseOf(parentUri, importedAssets) || CheckBaseOf(parentUri, deletedAssets) || CheckBaseOf(parentUri, movedAssets) || CheckBaseOf(parentUri, movedFromAssetPaths))
+            {
+                Debug.Log("Update AudioInfo");
+                Update(path.Replace("/" + Path.GetFileName(path), ""));
+            }
+
+        }
+        static void CreateSubFolder(string path, string dirName, string newDirName)
         {
             var subFolderPaths = AssetDatabase.GetSubFolders(path);
             foreach (var subFolderPath in subFolderPaths)
@@ -25,81 +54,77 @@ namespace Utility
                 var newPath = subFolderPath.Replace(dirName, newDirName);
                 if (!Directory.Exists(newPath))
                 {
-                    newPath.DebugLog();
                     Directory.CreateDirectory(newPath);
                 }
                 CreateSubFolder(subFolderPath, dirName, newDirName);
             }
         }
-        private void OnGUI()
+        static void DeleteIfEmpty(string folder)
+        {
+            foreach (var subdir in Directory.GetDirectories(folder))
+                DeleteIfEmpty(subdir);
+
+            if (IsDirectoryEmpty(folder))
+                AssetDatabase.DeleteAsset("assets/" + Path.GetRelativePath(Application.dataPath, folder));
+        }
+
+        private static bool IsDirectoryEmpty(string path)
+        {
+            return !Directory.EnumerateFileSystemEntries(path).Any();
+        }
+
+        static void Update(string sourcePath)
         {
 
-            GUILayout.Label("Document Generator", EditorStyles.boldLabel);
-
-            targetFolder = (DefaultAsset)EditorGUILayout.ObjectField(
-                "Select source Folder",
-                targetFolder,
-                typeof(DefaultAsset),
-                false);
+            if (string.IsNullOrEmpty(sourcePath))
+                return;
 
 
-            if (GUILayout.Button("Generate!!"))
+            var dirName = Path.GetFileName(sourcePath);
+
+            CreateSubFolder(sourcePath, dirName, "Info");
+
+            string[] childAssetPathList = AssetDatabase.FindAssets("", new[] { sourcePath })
+                .Select(AssetDatabase.GUIDToAssetPath).ToArray();
+
+            AssetDatabase.Refresh();
+
+            var infoDir = sourcePath.Replace(dirName, "Info");
+
+            var audioInfos = AssetDatabase.FindAssets("t:AudioInfo", new[] { infoDir })
+                .Select(AssetDatabase.GUIDToAssetPath)
+                .Select(AssetDatabase.LoadAssetAtPath<AudioInfo>).ToArray();
+
+            foreach (var childPath in childAssetPathList)
             {
-                if (targetFolder == null)
+                var clip = AssetDatabase.LoadAssetAtPath<AudioClip>(childPath);
+                if (clip == null)
+                    continue;
+                var newPath = childPath.Replace(dirName, "Info") + ".asset";
+
+                if (!File.Exists(Path.Combine(Path.GetDirectoryName(Application.dataPath), newPath).Replace("/", "\\")))
                 {
-                    Debug.LogError("Not valid Folder !");
-                    return;
-                }
-                var path = AssetDatabase.GetAssetPath(targetFolder);
-
-                if (string.IsNullOrEmpty(path))
-                    return;
-
-                // ディレクトリでなければ、指定を解除する
-                bool isDirectory = File.GetAttributes(path).HasFlag(FileAttributes.Directory);
-                if (isDirectory == false)
-                {
-                    targetFolder = null;
-                    return;
-                }
-
-                var dirName = Path.GetFileName(path);
-
-                CreateSubFolder(path, dirName, "Info");
-
-                string[] childAssetPathList = AssetDatabase.FindAssets("", new[] { path })
-                    .Select(AssetDatabase.GUIDToAssetPath).ToArray();
-                AssetDatabase.Refresh();
-
-                var audioInfos = AssetDatabase.FindAssets("t:AudioInfo", new[] { path.Replace(dirName, "Info") })
-                    .Select(AssetDatabase.GUIDToAssetPath)
-                    .Select(AssetDatabase.LoadAssetAtPath<AudioInfo>).ToArray();
-
-                foreach (var childPath in childAssetPathList)
-                {
-                    var clip = AssetDatabase.LoadAssetAtPath<AudioClip>(childPath);
-                    if (clip == null)
-                        continue;
-                    var newPath = childPath.Replace(dirName, "Info") + ".asset";
-
-                    if (!File.Exists(Path.Combine(Path.GetDirectoryName(Application.dataPath), newPath).Replace("/", "\\")))
+                    var f = audioInfos.FirstOrDefault(info => info.clip == clip);
+                    if (f != null)
                     {
-                        var f = audioInfos.FirstOrDefault(info => info.clip == clip);
-                        if (f != null)
-                        {
-                            AssetDatabase.MoveAsset(AssetDatabase.GetAssetPath(f), newPath);
-                        }
-                        else
-                        {
-                            var info = CreateInstance<AudioInfo>();
-                            info.clip = clip;
-                            AssetDatabase.CreateAsset(info, newPath);
-                            newPath.DebugLog();
-                        }
+                        AssetDatabase.MoveAsset(AssetDatabase.GetAssetPath(f), newPath);
+                    }
+                    else
+                    {
+                        var info = ScriptableObject.CreateInstance<AudioInfo>();
+                        info.clip = clip;
+                        AssetDatabase.CreateAsset(info, newPath);
+                        newPath.DebugLog();
                     }
                 }
-                AssetDatabase.Refresh();
             }
+            foreach (var info in audioInfos)
+            {
+                if (info.clip == null)
+                    AssetDatabase.DeleteAsset(AssetDatabase.GetAssetPath(info));
+            }
+            DeleteIfEmpty(Path.GetFullPath(infoDir));
+            AssetDatabase.Refresh();
         }
     }
 }
