@@ -20,6 +20,7 @@ namespace ReLeaf
         public bool IsValid => Item != null;
 
         public int Index { get; set; }
+        public Vector3 Offset { get; set; }
 
         public void Init(ItemBase item)
         {
@@ -44,6 +45,6 @@ namespace ReLeaf
 
         }
 
-        Vector3 GetItemLocalPos(int i) => new Vector3(180 * i, 0, 0);
+        Vector3 GetItemLocalPos(int i) => Offset * i;
     }
 }

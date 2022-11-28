@@ -63,13 +63,22 @@ namespace ReLeaf
         PlayerMover mover;
         ItemBase previewd;
 
+        Vector3 itemOffset;
+
         private void Start()
         {
             itemUIRoot.GetComponentsInChildren(true, itemUIs);
+            itemOffset = itemUIs[1].transform.localPosition - itemUIs[0].transform.localPosition;
             mainCamera = Camera.main;
 
             mover = GetComponentInParent<PlayerMover>();
             ItemCount = 0;
+
+
+            foreach (var item in itemUIs)
+            {
+                item.Offset = itemOffset;
+            }
         }
 
         public void AddItem(ItemBase itemBase)
