@@ -390,8 +390,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1b610d6421e5e5742a2bca35ea99c347, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  sePlayerSandWalk: {fileID: 8300000, guid: 7038f4ee472f65445ba1d2603528011a, type: 3}
-  sePlayerSandDash: {fileID: 8300000, guid: 9ab4089a124b8164b9ae9c84c311ccc0, type: 3}
 --- !u!114 &358065531368087245
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -410,6 +408,24 @@ MonoBehaviour:
   dashConsumeEnergy: 5
   energyRecoveryPoint: 0.2
   energyGauge: {fileID: 5839813641606943567}
+  seSandMove:
+    walk:
+      list:
+      - {fileID: 8300000, guid: be175bf574470c24ab811842c9e38112, type: 3}
+      - {fileID: 8300000, guid: 4dd466f19b52189419a1142d7b1edefb, type: 3}
+    dash:
+      list:
+      - {fileID: 8300000, guid: d83f51af763e0a24e9da6712063cb003, type: 3}
+      - {fileID: 8300000, guid: e8d0b1bed6cf7134cbc1431f43778736, type: 3}
+  seGrassMove:
+    walk:
+      list:
+      - {fileID: 8300000, guid: 695c7432a4cb6544eb7cbdbe5cbc7811, type: 3}
+      - {fileID: 8300000, guid: beb44e22f479af14ab33e600be3462e3, type: 3}
+    dash:
+      list:
+      - {fileID: 8300000, guid: 5018fa2691cba8749855a8f01e1c5e36, type: 3}
+      - {fileID: 8300000, guid: 45f4e6cc9d26154478f10fb48b464efe, type: 3}
 --- !u!50 &7234929495377642534
 Rigidbody2D:
   serializedVersion: 4

@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using UnityEngine;
 using Utility;
 
@@ -27,6 +28,37 @@ namespace ReLeaf
         ValueGaugeManager energyGauge;
         Rigidbody2DMover mover;
 
+        [Serializable]
+        class SequentialSE
+        {
+            int index = 0;
+            [SerializeField]
+            AudioClip[] list;
+            public AudioClip Get()
+            {
+                var clip = list[index];
+                index = (index + 1) % list.Length;
+                return clip;
+            }
+        }
+        [Serializable]
+        class MoveSE
+        {
+            [SerializeField]
+            SequentialSE walk;
+            [SerializeField]
+            SequentialSE dash;
+            public AudioClip Get(bool isDash)
+            {
+                return isDash ? dash.Get() : walk.Get();
+            }
+        }
+        [SerializeField]
+        MoveSE seSandMove;
+        [SerializeField]
+        MoveSE seGrassMove;
+
+
         public Vector2 Move { get; set; }
         public bool IsLeft { get; private set; }
         public bool IsDash { get; set; }
@@ -35,7 +67,7 @@ namespace ReLeaf
         public Vector2Int TilePos { get; private set; }
 
         public bool WasChangedTilePosThisFrame => OldTilePos != TilePos;
-        
+
         private void Awake()
         {
             TryGetComponent(out mover);
@@ -62,11 +94,20 @@ namespace ReLeaf
 
             mover.MoveDelta(DungeonManager.CELL_SIZE * speed * Move);
 
+            if (WasChangedTilePosThisFrame)
+            {
+                if (DungeonManager.Singleton.TryGetTile(TilePos, out var tile))
+                {
+                    var se = tile.TileType == TileType.Plant ? seGrassMove : seSandMove;
+                    SEManager.Singleton.Play(se.Get(IsDash), transform.position, 0.5f);
+                }
+            }
+
             if (DungeonManager.Singleton.SowSeed(TilePos, PlantType.Foundation))
             {
                 energyGauge.RecoveryValue(energyRecoveryPoint);
-            }
 
+            }
         }
         public IEnumerator KnockBack(Vector3 impulse)
         {
