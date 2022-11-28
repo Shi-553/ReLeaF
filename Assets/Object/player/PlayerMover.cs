@@ -104,11 +104,6 @@ namespace ReLeaf
                 }
             }
 
-            if (DungeonManager.Singleton.SowSeed(TilePos, PlantType.Foundation))
-            {
-                energyGauge.RecoveryValue(energyRecoveryPoint);
-
-            }
         }
         public IEnumerator KnockBack(Vector3 impulse)
         {
@@ -124,6 +119,17 @@ namespace ReLeaf
                     yield break;
                 }
                 yield return null;
+            }
+        }
+        private void OnTriggerStay2D(Collider2D collision)
+        {
+            if (IsMove && collision.gameObject.CompareTag("Sand"))
+            {
+                if (DungeonManager.Singleton.SowSeed(DungeonManager.Singleton.WorldToTilePos(collision.transform.position), PlantType.Foundation))
+                {
+                    energyGauge.RecoveryValue(energyRecoveryPoint);
+
+                }
             }
         }
     }
