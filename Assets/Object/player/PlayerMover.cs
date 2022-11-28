@@ -57,8 +57,6 @@ namespace ReLeaf
         MoveSE seSandMove;
         [SerializeField]
         MoveSE seGrassMove;
-        [SerializeField]
-        float volume = 0.3f;
 
 
         public Vector2 Move { get; set; }
@@ -102,7 +100,7 @@ namespace ReLeaf
                 if (DungeonManager.Singleton.TryGetTile(TilePos, out var tile))
                 {
                     var se = tile.TileType == TileType.Plant ? seGrassMove : seSandMove;
-                    SEManager.Singleton.Play(se.Get(IsDash), transform.position, volume);
+                    SEManager.Singleton.Play(se.Get(IsDash), transform.position, 0.4f);
                 }
             }
 
