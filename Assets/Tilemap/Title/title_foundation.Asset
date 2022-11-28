@@ -16,9 +16,9 @@ MonoBehaviour:
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_Flags: 3
   m_ColliderType: 0
-  currentTileObject: {fileID: -1407817353737737465, guid: 7d2dbdfb501b7b044ae8ef237778f103, type: 3}
-  defaultCapacity: 8000
-  maxSize: 8000
+  currentTileObject: {fileID: -1407817353737737465, guid: bab971c5311ce5b4183a5f273699c24c, type: 3}
+  defaultCapacity: 4000
+  maxSize: 4000
   cantUseTileManager: 0
   randomInfos:
   - probability: 80
