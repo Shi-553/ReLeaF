@@ -100,8 +100,8 @@ namespace ReLeaf
                         {
                             if (targetGroup.m_Targets.Length > 100)
                             {
-                                targetGroup.m_Targets[targetGroupIndex].target = tile.transform;
-                                targetGroupIndex = (targetGroupIndex + 1) % 99;
+                                targetGroup.m_Targets[2 + targetGroupIndex].target = tile.transform;
+                                targetGroupIndex = (targetGroupIndex + 1) % 98;
                             }
                             else
                             {
