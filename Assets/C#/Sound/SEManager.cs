@@ -8,23 +8,23 @@ namespace Utility
     {
         protected override int InitSourceCount => 5;
 
-        public AudioSource Play(AudioInfo info, Vector3 pos, float volumeScale = 1.0f)
+        public AudioSource Play(AudioInfo info, Vector3 pos)
         {
             var source = GetSource(true);
             source.clip = info.clip;
             source.transform.position = pos;
             source.loop = false;
-            source.volume = info.volume * volumeScale;
+            source.volume = info.volume;
             source.Play();
 
             return source;
         }
-        public AudioSource PlayLoop(AudioInfo info, Transform target, float volumeScale = 1.0f)
+        public AudioSource PlayLoop(AudioInfo info, Transform target)
         {
             var source = GetSource(true);
             source.clip = info.clip;
             source.loop = true;
-            source.volume = info.volume * volumeScale;
+            source.volume = info.volume;
             source.Play();
             StartCoroutine(FollowTarget(source, info.clip, target));
             return source;

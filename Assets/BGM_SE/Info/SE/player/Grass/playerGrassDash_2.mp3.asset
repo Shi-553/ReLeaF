@@ -13,4 +13,4 @@ MonoBehaviour:
   m_Name: playerGrassDash_2.mp3
   m_EditorClassIdentifier: 
   clip: {fileID: 8300000, guid: a23eda56c14f04c42b50f4932b031a72, type: 3}
-  volume: 1
+  volume: 0.5

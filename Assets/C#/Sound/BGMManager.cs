@@ -4,13 +4,13 @@
     {
         protected override int InitSourceCount => 1;
 
-        public void Play(AudioInfo info, float volumeScale = 1.0f)
+        public void Play(AudioInfo info)
         {
             StopAll();
             var source = GetSource(false);
             source.clip = info.clip;
             source.loop = true;
-            source.volume = info.volume * volumeScale;
+            source.volume = info.volume;
             source.Play();
         }
     }

@@ -31,6 +31,17 @@ namespace Utility
             return source;
         }
 
+        public AudioSource GetPlayingSource(AudioClip clip)
+        {
+            foreach (var source in audioSources)
+            {
+                if (source.isPlaying && source.clip == clip)
+                {
+                    return source;
+                }
+            }
+            return null;
+        }
         protected AudioSource GetSource(bool isCreate)
         {
             foreach (var source in audioSources)
