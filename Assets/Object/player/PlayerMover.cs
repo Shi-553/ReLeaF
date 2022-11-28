@@ -57,9 +57,12 @@ namespace ReLeaf
         MoveSE seSandMove;
         [SerializeField]
         MoveSE seGrassMove;
+        [SerializeField]
+        float volume = 0.3f;
 
 
         public Vector2 Move { get; set; }
+        public bool IsMove => Move != Vector2.zero;
         public bool IsLeft { get; private set; }
         public bool IsDash { get; set; }
 
@@ -94,12 +97,12 @@ namespace ReLeaf
 
             mover.MoveDelta(DungeonManager.CELL_SIZE * speed * Move);
 
-            if (WasChangedTilePosThisFrame)
+            if (WasChangedTilePosThisFrame && IsMove)
             {
                 if (DungeonManager.Singleton.TryGetTile(TilePos, out var tile))
                 {
                     var se = tile.TileType == TileType.Plant ? seGrassMove : seSandMove;
-                    SEManager.Singleton.Play(se.Get(IsDash), transform.position, 0.5f);
+                    SEManager.Singleton.Play(se.Get(IsDash), transform.position, volume);
                 }
             }
 

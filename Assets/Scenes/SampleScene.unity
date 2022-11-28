@@ -3186,7 +3186,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   value: 0
-  targetRate: 0.1
+  targetRate: 0.5
   targetRateTransform: {fileID: 114856932}
   slider: {fileID: 2118467201}
 --- !u!1 &1108755539
