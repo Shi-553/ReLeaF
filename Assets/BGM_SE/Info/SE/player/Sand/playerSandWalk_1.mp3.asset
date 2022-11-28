@@ -13,4 +13,4 @@ MonoBehaviour:
   m_Name: playerSandWalk_1.mp3
   m_EditorClassIdentifier: 
   clip: {fileID: 8300000, guid: 048083000952ae7459b480663332091f, type: 3}
-  volume: 1
+  volume: 0.5

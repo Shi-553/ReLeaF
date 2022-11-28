@@ -28,6 +28,7 @@ namespace Utility
                 {
                     i.volume = volume;
 
+                    EditorUtility.SetDirty(i);
                     if (Application.isPlaying)
                     {
                         var source = BGMManager.Singleton.GetPlayingSource(i.clip);

@@ -13,4 +13,4 @@ MonoBehaviour:
   m_Name: BGM1.mp3
   m_EditorClassIdentifier: 
   clip: {fileID: 8300000, guid: dbe867a2a6c3e7a47ac1b375cbb96a48, type: 3}
-  volume: 1
+  volume: 0.5
