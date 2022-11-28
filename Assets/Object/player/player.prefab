@@ -202,8 +202,8 @@ MonoBehaviour:
   itemUIRoot: {fileID: 0}
   selectFrame: {fileID: 0}
   seedMarkerManager: {fileID: 8685453909214998006}
-  seGetItem: {fileID: 8300000, guid: 6c07cdf4a0a6efc4ab55503683fdee1e, type: 3}
-  seUseItem: {fileID: 8300000, guid: f005ebe6306b0d147bc81514bc3febd9, type: 3}
+  seGetItem: {fileID: 11400000, guid: 55ca8ca85fa3fd540894d4ec9dc3b1d1, type: 2}
+  seUseItem: {fileID: 11400000, guid: 3f4e968a5953efd4896a676770419698, type: 2}
 --- !u!50 &354325909066514047
 Rigidbody2D:
   serializedVersion: 4
@@ -411,22 +411,21 @@ MonoBehaviour:
   seSandMove:
     walk:
       list:
-      - {fileID: 8300000, guid: be175bf574470c24ab811842c9e38112, type: 3}
-      - {fileID: 8300000, guid: 4dd466f19b52189419a1142d7b1edefb, type: 3}
+      - {fileID: 11400000, guid: 596db5ecbbafe644aad34d8aa2f50e04, type: 2}
+      - {fileID: 11400000, guid: 454c80cf3b1d22b498bc19c427883aca, type: 2}
     dash:
       list:
-      - {fileID: 8300000, guid: d83f51af763e0a24e9da6712063cb003, type: 3}
-      - {fileID: 8300000, guid: e8d0b1bed6cf7134cbc1431f43778736, type: 3}
+      - {fileID: 11400000, guid: cfa91bf627e05024fbc55606f931c564, type: 2}
+      - {fileID: 11400000, guid: 630f3aef47836994d933ecc1c4e82f5d, type: 2}
   seGrassMove:
     walk:
       list:
-      - {fileID: 8300000, guid: 695c7432a4cb6544eb7cbdbe5cbc7811, type: 3}
-      - {fileID: 8300000, guid: beb44e22f479af14ab33e600be3462e3, type: 3}
+      - {fileID: 11400000, guid: 2af23eeeb4e010148b8604110ce12ba1, type: 2}
+      - {fileID: 11400000, guid: 387efe668041db445b055ec22ef39aa2, type: 2}
     dash:
       list:
-      - {fileID: 8300000, guid: 5018fa2691cba8749855a8f01e1c5e36, type: 3}
-      - {fileID: 8300000, guid: 45f4e6cc9d26154478f10fb48b464efe, type: 3}
-  volume: 0.3
+      - {fileID: 11400000, guid: 2d647e75c15227948b952e1175a315c4, type: 2}
+      - {fileID: 11400000, guid: 0c1d8da08c8bdec43b11e9983dfc3b81, type: 2}
 --- !u!50 &7234929495377642534
 Rigidbody2D:
   serializedVersion: 4
@@ -535,4 +534,4 @@ MonoBehaviour:
   damagedInvicibleTime: 1
   damagedFlashingInterval: 0.1
   damagedFlashingAlpha: 0.5
-  seDamaged: {fileID: 8300000, guid: 529400733ba432e458c816377c311806, type: 3}
+  seDamaged: {fileID: 11400000, guid: 7aa91e4919feaf5489e7df122751deb0, type: 2}

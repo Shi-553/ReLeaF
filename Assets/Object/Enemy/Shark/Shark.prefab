@@ -163,7 +163,7 @@ MonoBehaviour:
   <HP>k__BackingField: 0
   specialPowerPrefab: {fileID: 7682479516954604330, guid: 110ed167187e534479bf9ad6f98fa9d6, type: 3}
   weakMarkerManager: {fileID: 2990406055205962186}
-  seEnemyDeath: {fileID: 8300000, guid: f9ff2d65c19ed1e4ca5ae62e8597c11f, type: 3}
+  seEnemyDeath: {fileID: 11400000, guid: c60d38e1592a9f2488104785a0989e07, type: 2}
 --- !u!114 &7609214511921149064
 MonoBehaviour:
   m_ObjectHideFlags: 0

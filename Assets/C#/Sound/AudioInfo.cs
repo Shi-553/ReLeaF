@@ -7,5 +7,9 @@ namespace Utility
         public AudioClip clip;
         public float volume = 1.0f;
 
+        //private void OnValidate()
+        //{
+        //    BGMManager
+        //}
     }
 }

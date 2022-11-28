@@ -15,10 +15,10 @@ namespace ReLeaf
         MarkerManager seedMarkerManager;
 
         [SerializeField]
-        AudioClip seGetItem;
+        AudioInfo seGetItem;
 
         [SerializeField]
-        AudioClip seUseItem;
+        AudioInfo seUseItem;
 
         int itemCount = 0;
         int ItemCount

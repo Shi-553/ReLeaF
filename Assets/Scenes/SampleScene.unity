@@ -2461,7 +2461,7 @@ MonoBehaviour:
   gameReadyText: {fileID: 281115132}
   gamestartText: {fileID: 242249647}
   gameclearText: {fileID: 1709581110}
-  bgmStage1: {fileID: 8300000, guid: 321b61c274358ba43b4e717e8e4f762e, type: 3}
+  bgmStage1: {fileID: 11400000, guid: 71c129295069af243b82fb8105be7d93, type: 2}
 --- !u!4 &812973352
 Transform:
   m_ObjectHideFlags: 0

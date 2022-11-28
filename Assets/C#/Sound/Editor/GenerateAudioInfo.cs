@@ -71,6 +71,10 @@ namespace Utility
                     .Select(AssetDatabase.GUIDToAssetPath).ToArray();
                 AssetDatabase.Refresh();
 
+                var audioInfos = AssetDatabase.FindAssets("t:AudioInfo", new[] { path.Replace(dirName, "Info") })
+                    .Select(AssetDatabase.GUIDToAssetPath)
+                    .Select(AssetDatabase.LoadAssetAtPath<AudioInfo>).ToArray();
+
                 foreach (var childPath in childAssetPathList)
                 {
                     var clip = AssetDatabase.LoadAssetAtPath<AudioClip>(childPath);
@@ -80,10 +84,18 @@ namespace Utility
 
                     if (!File.Exists(Path.Combine(Path.GetDirectoryName(Application.dataPath), newPath).Replace("/", "\\")))
                     {
-                        var info = CreateInstance<AudioInfo>();
-                        info.clip = clip;
-                        AssetDatabase.CreateAsset(info, newPath);
-                        newPath.DebugLog();
+                        var f = audioInfos.FirstOrDefault(info => info.clip == clip);
+                        if (f != null)
+                        {
+                            AssetDatabase.MoveAsset(AssetDatabase.GetAssetPath(f), newPath);
+                        }
+                        else
+                        {
+                            var info = CreateInstance<AudioInfo>();
+                            info.clip = clip;
+                            AssetDatabase.CreateAsset(info, newPath);
+                            newPath.DebugLog();
+                        }
                     }
                 }
                 AssetDatabase.Refresh();

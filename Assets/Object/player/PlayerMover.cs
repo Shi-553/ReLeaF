@@ -33,8 +33,8 @@ namespace ReLeaf
         {
             int index = 0;
             [SerializeField]
-            AudioClip[] list;
-            public AudioClip Get()
+            AudioInfo[] list;
+            public AudioInfo Get()
             {
                 var clip = list[index];
                 index = (index + 1) % list.Length;
@@ -48,7 +48,7 @@ namespace ReLeaf
             SequentialSE walk;
             [SerializeField]
             SequentialSE dash;
-            public AudioClip Get(bool isDash)
+            public AudioInfo Get(bool isDash)
             {
                 return isDash ? dash.Get() : walk.Get();
             }
@@ -100,7 +100,7 @@ namespace ReLeaf
                 if (DungeonManager.Singleton.TryGetTile(TilePos, out var tile))
                 {
                     var se = tile.TileType == TileType.Plant ? seGrassMove : seSandMove;
-                    SEManager.Singleton.Play(se.Get(IsDash), transform.position, 0.4f);
+                    SEManager.Singleton.Play(se.Get(IsDash), transform.position);
                 }
             }
 

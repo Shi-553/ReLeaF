@@ -18,7 +18,7 @@ namespace ReLeaf
         [SerializeField]
         MarkerManager weakMarkerManager;
         [SerializeField]
-        AudioClip seEnemyDeath;
+        AudioInfo seEnemyDeath;
 
         private void Start()
         {

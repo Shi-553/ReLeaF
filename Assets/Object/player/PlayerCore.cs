@@ -22,7 +22,7 @@ namespace ReLeaf
         public bool IsInvincible { get; set; }
 
         [SerializeField]
-        AudioClip seDamaged;
+        AudioInfo seDamaged;
 
 
         private void Awake()

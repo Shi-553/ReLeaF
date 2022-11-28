@@ -35,7 +35,7 @@ namespace ReLeaf
         GameObject gameclearText;
 
         [SerializeField]
-        AudioClip bgmStage1;
+        AudioInfo bgmStage1;
 
         protected override void Init()
         {
@@ -54,7 +54,7 @@ namespace ReLeaf
             yield return new WaitForSeconds(1);
             gamestartText.SetActive(false);
 
-            BGMManager.Singleton.Play(bgmStage1, 0.2f);
+            BGMManager.Singleton.Play(bgmStage1);
         }
 
         public void Finish(bool isGameClear)
