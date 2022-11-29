@@ -52,6 +52,8 @@ namespace ReLeaf
             targetRatePos.x = Mathf.Lerp(-sliderRect.sizeDelta.x / 2, sliderRect.sizeDelta.x / 2, targetRate);
             targetRateTransform.localPosition = targetRatePos;
 
+            slider.maxValue = targetRate;  //スライダーの最大値をターゲットの最大値に設定
+
             DungeonManager.Singleton.OnTileChanged += OnTileChanged;
         }
 
