@@ -12,7 +12,7 @@ namespace ReLeaf
         public TileType TileType => tileType;
 
         public bool CanEnemyMove => TileType == TileType.Plant || TileType == TileType.Sand || TileType == TileType.Messy;
-        public bool CanEnemyAttack(bool isDamagableOnly) => TileType == TileType.Plant || (isDamagableOnly && (TileType == TileType.Sand || TileType == TileType.Messy));
+        public bool CanEnemyAttack(bool isDamagableOnly) => TileType == TileType.Plant || (!isDamagableOnly && (TileType == TileType.Sand || TileType == TileType.Messy));
 
         public Vector2Int TilePos { get; set; }
         public bool IsInvincible { get; set; }

@@ -1,7 +1,5 @@
 using System.Collections.Generic;
-using System.Linq;
 using UnityEngine;
-using Utility;
 
 namespace ReLeaf
 {
@@ -19,13 +17,33 @@ namespace ReLeaf
         MarkerManager targetMarkerManager;
 
         Vector2Int? targetTilePos;
-        Vector2Int? targetTileBeferePos;
 
+        // 絶対到達できないターゲットたち
+        HashSet<Vector2Int> impossibleTargets = new();
         void Start()
         {
             TryGetComponent(out attacker);
             TryGetComponent(out mover);
         }
+
+        int GetNearest(int target, int min, int max)
+        {
+            if (min <= target && target <= max)
+                return target;
+            else if (target < min)
+                return min;
+            else
+                return max;
+        }
+        Vector2Int GetNearest(Vector2Int target)
+        {
+            var tilePos = mover.TilePos;
+            var tileSize = mover.TileSize;
+
+            return new Vector2Int(GetNearest(target.x, tilePos.x, tilePos.x + tileSize.x),
+                GetNearest(target.y, tilePos.y, tilePos.y + tileSize.y));
+        }
+
         void Update()
         {
             if (GameRuleManager.Singleton.IsPrepare)
@@ -48,59 +66,33 @@ namespace ReLeaf
 
                 // 一番近い直線距離
                 var minDistanceSq = float.MaxValue;
-                // 直線距離が一番近いやつら（複数）
-                var minElements = new List<Vector2Int>();
+                // 直線距離が一番近いやつ
+                Vector2Int minElement = Vector2Int.zero;
                 foreach (var target in searchVision.Targets())
                 {
                     var tilePos = DungeonManager.Singleton.WorldToTilePos(target.position);
-                    var distanceSq = (tilePos - mover.TilePos).sqrMagnitude;
+                    if (impossibleTargets.Contains(tilePos))
+                        continue;
+
+                    var distanceSq = (tilePos - GetNearest(tilePos)).sqrMagnitude;
                     if (distanceSq < minDistanceSq)
                     {
                         minDistanceSq = distanceSq;
-                        minElements.Clear();
-                        minElements.Add(tilePos);
+                        minElement = tilePos;
                     }
-                    if (distanceSq == minDistanceSq)
-                        minElements.Add(tilePos);
                 }
 
-                // ターゲットがないか今のターゲットより3マス以上近いとき
-                if (targetTilePos == null || minDistanceSq + 2 < (targetTileBeferePos.Value - mover.TilePos).sqrMagnitude)
+                // ターゲットがないか今のターゲットより近いとき
+                if (targetTilePos == null || minDistanceSq + 1 < (targetTilePos.Value - GetNearest(targetTilePos.Value)).sqrMagnitude)
                 {
-                    var tuples = minElements
-                        .Select(targetPos =>
-                        {
-                            var before = targetPos + (mover.TilePos - targetPos).ClampOneMagnitude();
-                            if (DungeonManager.Singleton.TryGetTile(before, out var tile) && tile.CanEnemyMove)
-                            {
-                                return (targetPos, beforeTargetPos: before);
-                            }
-                            mover.UpdateDir(targetPos, true);
-                            if (mover.Routing.Count == 0)
-                            {
-                                return (targetPos, beforeTargetPos: targetPos);
-                            }
-                            return (targetPos, beforeTargetPos: targetPos - mover.Routing.First());
-                        })
-                        .Where(t => t.targetPos != t.beforeTargetPos)
-                        .ToArray();
 
-                    if (tuples.Length != 0)
+                    if (minDistanceSq != float.MaxValue)
                     {
-
-                        var (element, index) = tuples.MaxBy(tuple => attacker.GetAttackRangeCount(tuple.targetPos, tuple.targetPos - tuple.beforeTargetPos, true));
-
-
                         // ターゲットマーカー更新
                         targetMarkerManager.ResetAllMarker();
-                        targetMarkerManager.SetMarker<TargetMarker>(element.targetPos);
+                        targetMarkerManager.SetMarker<TargetMarker>(minElement);
 
-                        targetTileBeferePos = element.beforeTargetPos;
-                        targetTilePos = element.targetPos;
-                    }
-                    else
-                    {
-                        Debug.Log("0");
+                        targetTilePos = minElement;
                     }
                 }
             }
@@ -111,12 +103,17 @@ namespace ReLeaf
             // 経路探索更新
             if (mover.WasChangedTilePosPrevFrame)
             {
-                mover.UpdateDir(targetTilePos.Value, true);
+                if (!mover.UpdateDir(targetTilePos.Value))
+                {
+                    impossibleTargets.Add(targetTilePos.Value);
+                    targetTilePos = null;
+                    return;
+                }
             }
 
             if (mover.Move(true))
             {
-                mover.UpdateDir(targetTilePos.Value, false);
+                mover.UpdateDir(targetTilePos.Value);
                 targetTilePos = null;
                 StartCoroutine(attacker.Attack());
             }
