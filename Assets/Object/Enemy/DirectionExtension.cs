@@ -5,7 +5,7 @@ namespace ReLeaf
 {
     public static class DirectionExtension
     {
-        public static Vector2Int ToVector2Int(this Direction dir)
+        public static Vector2Int GetVector2Int(this Direction dir)
         {
             return dir switch
             {

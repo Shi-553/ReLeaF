@@ -11,8 +11,6 @@ namespace ReLeaf
         [SerializeField]
         Vision searchVision;
 
-        [SerializeField]
-        EnemyMoverInfo enemyMoverInfo;
         EnemyMover mover;
         IEnemyAttacker attacker;
 
@@ -116,7 +114,7 @@ namespace ReLeaf
                 mover.UpdateDir(targetTilePos.Value, true);
             }
 
-            if (mover.Move(enemyMoverInfo.Speed, true))
+            if (mover.Move(true))
             {
                 mover.UpdateDir(targetTilePos.Value, false);
                 targetTilePos = null;
