@@ -131,7 +131,7 @@ TextureImporter:
         serializedVersion: 2
         x: 328
         y: 257
-        width: 97
+        width: 115
         height: 183
       alignment: 7
       pivot: {x: 0.5, y: 0}
@@ -152,7 +152,7 @@ TextureImporter:
         serializedVersion: 2
         x: 584
         y: 257
-        width: 97
+        width: 113
         height: 183
       alignment: 7
       pivot: {x: 0.5, y: 0}
@@ -173,7 +173,7 @@ TextureImporter:
         serializedVersion: 2
         x: 841
         y: 257
-        width: 100
+        width: 111
         height: 181
       alignment: 7
       pivot: {x: 0.5, y: 0}
@@ -194,7 +194,7 @@ TextureImporter:
         serializedVersion: 2
         x: 1096
         y: 257
-        width: 115
+        width: 113
         height: 184
       alignment: 7
       pivot: {x: 0.5, y: 0}
@@ -215,7 +215,7 @@ TextureImporter:
         serializedVersion: 2
         x: 1353
         y: 257
-        width: 115
+        width: 114
         height: 184
       alignment: 7
       pivot: {x: 0.5, y: 0}
@@ -234,9 +234,9 @@ TextureImporter:
       name: spriteseet_6
       rect:
         serializedVersion: 2
-        x: 86
+        x: 67
         y: 23
-        width: 99
+        width: 118
         height: 184
       alignment: 7
       pivot: {x: 0.5, y: 0}
@@ -255,9 +255,9 @@ TextureImporter:
       name: spriteseet_7
       rect:
         serializedVersion: 2
-        x: 344
+        x: 326
         y: 23
-        width: 97
+        width: 115
         height: 183
       alignment: 7
       pivot: {x: 0.5, y: 0}
@@ -276,9 +276,9 @@ TextureImporter:
       name: spriteseet_8
       rect:
         serializedVersion: 2
-        x: 600
+        x: 584
         y: 23
-        width: 97
+        width: 113
         height: 183
       alignment: 7
       pivot: {x: 0.5, y: 0}
@@ -297,9 +297,9 @@ TextureImporter:
       name: spriteseet_9
       rect:
         serializedVersion: 2
-        x: 852
+        x: 838
         y: 23
-        width: 101
+        width: 115
         height: 182
       alignment: 7
       pivot: {x: 0.5, y: 0}
@@ -318,9 +318,9 @@ TextureImporter:
       name: spriteseet_10
       rect:
         serializedVersion: 2
-        x: 1106
+        x: 1095
         y: 23
-        width: 103
+        width: 114
         height: 183
       alignment: 7
       pivot: {x: 0.5, y: 0}
@@ -339,9 +339,9 @@ TextureImporter:
       name: spriteseet_11
       rect:
         serializedVersion: 2
-        x: 1368
+        x: 1352
         y: 23
-        width: 97
+        width: 113
         height: 183
       alignment: 7
       pivot: {x: 0.5, y: 0}
