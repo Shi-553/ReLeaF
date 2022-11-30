@@ -60,7 +60,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.9, y: 0.9}
+  m_Size: {x: 0.8, y: 0.7}
   m_EdgeRadius: 0
 --- !u!1 &3549203390911731473
 GameObject:
@@ -219,11 +219,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   <TilePos>k__BackingField: {x: 0, y: 0}
   <OldTilePos>k__BackingField: {x: 0, y: 0}
-  <Target>k__BackingField: {x: 0, y: 0}
-  <OldTarget>k__BackingField: {x: 0, y: 0}
-  <Dir>k__BackingField: {x: 0, y: 0}
+  <MoveTarget>k__BackingField: {x: 0, y: 0}
   enemyMoverInfo: {fileID: 11400000, guid: d2c2aa15c7b214e468e0e53f4ebb64eb, type: 2}
-  prefab: {fileID: 6167335053545665017, guid: a22a8163d25687c4fb6285ee35d08b4d, type: 3}
 --- !u!50 &7484773499943557005
 Rigidbody2D:
   serializedVersion: 4
