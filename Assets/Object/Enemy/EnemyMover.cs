@@ -41,8 +41,11 @@ namespace ReLeaf
                     return;
                 }
                 var nearest = GetNearest(peekResult);
-                Dir = (peekResult - nearest).ClampOneMagnitude();
-                MoveTarget = peekResult + TilePos - nearest;
+                var nearToResult = peekResult - nearest;
+                Dir = nearToResult.ClampOneMagnitude();
+
+                MoveTarget = TilePos + nearToResult;
+
             }
         }
 
@@ -141,8 +144,8 @@ namespace ReLeaf
         }
         public Vector2Int GetNearest(Vector2Int target)
         {
-            return new Vector2Int(GetNearest(target.x, TilePos.x, TilePos.x + TileSize.x),
-                GetNearest(target.y, TilePos.y, TilePos.y + TileSize.y));
+            return new Vector2Int(GetNearest(target.x, TilePos.x, TilePos.x + TileSize.x - 1),
+                GetNearest(target.y, TilePos.y, TilePos.y + TileSize.y - 1));
         }
 
 
@@ -175,6 +178,9 @@ namespace ReLeaf
         // スタートしたマスからゴールの手前のマスまで
         Stack<Vector2Int> routes = new();
         public Stack<Vector2Int> Routing => routes;
+
+        // 最後にどの向きでターゲットに向かうか
+        public Vector2Int ToTargetDir { get; private set; }
 
         List<Vector2Int> buffer = new();
         public IReadOnlyList<Vector2Int> Targets => buffer;
@@ -210,6 +216,8 @@ namespace ReLeaf
 
             // 最初はターゲットの位置をみる
             Direction currentDir = routingMapBuffer[target];
+
+            ToTargetDir = currentDir.GetVector2Int();
 
             bool isSizeOne = TileSize == Vector2Int.one;
 

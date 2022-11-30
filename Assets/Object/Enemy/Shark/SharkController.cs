@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using UnityEngine;
+using Utility;
 
 namespace ReLeaf
 {
@@ -93,7 +94,8 @@ namespace ReLeaf
                 targetMarkerManager.ResetAllMarker();
                 foreach (var target in mover.Targets)
                 {
-                    targetMarkerManager.SetMarker<TargetMarker>(target);
+                    var marker = targetMarkerManager.SetMarker<TargetMarker>(target);
+                    marker.transform.rotation = mover.ToTargetDir.GetRotation();
                 }
             }
 
