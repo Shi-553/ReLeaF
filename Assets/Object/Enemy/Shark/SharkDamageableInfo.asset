@@ -12,10 +12,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: db56b5bacef47634ca304df9b4704406, type: 3}
   m_Name: SharkDamageableInfo
   m_EditorClassIdentifier: 
-  hpMax: 10
+  hpMax: 20
   weakLocalTilePos:
-  - {x: 0, y: -1}
   - {x: 0, y: -2}
   - {x: 0, y: -3}
   - {x: 0, y: -4}
   - {x: 0, y: -5}
+  - {x: 0, y: -6}
+  - {x: -1, y: -2}
+  - {x: -1, y: -3}
+  - {x: -1, y: -4}
+  - {x: -1, y: -5}
+  - {x: -1, y: -6}

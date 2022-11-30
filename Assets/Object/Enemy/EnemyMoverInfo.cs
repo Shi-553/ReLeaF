@@ -11,5 +11,9 @@ namespace ReLeaf
         float speed = 4;
         public float Speed => speed;
 
+        [SerializeField, Rename("敵の大きさ(nマス)")]
+        Vector2Int tileSize = new Vector2Int(2, 2);
+        public Vector2Int TileSize => tileSize;
+
     }
 }

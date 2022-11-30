@@ -1,5 +1,4 @@
 using System.Collections.Generic;
-using System.Linq;
 using UnityEngine;
 using Utility;
 
@@ -11,8 +10,6 @@ namespace ReLeaf
         [SerializeField]
         Vision searchVision;
 
-        [SerializeField]
-        EnemyMoverInfo enemyMoverInfo;
         EnemyMover mover;
         IEnemyAttacker attacker;
 
@@ -21,13 +18,16 @@ namespace ReLeaf
         MarkerManager targetMarkerManager;
 
         Vector2Int? targetTilePos;
-        Vector2Int? targetTileBeferePos;
 
+        // 絶対到達できないターゲットたち
+        HashSet<Vector2Int> impossibleTargets = new();
         void Start()
         {
             TryGetComponent(out attacker);
             TryGetComponent(out mover);
         }
+
+
         void Update()
         {
             if (GameRuleManager.Singleton.IsPrepare)
@@ -44,65 +44,35 @@ namespace ReLeaf
                 return;
             }
 
-
-            if (mover.WasChangedTilePosPrevFrame || targetTilePos == null)
+            bool isUpdateTarget = false;
+            if (mover.WasChangedTilePosPrevMove || targetTilePos == null)
             {
 
                 // 一番近い直線距離
                 var minDistanceSq = float.MaxValue;
-                // 直線距離が一番近いやつら（複数）
-                var minElements = new List<Vector2Int>();
+                // 直線距離が一番近いやつ
+                Vector2Int minElement = Vector2Int.zero;
                 foreach (var target in searchVision.Targets())
                 {
                     var tilePos = DungeonManager.Singleton.WorldToTilePos(target.position);
-                    var distanceSq = (tilePos - mover.TilePos).sqrMagnitude;
+                    if (impossibleTargets.Contains(tilePos))
+                        continue;
+
+                    var distanceSq = (tilePos - mover.GetNearest(tilePos)).sqrMagnitude;
                     if (distanceSq < minDistanceSq)
                     {
                         minDistanceSq = distanceSq;
-                        minElements.Clear();
-                        minElements.Add(tilePos);
+                        minElement = tilePos;
                     }
-                    if (distanceSq == minDistanceSq)
-                        minElements.Add(tilePos);
                 }
 
-                // ターゲットがないか今のターゲットより3マス以上近いとき
-                if (targetTilePos == null || minDistanceSq + 2 < (targetTileBeferePos.Value - mover.TilePos).sqrMagnitude)
+                // ターゲットがないか今のターゲットより近いとき
+                if (targetTilePos == null || minDistanceSq + 1 < (targetTilePos.Value - mover.GetNearest(targetTilePos.Value)).sqrMagnitude)
                 {
-                    var tuples = minElements
-                        .Select(targetPos =>
-                        {
-                            var before = targetPos + (mover.TilePos - targetPos).ClampOneMagnitude();
-                            if (DungeonManager.Singleton.TryGetTile(before, out var tile) && tile.CanEnemyMove)
-                            {
-                                return (targetPos, beforeTargetPos: before);
-                            }
-                            mover.UpdateDir(targetPos, true);
-                            if (mover.Routing.Count == 0)
-                            {
-                                return (targetPos, beforeTargetPos: targetPos);
-                            }
-                            return (targetPos, beforeTargetPos: targetPos - mover.Routing.First());
-                        })
-                        .Where(t => t.targetPos != t.beforeTargetPos)
-                        .ToArray();
-
-                    if (tuples.Length != 0)
+                    if (minDistanceSq != float.MaxValue)
                     {
-
-                        var (element, index) = tuples.MaxBy(tuple => attacker.GetAttackRangeCount(tuple.targetPos, tuple.targetPos - tuple.beforeTargetPos, true));
-
-
-                        // ターゲットマーカー更新
-                        targetMarkerManager.ResetAllMarker();
-                        targetMarkerManager.SetMarker<TargetMarker>(element.targetPos);
-
-                        targetTileBeferePos = element.beforeTargetPos;
-                        targetTilePos = element.targetPos;
-                    }
-                    else
-                    {
-                        Debug.Log("0");
+                        isUpdateTarget = true;
+                        targetTilePos = minElement;
                     }
                 }
             }
@@ -111,16 +81,34 @@ namespace ReLeaf
                 return;
 
             // 経路探索更新
-            if (mover.WasChangedTilePosPrevFrame)
+            if (isUpdateTarget)
             {
-                mover.UpdateDir(targetTilePos.Value, true);
+                if (!mover.UpdateTargetAutoRouting(targetTilePos.Value))
+                {
+                    // 到達不可能なターゲット
+                    impossibleTargets.Add(targetTilePos.Value);
+                    targetTilePos = null;
+                    return;
+                }
+                // ターゲットマーカー更新
+                targetMarkerManager.ResetAllMarker();
+                foreach (var target in mover.Targets)
+                {
+                    var marker = targetMarkerManager.SetMarker<TargetMarker>(target);
+                    marker.transform.rotation = mover.ToTargetDir.GetRotation();
+                }
             }
 
-            if (mover.Move(enemyMoverInfo.Speed, true))
+            var result = mover.Move();
+            if (result == EnemyMover.MoveResult.Finish)
             {
-                mover.UpdateDir(targetTilePos.Value, false);
+                mover.UpdateTargetStraight(targetTilePos.Value);
                 targetTilePos = null;
                 StartCoroutine(attacker.Attack());
+            }
+            if (result == EnemyMover.MoveResult.Error)
+            {
+                targetTilePos = null;
             }
         }
     }

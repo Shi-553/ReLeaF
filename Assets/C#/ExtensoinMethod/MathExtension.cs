@@ -56,37 +56,71 @@ namespace Utility
             }
         }
 
-        // 下向きをデフォルトとするローカル座標を向きに応じて回転
-        public static Vector2Int GetRotatedLocalPos(Vector2Int dir, Vector2Int defaultLocal)
+        /// <summary>
+        /// 上向きをデフォルトとするローカル座標を向きに応じて回転
+        /// </summary>
+        public static Vector2Int GetRotatedLocalPos(this Vector2Int dir, Vector2Int defaultLocal)
         {
-            if (dir == Vector2Int.up)
+            // up
+            if (dir.y > 0)
             {
                 return defaultLocal;
             }
-            if (dir == Vector2Int.down)
+            // down
+            if (dir.y < 0)
             {
                 return -defaultLocal;
             }
-            if (dir == Vector2Int.left)
+            // left
+            if (dir.x < 0)
             {
                 return -new Vector2Int(defaultLocal.y, defaultLocal.x);
             }
-            if (dir == Vector2Int.right)
+            //right
+            if (dir.x > 0)
             {
                 return new Vector2Int(defaultLocal.y, defaultLocal.x);
             }
-
             return defaultLocal;
         }
+        /// <summary>
+        /// 上向きをデフォルトとしたQuotanion
+        /// </summary>
+        public static Quaternion GetRotation(this Vector2Int dir)
+        {
+            // up
+            if (dir.y > 0)
+            {
+                return Quaternion.identity;
+            }
+            // down
+            if (dir.y < 0)
+            {
+                return Quaternion.Euler(0, 0, 180);
+            }
+            // left
+            if (dir.x < 0)
+            {
+                return Quaternion.Euler(0, 0, 90);
+            }
+            //right
+            if (dir.x > 0)
+            {
+                return Quaternion.Euler(0, 0, 270);
+            }
+            return Quaternion.identity;
+        }
 
-        public static bool DuringExists(Vector2Int target, Vector2Int start, Vector2Int end)
+        public static bool DuringExists(Vector2Int target, Vector2Int start, Vector2Int end, bool includeEnd = false)
         {
             var xt = start.x < end.x ? (start.x, end.x) : (end.x, start.x);
             var yt = start.y < end.y ? (start.y, end.y) : (end.y, start.y);
 
-            for (int x = xt.Item1; x <= xt.Item2; x++)
+            xt.Item2 += includeEnd ? 1 : 0;
+            yt.Item2 += includeEnd ? 1 : 0;
+            for (int x = xt.Item1; x < xt.Item2; x++)
             {
-                for (int y = yt.Item1; y <= yt.Item2; y++)
+                for (int y = yt.Item1; y < yt.Item2; y++)
                 {
                     if (target.x == x && target.y == y)
                     {
@@ -98,6 +132,9 @@ namespace Utility
         }
         public static Vector2Int ClampOneMagnitude(this Vector2 value)
         {
+            if (value == Vector2.zero)
+                return Vector2Int.zero;
+
             if (Mathf.Abs(value.x) < Mathf.Abs(value.y))
             {
                 return new Vector2Int(0, (value.y < 0 ? -1 : 1));

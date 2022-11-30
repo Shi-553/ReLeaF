@@ -25,6 +25,7 @@ namespace ReLeaf
         [SerializeField, ReadOnly]
         Vector2Int attackTargetPos;
 
+        List<Vector2Int> buffer = new();
 
         private void Awake()
         {
@@ -35,19 +36,20 @@ namespace ReLeaf
 
         void IEnemyAttacker.OnStartAiming()
         {
-            attackStartPos = enemyMover.TilePos;
             enemyDamageable.BeginWeekMarker();
-
-            attackTargetPos = GetAttackRange(enemyMover.TilePos, enemyMover.Dir, true).Last();
         }
         IEnumerator IEnemyAttacker.OnStartDamageing()
         {
             enemyDamageable.EndWeekMarker();
 
+            attackStartPos = enemyMover.TilePos;
+            enemyMover.GetCheckPoss(enemyMover.TilePos, enemyMover.Dir, buffer);
+            attackTargetPos = buffer.Last() + (enemyMover.Dir * (SharkAttackInfo.Range - 1));
+
+            enemyMover.UpdateTargetStraight(attackTargetPos);
             while (true)
             {
-                enemyMover.UpdateDir(attackTargetPos, false);
-                if (enemyMover.Move(SharkAttackInfo.Speed, false))
+                if (enemyMover.Move(SharkAttackInfo.Speed) != EnemyMover.MoveResult.Moveing)
                 {
                     break;
                 }
@@ -60,41 +62,36 @@ namespace ReLeaf
 
         public IEnumerable<Vector2Int> GetAttackRange(Vector2Int pos, Vector2Int dir, bool isDamagableOnly)
         {
+            List<Vector2Int> returns = new(2);
+            List<Vector2Int> buffer = new(2);
+
             for (int i = 0; i < SharkAttackInfo.Range + 1; i++)
             {
-                var worldTilePos = pos + dir * i;
-                if (!DungeonManager.Singleton.TryGetTile(worldTilePos, out var tile) || !tile.CanEnemyMove)
+                var worldTilePosBase = pos + dir * i;
+                for (int x = 0; x < enemyMover.TileSize.x; x++)
                 {
-                    yield break;
+                    for (int y = 0; y < enemyMover.TileSize.y; y++)
+                    {
+                        var worldTilePos = new Vector2Int(worldTilePosBase.x + x, worldTilePosBase.y + y);
+                        if (returns.Contains(worldTilePos))
+                            continue;
+                        if (!DungeonManager.Singleton.TryGetTile(worldTilePos, out var tile) || !tile.CanEnemyMove)
+                        {
+                            return returns;
+                        }
+                        if (tile.CanEnemyAttack(isDamagableOnly))
+                        {
+                            buffer.Add(worldTilePos);
+                        }
+                    }
                 }
-                if (tile.CanEnemyAttack(isDamagableOnly))
-                {
-                    yield return worldTilePos;
-                }
-
+                returns.AddRange(buffer);
+                buffer.Clear();
             }
-        }
-        public int GetAttackRangeCount(Vector2Int pos, Vector2Int dir, bool isDamagableOnly)
-        {
-            int count = 0;
-            for (int i = 0; i < SharkAttackInfo.Range + 1; i++)
-            {
-                var worldTilePos = pos + dir * i;
-
-                if (!DungeonManager.Singleton.TryGetTile(worldTilePos, out var tile) || !tile.CanEnemyMove)
-                {
-                    return count;
-                }
-
-                if (tile.CanEnemyAttack(isDamagableOnly))
-                {
-                    count++;
-                }
-            }
-            return count;
+            return returns;
         }
 
-        private void OnCollisionStay2D(Collision2D collision)
+        private void OnCollisionEnter2D(Collision2D collision)
         {
             if (Transition != AttackTransition.Damageing)
             {
@@ -108,7 +105,7 @@ namespace ReLeaf
                 }
             }
         }
-        private void OnTriggerEnter2D(Collider2D collider)
+        private void OnTriggerStay2D(Collider2D collider)
         {
             if (Transition != AttackTransition.Damageing)
             {
@@ -118,7 +115,7 @@ namespace ReLeaf
             {
                 if (collider.gameObject.TryGetComponent<Plant>(out var plant))
                 {
-                    if (MathExtension.DuringExists(plant.TilePos, attackStartPos, attackTargetPos))
+                    if (MathExtension.DuringExists(plant.TilePos, attackStartPos, attackTargetPos, true))
                     {
                         plant.Damaged(SharkAttackInfo.ATK, DamageType.Direct);
                     }
