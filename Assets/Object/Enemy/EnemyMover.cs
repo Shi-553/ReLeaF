@@ -1,4 +1,3 @@
-using DebugLogExtension;
 using System.Collections.Generic;
 using UnityEngine;
 using Utility;
@@ -142,7 +141,7 @@ namespace ReLeaf
 
         public enum Direction
         {
-            NONE, UP, DOWN, LEFT, RIGHT
+            NONE = -1, LEFT, DOWN, RIGHT, UP
         }
         Direction ToDirection(Vector2Int dir)
         {
@@ -157,20 +156,9 @@ namespace ReLeaf
 
             return Direction.NONE;
         }
-        struct Label
-        {
-            public Direction dir;
-            public int count;
-
-            public Label(Direction dir, int count)
-            {
-                this.dir = dir;
-                this.count = count;
-            }
-        }
 
         // そのマスに到達したとき、来た方向を記録
-        Dictionary<Vector2Int, Label> routingMapBuffer = new();
+        Dictionary<Vector2Int, Direction> routingMapBuffer = new();
 
         Queue<Vector2Int> tempMapQueue = new Queue<Vector2Int>();
 
@@ -183,7 +171,6 @@ namespace ReLeaf
 
         Vector2Int tempTarget;
         Vector2Int tempQueue;
-        Label tempDic;
 
         bool UpdateDirRouting()
         {
@@ -209,31 +196,58 @@ namespace ReLeaf
 
             // ターゲットから戻って経路を確認する
             var currnet = tempTarget;
+            // 四隅を入れる
+            Direction[] cornerDirs = new Direction[4];
+
+            // 最初はターゲットの位置をみる
+            Direction currentDir = routingMapBuffer[target];
+
+            bool isSizeOne = TileSize == Vector2Int.one;
+
             while (true)
             {
-                var max = new Label(Direction.NONE, 0);
-                for (int i = 0; i < TileSize.x; i++)
+                if (currentDir == Direction.NONE)
                 {
-                    for (int j = 0; j < TileSize.y; j++)
-                    {
-                        var c = routingMapBuffer[new Vector2Int(currnet.x + i, currnet.y + j)];
-                        if (c.count > max.count)
-                            max = c;
-                    }
-                }
-                if (max.dir == Direction.NONE)
-                {
-                    routing.DebugLogCollection();
                     UpdateDir();
-
                     return true;
                 }
-                var dir = max.dir.GetVector2Int();
+
+                var dir = currentDir.GetVector2Int();
 
                 // 一つ戻る
                 currnet -= dir;
 
                 routing.Push(currnet);
+
+
+                if (isSizeOne)
+                {
+                    currentDir = routingMapBuffer[currnet];
+                    continue;
+                }
+
+
+                // 例えば、一つ前が左(Direction.LEFT)だった場合、戻るために右に移動する。
+                // すると、右上＆右下の組み合わせはありえないので右上＆左上、左上＆左下、左下＆右下の三組を調べて次の方向を出す
+
+                // 反時計回りに格納 右上->左上->左下->右下
+                cornerDirs[0] = routingMapBuffer[new Vector2Int(currnet.x + TileSize.x - 1, currnet.y + TileSize.y - 1)];
+                cornerDirs[1] = routingMapBuffer[new Vector2Int(currnet.x, currnet.y + TileSize.y - 1)];
+                cornerDirs[2] = routingMapBuffer[currnet];
+                cornerDirs[3] = routingMapBuffer[new Vector2Int(currnet.x + TileSize.x - 1, currnet.y)];
+
+                // 0~2の3回
+                for (int i = 0; i < 3; i++)
+                {
+                    Direction corner1 = cornerDirs[((int)currentDir + i) % cornerDirs.Length];
+                    Direction corner2 = cornerDirs[((int)currentDir + i + 1) % cornerDirs.Length];
+
+                    if (corner1 == corner2)
+                    {
+                        currentDir = corner1;
+                        break;
+                    }
+                }
             }
         }
 
@@ -250,27 +264,27 @@ namespace ReLeaf
             {
                 for (int j = 0; j < TileSize.y; j++)
                 {
-                    routingMapBuffer[new Vector2Int(TilePos.x + i, TilePos.y + j)] = new Label(Direction.NONE, 0);
+                    routingMapBuffer[new Vector2Int(TilePos.x + i, TilePos.y + j)] = Direction.NONE;
                 }
             }
             while (tempMapQueue.Count != 0)
             {
                 tempQueue = tempMapQueue.Dequeue();
-                tempDic = routingMapBuffer[tempQueue];
+                var beforeDir = routingMapBuffer[tempQueue];
 
-                if (tempDic.dir != Direction.DOWN && TryEnqueueAndCheckTarget(Direction.UP))
+                if (beforeDir != Direction.DOWN && TryEnqueueAndCheckTarget(Direction.UP))
                 {
                     return true;
                 }
-                if (tempDic.dir != Direction.UP && TryEnqueueAndCheckTarget(Direction.DOWN))
+                if (beforeDir != Direction.UP && TryEnqueueAndCheckTarget(Direction.DOWN))
                 {
                     return true;
                 }
-                if (tempDic.dir != Direction.RIGHT && TryEnqueueAndCheckTarget(Direction.LEFT))
+                if (beforeDir != Direction.RIGHT && TryEnqueueAndCheckTarget(Direction.LEFT))
                 {
                     return true;
                 }
-                if (tempDic.dir != Direction.LEFT && TryEnqueueAndCheckTarget(Direction.RIGHT))
+                if (beforeDir != Direction.LEFT && TryEnqueueAndCheckTarget(Direction.RIGHT))
                 {
                     return true;
                 }
@@ -350,10 +364,9 @@ namespace ReLeaf
             }
             tempMapQueue.Enqueue(tempQueue + dir.GetVector2Int());
 
-            var nextBuffet = new Label(dir, tempDic.count + 1);
             foreach (var nextPos in buffer)
             {
-                routingMapBuffer[nextPos] = nextBuffet;
+                routingMapBuffer[nextPos] = dir;
             }
 
             if (includeTarget)
