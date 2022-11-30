@@ -26,23 +26,6 @@ namespace ReLeaf
             TryGetComponent(out mover);
         }
 
-        int GetNearest(int target, int min, int max)
-        {
-            if (min <= target && target <= max)
-                return target;
-            else if (target < min)
-                return min;
-            else
-                return max;
-        }
-        Vector2Int GetNearest(Vector2Int target)
-        {
-            var tilePos = mover.TilePos;
-            var tileSize = mover.TileSize;
-
-            return new Vector2Int(GetNearest(target.x, tilePos.x, tilePos.x + tileSize.x),
-                GetNearest(target.y, tilePos.y, tilePos.y + tileSize.y));
-        }
 
         void Update()
         {
@@ -61,7 +44,7 @@ namespace ReLeaf
             }
 
             bool isUpdateTarget = false;
-            if (mover.WasChangedTilePosPrevFrame || targetTilePos == null)
+            if (mover.WasChangedTilePosPrevMove || targetTilePos == null)
             {
 
                 // 一番近い直線距離
@@ -74,7 +57,7 @@ namespace ReLeaf
                     if (impossibleTargets.Contains(tilePos))
                         continue;
 
-                    var distanceSq = (tilePos - GetNearest(tilePos)).sqrMagnitude;
+                    var distanceSq = (tilePos - mover.GetNearest(tilePos)).sqrMagnitude;
                     if (distanceSq < minDistanceSq)
                     {
                         minDistanceSq = distanceSq;
@@ -83,16 +66,11 @@ namespace ReLeaf
                 }
 
                 // ターゲットがないか今のターゲットより近いとき
-                if (targetTilePos == null || minDistanceSq + 1 < (targetTilePos.Value - GetNearest(targetTilePos.Value)).sqrMagnitude)
+                if (targetTilePos == null || minDistanceSq + 1 < (targetTilePos.Value - mover.GetNearest(targetTilePos.Value)).sqrMagnitude)
                 {
-
                     if (minDistanceSq != float.MaxValue)
                     {
                         isUpdateTarget = true;
-                        // ターゲットマーカー更新
-                        targetMarkerManager.ResetAllMarker();
-                        targetMarkerManager.SetMarker<TargetMarker>(minElement);
-
                         targetTilePos = minElement;
                     }
                 }
@@ -102,21 +80,33 @@ namespace ReLeaf
                 return;
 
             // 経路探索更新
-            if (isUpdateTarget || mover.WasChangedTilePosPrevFrame)
+            if (isUpdateTarget)
             {
                 if (!mover.UpdateTarget(targetTilePos.Value))
                 {
+                    // 到達不可能なターゲット
                     impossibleTargets.Add(targetTilePos.Value);
                     targetTilePos = null;
                     return;
                 }
+                // ターゲットマーカー更新
+                targetMarkerManager.ResetAllMarker();
+                foreach (var target in mover.Targets)
+                {
+                    targetMarkerManager.SetMarker<TargetMarker>(target);
+                }
             }
 
-            if (mover.Move(true))
+            var result = mover.Move();
+            if (result == EnemyMover.MoveResult.Finish)
             {
-                mover.UpdateTarget(targetTilePos.Value);
+                mover.UpdateMoveTargetAndDir(targetTilePos.Value);
                 targetTilePos = null;
                 StartCoroutine(attacker.Attack());
+            }
+            if (result == EnemyMover.MoveResult.Error)
+            {
+                targetTilePos = null;
             }
         }
     }

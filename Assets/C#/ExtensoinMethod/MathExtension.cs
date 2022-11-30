@@ -79,14 +79,16 @@ namespace Utility
             return defaultLocal;
         }
 
-        public static bool DuringExists(Vector2Int target, Vector2Int start, Vector2Int end)
+        public static bool DuringExists(Vector2Int target, Vector2Int start, Vector2Int end, bool includeEnd = false)
         {
             var xt = start.x < end.x ? (start.x, end.x) : (end.x, start.x);
             var yt = start.y < end.y ? (start.y, end.y) : (end.y, start.y);
 
-            for (int x = xt.Item1; x <= xt.Item2; x++)
+            xt.Item2 += includeEnd ? 1 : 0;
+            yt.Item2 += includeEnd ? 1 : 0;
+            for (int x = xt.Item1; x < xt.Item2; x++)
             {
-                for (int y = yt.Item1; y <= yt.Item2; y++)
+                for (int y = yt.Item1; y < yt.Item2; y++)
                 {
                     if (target.x == x && target.y == y)
                     {
@@ -98,6 +100,9 @@ namespace Utility
         }
         public static Vector2Int ClampOneMagnitude(this Vector2 value)
         {
+            if (value == Vector2.zero)
+                return Vector2Int.zero;
+
             if (Mathf.Abs(value.x) < Mathf.Abs(value.y))
             {
                 return new Vector2Int(0, (value.y < 0 ? -1 : 1));

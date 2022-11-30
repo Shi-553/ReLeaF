@@ -46,10 +46,10 @@ namespace ReLeaf
             enemyMover.GetCheckPoss(enemyMover.TilePos, enemyMover.Dir, buffer);
             attackTargetPos = buffer.Last() + (enemyMover.Dir * (SharkAttackInfo.Range - 1));
 
-            enemyMover.UpdateTargetDir(enemyMover.TilePos + (enemyMover.Dir * SharkAttackInfo.Range), enemyMover.Dir);
+            enemyMover.UpdateMoveTargetAndDir(attackTargetPos);
             while (true)
             {
-                if (enemyMover.Move(SharkAttackInfo.Speed, false))
+                if (enemyMover.Move(SharkAttackInfo.Speed) != EnemyMover.MoveResult.Moveing)
                 {
                     break;
                 }
@@ -91,7 +91,7 @@ namespace ReLeaf
             return returns;
         }
 
-        private void OnCollisionStay2D(Collision2D collision)
+        private void OnCollisionEnter2D(Collision2D collision)
         {
             if (Transition != AttackTransition.Damageing)
             {
@@ -115,7 +115,7 @@ namespace ReLeaf
             {
                 if (collider.gameObject.TryGetComponent<Plant>(out var plant))
                 {
-                    if (MathExtension.DuringExists(plant.TilePos, attackStartPos, attackTargetPos))
+                    if (MathExtension.DuringExists(plant.TilePos, attackStartPos, attackTargetPos, true))
                     {
                         plant.Damaged(SharkAttackInfo.ATK, DamageType.Direct);
                     }

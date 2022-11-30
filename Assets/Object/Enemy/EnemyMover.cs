@@ -1,5 +1,5 @@
+using DebugLogExtension;
 using System.Collections.Generic;
-using System.Linq;
 using UnityEngine;
 using Utility;
 
@@ -14,18 +14,34 @@ namespace ReLeaf
         public Vector2Int TilePos { get; private set; }
         [field: SerializeField, ReadOnly]
         public Vector2Int OldTilePos { get; private set; }
-        public bool WasChangedTilePosPrevFrame => TilePos != OldTilePos;
+        public bool WasChangedTilePosPrevMove => TilePos != OldTilePos;
 
 
         [field: SerializeField, ReadOnly]
-        public Vector2Int Target { get; private set; }
-        [field: SerializeField, ReadOnly]
-        public Vector2Int OldTarget { get; private set; }
-        public bool WasChangedTargetThisFrame => Target != OldTarget;
+        public Vector2Int MoveTarget { get; private set; }
 
 
-        [field: SerializeField, ReadOnly]
-        public Vector2Int Dir { get; protected set; }
+        public Vector2Int Dir { get; private set; }
+        void UpdateDir(bool isNext = false)
+        {
+            if (isNext)
+            {
+                routing.TryPop(out var _);
+            }
+
+            if (routing.TryPeek(out var peekResult))
+            {
+                if (MathExtension.DuringExists(peekResult, TilePos, TilePos + TileSize))
+                {
+                    Dir = (peekResult - TilePos).ClampOneMagnitude();
+                    MoveTarget = peekResult;
+                    return;
+                }
+                var nearest = GetNearest(peekResult);
+                Dir = (peekResult - nearest).ClampOneMagnitude();
+                MoveTarget = peekResult + TilePos - nearest;
+            }
+        }
 
         [SerializeField]
         EnemyMoverInfo enemyMoverInfo;
@@ -36,15 +52,19 @@ namespace ReLeaf
         {
             TryGetComponent(out mover);
             TilePos = DungeonManager.Singleton.WorldToTilePos(mover.Position);
-            Dir = Vector2Int.down;
         }
-
-        public bool Move(bool useRouting)
+        public enum MoveResult
         {
-            return Move(enemyMoverInfo.Speed, useRouting);
+            Moveing,
+            Finish,
+            Error
+        }
+        public MoveResult Move()
+        {
+            return Move(enemyMoverInfo.Speed);
         }
 
-        public bool Move(float speedOverride, bool useRouting)
+        public MoveResult Move(float speedOverride)
         {
             OldTilePos = TilePos;
             GetCheckPoss(TilePos, Dir, buffer);
@@ -54,14 +74,9 @@ namespace ReLeaf
             foreach (var nextPos in buffer)
             {
                 if (!DungeonManager.Singleton.TryGetTile(nextPos, out var tile) || !tile.CanEnemyMove)
-                    return true;
-
+                    return MoveResult.Error;
             }
 
-            if (Target == TilePos)
-            {
-                return true;
-            }
 
             Vector2 worldNextTargetPos = DungeonManager.Singleton.TilePosToWorld(nextTilePos);
 
@@ -71,38 +86,57 @@ namespace ReLeaf
 
             if (Vector2.Dot(worldDir, (Vector2)Dir) < 0 || (distance.sqrMagnitude < 0.001f))
             {
-                var isFinish = Target == nextTilePos;
-                if (isFinish)
-                {
-                    mover.Position = worldNextTargetPos;
-                }
-
                 TilePos = nextTilePos;
+                if (MoveTarget == TilePos)
+                {
+                    UpdateDir(true);
+                }
+                var isFinish = routing.Count == 0;
+                if (isFinish)
+                    mover.Position = worldNextTargetPos;
 
-                return Target == nextTilePos;
+
+                return isFinish ? MoveResult.Finish : MoveResult.Moveing;
             }
 
             mover.MoveDelta(DungeonManager.CELL_SIZE * speedOverride * worldDir);
 
-            return false;
+            return MoveResult.Moveing;
         }
 
+        Vector2Int target = Vector2Int.zero;
+        // 自動操作(自由な位置を指定)
         public bool UpdateTarget(Vector2Int targetTilePos)
         {
-            OldTarget = Target;
-            Target = targetTilePos;
+            target = targetTilePos;
             var ret = UpdateDirRouting();
-            Target = routing.First();
             return ret;
         }
-        public void UpdateTargetDir(Vector2Int targetTilePos, Vector2Int dir)
+
+        // マニュアル操作(左下基準の直線位置を指定)
+        public void UpdateMoveTargetAndDir(Vector2Int targetTilePos)
         {
-            OldTarget = Target;
-            Target = targetTilePos;
-            Dir = dir;
+            routing.Clear();
+            routing.Push(targetTilePos);
+            UpdateDir();
         }
 
 
+        int GetNearest(int target, int min, int max)
+        {
+            if (min <= target && target <= max)
+                return target;
+            else if (target < min)
+                return min;
+            else
+                return max;
+        }
+        public Vector2Int GetNearest(Vector2Int target)
+        {
+
+            return new Vector2Int(GetNearest(target.x, TilePos.x, TilePos.x + TileSize.x - 1),
+                GetNearest(target.y, TilePos.y, TilePos.y + TileSize.y - 1));
+        }
 
         // ここから経路探索
 
@@ -136,14 +170,16 @@ namespace ReLeaf
         }
 
         // そのマスに到達したとき、来た方向を記録
-        Dictionary<Vector2Int, Label> routingBuffer = new();
+        Dictionary<Vector2Int, Label> routingMapBuffer = new();
 
         Queue<Vector2Int> tempMapQueue = new Queue<Vector2Int>();
 
-        // ゴールの手前のマスからスタートしたマスまで
-        List<Vector2Int> routing = new List<Vector2Int>();
+        // スタートしたマスからゴールの手前のマスまで
+        Stack<Vector2Int> routing = new();
+        public Stack<Vector2Int> Routing => routing;
+
         List<Vector2Int> buffer = new();
-        public IReadOnlyList<Vector2Int> Routing => routing;
+        public IReadOnlyList<Vector2Int> Targets => buffer;
 
         Vector2Int tempTarget;
         Vector2Int tempQueue;
@@ -152,25 +188,20 @@ namespace ReLeaf
         bool UpdateDirRouting()
         {
             // ターゲットが同じタイル とりあえず↑
-            if (Target == TilePos)
+            if (MathExtension.DuringExists(target, TilePos, TilePos + TileSize))
             {
-                Dir = Vector2Int.up;
-                return false;
-            }
-
-            // 移動中でターゲットも変更なし とりあえず変更なし
-            if (!WasChangedTilePosPrevFrame && !WasChangedTargetThisFrame)
-            {
+                UpdateMoveTargetAndDir(target);
                 return true;
             }
 
 
-            routingBuffer.Clear();
+
+            routingMapBuffer.Clear();
             tempMapQueue.Clear();
 
             if (!FindShortestPath())
             {
-                // 到達不可能 とりあえず直線移動させる
+                // 到達不可能
                 return false;
             }
             routing.Clear();
@@ -178,7 +209,6 @@ namespace ReLeaf
 
             // ターゲットから戻って経路を確認する
             var currnet = tempTarget;
-            Direction prevDir = Direction.NONE;
             while (true)
             {
                 var max = new Label(Direction.NONE, 0);
@@ -186,14 +216,16 @@ namespace ReLeaf
                 {
                     for (int j = 0; j < TileSize.y; j++)
                     {
-                        var c = routingBuffer[new Vector2Int(currnet.x + i, currnet.y + j)];
+                        var c = routingMapBuffer[new Vector2Int(currnet.x + i, currnet.y + j)];
                         if (c.count > max.count)
                             max = c;
                     }
                 }
                 if (max.dir == Direction.NONE)
                 {
-                    Dir = prevDir.GetVector2Int();
+                    routing.DebugLogCollection();
+                    UpdateDir();
+
                     return true;
                 }
                 var dir = max.dir.GetVector2Int();
@@ -201,9 +233,7 @@ namespace ReLeaf
                 // 一つ戻る
                 currnet -= dir;
 
-                routing.Add(currnet);
-
-                prevDir = max.dir;
+                routing.Push(currnet);
             }
         }
 
@@ -220,13 +250,13 @@ namespace ReLeaf
             {
                 for (int j = 0; j < TileSize.y; j++)
                 {
-                    routingBuffer[new Vector2Int(TilePos.x + i, TilePos.y + j)] = new Label(Direction.NONE, 0);
+                    routingMapBuffer[new Vector2Int(TilePos.x + i, TilePos.y + j)] = new Label(Direction.NONE, 0);
                 }
             }
             while (tempMapQueue.Count != 0)
             {
                 tempQueue = tempMapQueue.Dequeue();
-                tempDic = routingBuffer[tempQueue];
+                tempDic = routingMapBuffer[tempQueue];
 
                 if (tempDic.dir != Direction.DOWN && TryEnqueueAndCheckTarget(Direction.UP))
                 {
@@ -304,12 +334,12 @@ namespace ReLeaf
             foreach (var nextPos in buffer)
             {
                 // 既に通った
-                if (routingBuffer.ContainsKey(nextPos))
+                if (routingMapBuffer.ContainsKey(nextPos))
                 {
                     return false;
                 }
 
-                var isTarget = nextPos == Target;
+                var isTarget = nextPos == target;
                 if (isTarget)
                     includeTarget = true;
 
@@ -323,7 +353,7 @@ namespace ReLeaf
             var nextBuffet = new Label(dir, tempDic.count + 1);
             foreach (var nextPos in buffer)
             {
-                routingBuffer[nextPos] = nextBuffet;
+                routingMapBuffer[nextPos] = nextBuffet;
             }
 
             if (includeTarget)
