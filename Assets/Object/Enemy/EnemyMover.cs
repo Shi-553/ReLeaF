@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using Utility;
 
@@ -38,33 +39,29 @@ namespace ReLeaf
             Dir = Vector2Int.down;
         }
 
-        public bool Move(bool isStopInNear)
+        public bool Move(bool useRouting)
         {
-            return Move(enemyMoverInfo.Speed, isStopInNear);
+            return Move(enemyMoverInfo.Speed, useRouting);
         }
 
-        public bool Move(float speedOverride, bool isStopInNear)
+        public bool Move(float speedOverride, bool useRouting)
         {
-
-            (var nextBasePos, Vector2Int djacentDir, int size) = GetCheckPoss(TilePos, ToDirection(Dir));
+            OldTilePos = TilePos;
+            GetCheckPoss(TilePos, Dir, buffer);
 
             var nextTilePos = TilePos + Dir;
 
-            for (int i = 0; i < size; i++)
+            foreach (var nextPos in buffer)
             {
-                var nextPos = nextBasePos + djacentDir * i;
                 if (!DungeonManager.Singleton.TryGetTile(nextPos, out var tile) || !tile.CanEnemyMove)
                     return true;
 
-                if (isStopInNear && Target == nextPos)
-                {
-                    Dir = Target - TilePos;
-                    return true;
-                }
-                if (!isStopInNear && Target == nextPos - Dir)
-                    return true;
             }
 
+            if (Target == TilePos)
+            {
+                return true;
+            }
 
             Vector2 worldNextTargetPos = DungeonManager.Singleton.TilePosToWorld(nextTilePos);
 
@@ -72,22 +69,14 @@ namespace ReLeaf
             var worldDir = distance.normalized;
 
 
-
-            if (isStopInNear && (Target - TilePos).sqrMagnitude <= 1)
-            {
-                Dir = Target - TilePos;
-                return true;
-            }
-
             if (Vector2.Dot(worldDir, (Vector2)Dir) < 0 || (distance.sqrMagnitude < 0.001f))
             {
-                var isFinish = (isStopInNear && (Target - nextTilePos).sqrMagnitude <= 1) || Target == nextTilePos;
+                var isFinish = Target == nextTilePos;
                 if (isFinish)
                 {
                     mover.Position = worldNextTargetPos;
                 }
 
-                OldTilePos = TilePos;
                 TilePos = nextTilePos;
 
                 return Target == nextTilePos;
@@ -98,11 +87,19 @@ namespace ReLeaf
             return false;
         }
 
-        public bool UpdateDir(Vector2Int targetTilePos)
+        public bool UpdateTarget(Vector2Int targetTilePos)
         {
             OldTarget = Target;
             Target = targetTilePos;
-            return UpdateDirRouting();
+            var ret = UpdateDirRouting();
+            Target = routing.First();
+            return ret;
+        }
+        public void UpdateTargetDir(Vector2Int targetTilePos, Vector2Int dir)
+        {
+            OldTarget = Target;
+            Target = targetTilePos;
+            Dir = dir;
         }
 
 
@@ -145,6 +142,7 @@ namespace ReLeaf
 
         // ゴールの手前のマスからスタートしたマスまで
         List<Vector2Int> routing = new List<Vector2Int>();
+        List<Vector2Int> buffer = new();
         public IReadOnlyList<Vector2Int> Routing => routing;
 
         Vector2Int tempTarget;
@@ -209,8 +207,6 @@ namespace ReLeaf
             }
         }
 
-        [SerializeField]
-        TestTest prefab;
 
         /// <summary>
         /// 最短経路を探す
@@ -251,26 +247,50 @@ namespace ReLeaf
             }
             return false;
         }
-        (Vector2Int pos, Vector2Int adacentDir, int size) GetCheckPoss(Vector2Int tilePos, Direction dir)
+
+        public void GetCheckPoss(Vector2Int tilePos, Vector2Int dir, List<Vector2Int> checkPoss)
         {
+            GetCheckPoss(tilePos, ToDirection(dir), checkPoss);
+        }
+        public void GetCheckPoss(Vector2Int tilePos, Direction dir, List<Vector2Int> checkPoss)
+        {
+            checkPoss.Clear();
+            int size;
+            Vector2Int checkDir;
+
             switch (dir)
             {
                 case Direction.UP:
                     tilePos.y += TileSize.y;
-                    return (tilePos, Vector2Int.right, TileSize.x);
+                    checkDir = Vector2Int.right;
+                    size = TileSize.x;
+                    break;
                 case Direction.DOWN:
                     tilePos.y -= 1;
-                    return (tilePos, Vector2Int.right, TileSize.x);
+                    checkDir = Vector2Int.right;
+                    size = TileSize.x;
+                    break;
                 case Direction.LEFT:
                     tilePos.x -= 1;
-                    return (tilePos, Vector2Int.up, TileSize.y);
+                    checkDir = Vector2Int.up;
+                    size = TileSize.y;
+                    break;
                 case Direction.RIGHT:
                     tilePos.x += TileSize.y;
-                    return (tilePos, Vector2Int.up, TileSize.y);
+                    checkDir = Vector2Int.up;
+                    size = TileSize.y;
+                    break;
                 default:
-                    return (tilePos, Vector2Int.zero, 0);
+                    checkDir = Vector2Int.zero;
+                    size = 0;
+                    break;
+            }
+            for (int i = 0; i < size; i++)
+            {
+                checkPoss.Add(tilePos + checkDir * i);
             }
         }
+
         /// <summary>
         /// 通行可能で既に通ってない場合キューに入れる
         /// </summary>
@@ -278,12 +298,11 @@ namespace ReLeaf
         /// <returns>そこがターゲットかどうか</returns>
         bool TryEnqueueAndCheckTarget(Direction dir)
         {
-            (var nextBasePos, Vector2Int djacentDir, int size) = GetCheckPoss(tempQueue, dir);
+            GetCheckPoss(tempQueue, dir, buffer);
             bool includeTarget = false;
 
-            for (int i = 0; i < size; i++)
+            foreach (var nextPos in buffer)
             {
-                var nextPos = nextBasePos + djacentDir * i;
                 // 既に通った
                 if (routingBuffer.ContainsKey(nextPos))
                 {
@@ -302,9 +321,8 @@ namespace ReLeaf
             tempMapQueue.Enqueue(tempQueue + dir.GetVector2Int());
 
             var nextBuffet = new Label(dir, tempDic.count + 1);
-            for (int i = 0; i < size; i++)
+            foreach (var nextPos in buffer)
             {
-                var nextPos = nextBasePos + djacentDir * i;
                 routingBuffer[nextPos] = nextBuffet;
             }
 

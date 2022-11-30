@@ -21,8 +21,11 @@ namespace ReLeaf
         EnemyCore enemyDamageable;
 
         [SerializeField, ReadOnly]
-        Vector2Int[] attackTargetPoss;
+        Vector2Int attackStartPos;
+        [SerializeField, ReadOnly]
+        Vector2Int attackTargetPos;
 
+        List<Vector2Int> buffer = new();
 
         private void Awake()
         {
@@ -34,14 +37,16 @@ namespace ReLeaf
         void IEnemyAttacker.OnStartAiming()
         {
             enemyDamageable.BeginWeekMarker();
-
-            attackTargetPoss = GetAttackRange(enemyMover.TilePos, enemyMover.Dir, true).ToArray();
         }
         IEnumerator IEnemyAttacker.OnStartDamageing()
         {
             enemyDamageable.EndWeekMarker();
 
-            enemyMover.UpdateDir(GetAttackRange(enemyMover.TilePos, enemyMover.Dir, false).Last());
+            attackStartPos = enemyMover.TilePos;
+            enemyMover.GetCheckPoss(enemyMover.TilePos, enemyMover.Dir, buffer);
+            attackTargetPos = buffer.Last() + (enemyMover.Dir * (SharkAttackInfo.Range - 1));
+
+            enemyMover.UpdateTargetDir(enemyMover.TilePos + (enemyMover.Dir * SharkAttackInfo.Range), enemyMover.Dir);
             while (true)
             {
                 if (enemyMover.Move(SharkAttackInfo.Speed, false))
@@ -110,7 +115,7 @@ namespace ReLeaf
             {
                 if (collider.gameObject.TryGetComponent<Plant>(out var plant))
                 {
-                    if (attackTargetPoss.Contains(plant.TilePos))
+                    if (MathExtension.DuringExists(plant.TilePos, attackStartPos, attackTargetPos))
                     {
                         plant.Damaged(SharkAttackInfo.ATK, DamageType.Direct);
                     }

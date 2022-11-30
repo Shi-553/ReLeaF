@@ -60,7 +60,7 @@ namespace ReLeaf
                 return;
             }
 
-
+            bool isUpdateTarget = false;
             if (mover.WasChangedTilePosPrevFrame || targetTilePos == null)
             {
 
@@ -88,6 +88,7 @@ namespace ReLeaf
 
                     if (minDistanceSq != float.MaxValue)
                     {
+                        isUpdateTarget = true;
                         // ターゲットマーカー更新
                         targetMarkerManager.ResetAllMarker();
                         targetMarkerManager.SetMarker<TargetMarker>(minElement);
@@ -101,9 +102,9 @@ namespace ReLeaf
                 return;
 
             // 経路探索更新
-            if (mover.WasChangedTilePosPrevFrame)
+            if (isUpdateTarget || mover.WasChangedTilePosPrevFrame)
             {
-                if (!mover.UpdateDir(targetTilePos.Value))
+                if (!mover.UpdateTarget(targetTilePos.Value))
                 {
                     impossibleTargets.Add(targetTilePos.Value);
                     targetTilePos = null;
@@ -113,7 +114,7 @@ namespace ReLeaf
 
             if (mover.Move(true))
             {
-                mover.UpdateDir(targetTilePos.Value);
+                mover.UpdateTarget(targetTilePos.Value);
                 targetTilePos = null;
                 StartCoroutine(attacker.Attack());
             }
