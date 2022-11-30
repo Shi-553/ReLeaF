@@ -16,19 +16,23 @@ namespace ReLeaf
         public bool WasChangedTilePosPrevMove => TilePos != OldTilePos;
 
 
+        /// <summary>
+        /// 移動に使うターゲット位置、左下基準
+        /// </summary>
         [field: SerializeField, ReadOnly]
         public Vector2Int MoveTarget { get; private set; }
 
 
         public Vector2Int Dir { get; private set; }
+
         void UpdateDir(bool isNext = false)
         {
             if (isNext)
             {
-                routing.TryPop(out var _);
+                routes.TryPop(out var _);
             }
 
-            if (routing.TryPeek(out var peekResult))
+            if (routes.TryPeek(out var peekResult))
             {
                 if (MathExtension.DuringExists(peekResult, TilePos, TilePos + TileSize))
                 {
@@ -52,6 +56,7 @@ namespace ReLeaf
             TryGetComponent(out mover);
             TilePos = DungeonManager.Singleton.WorldToTilePos(mover.Position);
         }
+
         public enum MoveResult
         {
             Moveing,
@@ -90,7 +95,7 @@ namespace ReLeaf
                 {
                     UpdateDir(true);
                 }
-                var isFinish = routing.Count == 0;
+                var isFinish = routes.Count == 0;
                 if (isFinish)
                     mover.Position = worldNextTargetPos;
 
@@ -104,26 +109,30 @@ namespace ReLeaf
         }
 
         Vector2Int target = Vector2Int.zero;
-        // 自動操作(自由な位置を指定)
-        public bool UpdateTarget(Vector2Int targetTilePos)
+
+        // 自動操作(自由な位置を指定して経路探索)
+        public bool UpdateTargetAutoRouting(Vector2Int targetTilePos)
         {
             target = targetTilePos;
             var ret = UpdateDirRouting();
             return ret;
         }
 
-        // マニュアル操作(左下基準の直線位置を指定)
-        public void UpdateMoveTargetAndDir(Vector2Int targetTilePos)
+        // マニュアル操作(直線位置を指定)
+        public void UpdateTargetStraight(Vector2Int targetTilePos)
         {
-            routing.Clear();
-            routing.Push(targetTilePos);
+            routes.Clear();
+            routes.Push(targetTilePos);
             UpdateDir();
         }
 
 
+        /// <summary>
+        /// min <= target < max ならtargetを返す
+        /// </summary>
         int GetNearest(int target, int min, int max)
         {
-            if (min <= target && target <= max)
+            if (min <= target && target < max)
                 return target;
             else if (target < min)
                 return min;
@@ -132,10 +141,11 @@ namespace ReLeaf
         }
         public Vector2Int GetNearest(Vector2Int target)
         {
-
-            return new Vector2Int(GetNearest(target.x, TilePos.x, TilePos.x + TileSize.x - 1),
-                GetNearest(target.y, TilePos.y, TilePos.y + TileSize.y - 1));
+            return new Vector2Int(GetNearest(target.x, TilePos.x, TilePos.x + TileSize.x),
+                GetNearest(target.y, TilePos.y, TilePos.y + TileSize.y));
         }
+
+
 
         // ここから経路探索
 
@@ -160,11 +170,11 @@ namespace ReLeaf
         // そのマスに到達したとき、来た方向を記録
         Dictionary<Vector2Int, Direction> routingMapBuffer = new();
 
-        Queue<Vector2Int> tempMapQueue = new Queue<Vector2Int>();
+        Queue<Vector2Int> tempMapQueue = new();
 
         // スタートしたマスからゴールの手前のマスまで
-        Stack<Vector2Int> routing = new();
-        public Stack<Vector2Int> Routing => routing;
+        Stack<Vector2Int> routes = new();
+        public Stack<Vector2Int> Routing => routes;
 
         List<Vector2Int> buffer = new();
         public IReadOnlyList<Vector2Int> Targets => buffer;
@@ -174,14 +184,12 @@ namespace ReLeaf
 
         bool UpdateDirRouting()
         {
-            // ターゲットが同じタイル とりあえず↑
+            // ターゲットが同じタイル
             if (MathExtension.DuringExists(target, TilePos, TilePos + TileSize))
             {
-                UpdateMoveTargetAndDir(target);
+                UpdateTargetStraight(target);
                 return true;
             }
-
-
 
             routingMapBuffer.Clear();
             tempMapQueue.Clear();
@@ -191,10 +199,11 @@ namespace ReLeaf
                 // 到達不可能
                 return false;
             }
-            routing.Clear();
+            routes.Clear();
 
 
             // ターゲットから戻って経路を確認する
+
             var currnet = tempTarget;
             // 四隅を入れる
             Direction[] cornerDirs = new Direction[4];
@@ -217,7 +226,7 @@ namespace ReLeaf
                 // 一つ戻る
                 currnet -= dir;
 
-                routing.Push(currnet);
+                routes.Push(currnet);
 
 
                 if (isSizeOne)
@@ -292,10 +301,16 @@ namespace ReLeaf
             return false;
         }
 
+        /// <summary>
+        /// 左下基準のtileposからdirに移動したいとき、障害物などを判定しないといけない位置を返す
+        /// </summary>
         public void GetCheckPoss(Vector2Int tilePos, Vector2Int dir, List<Vector2Int> checkPoss)
         {
             GetCheckPoss(tilePos, ToDirection(dir), checkPoss);
         }
+        /// <summary>
+        /// 左下基準のtileposからdirに移動したいとき、障害物などを判定しないといけない位置を返す
+        /// </summary>
         public void GetCheckPoss(Vector2Int tilePos, Direction dir, List<Vector2Int> checkPoss)
         {
             checkPoss.Clear();

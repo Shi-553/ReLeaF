@@ -46,7 +46,7 @@ namespace ReLeaf
             enemyMover.GetCheckPoss(enemyMover.TilePos, enemyMover.Dir, buffer);
             attackTargetPos = buffer.Last() + (enemyMover.Dir * (SharkAttackInfo.Range - 1));
 
-            enemyMover.UpdateMoveTargetAndDir(attackTargetPos);
+            enemyMover.UpdateTargetStraight(attackTargetPos);
             while (true)
             {
                 if (enemyMover.Move(SharkAttackInfo.Speed) != EnemyMover.MoveResult.Moveing)

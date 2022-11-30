@@ -82,7 +82,7 @@ namespace ReLeaf
             // 経路探索更新
             if (isUpdateTarget)
             {
-                if (!mover.UpdateTarget(targetTilePos.Value))
+                if (!mover.UpdateTargetAutoRouting(targetTilePos.Value))
                 {
                     // 到達不可能なターゲット
                     impossibleTargets.Add(targetTilePos.Value);
@@ -100,7 +100,7 @@ namespace ReLeaf
             var result = mover.Move();
             if (result == EnemyMover.MoveResult.Finish)
             {
-                mover.UpdateMoveTargetAndDir(targetTilePos.Value);
+                mover.UpdateTargetStraight(targetTilePos.Value);
                 targetTilePos = null;
                 StartCoroutine(attacker.Attack());
             }
