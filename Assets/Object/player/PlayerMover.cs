@@ -123,6 +123,8 @@ namespace ReLeaf
         }
         private void OnTriggerStay2D(Collider2D collision)
         {
+            if (GameRuleManager.Singleton.IsPrepare)
+                return;
             if (IsMove && collision.gameObject.CompareTag("Sand"))
             {
                 if (DungeonManager.Singleton.SowSeed(DungeonManager.Singleton.WorldToTilePos(collision.transform.position), PlantType.Foundation))

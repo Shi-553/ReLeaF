@@ -15,7 +15,7 @@ namespace ReLeaf
     {
         public override bool DontDestroyOnLoad => false;
 
-        public GameRuleState State { get; protected set; }
+        public GameRuleState State { get; protected set; } = GameRuleState.Prepare;
 
         public bool IsPlaying => State == GameRuleState.Playing;
         public bool IsPrepare => State == GameRuleState.Prepare;
@@ -39,6 +39,7 @@ namespace ReLeaf
 
         protected override void Init()
         {
+            State = GameRuleState.Prepare;
         }
 
         protected virtual IEnumerator Start()
