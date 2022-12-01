@@ -28,6 +28,8 @@ namespace ReLeaf
         ValueGaugeManager energyGauge;
         Rigidbody2DMover mover;
 
+        bool isKnockback = false;
+
         [Serializable]
         class SequentialSE
         {
@@ -72,6 +74,7 @@ namespace ReLeaf
         private void Awake()
         {
             TryGetComponent(out mover);
+            isKnockback = false;
         }
         void Update()
         {
@@ -107,6 +110,7 @@ namespace ReLeaf
         }
         public IEnumerator KnockBack(Vector3 impulse)
         {
+            isKnockback = true;
             while (true)
             {
                 mover.MoveDelta(DungeonManager.CELL_SIZE * impulse);
@@ -116,6 +120,7 @@ namespace ReLeaf
 
                 if (impulse.sqrMagnitude < 0.01f)
                 {
+                    isKnockback = false;
                     yield break;
                 }
                 yield return null;
@@ -123,7 +128,7 @@ namespace ReLeaf
         }
         private void OnTriggerStay2D(Collider2D collision)
         {
-            if (GameRuleManager.Singleton.IsPrepare)
+            if (GameRuleManager.Singleton.IsPrepare || isKnockback)
                 return;
             if (IsMove && collision.gameObject.CompareTag("Sand"))
             {
