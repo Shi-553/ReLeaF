@@ -38,8 +38,23 @@ SpriteAtlas:
     cachedData: {fileID: 0}
   m_MasterAtlas: {fileID: 0}
   m_PackedSprites:
+  - {fileID: 820077601, guid: 0cfb0e61e992da04987cd6521e7aafca, type: 3}
+  - {fileID: -2076669896, guid: 0cfb0e61e992da04987cd6521e7aafca, type: 3}
+  - {fileID: -534082030, guid: 0cfb0e61e992da04987cd6521e7aafca, type: 3}
+  - {fileID: 1652872781, guid: 0cfb0e61e992da04987cd6521e7aafca, type: 3}
+  - {fileID: -713012179, guid: 0cfb0e61e992da04987cd6521e7aafca, type: 3}
+  - {fileID: -1355582443, guid: 0cfb0e61e992da04987cd6521e7aafca, type: 3}
+  - {fileID: 30700601, guid: 0cfb0e61e992da04987cd6521e7aafca, type: 3}
   - {fileID: 21300000, guid: 9bf3f314c3b0c19408389d5654a9d9cc, type: 3}
   - {fileID: 21300000, guid: d0ab15c5ff0077c4f90a2ff7775b7756, type: 3}
+  - {fileID: -994572753, guid: bb8fdbc78db09534396ebd67b2478d82, type: 3}
+  - {fileID: 614486066, guid: bb8fdbc78db09534396ebd67b2478d82, type: 3}
+  - {fileID: -2121093996, guid: bb8fdbc78db09534396ebd67b2478d82, type: 3}
+  - {fileID: 1149909415, guid: bb8fdbc78db09534396ebd67b2478d82, type: 3}
+  - {fileID: -910914359, guid: bb8fdbc78db09534396ebd67b2478d82, type: 3}
+  - {fileID: 2013819613, guid: bb8fdbc78db09534396ebd67b2478d82, type: 3}
+  - {fileID: 882906781, guid: bb8fdbc78db09534396ebd67b2478d82, type: 3}
+  - {fileID: 1931262785, guid: bb8fdbc78db09534396ebd67b2478d82, type: 3}
   - {fileID: 21300000, guid: ea0eaf1a3d18c4745825c520d75d0213, type: 3}
   - {fileID: -59194123, guid: 946826ac5cc353f4d9fad583b7404d14, type: 3}
   - {fileID: 1368857009, guid: 946826ac5cc353f4d9fad583b7404d14, type: 3}
@@ -76,8 +91,23 @@ SpriteAtlas:
   - {fileID: 427957052, guid: 8a6e187ff4c26fa4db3ea15a985ffd99, type: 3}
   - {fileID: -650196161, guid: 8a6e187ff4c26fa4db3ea15a985ffd99, type: 3}
   m_PackedSpriteNamesToIndex:
+  - SeaUrchin_before_attack_5
+  - SeaUrchin_before_attack_4
+  - SeaUrchin_before_attack_6
+  - SeaUrchin_before_attack_1
+  - SeaUrchin_before_attack_0
+  - SeaUrchin_before_attack_3
+  - SeaUrchin_before_attack_2
   - SeedMarker
   - TargetMarker
+  - SeaUrchin_attack_1
+  - SeaUrchin_attack_0
+  - SeaUrchin_attack_3
+  - SeaUrchin_attack_2
+  - SeaUrchin_attack_5
+  - SeaUrchin_attack_4
+  - SeaUrchin_attack_7
+  - SeaUrchin_attack_6
   - SharkIcon
   - spriteseet_2
   - spriteseet_3
