@@ -56,7 +56,7 @@ namespace ReLeaf
             foreach (var pos in groundTilemap.cellBounds.allPositionsWithin)
             {
                 var tile = groundTilemap.GetTile<TerrainTile>(pos);
-                if (tile != null && tile.CurrentTileObject.CanSowGrass)
+                if (tile != null && tile.CurrentTileObject.CanSowGrass(false))
                 {
                     MaxGreeningCount++;
                 }
@@ -92,35 +92,41 @@ namespace ReLeaf
         }
         public TileObject GetTile<T>(Vector2Int pos) where T : TileObject => tiles.GetValueOrDefault(pos, null) as T;
 
-        public bool CanSowSeed(TileObject tile, PlantType type)
+        public bool CanSowSeed(TileObject tile, PlantType type, bool isSpecial)
         {
             if (type < 0 || seedTiles.Length <= (int)type)
             {
                 return false;
             }
 
-            if (type == PlantType.Foundation && !tile.CanSowGrass)
+            if (type == PlantType.Foundation && !tile.CanSowGrass(isSpecial))
             {
                 return false;
             }
 
             return true;
         }
-        public bool CanSowSeed(Vector2Int tilePos, PlantType type)
+        public bool CanSowSeed(Vector2Int tilePos, PlantType type, bool isSpecial)
         {
             if (TryGetTile(tilePos, out var tile))
-                return CanSowSeed(tile, type);
+                return CanSowSeed(tile, type, isSpecial);
             return false;
         }
 
-        public bool SowSeed(Vector2Int tilePos, PlantType type, bool isFouce = false)
+        public bool SowSeed(Vector2Int tilePos, PlantType type, bool isSpecial = false)
         {
-            if (!isFouce && !CanSowSeed(tilePos, type))
+            if (!CanSowSeed(tilePos, type, isSpecial))
             {
                 return false;
             }
+            seedTiles[(int)type].IsInvincible = false;
+            ChangeTile(tilePos, seedTiles[(int)type]);
+            return true;
+        }
 
-            seedTiles[(int)type].IsInvincible = isFouce;
+        public bool SowInvincibleSeed(Vector2Int tilePos, PlantType type)
+        {
+            seedTiles[(int)type].IsInvincible = true;
 
             ChangeTile(tilePos, seedTiles[(int)type]);
             return true;

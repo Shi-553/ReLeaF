@@ -25,9 +25,7 @@ namespace ReLeaf
             IsInvincible = false;
         }
 
-        [SerializeField, Rename("種をまけるかどうか")]
-        protected bool canSowGrass;
-        public bool CanSowGrass => canSowGrass;
+        public bool CanSowGrass(bool isSpecial) => TileType == TileType.Sand || (isSpecial && TileType == TileType.Messy);
 
         IPool IPoolableSelfRelease.Pool { get; set; }
 

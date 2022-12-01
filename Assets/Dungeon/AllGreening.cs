@@ -112,7 +112,7 @@ namespace ReLeaf
                         // —Î‰»‚Å‚«‚é
                         if (tile.TileType == TileType.Sand || tile.TileType == TileType.Messy)
                         {
-                            DungeonManager.Singleton.SowSeed(pos, PlantType.Foundation, true);
+                            DungeonManager.Singleton.SowInvincibleSeed(pos, PlantType.Foundation);
                         }
                     }
                     else
