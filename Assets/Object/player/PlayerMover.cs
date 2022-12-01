@@ -24,6 +24,9 @@ namespace ReLeaf
         [SerializeField, Rename("1マス緑化したときのエネルギー回復量(n/マス)")]
         float energyRecoveryPoint = 1.0f;
 
+        [SerializeField, Rename("緑化マスでの自動エネルギー回復量(n/秒)")]
+        float energyAutoRecoveryPoint = 1.0f;
+
         [SerializeField]
         ValueGaugeManager energyGauge;
         Rigidbody2DMover mover;
@@ -89,9 +92,21 @@ namespace ReLeaf
 
             var speed = moveSpeed;
 
-            if (IsDash && energyGauge.ConsumeValue(dashConsumeEnergy * Time.deltaTime))
+            var currentTile = DungeonManager.Singleton.GetTile(TilePos);
+
+            var isFullGrowthPlant = currentTile is Plant plantTile && plantTile.IsFullGrowth;
+            if (isFullGrowthPlant)
             {
-                speed *= dashSpeedMagnification;
+                energyGauge.RecoveryValue(energyAutoRecoveryPoint * Time.deltaTime);
+            }
+
+            if (IsDash)
+            {
+                // 緑化マスではエネルギー消費無し
+                if (isFullGrowthPlant || energyGauge.ConsumeValue(dashConsumeEnergy * Time.deltaTime))
+                {
+                    speed *= dashSpeedMagnification;
+                }
 
             }
 
@@ -100,9 +115,9 @@ namespace ReLeaf
 
             if (WasChangedTilePosThisFrame && IsMove)
             {
-                if (DungeonManager.Singleton.TryGetTile(TilePos, out var tile))
+                if (currentTile != null)
                 {
-                    var se = tile.TileType == TileType.Plant ? seGrassMove : seSandMove;
+                    var se = currentTile.TileType == TileType.Plant ? seGrassMove : seSandMove;
                     SEManager.Singleton.Play(se.Get(IsDash), transform.position);
                 }
             }

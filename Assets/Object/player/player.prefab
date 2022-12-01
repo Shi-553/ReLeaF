@@ -406,7 +406,7 @@ MonoBehaviour:
   dashSpeedMagnification: 2
   knockBackDampingRate: 0.9
   dashConsumeEnergy: 5
-  energyRecoveryPoint: 0.2
+  energyRecoveryPoint: 0.1
   energyGauge: {fileID: 5839813641606943567}
   seSandMove:
     walk:
