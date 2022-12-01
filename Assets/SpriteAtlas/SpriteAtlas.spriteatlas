@@ -68,6 +68,7 @@ SpriteAtlas:
   - {fileID: -1120168090, guid: 946826ac5cc353f4d9fad583b7404d14, type: 3}
   - {fileID: -34460191, guid: 946826ac5cc353f4d9fad583b7404d14, type: 3}
   - {fileID: 379289595, guid: 946826ac5cc353f4d9fad583b7404d14, type: 3}
+  - {fileID: 21300000, guid: b0c5a0ecdbd82aa4d8cc07be72d2ea10, type: 3}
   - {fileID: 21300000, guid: 3534c52d4468d9e4aa5914b848160e5c, type: 3}
   - {fileID: 21300000, guid: 17d9c64d5139a734781fa288da534609, type: 3}
   - {fileID: -1781669393, guid: 3eef1b6d3f6178540bde166f5631b552, type: 3}
@@ -121,6 +122,7 @@ SpriteAtlas:
   - spriteseet_9
   - spriteseet_11
   - spriteseet_10
+  - SeaUrchin_spine
   - Shark
   - WeakMarker
   - spriteseet_walk_4
