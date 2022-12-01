@@ -107,7 +107,10 @@ namespace ReLeaf
                 {
                     speed *= dashSpeedMagnification;
                 }
-
+                else
+                {
+                    IsDash = false;
+                }
             }
 
 

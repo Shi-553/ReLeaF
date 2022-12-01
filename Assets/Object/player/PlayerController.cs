@@ -46,7 +46,8 @@ namespace ReLeaf
 
         public void OnDash(InputAction.CallbackContext context)
         {
-            mover.IsDash = context.ReadValue<float>() != 0;
+            if (context.started || context.canceled)
+                mover.IsDash = context.ReadValue<float>() != 0;
         }
 
         public void OnUseItem(InputAction.CallbackContext context)
