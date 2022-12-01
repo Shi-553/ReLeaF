@@ -43,8 +43,9 @@ namespace ReLeaf
             enemyDamageable.EndWeekMarker();
 
             attackStartPos = enemyMover.TilePos;
-            enemyMover.GetCheckPoss(enemyMover.TilePos, enemyMover.Dir, buffer);
-            attackTargetPos = buffer.Last() + (enemyMover.Dir * (SharkAttackInfo.Range - 1));
+            var dir = enemyMover.Dir == Vector2Int.zero ? Vector2Int.down : enemyMover.Dir;
+            enemyMover.GetCheckPoss(enemyMover.TilePos, dir, buffer);
+            attackTargetPos = buffer.Last() + (dir * (SharkAttackInfo.Range - 1));
 
             enemyMover.UpdateTargetStraight(attackTargetPos);
             while (true)
@@ -107,17 +108,23 @@ namespace ReLeaf
         }
         private void OnTriggerStay2D(Collider2D collider)
         {
-            if (Transition != AttackTransition.Damageing)
-            {
-                return;
-            }
             if (collider.gameObject.CompareTag("Plant"))
             {
                 if (collider.gameObject.TryGetComponent<Plant>(out var plant))
                 {
-                    if (MathExtension.DuringExists(plant.TilePos, attackStartPos, attackTargetPos, true))
+                    if (Transition == AttackTransition.Damageing)
+                    {
+                        if (MathExtension.DuringExists(plant.TilePos, attackStartPos, attackTargetPos, true))
+                        {
+                            plant.Damaged(SharkAttackInfo.ATK, DamageType.Direct);
+                            return;
+                        }
+                    }
+
+                    if (MathExtension.DuringExists(plant.TilePos, enemyMover.TilePos, enemyMover.TilePos + enemyMover.TileSize, false))
                     {
                         plant.Damaged(SharkAttackInfo.ATK, DamageType.Direct);
+                        return;
                     }
                 }
             }

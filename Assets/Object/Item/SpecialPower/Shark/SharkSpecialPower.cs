@@ -14,7 +14,7 @@ namespace ReLeaf
             var returns = new List<Vector2Int>(sharkSpecialPowerInfo.SeedLocalTilePos.Length);
             foreach (var weakLocalTilePos in sharkSpecialPowerInfo.SeedLocalTilePos)
             {
-                var pos = tilePos + MathExtension.GetRotatedLocalPos(dir, weakLocalTilePos);
+                var pos = tilePos + weakLocalTilePos.GetRotatedLocalPos(dir);
                 if (!DungeonManager.Singleton.CanSowSeed(pos, PlantType.Foundation))
                 {
                     continue;
@@ -28,7 +28,7 @@ namespace ReLeaf
         {
             foreach (var weakLocalTilePos in sharkSpecialPowerInfo.SeedLocalTilePos)
             {
-                var pos = tilePos + MathExtension.GetRotatedLocalPos(dir, weakLocalTilePos);
+                var pos = tilePos + weakLocalTilePos.GetRotatedLocalPos(dir);
                 DungeonManager.Singleton.SowSeed(pos, PlantType.Foundation);
 
             }

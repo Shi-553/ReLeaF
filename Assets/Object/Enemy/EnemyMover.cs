@@ -78,10 +78,16 @@ namespace ReLeaf
 
             var nextTilePos = TilePos + Dir;
 
+            if (routes.Count == 1 && MoveTarget == target && MathExtension.DuringExists(MoveTarget, TilePos, TilePos + TileSize))
+            {
+                return MoveResult.Finish;
+            }
             foreach (var nextPos in buffer)
             {
                 if (!DungeonManager.Singleton.TryGetTile(nextPos, out var tile) || !tile.CanEnemyMove)
+                {
                     return MoveResult.Error;
+                }
             }
 
 
@@ -124,6 +130,7 @@ namespace ReLeaf
         // マニュアル操作(直線位置を指定)
         public void UpdateTargetStraight(Vector2Int targetTilePos)
         {
+            target = targetTilePos;
             routes.Clear();
             routes.Push(targetTilePos);
             UpdateDir();
@@ -147,7 +154,6 @@ namespace ReLeaf
             return new Vector2Int(GetNearest(target.x, TilePos.x, TilePos.x + TileSize.x - 1),
                 GetNearest(target.y, TilePos.y, TilePos.y + TileSize.y - 1));
         }
-
 
 
         // ここから経路探索
@@ -343,7 +349,7 @@ namespace ReLeaf
                     size = TileSize.y;
                     break;
                 case Direction.RIGHT:
-                    tilePos.x += TileSize.y;
+                    tilePos.x += TileSize.x;
                     checkDir = Vector2Int.up;
                     size = TileSize.y;
                     break;

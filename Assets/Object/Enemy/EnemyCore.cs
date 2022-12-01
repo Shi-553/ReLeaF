@@ -36,7 +36,7 @@ namespace ReLeaf
         {
             foreach (var defaultLocalPos in enemyBaseInfo.WeakLocalTilePos)
             {
-                var worldTilePos = enemyMover.TilePos + MathExtension.GetRotatedLocalPos(enemyMover.Dir, defaultLocalPos);
+                var worldTilePos = enemyMover.TilePos + defaultLocalPos.GetRotatedLocalPos(enemyMover.Dir, enemyMover.TileSize);
 
                 if (DungeonManager.Singleton.TryGetTile(worldTilePos, out var tile) && tile.CanEnemyMove)
                 {
