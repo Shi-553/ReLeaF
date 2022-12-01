@@ -67,7 +67,7 @@ namespace ReLeaf
                 }
 
                 // ターゲットがないか今のターゲットより近いとき
-                if (targetTilePos == null || minDistanceSq + 1 < (targetTilePos.Value - mover.GetNearest(targetTilePos.Value)).sqrMagnitude)
+                if (targetTilePos == null || minDistanceSq < (targetTilePos.Value - mover.GetNearest(targetTilePos.Value)).sqrMagnitude)
                 {
                     if (minDistanceSq != float.MaxValue)
                     {
