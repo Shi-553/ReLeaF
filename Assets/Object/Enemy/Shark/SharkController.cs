@@ -94,8 +94,7 @@ namespace ReLeaf
                 targetMarkerManager.ResetAllMarker();
                 foreach (var target in mover.Targets)
                 {
-                    var marker = targetMarkerManager.SetMarker<TargetMarker>(target);
-                    marker.transform.rotation = mover.ToTargetDir.GetRotation();
+                    targetMarkerManager.SetMarker<TargetMarker>(target, mover.ToTargetDir.GetRotation());
                 }
             }
 

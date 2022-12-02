@@ -18,5 +18,6 @@ public class UseSameSprite : MonoBehaviour
         if (s != prevSprite)
             myself.sprite = s;
         prevSprite = s;
+
     }
 }

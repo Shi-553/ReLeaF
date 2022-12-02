@@ -4,7 +4,7 @@ using Utility;
 
 namespace ReLeaf
 {
-    public class EnemyMover : MonoBehaviour
+    public partial class EnemyMover : MonoBehaviour
     {
         Rigidbody2DMover mover;
 
@@ -23,7 +23,7 @@ namespace ReLeaf
         public Vector2Int MoveTarget { get; private set; }
 
 
-        public Vector2Int Dir { get; private set; }
+        public Vector2Int Dir { get; set; }
 
         void UpdateDir(bool isNext = false)
         {
@@ -155,27 +155,6 @@ namespace ReLeaf
                 GetNearest(target.y, TilePos.y, TilePos.y + TileSize.y - 1));
         }
 
-
-        // ここから経路探索
-
-        public enum Direction
-        {
-            NONE = -1, LEFT, DOWN, RIGHT, UP
-        }
-        Direction ToDirection(Vector2Int dir)
-        {
-            if (dir.y > 0)
-                return Direction.UP;
-            if (dir.y < 0)
-                return Direction.DOWN;
-            if (dir.x < 0)
-                return Direction.LEFT;
-            if (dir.x > 0)
-                return Direction.RIGHT;
-
-            return Direction.NONE;
-        }
-
         // そのマスに到達したとき、来た方向を記録
         Dictionary<Vector2Int, Direction> routingMapBuffer = new();
 
@@ -250,14 +229,14 @@ namespace ReLeaf
                 }
 
 
-                // 例えば、一つ前が左(Direction.LEFT)だった場合、戻るために右に移動する。
-                // すると、右上＆右下の組み合わせはありえないので右上＆左上、左上＆左下、左下＆右下の三組を調べて次の方向を出す
+                // 例えば、一つ前が左(Direction.UP)だった場合、戻るために上に移動する。
+                // すると、右下＆左下の組み合わせはありえないので右下＆右上、右上＆左上、左上＆左下の三組を調べて次の方向を出す
 
-                // 反時計回りに格納 右上->左上->左下->右下
-                cornerDirs[0] = routingMapBuffer[new Vector2Int(currnet.x + TileSize.x - 1, currnet.y + TileSize.y - 1)];
-                cornerDirs[1] = routingMapBuffer[new Vector2Int(currnet.x, currnet.y + TileSize.y - 1)];
-                cornerDirs[2] = routingMapBuffer[currnet];
-                cornerDirs[3] = routingMapBuffer[new Vector2Int(currnet.x + TileSize.x - 1, currnet.y)];
+                // 反時計回りに格納 右下->右上->左上->左下
+                cornerDirs[0] = routingMapBuffer[new Vector2Int(currnet.x + TileSize.x - 1, currnet.y)];
+                cornerDirs[1] = routingMapBuffer[new Vector2Int(currnet.x + TileSize.x - 1, currnet.y + TileSize.y - 1)];
+                cornerDirs[2] = routingMapBuffer[new Vector2Int(currnet.x, currnet.y + TileSize.y - 1)];
+                cornerDirs[3] = routingMapBuffer[currnet];
 
                 // 0~2の3回
                 for (int i = 0; i < 3; i++)
@@ -320,7 +299,7 @@ namespace ReLeaf
         /// </summary>
         public void GetCheckPoss(Vector2Int tilePos, Vector2Int dir, List<Vector2Int> checkPoss)
         {
-            GetCheckPoss(tilePos, ToDirection(dir), checkPoss);
+            GetCheckPoss(tilePos, dir.ToDirection(), checkPoss);
         }
         /// <summary>
         /// 左下基準のtileposからdirに移動したいとき、障害物などを判定しないといけない位置を返す

@@ -28,7 +28,13 @@ namespace ReLeaf
         private void Death()
         {
             Instantiate(specialPowerPrefab, transform.position, Quaternion.identity, transform.parent);
-            DungeonManager.Singleton.ToEnemyPlant(enemyMover.TilePos);
+            for (int x = 0; x < enemyMover.TileSize.x; x++)
+            {
+                for (int y = 0; y < enemyMover.TileSize.y; y++)
+                {
+                    DungeonManager.Singleton.ToEnemyPlant(new Vector2Int(enemyMover.TilePos.x + x, enemyMover.TilePos.y + y));
+                }
+            }
             Destroy(gameObject);
         }
 

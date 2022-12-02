@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -5,20 +6,57 @@ using Utility;
 
 namespace ReLeaf
 {
-    [ClassSummary("SeaUrchinÇÃçUåÇÉpÉâÉÅÅ[É^")]
-    [CreateAssetMenu(menuName = "Enemy/SeaUrchinAttackInfo")]
-    class SeaUrchinAttackInfo : EnemyAttackInfo
-    {
-        //[SerializeField]
 
-    }
     public class SeaUrchinAttacker : MonoBehaviour, IEnemyAttacker
     {
+        [Serializable]
+        class SpineInitPosSelect
+        {
+            public Direction Direction;
+            public Transform root;
+
+            List<Vector3> initWorldPositions = new();
+            public IReadOnlyList<Vector3> InitWorldPositions => initWorldPositions;
+
+            public void Init()
+            {
+                foreach (Transform child in root)
+                {
+                    initWorldPositions.Add(child.position);
+                }
+            }
+        }
+
+
+        [SerializeField]
+        SeaUrchinAttackInfo seaUrchinAttackInfo;
+        [SerializeField]
+        SpineInitPosSelect[] selects;
+
+        EnemyCore enemyDamageable;
         EnemyMover mover;
         List<Vector2Int> buffer = new();
+
         public AttackTransition Transition { get; set; }
 
-        public EnemyAttackInfo EnemyAttackInfo { get; }
+        public EnemyAttackInfo EnemyAttackInfo => seaUrchinAttackInfo;
+
+        [SerializeField]
+        MarkerManager targetMarkerManager;
+
+        List<Spine> currentAttackers = new();
+
+        void Start()
+        {
+            TryGetComponent(out mover);
+            TryGetComponent(out enemyDamageable);
+
+            foreach (var select in selects)
+            {
+                select.Init();
+            }
+        }
+
 
         public IEnumerable<Vector2Int> GetAttackRange(Vector2Int pos, Vector2Int dir, bool isDamagableOnly)
         {
@@ -26,21 +64,42 @@ namespace ReLeaf
             return buffer;
         }
 
+
+        void IEnemyAttacker.OnStartAiming()
+        {
+            foreach (var target in GetAttackRange(mover.TilePos, mover.Dir, false))
+            {
+                targetMarkerManager.SetMarker<TargetMarker>(target, mover.Dir.GetRotation());
+            }
+
+            currentAttackers.Clear();
+            var poss = selects[mover.Dir.ToDirection().ToInt32()].InitWorldPositions;
+            foreach (var pos in poss)
+            {
+                var spine = Instantiate(seaUrchinAttackInfo.SpinePrefab, pos, Quaternion.identity);
+                spine.Init(mover.Dir);
+                currentAttackers.Add(spine);
+            }
+        }
         IEnumerator IEnemyAttacker.OnStartDamageing()
         {
-            throw new System.NotImplementedException();
+            targetMarkerManager.ResetAllMarker();
+
+            enemyDamageable.BeginWeekMarker();
+
+            foreach (var spine in currentAttackers)
+            {
+                spine.ShotStart();
+            }
+
+            yield return new WaitForSeconds(seaUrchinAttackInfo.AttackTime);
         }
-
-        // Start is called before the first frame update
-        void Start()
+        void IEnemyAttacker.OnStartCoolTime()
         {
-            TryGetComponent(out mover);
         }
-
-        // Update is called once per frame
-        void Update()
+        void IEnemyAttacker.OnEndCoolTime()
         {
-
+            enemyDamageable.EndWeekMarker();
         }
     }
 }

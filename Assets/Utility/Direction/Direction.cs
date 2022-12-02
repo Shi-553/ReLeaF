@@ -1,8 +1,12 @@
 ﻿using UnityEngine;
-using static ReLeaf.EnemyMover;
 
-namespace ReLeaf
+namespace Utility
 {
+    public enum Direction
+    {
+        NONE = -1, UP, LEFT, DOWN, RIGHT
+    }
+
     public static class DirectionExtension
     {
         public static Vector2Int GetVector2Int(this Direction dir)

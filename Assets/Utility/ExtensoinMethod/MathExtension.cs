@@ -114,6 +114,30 @@ namespace Utility
             }
             return Quaternion.identity;
         }
+        public static float GetRotationZ(this Vector2Int dir)
+        {
+            // up
+            if (dir.y > 0)
+            {
+                return 0;
+            }
+            // down
+            if (dir.y < 0)
+            {
+                return 180;
+            }
+            // left
+            if (dir.x < 0)
+            {
+                return 90;
+            }
+            //right
+            if (dir.x > 0)
+            {
+                return 270;
+            }
+            return 0;
+        }
 
         public static bool DuringExists(Vector2Int target, Vector2Int start, Vector2Int end, bool includeEnd = false)
         {
@@ -151,6 +175,23 @@ namespace Utility
         public static Vector2Int ClampOneMagnitude(this Vector2Int value)
         {
             return ClampOneMagnitude((Vector2)value);
+        }
+        public static Vector2Int ClampOneMagnitude(this Vector3 value)
+        {
+            return ClampOneMagnitude((Vector2)value);
+        }
+        public static Direction ToDirection(this Vector2Int dir)
+        {
+            if (dir.y > 0)
+                return Direction.UP;
+            if (dir.y < 0)
+                return Direction.DOWN;
+            if (dir.x < 0)
+                return Direction.LEFT;
+            if (dir.x > 0)
+                return Direction.RIGHT;
+
+            return Direction.NONE;
         }
     }
 }

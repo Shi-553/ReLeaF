@@ -44,6 +44,10 @@ namespace ReLeaf
 
         public T SetMarker<T>(Vector2Int worldTilePos) where T : MarkerBase
         {
+            return SetMarker<T>(worldTilePos, Quaternion.identity);
+        }
+        public T SetMarker<T>(Vector2Int worldTilePos, Quaternion rotation) where T : MarkerBase
+        {
             var worldPos = DungeonManager.Singleton.TilePosToWorld(worldTilePos);
             if (markers.TryGetValue(worldTilePos, out var _))
             {
@@ -52,6 +56,7 @@ namespace ReLeaf
             using var _ = GetPool<T>().Get<T>(out var marker);
 
             marker.transform.position = worldPos;
+            marker.transform.rotation = rotation;
 
             markers.Add(worldTilePos, marker);
 
