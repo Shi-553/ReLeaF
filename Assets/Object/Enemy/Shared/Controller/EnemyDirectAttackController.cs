@@ -4,7 +4,7 @@ using Utility;
 
 namespace ReLeaf
 {
-    public class SharkController : MonoBehaviour
+    public class EnemyDirectAttackController : MonoBehaviour
     {
 
         [SerializeField]
