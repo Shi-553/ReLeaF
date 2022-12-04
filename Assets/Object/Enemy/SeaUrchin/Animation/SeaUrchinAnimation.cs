@@ -22,13 +22,13 @@ namespace ReLeaf
             switch (enemyAttacker.Transition)
             {
                 case AttackTransition.Aiming:
-                    animancerComponent.Play(info.BeforeAttack);
+                    animancerComponent.Play(info.GetClip(SeaUrhinAnimationType.BeforeAttack));
                     break;
                 case AttackTransition.Damageing:
-                    animancerComponent.Play(info.Attack);
+                    animancerComponent.Play(info.GetClip(SeaUrhinAnimationType.Attack));
                     break;
                 case AttackTransition.CoolTime:
-                    animancerComponent.Play(info.AfterAttack);
+                    animancerComponent.Play(info.GetClip(SeaUrhinAnimationType.AfterAttack));
                     break;
             }
         }
