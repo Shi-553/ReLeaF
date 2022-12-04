@@ -26,16 +26,16 @@ namespace ReLeaf
         {
             if (mover.IsDash)
             {
-                AnimationPlay(info.GetPair(PlayerAnimationType.Run).GetClip(mover.IsLeft));
+                AnimationPlay(info.GetClip(PlayerAnimationType.Run, mover.IsLeft));
                 return;
             }
             if (mover.Move != Vector2.zero)
             {
-                AnimationPlay(info.GetPair(PlayerAnimationType.Walk).GetClip(mover.IsLeft));
+                AnimationPlay(info.GetClip(PlayerAnimationType.Walk, mover.IsLeft));
                 return;
             }
 
-            AnimationPlay(info.GetPair(PlayerAnimationType.Standby).GetClip(mover.IsLeft));
+            AnimationPlay(info.GetClip(PlayerAnimationType.Standby, mover.IsLeft));
             return;
         }
     }

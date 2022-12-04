@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 513d0ff547aa07e49af47af39ef013f5, type: 3}
   m_Name: PlayerAnimationInfo
   m_EditorClassIdentifier: 
-  clips:
+  pairClips:
   - type: 0
     left: {fileID: 7400000, guid: 4e04bcf4a7cc84442a7c462e97a014c2, type: 2}
     right: {fileID: 7400000, guid: 1a2bffcdea615e04b9de68acc3fec898, type: 2}
@@ -22,3 +22,4 @@ MonoBehaviour:
   - type: 2
     left: {fileID: 7400000, guid: 9135f4f668304c14fbf4e98c21af61ef, type: 2}
     right: {fileID: 7400000, guid: aa9205005682e8f48b904b92130d35d2, type: 2}
+  singleClips: []

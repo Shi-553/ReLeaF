@@ -9,14 +9,14 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 02396e92eb5d4bf40820c04759cd5cc7, type: 3}
-  m_Name: SeaUrhinAnimationInfo
+  m_Script: {fileID: 11500000, guid: 03e671adc856d224abdb961e4689cbdd, type: 3}
+  m_Name: CrabAnimationInfo
   m_EditorClassIdentifier: 
   pairClips: []
   singleClips:
   - type: 0
-    clip: {fileID: 7400000, guid: 9a6e8e1176f81234d82096fd35302035, type: 2}
+    clip: {fileID: 7400000, guid: 44cdb4606cbed9a47a00c84ac32b0299, type: 2}
   - type: 1
-    clip: {fileID: 7400000, guid: 637be76ecb326c04f804cccb8c54069c, type: 2}
+    clip: {fileID: 7400000, guid: afad2ae2b41ccd447904da2dbb506f2b, type: 2}
   - type: 2
-    clip: {fileID: 7400000, guid: 0d547ec6ab591c44c8b51ffeb758085d, type: 2}
+    clip: {fileID: 7400000, guid: 06db62654749b04479c6268e7601e97e, type: 2}

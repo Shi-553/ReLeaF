@@ -1,18 +1,16 @@
 ﻿using UnityEngine;
+using Utility;
 
 namespace ReLeaf
 {
-    [CreateAssetMenu(menuName = "Enemy/SeaUrchin/SeaUrhinAnimationInfo")]
-    class SeaUrhinAnimationInfo : ScriptableObject
+    public enum SeaUrhinAnimationType
     {
-        [SerializeField]
-        AnimationClip beforeAttack;
-        public AnimationClip BeforeAttack => beforeAttack;
-        [SerializeField]
-        AnimationClip attack;
-        public AnimationClip Attack => attack;
-        [SerializeField]
-        AnimationClip afterAttack;
-        public AnimationClip AfterAttack => afterAttack;
+        BeforeAttack,
+        Attack,
+        AfterAttack
+    }
+    [CreateAssetMenu(menuName = "Enemy/SeaUrchin/SeaUrhinAnimationInfo")]
+    class SeaUrhinAnimationInfo : AnimationInfoBase<SeaUrhinAnimationType>
+    {
     }
 }

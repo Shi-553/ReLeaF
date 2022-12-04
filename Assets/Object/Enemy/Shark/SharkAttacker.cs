@@ -8,7 +8,23 @@ namespace ReLeaf
 {
     public class SharkAttacker : MonoBehaviour, IEnemyAttacker
     {
+        public interface III
+        {
 
+        }
+        [System.Serializable]
+        public class IS : III
+        {
+            public int id;
+        }
+        [System.Serializable]
+        public class IG : III
+        {
+            public int igg;
+        }
+
+        [SerializeReference]
+        List<III> list;
 
         [field: SerializeField]
         SharkAttackInfo SharkAttackInfo { get; set; }
