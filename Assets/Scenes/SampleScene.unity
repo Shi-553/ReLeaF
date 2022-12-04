@@ -2957,10 +2957,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 3867404719554941120}
     m_Modifications:
-    - target: {fileID: 4693390535996560461, guid: 564b1e5e843294d46a32470b0221b74b, type: 3}
-      propertyPath: m_Size.y
-      value: 0.4
-      objectReference: {fileID: 0}
     - target: {fileID: 5442024061459843501, guid: 564b1e5e843294d46a32470b0221b74b, type: 3}
       propertyPath: m_Name
       value: Crab

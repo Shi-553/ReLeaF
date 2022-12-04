@@ -29,7 +29,7 @@ namespace ReLeaf
                 AnimationPlay(info.GetClip(PlayerAnimationType.Run, mover.IsLeft));
                 return;
             }
-            if (mover.Move != Vector2.zero)
+            if (mover.IsMove)
             {
                 AnimationPlay(info.GetClip(PlayerAnimationType.Walk, mover.IsLeft));
                 return;
