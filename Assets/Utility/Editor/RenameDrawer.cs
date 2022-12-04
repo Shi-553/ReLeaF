@@ -14,7 +14,10 @@ namespace Utility
             {
                 att.Format(component);
             }
-            EditorGUI.PropertyField(position, property, new GUIContent(att.NewName, att.Tooltip == "" ? property.displayName : att.Tooltip), true);
+            label.text = att.NewName;
+            label.tooltip = att.Tooltip == "" ? property.displayName : att.Tooltip;
+
+            EditorGUI.PropertyField(position, property, label, true);
         }
         public override float GetPropertyHeight(SerializedProperty property, GUIContent label)
         {
@@ -24,6 +27,8 @@ namespace Utility
             {
                 att.Format(component);
             }
+            label.text = att.NewName;
+            label.tooltip = att.Tooltip == "" ? property.displayName : att.Tooltip;
 
             return EditorGUI.GetPropertyHeight(property, new GUIContent(att.NewName, att.Tooltip == "" ? property.displayName : att.Tooltip), true);
         }

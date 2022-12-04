@@ -141,7 +141,7 @@ namespace Utility
                 if (isFirst)
                 {
                     text += "\t\"";
-                    var classAttribute = c.GetType().GetCustomAttribute<ClassSummary>();
+                    var classAttribute = c.GetType().GetCustomAttribute<ClassSummaryAttribute>();
                     if (classAttribute != null)
                     {
                         if (!classAttribute.IsFormated)

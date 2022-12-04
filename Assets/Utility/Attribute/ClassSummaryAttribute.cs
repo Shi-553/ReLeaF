@@ -4,7 +4,7 @@ using UnityEngine;
 namespace Utility
 {
     [AttributeUsage(AttributeTargets.Class, Inherited = true, AllowMultiple = false)]
-    public class ClassSummary : Attribute
+    public class ClassSummaryAttribute : Attribute
     {
         public string Sammary { get; private set; }
         public bool IsFormated { get; private set; } = false;
@@ -20,7 +20,7 @@ namespace Utility
         }
 
 
-        public ClassSummary(string sammary)
+        public ClassSummaryAttribute(string sammary)
         {
             Sammary = sammary;
         }
