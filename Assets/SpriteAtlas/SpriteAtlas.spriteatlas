@@ -38,6 +38,14 @@ SpriteAtlas:
     cachedData: {fileID: 0}
   m_MasterAtlas: {fileID: 0}
   m_PackedSprites:
+  - {fileID: -647169675, guid: 7193e01198df35942945911e3c05d19d, type: 3}
+  - {fileID: -429934661, guid: 7193e01198df35942945911e3c05d19d, type: 3}
+  - {fileID: 490753209, guid: 7193e01198df35942945911e3c05d19d, type: 3}
+  - {fileID: 1329923598, guid: 7193e01198df35942945911e3c05d19d, type: 3}
+  - {fileID: -1356323870, guid: 7193e01198df35942945911e3c05d19d, type: 3}
+  - {fileID: 239769503, guid: 7193e01198df35942945911e3c05d19d, type: 3}
+  - {fileID: -2106303719, guid: 7193e01198df35942945911e3c05d19d, type: 3}
+  - {fileID: 910190305, guid: 7193e01198df35942945911e3c05d19d, type: 3}
   - {fileID: 820077601, guid: 0cfb0e61e992da04987cd6521e7aafca, type: 3}
   - {fileID: -2076669896, guid: 0cfb0e61e992da04987cd6521e7aafca, type: 3}
   - {fileID: -534082030, guid: 0cfb0e61e992da04987cd6521e7aafca, type: 3}
@@ -45,7 +53,30 @@ SpriteAtlas:
   - {fileID: -713012179, guid: 0cfb0e61e992da04987cd6521e7aafca, type: 3}
   - {fileID: -1355582443, guid: 0cfb0e61e992da04987cd6521e7aafca, type: 3}
   - {fileID: 30700601, guid: 0cfb0e61e992da04987cd6521e7aafca, type: 3}
+  - {fileID: 1841553587, guid: 7a3249922771d474ebc31043fc0f5e6e, type: 3}
+  - {fileID: 1471505283, guid: 7a3249922771d474ebc31043fc0f5e6e, type: 3}
+  - {fileID: -1503066304, guid: 7a3249922771d474ebc31043fc0f5e6e, type: 3}
+  - {fileID: 510713735, guid: 7a3249922771d474ebc31043fc0f5e6e, type: 3}
+  - {fileID: -238640074, guid: 7a3249922771d474ebc31043fc0f5e6e, type: 3}
   - {fileID: 21300000, guid: 9bf3f314c3b0c19408389d5654a9d9cc, type: 3}
+  - {fileID: 1325870066, guid: 45ff14b55280c0e458108ea280e1123d, type: 3}
+  - {fileID: -353080945, guid: 45ff14b55280c0e458108ea280e1123d, type: 3}
+  - {fileID: 1636303771, guid: 45ff14b55280c0e458108ea280e1123d, type: 3}
+  - {fileID: 1033145554, guid: 45ff14b55280c0e458108ea280e1123d, type: 3}
+  - {fileID: -906897192, guid: 45ff14b55280c0e458108ea280e1123d, type: 3}
+  - {fileID: 1714139861, guid: 45ff14b55280c0e458108ea280e1123d, type: 3}
+  - {fileID: -2092081178, guid: 45ff14b55280c0e458108ea280e1123d, type: 3}
+  - {fileID: 1662807943, guid: 45ff14b55280c0e458108ea280e1123d, type: 3}
+  - {fileID: 1742522696, guid: 45ff14b55280c0e458108ea280e1123d, type: 3}
+  - {fileID: -887971953, guid: 45ff14b55280c0e458108ea280e1123d, type: 3}
+  - {fileID: -1506782074, guid: 45ff14b55280c0e458108ea280e1123d, type: 3}
+  - {fileID: 1015763560, guid: 45ff14b55280c0e458108ea280e1123d, type: 3}
+  - {fileID: 306179298, guid: 45ff14b55280c0e458108ea280e1123d, type: 3}
+  - {fileID: 907704148, guid: 45ff14b55280c0e458108ea280e1123d, type: 3}
+  - {fileID: 1751511790, guid: 45ff14b55280c0e458108ea280e1123d, type: 3}
+  - {fileID: -1245875888, guid: 45ff14b55280c0e458108ea280e1123d, type: 3}
+  - {fileID: 1341558398, guid: 45ff14b55280c0e458108ea280e1123d, type: 3}
+  - {fileID: 555978137, guid: 45ff14b55280c0e458108ea280e1123d, type: 3}
   - {fileID: 21300000, guid: d0ab15c5ff0077c4f90a2ff7775b7756, type: 3}
   - {fileID: -994572753, guid: bb8fdbc78db09534396ebd67b2478d82, type: 3}
   - {fileID: 614486066, guid: bb8fdbc78db09534396ebd67b2478d82, type: 3}
@@ -92,6 +123,14 @@ SpriteAtlas:
   - {fileID: 427957052, guid: 8a6e187ff4c26fa4db3ea15a985ffd99, type: 3}
   - {fileID: -650196161, guid: 8a6e187ff4c26fa4db3ea15a985ffd99, type: 3}
   m_PackedSpriteNamesToIndex:
+  - spriteseet_Crabwalk_idou_4
+  - spriteseet_Crabwalk_idou_5
+  - spriteseet_Crabwalk_idou_6
+  - spriteseet_Crabwalk_idou_7
+  - spriteseet_Crabwalk_idou_0
+  - spriteseet_Crabwalk_idou_1
+  - spriteseet_Crabwalk_idou_2
+  - spriteseet_Crabwalk_idou_3
   - SeaUrchin_before_attack_5
   - SeaUrchin_before_attack_4
   - SeaUrchin_before_attack_6
@@ -99,7 +138,30 @@ SpriteAtlas:
   - SeaUrchin_before_attack_0
   - SeaUrchin_before_attack_3
   - SeaUrchin_before_attack_2
+  - spriteseet_Crabattackhit_4
+  - spriteseet_Crabattackhit_2
+  - spriteseet_Crabattackhit_3
+  - spriteseet_Crabattackhit_0
+  - spriteseet_Crabattackhit_1
   - SeedMarker
+  - spriteseet_Crabattack_14
+  - spriteseet_Crabattack_15
+  - spriteseet_Crabattack_16
+  - spriteseet_Crabattack_17
+  - spriteseet_Crabattack_10
+  - spriteseet_Crabattack_11
+  - spriteseet_Crabattack_12
+  - spriteseet_Crabattack_13
+  - spriteseet_Crabattack_5
+  - spriteseet_Crabattack_4
+  - spriteseet_Crabattack_7
+  - spriteseet_Crabattack_6
+  - spriteseet_Crabattack_1
+  - spriteseet_Crabattack_0
+  - spriteseet_Crabattack_3
+  - spriteseet_Crabattack_2
+  - spriteseet_Crabattack_9
+  - spriteseet_Crabattack_8
   - TargetMarker
   - SeaUrchin_attack_1
   - SeaUrchin_attack_0
