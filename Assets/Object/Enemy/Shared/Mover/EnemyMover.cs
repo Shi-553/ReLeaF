@@ -22,6 +22,7 @@ namespace ReLeaf
         [field: SerializeField, ReadOnly]
         public Vector2Int MoveTarget { get; private set; }
 
+        public bool IsMove => mover.IsMove;
 
         public Vector2Int Dir { get; set; }
 

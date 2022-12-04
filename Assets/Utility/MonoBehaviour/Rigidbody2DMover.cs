@@ -12,6 +12,8 @@ namespace Utility
         float DeltaTime => UseUnScaledTime ? Time.unscaledDeltaTime : Time.deltaTime;
         public Vector2 Position { get => rigid.position; set => rigid.position = value; }
 
+        public bool IsMove { get; private set; }
+
         private void Awake()
         {
             TryGetComponent(out rigid);
@@ -23,6 +25,8 @@ namespace Utility
         }
         private void FixedUpdate()
         {
+            IsMove = move != Vector2.zero;
+
             rigid.MovePosition(Position + move);
             move = Vector2.zero;
         }
