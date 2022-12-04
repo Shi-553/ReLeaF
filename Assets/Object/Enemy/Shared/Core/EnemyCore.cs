@@ -6,7 +6,7 @@ namespace ReLeaf
     public class EnemyCore : MonoBehaviour, IEnemyDamageable
     {
         [SerializeField]
-        EnemyDamageableInfo enemyBaseInfo;
+        EnemyDamageableInfo enemyDamageableInfo;
 
         [field: SerializeField, ReadOnly]
         public float HP { get; private set; }
@@ -23,7 +23,7 @@ namespace ReLeaf
         private void Start()
         {
             TryGetComponent(out enemyMover);
-            HP = enemyBaseInfo.HPMax;
+            HP = enemyDamageableInfo.HPMax;
         }
         private void Death()
         {
@@ -40,7 +40,7 @@ namespace ReLeaf
 
         public void BeginWeekMarker()
         {
-            foreach (var defaultLocalPos in enemyBaseInfo.WeakLocalTilePos)
+            foreach (var defaultLocalPos in enemyDamageableInfo.WeakLocalTilePos)
             {
                 var worldTilePos = enemyMover.TilePos + defaultLocalPos.GetRotatedLocalPos(enemyMover.Dir, enemyMover.TileSize);
 
@@ -65,7 +65,7 @@ namespace ReLeaf
                 return;
             if (weakMarkerManager.ResetMarker(tilePos))
             {
-                Damaged(atk * (enemyBaseInfo.WeakLocalTilePos.Length - (weakMarkerManager.Markers.Count)));
+                Damaged(atk * (enemyDamageableInfo.WeakLocalTilePos.Length - (weakMarkerManager.Markers.Count)));
                 return;
             }
         }

@@ -198,7 +198,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 10d0b6ec76a936e459b7a7d9939f8841, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemyBaseInfo: {fileID: 11400000, guid: 1ab4d09cbce90c748894f2696b68fc3d, type: 2}
+  enemyDamageableInfo: {fileID: 11400000, guid: 2bda01a80a88c954cb5f00420c06f53b, type: 2}
   <HP>k__BackingField: 0
   specialPowerPrefab: {fileID: 7682479516954604330, guid: 110ed167187e534479bf9ad6f98fa9d6, type: 3}
   weakMarkerManager: {fileID: 2990406055205962186}
