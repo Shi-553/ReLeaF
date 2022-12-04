@@ -129,7 +129,6 @@ namespace ReLeaf
             tileData.transform = m_Transform;
             tileData.flags = m_Flags;
             tileData.colliderType = m_ColliderType;
-
             if (!Application.isPlaying)
             {
                 tileData.gameObject = currentTileObject.gameObject;
