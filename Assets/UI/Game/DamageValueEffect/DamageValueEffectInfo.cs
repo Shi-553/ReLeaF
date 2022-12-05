@@ -19,5 +19,9 @@ namespace ReLeaf
         float maxSize = 70;
         public float MaxSize => maxSize;
 
+
+        [SerializeField, Rename("表示座標オフセット")]
+        Vector3 offset;
+        public Vector3 Offset => offset;
     }
 }

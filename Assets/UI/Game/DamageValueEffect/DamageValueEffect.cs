@@ -38,7 +38,7 @@ namespace ReLeaf
         public void ShowDamageValue(int damage, Vector3 pos)
         {
             this.damage = damage;
-            transform.position = pos;
+            transform.position = pos + info.Offset;
             text.text = damage.ToString();
             var size = textRect.sizeDelta;
             size.y = MathExtension.Map(damage, 0, info.MaxDamage, info.MinSize, info.MaxSize, true);

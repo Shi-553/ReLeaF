@@ -15,3 +15,4 @@ MonoBehaviour:
   maxDamage: 10
   minSize: 30
   maxSize: 100
+  offset: {x: 0, y: 0.6, z: -0.6}

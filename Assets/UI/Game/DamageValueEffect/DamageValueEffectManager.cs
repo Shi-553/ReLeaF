@@ -13,8 +13,6 @@ namespace ReLeaf
 
         [SerializeField]
         Transform effectParent;
-        [SerializeField]
-        Vector3 offset;
         protected override void Init()
         {
         }
@@ -27,7 +25,7 @@ namespace ReLeaf
         {
             var damageValueEffect = effectPool.Get<DamageValueEffect>();
             damageValueEffect.transform.SetParent(effectParent, false);
-            damageValueEffect.ShowDamageValue(damage, (Vector3)pos + offset);
+            damageValueEffect.ShowDamageValue(damage, (Vector3)pos);
         }
     }
 }
