@@ -162,6 +162,7 @@ MonoBehaviour:
   <Transition>k__BackingField: 0
   attackStartPos: {x: 0, y: 0}
   attackTargetPos: {x: 0, y: 0}
+  attackMarkerManager: {fileID: 4430456495496529935}
 --- !u!114 &-4858720575995891945
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -187,7 +188,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   searchVision: {fileID: 3643397740765400334}
-  targetMarkerManager: {fileID: 4430456495496529935}
 --- !u!114 &1197057677586801177
 MonoBehaviour:
   m_ObjectHideFlags: 0
