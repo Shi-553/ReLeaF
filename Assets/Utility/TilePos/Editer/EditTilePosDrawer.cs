@@ -8,6 +8,7 @@ namespace Utility
     {
         public override void OnGUI(Rect pos, SerializedProperty property, GUIContent label)
         {
+            var att = attribute as EditTilePosAttribute;
 
             var buttonPos = pos;
 
@@ -17,7 +18,7 @@ namespace Utility
 
             if (GUI.Button(buttonPos, "Edit"))
             {
-                TilePosEditor.Open(property);
+                TilePosEditor.Open(property, att.direction);
             }
 
             do

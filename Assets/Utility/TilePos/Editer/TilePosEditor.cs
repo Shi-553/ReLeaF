@@ -31,6 +31,9 @@ namespace Utility
         Vector2 gridOffsetLimited;
 
         Vector2 dragOffset;
+        Direction centerDirection;
+
+        int boldGridDistance = 5;
 
         void UpdateCenter()
         {
@@ -59,14 +62,16 @@ namespace Utility
 
 
 
-        static public void Open(SerializedProperty tiles)
+        static public void Open(SerializedProperty tiles, Direction centerDirection)
         {
             var window = GetWindow<TilePosEditor>();
             window.titleContent = new GUIContent("TilePosEditor");
             if (!window.TrySetTiles(tiles))
             {
                 Debug.LogWarning("Array Not Found.");
+                return;
             }
+            window.centerDirection = centerDirection;
         }
 
 
@@ -95,14 +100,40 @@ namespace Utility
                 var att = serializedProperty.GetAttributes<EditTilePosAttribute>(false);
                 if (att != null)
                 {
-                    TrySetTiles(serializedProperty);
-                    Repaint();
-                    return;
+                    if (TrySetTiles(serializedProperty))
+                    {
+                        centerDirection = att.direction;
+                        Repaint();
+                        return;
+                    }
                 }
             }
         }
 
-
+        void SetXBoldGridColor(float x)
+        {
+            x += 1;
+            var tilePos = ScreenPosToTilePos(new Vector2(x, 0));
+            var pos = tilePos.x;
+            if ((pos < 0 && 0 == (pos % boldGridDistance)) || (pos > 0 && 0 == ((pos - centerTileSize.x) % boldGridDistance)) || pos == 0)
+            {
+                Handles.color = Color.white;
+            }
+            else
+                Handles.color = Color.gray;
+        }
+        void SetYBoldGridColor(float y)
+        {
+            y += 1;
+            var tilePos = ScreenPosToTilePos(new Vector2(0, y));
+            var pos = tilePos.y;
+            if ((pos > 0 && 0 == ((pos - centerTileSize.y + 1) % boldGridDistance)) || (pos < 0 && 0 == ((pos + 1) % boldGridDistance)) || pos == centerTileSize.y - 1)
+            {
+                Handles.color = Color.white;
+            }
+            else
+                Handles.color = Color.gray;
+        }
 
         void DrawGrid()
         {
@@ -111,26 +142,70 @@ namespace Utility
             for (int i = 0; i <= lineCount.x; i++)
             {
                 var x = i * cellSize + gridOffsetLimited.x;
+                SetXBoldGridColor(x);
                 Handles.DrawLine(new Vector3(x, 0), new Vector3(x, position.height));
             }
             for (int i = 0; i <= lineCount.y; i++)
             {
                 var y = i * cellSize + gridOffsetLimited.y;
+                SetYBoldGridColor(y);
                 Handles.DrawLine(new Vector3(0, y), new Vector3(position.width, y));
             }
         }
-
-        void DrawTiles()
+        void DrawCenter()
         {
+
             Handles.color = Color.white;
 
             for (int x = 0; x < centerTileSize.x; x++)
             {
                 for (int y = 0; y < centerTileSize.y; y++)
                 {
-                    Handles.DrawSolidDisc(TilePosToScreenPos(new Vector2Int(x, y)), Vector3.forward, cellSize / 2);
+                    var centerPos = new Vector2Int(x, y);
+                    var pos = TilePosToScreenPos(centerPos);
+
+                    if (centerDirection == Direction.NONE)
+                    {
+                        Handles.DrawSolidDisc(pos, Vector3.forward, cellSize / 2);
+                        continue;
+                    }
+
+                    var cellHeight = new Vector2(0, cellSize / 2);
+                    var cellWidth = new Vector2(cellSize / 2, 0);
+
+                    if (centerDirection == Direction.UP || centerDirection == Direction.DOWN)
+                    {
+                        Handles.DrawLine(pos + cellHeight, pos - cellHeight);
+                    }
+                    else
+                    {
+                        Handles.DrawLine(pos + cellWidth, pos - cellWidth);
+                    }
+
+                    switch (centerDirection)
+                    {
+                        case Direction.UP:
+                            Handles.DrawLine(pos - cellHeight, pos + cellWidth / 2);
+                            Handles.DrawLine(pos - cellHeight, pos - cellWidth / 2);
+                            break;
+                        case Direction.LEFT:
+                            Handles.DrawLine(pos - cellWidth, pos + cellHeight / 2);
+                            Handles.DrawLine(pos - cellWidth, pos - cellHeight / 2);
+                            break;
+                        case Direction.DOWN:
+                            Handles.DrawLine(pos + cellHeight, pos + cellWidth / 2);
+                            Handles.DrawLine(pos + cellHeight, pos - cellWidth / 2);
+                            break;
+                        case Direction.RIGHT:
+                            Handles.DrawLine(pos + cellWidth, pos + cellHeight / 2);
+                            Handles.DrawLine(pos + cellWidth, pos - cellHeight / 2);
+                            break;
+                    }
                 }
             }
+        }
+        void DrawTiles()
+        {
 
             for (int i = 0; i < tiles.arraySize; i++)
             {
@@ -172,6 +247,9 @@ namespace Utility
 
         bool TryAddTilePos(Vector2Int target)
         {
+            if (MathExtension.DuringExists(target, Vector2Int.zero, centerTileSize))
+                return false;
+
             if (!TryGetTilePosIndex(target, out var _))
             {
                 var insertIndex = tiles.arraySize;
@@ -193,8 +271,6 @@ namespace Utility
 
             var clickedTilePos = ScreenPosToTilePos(mousePos);
 
-            if (MathExtension.DuringExists(clickedTilePos, Vector2Int.zero, centerTileSize))
-                return;
 
             if (changedTiles.Contains(clickedTilePos))
                 return;
@@ -254,7 +330,7 @@ namespace Utility
 
             UpdateCenter();
 
-            DrawGrid();
+            DrawCenter();
 
             if (tiles == null)
             {
@@ -300,6 +376,9 @@ namespace Utility
             {
                 // null判定できない・・・
             }
+            DrawGrid();
+
+
             GUILayout.BeginArea(guiArea);
             centerTileSize = EditorGUILayout.Vector2IntField("中心サイズ", centerTileSize, GUILayout.MaxWidth(200));
             GUILayout.EndArea();
