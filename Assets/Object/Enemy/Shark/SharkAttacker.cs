@@ -35,11 +35,11 @@ namespace ReLeaf
 
         void IEnemyAttacker.OnStartAiming()
         {
-            enemyDamageable.BeginWeekMarker();
+            enemyDamageable.SetWeekMarker();
         }
         IEnumerator IEnemyAttacker.OnStartDamageing()
         {
-            enemyDamageable.EndWeekMarker();
+            enemyDamageable.ResetWeekMarker();
 
             attackStartPos = enemyMover.TilePos;
             var dir = enemyMover.Dir == Vector2Int.zero ? Vector2Int.down : enemyMover.Dir;

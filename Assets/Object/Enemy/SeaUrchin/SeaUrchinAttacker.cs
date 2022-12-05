@@ -85,7 +85,7 @@ namespace ReLeaf
         {
             targetMarkerManager.ResetAllMarker();
 
-            enemyDamageable.BeginWeekMarker();
+            enemyDamageable.SetWeekMarker();
 
             foreach (var spine in currentAttackers)
             {
@@ -99,7 +99,7 @@ namespace ReLeaf
         }
         void IEnemyAttacker.OnEndCoolTime()
         {
-            enemyDamageable.EndWeekMarker();
+            enemyDamageable.ResetWeekMarker();
         }
     }
 }

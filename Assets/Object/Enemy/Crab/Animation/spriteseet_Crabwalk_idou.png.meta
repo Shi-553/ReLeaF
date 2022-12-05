@@ -47,7 +47,7 @@ TextureImporter:
   spriteMeshType: 1
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
-  spritePixelsToUnits: 500
+  spritePixelsToUnits: 200
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
@@ -109,18 +109,18 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 0
-        y: 606
-        width: 606
-        height: 606
-      alignment: 7
-      pivot: {x: 0.5, y: 0}
+        y: 250
+        width: 250
+        height: 250
+      alignment: 0
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: cc7f025291583f042ba46a8e57b7adf6
-      internalID: -1356323870
+      spriteID: 8edfc3ccdb68e01408804a3e9468f943
+      internalID: -920501516
       vertices: []
       indices: 
       edges: []
@@ -129,19 +129,19 @@ TextureImporter:
       name: spriteseet_Crabwalk_idou_1
       rect:
         serializedVersion: 2
-        x: 606
-        y: 606
-        width: 606
-        height: 606
-      alignment: 7
-      pivot: {x: 0.5, y: 0}
+        x: 250
+        y: 250
+        width: 250
+        height: 250
+      alignment: 0
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: f16537091b27f1b458a05e5cca68401b
-      internalID: 239769503
+      spriteID: af14b0def5006d6428e7f08e74355ca6
+      internalID: -1416245944
       vertices: []
       indices: 
       edges: []
@@ -150,19 +150,19 @@ TextureImporter:
       name: spriteseet_Crabwalk_idou_2
       rect:
         serializedVersion: 2
-        x: 1212
-        y: 606
-        width: 606
-        height: 606
-      alignment: 7
-      pivot: {x: 0.5, y: 0}
+        x: 500
+        y: 250
+        width: 250
+        height: 250
+      alignment: 0
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 708fe916b12c3e947adc721b2a8c4725
-      internalID: -2106303719
+      spriteID: 9aca58b60d54c3e4081d44b076068899
+      internalID: 488004330
       vertices: []
       indices: 
       edges: []
@@ -171,19 +171,19 @@ TextureImporter:
       name: spriteseet_Crabwalk_idou_3
       rect:
         serializedVersion: 2
-        x: 1818
-        y: 606
-        width: 606
-        height: 606
-      alignment: 7
-      pivot: {x: 0.5, y: 0}
+        x: 750
+        y: 250
+        width: 250
+        height: 250
+      alignment: 0
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 79d76b9281c956b4f942c1e7906c89e4
-      internalID: 910190305
+      spriteID: 1ed36c6f94e7fdf4d8522d7eb4513c4e
+      internalID: -1598632498
       vertices: []
       indices: 
       edges: []
@@ -194,17 +194,17 @@ TextureImporter:
         serializedVersion: 2
         x: 0
         y: 0
-        width: 606
-        height: 606
-      alignment: 7
-      pivot: {x: 0.5, y: 0}
+        width: 250
+        height: 250
+      alignment: 0
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 90ed07e1dd2c7bd43920e8f0a2c459d3
-      internalID: -647169675
+      spriteID: 84bdd512e77e7294c8ed09148f6c7055
+      internalID: -1767365678
       vertices: []
       indices: 
       edges: []
@@ -213,19 +213,19 @@ TextureImporter:
       name: spriteseet_Crabwalk_idou_5
       rect:
         serializedVersion: 2
-        x: 606
+        x: 250
         y: 0
-        width: 606
-        height: 606
-      alignment: 7
-      pivot: {x: 0.5, y: 0}
+        width: 250
+        height: 250
+      alignment: 0
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 147f01c18b07c26418e397e0b854badc
-      internalID: -429934661
+      spriteID: 648fc94b0e7bb914d900c04ae30e4eac
+      internalID: -822591951
       vertices: []
       indices: 
       edges: []
@@ -234,19 +234,19 @@ TextureImporter:
       name: spriteseet_Crabwalk_idou_6
       rect:
         serializedVersion: 2
-        x: 1212
+        x: 500
         y: 0
-        width: 606
-        height: 606
-      alignment: 7
-      pivot: {x: 0.5, y: 0}
+        width: 250
+        height: 250
+      alignment: 0
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: cf2a95b559cb89543b8c069e78ce099a
-      internalID: 490753209
+      spriteID: 173e5cb042a6d8c4f995c2a8024526b8
+      internalID: 738774706
       vertices: []
       indices: 
       edges: []
@@ -255,19 +255,19 @@ TextureImporter:
       name: spriteseet_Crabwalk_idou_7
       rect:
         serializedVersion: 2
-        x: 1818
+        x: 750
         y: 0
-        width: 606
-        height: 606
-      alignment: 7
-      pivot: {x: 0.5, y: 0}
+        width: 250
+        height: 250
+      alignment: 0
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 704af6ab0cc782b4e90bb2c93cd1ed63
-      internalID: 1329923598
+      spriteID: 15b2fbc1689f0fb4c936fa7ed1b837ba
+      internalID: -1451120646
       vertices: []
       indices: 
       edges: []
@@ -275,7 +275,7 @@ TextureImporter:
     outline: []
     physicsShape: []
     bones: []
-    spriteID: 2c327cc49ac439c438322605daac8618
+    spriteID: 2e88f6704f8f2ac4593db191313e4b98
     internalID: 0
     vertices: []
     indices: 
@@ -283,14 +283,14 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      spriteseet_Crabwalk_idou_1: 239769503
-      spriteseet_Crabwalk_idou_5: -429934661
-      spriteseet_Crabwalk_idou_4: -647169675
-      spriteseet_Crabwalk_idou_3: 910190305
-      spriteseet_Crabwalk_idou_6: 490753209
-      spriteseet_Crabwalk_idou_2: -2106303719
-      spriteseet_Crabwalk_idou_0: -1356323870
-      spriteseet_Crabwalk_idou_7: 1329923598
+      spriteseet_Crabwalk_idou_1: -1416245944
+      spriteseet_Crabwalk_idou_5: -822591951
+      spriteseet_Crabwalk_idou_4: -1767365678
+      spriteseet_Crabwalk_idou_3: -1598632498
+      spriteseet_Crabwalk_idou_6: 738774706
+      spriteseet_Crabwalk_idou_2: 488004330
+      spriteseet_Crabwalk_idou_0: -920501516
+      spriteseet_Crabwalk_idou_7: -1451120646
   spritePackingTag: 
   pSDRemoveMatte: 0
   pSDShowRemoveMatteOption: 0

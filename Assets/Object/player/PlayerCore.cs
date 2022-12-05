@@ -4,12 +4,13 @@ using Utility;
 
 namespace ReLeaf
 {
-    public class PlayerCore : MonoBehaviour
+    public class PlayerCore : SingletonBase<PlayerCore>
     {
         [SerializeField]
         ValueGaugeManager hpGauge;
 
         PlayerMover mover;
+        public PlayerMover Mover => mover;
         SpriteRenderer spriteRenderer;
 
         [SerializeField, Rename("ダメージを受けたときの無敵時間")]
@@ -20,12 +21,12 @@ namespace ReLeaf
         public float damagedFlashingAlpha = 0.5f;
 
         public bool IsInvincible { get; set; }
+        public override bool DontDestroyOnLoad => false;
 
         [SerializeField]
         AudioInfo seDamaged;
 
-
-        private void Awake()
+        protected override void Init()
         {
             IsInvincible = false;
             TryGetComponent(out mover);
@@ -83,7 +84,6 @@ namespace ReLeaf
             spriteRenderer.enabled = false;
             GameRuleManager.Singleton.Finish(false);
         }
-
 
     }
 }

@@ -11,8 +11,8 @@ namespace ReLeaf
         float hpMax = 10;
         public float HPMax => hpMax;
 
-        [SerializeField, Rename("緑化でダメージを受けるマス", "(上向きが基準のローカルポジション)"), EditTilePos]
-        ArrayWrapper<Vector2Int> weakLocalTilePos;
-        public Vector2Int[] WeakLocalTilePos => weakLocalTilePos.Value;
+        [SerializeField, Rename("緑化でダメージを受けるマス")]
+        LocalTilePos weakLocalTilePos;
+        public LocalTilePos WeakLocalTilePos => weakLocalTilePos;
     }
 }

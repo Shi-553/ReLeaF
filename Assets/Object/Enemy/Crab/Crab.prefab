@@ -124,6 +124,7 @@ GameObject:
   - component: {fileID: 1197057677586801177}
   - component: {fileID: 7609214511921149064}
   - component: {fileID: 7484773499943557005}
+  - component: {fileID: 9029419914283558646}
   m_Layer: 0
   m_Name: Crab
   m_TagString: Enemy
@@ -174,6 +175,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   crabAttackInfo: {fileID: 11400000, guid: 6e7c3bc147154ce48bf6db032aa011a7, type: 2}
+  targetMarkerManager: {fileID: 4430456495496529935}
 --- !u!114 &-4858720575995891945
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -218,7 +220,7 @@ MonoBehaviour:
   <TilePos>k__BackingField: {x: 0, y: 0}
   <OldTilePos>k__BackingField: {x: 0, y: 0}
   <MoveTarget>k__BackingField: {x: 0, y: 0}
-  enemyMoverInfo: {fileID: 11400000, guid: d2c2aa15c7b214e468e0e53f4ebb64eb, type: 2}
+  enemyMoverInfo: {fileID: 11400000, guid: 30bf65f9ba83a024ab3b493498ac6584, type: 2}
 --- !u!50 &7484773499943557005
 Rigidbody2D:
   serializedVersion: 4
@@ -240,6 +242,19 @@ Rigidbody2D:
   m_SleepingMode: 0
   m_CollisionDetection: 0
   m_Constraints: 4
+--- !u!114 &9029419914283558646
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5442024061459843501}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bf86aac9adabb124da8f40474d9edc1b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  info: {fileID: 11400000, guid: 4a08f6b05504599438f92bc5fcdb942c, type: 2}
 --- !u!1 &5759868525542624290
 GameObject:
   m_ObjectHideFlags: 0
@@ -252,7 +267,6 @@ GameObject:
   - component: {fileID: 3893573754564588802}
   - component: {fileID: 7722148096185822145}
   - component: {fileID: 6705507377740966996}
-  - component: {fileID: 181336883732791840}
   m_Layer: 0
   m_Name: Sprite
   m_TagString: Untagged
@@ -268,7 +282,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5759868525542624290}
   m_LocalRotation: {x: -0.258819, y: 0, z: 0, w: 0.9659259}
-  m_LocalPosition: {x: 0, y: -0.562, z: 0.128}
+  m_LocalPosition: {x: 0, y: 0.030000031, z: -0.203}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -316,12 +330,12 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 20
-  m_Sprite: {fileID: 1841553587, guid: 7a3249922771d474ebc31043fc0f5e6e, type: 3}
+  m_Sprite: {fileID: -920501516, guid: 7193e01198df35942945911e3c05d19d, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 1.0390625, y: 1}
+  m_Size: {x: 1.25, y: 1.25}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
@@ -361,19 +375,6 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
---- !u!114 &181336883732791840
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5759868525542624290}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: bf86aac9adabb124da8f40474d9edc1b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  info: {fileID: 11400000, guid: 4a08f6b05504599438f92bc5fcdb942c, type: 2}
 --- !u!1 &7950887957925595506
 GameObject:
   m_ObjectHideFlags: 0
@@ -446,7 +447,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8242962315939319434}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: -0.626, z: -0.124}
+  m_LocalPosition: {x: 0, y: 0.049, z: -0.031}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -494,12 +495,12 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 19
-  m_Sprite: {fileID: 1841553587, guid: 7a3249922771d474ebc31043fc0f5e6e, type: 3}
+  m_Sprite: {fileID: -920501516, guid: 7193e01198df35942945911e3c05d19d, type: 3}
   m_Color: {r: 0, g: 0, b: 0, a: 0.56078434}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 1.0390625, y: 1}
+  m_Size: {x: 1.25, y: 1.25}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1

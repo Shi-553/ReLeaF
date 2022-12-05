@@ -22,6 +22,7 @@ namespace Utility
         }
 
         float cellSize = 50;
+        Vector2Int centerTileSize = Vector2Int.one;
 
         Vector2Int lineCount;
         Vector2Int centerTilePos;
@@ -123,7 +124,13 @@ namespace Utility
         {
             Handles.color = Color.white;
 
-            Handles.DrawSolidDisc(centerPos, Vector3.forward, cellSize / 2);
+            for (int x = 0; x < centerTileSize.x; x++)
+            {
+                for (int y = 0; y < centerTileSize.y; y++)
+                {
+                    Handles.DrawSolidDisc(TilePosToScreenPos(new Vector2Int(x, y)), Vector3.forward, cellSize / 2);
+                }
+            }
 
             for (int i = 0; i < tiles.arraySize; i++)
             {
@@ -186,7 +193,7 @@ namespace Utility
 
             var clickedTilePos = ScreenPosToTilePos(mousePos);
 
-            if (clickedTilePos == Vector2Int.zero)
+            if (MathExtension.DuringExists(clickedTilePos, Vector2Int.zero, centerTileSize))
                 return;
 
             if (changedTiles.Contains(clickedTilePos))
@@ -240,7 +247,7 @@ namespace Utility
 
         private void OnGUI()
         {
-            Handles.BeginGUI();
+            var guiArea = new Rect(10, 10, 200, 100);
 
             lineCount.x = Mathf.CeilToInt(position.width / cellSize);
             lineCount.y = Mathf.CeilToInt(position.height / cellSize);
@@ -251,7 +258,6 @@ namespace Utility
 
             if (tiles == null)
             {
-                Handles.EndGUI();
                 return;
             }
 
@@ -261,38 +267,42 @@ namespace Utility
 
                 var e = Event.current;
                 var mousePos = Event.current.mousePosition;
-
-                switch (e.type)
+                if (!guiArea.Contains(mousePos))
                 {
-                    case EventType.MouseDown:
-                        if (e.button == 0)
-                        {
-                            ChangeTile(mousePos, true);
-                        }
-                        break;
+                    switch (e.type)
+                    {
+                        case EventType.MouseDown:
+                            if (e.button == 0)
+                            {
+                                ChangeTile(mousePos, true);
+                            }
+                            break;
 
-                    case EventType.MouseDrag:
-                        if (e.button == 0)
-                        {
-                            ChangeTile(mousePos, false);
-                        }
-                        if (e.button == 2)
-                        {
-                            ChangeDragOffset(e.delta * 1.2f);
-                        }
-                        break;
+                        case EventType.MouseDrag:
+                            if (e.button == 0)
+                            {
+                                ChangeTile(mousePos, false);
+                            }
+                            if (e.button == 2)
+                            {
+                                ChangeDragOffset(e.delta * 1.2f);
+                            }
+                            break;
 
-                    case EventType.ScrollWheel:
-                        ChangeCellSize(e.delta.y * 1.2f, mousePos);
-                        break;
+                        case EventType.ScrollWheel:
+                            ChangeCellSize(e.delta.y * 1.2f, mousePos);
+                            break;
 
+                    }
                 }
             }
             catch
             {
                 // null判定できない・・・
             }
-            Handles.EndGUI();
+            GUILayout.BeginArea(guiArea);
+            centerTileSize = EditorGUILayout.Vector2IntField("中心サイズ", centerTileSize, GUILayout.MaxWidth(200));
+            GUILayout.EndArea();
         }
     }
 }

@@ -57,37 +57,6 @@ namespace Utility
         }
 
         /// <summary>
-        /// 上向きをデフォルトとするローカル座標を向きに応じて回転
-        /// </summary>
-        public static Vector2Int GetRotatedLocalPos(this Vector2Int local, Vector2Int dir)
-        {
-            return GetRotatedLocalPos(local, dir, Vector2Int.one);
-        }
-        public static Vector2Int GetRotatedLocalPos(this Vector2Int local, Vector2Int dir, Vector2Int size)
-        {
-            // up
-            if (dir.y > 0)
-            {
-                return local;
-            }
-            // down
-            if (dir.y < 0)
-            {
-                return new Vector2Int(local.x, -local.y + size.y - 1); ;
-            }
-            // left
-            if (dir.x < 0)
-            {
-                return new Vector2Int(-local.y + size.x - 1, local.x);
-            }
-            //right
-            if (dir.x > 0)
-            {
-                return new Vector2Int(local.y, local.x);
-            }
-            return local;
-        }
-        /// <summary>
         /// 上向きをデフォルトとしたQuotanion
         /// </summary>
         public static Quaternion GetRotation(this Vector2Int dir)

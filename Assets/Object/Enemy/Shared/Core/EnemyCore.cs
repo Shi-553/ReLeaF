@@ -38,11 +38,11 @@ namespace ReLeaf
             Destroy(gameObject);
         }
 
-        public void BeginWeekMarker()
+        public void SetWeekMarker()
         {
-            foreach (var defaultLocalPos in enemyDamageableInfo.WeakLocalTilePos)
+            foreach (var localPos in enemyDamageableInfo.WeakLocalTilePos.GetLocalTilePosList(enemyMover.Dir))
             {
-                var worldTilePos = enemyMover.TilePos + defaultLocalPos.GetRotatedLocalPos(enemyMover.Dir, enemyMover.TileSize);
+                var worldTilePos = enemyMover.TilePos + localPos;
 
                 if (DungeonManager.Singleton.TryGetTile(worldTilePos, out var tile) && tile.CanEnemyMove)
                 {
@@ -55,7 +55,7 @@ namespace ReLeaf
 
             }
         }
-        public void EndWeekMarker()
+        public void ResetWeekMarker()
         {
             weakMarkerManager.ResetAllMarker();
         }
@@ -65,7 +65,7 @@ namespace ReLeaf
                 return;
             if (weakMarkerManager.ResetMarker(tilePos))
             {
-                Damaged(atk * (enemyDamageableInfo.WeakLocalTilePos.Length - (weakMarkerManager.Markers.Count)));
+                Damaged(atk * (enemyDamageableInfo.WeakLocalTilePos.GetLocalTilePosList(enemyMover.Dir).Length - (weakMarkerManager.Markers.Count)));
                 return;
             }
         }
