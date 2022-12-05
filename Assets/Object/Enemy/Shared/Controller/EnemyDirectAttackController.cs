@@ -1,6 +1,5 @@
 using System.Collections.Generic;
 using UnityEngine;
-using Utility;
 
 namespace ReLeaf
 {
@@ -13,9 +12,6 @@ namespace ReLeaf
         EnemyMover mover;
         IEnemyAttacker attacker;
 
-
-        [SerializeField]
-        MarkerManager targetMarkerManager;
 
         Vector2Int? targetTilePos;
 
@@ -38,9 +34,6 @@ namespace ReLeaf
             }
             if (attacker.IsAttack)
             {
-                if (attacker.Transition == AttackTransition.Damageing)
-                    targetMarkerManager.ResetAllMarker();
-
                 return;
             }
 
@@ -89,12 +82,6 @@ namespace ReLeaf
                     impossibleTargets.Add(targetTilePos.Value);
                     targetTilePos = null;
                     return;
-                }
-                // ターゲットマーカー更新
-                targetMarkerManager.ResetAllMarker();
-                foreach (var target in mover.Targets)
-                {
-                    targetMarkerManager.SetMarker<TargetMarker>(target, mover.ToTargetDir.GetRotation());
                 }
             }
 

@@ -24,6 +24,9 @@ namespace ReLeaf
         [SerializeField, ReadOnly]
         Vector2Int attackTargetPos;
 
+        [SerializeField]
+        MarkerManager attackMarkerManager;
+
         List<Vector2Int> buffer = new();
 
         private void Awake()
@@ -36,15 +39,21 @@ namespace ReLeaf
         void IEnemyAttacker.OnStartAiming()
         {
             enemyDamageable.SetWeekMarker();
-        }
-        IEnumerator IEnemyAttacker.OnStartDamageing()
-        {
-            enemyDamageable.ResetWeekMarker();
 
             attackStartPos = enemyMover.TilePos;
             var dir = enemyMover.Dir == Vector2Int.zero ? Vector2Int.down : enemyMover.Dir;
             enemyMover.GetCheckPoss(enemyMover.TilePos, dir, buffer);
             attackTargetPos = buffer.Last() + (dir * (SharkAttackInfo.Range - 1));
+
+            foreach (var target in GetAttackRange(enemyMover.TilePos, enemyMover.Dir, false))
+            {
+                attackMarkerManager.SetMarker<TargetMarker>(target, enemyMover.Dir.GetRotation());
+            }
+        }
+        IEnumerator IEnemyAttacker.OnStartDamageing()
+        {
+            enemyDamageable.ResetWeekMarker();
+
 
             enemyMover.UpdateTargetStraight(attackTargetPos);
             while (true)
@@ -59,7 +68,10 @@ namespace ReLeaf
                     yield break;
             }
         }
-
+        void IEnemyAttacker.OnStartCoolTime()
+        {
+            attackMarkerManager.ResetAllMarker();
+        }
         public IEnumerable<Vector2Int> GetAttackRange(Vector2Int pos, Vector2Int dir, bool isDamagableOnly)
         {
             List<Vector2Int> returns = new(2);
