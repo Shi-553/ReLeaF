@@ -5,11 +5,7 @@ namespace ReLeaf
 {
     [ClassSummary("Sharkのスペシャルパワーパラメータ")]
     [CreateAssetMenu(menuName = "Item/SpecialPower/SharkSpecialPower")]
-    public class SharkSpecialPowerInfo : ScriptableObject
+    public class SharkSpecialPowerInfo : SowSeedSpecialPowerInfo
     {
-
-        [SerializeField, Rename("種をまくマス")]
-        LocalTilePos seedLocalTilePos;
-        public LocalTilePos SeedLocalTilePos => seedLocalTilePos;
     }
 }

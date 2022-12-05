@@ -1,3 +1,4 @@
+using Cinemachine;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
@@ -14,7 +15,9 @@ namespace ReLeaf
 
         PlayerMover mover;
 
-
+        [SerializeField]
+        CinemachineVirtualCamera cinemachine;
+        CinemachineFramingTransposer cinemachineFramingTransposer;
 
         private void Awake()
         {
@@ -28,6 +31,7 @@ namespace ReLeaf
 
             itemManager = GetComponentInChildren<ItemManager>();
 
+            cinemachineFramingTransposer = cinemachine.GetCinemachineComponent<CinemachineFramingTransposer>();
         }
 
         void OnDisable()
@@ -65,7 +69,7 @@ namespace ReLeaf
             if (!context.performed)
                 return;
             Vector3 mouseScreenPos = context.ReadValue<Vector2>();
-            mouseScreenPos.z = 10.0f;
+            mouseScreenPos.z = cinemachineFramingTransposer.m_CameraDistance;
             SetItemDir(Camera.main.ScreenToWorldPoint(mouseScreenPos) - transform.position);
         }
 
