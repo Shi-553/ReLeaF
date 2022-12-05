@@ -6,9 +6,10 @@ namespace Utility
 {
     public static class MathExtension
     {
-        static public float Map(float value, float start1, float stop1, float start2, float stop2)
+        static public float Map(float value, float start1, float stop1, float start2, float stop2, bool isClamp = false)
         {
-            return start2 + (stop2 - start2) * ((value - start1) / (stop1 - start1));
+            var ret = start2 + (stop2 - start2) * ((value - start1) / (stop1 - start1));
+            return isClamp ? Mathf.Clamp(ret, start2, stop2) : ret;
         }
 
         static public float LerpPairs(SortedList<float, float> pairs, float t)

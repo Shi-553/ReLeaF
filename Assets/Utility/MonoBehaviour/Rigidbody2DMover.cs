@@ -17,6 +17,7 @@ namespace Utility
         private void Awake()
         {
             TryGetComponent(out rigid);
+
         }
 
         public void MoveDelta(Vector2 m)

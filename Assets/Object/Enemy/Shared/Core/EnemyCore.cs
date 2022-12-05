@@ -75,6 +75,8 @@ namespace ReLeaf
                 return;
             Debug.Log(atk + "ƒ_ƒ[ƒW!");
 
+            DamageValueEffectManager.Singleton.SetDamageValueEffect((int)atk, enemyMover.WorldCenter);
+
             if (HP - atk <= 0)
             {
                 HP = 0;

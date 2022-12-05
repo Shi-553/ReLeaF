@@ -23,6 +23,7 @@ namespace ReLeaf
         public Vector2Int MoveTarget { get; private set; }
 
         public bool IsMove => mover.IsMove;
+        public Vector2 WorldCenter => DungeonManager.Singleton.TilePosToWorld((Vector2)TilePos + ((Vector2)TileSize - Vector2.one) / 2);
 
         public Vector2Int Dir { get; set; }
 

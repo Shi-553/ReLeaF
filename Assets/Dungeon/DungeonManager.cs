@@ -75,6 +75,12 @@ namespace ReLeaf
         {
             return (Vector2)groundTilemap.CellToWorld((Vector3Int)tilePos) + new Vector2(CELL_SIZE, CELL_SIZE) / 2;
         }
+        public Vector2 TilePosToWorld(Vector2 tilePos)
+        {
+            var floor = Vector2Int.FloorToInt(tilePos);
+            var smallNumber = tilePos - floor;
+            return (Vector2)groundTilemap.CellToWorld((Vector3Int)floor) + (smallNumber * CELL_SIZE) + new Vector2(CELL_SIZE, CELL_SIZE) / 2;
+        }
         public bool TryGetTile(Vector2Int pos, out TileObject tile) => tiles.TryGetValue(pos, out tile);
         public TileObject GetTile(Vector2Int pos) => tiles.GetValueOrDefault(pos, null);
 
