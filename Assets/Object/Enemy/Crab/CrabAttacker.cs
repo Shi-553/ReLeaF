@@ -64,6 +64,7 @@ namespace ReLeaf
                 plant.Damaged(crabAttackInfo.ATK, DamageType.Direct);
 
             }
+            targetMarkerManager.ResetAllMarker();
         }
 
 
