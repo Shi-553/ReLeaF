@@ -489,6 +489,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1b610d6421e5e5742a2bca35ea99c347, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  cinemachine: {fileID: 0}
 --- !u!114 &358065531368087245
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -506,7 +507,7 @@ MonoBehaviour:
   knockBackDampingRate: 0.9
   dashConsumeEnergy: 5
   energyRecoveryPoint: 0.1
-  energyAutoRecoveryPoint: 1
+  energyAutoRecoveryPoint: 0
   energyGauge: {fileID: 5839813641606943567}
   seSandMove:
     walk:

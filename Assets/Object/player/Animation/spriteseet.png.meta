@@ -47,7 +47,7 @@ TextureImporter:
   spriteMeshType: 1
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
-  spritePixelsToUnits: 200
+  spritePixelsToUnits: 242.71844
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
@@ -108,10 +108,10 @@ TextureImporter:
       name: spriteseet_0
       rect:
         serializedVersion: 2
-        x: 71
-        y: 257
-        width: 116
-        height: 184
+        x: 0
+        y: 250
+        width: 250
+        height: 250
       alignment: 7
       pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -129,10 +129,10 @@ TextureImporter:
       name: spriteseet_1
       rect:
         serializedVersion: 2
-        x: 328
-        y: 257
-        width: 115
-        height: 183
+        x: 250
+        y: 250
+        width: 250
+        height: 250
       alignment: 7
       pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -150,10 +150,10 @@ TextureImporter:
       name: spriteseet_2
       rect:
         serializedVersion: 2
-        x: 584
-        y: 257
-        width: 113
-        height: 183
+        x: 500
+        y: 250
+        width: 250
+        height: 250
       alignment: 7
       pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -171,10 +171,10 @@ TextureImporter:
       name: spriteseet_3
       rect:
         serializedVersion: 2
-        x: 841
-        y: 257
-        width: 111
-        height: 181
+        x: 750
+        y: 250
+        width: 250
+        height: 250
       alignment: 7
       pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -192,10 +192,10 @@ TextureImporter:
       name: spriteseet_4
       rect:
         serializedVersion: 2
-        x: 1096
-        y: 257
-        width: 113
-        height: 184
+        x: 1000
+        y: 250
+        width: 250
+        height: 250
       alignment: 7
       pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -213,10 +213,10 @@ TextureImporter:
       name: spriteseet_5
       rect:
         serializedVersion: 2
-        x: 1353
-        y: 257
-        width: 114
-        height: 184
+        x: 1250
+        y: 250
+        width: 250
+        height: 250
       alignment: 7
       pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -234,10 +234,10 @@ TextureImporter:
       name: spriteseet_6
       rect:
         serializedVersion: 2
-        x: 67
-        y: 23
-        width: 118
-        height: 184
+        x: 0
+        y: 0
+        width: 250
+        height: 250
       alignment: 7
       pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -255,10 +255,10 @@ TextureImporter:
       name: spriteseet_7
       rect:
         serializedVersion: 2
-        x: 326
-        y: 23
-        width: 115
-        height: 183
+        x: 250
+        y: 0
+        width: 250
+        height: 250
       alignment: 7
       pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -276,10 +276,10 @@ TextureImporter:
       name: spriteseet_8
       rect:
         serializedVersion: 2
-        x: 584
-        y: 23
-        width: 113
-        height: 183
+        x: 500
+        y: 0
+        width: 250
+        height: 250
       alignment: 7
       pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -297,10 +297,10 @@ TextureImporter:
       name: spriteseet_9
       rect:
         serializedVersion: 2
-        x: 838
-        y: 23
-        width: 115
-        height: 182
+        x: 750
+        y: 0
+        width: 250
+        height: 250
       alignment: 7
       pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -318,10 +318,10 @@ TextureImporter:
       name: spriteseet_10
       rect:
         serializedVersion: 2
-        x: 1095
-        y: 23
-        width: 114
-        height: 183
+        x: 1000
+        y: 0
+        width: 250
+        height: 250
       alignment: 7
       pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -339,10 +339,10 @@ TextureImporter:
       name: spriteseet_11
       rect:
         serializedVersion: 2
-        x: 1352
-        y: 23
-        width: 113
-        height: 183
+        x: 1250
+        y: 0
+        width: 250
+        height: 250
       alignment: 7
       pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
