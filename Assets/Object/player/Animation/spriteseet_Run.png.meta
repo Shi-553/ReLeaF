@@ -108,10 +108,10 @@ TextureImporter:
       name: spriteseet_Run_0
       rect:
         serializedVersion: 2
-        x: 27
-        y: 211
-        width: 138
-        height: 171
+        x: 0
+        y: 206
+        width: 206
+        height: 206
       alignment: 7
       pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -129,10 +129,10 @@ TextureImporter:
       name: spriteseet_Run_1
       rect:
         serializedVersion: 2
-        x: 234
-        y: 213
-        width: 130
-        height: 176
+        x: 206
+        y: 206
+        width: 206
+        height: 206
       alignment: 7
       pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -150,10 +150,10 @@ TextureImporter:
       name: spriteseet_Run_2
       rect:
         serializedVersion: 2
-        x: 442
-        y: 213
-        width: 135
-        height: 169
+        x: 412
+        y: 206
+        width: 206
+        height: 206
       alignment: 7
       pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -171,10 +171,10 @@ TextureImporter:
       name: spriteseet_Run_3
       rect:
         serializedVersion: 2
-        x: 646
-        y: 213
-        width: 137
-        height: 169
+        x: 618
+        y: 206
+        width: 206
+        height: 206
       alignment: 7
       pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -192,10 +192,10 @@ TextureImporter:
       name: spriteseet_Run_4
       rect:
         serializedVersion: 2
-        x: 853
-        y: 215
-        width: 129
-        height: 174
+        x: 824
+        y: 206
+        width: 206
+        height: 206
       alignment: 7
       pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -213,10 +213,10 @@ TextureImporter:
       name: spriteseet_Run_5
       rect:
         serializedVersion: 2
-        x: 1058
-        y: 211
-        width: 138
-        height: 171
+        x: 1030
+        y: 206
+        width: 206
+        height: 206
       alignment: 7
       pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -234,10 +234,10 @@ TextureImporter:
       name: spriteseet_Run_6
       rect:
         serializedVersion: 2
-        x: 40
-        y: 5
-        width: 139
-        height: 171
+        x: 0
+        y: 0
+        width: 206
+        height: 206
       alignment: 7
       pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -255,10 +255,10 @@ TextureImporter:
       name: spriteseet_Run_7
       rect:
         serializedVersion: 2
-        x: 253
-        y: 7
-        width: 130
-        height: 175
+        x: 206
+        y: 0
+        width: 206
+        height: 206
       alignment: 7
       pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -276,10 +276,10 @@ TextureImporter:
       name: spriteseet_Run_8
       rect:
         serializedVersion: 2
-        x: 452
-        y: 7
-        width: 137
-        height: 169
+        x: 412
+        y: 0
+        width: 206
+        height: 206
       alignment: 7
       pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -297,10 +297,10 @@ TextureImporter:
       name: spriteseet_Run_9
       rect:
         serializedVersion: 2
-        x: 659
-        y: 7
-        width: 137
-        height: 169
+        x: 618
+        y: 0
+        width: 206
+        height: 206
       alignment: 7
       pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -318,10 +318,10 @@ TextureImporter:
       name: spriteseet_Run_10
       rect:
         serializedVersion: 2
-        x: 872
-        y: 9
-        width: 132
-        height: 173
+        x: 824
+        y: 0
+        width: 206
+        height: 206
       alignment: 7
       pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -339,10 +339,10 @@ TextureImporter:
       name: spriteseet_Run_11
       rect:
         serializedVersion: 2
-        x: 1071
-        y: 5
-        width: 137
-        height: 171
+        x: 1030
+        y: 0
+        width: 206
+        height: 206
       alignment: 7
       pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}

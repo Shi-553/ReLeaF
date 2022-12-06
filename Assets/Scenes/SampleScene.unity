@@ -3058,7 +3058,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   effectPrefab: {fileID: 1924457967842652367, guid: 20d09eb995f789c478cb0655e8535395, type: 3}
   effectParent: {fileID: 1129799443}
-  offset: {x: 0, y: 0.6, z: -0.6}
 --- !u!4 &1274899284
 Transform:
   m_ObjectHideFlags: 0
@@ -3143,25 +3142,9 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 3867404719554941120}
     m_Modifications:
-    - target: {fileID: -5171749595196955111, guid: 2a7de3647c92d20429b93cd67b201cf0, type: 3}
-      propertyPath: list.Array.size
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: -5171749595196955111, guid: 2a7de3647c92d20429b93cd67b201cf0, type: 3}
-      propertyPath: list.Array.data[0]
-      value: -2
-      objectReference: {fileID: 0}
-    - target: {fileID: -5171749595196955111, guid: 2a7de3647c92d20429b93cd67b201cf0, type: 3}
-      propertyPath: managedReferences[-2]
-      value: 
-      objectReference: {fileID: 0}
     - target: {fileID: 5442024061459843501, guid: 2a7de3647c92d20429b93cd67b201cf0, type: 3}
       propertyPath: m_Name
       value: scorpion (2)
-      objectReference: {fileID: 0}
-    - target: {fileID: 5442024061459843501, guid: 2a7de3647c92d20429b93cd67b201cf0, type: 3}
-      propertyPath: m_IsActive
-      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8780205405150213191, guid: 2a7de3647c92d20429b93cd67b201cf0, type: 3}
       propertyPath: m_RootOrder
@@ -8348,22 +8331,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 1885619581900236545, guid: 7145dcadd5ab20341bfef2b0cf89dc63, type: 3}
-      propertyPath: m_LocalScale.y
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 1885619581900236545, guid: 7145dcadd5ab20341bfef2b0cf89dc63, type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 0.9659259
-      objectReference: {fileID: 0}
-    - target: {fileID: 1885619581900236545, guid: 7145dcadd5ab20341bfef2b0cf89dc63, type: 3}
-      propertyPath: m_LocalRotation.x
-      value: -0.258819
-      objectReference: {fileID: 0}
-    - target: {fileID: 1885619581900236545, guid: 7145dcadd5ab20341bfef2b0cf89dc63, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: -30
-      objectReference: {fileID: 0}
     - target: {fileID: 4052387953760838874, guid: 7145dcadd5ab20341bfef2b0cf89dc63, type: 3}
       propertyPath: itemUIRoot
       value: 
@@ -8376,10 +8343,6 @@ PrefabInstance:
       propertyPath: slider
       value: 
       objectReference: {fileID: 430693544}
-    - target: {fileID: 7388926275364266459, guid: 7145dcadd5ab20341bfef2b0cf89dc63, type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 7810232181920566239, guid: 7145dcadd5ab20341bfef2b0cf89dc63, type: 3}
       propertyPath: slider
       value: 

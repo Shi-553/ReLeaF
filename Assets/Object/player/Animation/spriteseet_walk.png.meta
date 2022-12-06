@@ -108,10 +108,10 @@ TextureImporter:
       name: spriteseet_walk_0
       rect:
         serializedVersion: 2
-        x: 90
-        y: 420
-        width: 200
-        height: 376
+        x: 0
+        y: 411
+        width: 411.5
+        height: 411
       alignment: 7
       pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -129,10 +129,10 @@ TextureImporter:
       name: spriteseet_walk_1
       rect:
         serializedVersion: 2
-        x: 502
-        y: 425
-        width: 199
-        height: 374
+        x: 411
+        y: 411
+        width: 411.5
+        height: 411
       alignment: 7
       pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -150,10 +150,10 @@ TextureImporter:
       name: spriteseet_walk_2
       rect:
         serializedVersion: 2
-        x: 913
-        y: 422
-        width: 206
-        height: 374
+        x: 822
+        y: 411
+        width: 411.5
+        height: 411
       alignment: 7
       pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -171,10 +171,10 @@ TextureImporter:
       name: spriteseet_walk_3
       rect:
         serializedVersion: 2
-        x: 1324
-        y: 422
-        width: 200
-        height: 377
+        x: 1233
+        y: 411
+        width: 411.5
+        height: 411
       alignment: 7
       pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -192,10 +192,10 @@ TextureImporter:
       name: spriteseet_walk_4
       rect:
         serializedVersion: 2
-        x: 121
-        y: 10
-        width: 201
-        height: 377
+        x: 0
+        y: 0
+        width: 411.5
+        height: 411
       alignment: 7
       pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -213,10 +213,10 @@ TextureImporter:
       name: spriteseet_walk_5
       rect:
         serializedVersion: 2
-        x: 533
-        y: 13
-        width: 200
-        height: 374
+        x: 411
+        y: 0
+        width: 411.5
+        height: 411
       alignment: 7
       pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -234,10 +234,10 @@ TextureImporter:
       name: spriteseet_walk_6
       rect:
         serializedVersion: 2
-        x: 944
-        y: 9
-        width: 201
-        height: 376
+        x: 822
+        y: 0
+        width: 411.5
+        height: 411
       alignment: 7
       pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -255,10 +255,10 @@ TextureImporter:
       name: spriteseet_walk_7
       rect:
         serializedVersion: 2
-        x: 1349
-        y: 10
-        width: 207
-        height: 375
+        x: 1233
+        y: 0
+        width: 411.5
+        height: 411
       alignment: 7
       pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}

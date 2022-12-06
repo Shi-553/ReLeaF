@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 946826ac5cc353f4d9fad583b7404d14
+guid: 0b20063f41144b74f86a095774e70ec9
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -47,7 +47,7 @@ TextureImporter:
   spriteMeshType: 1
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
-  spritePixelsToUnits: 242.71844
+  spritePixelsToUnits: 500
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
@@ -105,13 +105,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: spriteseet_0
+      name: spriteseet_shark_idou_0
       rect:
         serializedVersion: 2
         x: 0
-        y: 250
-        width: 250
-        height: 250
+        y: 601
+        width: 601
+        height: 601
       alignment: 7
       pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -119,20 +119,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: a7cb4451d40d7a7488f230146140cfcc
-      internalID: -1836472151
+      spriteID: 1542d4ad5235a1c4f9913805734f4278
+      internalID: 451706540
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: spriteseet_1
+      name: spriteseet_shark_idou_1
       rect:
         serializedVersion: 2
-        x: 250
-        y: 250
-        width: 250
-        height: 250
+        x: 601
+        y: 601
+        width: 601
+        height: 601
       alignment: 7
       pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -140,20 +140,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 5f3aaf63d07c6e2499cb1c025d6c44bf
-      internalID: 671056900
+      spriteID: fc8440eca5babde45b7cb9aa344af70a
+      internalID: -294718541
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: spriteseet_2
+      name: spriteseet_shark_idou_2
       rect:
         serializedVersion: 2
-        x: 500
-        y: 250
-        width: 250
-        height: 250
+        x: 1202
+        y: 601
+        width: 601
+        height: 601
       alignment: 7
       pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -161,20 +161,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: ed09cbc8db4429a488c7d90be30b9cca
-      internalID: -59194123
+      spriteID: 5cf491b8e37392b40a738b79552cf0c4
+      internalID: 1517304226
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: spriteseet_3
+      name: spriteseet_shark_idou_3
       rect:
         serializedVersion: 2
-        x: 750
-        y: 250
-        width: 250
-        height: 250
+        x: 1803
+        y: 601
+        width: 601
+        height: 601
       alignment: 7
       pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -182,62 +182,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: fba1e7cbbb8ee464eb2def42fe280705
-      internalID: 1368857009
+      spriteID: 873af4649af14d84ea6c79e51ede69ed
+      internalID: 489971926
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: spriteseet_4
-      rect:
-        serializedVersion: 2
-        x: 1000
-        y: 250
-        width: 250
-        height: 250
-      alignment: 7
-      pivot: {x: 0.5, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 0b64266aaf841ee48b5f26cf49072fa5
-      internalID: -1525227162
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: spriteseet_5
-      rect:
-        serializedVersion: 2
-        x: 1250
-        y: 250
-        width: 250
-        height: 250
-      alignment: 7
-      pivot: {x: 0.5, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: ab7cdb87afc4a354a8b411ea5035e826
-      internalID: -1589811457
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: spriteseet_6
+      name: spriteseet_shark_idou_4
       rect:
         serializedVersion: 2
         x: 0
         y: 0
-        width: 250
-        height: 250
+        width: 601
+        height: 601
       alignment: 7
       pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -245,20 +203,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 71cedd1eae61e0d4db88e6ba16ea701e
-      internalID: 975856849
+      spriteID: 8b7dd2bc8181f3a4caef87fe2361eddb
+      internalID: 97894606
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: spriteseet_7
+      name: spriteseet_shark_idou_5
       rect:
         serializedVersion: 2
-        x: 250
+        x: 601
         y: 0
-        width: 250
-        height: 250
+        width: 601
+        height: 601
       alignment: 7
       pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -266,20 +224,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: f7fb5ec65e0ec6a4c93be962aee092f6
-      internalID: -314629776
+      spriteID: cf7944c2dd8bee34ea16831c502b6257
+      internalID: 358989010
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: spriteseet_8
+      name: spriteseet_shark_idou_6
       rect:
         serializedVersion: 2
-        x: 500
+        x: 1202
         y: 0
-        width: 250
-        height: 250
+        width: 601
+        height: 601
       alignment: 7
       pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -287,20 +245,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: daf15b2fa19c5a146955c15dd8d802f0
-      internalID: 1257295776
+      spriteID: d27add348d6ac8940968a784bf08c0bf
+      internalID: -279137518
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: spriteseet_9
+      name: spriteseet_shark_idou_7
       rect:
         serializedVersion: 2
-        x: 750
+        x: 1803
         y: 0
-        width: 250
-        height: 250
+        width: 601
+        height: 601
       alignment: 7
       pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -308,50 +266,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 808892a1730ed2b4183501aaccea5d21
-      internalID: -1120168090
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: spriteseet_10
-      rect:
-        serializedVersion: 2
-        x: 1000
-        y: 0
-        width: 250
-        height: 250
-      alignment: 7
-      pivot: {x: 0.5, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 69697e09983ae3b429b24b35e94c95b4
-      internalID: 379289595
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: spriteseet_11
-      rect:
-        serializedVersion: 2
-        x: 1250
-        y: 0
-        width: 250
-        height: 250
-      alignment: 7
-      pivot: {x: 0.5, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 775aa3bdb9b748246be99aa1fc716f83
-      internalID: -34460191
+      spriteID: 05600a8996dfa354ea26d8dab978ea4b
+      internalID: -1636457836
       vertices: []
       indices: 
       edges: []
@@ -359,7 +275,7 @@ TextureImporter:
     outline: []
     physicsShape: []
     bones: []
-    spriteID: 260f871555eee574cac4eb35e9d3e6e9
+    spriteID: c184352a1b40015488aca01e45f465ed
     internalID: 0
     vertices: []
     indices: 
@@ -367,18 +283,14 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      spriteseet_2: -59194123
-      spriteseet_7: -314629776
-      spriteseet_1: 671056900
-      spriteseet_10: 379289595
-      spriteseet_9: -1120168090
-      spriteseet_5: -1589811457
-      spriteseet_0: -1836472151
-      spriteseet_3: 1368857009
-      spriteseet_8: 1257295776
-      spriteseet_4: -1525227162
-      spriteseet_11: -34460191
-      spriteseet_6: 975856849
+      spriteseet_shark_idou_0: 451706540
+      spriteseet_shark_idou_7: -1636457836
+      spriteseet_shark_idou_6: -279137518
+      spriteseet_shark_idou_3: 489971926
+      spriteseet_shark_idou_5: 358989010
+      spriteseet_shark_idou_4: 97894606
+      spriteseet_shark_idou_1: -294718541
+      spriteseet_shark_idou_2: 1517304226
   spritePackingTag: 
   pSDRemoveMatte: 0
   pSDShowRemoveMatteOption: 0
