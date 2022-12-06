@@ -3142,25 +3142,9 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 3867404719554941120}
     m_Modifications:
-    - target: {fileID: -5171749595196955111, guid: 2a7de3647c92d20429b93cd67b201cf0, type: 3}
-      propertyPath: list.Array.size
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: -5171749595196955111, guid: 2a7de3647c92d20429b93cd67b201cf0, type: 3}
-      propertyPath: list.Array.data[0]
-      value: -2
-      objectReference: {fileID: 0}
-    - target: {fileID: -5171749595196955111, guid: 2a7de3647c92d20429b93cd67b201cf0, type: 3}
-      propertyPath: managedReferences[-2]
-      value: 
-      objectReference: {fileID: 0}
     - target: {fileID: 5442024061459843501, guid: 2a7de3647c92d20429b93cd67b201cf0, type: 3}
       propertyPath: m_Name
       value: scorpion (2)
-      objectReference: {fileID: 0}
-    - target: {fileID: 5442024061459843501, guid: 2a7de3647c92d20429b93cd67b201cf0, type: 3}
-      propertyPath: m_IsActive
-      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8780205405150213191, guid: 2a7de3647c92d20429b93cd67b201cf0, type: 3}
       propertyPath: m_RootOrder
