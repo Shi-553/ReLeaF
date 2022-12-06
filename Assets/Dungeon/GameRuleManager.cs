@@ -36,6 +36,10 @@ namespace ReLeaf
 
         [SerializeField]
         AudioInfo bgmStage1;
+        [SerializeField]
+        AudioInfo seReady;
+        [SerializeField]
+        AudioInfo seStart;
 
         protected override void Init()
         {
@@ -46,9 +50,11 @@ namespace ReLeaf
         {
             yield return new WaitForSeconds(1);
             gameReadyText.SetActive(true);
+            SEManager.Singleton.Play(seReady, new Vector3(0, 0, 0));
             yield return new WaitForSeconds(1);
             gameReadyText.SetActive(false);
             gamestartText.SetActive(true);
+            SEManager.Singleton.Play(seStart, new Vector3(0, 0, 0));
 
             State = GameRuleState.Playing;
 
