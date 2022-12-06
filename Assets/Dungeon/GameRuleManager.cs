@@ -36,6 +36,12 @@ namespace ReLeaf
 
         [SerializeField]
         AudioInfo bgmStage1;
+        [SerializeField]
+        AudioInfo clearBGM;
+        [SerializeField]
+        AudioInfo stageClear1;
+        [SerializeField]
+        AudioInfo stageClear2;
 
         protected override void Init()
         {
@@ -65,12 +71,24 @@ namespace ReLeaf
             State = isGameClear ? GameRuleState.GameClear : GameRuleState.GameOver;
 
             if (isGameClear)
+            {
+                BGMManager.Singleton.Stop();
+                SEManager.Singleton.Play(stageClear1, transform.position);
+                StartCoroutine(WaitClearSound());
                 StartCoroutine(WaitGreening());
+            }
+        }
+        IEnumerator WaitClearSound()
+        {
+            yield return new WaitForSeconds(stageClear1.clip.length);
+            SEManager.Singleton.Play(stageClear2, transform.position);
+
         }
         IEnumerator WaitGreening()
         {
             yield return StartCoroutine(allGreening.StartGreeningWithPlayer());
             gameclearText.SetActive(true);
+            SEManager.Singleton.Play(clearBGM, transform.position);
         }
 
     }
