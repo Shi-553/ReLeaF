@@ -50,9 +50,9 @@ namespace ReLeaf
             foreach (var attackPos in attackPoss)
             {
                 targetMarkerManager.SetMarker<TargetMarker>(attackPos);
-                SEManager.Singleton.Play(seBeforeAttack, transform.position);
             }
             enemyCore.SetWeekMarker();
+            SEManager.Singleton.Play(seBeforeAttack, transform.position);
         }
         IEnumerator IEnemyAttacker.OnStartDamageing()
         {
@@ -69,10 +69,10 @@ namespace ReLeaf
                     continue;
 
                 plant.Damaged(crabAttackInfo.ATK, DamageType.Direct);
-                SEManager.Singleton.Play(seAttack, transform.position);
 
             }
             targetMarkerManager.ResetAllMarker();
+            SEManager.Singleton.Play(seAttack, transform.position);
         }
 
 
