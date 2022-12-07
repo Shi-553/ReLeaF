@@ -21,8 +21,6 @@ namespace ReLeaf
         }
         public float ValueRate => value / DungeonManager.Singleton.MaxGreeningCount;
 
-        [SerializeField, Rename("クリアに必要な緑化率")]
-        float targetRate = 0.8f;
         [SerializeField]
         Transform targetRateTransform;
 
@@ -49,10 +47,10 @@ namespace ReLeaf
             var sliderRect = slider.GetComponent<RectTransform>();
 
             var targetRatePos = targetRateTransform.localPosition;
-            targetRatePos.x = Mathf.Lerp(-sliderRect.sizeDelta.x / 2, sliderRect.sizeDelta.x / 2, targetRate);
+            targetRatePos.x = Mathf.Lerp(-sliderRect.sizeDelta.x / 2, sliderRect.sizeDelta.x / 2, StageManager.Singleton.Current.TargetRate);
             targetRateTransform.localPosition = targetRatePos;
 
-            slider.maxValue = targetRate;  //スライダーの最大値をターゲットの最大値に設定
+            slider.maxValue = StageManager.Singleton.Current.TargetRate;  //スライダーの最大値をターゲットの最大値に設定
 
             DungeonManager.Singleton.OnTileChanged += OnTileChanged;
         }
@@ -67,7 +65,7 @@ namespace ReLeaf
                 obj.afterTile.TileType != TileType.Plant)
                 Value--;
 
-            if (ValueRate >= targetRate)
+            if (ValueRate >= StageManager.Singleton.Current.TargetRate)
             {
                 GameRuleManager.Singleton.Finish(true);
             }

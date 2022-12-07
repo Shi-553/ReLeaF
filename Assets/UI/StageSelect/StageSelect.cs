@@ -31,6 +31,7 @@ namespace ReLeaf
 
                     button.onClick.AddListener(() =>
                     {
+                        StageManager.Singleton.Current = info;
                         SceneLoader.Singleton.LoadScene(info.Scene, fadeoutTime, fadeinTime);
                     });
                 }

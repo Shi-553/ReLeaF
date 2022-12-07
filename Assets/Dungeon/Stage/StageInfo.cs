@@ -18,5 +18,10 @@ namespace ReLeaf
         [SerializeField, Rename("無効なボタンの画像")]
         Sprite disableButton;
         public Sprite DisableButton => disableButton;
+
+
+        [SerializeField, Rename("クリアに必要な緑化率")]
+        float targetRate = 0.5f;
+        public float TargetRate => targetRate;
     }
 }
