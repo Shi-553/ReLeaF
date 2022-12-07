@@ -53,6 +53,14 @@ SpriteAtlas:
   - {fileID: -713012179, guid: 0cfb0e61e992da04987cd6521e7aafca, type: 3}
   - {fileID: -1355582443, guid: 0cfb0e61e992da04987cd6521e7aafca, type: 3}
   - {fileID: 30700601, guid: 0cfb0e61e992da04987cd6521e7aafca, type: 3}
+  - {fileID: -1704666576, guid: 82f15b521f256f942bff740a41b3471f, type: 3}
+  - {fileID: -288787433, guid: 82f15b521f256f942bff740a41b3471f, type: 3}
+  - {fileID: -1855342809, guid: 82f15b521f256f942bff740a41b3471f, type: 3}
+  - {fileID: -2108873650, guid: 82f15b521f256f942bff740a41b3471f, type: 3}
+  - {fileID: 740432246, guid: 82f15b521f256f942bff740a41b3471f, type: 3}
+  - {fileID: -740184259, guid: 82f15b521f256f942bff740a41b3471f, type: 3}
+  - {fileID: 921069318, guid: 82f15b521f256f942bff740a41b3471f, type: 3}
+  - {fileID: -1962399627, guid: 82f15b521f256f942bff740a41b3471f, type: 3}
   - {fileID: -1059838727, guid: 7a3249922771d474ebc31043fc0f5e6e, type: 3}
   - {fileID: -2016827331, guid: 7a3249922771d474ebc31043fc0f5e6e, type: 3}
   - {fileID: 1314197066, guid: 7a3249922771d474ebc31043fc0f5e6e, type: 3}
@@ -85,6 +93,18 @@ SpriteAtlas:
   - {fileID: 2013819613, guid: bb8fdbc78db09534396ebd67b2478d82, type: 3}
   - {fileID: 882906781, guid: bb8fdbc78db09534396ebd67b2478d82, type: 3}
   - {fileID: 1931262785, guid: bb8fdbc78db09534396ebd67b2478d82, type: 3}
+  - {fileID: -1005738605, guid: e0cb90e7c5bb06b4dbaf94a37135467b, type: 3}
+  - {fileID: -1033055121, guid: e0cb90e7c5bb06b4dbaf94a37135467b, type: 3}
+  - {fileID: -601130, guid: e0cb90e7c5bb06b4dbaf94a37135467b, type: 3}
+  - {fileID: 391023799, guid: e0cb90e7c5bb06b4dbaf94a37135467b, type: 3}
+  - {fileID: -145351446, guid: e0cb90e7c5bb06b4dbaf94a37135467b, type: 3}
+  - {fileID: 968683188, guid: e0cb90e7c5bb06b4dbaf94a37135467b, type: 3}
+  - {fileID: 1817452053, guid: e0cb90e7c5bb06b4dbaf94a37135467b, type: 3}
+  - {fileID: -1908044347, guid: e0cb90e7c5bb06b4dbaf94a37135467b, type: 3}
+  - {fileID: 1102529676, guid: e0cb90e7c5bb06b4dbaf94a37135467b, type: 3}
+  - {fileID: 244047564, guid: e0cb90e7c5bb06b4dbaf94a37135467b, type: 3}
+  - {fileID: -1229468952, guid: e0cb90e7c5bb06b4dbaf94a37135467b, type: 3}
+  - {fileID: 832701501, guid: e0cb90e7c5bb06b4dbaf94a37135467b, type: 3}
   - {fileID: -59194123, guid: 946826ac5cc353f4d9fad583b7404d14, type: 3}
   - {fileID: 1368857009, guid: 946826ac5cc353f4d9fad583b7404d14, type: 3}
   - {fileID: -1836472151, guid: 946826ac5cc353f4d9fad583b7404d14, type: 3}
@@ -98,14 +118,6 @@ SpriteAtlas:
   - {fileID: -34460191, guid: 946826ac5cc353f4d9fad583b7404d14, type: 3}
   - {fileID: 379289595, guid: 946826ac5cc353f4d9fad583b7404d14, type: 3}
   - {fileID: 21300000, guid: b0c5a0ecdbd82aa4d8cc07be72d2ea10, type: 3}
-  - {fileID: -1781669393, guid: 3eef1b6d3f6178540bde166f5631b552, type: 3}
-  - {fileID: -1087164729, guid: 3eef1b6d3f6178540bde166f5631b552, type: 3}
-  - {fileID: -2057358781, guid: 3eef1b6d3f6178540bde166f5631b552, type: 3}
-  - {fileID: 635286840, guid: 3eef1b6d3f6178540bde166f5631b552, type: 3}
-  - {fileID: 1477223971, guid: 3eef1b6d3f6178540bde166f5631b552, type: 3}
-  - {fileID: -792598894, guid: 3eef1b6d3f6178540bde166f5631b552, type: 3}
-  - {fileID: 1968631007, guid: 3eef1b6d3f6178540bde166f5631b552, type: 3}
-  - {fileID: -498414996, guid: 3eef1b6d3f6178540bde166f5631b552, type: 3}
   - {fileID: 1517304226, guid: 0b20063f41144b74f86a095774e70ec9, type: 3}
   - {fileID: 489971926, guid: 0b20063f41144b74f86a095774e70ec9, type: 3}
   - {fileID: 451706540, guid: 0b20063f41144b74f86a095774e70ec9, type: 3}
@@ -114,18 +126,6 @@ SpriteAtlas:
   - {fileID: -1636457836, guid: 0b20063f41144b74f86a095774e70ec9, type: 3}
   - {fileID: 97894606, guid: 0b20063f41144b74f86a095774e70ec9, type: 3}
   - {fileID: 358989010, guid: 0b20063f41144b74f86a095774e70ec9, type: 3}
-  - {fileID: -420367849, guid: 8a6e187ff4c26fa4db3ea15a985ffd99, type: 3}
-  - {fileID: -1368348246, guid: 8a6e187ff4c26fa4db3ea15a985ffd99, type: 3}
-  - {fileID: -276530718, guid: 8a6e187ff4c26fa4db3ea15a985ffd99, type: 3}
-  - {fileID: 1138152943, guid: 8a6e187ff4c26fa4db3ea15a985ffd99, type: 3}
-  - {fileID: -1461846766, guid: 8a6e187ff4c26fa4db3ea15a985ffd99, type: 3}
-  - {fileID: -1803180003, guid: 8a6e187ff4c26fa4db3ea15a985ffd99, type: 3}
-  - {fileID: 2147339871, guid: 8a6e187ff4c26fa4db3ea15a985ffd99, type: 3}
-  - {fileID: -2068205165, guid: 8a6e187ff4c26fa4db3ea15a985ffd99, type: 3}
-  - {fileID: -1390297220, guid: 8a6e187ff4c26fa4db3ea15a985ffd99, type: 3}
-  - {fileID: -1791372572, guid: 8a6e187ff4c26fa4db3ea15a985ffd99, type: 3}
-  - {fileID: 427957052, guid: 8a6e187ff4c26fa4db3ea15a985ffd99, type: 3}
-  - {fileID: -650196161, guid: 8a6e187ff4c26fa4db3ea15a985ffd99, type: 3}
   m_PackedSpriteNamesToIndex:
   - spriteseet_Crabwalk_idou_4
   - spriteseet_Crabwalk_idou_5
@@ -142,6 +142,14 @@ SpriteAtlas:
   - SeaUrchin_before_attack_0
   - SeaUrchin_before_attack_3
   - SeaUrchin_before_attack_2
+  - spriteseet_walk_ver2_2
+  - spriteseet_walk_ver2_3
+  - spriteseet_walk_ver2_0
+  - spriteseet_walk_ver2_1
+  - spriteseet_walk_ver2_6
+  - spriteseet_walk_ver2_7
+  - spriteseet_walk_ver2_4
+  - spriteseet_walk_ver2_5
   - spriteseet_Crabattackhit_4
   - spriteseet_Crabattackhit_2
   - spriteseet_Crabattackhit_3
@@ -174,6 +182,18 @@ SpriteAtlas:
   - SeaUrchin_attack_4
   - SeaUrchin_attack_7
   - SeaUrchin_attack_6
+  - spriteseet_Run_ver2_11
+  - spriteseet_Run_ver2_10
+  - spriteseet_Run_ver2_2
+  - spriteseet_Run_ver2_3
+  - spriteseet_Run_ver2_0
+  - spriteseet_Run_ver2_1
+  - spriteseet_Run_ver2_6
+  - spriteseet_Run_ver2_7
+  - spriteseet_Run_ver2_4
+  - spriteseet_Run_ver2_5
+  - spriteseet_Run_ver2_8
+  - spriteseet_Run_ver2_9
   - spriteseet_2
   - spriteseet_3
   - spriteseet_0
@@ -187,14 +207,6 @@ SpriteAtlas:
   - spriteseet_11
   - spriteseet_10
   - SeaUrchin_spine
-  - spriteseet_walk_4
-  - spriteseet_walk_5
-  - spriteseet_walk_6
-  - spriteseet_walk_7
-  - spriteseet_walk_0
-  - spriteseet_walk_1
-  - spriteseet_walk_2
-  - spriteseet_walk_3
   - spriteseet_shark_idou_2
   - spriteseet_shark_idou_3
   - spriteseet_shark_idou_0
@@ -203,18 +215,6 @@ SpriteAtlas:
   - spriteseet_shark_idou_7
   - spriteseet_shark_idou_4
   - spriteseet_shark_idou_5
-  - spriteseet_Run_11
-  - spriteseet_Run_10
-  - spriteseet_Run_4
-  - spriteseet_Run_5
-  - spriteseet_Run_6
-  - spriteseet_Run_7
-  - spriteseet_Run_0
-  - spriteseet_Run_1
-  - spriteseet_Run_2
-  - spriteseet_Run_3
-  - spriteseet_Run_8
-  - spriteseet_Run_9
   m_RenderDataMap: {}
   m_Tag: SpriteAtlas
   m_IsVariant: 0
