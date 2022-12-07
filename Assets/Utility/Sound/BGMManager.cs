@@ -13,5 +13,10 @@
             source.volume = info.volume;
             source.Play();
         }
+
+        public void Stop()
+        {
+            StopAll();
+        }
     }
 }
