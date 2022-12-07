@@ -13,4 +13,4 @@ MonoBehaviour:
   m_Name: changeTile.mp3
   m_EditorClassIdentifier: 
   clip: {fileID: 8300000, guid: 41ef5e36c0b96fa4e98f59f4637561ae, type: 3}
-  volume: 1
+  volume: 0.4

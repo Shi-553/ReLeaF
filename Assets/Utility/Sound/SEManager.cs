@@ -7,6 +7,8 @@ namespace Utility
     public class SEManager : SoundManager<SEManager>
     {
         protected override int InitSourceCount => 5;
+        [SerializeField]
+        float spatialBlend = 0.8f;
 
         /// <summary>
         /// ˆÊ’uŠÖŒW‚È‚­SE‚ð–Â‚ç‚·
@@ -29,7 +31,7 @@ namespace Utility
         {
             var source = GetSource(true);
             source.clip = info.clip;
-            source.spatialBlend = 1;
+            source.spatialBlend = spatialBlend;
             source.transform.position = pos;
             source.loop = false;
             source.volume = info.volume;
