@@ -6,55 +6,53 @@ namespace Utility
 {
     public static class SerializedPropertyExtension
     {
-        public static T GetAttributes<T>(this SerializedProperty prop, bool inherit) where T : Attribute
+
+
+        public static TAttribute[] GetAttributes<TAttribute>(this SerializedProperty serializedProperty, bool inherit)
+            where TAttribute : Attribute
         {
-            if (prop == null) { return null; }
-
-            Type t = prop.serializedObject.targetObject.GetType();
-
-            FieldInfo f = null;
-            PropertyInfo p = null;
-            foreach (var name in prop.propertyPath.Split('.'))
+            if (serializedProperty == null)
             {
-                f = t.GetField(name, (BindingFlags)(-1));
+                throw new ArgumentNullException(nameof(serializedProperty));
+            }
 
-                if (f == null)
+            var targetObjectType = serializedProperty.serializedObject.targetObject.GetType();
+
+            if (targetObjectType == null)
+            {
+                throw new ArgumentException($"Could not find the {nameof(targetObjectType)} of {nameof(serializedProperty)}");
+            }
+
+            foreach (var pathSegment in serializedProperty.propertyPath.Split('.'))
+            {
+                var t = targetObjectType;
+                do
                 {
-                    p = t.GetProperty(name, (BindingFlags)(-1));
-                    if (p == null)
+                    var fieldInfo = t.GetField(pathSegment, AllBindingFlags);
+
+                    if (fieldInfo != null)
                     {
-                        return null;
+                        return (TAttribute[])fieldInfo.GetCustomAttributes<TAttribute>(inherit);
                     }
-                    t = p.PropertyType;
-                }
-                else
+
+                    t = t.BaseType;
+                } while (t != null);
+
+
+                var propertyInfo = targetObjectType.GetProperty(pathSegment, AllBindingFlags);
+                if (propertyInfo != null)
                 {
-                    t = f.FieldType;
+                    return (TAttribute[])propertyInfo.GetCustomAttributes<TAttribute>(inherit);
                 }
             }
-
-            T[] attributes;
-
-            if (f != null)
-            {
-                attributes = f.GetCustomAttributes(typeof(T), inherit) as T[];
-            }
-            else if (p != null)
-            {
-                attributes = p.GetCustomAttributes(typeof(T), inherit) as T[];
-            }
-            else
-            {
-                return null;
-            }
-            return attributes.Length > 0 ? attributes[0] : null;
+            return new TAttribute[] { };
         }
-
 
 
         // https://gist.github.com/SixWays/2257d0c129c5cb7db96c7990af823b44
 
         const BindingFlags FLAGS_ALL = BindingFlags.Instance | BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.FlattenHierarchy;
+        static BindingFlags AllBindingFlags => FLAGS_ALL;
 
         /// <summary>
         /// Get the object this property
@@ -79,6 +77,8 @@ namespace Utility
                 else
                 {
                     var fi = o.GetType().GetFieldPrivate(elements[i], FLAGS_ALL);
+                    if (fi == null)
+                        return null;
                     o = fi.GetValue(o);
                 }
             }

@@ -1,3 +1,4 @@
+using Animancer;
 using UnityEngine;
 using UnityEngine.UI;
 using Utility;
@@ -11,6 +12,8 @@ namespace ReLeaf
         [SerializeField]
         GameObject[] toActiveObj;
 
+        [SerializeField]
+        AnimationClip toStageSelect;
 
         void Start()
         {
@@ -18,7 +21,8 @@ namespace ReLeaf
         }
         void StartStageSelect()
         {
-            Camera.main.GetComponent<Animation>().Play();
+            startButton.enabled = false;
+            GetComponentInParent<AnimancerComponent>().Play(toStageSelect);
             toActiveObj.ForEach(x => x.SetActive(true));
 
         }

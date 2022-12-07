@@ -1,53 +1,129 @@
+	Assets\Object\Enemy\Crab
+0	"Crabの攻撃パラメータ
+Assets\Object\Enemy\Crab\CrabAttackInfo"	"攻撃した後の待機時間(秒)"	1	coolTime	float
+0		"攻撃前の準備時間(秒)"	1.4	aimTime	float
+0		"攻撃モーション開始から実際にダメージ発生までの時間(秒)"	0.1	attackBeforeDamageTime	float
+0		"攻撃力"	2	atk	float
+0		"攻撃するマス
+(上向きが基準のローカルポジション)"	{"upList":{"value":[{"x":-1,"y":1},{"x":-1,"y":2},{"x":-1,"y":3},{"x":0,"y":3},{"x":0,"y":2},{"x":0,"y":1},{"x":1,"y":1},{"x":1,"y":2},{"x":1,"y":3},{"x":2,"y":3},{"x":2,"y":2},{"x":2,"y":1},{"x":3,"y":1},{"x":3,"y":2},{"x":3,"y":3}]},"downList":{"value":[{"x":1,"y":-1},{"x":0,"y":-1},{"x":-1,"y":-1},{"x":-2,"y":-1},{"x":1,"y":-2},{"x":0,"y":-2},{"x":-1,"y":-2},{"x":-2,"y":-2},{"x":-2,"y":-3},{"x":-1,"y":-3},{"x":0,"y":-3},{"x":1,"y":-3},{"x":2,"y":-1},{"x":2,"y":-2},{"x":2,"y":-3}]},"leftList":{"value":[{"x":-1,"y":0},{"x":-2,"y":0},{"x":-3,"y":0},{"x":-1,"y":-2},{"x":-1,"y":-1},{"x":-2,"y":-1},{"x":-2,"y":-2},{"x":-3,"y":-2},{"x":-3,"y":-1},{"x":-3,"y":1},{"x":-3,"y":2},{"x":-2,"y":2},{"x":-2,"y":1},{"x":-1,"y":1},{"x":-1,"y":2}]},"rightList":{"value":[{"x":2,"y":1},{"x":2,"y":0},{"x":2,"y":-1},{"x":2,"y":2},{"x":2,"y":-2},{"x":3,"y":-2},{"x":4,"y":-2},{"x":4,"y":-1},{"x":4,"y":0},{"x":4,"y":1},{"x":4,"y":2},{"x":3,"y":2},{"x":3,"y":1},{"x":3,"y":0},{"x":3,"y":-1}]}}	attackLocalTilePos	LocalTilePos
+0		"攻撃のノックバック力(nマス/秒)　減衰あり"	10	knockBackPower	float
+1	"敵(Crab)の被ダメージパラメータ
+Assets\Object\Enemy\Crab\CrabDamageableInfo"	"最大HP"	30	hpMax	float
+1		"緑化でダメージを受けるマス"	{"upList":{"value":[{"x":0,"y":-1},{"x":0,"y":-2},{"x":-1,"y":-1},{"x":-1,"y":-2},{"x":1,"y":-1},{"x":1,"y":-2}]},"downList":{"value":[{"x":-7,"y":5},{"x":-8,"y":5},{"x":0,"y":2},{"x":0,"y":1},{"x":1,"y":1},{"x":1,"y":2},{"x":2,"y":2},{"x":2,"y":1}]},"leftList":{"value":[{"x":2,"y":1},{"x":2,"y":0},{"x":2,"y":-1},{"x":3,"y":-1},{"x":3,"y":0},{"x":3,"y":1}]},"rightList":{"value":[{"x":-1,"y":1},{"x":-1,"y":0},{"x":-1,"y":-1},{"x":-2,"y":-1},{"x":-2,"y":0},{"x":-2,"y":1}]}}	weakLocalTilePos	LocalTilePos
+2	"敵(Crab)の移動パラメータ
+Assets\Object\Enemy\Crab\CrabMoverInfo"	"移動スピード(nマス/秒)"	2	speed	float
+2		"敵の大きさ(nマス)"	(2, 1)	tileSize	Vector2Int
+
+	Assets\Object\Enemy\SeaUrchin
+0	"敵(SeaUrchin)の移動パラメータ
+Assets\Object\Enemy\SeaUrchin\SeaCrchinMoverInfo"	"移動スピード(nマス/秒)"	0	speed	float
+0		"敵の大きさ(nマス)"	(2, 2)	tileSize	Vector2Int
+1	"SeaUrchinの攻撃パラメータ
+Assets\Object\Enemy\SeaUrchin\SeaUrchinAttackInfo"	"攻撃した後の待機時間(秒)"	1	coolTime	float
+1		"攻撃前の準備時間(秒)"	1	aimTime	float
+1		"発射するトゲ"	Spine (ReLeaf.Spine)	spinePrefab	PPtr<$Spine>
+1		"攻撃時間(秒)"	1.5	attackTime	float
+2	"敵(SeaUrchin)の被ダメージパラメータ
+Assets\Object\Enemy\SeaUrchin\SeaUrchinDamageableInfo"	"最大HP"	10	hpMax	float
+2		"緑化でダメージを受けるマス"	{"upList":{"value":[{"x":0,"y":2},{"x":0,"y":3},{"x":1,"y":2},{"x":1,"y":3}]},"downList":{"value":[{"x":0,"y":-1},{"x":0,"y":-2},{"x":1,"y":-2},{"x":1,"y":-1}]},"leftList":{"value":[{"x":-1,"y":0},{"x":-2,"y":0},{"x":-2,"y":1},{"x":-1,"y":1}]},"rightList":{"value":[{"x":3,"y":1},{"x":3,"y":0},{"x":2,"y":0},{"x":2,"y":1}]}}	weakLocalTilePos	LocalTilePos
+
+	Assets\Object\Enemy\SeaUrchin\Spine
+0	"Assets\Object\Enemy\SeaUrchin\Spine\SpineInfo"	"スポーン時のアニメーションまでのディレイ(秒)"	0.1	initAnimationDelay	float
+0		"スポーン時のアニメーションの長さ(秒)"	0.3	initAnimationTime	float
+0		"スポーン時のアニメーションの移動速度(nマス/秒)"	0.3	initAnimationSpeed	float
+0		"速度(nマス/秒)"	5	speed	float
+0		"攻撃力"	2	atk	float
+0		"攻撃のノックバック力(nマス/秒)　減衰あり"	4	knockBackPower	float
+
 	Assets\Object\Enemy\Shark
 0	"Sharkの攻撃パラメータ
-Assets\Object\Enemy\Shark\SharkAttackInfo"	atk	float	1	"攻撃力"
-0		speed	float	20	"攻撃時の移動スピード(nマス/秒)"
-0		range	int	5	"攻撃範囲(前方nマス)"
-0		knockBackPower	float	4	"攻撃のノックバック力(nマス/秒)　減衰あり"
+Assets\Object\Enemy\Shark\SharkAttackInfo"	"攻撃した後の待機時間(秒)"	1	coolTime	float
+0		"攻撃前の準備時間(秒)"	1.5	aimTime	float
+0		"攻撃力"	3	atk	float
+0		"攻撃時の移動スピード(nマス/秒)"	20	speed	float
+0		"攻撃範囲(前方nマス)"	5	range	int
+0		"攻撃のノックバック力(nマス/秒)　減衰あり"	4	knockBackPower	float
 1	"敵(Shark)の被ダメージパラメータ
-Assets\Object\Enemy\Shark\SharkDamageableInfo"	hpMax	float	10	"最大HP"
-1		weakLocalTilePos	Vector2Int[]	(0, -1)(0, -2)(0, -3)(0, -4)(0, -5)	"緑化でダメージを受けるマス
-(上向きが基準のローカルポジション)"
+Assets\Object\Enemy\Shark\SharkDamageableInfo"	"最大HP"	40	hpMax	float
+1		"緑化でダメージを受けるマス"	{"upList":{"value":[{"x":0,"y":-1},{"x":0,"y":-2},{"x":0,"y":-3},{"x":0,"y":-4},{"x":0,"y":-5},{"x":1,"y":-5},{"x":1,"y":-4},{"x":1,"y":-3},{"x":1,"y":-2},{"x":1,"y":-1}]},"downList":{"value":[{"x":0,"y":2},{"x":0,"y":3},{"x":1,"y":3},{"x":1,"y":4},{"x":1,"y":5},{"x":1,"y":6},{"x":0,"y":5},{"x":0,"y":4},{"x":0,"y":6},{"x":1,"y":2}]},"leftList":{"value":[{"x":2,"y":1},{"x":3,"y":1},{"x":4,"y":1},{"x":5,"y":1},{"x":5,"y":0},{"x":4,"y":0},{"x":3,"y":0},{"x":2,"y":0},{"x":6,"y":1},{"x":6,"y":0}]},"rightList":{"value":[{"x":-1,"y":1},{"x":-2,"y":1},{"x":-3,"y":1},{"x":-4,"y":1},{"x":-5,"y":1},{"x":-5,"y":0},{"x":-4,"y":0},{"x":-3,"y":0},{"x":-2,"y":0},{"x":-1,"y":0}]}}	weakLocalTilePos	LocalTilePos
 2	"敵(Shark)の移動パラメータ
-Assets\Object\Enemy\Shark\SharkMoverInfo"	speed	float	4	"移動スピード(nマス/秒)"
+Assets\Object\Enemy\Shark\SharkMoverInfo"	"移動スピード(nマス/秒)"	4	speed	float
+2		"敵の大きさ(nマス)"	(2, 2)	tileSize	Vector2Int
 
 	Assets\Object\Item
 0	"アイテムのUI
-Assets\Object\Item\Item->ItemUI"	smoothTime	float	0.2	"正しい位置へ到達するまでのおおよその時間"
-0		maxSpeed	float	10000	"最大速度"
+Assets\Object\Item\Item->ItemUI"	"正しい位置へ到達するまでのおおよその時間"	0.2	smoothTime	float
+0		"最大速度"	10000	maxSpeed	float
+
+	Assets\Object\Item\SpecialPower\Crab
+0	"種をまくスペシャルパワーパラメータ
+Assets\Object\Item\SpecialPower\Crab\CrabSpecialPower"	"種をまくマス"	{"upList":{"value":[{"x":0,"y":1},{"x":0,"y":2},{"x":0,"y":3},{"x":1,"y":3},{"x":1,"y":2},{"x":1,"y":1},{"x":2,"y":1},{"x":2,"y":2},{"x":2,"y":3},{"x":-1,"y":3},{"x":-1,"y":2},{"x":-1,"y":1},{"x":-2,"y":1},{"x":-2,"y":2},{"x":-2,"y":3}]},"downList":{"value":[{"x":0,"y":-1},{"x":0,"y":-2},{"x":0,"y":-3},{"x":2,"y":-3},{"x":2,"y":-2},{"x":2,"y":-1},{"x":1,"y":-1},{"x":1,"y":-2},{"x":1,"y":-3},{"x":-1,"y":-3},{"x":-1,"y":-2},{"x":-1,"y":-1},{"x":-2,"y":-1},{"x":-2,"y":-2},{"x":-2,"y":-3}]},"leftList":{"value":[{"x":-1,"y":2},{"x":-1,"y":1},{"x":-1,"y":0},{"x":-1,"y":-1},{"x":-1,"y":-2},{"x":-2,"y":-2},{"x":-2,"y":-1},{"x":-2,"y":0},{"x":-2,"y":1},{"x":-2,"y":2},{"x":-3,"y":2},{"x":-3,"y":1},{"x":-3,"y":0},{"x":-3,"y":-1},{"x":-3,"y":-2}]},"rightList":{"value":[{"x":1,"y":2},{"x":1,"y":1},{"x":1,"y":0},{"x":1,"y":-1},{"x":1,"y":-2},{"x":2,"y":-2},{"x":2,"y":-1},{"x":2,"y":0},{"x":2,"y":1},{"x":2,"y":2},{"x":3,"y":2},{"x":3,"y":1},{"x":3,"y":0},{"x":3,"y":-1},{"x":3,"y":-2}]}}	seedLocalTilePos	LocalTilePos
 
 	Assets\Object\Item\SpecialPower\Shark
 0	"Sharkのスペシャルパワーパラメータ
-Assets\Object\Item\SpecialPower\Shark\SharkSpecialPowerInfo"	seedLocalTilePos	Vector2Int[]	(0, 1)(0, 2)(0, 3)(0, 4)(0, 5)	"種をまくマス
-(上向きが基準のローカルポジション)"
+Assets\Object\Item\SpecialPower\Shark\SharkSpecialPowerInfo"	"種をまくマス"	{"upList":{"value":[{"x":-1,"y":1},{"x":0,"y":1},{"x":1,"y":1},{"x":1,"y":2},{"x":1,"y":3},{"x":1,"y":4},{"x":1,"y":5},{"x":0,"y":5},{"x":-1,"y":5},{"x":-1,"y":4},{"x":-1,"y":3},{"x":-1,"y":2},{"x":0,"y":2},{"x":0,"y":3},{"x":0,"y":4},{"x":1,"y":6},{"x":0,"y":6},{"x":-1,"y":6}]},"downList":{"value":[{"x":1,"y":-1},{"x":1,"y":-2},{"x":1,"y":-3},{"x":1,"y":-4},{"x":1,"y":-5},{"x":0,"y":-5},{"x":-1,"y":-5},{"x":-1,"y":-4},{"x":-1,"y":-3},{"x":-1,"y":-2},{"x":-1,"y":-1},{"x":0,"y":-1},{"x":0,"y":-2},{"x":0,"y":-3},{"x":0,"y":-4},{"x":1,"y":-6},{"x":0,"y":-6},{"x":-1,"y":-6}]},"leftList":{"value":[{"x":-1,"y":1},{"x":-1,"y":0},{"x":-1,"y":-1},{"x":-2,"y":-1},{"x":-3,"y":-1},{"x":-4,"y":-1},{"x":-5,"y":-1},{"x":-5,"y":0},{"x":-5,"y":1},{"x":-4,"y":1},{"x":-3,"y":1},{"x":-3,"y":0},{"x":-4,"y":0},{"x":-2,"y":0},{"x":-2,"y":1},{"x":-6,"y":-1},{"x":-6,"y":0},{"x":-6,"y":1}]},"rightList":{"value":[{"x":2,"y":1},{"x":3,"y":1},{"x":5,"y":1},{"x":6,"y":1},{"x":6,"y":0},{"x":5,"y":0},{"x":5,"y":-1},{"x":4,"y":-1},{"x":3,"y":-1},{"x":2,"y":-1},{"x":2,"y":0},{"x":3,"y":0},{"x":4,"y":0},{"x":4,"y":1},{"x":6,"y":-1},{"x":1,"y":1},{"x":1,"y":0},{"x":1,"y":-1}]}}	seedLocalTilePos	LocalTilePos
 
 	Assets\Object\player
 0	"プレイヤーの移動
-Assets\Object\player\player->PlayerMover"	moveSpeed	float	5	"プレイヤーの移動スピード(nマス/秒)"
-0		dashSpeedMagnification	float	2	"ダッシュ中の移動スピード倍率(n倍)"
-0		knockBackDampingRate	float	0.9	"ノックバックの減衰率（0でノックバックしない、1.0でノックバックし続ける）"
-0		dashConsumeEnergy	float	5	"ダッシュで消費するスタミナ(n/秒)"
-0		energyRecoveryPoint	float	0.2	"1マス緑化したときのエネルギー回復量(n/マス)"
-1	"HPゲージの管理
-Assets\Object\player\player-HP->ValueGaugeManager"	valueMax	float	10	"HPの最大値"
-1		canOverConsumeOnlyOnce	bool	True	"0をちょうど下回ったフレームにtrueを返すか"
-2	"Energyゲージの管理
-Assets\Object\player\player-Energy->ValueGaugeManager"	valueMax	float	10	"Energyの最大値"
-2		canOverConsumeOnlyOnce	bool	False	"0をちょうど下回ったフレームにtrueを返すか"
-3	"アイテムを引き寄せて回収する
-Assets\Object\player\player-Item->ItemCollector"	floatItemMoveSpeed	float	5	"アイテム引き寄せ速度(nマス/秒)"
-3		collectRange	float	0.1	"アイテムを回収して使えるようにする範囲(nマス)"
+Assets\Object\player\player->PlayerMover"	"プレイヤーの移動スピード(nマス/秒)"	5	moveSpeed	float
+0		"ダッシュ中の移動スピード倍率(n倍)"	2	dashSpeedMagnification	float
+0		"ノックバックの減衰率（0でノックバックしない、1.0でノックバックし続ける）"	0.9	knockBackDampingRate	float
+0		"ダッシュで消費するスタミナ(n/秒)"	5	dashConsumeEnergy	float
+0		"1マス緑化したときのエネルギー回復量(n/マス)"	0.1	energyRecoveryPoint	float
+0		"緑化マスでの自動エネルギー回復量(n/秒)"	0	energyAutoRecoveryPoint	float
+1	"Assets\Object\player\player->PlayerCore"	"ダメージを受けたときの無敵時間"	1	damagedInvicibleTime	float
+1		"無敵時間の点滅間隔"	0.1	damagedFlashingInterval	float
+1		"無敵時間の点滅の透明度"	0.5	damagedFlashingAlpha	float
+2	"HPゲージの管理
+Assets\Object\player\player-HP->ValueGaugeManager"	"HPの最大値"	10	valueMax	float
+2		"0をちょうど下回ったフレームにtrueを返すか"	True	canOverConsumeOnlyOnce	bool
+3	"Energyゲージの管理
+Assets\Object\player\player-Energy->ValueGaugeManager"	"Energyの最大値"	10	valueMax	float
+3		"0をちょうど下回ったフレームにtrueを返すか"	False	canOverConsumeOnlyOnce	bool
+4	"アイテムを引き寄せて回収する
+Assets\Object\player\player-Item->ItemCollector"	"アイテム引き寄せ速度(nマス/秒)"	5	floatItemMoveSpeed	float
+4		"アイテムを回収して使えるようにする範囲(nマス)"	0.1	collectRange	float
+
+	Assets\Object\Tile\Hole
+0	"Assets\Object\Tile\Hole\hole->Hole"	"タイルタイプ"	Hole	tileType	Enum
+
+	Assets\Object\Tile\Messy
+0	"Assets\Object\Tile\Messy\messy_block_clover->Messy"	"タイルタイプ"	Messy	tileType	Enum
+1	"Assets\Object\Tile\Messy\messy_block_grass->Messy"	"タイルタイプ"	Messy	tileType	Enum
+2	"Assets\Object\Tile\Messy\messy_foundation->Messy"	"タイルタイプ"	Messy	tileType	Enum
+3	"ぐちゃぐちゃな地面のパラメータ
+Assets\Object\Tile\Messy\MessyInfo"	"砂になるまでの時間"	10	cureTime	float
+
+	Assets\Object\Tile\Plant\EnemyPlant
+0	"Assets\Object\Tile\Plant\EnemyPlant\enemyPlant->EnemyPlant"	"タイルタイプ"	EnemyPlant	tileType	Enum
 
 	Assets\Object\Tile\Plant\Foundation
 0	"植物(Foundation)のパラメータ
-Assets\Object\Tile\Plant\Foundation\FoundationInfo"	plantType	Enum	Foundation	"植物タイプ"
-0		hpMax	float	1	"最大HP"
-0		growTime	float	0.5	"成長にかかる時間(秒)"
-0		damageMagnifications	DamageMagnification[]		"ダメージタイプごとの被ダメージ倍率"
+Assets\Object\Tile\Plant\Foundation\FoundationInfo"	"植物タイプ"	Foundation	plantType	Enum
+0		"最大HP"	1	hpMax	float
+0		"成長にかかる時間(秒)"	0.5	growTime	float
+
+	Assets\Object\Tile\Plant\Foundation\preafab
+0	"Assets\Object\Tile\Plant\Foundation\preafab\block_clover->Foundation"	"タイルタイプ"	Plant	tileType	Enum
+0		"見た目"	BlockCover	visualType	Enum
+1	"Assets\Object\Tile\Plant\Foundation\preafab\block_grass->Foundation"	"タイルタイプ"	Plant	tileType	Enum
+1		"見た目"	BlackGrass	visualType	Enum
+2	"Assets\Object\Tile\Plant\Foundation\preafab\foundation->Foundation"	"タイルタイプ"	Plant	tileType	Enum
+2		"見た目"	Normal	visualType	Enum
+
+	Assets\Object\Tile\Rock
+0	"Assets\Object\Tile\Rock\rock->Rock"	"タイルタイプ"	Rock	tileType	Enum
+
+	Assets\Object\Tile\Sand
+0	"Assets\Object\Tile\Sand\sand->Sand"	"タイルタイプ"	Sand	tileType	Enum
+
+	Assets\Object\Tile\wall
+0	"Assets\Object\Tile\wall\wall fill->Wall"	"タイルタイプ"	Wall	tileType	Enum
+1	"Assets\Object\Tile\wall\wall->Wall"	"タイルタイプ"	Wall	tileType	Enum
 
 	Assets\Scenes
-0	"タイルマップマネージャー
-Assets\Scenes\SampleScene\TestDungeon->DungeonManager"	messyCuredTime	float	10	"ぐちゃぐちゃな地面が砂になるまでの時間(秒)"
-1	"緑化率マネージャー
-Assets\Scenes\SampleScene\Canvas-GreeningRate->GreeningRate"	targetRate	float	0.7	"クリアに必要な緑化率"
+0	"緑化率マネージャー
+Assets\Scenes\SampleScene\Canvas-GreeningRate->GreeningRate"	"クリアに必要な緑化率"	0.5	targetRate	float
+1	"Assets\Scenes\SampleScene\AllGreening->AllGreening"	"次のマスを緑化するまでの時間"	0.1	greeningTime	float
+2	"Assets\Scenes\Title\AllGreening->AllGreening"	"次のマスを緑化するまでの時間"	0.0001	greeningTime	float
 
