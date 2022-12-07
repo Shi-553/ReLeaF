@@ -85,7 +85,8 @@ namespace Utility
                                     // コンポーネントごと
                                     foreach (var component in components)
                                     {
-                                        if (PrefabUtility.IsPartOfAnyPrefab(component))
+
+                                        if (PrefabUtility.IsPartOfPrefabInstance(component.gameObject) || component.gameObject.name.Contains("(Clone)"))
                                         {
                                             continue;
                                         }
@@ -171,10 +172,10 @@ namespace Utility
         {
             var serializedObject = new SerializedObject(target);
             var serializedProperty = serializedObject.GetIterator();
-
-            while (serializedProperty.Next(true))
+            serializedProperty.Next(true);
+            do
             {
-                var att = serializedProperty.GetAttributes<RenameAttribute>(false);
+                var att = serializedProperty.GetAttributes<RenameAttribute>(false).FirstOrDefault();
                 if (att != null)
                 {
                     if (!att.IsFormated && target is Component component)
@@ -184,9 +185,13 @@ namespace Utility
                     var type = (serializedProperty.isArray) ? serializedProperty.arrayElementType + "[]" : serializedProperty.type;
                     var valString = SerializedPropertyToString(serializedProperty);
 
-                    yield return serializedProperty.name + "\t" + type + "\t" + valString + "\t" + "\"" + att.NewName + (att.Tooltip == "" ? "" : "\n" + att.Tooltip) + "\"";
+                    if (valString != "")
+                        yield return "\"" + att.NewName + (att.Tooltip == "" ? "" : "\n" + att.Tooltip) + "\"\t"
+                            + valString + "\t"
+                            + serializedProperty.name + "\t"
+                            + type;
                 }
-            }
+            } while (serializedProperty.Next(false));
         }
 
         /// <summary>
@@ -209,6 +214,9 @@ namespace Utility
             else
             {
                 var val = serializedProperty.GetValue();
+                if (val == null)
+                    return text;
+
                 var valString = val.ToString();
 
                 if (valString == val.GetType().ToString())
@@ -231,7 +239,7 @@ namespace Utility
         public static Dictionary<string, List<Tuple<string, Object>>> FindAssetsByType(Type[] types)
         {
             var assets = new Dictionary<string, List<Tuple<string, Object>>>();
-            string[] guids = AssetDatabase.FindAssets("t:" + String.Join(" t:", types.Select(t => t.Name)));
+            string[] guids = AssetDatabase.FindAssets("t:" + String.Join(" t:", types.Select(t => t.Name)), new[] { "Assets" });
             for (int i = 0; i < guids.Length; i++)
             {
                 string assetPath = AssetDatabase.GUIDToAssetPath(guids[i]);

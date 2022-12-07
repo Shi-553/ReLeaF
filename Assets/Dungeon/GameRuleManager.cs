@@ -1,6 +1,4 @@
 using System.Collections;
-using UnityEngine;
-using Utility;
 
 namespace ReLeaf
 {
@@ -40,6 +38,12 @@ namespace ReLeaf
         AudioInfo seReady;
         [SerializeField]
         AudioInfo seStart;
+        [SerializeField]
+        AudioInfo clearBGM;
+        [SerializeField]
+        AudioInfo stageClear1;
+        [SerializeField]
+        AudioInfo stageClear2;
 
         protected override void Init()
         {
@@ -71,12 +75,24 @@ namespace ReLeaf
             State = isGameClear ? GameRuleState.GameClear : GameRuleState.GameOver;
 
             if (isGameClear)
+            {
+                BGMManager.Singleton.Stop();
+                SEManager.Singleton.Play(stageClear1);
+                StartCoroutine(WaitClearSound());
                 StartCoroutine(WaitGreening());
+            }
+        }
+        IEnumerator WaitClearSound()
+        {
+            yield return new WaitForSeconds(stageClear1.clip.length);
+            SEManager.Singleton.Play(stageClear2);
+
         }
         IEnumerator WaitGreening()
         {
             yield return StartCoroutine(allGreening.StartGreeningWithPlayer());
             gameclearText.SetActive(true);
+            SEManager.Singleton.Play(clearBGM);
         }
 
     }

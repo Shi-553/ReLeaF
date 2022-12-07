@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using UnityEditor;
 using UnityEngine;
 
@@ -97,7 +98,7 @@ namespace Utility
 
             while (serializedProperty.Next(true))
             {
-                var att = serializedProperty.GetAttributes<EditTilePosAttribute>(false);
+                var att = serializedProperty.GetAttributes<EditTilePosAttribute>(false).FirstOrDefault();
                 if (att != null)
                 {
                     if (TrySetTiles(serializedProperty))

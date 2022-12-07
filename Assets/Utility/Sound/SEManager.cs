@@ -8,10 +8,28 @@ namespace Utility
     {
         protected override int InitSourceCount => 5;
 
+        /// <summary>
+        /// ˆÊ’uŠÖŒW‚È‚­SE‚ð–Â‚ç‚·
+        /// </summary>
+        public AudioSource Play(AudioInfo info)
+        {
+            var source = GetSource(true);
+            source.clip = info.clip;
+            source.spatialBlend = 0;
+            source.loop = false;
+            source.volume = info.volume;
+            source.Play();
+
+            return source;
+        }
+        /// <summary>
+        /// ‚RDƒTƒEƒ“ƒh‚Æ‚µ‚ÄSE‚ð–Â‚ç‚·
+        /// </summary>
         public AudioSource Play(AudioInfo info, Vector3 pos)
         {
             var source = GetSource(true);
             source.clip = info.clip;
+            source.spatialBlend = 1;
             source.transform.position = pos;
             source.loop = false;
             source.volume = info.volume;

@@ -84,6 +84,7 @@ namespace Utility
             var sceneNames = new List<string>(sceneNamesOriginal);
 
             var builder = new StringBuilder()
+                .AppendLine("using UnityEngine.SceneManagement;")
                 .AppendLine("/// <summary>")
                 .AppendLine("/// シーンの種類を管理する列挙型")
                 .AppendLine("/// <summary>")
@@ -128,6 +129,22 @@ namespace Utility
             for (int i = 0; i < sceneNamesOriginal.Count; i++)
             {
                 builder.AppendLine($"          SceneType.{sceneNamesOriginal[i]} => {i},              ");
+            }
+
+            builder.AppendLine("          _ => 0,                                ");
+            builder.AppendLine("      };                                         ");
+            builder.AppendLine("   }");
+
+            builder.AppendLine("   public static SceneType GetSceneType(this Scene scene)");
+            builder.AppendLine("   {");
+
+            builder.AppendLine("      return scene.buildIndex switch                         ");
+            builder.AppendLine("      {                                          ");
+
+
+            for (int i = 0; i < sceneNamesOriginal.Count; i++)
+            {
+                builder.AppendLine($"          {i} => SceneType.{sceneNamesOriginal[i]},              ");
             }
 
             builder.AppendLine("          _ => 0,                                ");
