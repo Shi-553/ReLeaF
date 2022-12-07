@@ -29,6 +29,13 @@ namespace ReLeaf
 
         List<Vector2Int> buffer = new();
 
+        [SerializeField]
+        AudioInfo seBeforeAttack;
+        [SerializeField]
+        AudioInfo seAttack;
+
+
+
         private void Awake()
         {
             TryGetComponent(out enemyMover);
@@ -48,14 +55,16 @@ namespace ReLeaf
             foreach (var target in GetAttackRange(enemyMover.TilePos, enemyMover.Dir, false))
             {
                 attackMarkerManager.SetMarker<TargetMarker>(target, enemyMover.Dir.GetRotation());
+                SEManager.Singleton.Play(seBeforeAttack, transform.position);
             }
         }
         IEnumerator IEnemyAttacker.OnStartDamageing()
         {
             enemyDamageable.ResetWeekMarker();
-
+            //SEManager.Singleton.Play(seAttack, transform.position);
 
             enemyMover.UpdateTargetStraight(attackTargetPos);
+
             while (true)
             {
                 if (enemyMover.Move(SharkAttackInfo.Speed) != EnemyMover.MoveResult.Moveing)
@@ -65,7 +74,9 @@ namespace ReLeaf
                 yield return null;
 
                 if (this == null)
-                    yield break;
+                yield break;
+                //Ç±Ç±Ç…èëÇ≠Ç∆ëΩèdÇ…ï∑Ç±Ç¶ÇÈ
+
             }
         }
         void IEnemyAttacker.OnStartCoolTime()
