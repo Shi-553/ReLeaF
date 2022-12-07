@@ -40,7 +40,8 @@ namespace ReLeaf
 
         public void SetWeekMarker()
         {
-            foreach (var localPos in enemyDamageableInfo.WeakLocalTilePos.GetLocalTilePosList(enemyMover.Dir))
+            var localPoss = enemyDamageableInfo.WeakLocalTilePos.GetLocalTilePosList(enemyMover.Dir);
+            foreach (var localPos in localPoss)
             {
                 var worldTilePos = enemyMover.TilePos + localPos;
 
