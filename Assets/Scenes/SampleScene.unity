@@ -1805,6 +1805,11 @@ MonoBehaviour:
   gamestartText: {fileID: 242249647}
   gameclearText: {fileID: 1709581110}
   bgmStage1: {fileID: 11400000, guid: 71c129295069af243b82fb8105be7d93, type: 2}
+  seReady: {fileID: 11400000, guid: 2f132ff312de5f84e89c4d748df39f38, type: 2}
+  seStart: {fileID: 11400000, guid: 02f930166ee8bd24cab1fc8689f16de4, type: 2}
+  clearBGM: {fileID: 11400000, guid: c4d8fe8b3fcb79e40ada69b098aca8ba, type: 2}
+  stageClear1: {fileID: 11400000, guid: 291e49e1af0f0ef479acbcb7f55c3b92, type: 2}
+  stageClear2: {fileID: 11400000, guid: 368a254ca49eab74eb797f91ff52b162, type: 2}
 --- !u!4 &812973352
 Transform:
   m_ObjectHideFlags: 0
@@ -4395,6 +4400,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 166d001927ca49442b7b421b1722cf0f, type: 2}
   messyTile: {fileID: 11400000, guid: 0990de19b010e804cbbe751cea55c8be, type: 2}
   enemyPlant: {fileID: 11400000, guid: 1263c40a7eae41447bd0359878251824, type: 2}
+  changeSand: {fileID: 0}
   <MaxGreeningCount>k__BackingField: 0
 --- !u!483693784 &1669264805538347063
 TilemapRenderer:

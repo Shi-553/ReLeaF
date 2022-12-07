@@ -31,8 +31,6 @@ namespace ReLeaf
         [SerializeField]
         TerrainTile enemyPlant;
 
-        [SerializeField]
-        AudioInfo changeSand;
 
         public Dictionary<Vector2Int, TileObject> tiles = new Dictionary<Vector2Int, TileObject>();
 
@@ -159,16 +157,15 @@ namespace ReLeaf
         {
             messyTile.Selected = visual;
             ChangeTile(tilePos, messyTile);
-            SEManager.Singleton.Play(changeSand, new Vector3(tilePos.x, tilePos.y, 0));
         }
         public void ToSand(Vector2Int tilePos)
         {
             ChangeTile(tilePos, sandTile);
-                   }
+        }
         public void ToEnemyPlant(Vector2Int tilePos)
         {
             ChangeTile(tilePos, enemyPlant);
-                }
+        }
 
 
         static public readonly float CELL_SIZE = 0.5f;
