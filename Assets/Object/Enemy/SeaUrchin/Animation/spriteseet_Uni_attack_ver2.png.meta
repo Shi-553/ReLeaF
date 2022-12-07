@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: bb8fdbc78db09534396ebd67b2478d82
+guid: 53da1678ebc1f8944813236d19a243cb
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -47,7 +47,7 @@ TextureImporter:
   spriteMeshType: 1
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
-  spritePixelsToUnits: 200
+  spritePixelsToUnits: 400
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
@@ -105,169 +105,169 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: SeaUrchin_attack_0
+      name: spriteseet_Uni_attack_ver2_0
       rect:
         serializedVersion: 2
-        x: 93
-        y: 96
-        width: 118
-        height: 104
-      alignment: 0
-      pivot: {x: 0, y: 0}
+        x: 0
+        y: 0
+        width: 500
+        height: 500
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 790e257a9c5826b4d83ce338939e4612
-      internalID: 614486066
+      spriteID: 9fb608ee9eb774d4794f6910d5722582
+      internalID: -1745626222
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: SeaUrchin_attack_1
+      name: spriteseet_Uni_attack_ver2_1
       rect:
         serializedVersion: 2
-        x: 370
-        y: 74
-        width: 167
-        height: 147
-      alignment: 0
-      pivot: {x: 0, y: 0}
+        x: 500
+        y: 0
+        width: 500
+        height: 500
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 0cc239a4ef0b60b4b9541f3863f8cde3
-      internalID: -994572753
+      spriteID: 8041feb54ea1dd0488bf4a203cca80e3
+      internalID: 1801234759
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: SeaUrchin_attack_2
+      name: spriteseet_Uni_attack_ver2_2
       rect:
         serializedVersion: 2
-        x: 666
-        y: 69
-        width: 179
-        height: 157
-      alignment: 0
-      pivot: {x: 0, y: 0}
+        x: 1000
+        y: 0
+        width: 500
+        height: 500
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 1494b64d015a9fd498eae8c87df9f8f9
-      internalID: 1149909415
+      spriteID: 75facb408a3996b44b491804d1533583
+      internalID: 179412138
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: SeaUrchin_attack_3
+      name: spriteseet_Uni_attack_ver2_3
       rect:
         serializedVersion: 2
-        x: 971
-        y: 73
-        width: 173
-        height: 151
-      alignment: 0
-      pivot: {x: 0, y: 0}
+        x: 1500
+        y: 0
+        width: 500
+        height: 500
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 812839cc687046445ac944bc332de8c6
-      internalID: -2121093996
+      spriteID: 59acaaae704d82346872120e5a4e2cbd
+      internalID: 901411613
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: SeaUrchin_attack_4
+      name: spriteseet_Uni_attack_ver2_4
       rect:
         serializedVersion: 2
-        x: 1274
-        y: 73
-        width: 172
-        height: 150
-      alignment: 0
-      pivot: {x: 0, y: 0}
+        x: 2000
+        y: 0
+        width: 500
+        height: 500
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 818d3210b6c78d2449a15207a933c9a2
-      internalID: 2013819613
+      spriteID: 17207c0890a296141b14260c0b3bea18
+      internalID: 179932449
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: SeaUrchin_attack_5
+      name: spriteseet_Uni_attack_ver2_5
       rect:
         serializedVersion: 2
-        x: 1580
-        y: 76
-        width: 164
-        height: 144
-      alignment: 0
-      pivot: {x: 0, y: 0}
+        x: 2500
+        y: 0
+        width: 500
+        height: 500
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: cc01486ffb5449d4ca577f2e6e5e7827
-      internalID: -910914359
+      spriteID: f7281742d32172941aec6af8c21b919f
+      internalID: 1859202887
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: SeaUrchin_attack_6
+      name: spriteseet_Uni_attack_ver2_6
       rect:
         serializedVersion: 2
-        x: 1883
-        y: 77
-        width: 162
-        height: 142
-      alignment: 0
-      pivot: {x: 0, y: 0}
+        x: 3000
+        y: 0
+        width: 500
+        height: 500
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 3c5f618d80049cb45aaa5aa9f8b10a5c
-      internalID: 1931262785
+      spriteID: 97e37220477c1ed4388fa88509b419bd
+      internalID: -1222673258
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: SeaUrchin_attack_7
+      name: spriteseet_Uni_attack_ver2_7
       rect:
         serializedVersion: 2
-        x: 2183
-        y: 76
-        width: 165
-        height: 144
-      alignment: 0
-      pivot: {x: 0, y: 0}
+        x: 3500
+        y: 0
+        width: 500
+        height: 500
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: b093f1b5c23c1d44594226c973ab7501
-      internalID: 882906781
+      spriteID: 4b730036568fae24ca750d470a071672
+      internalID: 27751373
       vertices: []
       indices: 
       edges: []
@@ -275,7 +275,7 @@ TextureImporter:
     outline: []
     physicsShape: []
     bones: []
-    spriteID: e3ea98c758ef88c4c99697831439ee3c
+    spriteID: 7880689984066714592129e46bb58a3b
     internalID: 0
     vertices: []
     indices: 
@@ -283,14 +283,14 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      SeaUrchin_attack_7: 882906781
-      SeaUrchin_attack_2: 1149909415
-      SeaUrchin_attack_0: 614486066
-      SeaUrchin_attack_6: 1931262785
-      SeaUrchin_attack_1: -994572753
-      SeaUrchin_attack_3: -2121093996
-      SeaUrchin_attack_4: 2013819613
-      SeaUrchin_attack_5: -910914359
+      spriteseet_Uni_attack_ver2_3: 901411613
+      spriteseet_Uni_attack_ver2_4: 179932449
+      spriteseet_Uni_attack_ver2_0: -1745626222
+      spriteseet_Uni_attack_ver2_5: 1859202887
+      spriteseet_Uni_attack_ver2_7: 27751373
+      spriteseet_Uni_attack_ver2_6: -1222673258
+      spriteseet_Uni_attack_ver2_1: 1801234759
+      spriteseet_Uni_attack_ver2_2: 179412138
   spritePackingTag: 
   pSDRemoveMatte: 0
   pSDShowRemoveMatteOption: 0
