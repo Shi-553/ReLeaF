@@ -17,6 +17,7 @@ namespace ReLeaf
         {
             base.Init(isCreated);
             StartCoroutine(WaitCure());
+            SEManager.Singleton.Play(messyInfo.ChangeSand, DungeonManager.Singleton.TilePosToWorld(TilePos));
         }
         IEnumerator WaitCure()
         {

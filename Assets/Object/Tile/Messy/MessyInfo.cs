@@ -11,5 +11,9 @@ namespace ReLeaf
         float cureTime = 10;
         public float CureTime => cureTime;
 
+
+        [SerializeField, Rename("ぐちゃぐちゃになったときの音")]
+        AudioInfo changeSand;
+        public AudioInfo ChangeSand => changeSand;
     }
 }

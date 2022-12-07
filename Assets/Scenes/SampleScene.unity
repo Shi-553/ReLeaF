@@ -1226,9 +1226,9 @@ GameObject:
   m_Component:
   - component: {fileID: 519420032}
   - component: {fileID: 519420031}
-  - component: {fileID: 519420029}
   - component: {fileID: 519420030}
   - component: {fileID: 519420033}
+  - component: {fileID: 519420034}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -1236,14 +1236,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!81 &519420029
-AudioListener:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 519420028}
-  m_Enabled: 1
 --- !u!114 &519420030
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1369,6 +1361,14 @@ MonoBehaviour:
   m_CameraActivatedEvent:
     m_PersistentCalls:
       m_Calls: []
+--- !u!81 &519420034
+AudioListener:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 519420028}
+  m_Enabled: 1
 --- !u!1001 &587555204
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1805,6 +1805,11 @@ MonoBehaviour:
   gamestartText: {fileID: 242249647}
   gameclearText: {fileID: 1709581110}
   bgmStage1: {fileID: 11400000, guid: 71c129295069af243b82fb8105be7d93, type: 2}
+  seReady: {fileID: 11400000, guid: 2f132ff312de5f84e89c4d748df39f38, type: 2}
+  seStart: {fileID: 11400000, guid: 02f930166ee8bd24cab1fc8689f16de4, type: 2}
+  clearBGM: {fileID: 11400000, guid: c4d8fe8b3fcb79e40ada69b098aca8ba, type: 2}
+  stageClear1: {fileID: 11400000, guid: 291e49e1af0f0ef479acbcb7f55c3b92, type: 2}
+  stageClear2: {fileID: 11400000, guid: 368a254ca49eab74eb797f91ff52b162, type: 2}
 --- !u!4 &812973352
 Transform:
   m_ObjectHideFlags: 0

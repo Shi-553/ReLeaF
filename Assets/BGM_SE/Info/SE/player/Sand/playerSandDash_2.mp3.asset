@@ -13,4 +13,4 @@ MonoBehaviour:
   m_Name: playerSandDash_2.mp3
   m_EditorClassIdentifier: 
   clip: {fileID: 8300000, guid: 831f7f599b691f543b31ff2f9a2506d6, type: 3}
-  volume: 0.5
+  volume: 1

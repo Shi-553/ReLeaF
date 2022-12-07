@@ -1,7 +1,6 @@
 using System.Collections;
 using UnityEngine;
 using Utility;
-
 namespace ReLeaf
 {
     public enum GameRuleState
@@ -37,6 +36,10 @@ namespace ReLeaf
         [SerializeField]
         AudioInfo bgmStage1;
         [SerializeField]
+        AudioInfo seReady;
+        [SerializeField]
+        AudioInfo seStart;
+        [SerializeField]
         AudioInfo clearBGM;
         [SerializeField]
         AudioInfo stageClear1;
@@ -52,9 +55,11 @@ namespace ReLeaf
         {
             yield return new WaitForSeconds(1);
             gameReadyText.SetActive(true);
+            SEManager.Singleton.Play(seReady);
             yield return new WaitForSeconds(1);
             gameReadyText.SetActive(false);
             gamestartText.SetActive(true);
+            SEManager.Singleton.Play(seStart);
 
             State = GameRuleState.Playing;
 
