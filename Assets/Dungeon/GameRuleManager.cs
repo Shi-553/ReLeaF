@@ -73,7 +73,7 @@ namespace ReLeaf
             if (isGameClear)
             {
                 BGMManager.Singleton.Stop();
-                SEManager.Singleton.Play(stageClear1, transform.position);
+                SEManager.Singleton.Play(stageClear1);
                 StartCoroutine(WaitClearSound());
                 StartCoroutine(WaitGreening());
             }
@@ -81,14 +81,14 @@ namespace ReLeaf
         IEnumerator WaitClearSound()
         {
             yield return new WaitForSeconds(stageClear1.clip.length);
-            SEManager.Singleton.Play(stageClear2, transform.position);
+            SEManager.Singleton.Play(stageClear2);
 
         }
         IEnumerator WaitGreening()
         {
             yield return StartCoroutine(allGreening.StartGreeningWithPlayer());
             gameclearText.SetActive(true);
-            SEManager.Singleton.Play(clearBGM, transform.position);
+            SEManager.Singleton.Play(clearBGM);
         }
 
     }
