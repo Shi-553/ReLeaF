@@ -1,5 +1,6 @@
 using System.Collections;
-
+using UnityEngine;
+using Utility;
 namespace ReLeaf
 {
     public enum GameRuleState
@@ -54,11 +55,11 @@ namespace ReLeaf
         {
             yield return new WaitForSeconds(1);
             gameReadyText.SetActive(true);
-            SEManager.Singleton.Play(seReady, new Vector3(0, 0, 0));
+            SEManager.Singleton.Play(seReady);
             yield return new WaitForSeconds(1);
             gameReadyText.SetActive(false);
             gamestartText.SetActive(true);
-            SEManager.Singleton.Play(seStart, new Vector3(0, 0, 0));
+            SEManager.Singleton.Play(seStart);
 
             State = GameRuleState.Playing;
 
