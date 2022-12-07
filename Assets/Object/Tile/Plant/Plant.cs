@@ -57,6 +57,8 @@ namespace ReLeaf
             }
 
             growCo = StartCoroutine(Growing());
+            var effect = ComponentPool.Singleton.SetPool(plantInfo.ToLeafEffect).Get<ToLeafEffect>();
+            effect.transform.position = transform.position;
         }
         IEnumerator Growing()
         {

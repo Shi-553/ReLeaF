@@ -4,7 +4,7 @@ using Utility;
 namespace ReLeaf
 {
     [ClassSummary("ぐちゃぐちゃな地面のパラメータ")]
-    [CreateAssetMenu]
+    [CreateAssetMenu(menuName = "Tile/MessyInfo")]
     public class MessyInfo : ScriptableObject
     {
         [SerializeField, Rename("砂になるまでの時間")]

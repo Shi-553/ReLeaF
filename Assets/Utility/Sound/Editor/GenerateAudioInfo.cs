@@ -21,14 +21,20 @@ namespace Utility
         }
         static bool CheckBaseOf(Uri parentUri, string[] children)
         {
-            foreach (var child in children)
+            try
             {
-                var childUri = new Uri(Path.GetFullPath(child));
-                if (parentUri != childUri && parentUri.IsBaseOf(childUri))
+                foreach (var child in children)
                 {
-                    return true;
-                }
+                    var childUri = new Uri(Path.GetFullPath(child));
+                    if (parentUri != childUri && parentUri.IsBaseOf(childUri))
+                    {
+                        return true;
+                    }
 
+                }
+            }
+            catch
+            {
             }
             return false;
         }

@@ -5,7 +5,7 @@ using Utility;
 namespace ReLeaf
 {
     [ClassSummary("植物({asset.dirname})のパラメータ")]
-    [CreateAssetMenu]
+    [CreateAssetMenu(menuName = "Tile/PlantInfo")]
     public class PlantInfo : ScriptableObject
     {
         [SerializeField, Rename("植物タイプ")]
@@ -24,5 +24,9 @@ namespace ReLeaf
         [SerializeField, Rename("ダメージタイプごとの被ダメージ倍率")]
         DamageMagnification[] damageMagnifications;
         public IReadOnlyCollection<DamageMagnification> DamageMagnifications => damageMagnifications;
+
+        [SerializeField, Rename("緑化時のエフェクト")]
+        ToLeafEffect toLeafEffect;
+        public ToLeafEffect ToLeafEffect => toLeafEffect;
     }
 }

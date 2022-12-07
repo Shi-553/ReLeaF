@@ -16,3 +16,4 @@ MonoBehaviour:
   hpMax: 1
   growTime: 0.5
   damageMagnifications: []
+  toLeafEffect: {fileID: 0}
