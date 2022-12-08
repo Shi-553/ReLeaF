@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using TMPro;
+using UnityEngine;
 using Utility;
 
 namespace ReLeaf
@@ -7,6 +8,22 @@ namespace ReLeaf
     [CreateAssetMenu(menuName = "UI/DamageValueEffectInfo")]
     class DamageValueEffectInfo : ScriptableObject
     {
+        [SerializeField, Rename("アニメーション")]
+        AnimationClip initAnimation;
+        public AnimationClip InitAnimation => initAnimation;
+
+        [SerializeField, Rename("普通のダメージのスプライトアセット")]
+        TMP_SpriteAsset normalDamageSpriteAsset;
+        public TMP_SpriteAsset NormalDamageSpriteAsset => normalDamageSpriteAsset;
+
+        [SerializeField, Rename("大きなダメージのスプライトアセット")]
+        TMP_SpriteAsset highDamageSpriteAsset;
+        public TMP_SpriteAsset HighDamageSpriteAsset => highDamageSpriteAsset;
+
+        [SerializeField, Rename("大きなダメージとなる閾値")]
+        int highDamageThreshold;
+        public int HighDamageThreshold => highDamageThreshold;
+
         [SerializeField, Rename("サイズ変化で考慮する最大ダメージ")]
         float maxDamage = 10;
         public float MaxDamage => maxDamage;
@@ -20,8 +37,11 @@ namespace ReLeaf
         public float MaxSize => maxSize;
 
 
-        [SerializeField, Rename("表示座標オフセット")]
+        [SerializeField, Rename("表示座標のオフセット")]
         Vector3 offset;
         public Vector3 Offset => offset;
+        [SerializeField, Rename("表示座標のランダムオフセットの最大")]
+        Vector3 randomOffsetMax;
+        public Vector3 RandomOffsetMax => randomOffsetMax;
     }
 }

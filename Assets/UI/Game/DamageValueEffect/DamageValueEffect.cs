@@ -1,6 +1,7 @@
+using Animancer;
 using System.Collections;
+using TMPro;
 using UnityEngine;
-using UnityEngine.UI;
 using Utility;
 
 namespace ReLeaf
@@ -11,11 +12,10 @@ namespace ReLeaf
         {
             if (isCreated)
             {
-                TryGetComponent(out animation);
-                text = GetComponentInChildren<Text>();
-                textRect = text.GetComponent<RectTransform>();
+                TryGetComponent(out animancer);
+                text = GetComponentInChildren<TextMeshProUGUI>(true);
             }
-            animation.Play();
+            animancer.Play(info.InitAnimation);
             StartCoroutine(WaitAnimation());
         }
 
@@ -23,34 +23,39 @@ namespace ReLeaf
         {
         }
 
-        Text text;
-        RectTransform textRect;
-        new Animation animation;
+        TextMeshProUGUI text;
 
         int damage;
 
         [SerializeField]
         DamageValueEffectInfo info;
 
+        AnimancerComponent animancer;
 
         IPool IPoolableSelfRelease.Pool { get; set; }
 
         public void ShowDamageValue(int damage, Vector3 pos)
         {
             this.damage = damage;
-            transform.position = pos + info.Offset;
-            text.text = damage.ToString();
-            var size = textRect.sizeDelta;
-            size.y = MathExtension.Map(damage, 0, info.MaxDamage, info.MinSize, info.MaxSize, true);
-            textRect.sizeDelta = size;
+            transform.position = pos + info.Offset + Vector3.Lerp(-info.RandomOffsetMax, info.RandomOffsetMax, Random.value);
+
+            var damageStr = damage.ToString();
+            var damageText = "";
+            foreach (var damageChar in damageStr)
+            {
+                damageText += $"<sprite={damageChar}>";
+            }
+
+            text.text = damageText;
+            text.fontSize = MathExtension.Map(damage, 0, info.MaxDamage, info.MinSize, info.MaxSize, true);
 
 
-            text.color = damage <= 4 ? Color.white : Color.green;
+            text.spriteAsset = damage <= info.HighDamageThreshold ? info.NormalDamageSpriteAsset : info.HighDamageSpriteAsset;
         }
 
         IEnumerator WaitAnimation()
         {
-            yield return new WaitForSeconds(animation.clip.length);
+            yield return new WaitForSeconds(info.InitAnimation.length);
             this.StaticCast<IPoolableSelfRelease>().Release();
         }
 
