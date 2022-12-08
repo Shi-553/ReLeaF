@@ -108,10 +108,10 @@ TextureImporter:
       name: spriteseet_Crabattackhit_ver2_0
       rect:
         serializedVersion: 2
-        x: 0
-        y: 0
-        width: 250
-        height: 250
+        x: 42
+        y: 72
+        width: 175
+        height: 153
       alignment: 7
       pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -129,10 +129,10 @@ TextureImporter:
       name: spriteseet_Crabattackhit_ver2_1
       rect:
         serializedVersion: 2
-        x: 250
-        y: 0
-        width: 250
-        height: 250
+        x: 299
+        y: 72
+        width: 170
+        height: 106
       alignment: 7
       pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -150,12 +150,12 @@ TextureImporter:
       name: spriteseet_Crabattackhit_ver2_2
       rect:
         serializedVersion: 2
-        x: 500
-        y: 0
-        width: 250
-        height: 250
-      alignment: 7
-      pivot: {x: 0.5, y: 0}
+        x: 550
+        y: 69
+        width: 168
+        height: 107
+      alignment: 9
+      pivot: {x: 0.5, y: 0.0717757}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -171,12 +171,12 @@ TextureImporter:
       name: spriteseet_Crabattackhit_ver2_3
       rect:
         serializedVersion: 2
-        x: 750
-        y: 0
-        width: 250
-        height: 250
-      alignment: 7
-      pivot: {x: 0.5, y: 0}
+        x: 789
+        y: 58
+        width: 174
+        height: 132
+      alignment: 9
+      pivot: {x: 0.5, y: 0.119696975}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -192,10 +192,10 @@ TextureImporter:
       name: spriteseet_Crabattackhit_ver2_4
       rect:
         serializedVersion: 2
-        x: 1000
-        y: 0
-        width: 250
-        height: 250
+        x: 1004
+        y: 72
+        width: 201
+        height: 120
       alignment: 7
       pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -221,6 +221,7 @@ TextureImporter:
     secondaryTextures: []
     nameFileIdTable:
       spriteseet_Crabattackhit_ver2_4: 596996085
+      spriteseet_Crabattackhit_ver2_5: -1227670811
       spriteseet_Crabattackhit_ver2_0: -585720491
       spriteseet_Crabattackhit_ver2_3: -1588761541
       spriteseet_Crabattackhit_ver2_1: 460504735

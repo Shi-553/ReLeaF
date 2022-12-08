@@ -108,12 +108,12 @@ TextureImporter:
       name: spriteseet_Crabwalk_idou_ver2_0
       rect:
         serializedVersion: 2
-        x: 0
-        y: 250
-        width: 250
-        height: 250
-      alignment: 7
-      pivot: {x: 0.5, y: 0}
+        x: 10
+        y: 298
+        width: 234
+        height: 142
+      alignment: 9
+      pivot: {x: 0.5, y: 0.18239437}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -129,12 +129,12 @@ TextureImporter:
       name: spriteseet_Crabwalk_idou_ver2_1
       rect:
         serializedVersion: 2
-        x: 250
-        y: 250
-        width: 250
-        height: 250
-      alignment: 7
-      pivot: {x: 0.5, y: 0}
+        x: 274
+        y: 299
+        width: 212
+        height: 142
+      alignment: 9
+      pivot: {x: 0.5, y: 0.18380281}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -150,12 +150,12 @@ TextureImporter:
       name: spriteseet_Crabwalk_idou_ver2_2
       rect:
         serializedVersion: 2
-        x: 500
-        y: 250
-        width: 250
-        height: 250
-      alignment: 7
-      pivot: {x: 0.5, y: 0}
+        x: 506
+        y: 298
+        width: 238
+        height: 142
+      alignment: 9
+      pivot: {x: 0.5, y: 0.18732394}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -171,12 +171,12 @@ TextureImporter:
       name: spriteseet_Crabwalk_idou_ver2_3
       rect:
         serializedVersion: 2
-        x: 750
-        y: 250
-        width: 250
-        height: 250
-      alignment: 7
-      pivot: {x: 0.5, y: 0}
+        x: 776
+        y: 299
+        width: 207
+        height: 142
+      alignment: 9
+      pivot: {x: 0.5, y: 0.1802817}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -192,12 +192,12 @@ TextureImporter:
       name: spriteseet_Crabwalk_idou_ver2_4
       rect:
         serializedVersion: 2
-        x: 0
-        y: 0
-        width: 250
-        height: 250
-      alignment: 7
-      pivot: {x: 0.5, y: 0}
+        x: 6
+        y: 48
+        width: 238
+        height: 142
+      alignment: 9
+      pivot: {x: 0.5, y: 0.19}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -213,12 +213,12 @@ TextureImporter:
       name: spriteseet_Crabwalk_idou_ver2_5
       rect:
         serializedVersion: 2
-        x: 250
-        y: 0
-        width: 250
-        height: 250
-      alignment: 7
-      pivot: {x: 0.5, y: 0}
+        x: 276
+        y: 49
+        width: 207
+        height: 142
+      alignment: 9
+      pivot: {x: 0.5, y: 0.19}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -234,12 +234,12 @@ TextureImporter:
       name: spriteseet_Crabwalk_idou_ver2_6
       rect:
         serializedVersion: 2
-        x: 500
-        y: 0
-        width: 250
-        height: 250
-      alignment: 7
-      pivot: {x: 0.5, y: 0}
+        x: 510
+        y: 48
+        width: 234
+        height: 142
+      alignment: 9
+      pivot: {x: 0.5, y: 0.19}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -255,12 +255,12 @@ TextureImporter:
       name: spriteseet_Crabwalk_idou_ver2_7
       rect:
         serializedVersion: 2
-        x: 750
-        y: 0
-        width: 250
-        height: 250
-      alignment: 7
-      pivot: {x: 0.5, y: 0}
+        x: 774
+        y: 49
+        width: 212
+        height: 142
+      alignment: 9
+      pivot: {x: 0.5, y: 0.16197184}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []

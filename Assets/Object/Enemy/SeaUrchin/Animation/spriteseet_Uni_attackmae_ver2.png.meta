@@ -108,10 +108,10 @@ TextureImporter:
       name: spriteseet_Uni_attackmae_ver2_0
       rect:
         serializedVersion: 2
-        x: 0
-        y: 0
-        width: 500
-        height: 500
+        x: 114
+        y: 125
+        width: 273
+        height: 241
       alignment: 7
       pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -129,10 +129,10 @@ TextureImporter:
       name: spriteseet_Uni_attackmae_ver2_1
       rect:
         serializedVersion: 2
-        x: 500
-        y: 0
-        width: 500
-        height: 500
+        x: 609
+        y: 120
+        width: 284
+        height: 249
       alignment: 7
       pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -150,10 +150,10 @@ TextureImporter:
       name: spriteseet_Uni_attackmae_ver2_2
       rect:
         serializedVersion: 2
-        x: 1000
-        y: 0
-        width: 500
-        height: 500
+        x: 1119
+        y: 129
+        width: 264
+        height: 234
       alignment: 7
       pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -171,10 +171,10 @@ TextureImporter:
       name: spriteseet_Uni_attackmae_ver2_3
       rect:
         serializedVersion: 2
-        x: 1500
-        y: 0
-        width: 500
-        height: 500
+        x: 1623
+        y: 132
+        width: 256
+        height: 225
       alignment: 7
       pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -192,10 +192,10 @@ TextureImporter:
       name: spriteseet_Uni_attackmae_ver2_4
       rect:
         serializedVersion: 2
-        x: 2000
-        y: 0
-        width: 500
-        height: 500
+        x: 2134
+        y: 131
+        width: 234
+        height: 219
       alignment: 7
       pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -213,10 +213,10 @@ TextureImporter:
       name: spriteseet_Uni_attackmae_ver2_5
       rect:
         serializedVersion: 2
-        x: 2500
-        y: 0
-        width: 500
-        height: 500
+        x: 2650
+        y: 129
+        width: 201
+        height: 206
       alignment: 7
       pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -234,10 +234,10 @@ TextureImporter:
       name: spriteseet_Uni_attackmae_ver2_6
       rect:
         serializedVersion: 2
-        x: 3000
-        y: 0
-        width: 500
-        height: 500
+        x: 3152
+        y: 131
+        width: 197
+        height: 201
       alignment: 7
       pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}

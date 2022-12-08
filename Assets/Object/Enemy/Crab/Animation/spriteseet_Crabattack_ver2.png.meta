@@ -108,12 +108,12 @@ TextureImporter:
       name: spriteseet_Crabattack_ver2_0
       rect:
         serializedVersion: 2
-        x: 0
-        y: 250
-        width: 250
-        height: 250
-      alignment: 7
-      pivot: {x: 0.5, y: 0}
+        x: 9
+        y: 298
+        width: 236
+        height: 144
+      alignment: 9
+      pivot: {x: 0.5, y: 0.15902777}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -129,12 +129,12 @@ TextureImporter:
       name: spriteseet_Crabattack_ver2_1
       rect:
         serializedVersion: 2
-        x: 250
-        y: 250
-        width: 250
-        height: 250
-      alignment: 7
-      pivot: {x: 0.5, y: 0}
+        x: 260
+        y: 296
+        width: 235
+        height: 133
+      alignment: 9
+      pivot: {x: 0.5, y: 0.19022556}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -150,12 +150,12 @@ TextureImporter:
       name: spriteseet_Crabattack_ver2_2
       rect:
         serializedVersion: 2
-        x: 500
-        y: 250
-        width: 250
-        height: 250
-      alignment: 7
-      pivot: {x: 0.5, y: 0}
+        x: 529
+        y: 307
+        width: 194
+        height: 124
+      alignment: 9
+      pivot: {x: 0.5, y: 0.13241936}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -171,10 +171,10 @@ TextureImporter:
       name: spriteseet_Crabattack_ver2_3
       rect:
         serializedVersion: 2
-        x: 750
-        y: 250
-        width: 250
-        height: 250
+        x: 786
+        y: 319
+        width: 182
+        height: 162
       alignment: 7
       pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -192,10 +192,10 @@ TextureImporter:
       name: spriteseet_Crabattack_ver2_4
       rect:
         serializedVersion: 2
-        x: 1000
-        y: 250
-        width: 250
-        height: 250
+        x: 1041
+        y: 320
+        width: 178
+        height: 158
       alignment: 7
       pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -213,10 +213,10 @@ TextureImporter:
       name: spriteseet_Crabattack_ver2_5
       rect:
         serializedVersion: 2
-        x: 1250
-        y: 250
-        width: 250
-        height: 250
+        x: 1291
+        y: 319
+        width: 177
+        height: 156
       alignment: 7
       pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -234,10 +234,10 @@ TextureImporter:
       name: spriteseet_Crabattack_ver2_6
       rect:
         serializedVersion: 2
-        x: 1500
-        y: 250
-        width: 250
-        height: 250
+        x: 1541
+        y: 319
+        width: 178
+        height: 159
       alignment: 7
       pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -255,10 +255,10 @@ TextureImporter:
       name: spriteseet_Crabattack_ver2_7
       rect:
         serializedVersion: 2
-        x: 1750
-        y: 250
-        width: 250
-        height: 250
+        x: 1791
+        y: 319
+        width: 177
+        height: 156
       alignment: 7
       pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -276,10 +276,10 @@ TextureImporter:
       name: spriteseet_Crabattack_ver2_8
       rect:
         serializedVersion: 2
-        x: 2000
-        y: 250
-        width: 250
-        height: 250
+        x: 2041
+        y: 319
+        width: 178
+        height: 159
       alignment: 7
       pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -297,10 +297,10 @@ TextureImporter:
       name: spriteseet_Crabattack_ver2_9
       rect:
         serializedVersion: 2
-        x: 0
-        y: 0
-        width: 250
-        height: 250
+        x: 42
+        y: 70
+        width: 176
+        height: 155
       alignment: 7
       pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -318,10 +318,10 @@ TextureImporter:
       name: spriteseet_Crabattack_ver2_10
       rect:
         serializedVersion: 2
-        x: 250
-        y: 0
-        width: 250
-        height: 250
+        x: 291
+        y: 70
+        width: 179
+        height: 158
       alignment: 7
       pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -339,10 +339,10 @@ TextureImporter:
       name: spriteseet_Crabattack_ver2_11
       rect:
         serializedVersion: 2
-        x: 500
-        y: 0
-        width: 250
-        height: 250
+        x: 542
+        y: 70
+        width: 176
+        height: 155
       alignment: 7
       pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -360,10 +360,10 @@ TextureImporter:
       name: spriteseet_Crabattack_ver2_12
       rect:
         serializedVersion: 2
-        x: 750
-        y: 0
-        width: 250
-        height: 250
+        x: 791
+        y: 70
+        width: 178
+        height: 158
       alignment: 7
       pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -381,10 +381,10 @@ TextureImporter:
       name: spriteseet_Crabattack_ver2_13
       rect:
         serializedVersion: 2
-        x: 1000
-        y: 0
-        width: 250
-        height: 250
+        x: 1042
+        y: 70
+        width: 176
+        height: 155
       alignment: 7
       pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -402,10 +402,10 @@ TextureImporter:
       name: spriteseet_Crabattack_ver2_14
       rect:
         serializedVersion: 2
-        x: 1250
-        y: 0
-        width: 250
-        height: 250
+        x: 1291
+        y: 70
+        width: 178
+        height: 158
       alignment: 7
       pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -423,10 +423,10 @@ TextureImporter:
       name: spriteseet_Crabattack_ver2_15
       rect:
         serializedVersion: 2
-        x: 1500
-        y: 0
-        width: 250
-        height: 250
+        x: 1542
+        y: 70
+        width: 177
+        height: 155
       alignment: 7
       pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -444,10 +444,10 @@ TextureImporter:
       name: spriteseet_Crabattack_ver2_16
       rect:
         serializedVersion: 2
-        x: 1750
-        y: 0
-        width: 250
-        height: 250
+        x: 1791
+        y: 70
+        width: 178
+        height: 158
       alignment: 7
       pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -465,10 +465,10 @@ TextureImporter:
       name: spriteseet_Crabattack_ver2_17
       rect:
         serializedVersion: 2
-        x: 2000
-        y: 0
-        width: 250
-        height: 250
+        x: 2042
+        y: 70
+        width: 177
+        height: 155
       alignment: 7
       pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -500,6 +500,7 @@ TextureImporter:
       spriteseet_Crabattack_ver2_0: -1114590350
       spriteseet_Crabattack_ver2_10: 657400868
       spriteseet_Crabattack_ver2_15: -30571354
+      spriteseet_Crabattack_ver2_18: -1808975339
       spriteseet_Crabattack_ver2_6: 1986173372
       spriteseet_Crabattack_ver2_13: 1737987790
       spriteseet_Crabattack_ver2_7: 2095741792
