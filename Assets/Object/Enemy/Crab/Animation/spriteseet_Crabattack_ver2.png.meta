@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 45ff14b55280c0e458108ea280e1123d
+guid: 7bac8617794be3a46b63d3de9ca31efd
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -47,7 +47,7 @@ TextureImporter:
   spriteMeshType: 1
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
-  spritePixelsToUnits: 200
+  spritePixelsToUnits: 220
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
@@ -105,379 +105,379 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: spriteseet_Crabattack_0
+      name: spriteseet_Crabattack_ver2_0
       rect:
         serializedVersion: 2
         x: 0
         y: 250
         width: 250
         height: 250
-      alignment: 0
-      pivot: {x: 0, y: 0}
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: b9016fc803c7e4748a38da1f9bb1f5b0
-      internalID: 1040829750
+      spriteID: 1e630026712ff28469138d2e6aad4373
+      internalID: -1114590350
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: spriteseet_Crabattack_1
+      name: spriteseet_Crabattack_ver2_1
       rect:
         serializedVersion: 2
         x: 250
         y: 250
         width: 250
         height: 250
-      alignment: 0
-      pivot: {x: 0, y: 0}
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: df46010a39c09864796e91dbebcd9404
-      internalID: 1202500079
+      spriteID: c38c975b1763eed4c9b75b048a17b655
+      internalID: 1542177705
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: spriteseet_Crabattack_2
+      name: spriteseet_Crabattack_ver2_2
       rect:
         serializedVersion: 2
         x: 500
         y: 250
         width: 250
         height: 250
-      alignment: 0
-      pivot: {x: 0, y: 0}
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: f70faddfc884d094a9843dc259862184
-      internalID: -1374178752
+      spriteID: e2129abd72c80fb4391da3848e55f724
+      internalID: -292553154
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: spriteseet_Crabattack_3
+      name: spriteseet_Crabattack_ver2_3
       rect:
         serializedVersion: 2
         x: 750
         y: 250
         width: 250
         height: 250
-      alignment: 0
-      pivot: {x: 0, y: 0}
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 8cb7f5d7d47911a4c9711b8a29025d37
-      internalID: -1758770421
+      spriteID: 7b3d817484fa81347a68adfec07fd344
+      internalID: -43583604
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: spriteseet_Crabattack_4
+      name: spriteseet_Crabattack_ver2_4
       rect:
         serializedVersion: 2
         x: 1000
         y: 250
         width: 250
         height: 250
-      alignment: 0
-      pivot: {x: 0, y: 0}
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: d5938c2d72b01a949826f8ae1ec63ec8
-      internalID: -1838384734
+      spriteID: 743f50a624f53f84a95e6ea5060f7766
+      internalID: 1236249587
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: spriteseet_Crabattack_5
+      name: spriteseet_Crabattack_ver2_5
       rect:
         serializedVersion: 2
         x: 1250
         y: 250
         width: 250
         height: 250
-      alignment: 0
-      pivot: {x: 0, y: 0}
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 39c05ae14cb2f784c915317c1f654256
-      internalID: 929294206
+      spriteID: 3ebb3831f1e6a0442ba1a68c0824fb32
+      internalID: -1061491582
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: spriteseet_Crabattack_6
+      name: spriteseet_Crabattack_ver2_6
       rect:
         serializedVersion: 2
         x: 1500
         y: 250
         width: 250
         height: 250
-      alignment: 0
-      pivot: {x: 0, y: 0}
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 26eb7adc6beb03b439945f6ab79e7300
-      internalID: -1598217480
+      spriteID: 141cf8b4efe2feb49bcad978a6a926c8
+      internalID: 1986173372
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: spriteseet_Crabattack_7
+      name: spriteseet_Crabattack_ver2_7
       rect:
         serializedVersion: 2
         x: 1750
         y: 250
         width: 250
         height: 250
-      alignment: 0
-      pivot: {x: 0, y: 0}
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: a0081d07775c62141a07e1c73443e1e7
-      internalID: 217633107
+      spriteID: 75b1a5b5baea6f843b26bf427b3f122c
+      internalID: 2095741792
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: spriteseet_Crabattack_8
+      name: spriteseet_Crabattack_ver2_8
       rect:
         serializedVersion: 2
         x: 2000
         y: 250
         width: 250
         height: 250
-      alignment: 0
-      pivot: {x: 0, y: 0}
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 97d4348079019234b84ce1de9fdb9b4c
-      internalID: -1478783116
+      spriteID: e6475f04de5f0f14c9a64a550429c6ad
+      internalID: -492080377
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: spriteseet_Crabattack_9
+      name: spriteseet_Crabattack_ver2_9
       rect:
         serializedVersion: 2
         x: 0
         y: 0
         width: 250
         height: 250
-      alignment: 0
-      pivot: {x: 0, y: 0}
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: e1fa2612cd53b73478795d8b4853a157
-      internalID: -1703740139
+      spriteID: c27b20b19c888054fa329aa55b92a49e
+      internalID: -363615373
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: spriteseet_Crabattack_10
+      name: spriteseet_Crabattack_ver2_10
       rect:
         serializedVersion: 2
         x: 250
         y: 0
         width: 250
         height: 250
-      alignment: 0
-      pivot: {x: 0, y: 0}
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 274e5ec8b744fb94ab9c34495a3131f6
-      internalID: 660193342
+      spriteID: 7edd5e1d81ab04f48829ed54726a1e30
+      internalID: 657400868
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: spriteseet_Crabattack_11
+      name: spriteseet_Crabattack_ver2_11
       rect:
         serializedVersion: 2
         x: 500
         y: 0
         width: 250
         height: 250
-      alignment: 0
-      pivot: {x: 0, y: 0}
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: fe443d0a1295d1146ad2a1dd24458377
-      internalID: 1696738894
+      spriteID: 25677f811d25c6c4e840444bfc6a62dd
+      internalID: 496642226
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: spriteseet_Crabattack_12
+      name: spriteseet_Crabattack_ver2_12
       rect:
         serializedVersion: 2
         x: 750
         y: 0
         width: 250
         height: 250
-      alignment: 0
-      pivot: {x: 0, y: 0}
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 335b8b48b02724d41bebdefc7c9cad2c
-      internalID: -934450050
+      spriteID: ee6cdf5d2916ba24db1a2d069503a7d8
+      internalID: -1274948436
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: spriteseet_Crabattack_13
+      name: spriteseet_Crabattack_ver2_13
       rect:
         serializedVersion: 2
         x: 1000
         y: 0
         width: 250
         height: 250
-      alignment: 0
-      pivot: {x: 0, y: 0}
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 7fa701c6dfcb6814dbe12a39653435a9
-      internalID: -610089679
+      spriteID: e1ea5b59a62612b41bb7d87a7a144f7a
+      internalID: 1737987790
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: spriteseet_Crabattack_14
+      name: spriteseet_Crabattack_ver2_14
       rect:
         serializedVersion: 2
         x: 1250
         y: 0
         width: 250
         height: 250
-      alignment: 0
-      pivot: {x: 0, y: 0}
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: d0589e1cd5b081449aaa4a37ece7cba3
-      internalID: 1665454247
+      spriteID: 9f78b7ddde9a14b43a50b74e077d7bbf
+      internalID: -35570177
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: spriteseet_Crabattack_15
+      name: spriteseet_Crabattack_ver2_15
       rect:
         serializedVersion: 2
         x: 1500
         y: 0
         width: 250
         height: 250
-      alignment: 0
-      pivot: {x: 0, y: 0}
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: ce9d0559a7b4cb642b55a1b2c278c0a7
-      internalID: 138095200
+      spriteID: 3bdeca4c62567a641bc68c60af1553a3
+      internalID: -30571354
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: spriteseet_Crabattack_16
+      name: spriteseet_Crabattack_ver2_16
       rect:
         serializedVersion: 2
         x: 1750
         y: 0
         width: 250
         height: 250
-      alignment: 0
-      pivot: {x: 0, y: 0}
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 89a79a95530b71d46a60dc99d5263280
-      internalID: 582359582
+      spriteID: f163d531f01374d4ea8b618d90efb7a5
+      internalID: 350766291
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: spriteseet_Crabattack_17
+      name: spriteseet_Crabattack_ver2_17
       rect:
         serializedVersion: 2
         x: 2000
         y: 0
         width: 250
         height: 250
-      alignment: 0
-      pivot: {x: 0, y: 0}
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 87a82c5dfd1e6e34fb7d17bf98145555
-      internalID: 1114892381
+      spriteID: 74b88e26a2197884bb6fc9bec6e2b53f
+      internalID: -681031710
       vertices: []
       indices: 
       edges: []
@@ -485,7 +485,7 @@ TextureImporter:
     outline: []
     physicsShape: []
     bones: []
-    spriteID: 025bcc0b6e91f224f8bc728edcd56edf
+    spriteID: a388d4692163c474ca08cf8bd2d07136
     internalID: 0
     vertices: []
     indices: 
@@ -493,24 +493,24 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      spriteseet_Crabattack_17: 1114892381
-      spriteseet_Crabattack_5: 929294206
-      spriteseet_Crabattack_15: 138095200
-      spriteseet_Crabattack_0: 1040829750
-      spriteseet_Crabattack_7: 217633107
-      spriteseet_Crabattack_8: -1478783116
-      spriteseet_Crabattack_9: -1703740139
-      spriteseet_Crabattack_4: -1838384734
-      spriteseet_Crabattack_3: -1758770421
-      spriteseet_Crabattack_2: -1374178752
-      spriteseet_Crabattack_13: -610089679
-      spriteseet_Crabattack_10: 660193342
-      spriteseet_Crabattack_11: 1696738894
-      spriteseet_Crabattack_16: 582359582
-      spriteseet_Crabattack_6: -1598217480
-      spriteseet_Crabattack_1: 1202500079
-      spriteseet_Crabattack_12: -934450050
-      spriteseet_Crabattack_14: 1665454247
+      spriteseet_Crabattack_ver2_16: 350766291
+      spriteseet_Crabattack_ver2_5: -1061491582
+      spriteseet_Crabattack_ver2_12: -1274948436
+      spriteseet_Crabattack_ver2_2: -292553154
+      spriteseet_Crabattack_ver2_0: -1114590350
+      spriteseet_Crabattack_ver2_10: 657400868
+      spriteseet_Crabattack_ver2_15: -30571354
+      spriteseet_Crabattack_ver2_6: 1986173372
+      spriteseet_Crabattack_ver2_13: 1737987790
+      spriteseet_Crabattack_ver2_7: 2095741792
+      spriteseet_Crabattack_ver2_1: 1542177705
+      spriteseet_Crabattack_ver2_14: -35570177
+      spriteseet_Crabattack_ver2_8: -492080377
+      spriteseet_Crabattack_ver2_11: 496642226
+      spriteseet_Crabattack_ver2_9: -363615373
+      spriteseet_Crabattack_ver2_4: 1236249587
+      spriteseet_Crabattack_ver2_17: -681031710
+      spriteseet_Crabattack_ver2_3: -43583604
   spritePackingTag: 
   pSDRemoveMatte: 0
   pSDShowRemoveMatteOption: 0

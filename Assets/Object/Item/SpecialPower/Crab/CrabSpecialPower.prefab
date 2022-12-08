@@ -73,12 +73,12 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: -1451120646, guid: 7193e01198df35942945911e3c05d19d, type: 3}
+  m_Sprite: {fileID: -1473712328, guid: 5ab77553eb8b53548b921a1994a66f6f, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 1
   m_DrawMode: 0
-  m_Size: {x: 0.5, y: 0.5}
+  m_Size: {x: 1.1363636, y: 1.1363636}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
@@ -131,7 +131,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4e53a661ad922e448b55f0667b26f11e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  icon: {fileID: -1451120646, guid: 7193e01198df35942945911e3c05d19d, type: 3}
+  icon: {fileID: -1473712328, guid: 5ab77553eb8b53548b921a1994a66f6f, type: 3}
   isImmediate: 0
   sowSeedSpecialPowerInfo: {fileID: 11400000, guid: e50d0530a7484dc479779ef1cd477d56, type: 2}
 --- !u!58 &4384070283387547719

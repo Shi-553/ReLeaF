@@ -12,10 +12,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 03e671adc856d224abdb961e4689cbdd, type: 3}
   m_Name: CrabAnimationInfo
   m_EditorClassIdentifier: 
-  pairClips: []
-  singleClips:
+  pairClips:
   - type: 0
-    clip: {fileID: 7400000, guid: 92e4938c7359c4444ba21ad219fb8936, type: 2}
+    left: {fileID: 7400000, guid: 1e9c5a1afc3a25146b2a1ff20184630c, type: 2}
+    right: {fileID: 7400000, guid: d0a9b68c59d60724e8b0dfa5082e5514, type: 2}
+  singleClips:
   - type: 1
     clip: {fileID: 7400000, guid: afad2ae2b41ccd447904da2dbb506f2b, type: 2}
   - type: 2
