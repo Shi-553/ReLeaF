@@ -26,6 +26,8 @@ namespace ReLeaf
         TextMeshProUGUI text;
 
         int damage;
+        bool IsHighDamage => damage > info.HighDamageThreshold;
+
 
         [SerializeField]
         DamageValueEffectInfo info;
@@ -39,6 +41,8 @@ namespace ReLeaf
             this.damage = damage;
             transform.position = pos + info.Offset + Vector3.Lerp(-info.RandomOffsetMax, info.RandomOffsetMax, Random.value);
 
+            transform.position += damage * info.DamageOffset * Vector3.up;
+
             var damageStr = damage.ToString();
             var damageText = "";
             foreach (var damageChar in damageStr)
@@ -50,7 +54,7 @@ namespace ReLeaf
             text.fontSize = MathExtension.Map(damage, 0, info.MaxDamage, info.MinSize, info.MaxSize, true);
 
 
-            text.spriteAsset = damage <= info.HighDamageThreshold ? info.NormalDamageSpriteAsset : info.HighDamageSpriteAsset;
+            text.spriteAsset = IsHighDamage ? info.HighDamageSpriteAsset : info.NormalDamageSpriteAsset;
         }
 
         IEnumerator WaitAnimation()
