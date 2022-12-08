@@ -14,6 +14,7 @@ namespace ReLeaf
             {
                 TryGetComponent(out animancer);
                 text = GetComponentInChildren<TextMeshProUGUI>(true);
+                wait = new WaitForSeconds(info.InitAnimation.length);
             }
             animancer.Play(info.InitAnimation);
             StartCoroutine(WaitAnimation());
@@ -33,7 +34,7 @@ namespace ReLeaf
         DamageValueEffectInfo info;
 
         AnimancerComponent animancer;
-
+        WaitForSeconds wait;
         IPool IPoolableSelfRelease.Pool { get; set; }
 
         public void ShowDamageValue(int damage, Vector3 pos)
@@ -59,7 +60,7 @@ namespace ReLeaf
 
         IEnumerator WaitAnimation()
         {
-            yield return new WaitForSeconds(info.InitAnimation.length);
+            yield return wait;
             this.StaticCast<IPoolableSelfRelease>().Release();
         }
 
