@@ -22,6 +22,12 @@ namespace ReLeaf
 
         Vector2Int[] attackPoss;
 
+        [SerializeField]
+        AudioInfo seBeforeAttack;
+
+        [SerializeField]
+        AudioInfo seAttack;
+
         public IEnumerable<Vector2Int> GetAttackRange(Vector2Int pos, Vector2Int dir, bool isDamagableOnly)
         {
             foreach (var local in crabAttackInfo.AttackLocalTilePos.GetLocalTilePosList(dir))
@@ -46,6 +52,7 @@ namespace ReLeaf
                 targetMarkerManager.SetMarker<TargetMarker>(attackPos);
             }
             enemyCore.SetWeekMarker();
+            SEManager.Singleton.Play(seBeforeAttack, transform.position);
         }
         IEnumerator IEnemyAttacker.OnStartDamageing()
         {
@@ -65,6 +72,7 @@ namespace ReLeaf
 
             }
             targetMarkerManager.ResetAllMarker();
+            SEManager.Singleton.Play(seAttack, transform.position);
         }
 
 

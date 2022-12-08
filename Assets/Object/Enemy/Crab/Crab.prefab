@@ -161,7 +161,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   searchVision: {fileID: 3643397740765400334}
-  targetMarkerManager: {fileID: 4430456495496529935}
 --- !u!114 &6589404231911195076
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -176,6 +175,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   crabAttackInfo: {fileID: 11400000, guid: 6e7c3bc147154ce48bf6db032aa011a7, type: 2}
   targetMarkerManager: {fileID: 4430456495496529935}
+  seBeforeAttack: {fileID: 11400000, guid: 944dc60fe853d5e498d219726e227aa6, type: 2}
+  seAttack: {fileID: 11400000, guid: a968b2b4dac08ae4c8203f7bf729d3cf, type: 2}
 --- !u!114 &-4858720575995891945
 MonoBehaviour:
   m_ObjectHideFlags: 0
