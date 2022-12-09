@@ -8,10 +8,6 @@ namespace ReLeaf
     [CreateAssetMenu(menuName = "Tile/PlantInfo")]
     public class PlantInfo : ScriptableObject
     {
-        [SerializeField, Rename("A•¨ƒ^ƒCƒv")]
-        PlantType plantType;
-        public PlantType PlantType => plantType;
-
         [SerializeField, Rename("Å‘åHP")]
         float hpMax;
         public float HpMax => hpMax;

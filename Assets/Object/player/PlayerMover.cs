@@ -150,7 +150,7 @@ namespace ReLeaf
                 return;
             if (IsMove && collision.gameObject.CompareTag("Sand"))
             {
-                if (DungeonManager.Singleton.SowSeed(DungeonManager.Singleton.WorldToTilePos(collision.transform.position), PlantType.Foundation))
+                if (DungeonManager.Singleton.SowSeed(DungeonManager.Singleton.WorldToTilePos(collision.transform.position)))
                 {
                     energyGauge.RecoveryValue(energyRecoveryPoint);
 

@@ -53,8 +53,7 @@ namespace ReLeaf
         protected override IPool Pool => poolArray.GetPool(selected.VisualType);
 
 #if UNITY_EDITOR
-        // The following is a helper that adds a menu item to create a RoadTile Asset
-        [MenuItem("Assets/Create/2D/Tiles/RandomTile")]
+        [MenuItem("Assets/Create/Tile/RandomTile")]
         public static void CreateRandomTile()
         {
             string path = EditorUtility.SaveFilePanelInProject("Save Random Tile", "New Random Tile", "Asset", "Save Random Tile");
