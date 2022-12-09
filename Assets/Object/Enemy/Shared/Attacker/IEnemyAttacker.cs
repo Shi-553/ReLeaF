@@ -32,7 +32,17 @@ namespace ReLeaf
         {
         }
 
-        IEnumerator Attack()
+        Coroutine AttackCo { get; protected set; }
+        void Attack()
+        {
+            AttackCo = GlobalCoroutine.StartCoroutine(AttackImpl());
+        }
+        void Stop()
+        {
+            if (AttackCo != null)
+                GlobalCoroutine.StopCoroutine(AttackCo);
+        }
+        protected IEnumerator AttackImpl()
         {
             Transition = AttackTransition.Aiming;
             OnStartAiming();
@@ -51,6 +61,7 @@ namespace ReLeaf
 
             Transition = AttackTransition.None;
             OnEndCoolTime();
+            AttackCo = null;
         }
     }
 }

@@ -27,6 +27,11 @@ namespace ReLeaf
         }
         private void Death()
         {
+            if (TryGetComponent(out IEnemyAttacker attacker))
+            {
+                attacker.Stop();
+            }
+
             Instantiate(specialPowerPrefab, transform.position, Quaternion.identity, transform.parent);
             for (int x = 0; x < enemyMover.TileSize.x; x++)
             {
@@ -74,7 +79,6 @@ namespace ReLeaf
         {
             if (HP == 0)
                 return;
-            Debug.Log(atk + "ƒ_ƒ[ƒW!");
 
             DamageValueEffectManager.Singleton.SetDamageValueEffect((int)atk, enemyMover.WorldCenter);
 

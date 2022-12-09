@@ -90,7 +90,7 @@ namespace ReLeaf
             {
                 mover.UpdateTargetStraight(targetTilePos.Value);
                 targetTilePos = null;
-                StartCoroutine(attacker.Attack());
+                attacker.Attack();
             }
             if (result == EnemyMover.MoveResult.Error)
             {

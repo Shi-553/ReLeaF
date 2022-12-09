@@ -11,6 +11,10 @@ namespace Utility
         protected override void Init()
         {
         }
+        public static new void StopCoroutine(Coroutine routine)
+        {
+            Singleton.StaticCast<MonoBehaviour>().StopCoroutine(routine);
+        }
         public static new Coroutine StartCoroutine(IEnumerator routine)
         {
             return Singleton.StaticCast<MonoBehaviour>().StartCoroutine(routine);

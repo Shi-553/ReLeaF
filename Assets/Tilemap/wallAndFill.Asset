@@ -17,5 +17,9 @@ MonoBehaviour:
   m_Flags: 3
   m_ColliderType: 2
   currentTileObject: {fileID: -799063905996909885, guid: 8d6ea43fa261c0649a74f6841f4ca1c0, type: 3}
+  defaultCapacity: 10
+  maxSize: 100
+  dontUseTileManager: 0
+  isOverrideTile: 1
   block: {fileID: -799063905996909885, guid: 8d6ea43fa261c0649a74f6841f4ca1c0, type: 3}
   fill: {fileID: -848456482416004739, guid: 532bf521b3b5d7e4bb00fe9c9a0625af, type: 3}

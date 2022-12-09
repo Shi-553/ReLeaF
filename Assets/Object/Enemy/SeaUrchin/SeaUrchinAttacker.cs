@@ -38,6 +38,7 @@ namespace ReLeaf
         List<Vector2Int> buffer = new();
 
         public AttackTransition Transition { get; set; }
+        Coroutine IEnemyAttacker.AttackCo { get; set; }
 
         public EnemyAttackInfo EnemyAttackInfo => seaUrchinAttackInfo;
 

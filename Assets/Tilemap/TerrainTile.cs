@@ -59,7 +59,8 @@ namespace ReLeaf
 
         public int defaultCapacity = 10;
         public int maxSize = 100;
-        public bool cantUseTileManager = false;
+        public bool dontUseTileManager = false;
+        public bool isOverrideTile = false;
 
 
         bool isInit = false;
@@ -97,15 +98,15 @@ namespace ReLeaf
                     pool = Pool ?? Pools.SetPool(CurrentTileObject.TileType.ToInt32(), CurrentTileObject, defaultCapacity, maxSize);
                 }
 
-                if (!cantUseTileManager && DungeonManager.Singleton.tiles.ContainsKey((Vector2Int)position))
+                if (!dontUseTileManager && !isOverrideTile && DungeonManager.Singleton.tiles.ContainsKey((Vector2Int)position))
                 {
-                    return true;
+                    return false;
                 }
 
                 UpdateTileObject(position, tm);
                 if (currentTileObject == null)
                 {
-                    return true;
+                    return false;
                 }
 
                 using var _ = Pool.Get<TileObject>(out var newTile);
@@ -115,8 +116,13 @@ namespace ReLeaf
                 newTile.transform.localPosition = tm.GetComponent<Tilemap>().CellToLocal(position) + new Vector3(DungeonManager.CELL_SIZE, DungeonManager.CELL_SIZE) / 2;
                 newTile.TilePos = DungeonManager.Singleton.WorldToTilePos(newTile.transform.position);
 
+                if (isOverrideTile)
+                {
+                    if (DungeonManager.Singleton.tiles.Remove((Vector2Int)position, out var removed))
+                        removed.StaticCast<IPoolableSelfRelease>().Release();
+                }
 
-                if (!cantUseTileManager)
+                if (!dontUseTileManager)
                     DungeonManager.Singleton.tiles[(Vector2Int)position] = newTile;
             }
             return true;

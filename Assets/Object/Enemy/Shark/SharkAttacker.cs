@@ -15,6 +15,7 @@ namespace ReLeaf
 
         [field: SerializeField, ReadOnly]
         public AttackTransition Transition { get; set; }
+        Coroutine IEnemyAttacker.AttackCo { get; set; }
 
         EnemyMover enemyMover;
         EnemyCore enemyDamageable;

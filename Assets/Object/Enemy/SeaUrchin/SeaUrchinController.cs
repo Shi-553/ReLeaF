@@ -23,7 +23,7 @@ namespace ReLeaf
 
 
             mover.Dir = (Quaternion.Euler(0, 0, -90 + mover.Dir.GetRotationZ()) * Vector2.up).ClampOneMagnitude();
-            StartCoroutine(enemyAttacker.Attack());
+            enemyAttacker.Attack();
         }
     }
 }

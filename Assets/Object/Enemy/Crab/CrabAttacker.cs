@@ -9,6 +9,7 @@ namespace ReLeaf
     public class CrabAttacker : MonoBehaviour, IEnemyAttacker
     {
         public AttackTransition Transition { get; set; }
+        Coroutine IEnemyAttacker.AttackCo { get; set; }
         public EnemyAttackInfo EnemyAttackInfo => crabAttackInfo;
 
         [SerializeField]

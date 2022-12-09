@@ -1,3 +1,4 @@
+using DebugLogExtension;
 using System;
 using System.Collections.Generic;
 using UnityEngine;
@@ -150,6 +151,9 @@ namespace ReLeaf
             }
             OnTileChanged?.Invoke(new TileChangedInfo(pos, before, after.CurrentTileObject));
             groundTilemap.SetTile((Vector3Int)pos, after);
+            var af = groundTilemap.GetTile((Vector3Int)pos);
+            if (af == null)
+                af.DebugLog();
         }
 
 
