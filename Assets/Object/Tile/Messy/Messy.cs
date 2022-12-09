@@ -13,9 +13,9 @@ namespace ReLeaf
         public VisualType visualType;
         public int VisualType => visualType.ToInt32();
 
-        public override void Init(bool isCreated)
+        protected override void InitImpl()
         {
-            base.Init(isCreated);
+            base.InitImpl();
             StartCoroutine(WaitCure());
             SEManager.Singleton.Play(messyInfo.ChangeSand, DungeonManager.Singleton.TilePosToWorld(TilePos));
         }

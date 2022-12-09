@@ -17,7 +17,7 @@ namespace ReLeaf
         bool subscribeOnTileChanged;
 
         IPool pool;
-        IPool GetPool<T>() where T : MarkerBase => pool ??= ComponentPool.Singleton.SetPool(marker as T);
+        IPool GetPool<T>() where T : MarkerBase => pool ??= PoolManager.Singleton.SetPool(marker as T);
 
         [SerializeField]
         MarkerBase marker;

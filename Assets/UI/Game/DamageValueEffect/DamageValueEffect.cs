@@ -6,11 +6,11 @@ using Utility;
 
 namespace ReLeaf
 {
-    public class DamageValueEffect : MonoBehaviour, IPoolableSelfRelease
+    public class DamageValueEffect : PoolableMonoBehaviour
     {
-        public void Init(bool isCreated)
+        protected override void InitImpl()
         {
-            if (isCreated)
+            if (!IsInitialized)
             {
                 TryGetComponent(out animancer);
                 text = GetComponentInChildren<TextMeshProUGUI>(true);
@@ -20,7 +20,7 @@ namespace ReLeaf
             StartCoroutine(WaitAnimation());
         }
 
-        public void Uninit()
+        protected override void UninitImpl()
         {
         }
 
@@ -35,7 +35,6 @@ namespace ReLeaf
 
         AnimancerComponent animancer;
         WaitForSeconds wait;
-        IPool IPoolableSelfRelease.Pool { get; set; }
 
         public void ShowDamageValue(int damage, Vector3 pos)
         {
@@ -61,7 +60,7 @@ namespace ReLeaf
         IEnumerator WaitAnimation()
         {
             yield return wait;
-            this.StaticCast<IPoolableSelfRelease>().Release();
+            Release();
         }
 
     }

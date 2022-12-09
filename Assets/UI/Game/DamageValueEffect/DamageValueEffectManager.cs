@@ -18,7 +18,7 @@ namespace ReLeaf
         }
         private void Start()
         {
-            effectPool = ComponentPool.Singleton.SetPool(effectPrefab);
+            effectPool = PoolManager.Singleton.SetPool(effectPrefab, 10, 100, true);
         }
 
         public void SetDamageValueEffect(int damage, Vector2 pos)

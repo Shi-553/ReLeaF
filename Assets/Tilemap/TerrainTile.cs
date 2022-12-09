@@ -77,7 +77,7 @@ namespace ReLeaf
         protected virtual void InitImpl()
         {
             isInit = true;
-            Pools = ComponentPool.Singleton.SetPoolArray<TileObject>(TileType.Max.ToInt32());
+            Pools = PoolManager.Singleton.SetPoolArray<TileObject>(TileType.Max.ToInt32());
         }
 
 
@@ -119,7 +119,7 @@ namespace ReLeaf
                 if (isOverrideTile)
                 {
                     if (DungeonManager.Singleton.tiles.Remove((Vector2Int)position, out var removed))
-                        removed.StaticCast<IPoolableSelfRelease>().Release();
+                        removed.Release();
                 }
 
                 if (!dontUseTileManager)

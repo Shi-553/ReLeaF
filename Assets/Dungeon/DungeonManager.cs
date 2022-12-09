@@ -144,7 +144,7 @@ namespace ReLeaf
         {
 
             if (tiles.Remove(pos, out var before))
-                before.StaticCast<IPoolableSelfRelease>().Release();
+                before.Release();
             else
             {
                 before = TileObject.NullTile;

@@ -43,9 +43,9 @@ namespace ReLeaf
         Coroutine growCo;
         public bool IsFouceGrowing { get; private set; }
 
-        public override void Init(bool isCreated)
+        protected override void InitImpl()
         {
-            base.Init(isCreated);
+            base.InitImpl();
 
             hp = plantInfo.HpMax;
             if (IsFullGrowth)
@@ -57,7 +57,7 @@ namespace ReLeaf
             }
 
             growCo = StartCoroutine(Growing());
-            var effect = ComponentPool.Singleton.SetPool(plantInfo.ToLeafEffect).Get<ToLeafEffect>();
+            var effect = PoolManager.Singleton.SetPool(plantInfo.ToLeafEffect).Get<ToLeafEffect>();
             effect.transform.position = transform.position;
         }
         IEnumerator Growing()

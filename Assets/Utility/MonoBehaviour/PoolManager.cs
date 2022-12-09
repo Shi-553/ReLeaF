@@ -8,7 +8,7 @@ using Transform = UnityEngine.Transform;
 namespace Utility
 {
 
-    public class ComponentPool : SingletonBase<ComponentPool>
+    public class PoolManager : SingletonBase<PoolManager>
     {
         readonly Dictionary<Type, IPool> pools = new();
         public IReadOnlyDictionary<Type, IPool> Pools => pools;
@@ -31,7 +31,7 @@ namespace Utility
                 .ForEach(t => Destroy(t.gameObject));
         }
 
-        public IPool GetPool<T>() where T : Component, IPoolable
+        public IPool GetPool<T>() where T : PoolableMonoBehaviour
         {
             var type = typeof(T);
             if (pools.TryGetValue(type, out var pool))
@@ -40,7 +40,7 @@ namespace Utility
             }
             return null;
         }
-        public IPool SetPool<T>(T prefab, int defaultCapacity = 10, int maxSize = 100, bool setSizeWithCapacity = false) where T : Component, IPoolable
+        public IPool SetPool<T>(T prefab, int defaultCapacity = 10, int maxSize = 100, bool setSizeWithCapacity = false) where T : PoolableMonoBehaviour
         {
             var type = typeof(T);
             if (pools.TryGetValue(type, out var pool))
@@ -58,7 +58,7 @@ namespace Utility
 
             return newPool;
         }
-        public PoolArray GetPoolArray<T>() where T : Component, IPoolable
+        public PoolArray GetPoolArray<T>() where T : PoolableMonoBehaviour
         {
             var type = typeof(T);
             if (pools.TryGetValue(type, out var pool) && pool is PoolArray array)
@@ -68,7 +68,7 @@ namespace Utility
             return null;
         }
 
-        public PoolArray SetPoolArray<T>(int size) where T : Component, IPoolable
+        public PoolArray SetPoolArray<T>(int size) where T : PoolableMonoBehaviour
         {
             var type = typeof(T);
             if (pools.TryGetValue(type, out var pool))
@@ -93,35 +93,31 @@ namespace Utility
 
     public interface IPool : IEnumerable<IPool>
     {
-        ObjectPool<IPoolable> ObjectPool { get; }
+        ObjectPool<PoolableMonoBehaviour> ObjectPool { get; }
 
-        public readonly struct PoolInitializeHelper<T> : IDisposable where T : Component, IPoolable
+        public readonly struct PoolInitializeHelper<T> : IDisposable where T : PoolableMonoBehaviour
         {
-            readonly bool isCreated;
             readonly T value;
-            public PoolInitializeHelper(T value, bool isCreated)
+            public PoolInitializeHelper(T value)
             {
                 this.value = value;
-                this.isCreated = isCreated;
             }
             public void Dispose()
             {
-                value.Init(isCreated);
+                value.Init();
             }
         }
-        public T Get<T>() where T : Component, IPoolable
+        public T Get<T>() where T : PoolableMonoBehaviour
         {
-            bool isCreated = ObjectPool.CountInactive == 0;
             var val = ObjectPool.Get() as T;
-            val.Init(isCreated);
+            val.Init();
             return val;
         }
-        public PoolInitializeHelper<T> Get<T>(out T val) where T : Component, IPoolable
+        public PoolInitializeHelper<T> Get<T>(out T val) where T : PoolableMonoBehaviour
         {
-            bool isCreated = ObjectPool.CountInactive == 0;
-            return new PoolInitializeHelper<T>(val = ObjectPool.Get() as T, isCreated);
+            return new PoolInitializeHelper<T>(val = ObjectPool.Get() as T);
         }
-        public void Release<T>(T element) where T : IPoolable
+        public void Release<T>(T element) where T : PoolableMonoBehaviour
         {
             element.Uninit();
             ObjectPool.Release(element);
@@ -131,7 +127,7 @@ namespace Utility
 
         public void Resize(int size)
         {
-            var poolables = new IPoolable[size];
+            var poolables = new PoolableMonoBehaviour[size];
 
             for (int i = 0; i < size; i++)
             {
@@ -147,14 +143,14 @@ namespace Utility
 
     public class Pool : IPool
     {
-        protected ObjectPool<IPoolable> pool;
-        ObjectPool<IPoolable> IPool.ObjectPool => pool;
+        protected ObjectPool<PoolableMonoBehaviour> pool;
+        ObjectPool<PoolableMonoBehaviour> IPool.ObjectPool => pool;
 
         // thisでキャプチャ
         readonly Transform parent;
-        readonly IPoolable prefab;
+        readonly PoolableMonoBehaviour prefab;
 
-        public Pool(Transform parent, IPoolable p, int defaultCapacity = 10, int maxSize = 100, bool setSizeWithCapacity = false)
+        public Pool(Transform parent, PoolableMonoBehaviour p, int defaultCapacity = 10, int maxSize = 100, bool setSizeWithCapacity = false)
         {
             this.parent = parent;
             prefab = p;
@@ -164,15 +160,8 @@ namespace Utility
                 Debug.LogError("Pool Prefab null!!!");
 #endif
 
-            pool = new ObjectPool<IPoolable>(
-                             createFunc: () =>
-                             {
-                                 var instance = prefab.Create(this.parent);
-                                 if (instance is IPoolableSelfRelease poolableSelfRelease)
-                                     poolableSelfRelease.SetPool(this);
-
-                                 return instance;
-                             },
+            pool = new ObjectPool<PoolableMonoBehaviour>(
+                             createFunc: () => prefab.Create(this.parent, this),
                              actionOnGet: target => target.OnGetPool(),
                              actionOnRelease: target => target.OnReleasePool(),
                              actionOnDestroy: target => target.OnDestroyPool(),
@@ -201,7 +190,7 @@ namespace Utility
         // thisでキャプチャ
         readonly Transform parent;
 
-        ObjectPool<IPoolable> IPool.ObjectPool => pools[0].ObjectPool;
+        ObjectPool<PoolableMonoBehaviour> IPool.ObjectPool => pools[0].ObjectPool;
 
         public PoolArray(Transform parent, int size)
         {
@@ -218,7 +207,7 @@ namespace Utility
             return null;
         }
 
-        public IPool SetPool<T>(int index, T prefab, int defaultCapacity = 10, int maxSize = 100, bool setSizeWithCapacity = false) where T : Component, IPoolable
+        public IPool SetPool<T>(int index, T prefab, int defaultCapacity = 10, int maxSize = 100, bool setSizeWithCapacity = false) where T : PoolableMonoBehaviour
         {
             if (pools[index] != null)
                 return pools[index];

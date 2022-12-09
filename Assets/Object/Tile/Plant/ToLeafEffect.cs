@@ -4,15 +4,14 @@ using Utility;
 
 namespace ReLeaf
 {
-    public class ToLeafEffect : MonoBehaviour, IPoolableSelfRelease
+    public class ToLeafEffect : PoolableMonoBehaviour
     {
         ParticleSystem particle;
         WaitForSeconds wait;
-        IPool IPoolableSelfRelease.Pool { get; set; }
 
-        public void Init(bool isCreated)
+        protected override void InitImpl()
         {
-            if (isCreated)
+            if (!IsInitialized)
             {
                 particle = GetComponentInChildren<ParticleSystem>();
                 wait = new WaitForSeconds(particle.main.duration);
@@ -23,9 +22,10 @@ namespace ReLeaf
         IEnumerator WaitParticle()
         {
             yield return wait;
-            this.StaticCast<IPoolableSelfRelease>().Release();
+            Release();
         }
-        public void Uninit()
+
+        protected override void UninitImpl()
         {
         }
     }

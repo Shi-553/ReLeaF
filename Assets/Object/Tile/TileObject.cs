@@ -3,7 +3,7 @@ using Utility;
 
 namespace ReLeaf
 {
-    public abstract class TileObject : MonoBehaviour, IPoolableSelfRelease
+    public abstract class TileObject : PoolableMonoBehaviour
     {
         public static TileObject NullTile;
 
@@ -16,18 +16,17 @@ namespace ReLeaf
 
         public Vector2Int TilePos { get; set; }
         public bool IsInvincible { get; set; }
-        public virtual void Init(bool isCreated)
+
+        protected override void InitImpl()
         {
         }
-
-        public virtual void Uninit()
+        protected override void UninitImpl()
         {
             IsInvincible = false;
         }
 
         public bool CanSowGrass(bool isSpecial) => TileType == TileType.Sand || (isSpecial && TileType == TileType.Messy);
 
-        IPool IPoolableSelfRelease.Pool { get; set; }
 
     }
 }
