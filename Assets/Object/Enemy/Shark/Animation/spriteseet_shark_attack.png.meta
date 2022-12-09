@@ -1,0 +1,827 @@
+fileFormatVersion: 2
+guid: 7ad29538470d1804ba097c4efecc3f4e
+TextureImporter:
+  internalIDToNameTable: []
+  externalObjects: {}
+  serializedVersion: 12
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 1
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMasterTextureLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 1
+    aniso: 1
+    mipBias: 0
+    wrapU: 0
+    wrapV: 0
+    wrapW: 0
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 300
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 0
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 3
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Server
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: spriteseet_shark_attack_0
+      rect:
+        serializedVersion: 2
+        x: 169
+        y: 802
+        width: 164
+        height: 95
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c69d905c962fde348acdf0b84e898c3b
+      internalID: -1514122623
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: spriteseet_shark_attack_1
+      rect:
+        serializedVersion: 2
+        x: 669
+        y: 800
+        width: 164
+        height: 97
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b2029440188601144af3954a34596717
+      internalID: 253222921
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: spriteseet_shark_attack_2
+      rect:
+        serializedVersion: 2
+        x: 1169
+        y: 802
+        width: 164
+        height: 93
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: cec9fff87f743ef4b820e3d6b2547324
+      internalID: 129210527
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: spriteseet_shark_attack_3
+      rect:
+        serializedVersion: 2
+        x: 1669
+        y: 803
+        width: 164
+        height: 83
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 26196496682f985428d2f9763216c27e
+      internalID: 1070032725
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: spriteseet_shark_attack_4
+      rect:
+        serializedVersion: 2
+        x: 2169
+        y: 802
+        width: 164
+        height: 84
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 77ce22d61b1f65244b780f0e430e21f2
+      internalID: -1349073478
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: spriteseet_shark_attack_5
+      rect:
+        serializedVersion: 2
+        x: 2593
+        y: 800
+        width: 326
+        height: 121
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2f6e4142bcae5c74e8f61e49ec209061
+      internalID: -1794564631
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: spriteseet_shark_attack_6
+      rect:
+        serializedVersion: 2
+        x: 3046
+        y: 794
+        width: 355
+        height: 123
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 06b2cb0b1f74efd4699d645d9b88d3ab
+      internalID: -1127092874
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: spriteseet_shark_attack_7
+      rect:
+        serializedVersion: 2
+        x: 3550
+        y: 794
+        width: 352
+        height: 127
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c1071d4c94bd9b248b90133223b70d90
+      internalID: 816430007
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: spriteseet_shark_attack_8
+      rect:
+        serializedVersion: 2
+        x: 56
+        y: 542
+        width: 344
+        height: 154
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 185f32466540c5f42aa6a3726cfd2bfe
+      internalID: -1989845281
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: spriteseet_shark_attack_9
+      rect:
+        serializedVersion: 2
+        x: 556
+        y: 544
+        width: 347
+        height: 152
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 42a87df34144713499f682d80d47d7f7
+      internalID: 1759766485
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: spriteseet_shark_attack_10
+      rect:
+        serializedVersion: 2
+        x: 1056
+        y: 542
+        width: 345
+        height: 150
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d6d2a53691446ce428ac9c54fc6f93c7
+      internalID: -675144219
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: spriteseet_shark_attack_11
+      rect:
+        serializedVersion: 2
+        x: 1556
+        y: 542
+        width: 343
+        height: 150
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 45a5ef48e3ca1db41831d1724bcd4bb0
+      internalID: -1105805533
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: spriteseet_shark_attack_12
+      rect:
+        serializedVersion: 2
+        x: 2056
+        y: 544
+        width: 345
+        height: 148
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1f23fa489b1bf8d45872dfe8b65f1f91
+      internalID: -886422506
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: spriteseet_shark_attack_13
+      rect:
+        serializedVersion: 2
+        x: 2556
+        y: 542
+        width: 345
+        height: 150
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 5ec86ee9c7af5d54eb237cb9bb1ff252
+      internalID: 1376725472
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: spriteseet_shark_attack_14
+      rect:
+        serializedVersion: 2
+        x: 3056
+        y: 542
+        width: 345
+        height: 150
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e2d3deffd87b9a441bf6749169f250bf
+      internalID: -974664768
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: spriteseet_shark_attack_15
+      rect:
+        serializedVersion: 2
+        x: 3556
+        y: 542
+        width: 345
+        height: 150
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 762c4b277b6a55b4e8673433a14d16aa
+      internalID: -1992571152
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: spriteseet_shark_attack_16
+      rect:
+        serializedVersion: 2
+        x: 167
+        y: 302
+        width: 164
+        height: 95
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 63b98ee519f67f742a42c90158e06dd0
+      internalID: -1592669368
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: spriteseet_shark_attack_17
+      rect:
+        serializedVersion: 2
+        x: 667
+        y: 300
+        width: 164
+        height: 97
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c4d4123293788d845b5649484f630d5a
+      internalID: 2016163952
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: spriteseet_shark_attack_18
+      rect:
+        serializedVersion: 2
+        x: 1167
+        y: 302
+        width: 164
+        height: 93
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 483dec04f0eb07742a09923a3779dbca
+      internalID: -1660639926
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: spriteseet_shark_attack_19
+      rect:
+        serializedVersion: 2
+        x: 1667
+        y: 303
+        width: 164
+        height: 83
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e0a77c8a8be093d4e9cb7a7f46d189e5
+      internalID: -457531028
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: spriteseet_shark_attack_20
+      rect:
+        serializedVersion: 2
+        x: 2167
+        y: 302
+        width: 164
+        height: 84
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f03c17d0c6dd15949abe664d0543658b
+      internalID: -2088684910
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: spriteseet_shark_attack_21
+      rect:
+        serializedVersion: 2
+        x: 2581
+        y: 300
+        width: 326
+        height: 121
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 766f2455afabb5c4f925c3b450eb3ead
+      internalID: -1143925201
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: spriteseet_shark_attack_22
+      rect:
+        serializedVersion: 2
+        x: 3099
+        y: 294
+        width: 355
+        height: 123
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2ff9133984bf14943bb1f4f22758f5a0
+      internalID: -194174873
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: spriteseet_shark_attack_23
+      rect:
+        serializedVersion: 2
+        x: 3598
+        y: 294
+        width: 352
+        height: 127
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 79b0cb1d10e6ef24ba48b3053c050c79
+      internalID: -1612002122
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: spriteseet_shark_attack_24
+      rect:
+        serializedVersion: 2
+        x: 100
+        y: 42
+        width: 344
+        height: 154
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 204917ed613da224bace7520e90e9f0b
+      internalID: 12593109
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: spriteseet_shark_attack_25
+      rect:
+        serializedVersion: 2
+        x: 597
+        y: 44
+        width: 347
+        height: 152
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ee4c9702d1daf5440832182d09beec8f
+      internalID: -326777773
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: spriteseet_shark_attack_26
+      rect:
+        serializedVersion: 2
+        x: 1099
+        y: 42
+        width: 345
+        height: 150
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e9fc98f26c9a08e46aa9bca7c84921cc
+      internalID: -880222558
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: spriteseet_shark_attack_27
+      rect:
+        serializedVersion: 2
+        x: 1601
+        y: 42
+        width: 343
+        height: 150
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b8c5be4327770074c8f8ae953496a809
+      internalID: 732149778
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: spriteseet_shark_attack_28
+      rect:
+        serializedVersion: 2
+        x: 2099
+        y: 44
+        width: 345
+        height: 148
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 6260d38a47f01a5419ab578a626e4453
+      internalID: 491903169
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: spriteseet_shark_attack_29
+      rect:
+        serializedVersion: 2
+        x: 2599
+        y: 42
+        width: 345
+        height: 150
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 51c344f305f30a14ea3298ea6c088396
+      internalID: -1119097407
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: spriteseet_shark_attack_30
+      rect:
+        serializedVersion: 2
+        x: 3099
+        y: 42
+        width: 345
+        height: 150
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ff40cb07d0812a0469051bae7ff61ae7
+      internalID: -1756437049
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: spriteseet_shark_attack_31
+      rect:
+        serializedVersion: 2
+        x: 3599
+        y: 42
+        width: 345
+        height: 150
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 9155eb3d687604445b3a154620c70fd1
+      internalID: 1571880744
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    physicsShape: []
+    bones: []
+    spriteID: 4cd8d335e277aca4d91e6dd959bd049c
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    nameFileIdTable:
+      spriteseet_shark_attack_7: 816430007
+      spriteseet_shark_attack_28: 491903169
+      spriteseet_shark_attack_4: -1349073478
+      spriteseet_shark_attack_27: 732149778
+      spriteseet_shark_attack_8: -1989845281
+      spriteseet_shark_attack_6: -1127092874
+      spriteseet_shark_attack_10: -675144219
+      spriteseet_shark_attack_9: 1759766485
+      spriteseet_shark_attack_19: -457531028
+      spriteseet_shark_attack_18: -1660639926
+      spriteseet_shark_attack_20: -2088684910
+      spriteseet_shark_attack_25: -326777773
+      spriteseet_shark_attack_22: -194174873
+      spriteseet_shark_attack_30: -1756437049
+      spriteseet_shark_attack_3: 1070032725
+      spriteseet_shark_attack_2: 129210527
+      spriteseet_shark_attack_17: 2016163952
+      spriteseet_shark_attack_0: -1514122623
+      spriteseet_shark_attack_13: 1376725472
+      spriteseet_shark_attack_29: -1119097407
+      spriteseet_shark_attack_15: -1992571152
+      spriteseet_shark_attack_21: -1143925201
+      spriteseet_shark_attack_1: 253222921
+      spriteseet_shark_attack_31: 1571880744
+      spriteseet_shark_attack_14: -974664768
+      spriteseet_shark_attack_11: -1105805533
+      spriteseet_shark_attack_5: -1794564631
+      spriteseet_shark_attack_12: -886422506
+      spriteseet_shark_attack_26: -880222558
+      spriteseet_shark_attack_16: -1592669368
+      spriteseet_shark_attack_23: -1612002122
+      spriteseet_shark_attack_24: 12593109
+  spritePackingTag: 
+  pSDRemoveMatte: 0
+  pSDShowRemoveMatteOption: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

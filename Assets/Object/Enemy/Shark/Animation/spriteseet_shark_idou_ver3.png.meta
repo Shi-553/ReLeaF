@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 0b20063f41144b74f86a095774e70ec9
+guid: d535f3e25352437458adb7506f91e235
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -47,7 +47,7 @@ TextureImporter:
   spriteMeshType: 1
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
-  spritePixelsToUnits: 800
+  spritePixelsToUnits: 300
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
@@ -105,13 +105,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: spriteseet_shark_idou_0
+      name: spriteseet_shark_idou_ver3_0
       rect:
         serializedVersion: 2
-        x: 17
-        y: 741
-        width: 580
-        height: 327
+        x: 171
+        y: 305
+        width: 160
+        height: 92
       alignment: 7
       pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -119,20 +119,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 1542d4ad5235a1c4f9913805734f4278
-      internalID: 451706540
+      spriteID: 9e3081febf56acf4390d6e216633bef7
+      internalID: 70349415
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: spriteseet_shark_idou_1
+      name: spriteseet_shark_idou_ver3_1
       rect:
         serializedVersion: 2
-        x: 619
-        y: 733
-        width: 577
-        height: 335
+        x: 671
+        y: 307
+        width: 161
+        height: 90
       alignment: 7
       pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -140,20 +140,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: fc8440eca5babde45b7cb9aa344af70a
-      internalID: -294718541
+      spriteID: 8f3a4da321a3d0047944d42358cb1bf7
+      internalID: 568650388
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: spriteseet_shark_idou_2
+      name: spriteseet_shark_idou_ver3_2
       rect:
         serializedVersion: 2
-        x: 1219
-        y: 745
-        width: 578
-        height: 323
+        x: 1171
+        y: 307
+        width: 160
+        height: 90
       alignment: 7
       pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -161,20 +161,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 5cf491b8e37392b40a738b79552cf0c4
-      internalID: 1517304226
+      spriteID: ca663f2b2bcb43142b5f87ffc87fb6db
+      internalID: -2058820168
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: spriteseet_shark_idou_3
+      name: spriteseet_shark_idou_ver3_3
       rect:
         serializedVersion: 2
-        x: 1821
-        y: 735
-        width: 575
-        height: 333
+        x: 1671
+        y: 304
+        width: 160
+        height: 93
       alignment: 7
       pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -182,20 +182,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 873af4649af14d84ea6c79e51ede69ed
-      internalID: 489971926
+      spriteID: 69b94b6c25e07f044b6c33c6e5b10537
+      internalID: -912250474
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: spriteseet_shark_idou_4
+      name: spriteseet_shark_idou_ver3_4
       rect:
         serializedVersion: 2
-        x: 21
-        y: 134
-        width: 575
-        height: 332
+        x: 169
+        y: 55
+        width: 160
+        height: 92
       alignment: 7
       pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -203,20 +203,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 8b7dd2bc8181f3a4caef87fe2361eddb
-      internalID: 97894606
+      spriteID: b0e1a2e920c694e459c90fe3a1b538b9
+      internalID: -214467178
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: spriteseet_shark_idou_5
+      name: spriteseet_shark_idou_ver3_5
       rect:
         serializedVersion: 2
-        x: 618
-        y: 140
-        width: 579
-        height: 326
+        x: 668
+        y: 57
+        width: 161
+        height: 90
       alignment: 7
       pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -224,20 +224,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: cf7944c2dd8bee34ea16831c502b6257
-      internalID: 358989010
+      spriteID: 7707a0476b258574da6fc359772ad2a7
+      internalID: 1160387795
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: spriteseet_shark_idou_6
+      name: spriteseet_shark_idou_ver3_6
       rect:
         serializedVersion: 2
-        x: 1221
-        y: 144
-        width: 577
-        height: 322
+        x: 1169
+        y: 57
+        width: 160
+        height: 90
       alignment: 7
       pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -245,20 +245,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: d27add348d6ac8940968a784bf08c0bf
-      internalID: -279137518
+      spriteID: 68a6daa65644baa47987823c45b09300
+      internalID: -1028768756
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: spriteseet_shark_idou_7
+      name: spriteseet_shark_idou_ver3_7
       rect:
         serializedVersion: 2
-        x: 1822
-        y: 132
-        width: 577
-        height: 334
+        x: 1668
+        y: 54
+        width: 161
+        height: 93
       alignment: 7
       pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -266,8 +266,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 05600a8996dfa354ea26d8dab978ea4b
-      internalID: -1636457836
+      spriteID: 90cffe481f65b484f8736c8be7c030d5
+      internalID: -2031416447
       vertices: []
       indices: 
       edges: []
@@ -275,7 +275,7 @@ TextureImporter:
     outline: []
     physicsShape: []
     bones: []
-    spriteID: c184352a1b40015488aca01e45f465ed
+    spriteID: 21eb551f01c0fe5428c22cca037660a6
     internalID: 0
     vertices: []
     indices: 
@@ -283,14 +283,14 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      spriteseet_shark_idou_0: 451706540
-      spriteseet_shark_idou_7: -1636457836
-      spriteseet_shark_idou_6: -279137518
-      spriteseet_shark_idou_3: 489971926
-      spriteseet_shark_idou_5: 358989010
-      spriteseet_shark_idou_4: 97894606
-      spriteseet_shark_idou_1: -294718541
-      spriteseet_shark_idou_2: 1517304226
+      spriteseet_shark_idou_ver3_2: -2058820168
+      spriteseet_shark_idou_ver3_1: 568650388
+      spriteseet_shark_idou_ver3_5: 1160387795
+      spriteseet_shark_idou_ver3_4: -214467178
+      spriteseet_shark_idou_ver3_7: -2031416447
+      spriteseet_shark_idou_ver3_6: -1028768756
+      spriteseet_shark_idou_ver3_0: 70349415
+      spriteseet_shark_idou_ver3_3: -912250474
   spritePackingTag: 
   pSDRemoveMatte: 0
   pSDShowRemoveMatteOption: 0

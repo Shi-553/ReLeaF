@@ -23,7 +23,8 @@ namespace ReLeaf
         public Vector2Int MoveTarget { get; private set; }
 
         public bool IsMove => mover.IsMove;
-        public bool IsLeft { get; private set; }
+        public bool IsLeftNow => Dir.x < 0;
+        public bool IsLeftIfMove { get; private set; }
         public Vector2 WorldCenter => DungeonManager.Singleton.TilePosToWorld((Vector2)TilePos + ((Vector2)TileSize - Vector2.one) / 2);
 
         public Vector2Int Dir { get; set; }
@@ -80,7 +81,7 @@ namespace ReLeaf
             GetCheckPoss(TilePos, Dir, buffer);
 
             if (Dir.x != 0)
-                IsLeft = Dir.x < 0;
+                IsLeftIfMove = Dir.x < 0;
 
             var nextTilePos = TilePos + Dir;
 
