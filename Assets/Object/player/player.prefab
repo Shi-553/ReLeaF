@@ -168,7 +168,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 54b06c922a78e394ab6862cbdb891302, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  floatItemMoveSpeed: 5
+  floatItemMoveSpeed: 8
   collectRange: 0.1
   itemManager: {fileID: 4052387953760838874}
 --- !u!58 &6203716136439494101
