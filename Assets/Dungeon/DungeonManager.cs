@@ -1,4 +1,3 @@
-using DebugLogExtension;
 using Pickle;
 using System;
 using System.Collections.Generic;
@@ -121,9 +120,8 @@ namespace ReLeaf
             {
                 return false;
             }
-            var canGreening = tile.CanGreening(isSpecial);
 
-            if (canGreening || tile.IsAlreadyGreening)
+            if (tile.CanOrAleeadyGreening(isSpecial))
             {
                 OnGreening?.Invoke(new GreeningInfo(tilePos, tile.IsAlreadyGreening));
 
@@ -131,7 +129,7 @@ namespace ReLeaf
                 effect.transform.position = TilePosToWorld(tilePos);
             }
 
-            if (!canGreening)
+            if (!tile.CanGreening(isSpecial))
                 return false;
 
             if (tile is SpawnLake lake)
@@ -156,7 +154,6 @@ namespace ReLeaf
             }
             before.Release();
 
-            pos.DebugLog();
             groundTilemap.SetTile((Vector3Int)pos, after);
 
             if (TryGetTile(pos, out var afterTile))

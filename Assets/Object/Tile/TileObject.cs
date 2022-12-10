@@ -10,10 +10,12 @@ namespace ReLeaf
         protected TileObjectInfo Info => info;
 
         public TileType TileType => info.TileType;
-        public bool CanEnemyMove => info.CanEnemyMove;
+        public bool CanEnemyMove(bool isAttackMove) => isAttackMove ? CanEnemyAttack(true) : info.CanEnemyMove;
         public bool CanEnemyAttack(bool includeMoveabePos) => info.CanEnemyAttack || (includeMoveabePos && info.CanEnemyMove);
         public virtual bool CanGreening(bool useSpecial) => useSpecial ? info.CanGreeningUseSpecial : info.CanGreening;
         public virtual bool IsAlreadyGreening => info.IsAlreadyGreening;
+
+        public bool CanOrAleeadyGreening(bool useSpecial) => CanGreening(useSpecial) || IsAlreadyGreening;
 
         public Vector2Int TilePos { get; set; }
         public bool IsInvincible { get; set; }

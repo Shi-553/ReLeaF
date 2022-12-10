@@ -59,7 +59,7 @@ namespace ReLeaf
             enemyMover.UpdateTargetStraight(attackTargetPos);
             while (true)
             {
-                if (enemyMover.Move(SharkAttackInfo.Speed) != EnemyMover.MoveResult.Moveing)
+                if (enemyMover.Move(SharkAttackInfo.Speed, true) != EnemyMover.MoveResult.Moveing)
                 {
                     break;
                 }

@@ -16,7 +16,7 @@ namespace ReLeaf
         {
         }
 
-        public virtual void TileChanged(DungeonManager.TileChangedInfo info) { }
+        public virtual void OnGreening(DungeonManager.GreeningInfo info) { }
 
     }
 }

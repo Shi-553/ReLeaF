@@ -54,7 +54,7 @@ namespace ReLeaf
             {
                 var worldTilePos = enemyMover.TilePos + localPos;
 
-                if (DungeonManager.Singleton.TryGetTile(worldTilePos, out var tile) && tile.CanEnemyMove)
+                if (DungeonManager.Singleton.TryGetTile(worldTilePos, out var tile) && tile.CanOrAleeadyGreening(true))
                 {
                     var marker = weakMarkerManager.SetMarker<WeakMarker>(worldTilePos);
                     if (marker != null)

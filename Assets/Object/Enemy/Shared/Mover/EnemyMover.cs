@@ -90,7 +90,7 @@ namespace ReLeaf
             return Move(enemyMoverInfo.Speed);
         }
 
-        public MoveResult Move(float speedOverride)
+        public MoveResult Move(float speedOverride, bool isAttackMove = false)
         {
             OldTilePos = TilePos;
             GetCheckPoss(TilePos, Dir, buffer);
@@ -106,7 +106,13 @@ namespace ReLeaf
             }
             foreach (var nextPos in buffer)
             {
-                if (!DungeonManager.Singleton.TryGetTile(nextPos, out var tile) || !tile.CanEnemyMove)
+                if (routes.Count == 1 && nextPos == target)
+                    return MoveResult.Finish;
+            }
+
+            foreach (var nextPos in buffer)
+            {
+                if (!DungeonManager.Singleton.TryGetTile(nextPos, out var tile) || !tile.CanEnemyMove(isAttackMove))
                 {
                     return MoveResult.Error;
                 }
@@ -387,7 +393,7 @@ namespace ReLeaf
                 if (isTarget)
                     includeTarget = true;
 
-                if (!isTarget && (!DungeonManager.Singleton.TryGetTile(nextPos, out var tile) || !tile.CanEnemyMove))
+                if (!isTarget && (!DungeonManager.Singleton.TryGetTile(nextPos, out var tile) || !tile.CanEnemyMove(true)))
                 {
                     return false;
                 }

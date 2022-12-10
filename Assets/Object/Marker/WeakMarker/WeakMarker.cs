@@ -8,9 +8,9 @@ namespace ReLeaf
         {
             enemyDamageable = damageable;
         }
-        public override void TileChanged(DungeonManager.TileChangedInfo info)
+        public override void OnGreening(DungeonManager.GreeningInfo info)
         {
-            if (info.tilePos == tilePos && info.afterTile.TileType == TileType.Foundation)
+            if (info.tilePos == tilePos)
             {
                 enemyDamageable.DamagedGreening(tilePos, 1);
             }

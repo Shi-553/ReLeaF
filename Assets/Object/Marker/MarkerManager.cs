@@ -30,13 +30,13 @@ namespace ReLeaf
         private void Start()
         {
             if (subscribeOnTileChanged)
-                DungeonManager.Singleton.OnTileChanged += OnTileChanged;
+                DungeonManager.Singleton.OnGreening += OnGreening;
         }
 
         private void OnDestroy()
         {
             if (subscribeOnTileChanged)
-                DungeonManager.Singleton.OnTileChanged -= OnTileChanged;
+                DungeonManager.Singleton.OnGreening -= OnGreening;
             ResetAllMarker();
         }
 
@@ -88,14 +88,14 @@ namespace ReLeaf
             markers.Clear();
 
         }
-        private void OnTileChanged(DungeonManager.TileChangedInfo info)
+        private void OnGreening(DungeonManager.GreeningInfo info)
         {
             if (this != null && !gameObject.activeSelf)
                 return;
 
             foreach (var key in markers.ToArray())
             {
-                key.Value.TileChanged(info);
+                key.Value.OnGreening(info);
             }
         }
     }

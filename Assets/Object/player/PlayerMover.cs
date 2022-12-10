@@ -180,7 +180,7 @@ namespace ReLeaf
             if (!underTiles.Add(tileObject))
                 return;
 
-            if (!tileObject.CanGreening(false) && !tileObject.IsAlreadyGreening)
+            if (!tileObject.CanOrAleeadyGreening(false))
                 return;
 
             if (!CanSowSeed)
