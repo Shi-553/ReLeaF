@@ -45,7 +45,7 @@ namespace ReLeaf
             foreach (var pos in groundTilemap.cellBounds.allPositionsWithin)
             {
                 var tile = groundTilemap.GetTile<TerrainTile>(pos);
-                if (tile != null && tile.CurrentTileObject.CanGreening(false))
+                if (tile != null && tile.CurrentTileObject.CanGreening(true))
                 {
                     MaxGreeningCount++;
                 }
@@ -89,9 +89,12 @@ namespace ReLeaf
         }
         public TileObject GetTile<T>(Vector2Int pos) where T : TileObject => tiles.GetValueOrDefault(pos, null) as T;
 
-        public bool SowSeed(Vector2Int tilePos, bool isSpecial = false)
+        public bool SowSeed(Vector2Int tilePos, bool isSpecial = false, bool isInvincible = false) =>
+            SowSeed(GetTile(tilePos), isSpecial, isInvincible);
+
+        public bool SowSeed(TileObject tile, bool isSpecial = false, bool isInvincible = false)
         {
-            if (!TryGetTile(tilePos, out var tile) || !tile.CanGreening(isSpecial))
+            if (tile == null || !tile.CanGreening(isSpecial))
             {
                 return false;
             }
@@ -100,23 +103,11 @@ namespace ReLeaf
                 lake.Greening();
                 return true;
             }
-            terrainTileDic[TileType.Plant].IsInvincible = false;
-            ChangeTile(tilePos, terrainTileDic[TileType.Plant]);
+            terrainTileDic[TileType.Plant].IsInvincible = isInvincible;
+            ChangeTile(tile.TilePos, terrainTileDic[TileType.Plant]);
             return true;
         }
 
-        public bool SowInvincibleSeed(Vector2Int tilePos)
-        {
-            if (TryGetTile(tilePos, out var tile) && tile is SpawnLake lake)
-            {
-                lake.Greening();
-                return true;
-            }
-            terrainTileDic[TileType.Plant].IsInvincible = true;
-
-            ChangeTile(tilePos, terrainTileDic[TileType.Plant]);
-            return true;
-        }
 
         void ChangeTile(Vector2Int pos, TerrainTile after)
         {
