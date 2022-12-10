@@ -19,7 +19,7 @@ namespace ReLeaf
 
             }
         }
-        public float ValueRate => value / DungeonManager.Singleton.MaxGreeningCount;
+        public float ValueRate => value / StageManager.Singleton.Current.TargetRate / DungeonManager.Singleton.MaxGreeningCount;
 
         [SerializeField]
         Slider slider;
@@ -43,8 +43,6 @@ namespace ReLeaf
             slider.value = ValueRate;
             var sliderRect = slider.GetComponent<RectTransform>();
 
-            slider.maxValue = StageManager.Singleton.Current.TargetRate;  //スライダーの最大値をターゲットの最大値に設定
-
             DungeonManager.Singleton.OnTileChanged += OnTileChanged;
         }
 
@@ -58,7 +56,7 @@ namespace ReLeaf
                 obj.afterTile.TileType != TileType.Plant)
                 Value--;
 
-            if (ValueRate >= StageManager.Singleton.Current.TargetRate)
+            if (ValueRate >= 1.0f)
             {
                 GameRuleManager.Singleton.Finish(true);
             }
