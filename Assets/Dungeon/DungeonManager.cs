@@ -1,37 +1,24 @@
-using DebugLogExtension;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.Tilemaps;
 using Utility;
 
 namespace ReLeaf
 {
-    public enum PlantType
-    {
-        None = -1,
-        Foundation,
-        Max
-    };
     [ClassSummary("タイルマップマネージャー")]
     public class DungeonManager : SingletonBase<DungeonManager>
     {
         public override bool DontDestroyOnLoad => false;
 
         [SerializeField]
+        List<TerrainTile> terrainTiles = new();
+
+        [SerializeField]
         Tilemap groundTilemap;
 
-        [SerializeField]
-        TerrainTile sandTile;
-        [SerializeField]
-        TerrainTile[] seedTiles;
-
-        [SerializeField]
-        SelectTile messyTile;
-
-        [SerializeField]
-        TerrainTile enemyPlant;
-
+        Dictionary<TileType, TerrainTile> terrainTileDic;
 
         public Dictionary<Vector2Int, TileObject> tiles = new Dictionary<Vector2Int, TileObject>();
 
@@ -58,15 +45,17 @@ namespace ReLeaf
             foreach (var pos in groundTilemap.cellBounds.allPositionsWithin)
             {
                 var tile = groundTilemap.GetTile<TerrainTile>(pos);
-                if (tile != null && tile.CurrentTileObject.CanSowGrass(false))
+                if (tile != null && tile.CurrentTileObject.CanGreening(true))
                 {
                     MaxGreeningCount++;
                 }
             }
+            terrainTileDic = terrainTiles.ToDictionary(t => t.CurrentTileObject.TileType, t => t);
 
-            sandTile.Init();
-            seedTiles.ForEach(t => t.Init());
-            messyTile.Init();
+            foreach (var terrainTile in terrainTileDic)
+            {
+                terrainTile.Value.Init();
+            }
         }
 
         public Vector2Int WorldToTilePos(Vector3 worldPos)
@@ -100,49 +89,28 @@ namespace ReLeaf
         }
         public TileObject GetTile<T>(Vector2Int pos) where T : TileObject => tiles.GetValueOrDefault(pos, null) as T;
 
-        public bool CanSowSeed(TileObject tile, PlantType type, bool isSpecial)
+        public bool SowSeed(Vector2Int tilePos, bool isSpecial = false, bool isInvincible = false) =>
+            SowSeed(GetTile(tilePos), isSpecial, isInvincible);
+
+        public bool SowSeed(TileObject tile, bool isSpecial = false, bool isInvincible = false)
         {
-            if (type < 0 || seedTiles.Length <= (int)type)
+            if (tile == null || !tile.CanGreening(isSpecial))
             {
                 return false;
             }
-
-            if (type == PlantType.Foundation && !tile.CanSowGrass(isSpecial))
+            if (tile is SpawnLake lake)
             {
-                return false;
+                lake.Greening();
+                return true;
             }
-
-            return true;
-        }
-        public bool CanSowSeed(Vector2Int tilePos, PlantType type, bool isSpecial)
-        {
-            if (TryGetTile(tilePos, out var tile))
-                return CanSowSeed(tile, type, isSpecial);
-            return false;
-        }
-
-        public bool SowSeed(Vector2Int tilePos, PlantType type, bool isSpecial = false)
-        {
-            if (!CanSowSeed(tilePos, type, isSpecial))
-            {
-                return false;
-            }
-            seedTiles[(int)type].IsInvincible = false;
-            ChangeTile(tilePos, seedTiles[(int)type]);
+            terrainTileDic[TileType.Plant].IsInvincible = isInvincible;
+            ChangeTile(tile.TilePos, terrainTileDic[TileType.Plant]);
             return true;
         }
 
-        public bool SowInvincibleSeed(Vector2Int tilePos, PlantType type)
-        {
-            seedTiles[(int)type].IsInvincible = true;
-
-            ChangeTile(tilePos, seedTiles[(int)type]);
-            return true;
-        }
 
         void ChangeTile(Vector2Int pos, TerrainTile after)
         {
-
             if (tiles.Remove(pos, out var before))
                 before.Release();
             else
@@ -151,24 +119,23 @@ namespace ReLeaf
             }
             OnTileChanged?.Invoke(new TileChangedInfo(pos, before, after.CurrentTileObject));
             groundTilemap.SetTile((Vector3Int)pos, after);
-            var af = groundTilemap.GetTile((Vector3Int)pos);
-            if (af == null)
-                af.DebugLog();
+
         }
 
 
         public void Messy(Vector2Int tilePos, IMultipleVisual visual)
         {
-            messyTile.Selected = visual;
-            ChangeTile(tilePos, messyTile);
+            var messy = terrainTileDic[TileType.Messy] as SelectTile;
+            messy.Selected = visual;
+            ChangeTile(tilePos, messy);
         }
         public void ToSand(Vector2Int tilePos)
         {
-            ChangeTile(tilePos, sandTile);
+            ChangeTile(tilePos, terrainTileDic[TileType.Sand]);
         }
         public void ToEnemyPlant(Vector2Int tilePos)
         {
-            ChangeTile(tilePos, enemyPlant);
+            ChangeTile(tilePos, terrainTileDic[TileType.EnemyPlant]);
         }
 
 

@@ -19,6 +19,8 @@ namespace ReLeaf
         Wall,
         Messy,
         EnemyPlant,
+        SpwanLake,
+        SpwanTarget,
         Max
     };
 
@@ -62,6 +64,7 @@ namespace ReLeaf
         public bool dontUseTileManager = false;
         public bool isOverrideTile = false;
 
+        protected TileObject createdObject;
 
         bool isInit = false;
         void OnEnable()
@@ -109,12 +112,12 @@ namespace ReLeaf
                     return false;
                 }
 
-                using var _ = Pool.Get<TileObject>(out var newTile);
+                using var _ = Pool.Get<TileObject>(out createdObject);
 
-                newTile.IsInvincible = IsInvincible;
-                newTile.transform.parent = tm.GetComponent<Transform>();
-                newTile.transform.localPosition = tm.GetComponent<Tilemap>().CellToLocal(position) + new Vector3(DungeonManager.CELL_SIZE, DungeonManager.CELL_SIZE) / 2;
-                newTile.TilePos = DungeonManager.Singleton.WorldToTilePos(newTile.transform.position);
+                createdObject.IsInvincible = IsInvincible;
+                createdObject.transform.parent = tm.GetComponent<Transform>();
+                createdObject.transform.localPosition = tm.GetComponent<Tilemap>().CellToLocal(position) + new Vector3(DungeonManager.CELL_SIZE, DungeonManager.CELL_SIZE) / 2;
+                createdObject.TilePos = DungeonManager.Singleton.WorldToTilePos(createdObject.transform.position);
 
                 if (isOverrideTile)
                 {
@@ -123,9 +126,10 @@ namespace ReLeaf
                 }
 
                 if (!dontUseTileManager)
-                    DungeonManager.Singleton.tiles[(Vector2Int)position] = newTile;
+                    DungeonManager.Singleton.tiles[(Vector2Int)position] = createdObject;
+                return true;
             }
-            return true;
+            return false;
         }
 
         public override void GetTileData(Vector3Int position, ITilemap tilemap, ref TileData tileData)
@@ -148,9 +152,9 @@ namespace ReLeaf
         }
 
 #if UNITY_EDITOR
-        // The following is a helper that adds a menu item to create a RoadTile Asset
-        [MenuItem("Assets/Create/2D/Tiles/TerrainTile")]
-        public static void CreateRoadTile()
+
+        [MenuItem("Assets/Create/Tile/TerrainTile")]
+        public static void CreateTerrainTile()
         {
             string path = EditorUtility.SaveFilePanelInProject("Save Terrain Tile", "New Terrain Tile", "Asset", "Save Terrain Tile");
             if (path == "")

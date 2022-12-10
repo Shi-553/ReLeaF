@@ -37,8 +37,7 @@ namespace ReLeaf
 
 
 #if UNITY_EDITOR
-        // The following is a helper that adds a menu item to create a RoadTile Asset
-        [MenuItem("Assets/Create/2D/Tiles/SelectTile")]
+        [MenuItem("Assets/Create/Tile/SelectTile")]
         public static void CreateSelectTile()
         {
             string path = EditorUtility.SaveFilePanelInProject("Save Select Tile", "New Select Tile", "Asset", "Save Select Tile");

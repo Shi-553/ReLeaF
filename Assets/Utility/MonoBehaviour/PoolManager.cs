@@ -119,8 +119,11 @@ namespace Utility
         }
         public void Release<T>(T element) where T : PoolableMonoBehaviour
         {
-            element.Uninit();
-            ObjectPool.Release(element);
+            if (element.IsInitialized)
+            {
+                element.Uninit();
+                ObjectPool.Release(element);
+            }
         }
 
         public void Clear() => ObjectPool.Clear();

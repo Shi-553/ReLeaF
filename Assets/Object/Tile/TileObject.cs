@@ -25,7 +25,7 @@ namespace ReLeaf
             IsInvincible = false;
         }
 
-        public bool CanSowGrass(bool isSpecial) => TileType == TileType.Sand || (isSpecial && TileType == TileType.Messy);
+        public bool CanGreening(bool isSpecial) => TileType == TileType.Sand || (isSpecial && (TileType == TileType.Messy || (TileType == TileType.SpwanLake && this is SpawnLake lake && !lake.IsGreening)));
 
 
     }

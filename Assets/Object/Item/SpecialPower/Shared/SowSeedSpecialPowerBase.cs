@@ -15,7 +15,7 @@ namespace ReLeaf
             foreach (var weakLocalTilePos in localList)
             {
                 var pos = tilePos + weakLocalTilePos;
-                if (!DungeonManager.Singleton.CanSowSeed(pos, PlantType.Foundation, true))
+                if (!DungeonManager.Singleton.TryGetTile(pos, out var tile) || !tile.CanGreening(true))
                 {
                     continue;
                 }
@@ -29,7 +29,7 @@ namespace ReLeaf
             foreach (var weakLocalTilePos in SowSeedSpecialPowerInfo.SeedLocalTilePos.GetLocalTilePosList(dir))
             {
                 var pos = tilePos + weakLocalTilePos;
-                DungeonManager.Singleton.SowSeed(pos, PlantType.Foundation, true);
+                DungeonManager.Singleton.SowSeed(pos, true);
 
             }
         }
