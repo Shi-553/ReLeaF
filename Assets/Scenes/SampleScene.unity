@@ -3621,6 +3621,7 @@ GameObject:
   - component: {fileID: 1648815935}
   - component: {fileID: 1648815937}
   - component: {fileID: 1648815936}
+  - component: {fileID: 1648815938}
   m_Layer: 5
   m_Name: Face
   m_TagString: Untagged
@@ -3668,7 +3669,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: ccc39ffb30c29244c8f35cb260232377, type: 3}
+  m_Sprite: {fileID: 21300000, guid: faa7668d3be9df749a9460f43ac24bb2, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -3686,6 +3687,26 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1648815934}
   m_CullTransparentMesh: 1
+--- !u!114 &1648815938
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1648815934}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d48a58d281d7fcd44b76f9f6bfb0a817, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  faces:
+  - maxHPRate: 1
+    sprite: {fileID: 21300000, guid: faa7668d3be9df749a9460f43ac24bb2, type: 3}
+  - maxHPRate: 0.6
+    sprite: {fileID: 21300000, guid: 93dd154f0ce2af9418ad01c226f4b13d, type: 3}
+  - maxHPRate: 0.3
+    sprite: {fileID: 21300000, guid: 4b82f3baf8b25ee4699ba5fa4b736a1d, type: 3}
+  hpSlider: {fileID: 2105551476}
 --- !u!1 &1709581110
 GameObject:
   m_ObjectHideFlags: 0
