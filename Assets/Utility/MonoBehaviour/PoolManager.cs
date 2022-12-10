@@ -14,9 +14,10 @@ namespace Utility
         public IReadOnlyDictionary<Type, IPool> Pools => pools;
 
         public override bool DontDestroyOnLoad => true;
-        protected override void Init()
+        protected override void Init(bool isFirstInit, bool callByAwake)
         {
         }
+
         protected override void UninitAfterSceneUnload(bool isDestroy)
         {
             foreach (var pool in pools.Values)
@@ -89,6 +90,7 @@ namespace Utility
 
             return newPool;
         }
+
     }
 
     public interface IPool : IEnumerable<IPool>

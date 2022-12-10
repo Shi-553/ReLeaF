@@ -3,16 +3,17 @@ using Utility;
 
 namespace ReLeaf
 {
-    public abstract class TileObject : PoolableMonoBehaviour
+    public class TileObject : PoolableMonoBehaviour
     {
-        public static TileObject NullTile;
+        [SerializeField]
+        TileObjectInfo info;
+        protected TileObjectInfo Info => info;
 
-        [SerializeField, Rename("タイルタイプ")]
-        protected TileType tileType = TileType.None;
-        public TileType TileType => tileType;
-
-        public bool CanEnemyMove => TileType == TileType.Plant || TileType == TileType.Sand || TileType == TileType.Messy;
-        public bool CanEnemyAttack(bool isDamagableOnly) => TileType == TileType.Plant || (!isDamagableOnly && (TileType == TileType.Sand || TileType == TileType.Messy));
+        public TileType TileType => info.TileType;
+        public bool CanEnemyMove => info.CanEnemyMove;
+        public bool CanEnemyAttack(bool includeMoveabePos) => info.CanEnemyAttack || (includeMoveabePos && info.CanEnemyMove);
+        public virtual bool CanGreening(bool useSpecial) => useSpecial ? info.CanGreeningUseSpecial : info.CanGreening;
+        public virtual bool IsAlreadyGreening => info.IsAlreadyGreening;
 
         public Vector2Int TilePos { get; set; }
         public bool IsInvincible { get; set; }
@@ -24,9 +25,5 @@ namespace ReLeaf
         {
             IsInvincible = false;
         }
-
-        public bool CanGreening(bool isSpecial) => TileType == TileType.Sand || (isSpecial && (TileType == TileType.Messy || (TileType == TileType.SpwanLake && this is SpawnLake lake && !lake.IsGreening)));
-
-
     }
 }

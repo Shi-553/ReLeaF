@@ -7,8 +7,7 @@ namespace ReLeaf
 {
     public class Messy : TileObject, IMultipleVisual
     {
-        [SerializeField]
-        MessyInfo messyInfo;
+        MessyInfo MessyInfo => Info as MessyInfo;
 
         public VisualType visualType;
         public int VisualType => visualType.ToInt32();
@@ -17,11 +16,11 @@ namespace ReLeaf
         {
             base.InitImpl();
             StartCoroutine(WaitCure());
-            SEManager.Singleton.Play(messyInfo.ChangeSand, DungeonManager.Singleton.TilePosToWorld(TilePos));
+            SEManager.Singleton.Play(MessyInfo.ChangeSand, DungeonManager.Singleton.TilePosToWorld(TilePos));
         }
         IEnumerator WaitCure()
         {
-            yield return new WaitForSeconds(messyInfo.CureTime);
+            yield return new WaitForSeconds(MessyInfo.CureTime);
             DungeonManager.Singleton.ToSand(TilePos);
         }
     }

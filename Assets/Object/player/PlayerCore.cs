@@ -26,8 +26,10 @@ namespace ReLeaf
         [SerializeField]
         AudioInfo seDamaged;
 
-        protected override void Init()
+        protected override void Init(bool isFirstInit, bool callByAwake)
         {
+            if (!isFirstInit)
+                return;
             IsInvincible = false;
             TryGetComponent(out mover);
 

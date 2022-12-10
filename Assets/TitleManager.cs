@@ -1,4 +1,3 @@
-using System.Collections;
 using UnityEngine;
 using Utility;
 
@@ -12,11 +11,10 @@ namespace ReLeaf
         [SerializeField]
         AudioInfo titleBGM;
 
-        protected override void Init()
+        protected override void Init(bool isFirstInit, bool callByAwake)
         {
-            
         }
-        
+
         void Start()
         {
             BGMManager.Singleton.Play(titleBGM);

@@ -48,12 +48,12 @@ namespace ReLeaf
 
         private void OnTileChanged(DungeonManager.TileChangedInfo obj)
         {
-            if (obj.beforeTile.TileType != TileType.Plant &&
-                obj.afterTile.TileType == TileType.Plant)
+            if (obj.beforeTile.TileType != TileType.Foundation &&
+                obj.afterTile.TileType == TileType.Foundation)
                 Value++;
 
-            if (obj.beforeTile.TileType == TileType.Plant &&
-                obj.afterTile.TileType != TileType.Plant)
+            if (obj.beforeTile.TileType == TileType.Foundation &&
+                obj.afterTile.TileType != TileType.Foundation)
                 Value--;
 
             if (ValueRate >= 1.0f)

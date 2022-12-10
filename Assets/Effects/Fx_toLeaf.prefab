@@ -9751,6 +9751,7 @@ GameObject:
   - component: {fileID: 6149984609233470480}
   - component: {fileID: 6149984609233470483}
   - component: {fileID: 6149984609233470482}
+  - component: {fileID: -8009822704911909708}
   m_Layer: 0
   m_Name: Fx_toLeaf
   m_TagString: Untagged
@@ -14555,6 +14556,18 @@ ParticleSystemRenderer:
   m_MeshWeighting2: 1
   m_MeshWeighting3: 1
   m_MaskInteraction: 0
+--- !u!114 &-8009822704911909708
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6149984609233470477}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c5638df2260b1484a84c3c804483f947, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &6149984610992761753
 GameObject:
   m_ObjectHideFlags: 0

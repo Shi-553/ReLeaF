@@ -19,7 +19,7 @@ namespace ReLeaf
         bool IsAttack => Transition != AttackTransition.None;
         EnemyAttackInfo EnemyAttackInfo { get; }
 
-        IEnumerable<Vector2Int> GetAttackRange(Vector2Int pos, Vector2Int dir, bool isDamagableOnly);
+        IEnumerable<Vector2Int> GetAttackRange(Vector2Int pos, Vector2Int dir, bool includeMoveabePos);
 
         protected void OnStartAiming()
         {

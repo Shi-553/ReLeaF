@@ -8,7 +8,7 @@ namespace Utility
     public class GlobalCoroutine : SingletonBase<GlobalCoroutine>
     {
         public override bool DontDestroyOnLoad => true;
-        protected override void Init()
+        protected override void Init(bool isFirstInit, bool callByAwake)
         {
         }
         public static new void StopCoroutine(Coroutine routine)

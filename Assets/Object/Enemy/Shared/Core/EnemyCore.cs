@@ -20,6 +20,8 @@ namespace ReLeaf
         [SerializeField]
         AudioInfo seEnemyDeath;
 
+        int greeningCount = 0;
+
         private void Start()
         {
             TryGetComponent(out enemyMover);
@@ -45,7 +47,9 @@ namespace ReLeaf
 
         public void SetWeekMarker()
         {
-            var localPoss = enemyDamageableInfo.WeakLocalTilePos.GetLocalTilePosList(enemyMover.Dir);
+            greeningCount = 0;
+
+            var localPoss = enemyDamageableInfo.WeakLocalTilePos.GetLocalTilePosList(enemyMover.DirNotZero);
             foreach (var localPos in localPoss)
             {
                 var worldTilePos = enemyMover.TilePos + localPos;
@@ -58,7 +62,6 @@ namespace ReLeaf
                         marker.SetEnemyDamageable(this);
                     }
                 }
-
             }
         }
         public void ResetWeekMarker()
@@ -71,7 +74,8 @@ namespace ReLeaf
                 return;
             if (weakMarkerManager.ResetMarker(tilePos))
             {
-                Damaged(atk * (enemyDamageableInfo.WeakLocalTilePos.GetLocalTilePosList(enemyMover.Dir).Length - (weakMarkerManager.Markers.Count)));
+                greeningCount++;
+                Damaged(atk * greeningCount);
                 return;
             }
         }

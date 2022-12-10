@@ -1,3 +1,5 @@
+using DebugLogExtension;
+using Pickle;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -18,9 +20,13 @@ namespace ReLeaf
         [SerializeField]
         Tilemap groundTilemap;
 
+        [SerializeField, Pickle, Rename("緑化時のエフェクト")]
+        ToLeafEffect toLeafEffect;
+        IPool toLeafEffectPool;
+
         Dictionary<TileType, TerrainTile> terrainTileDic;
 
-        public Dictionary<Vector2Int, TileObject> tiles = new Dictionary<Vector2Int, TileObject>();
+        public Dictionary<Vector2Int, TileObject> tiles = new();
 
         [field: SerializeField, ReadOnly]
         public int MaxGreeningCount { get; private set; }
@@ -40,24 +46,43 @@ namespace ReLeaf
         }
         public event Action<TileChangedInfo> OnTileChanged;
 
-        protected override void Init()
+        public readonly struct GreeningInfo
         {
-            foreach (var pos in groundTilemap.cellBounds.allPositionsWithin)
-            {
-                var tile = groundTilemap.GetTile<TerrainTile>(pos);
-                if (tile != null && tile.CurrentTileObject.CanGreening(true))
-                {
-                    MaxGreeningCount++;
-                }
-            }
-            terrainTileDic = terrainTiles.ToDictionary(t => t.CurrentTileObject.TileType, t => t);
+            readonly public Vector2Int tilePos;
+            readonly public bool WasAleadyGreening;
 
-            foreach (var terrainTile in terrainTileDic)
+            public GreeningInfo(Vector2Int tilePos, bool wasAleadyGreening)
             {
-                terrainTile.Value.Init();
+                this.tilePos = tilePos;
+                WasAleadyGreening = wasAleadyGreening;
             }
         }
+        public event Action<GreeningInfo> OnGreening;
 
+        protected override void Init(bool isFirstInit, bool callByAwake)
+        {
+            if (isFirstInit)
+            {
+                terrainTileDic = terrainTiles.ToDictionary(t => t.CurrentTileObject.TileType, t => t);
+                foreach (var terrainTile in terrainTileDic)
+                {
+                    terrainTile.Value.Init();
+                }
+            }
+            if (callByAwake)
+            {
+
+                toLeafEffectPool = PoolManager.Singleton.SetPool(toLeafEffect);
+                foreach (var pos in groundTilemap.cellBounds.allPositionsWithin)
+                {
+                    var tile = groundTilemap.GetTile<TerrainTile>(pos);
+                    if (tile != null && tile.CurrentTileObject.CanGreening(true))
+                    {
+                        MaxGreeningCount++;
+                    }
+                }
+            }
+        }
         public Vector2Int WorldToTilePos(Vector3 worldPos)
         {
             return (Vector2Int)groundTilemap.WorldToCell(worldPos);
@@ -89,37 +114,55 @@ namespace ReLeaf
         }
         public TileObject GetTile<T>(Vector2Int pos) where T : TileObject => tiles.GetValueOrDefault(pos, null) as T;
 
-        public bool SowSeed(Vector2Int tilePos, bool isSpecial = false, bool isInvincible = false) =>
-            SowSeed(GetTile(tilePos), isSpecial, isInvincible);
 
-        public bool SowSeed(TileObject tile, bool isSpecial = false, bool isInvincible = false)
+        public bool SowSeed(Vector2Int tilePos, bool isSpecial = false, bool isInvincible = false)
         {
-            if (tile == null || !tile.CanGreening(isSpecial))
+            if (!TryGetTile(tilePos, out var tile))
             {
                 return false;
             }
+            var canGreening = tile.CanGreening(isSpecial);
+
+            if (canGreening || tile.IsAlreadyGreening)
+            {
+                OnGreening?.Invoke(new GreeningInfo(tilePos, tile.IsAlreadyGreening));
+
+                var effect = toLeafEffectPool.Get<ToLeafEffect>();
+                effect.transform.position = TilePosToWorld(tilePos);
+            }
+
+            if (!canGreening)
+                return false;
+
             if (tile is SpawnLake lake)
             {
                 lake.Greening();
                 return true;
             }
-            terrainTileDic[TileType.Plant].IsInvincible = isInvincible;
-            ChangeTile(tile.TilePos, terrainTileDic[TileType.Plant]);
+
+            terrainTileDic[TileType.Foundation].IsInvincible = isInvincible;
+            ChangeTile(tile.TilePos, TileType.Foundation);
             return true;
         }
 
 
-        void ChangeTile(Vector2Int pos, TerrainTile after)
+        void ChangeTile(Vector2Int pos, TileType type)
         {
-            if (tiles.Remove(pos, out var before))
-                before.Release();
-            else
+            var after = terrainTileDic[type];
+            if (!tiles.Remove(pos, out var before))
             {
-                before = TileObject.NullTile;
+                Debug.LogError("change null tile.");
+                return;
             }
-            OnTileChanged?.Invoke(new TileChangedInfo(pos, before, after.CurrentTileObject));
+            before.Release();
+
+            pos.DebugLog();
             groundTilemap.SetTile((Vector3Int)pos, after);
 
+            if (TryGetTile(pos, out var afterTile))
+            {
+                OnTileChanged?.Invoke(new TileChangedInfo(pos, before, afterTile));
+            }
         }
 
 
@@ -127,15 +170,15 @@ namespace ReLeaf
         {
             var messy = terrainTileDic[TileType.Messy] as SelectTile;
             messy.Selected = visual;
-            ChangeTile(tilePos, messy);
+            ChangeTile(tilePos, TileType.Messy);
         }
         public void ToSand(Vector2Int tilePos)
         {
-            ChangeTile(tilePos, terrainTileDic[TileType.Sand]);
+            ChangeTile(tilePos, TileType.Sand);
         }
         public void ToEnemyPlant(Vector2Int tilePos)
         {
-            ChangeTile(tilePos, terrainTileDic[TileType.EnemyPlant]);
+            ChangeTile(tilePos, TileType.EnemyPlant);
         }
 
 

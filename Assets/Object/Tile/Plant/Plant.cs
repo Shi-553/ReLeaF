@@ -23,8 +23,7 @@ namespace ReLeaf
 
     public abstract class Plant : TileObject, IMultipleVisual
     {
-        [SerializeField]
-        PlantInfo plantInfo;
+        PlantInfo PlantInfo => Info as PlantInfo;
 
         [SerializeField, ReadOnly]
         float hp;
@@ -47,7 +46,7 @@ namespace ReLeaf
         {
             base.InitImpl();
 
-            hp = plantInfo.HpMax;
+            hp = PlantInfo.HpMax;
             if (IsFullGrowth)
             {
                 IsFullGrowth = false;
@@ -57,15 +56,13 @@ namespace ReLeaf
             }
 
             growCo = StartCoroutine(Growing());
-            var effect = PoolManager.Singleton.SetPool(plantInfo.ToLeafEffect).Get<ToLeafEffect>();
-            effect.transform.position = transform.position;
         }
         IEnumerator Growing()
         {
             if (!IsFouceGrowing)
             {
                 // äÆëSÇ…ê¨í∑Ç∑ÇÈÇ‹Ç≈
-                yield return new WaitForSeconds(plantInfo.GrowTime);
+                yield return new WaitForSeconds(PlantInfo.GrowTime);
             }
             growCo = null;
             IsFullGrowth = true;
@@ -104,7 +101,7 @@ namespace ReLeaf
                 return;
             }
 
-            foreach (var magnification in plantInfo.DamageMagnifications)
+            foreach (var magnification in PlantInfo.DamageMagnifications)
             {
                 if (magnification.damageType == type)
                 {

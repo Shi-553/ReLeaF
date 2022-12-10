@@ -27,7 +27,22 @@ namespace ReLeaf
         public bool IsLeftIfMove { get; private set; }
         public Vector2 WorldCenter => DungeonManager.Singleton.TilePosToWorld((Vector2)TilePos + ((Vector2)TileSize - Vector2.one) / 2);
 
-        public Vector2Int Dir { get; set; }
+        Vector2Int dir;
+        Vector2Int Dir
+        {
+            get => dir;
+            set
+            {
+                dir = value;
+                dirNotZero = dir == Vector2Int.zero ? Vector2Int.down : dir;
+            }
+        }
+        Vector2Int dirNotZero;
+        public Vector2Int DirNotZero
+        {
+            get => dirNotZero;
+            set => Dir = value;
+        }
 
         void UpdateDir(bool isNext = false)
         {

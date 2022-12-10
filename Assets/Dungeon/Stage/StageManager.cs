@@ -10,7 +10,7 @@ namespace ReLeaf
 
         [field: SerializeField, Rename("今のステージ")]
         public StageInfo Current { get; set; }
-        protected override void Init()
+        protected override void Init(bool isFirstInit, bool callByAwake)
         {
         }
 

@@ -1,3 +1,4 @@
+using DebugLogExtension;
 using Pickle;
 #if UNITY_EDITOR
 using UnityEditor;
@@ -15,7 +16,7 @@ namespace ReLeaf
         Hole,
         Rock,
 
-        Plant,
+        Foundation,
         Wall,
         Messy,
         EnemyPlant,
@@ -103,12 +104,14 @@ namespace ReLeaf
 
                 if (!dontUseTileManager && !isOverrideTile && DungeonManager.Singleton.tiles.ContainsKey((Vector2Int)position))
                 {
+                    $"{position} is Aleady".DebugLog();
                     return false;
                 }
 
                 UpdateTileObject(position, tm);
                 if (currentTileObject == null)
                 {
+                    $"currentTileObject == null".DebugLog();
                     return false;
                 }
 

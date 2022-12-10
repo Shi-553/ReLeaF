@@ -1402,6 +1402,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 0990de19b010e804cbbe751cea55c8be, type: 2}
   - {fileID: 11400000, guid: 001da747823b07f45a2ab13eb1073cbe, type: 2}
   groundTilemap: {fileID: 9020821008736504434}
+  toLeafEffect: {fileID: -8009822704911909708, guid: 3de2c373e89cf4f4c856cbd81c7c4eeb, type: 3}
   <MaxGreeningCount>k__BackingField: 0
 --- !u!1 &543773112
 GameObject:
@@ -3410,7 +3411,7 @@ MonoBehaviour:
   m_PreserveAspect: 0
   m_FillCenter: 1
   m_FillMethod: 1
-  m_FillAmount: 0.44
+  m_FillAmount: 0
   m_FillClockwise: 1
   m_FillOrigin: 0
   m_UseSpriteMesh: 0

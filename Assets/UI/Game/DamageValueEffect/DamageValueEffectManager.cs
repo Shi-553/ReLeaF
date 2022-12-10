@@ -13,7 +13,7 @@ namespace ReLeaf
 
         [SerializeField]
         Transform effectParent;
-        protected override void Init()
+        protected override void Init(bool isFirstInit, bool callByAwake)
         {
         }
         private void Start()

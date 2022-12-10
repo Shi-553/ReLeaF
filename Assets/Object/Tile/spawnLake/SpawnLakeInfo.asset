@@ -9,14 +9,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ea76c892cd128334d9857d7044888d60, type: 3}
-  m_Name: MessyInfo
+  m_Script: {fileID: 11500000, guid: 46b5c867a576f374c8e8bfd65eb3e179, type: 3}
+  m_Name: SpawnLakeInfo
   m_EditorClassIdentifier: 
-  tileType: 5
-  canEnemyMove: 1
+  tileType: 7
+  canEnemyMove: 0
   canEnemyAttack: 0
   canGreening: 0
   canGreeningUseSpecial: 1
   isAlreadyGreening: 0
-  cureTime: 1
-  changeSand: {fileID: 11400000, guid: 158e9342f36cbea4f8a14c1d1797744c, type: 2}

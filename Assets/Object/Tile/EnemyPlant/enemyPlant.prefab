@@ -45,8 +45,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bc94d2362175ff940a1d4b3a38508dbe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  tileType: 6
-  canSowGrass: 0
+  info: {fileID: 11400000, guid: 00077b2c6e92ddf458a6c57e709836b7, type: 2}
 --- !u!1 &3660980644157755159
 GameObject:
   m_ObjectHideFlags: 0

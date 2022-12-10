@@ -36,8 +36,10 @@ namespace Utility
 
 
 #endif
-        protected override void Init()
+        protected override void Init(bool isFirstInit, bool callByAwake)
         {
+            if (!isFirstInit)
+                return;
             Current = SceneManager.GetActiveScene();
             if (Current.name == "" && Current.path == "")
             {

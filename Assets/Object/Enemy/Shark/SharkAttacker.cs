@@ -42,13 +42,13 @@ namespace ReLeaf
             enemyDamageable.SetWeekMarker();
 
             attackStartPos = enemyMover.TilePos;
-            var dir = enemyMover.Dir == Vector2Int.zero ? Vector2Int.down : enemyMover.Dir;
-            enemyMover.GetCheckPoss(enemyMover.TilePos, dir, buffer);
-            attackTargetPos = buffer.Last() + (dir * (SharkAttackInfo.Range - 1));
 
-            foreach (var target in GetAttackRange(enemyMover.TilePos, enemyMover.Dir, false))
+            enemyMover.GetCheckPoss(enemyMover.TilePos, enemyMover.DirNotZero, buffer);
+            attackTargetPos = buffer.Last() + (enemyMover.DirNotZero * (SharkAttackInfo.Range - 1));
+
+            foreach (var target in GetAttackRange(enemyMover.TilePos, enemyMover.DirNotZero, true))
             {
-                attackMarkerManager.SetMarker<TargetMarker>(target, enemyMover.Dir.GetRotation());
+                attackMarkerManager.SetMarker<TargetMarker>(target, enemyMover.DirNotZero.GetRotation());
             }
         }
         IEnumerator IEnemyAttacker.OnStartDamageing()
@@ -73,7 +73,7 @@ namespace ReLeaf
         {
             attackMarkerManager.ResetAllMarker();
         }
-        public IEnumerable<Vector2Int> GetAttackRange(Vector2Int pos, Vector2Int dir, bool isDamagableOnly)
+        public IEnumerable<Vector2Int> GetAttackRange(Vector2Int pos, Vector2Int dir, bool includeMoveabePos)
         {
             List<Vector2Int> returns = new(2);
             List<Vector2Int> buffer = new(2);
@@ -88,14 +88,17 @@ namespace ReLeaf
                         var worldTilePos = new Vector2Int(worldTilePosBase.x + x, worldTilePosBase.y + y);
                         if (returns.Contains(worldTilePos))
                             continue;
-                        if (!DungeonManager.Singleton.TryGetTile(worldTilePos, out var tile) || !tile.CanEnemyMove)
+                        if (!DungeonManager.Singleton.TryGetTile(worldTilePos, out var tile))
                         {
                             return returns;
                         }
-                        if (tile.CanEnemyAttack(isDamagableOnly))
+                        if (tile.CanEnemyAttack(includeMoveabePos))
                         {
                             buffer.Add(worldTilePos);
+                            continue;
                         }
+
+                        return returns;
                     }
                 }
                 returns.AddRange(buffer);
@@ -114,7 +117,7 @@ namespace ReLeaf
             {
                 if (collision.gameObject.TryGetComponent<PlayerCore>(out var player))
                 {
-                    player.Damaged(SharkAttackInfo.ATK, (Vector2)enemyMover.Dir * SharkAttackInfo.KnockBackPower);
+                    player.Damaged(SharkAttackInfo.ATK, (Vector2)enemyMover.DirNotZero * SharkAttackInfo.KnockBackPower);
                 }
             }
         }

@@ -12,8 +12,10 @@ namespace ReLeaf
         [SerializeField]
         Transform disabledLake;
         List<SpawnLake> spawnLakes = new();
-        protected override void Init()
+        protected override void Init(bool isFirstInit, bool callByAwake)
         {
+            if (!isFirstInit)
+                return;
             spawnLakes.Clear();
         }
 

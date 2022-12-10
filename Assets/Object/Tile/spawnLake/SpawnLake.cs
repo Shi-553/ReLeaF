@@ -4,6 +4,9 @@ namespace ReLeaf
     {
         public bool IsGreening { get; private set; }
 
+        public override bool CanGreening(bool useSpecial) => useSpecial && !IsGreening;
+        public override bool IsAlreadyGreening => IsGreening;
+
         public void Greening()
         {
             IsGreening = true;

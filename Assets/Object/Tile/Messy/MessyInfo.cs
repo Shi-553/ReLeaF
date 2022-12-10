@@ -5,7 +5,7 @@ namespace ReLeaf
 {
     [ClassSummary("ぐちゃぐちゃな地面のパラメータ")]
     [CreateAssetMenu(menuName = "Tile/MessyInfo")]
-    public class MessyInfo : ScriptableObject
+    public class MessyInfo : TileObjectInfo
     {
         [SerializeField, Rename("砂になるまでの時間")]
         float cureTime = 10;

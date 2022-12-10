@@ -9,16 +9,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d8e5440912cef0f4f9d63266a7cc7df9, type: 3}
-  m_Name: FoundationInfo
+  m_Script: {fileID: 11500000, guid: 46b5c867a576f374c8e8bfd65eb3e179, type: 3}
+  m_Name: EnemyPlantInfo
   m_EditorClassIdentifier: 
-  tileType: 3
+  tileType: 6
   canEnemyMove: 0
-  canEnemyAttack: 1
+  canEnemyAttack: 0
   canGreening: 0
   canGreeningUseSpecial: 0
   isAlreadyGreening: 1
-  hpMax: 1
-  growTime: 0.5
-  damageMagnifications: []
-  toLeafEffect: {fileID: 4742772883075391010, guid: 47a4a79c5aedb0f4abbe6415d44b76d9, type: 3}

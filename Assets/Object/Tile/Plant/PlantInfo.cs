@@ -6,7 +6,7 @@ namespace ReLeaf
 {
     [ClassSummary("植物({asset.dirname})のパラメータ")]
     [CreateAssetMenu(menuName = "Tile/PlantInfo")]
-    public class PlantInfo : ScriptableObject
+    public class PlantInfo : TileObjectInfo
     {
         [SerializeField, Rename("最大HP")]
         float hpMax;
@@ -21,8 +21,5 @@ namespace ReLeaf
         DamageMagnification[] damageMagnifications;
         public IReadOnlyCollection<DamageMagnification> DamageMagnifications => damageMagnifications;
 
-        [SerializeField, Rename("緑化時のエフェクト")]
-        ToLeafEffect toLeafEffect;
-        public ToLeafEffect ToLeafEffect => toLeafEffect;
     }
 }

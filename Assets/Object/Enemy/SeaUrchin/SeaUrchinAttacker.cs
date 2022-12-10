@@ -59,7 +59,7 @@ namespace ReLeaf
         }
 
 
-        public IEnumerable<Vector2Int> GetAttackRange(Vector2Int pos, Vector2Int dir, bool isDamagableOnly)
+        public IEnumerable<Vector2Int> GetAttackRange(Vector2Int pos, Vector2Int dir, bool includeMoveabePos)
         {
             mover.GetCheckPoss(pos, dir, buffer);
             return buffer;
@@ -68,17 +68,17 @@ namespace ReLeaf
 
         void IEnemyAttacker.OnStartAiming()
         {
-            foreach (var target in GetAttackRange(mover.TilePos, mover.Dir, false))
+            foreach (var target in GetAttackRange(mover.TilePos, mover.DirNotZero, true))
             {
-                targetMarkerManager.SetMarker<TargetMarker>(target, mover.Dir.GetRotation());
+                targetMarkerManager.SetMarker<TargetMarker>(target, mover.DirNotZero.GetRotation());
             }
 
             currentAttackers.Clear();
-            var poss = selects[mover.Dir.ToDirection().ToInt32()].InitWorldPositions;
+            var poss = selects[mover.DirNotZero.ToDirection().ToInt32()].InitWorldPositions;
             foreach (var pos in poss)
             {
                 var spine = Instantiate(seaUrchinAttackInfo.SpinePrefab, pos, Quaternion.identity);
-                spine.Init(mover.Dir);
+                spine.Init(mover.DirNotZero);
                 currentAttackers.Add(spine);
             }
         }
