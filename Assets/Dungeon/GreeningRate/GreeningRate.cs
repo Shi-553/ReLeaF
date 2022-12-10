@@ -22,9 +22,6 @@ namespace ReLeaf
         public float ValueRate => value / DungeonManager.Singleton.MaxGreeningCount;
 
         [SerializeField]
-        Transform targetRateTransform;
-
-        [SerializeField]
         Slider slider;
 
         public static GreeningRate Instance { get; private set; }
@@ -45,10 +42,6 @@ namespace ReLeaf
             value = 0;
             slider.value = ValueRate;
             var sliderRect = slider.GetComponent<RectTransform>();
-
-            var targetRatePos = targetRateTransform.localPosition;
-            targetRatePos.x = Mathf.Lerp(-sliderRect.sizeDelta.x / 2, sliderRect.sizeDelta.x / 2, StageManager.Singleton.Current.TargetRate);
-            targetRateTransform.localPosition = targetRatePos;
 
             slider.maxValue = StageManager.Singleton.Current.TargetRate;  //スライダーの最大値をターゲットの最大値に設定
 
