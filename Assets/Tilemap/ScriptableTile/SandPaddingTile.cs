@@ -66,6 +66,8 @@ namespace ReLeaf
         IEnumerator ConnectInEditor(Tilemap tm, Vector3Int position, TileObject tile)
         {
             yield return null;
+            if (tm == null)
+                yield break;
 
             for (int x = 0; x < Size.x; x++)
             {
