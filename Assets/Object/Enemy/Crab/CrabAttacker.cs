@@ -58,6 +58,8 @@ namespace ReLeaf
         IEnumerator IEnemyAttacker.OnStartDamageing()
         {
             yield return new WaitForSeconds(crabAttackInfo.AttackBeforeDamageTime);
+            if (gameObject == null)
+                yield break;
 
             var player = PlayerCore.Singleton;
             foreach (var attackPos in attackPoss)

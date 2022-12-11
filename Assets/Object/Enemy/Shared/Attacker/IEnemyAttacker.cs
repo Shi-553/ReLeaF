@@ -35,12 +35,12 @@ namespace ReLeaf
         Coroutine AttackCo { get; protected set; }
         void Attack()
         {
-            AttackCo = GlobalCoroutine.StartCoroutine(AttackImpl());
+            AttackCo = GlobalCoroutine.Singleton.StartCoroutine(AttackImpl());
         }
         void Stop()
         {
             if (AttackCo != null)
-                GlobalCoroutine.StopCoroutine(AttackCo);
+                GlobalCoroutine.Singleton.StopCoroutine(AttackCo);
         }
         protected IEnumerator AttackImpl()
         {
@@ -50,7 +50,7 @@ namespace ReLeaf
             yield return new WaitForSeconds(EnemyAttackInfo.AimTime);
 
             Transition = AttackTransition.Damageing;
-            yield return GlobalCoroutine.StartCoroutine(OnStartDamageing());
+            yield return GlobalCoroutine.Singleton.StartCoroutine(OnStartDamageing());
 
             Transition = AttackTransition.CoolTime;
             yield return new WaitUntil(() => Transition == AttackTransition.CoolTime);

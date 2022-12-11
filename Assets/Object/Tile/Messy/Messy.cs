@@ -12,6 +12,7 @@ namespace ReLeaf
         public VisualType visualType;
         public int VisualType => visualType.ToInt32();
 
+        public int VisualMax => Plant.VisualType.Max.ToInt32();
         protected override void InitImpl()
         {
             base.InitImpl();

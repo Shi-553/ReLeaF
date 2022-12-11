@@ -80,8 +80,9 @@ namespace ReLeaf
         [SerializeField, Rename("Œ©‚½–Ú")]
         VisualType visualType;
 
-        public int VisualTypeMax => (int)VisualType.Max;
         int IMultipleVisual.VisualType => (int)visualType;
+
+        public int VisualMax => VisualType.Max.ToInt32();
 
         virtual protected void FullGrowed()
         {

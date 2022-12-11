@@ -13,8 +13,24 @@ namespace ReLeaf
     {
         public override bool DontDestroyOnLoad => false;
 
+        [Serializable]
+        class TileArray
+        {
+            [SerializeField]
+            public TerrainTile[] tiles;
+
+            public void Sort()
+            {
+                tiles = tiles
+                    .OrderBy(t => (t.CurrentTileObject as IMultipleVisual).VisualType)
+                    .ToArray();
+            }
+        }
+
         [SerializeField]
-        List<TerrainTile> terrainTiles = new();
+        TerrainTile[] terrainTiles;
+        [SerializeField]
+        TileArray[] terrainTileArrays;
 
         [SerializeField]
         Tilemap groundTilemap;
@@ -23,7 +39,7 @@ namespace ReLeaf
         ToLeafEffect toLeafEffect;
         IPool toLeafEffectPool;
 
-        Dictionary<TileType, TerrainTile> terrainTileDic;
+        Dictionary<TileType, TerrainTile[]> terrainTileDic;
 
         public Dictionary<Vector2Int, TileObject> tiles = new();
 
@@ -62,10 +78,18 @@ namespace ReLeaf
         {
             if (isFirstInit)
             {
-                terrainTileDic = terrainTiles.ToDictionary(t => t.CurrentTileObject.TileType, t => t);
+                terrainTileArrays.ForEach(arr => arr.Sort());
+
+                terrainTileDic = terrainTileArrays.ToDictionary(t => t.tiles.First().CurrentTileObject.TileType, t => t.tiles);
+
+                foreach (var terrainTile in terrainTiles)
+                {
+                    terrainTileDic.Add(terrainTile.CurrentTileObject.TileType, new[] { terrainTile });
+                }
+
                 foreach (var terrainTile in terrainTileDic)
                 {
-                    terrainTile.Value.Init();
+                    terrainTile.Value.ForEach(tag => tag.Init());
                 }
             }
             if (callByAwake)
@@ -138,19 +162,20 @@ namespace ReLeaf
                 return true;
             }
 
-            terrainTileDic[TileType.Foundation].IsInvincible = isInvincible;
-            ChangeTile(tile.TilePos, TileType.Foundation);
+            var atfer = ChangeTile(tile.TilePos, TileType.Foundation);
+            if (atfer != null)
+                atfer.IsInvincible = isInvincible;
+
             return true;
         }
 
 
-        void ChangeTile(Vector2Int pos, TileType type)
+        TileObject ChangeTile(Vector2Int pos, TileType type, int index = 0)
         {
-            var after = terrainTileDic[type];
+            var after = terrainTileDic[type][index];
             if (!tiles.Remove(pos, out var before))
             {
-                Debug.LogError("change null tile.");
-                return;
+                return null;
             }
             before.Release();
 
@@ -159,15 +184,15 @@ namespace ReLeaf
             if (TryGetTile(pos, out var afterTile))
             {
                 OnTileChanged?.Invoke(new TileChangedInfo(pos, before, afterTile));
+                return afterTile;
             }
+            return null;
         }
 
 
         public void Messy(Vector2Int tilePos, IMultipleVisual visual)
         {
-            var messy = terrainTileDic[TileType.Messy] as SelectTile;
-            messy.Selected = visual;
-            ChangeTile(tilePos, TileType.Messy);
+            ChangeTile(tilePos, TileType.Messy, visual.VisualType);
         }
         public void ToSand(Vector2Int tilePos)
         {

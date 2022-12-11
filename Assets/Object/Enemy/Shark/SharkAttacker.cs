@@ -65,7 +65,7 @@ namespace ReLeaf
                 }
                 yield return null;
 
-                if (this == null)
+                if (gameObject == null)
                     yield break;
             }
         }

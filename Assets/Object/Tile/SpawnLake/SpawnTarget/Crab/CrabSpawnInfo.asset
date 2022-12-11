@@ -1,0 +1,23 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 483af913fff4ed546be67a6619144fbf, type: 3}
+  m_Name: CrabSpawnInfo
+  m_EditorClassIdentifier: 
+  tileType: 8
+  canEnemyMove: 1
+  canEnemyAttack: 0
+  canGreening: 1
+  canGreeningUseSpecial: 1
+  isAlreadyGreening: 0
+  type: 1
+  enemyPrefab: {fileID: 7609214511921149064, guid: 564b1e5e843294d46a32470b0221b74b, type: 3}
+  spwanInterval: 10

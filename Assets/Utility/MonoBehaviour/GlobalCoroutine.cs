@@ -11,15 +11,15 @@ namespace Utility
         protected override void Init(bool isFirstInit, bool callByAwake)
         {
         }
-        public static new void StopCoroutine(Coroutine routine)
+        public new void StopCoroutine(Coroutine routine)
         {
-            Singleton.StaticCast<MonoBehaviour>().StopCoroutine(routine);
+            this.StaticCast<MonoBehaviour>().StopCoroutine(routine);
         }
-        public static new Coroutine StartCoroutine(IEnumerator routine)
+        public new Coroutine StartCoroutine(IEnumerator routine)
         {
-            return Singleton.StaticCast<MonoBehaviour>().StartCoroutine(routine);
+            return this.StaticCast<MonoBehaviour>().StartCoroutine(routine);
         }
-        public static Coroutine DestroyNextFrame(GameObject gameObject)
+        public Coroutine DestroyNextFrame(GameObject gameObject)
         {
             return StartCoroutine(DestroyNextFrameImpl(gameObject));
         }
@@ -29,7 +29,7 @@ namespace Utility
             Destroy(gameObject);
         }
 
-        public static Coroutine WaitNextFrame(Action action)
+        public Coroutine WaitNextFrame(Action action)
         {
             return StartCoroutine(WaitNextFrameImpl(action));
         }

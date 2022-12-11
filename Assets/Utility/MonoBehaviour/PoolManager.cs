@@ -20,6 +20,10 @@ namespace Utility
 
         protected override void UninitAfterSceneUnload(bool isDestroy)
         {
+            Uninit();
+        }
+        public void Uninit()
+        {
             foreach (var pool in pools.Values)
             {
                 foreach (var p in pool)
@@ -240,6 +244,7 @@ namespace Utility
                 if (pools[index] is PoolArray array)
                     return array;
 
+                Debug.LogError("Aleady Pool is Not Array");
                 return null;
             }
 
