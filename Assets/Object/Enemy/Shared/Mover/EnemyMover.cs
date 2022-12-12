@@ -272,7 +272,7 @@ namespace ReLeaf
                     "not found key".DebugLog();
                 }
                 // 0~2‚Ì3‰ñ
-                for (int i = 0; i < 3; i++)
+                for (int i = 0; i < 2; i++)
                 {
                     Direction corner1 = cornerDirs[((int)currentDir + i) % cornerDirs.Length];
                     Direction corner2 = cornerDirs[((int)currentDir + i + 1) % cornerDirs.Length];
@@ -282,6 +282,14 @@ namespace ReLeaf
                         currentDir = corner1;
                         break;
                     }
+                    if (i == 2)
+                    {
+                        "!!!".DebugLog();
+                    }
+                }
+                for (int i = 0; i < 3; i++)
+                {
+                    cornerDirs[i] = Direction.NONE;
                 }
             }
         }
