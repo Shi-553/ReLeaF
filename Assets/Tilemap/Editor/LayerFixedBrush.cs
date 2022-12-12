@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEditor;
 using UnityEditor.SceneManagement;
 using UnityEditor.Tilemaps;
@@ -173,21 +174,34 @@ namespace ReLeaf
             data.tile = tile;
         }
 
-        void ClearZNotZeroTile()
+        void ClearOverlappedTile()
         {
             if (!UpdateTilemapDic())
                 return;
 
+            var tilemaps = tilemapLayerDic.Values.ToArray();
+
+            Undo.RecordObjects(tilemaps, "ClearOverlappedTile");
+
+            HashSet<Vector3Int> allTiles = new();
+
             List<Vector3Int> posList = new();
-            foreach (var tilemap in tilemapLayerDic.Values)
+
+            foreach (var tilemap in tilemaps)
             {
-                posList.Clear();
                 foreach (var pos in tilemap.cellBounds.allPositionsWithin)
                 {
-                    if (pos.z == 0) continue;
-
-                    posList.Add(pos);
+                    if (!tilemap.HasTile(pos))
+                    {
+                        continue;
+                    }
+                    if (pos.z != 0 || !allTiles.Add(pos))
+                    {
+                        posList.Add(pos);
+                        continue;
+                    }
                 }
+
                 tilemap.SetTiles(posList.ToArray(), new TileBase[posList.Count]);
             }
             EditorSceneManager.MarkSceneDirty(beforeGridLayout.gameObject.scene);
@@ -212,9 +226,9 @@ namespace ReLeaf
             {
                 var brush = target as LayerFixedBrush;
 
-                if (GUILayout.Button("zが0じゃないものをクリア   （何故か通れない場所があったときに押す）"))
+                if (GUILayout.Button("重なってるタイルをクリア   （何故か通れない場所があったときに押す）"))
                 {
-                    brush.ClearZNotZeroTile();
+                    brush.ClearOverlappedTile();
                 }
 
             }

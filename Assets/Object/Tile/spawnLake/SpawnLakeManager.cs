@@ -1,4 +1,3 @@
-using DebugLogExtension;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -60,7 +59,6 @@ namespace ReLeaf
                     {
                         continue;
                     }
-                    tile.DebugLog();
                     if (tile is not SpawnTarget target)
                     {
                         if (tile is not Sand connectedSand)
