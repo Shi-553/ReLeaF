@@ -1,3 +1,4 @@
+using DebugLogExtension;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEditor;
@@ -17,20 +18,8 @@ public class SceneCleaner : EditorWindow
         var objs = Resources.FindObjectsOfTypeAll(typeof(GameObject)) as GameObject[];
         m_Objects.Clear();
         m_Objects.AddRange(objs);
-        var array = m_Objects.Where(o => o != null && o.hideFlags.HasFlag(HideFlags.HideInHierarchy)).ToArray();
-        for (int i = 0; i < array.Length; i++)
-        {
-            if (!PrefabUtility.IsPartOfAnyPrefab(array[i]))
-            {
-                continue;
-            }
-            if (AssetDatabase.Contains(array[i]))
-            {
-                continue;
-            }
-            DestroyImmediate(array[i], false);
-        }
-
+        var count = m_Objects.Count(o => o != null && o.hideFlags.HasFlag(HideFlags.HideInHierarchy));
+        $"非表示オブジェクトは{count}個".DebugLog();
     }
 
     [MenuItem("Window/SceneCleaner")]
