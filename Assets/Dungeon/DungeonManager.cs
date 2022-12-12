@@ -172,13 +172,15 @@ namespace ReLeaf
 
         TileObject ChangeTile(Vector2Int pos, TileType type, int index = 0)
         {
-            var after = terrainTileDic[type][index];
-            if (!tiles.Remove(pos, out var before))
+            if (!tiles.TryGetValue(pos, out var before) || before.TileType == type)
             {
                 return null;
             }
+
+            tiles.Remove(pos);
             before.Release();
 
+            var after = terrainTileDic[type][index];
             groundTilemap.SetTile((Vector3Int)pos, after);
 
             if (TryGetTile(pos, out var afterTile))
