@@ -65,6 +65,8 @@ namespace ReLeaf
 
         Vector3 itemOffset;
 
+        List<Vector2Int> previews = new();
+
         private void Start()
         {
             itemUIRoot.GetComponentsInChildren(true, itemUIs);
@@ -147,7 +149,7 @@ namespace ReLeaf
                     return;
                 }
                 previewd = Current.Item;
-                var previews = previewd.PreviewRange(mover.TilePos, ItemDir);
+                previewd.PreviewRange(mover.TilePos, ItemDir, previews);
 
                 foreach (var p in previews)
                 {

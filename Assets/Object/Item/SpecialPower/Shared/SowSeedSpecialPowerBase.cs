@@ -7,21 +7,20 @@ namespace ReLeaf
     {
         abstract protected SowSeedSpecialPowerInfo SowSeedSpecialPowerInfo { get; }
 
-        public override List<Vector2Int> PreviewRange(Vector2Int tilePos, Vector2Int dir)
+        public override void PreviewRange(Vector2Int tilePos, Vector2Int dir, List<Vector2Int> returns)
         {
+            returns.Clear();
             var localList = SowSeedSpecialPowerInfo.SeedLocalTilePos.GetLocalTilePosList(dir);
 
-            var returns = new List<Vector2Int>(localList.Length);
             foreach (var weakLocalTilePos in localList)
             {
                 var pos = tilePos + weakLocalTilePos;
-                if (!DungeonManager.Singleton.TryGetTile(pos, out var tile) || !tile.CanGreening(true))
+                if (!DungeonManager.Singleton.TryGetTile(pos, out var tile) || !tile.CanOrAleeadyGreening(true))
                 {
                     continue;
                 }
                 returns.Add(pos);
             }
-            return returns;
         }
 
         public override void Use(Vector2Int tilePos, Vector2Int dir)

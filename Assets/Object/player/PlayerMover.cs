@@ -102,7 +102,8 @@ namespace ReLeaf
 
             var currentTile = DungeonManager.Singleton.GetTile(TilePos);
 
-            var isFullGrowthPlant = currentTile is Plant plantTile && plantTile.IsFullGrowth;
+            var isFullGrowthPlant = (currentTile is Plant plantTile && plantTile.IsFullGrowth) ||
+                                    (currentTile is not Plant && currentTile.IsAlreadyGreening);
             if (isFullGrowthPlant)
             {
                 energyGauge.RecoveryValue(energyAutoRecoveryPoint * Time.deltaTime);
