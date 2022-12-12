@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 using Utility;
 
@@ -22,6 +23,8 @@ namespace ReLeaf
 
         int greeningCount = 0;
 
+        public event Action OnDeath;
+
         private void Start()
         {
             TryGetComponent(out enemyMover);
@@ -43,6 +46,7 @@ namespace ReLeaf
                 }
             }
             Destroy(gameObject);
+            OnDeath?.Invoke();
         }
 
         public void SetWeekMarker()

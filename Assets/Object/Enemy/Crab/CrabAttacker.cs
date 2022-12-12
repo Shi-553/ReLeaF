@@ -58,7 +58,7 @@ namespace ReLeaf
         IEnumerator IEnemyAttacker.OnStartDamageing()
         {
             yield return new WaitForSeconds(crabAttackInfo.AttackBeforeDamageTime);
-            if (gameObject == null)
+            if (this == null)
                 yield break;
 
             var player = PlayerCore.Singleton;

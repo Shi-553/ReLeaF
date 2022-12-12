@@ -33,6 +33,8 @@ namespace ReLeaf
         {
             float time = 0;
             yield return new WaitForSeconds(info.InitAnimationDelay);
+            if (this == null)
+                yield break;
             while (true)
             {
                 mover.MoveDelta(DungeonManager.CELL_SIZE * info.InitAnimationSpeed * (Vector2)dir);
@@ -41,6 +43,9 @@ namespace ReLeaf
                     yield break;
                 time += Time.deltaTime;
                 yield return null;
+
+                if (this == null)
+                    yield break;
             }
         }
 
