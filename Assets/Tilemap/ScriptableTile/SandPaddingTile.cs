@@ -26,7 +26,7 @@ namespace ReLeaf
             var result = base.StartUp(position, tm, go);
             if (result)
             {
-                GlobalCoroutine.Singleton.StartCoroutine(Connect());
+                GlobalCoroutine.Singleton.StartCoroutine(Connect((Vector2Int)position, createdObject));
             }
 
 #if UNITY_EDITOR
@@ -46,7 +46,7 @@ namespace ReLeaf
 #endif
             return result;
         }
-        IEnumerator Connect()
+        IEnumerator Connect(Vector2Int position, TileObject obj)
         {
             yield return null;
             for (int x = 0; x < Size.x; x++)
@@ -55,9 +55,9 @@ namespace ReLeaf
                 {
                     if (x == 0 && y == 0) continue;
 
-                    if (DungeonManager.Singleton.TryGetTile<ConnectedSand>(new Vector2Int(createdObject.TilePos.x + x, createdObject.TilePos.y + y), out var connectedSand))
+                    if (DungeonManager.Singleton.TryGetTile<Sand>(new Vector2Int(position.x + x, position.y + y), out var connectedSand))
                     {
-                        connectedSand.Target = createdObject;
+                        connectedSand.Target = obj;
                     }
                 }
             }
@@ -76,7 +76,7 @@ namespace ReLeaf
                     if (x == 0 && y == 0) continue;
 
                     var obj = tm.GetInstantiatedObject(new Vector3Int(position.x + x, position.y + y));
-                    if (obj != null && obj.TryGetComponent<ConnectedSand>(out var connectedSand))
+                    if (obj != null && obj.TryGetComponent<Sand>(out var connectedSand))
                     {
                         connectedSand.Target = tile;
                     }

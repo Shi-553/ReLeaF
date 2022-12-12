@@ -1,3 +1,4 @@
+using DebugLogExtension;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -55,9 +56,14 @@ namespace ReLeaf
 
                 foreach (var pos in upAndDownLeftRight)
                 {
-                    if (!DungeonManager.Singleton.TryGetTile<SpawnTarget>(pos, out var target))
+                    if (!DungeonManager.Singleton.TryGetTile(pos, out var tile))
                     {
-                        if (!DungeonManager.Singleton.TryGetTile<ConnectedSand>(pos, out var connectedSand))
+                        continue;
+                    }
+                    tile.DebugLog();
+                    if (tile is not SpawnTarget target)
+                    {
+                        if (tile is not Sand connectedSand)
                         {
                             continue;
                         }

@@ -1,9 +1,11 @@
 using System;
 using System.Collections.Generic;
 using UnityEditor;
+using UnityEditor.SceneManagement;
 using UnityEditor.Tilemaps;
 using UnityEngine;
 using UnityEngine.Tilemaps;
+using Object = UnityEngine.Object;
 
 namespace ReLeaf
 {
@@ -12,25 +14,49 @@ namespace ReLeaf
     {
         [SerializeField]
         TerrainTile sandTile;
-        [SerializeField]
-        TerrainTile connectedSeedTile;
 
         [SerializeField]
         [HideInInspector]
         List<Tilemap> tilemaps = new();
         [SerializeField]
         [HideInInspector]
-        Dictionary<TileLayerType, Tilemap> tilemapLayerMaps = new();
+        Dictionary<TileLayerType, Tilemap> tilemapLayerDic = new();
+
+        [SerializeField]
+        [HideInInspector]
+        GridLayout beforeGridLayout;
+
+        bool UpdateTilemapDic(GridLayout gridLayout = null)
+        {
+            if (gridLayout == null)
+                gridLayout = Object.FindObjectOfType<GridLayout>();
+
+            if (gridLayout == null)
+                return false;
+
+            beforeGridLayout = gridLayout;
+
+            gridLayout.GetComponentsInChildren(tilemaps);
+
+            tilemapLayerDic.Clear();
+            foreach (var map in tilemaps)
+            {
+                if (Enum.TryParse<TileLayerType>(map.name, out var mapType))
+                    tilemapLayerDic.Add(mapType, map);
+            }
+            return tilemapLayerDic.Count != 0;
+        }
 
         [SerializeField]
         [HideInInspector]
         private List<TileChangeData> tileChangeDataList;
 
-        Tilemap GroundTileMap => tilemapLayerMaps[TileLayerType.Ground];
+        Tilemap GroundTileMap => tilemapLayerDic[TileLayerType.Ground];
 
         public override void BoxErase(GridLayout gridLayout, GameObject brushTarget, BoundsInt position)
         {
-            gridLayout.GetComponentsInChildren(tilemaps);
+            if (!UpdateTilemapDic(gridLayout))
+                return;
 
             foreach (var tilemap in tilemaps)
             {
@@ -40,19 +66,7 @@ namespace ReLeaf
 
         public override void BoxFill(GridLayout gridLayout, GameObject brushTarget, BoundsInt position)
         {
-            if (brushTarget == null)
-                return;
-
-            gridLayout.GetComponentsInChildren(tilemaps);
-
-            tilemapLayerMaps.Clear();
-            foreach (var map in tilemaps)
-            {
-                if (Enum.TryParse<TileLayerType>(map.name, out var mapType))
-                    tilemapLayerMaps.Add(mapType, map);
-            }
-
-            if (tilemapLayerMaps.Count == 0)
+            if (!UpdateTilemapDic(gridLayout))
                 return;
 
             int count = 0;
@@ -103,7 +117,7 @@ namespace ReLeaf
 
                 SetTile(ref data, terrainTile.TileLayerType);
 
-                data.tile = connectedSeedTile;
+                data.tile = sandTile;
 
                 var pos = data.position;
                 for (int x = 0; x < paddingTile.Size.x; x++)
@@ -115,7 +129,7 @@ namespace ReLeaf
                             continue;
                         }
                         data.position = new(pos.x + x, pos.y + y, pos.z);
-                        SetTile(ref data, connectedSeedTile.TileLayerType);
+                        SetTile(ref data, sandTile.TileLayerType);
 
                     }
                 }
@@ -125,7 +139,7 @@ namespace ReLeaf
         void SetTile(ref TileChangeData data, TileLayerType paintLayer)
         {
             var obj = GroundTileMap.GetInstantiatedObject(data.position);
-            if (obj != null && obj.TryGetComponent<ConnectedSand>(out var connectedSand) && connectedSand.Target != null)
+            if (obj != null && obj.TryGetComponent<Sand>(out var connectedSand) && connectedSand.Target != null)
             {
                 var targetPos = connectedSand.Target.TilePos;
                 if (GroundTileMap.GetTile((Vector3Int)targetPos) is SandPaddingTile paddingTile)
@@ -145,21 +159,40 @@ namespace ReLeaf
                 }
             }
 
-            tilemapLayerMaps[paintLayer].SetTile(data, false);
+            tilemapLayerDic[paintLayer].SetTile(data, false);
 
             var tile = data.tile;
             data.tile = null;
 
-            foreach (var layer in tilemapLayerMaps.Keys)
+            foreach (var layer in tilemapLayerDic.Keys)
             {
                 if (layer != paintLayer)
-                    tilemapLayerMaps[layer].SetTile(data, false);
+                    tilemapLayerDic[layer].SetTile(data, false);
             }
 
             data.tile = tile;
         }
 
-#if UNITY_EDITOR
+        void ClearZNotZeroTile()
+        {
+            if (!UpdateTilemapDic())
+                return;
+
+            List<Vector3Int> posList = new();
+            foreach (var tilemap in tilemapLayerDic.Values)
+            {
+                posList.Clear();
+                foreach (var pos in tilemap.cellBounds.allPositionsWithin)
+                {
+                    if (pos.z == 0) continue;
+
+                    posList.Add(pos);
+                }
+                tilemap.SetTiles(posList.ToArray(), new TileBase[posList.Count]);
+            }
+            EditorSceneManager.MarkSceneDirty(beforeGridLayout.gameObject.scene);
+        }
+
 
         [MenuItem("Assets/Create/Tile/Brush/LayerFixedBrush")]
         public static void CreateLayerFixedBrush()
@@ -169,12 +202,22 @@ namespace ReLeaf
                 return;
             AssetDatabase.CreateAsset(ScriptableObject.CreateInstance<LayerFixedBrush>(), path);
         }
-#endif
 
         [CustomEditor(typeof(LayerFixedBrush))]
         public class LayerFixedBrushEditor : GridBrushEditor
         {
             public override bool canChangeZPosition => false;
+
+            public override void OnPaintInspectorGUI()
+            {
+                var brush = target as LayerFixedBrush;
+
+                if (GUILayout.Button("zが0じゃないものをクリア   （何故か通れない場所があったときに押す）"))
+                {
+                    brush.ClearZNotZeroTile();
+                }
+
+            }
         }
     }
 }
