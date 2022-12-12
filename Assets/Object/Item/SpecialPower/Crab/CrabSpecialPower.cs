@@ -11,6 +11,7 @@ namespace ReLeaf
 
         public override IEnumerator Use(Vector2Int tilePos, Vector2Int dir)
         {
+            base.Use(tilePos, dir);
             var localRanges = SowSeedSpecialPowerInfo.SeedLocalTilePos.GetLocalTilePosList(dir);
 
 
