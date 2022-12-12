@@ -4,49 +4,34 @@ using UnityEngine;
 
 namespace ReLeaf
 {
-    public class Vision : MonoBehaviour
-    {
-        public bool ShouldFoundTarget => Targets().Any();
 
+    public abstract class Vision : MonoBehaviour
+    {
         [SerializeField]
         string[] targetTags = { "Player" };
-        HashSet<Transform> targets = new HashSet<Transform>();
+
+        Transform[] targets;
+
         public IEnumerable<Transform> Targets()
         {
             foreach (var item in targets)
             {
                 if (item != null)
-                    yield return item;
+                    yield return item.transform;
             }
         }
 
-        public Transform LastTarget { get; private set; }
-        private void Start()
-        {
-            targets.Clear();
-        }
+        protected abstract Collider2D[] GetOverLapAll();
 
-        private void OnTriggerEnter2D(Collider2D collision)
+        public bool UpdateTarget()
         {
-            foreach (var tag in targetTags)
-            {
-                if (collision.CompareTag(tag))
-                {
-                    targets.Add(collision.transform);
-                    LastTarget = collision.transform;
-                }
-            }
-        }
-        private void OnTriggerExit2D(Collider2D collision)
-        {
-            foreach (var tag in targetTags)
-            {
-                if (collision.CompareTag(tag))
-                {
-                    targets.Remove(collision.transform);
-                }
-            }
-        }
+            targets = GetOverLapAll()
+                .Where(item =>
+                targetTags.Any(t => item.CompareTag(t)))
+                .Select(c => c.transform)
+                .ToArray();
 
+            return targets.Any();
+        }
     }
 }

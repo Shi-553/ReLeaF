@@ -28,11 +28,11 @@ namespace ReLeaf
         {
             if (GameRuleManager.Singleton.IsPrepare)
                 return;
-            if (!searchVision.ShouldFoundTarget)
+            if (attacker.IsAttack)
             {
                 return;
             }
-            if (attacker.IsAttack)
+            if (!searchVision.UpdateTarget())
             {
                 return;
             }

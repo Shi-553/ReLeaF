@@ -1,5 +1,4 @@
 using System.Collections;
-using System.Linq;
 using UnityEngine;
 using Utility;
 
@@ -63,9 +62,9 @@ namespace ReLeaf
 
             if (collision.gameObject.CompareTag("Wall") || collision.gameObject.CompareTag("Plant") || collision.gameObject.CompareTag("Player"))
             {
-                if (targetVision.ShouldFoundTarget)
+                if (targetVision.UpdateTarget())
                 {
-                    foreach (var target in targetVision.Targets().ToArray())
+                    foreach (var target in targetVision.Targets())
                     {
                         if (target.TryGetComponent(out Plant plant))
                         {

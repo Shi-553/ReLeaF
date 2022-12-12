@@ -75,8 +75,8 @@ namespace ReLeaf
 
         public bool WasChangedTilePosThisFrame => OldTilePos != TilePos;
 
-        HashSet<TileObject> underTiles = new();
-        HashSet<Vector2Int> waitGreeningTiles = new();
+        HashSet<TileObject> underTiles = new(20);
+        HashSet<Vector2Int> waitGreeningTiles = new(10);
 
         bool CanSowSeed => !GameRuleManager.Singleton.IsPrepare && !isKnockback && IsMove;
 
