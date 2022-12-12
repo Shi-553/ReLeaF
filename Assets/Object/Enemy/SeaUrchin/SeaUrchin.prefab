@@ -636,7 +636,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8edec6174e9630244ae6e11ad4edd6ec, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  subscribeOnTileChanged: 1
+  subscribeOnGreening: 1
   marker: {fileID: -2048128077216658571, guid: c0af75f48203c6349863ead5d0ce2904, type: 3}
 --- !u!1 &3608326819325479133
 GameObject:
@@ -1503,7 +1503,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8edec6174e9630244ae6e11ad4edd6ec, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  subscribeOnTileChanged: 0
+  subscribeOnGreening: 0
   marker: {fileID: -4394657167183029528, guid: 3a9b88e6c6368b04f9611c18dbfef098, type: 3}
 --- !u!1 &8061968723565473751
 GameObject:

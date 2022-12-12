@@ -14,7 +14,7 @@ namespace ReLeaf
         public ReadOnlyDictionary<Vector2Int, MarkerBase> Markers;
 
         [SerializeField]
-        bool subscribeOnTileChanged;
+        bool subscribeOnGreening;
 
         IPool pool;
         IPool GetPool<T>() where T : MarkerBase => pool ??= PoolManager.Singleton.SetPool(marker as T);
@@ -29,13 +29,13 @@ namespace ReLeaf
 
         private void Start()
         {
-            if (subscribeOnTileChanged)
+            if (subscribeOnGreening)
                 DungeonManager.Singleton.OnGreening += OnGreening;
         }
 
         private void OnDestroy()
         {
-            if (subscribeOnTileChanged)
+            if (subscribeOnGreening)
                 DungeonManager.Singleton.OnGreening -= OnGreening;
             ResetAllMarker();
         }

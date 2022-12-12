@@ -237,7 +237,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8edec6174e9630244ae6e11ad4edd6ec, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  subscribeOnTileChanged: 0
+  subscribeOnGreening: 0
   marker: {fileID: 3219640911387259323, guid: 32569a780da112443bfc86fecabc2323, type: 3}
 --- !u!1 &4013356209018127977
 GameObject:
