@@ -8609,10 +8609,6 @@ PrefabInstance:
       propertyPath: slider
       value: 
       objectReference: {fileID: 430693544}
-    - target: {fileID: 6948830093742245587, guid: 7145dcadd5ab20341bfef2b0cf89dc63, type: 3}
-      propertyPath: floatItemMoveSpeed
-      value: 8
-      objectReference: {fileID: 0}
     - target: {fileID: 7810232181920566239, guid: 7145dcadd5ab20341bfef2b0cf89dc63, type: 3}
       propertyPath: slider
       value: 
