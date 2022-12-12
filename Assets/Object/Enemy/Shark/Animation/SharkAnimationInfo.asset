@@ -19,6 +19,7 @@ MonoBehaviour:
   - type: 1
     left: {fileID: 7400000, guid: 3a75d9abc1b46ce4b9044402487ccac6, type: 2}
     right: {fileID: 7400000, guid: 5264ccd40f22ccd48bf9e442485077a9, type: 2}
-  singleClips:
   - type: 2
-    clip: {fileID: 7400000, guid: 62f03c0754ed8f84180d0071f46d18a4, type: 2}
+    left: {fileID: 7400000, guid: 32ef79507840c04478d176ac69d5cb29, type: 2}
+    right: {fileID: 7400000, guid: 0256695dbb77d214eabc46ae8ebc3208, type: 2}
+  singleClips: []

@@ -27,7 +27,7 @@ namespace ReLeaf
                     animancerComponent.Play(info.GetClip(SharkAnimationType.BeforeAttack, enemyMover.IsLeftNow));
                     break;
                 case AttackTransition.Damageing:
-                    animancerComponent.Play(info.GetClip(SharkAnimationType.Attack));
+                    animancerComponent.Play(info.GetClip(SharkAnimationType.Attack, enemyMover.IsLeftNow));
                     break;
                 case AttackTransition.None:
                     if (enemyMover.IsMove)

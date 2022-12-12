@@ -787,7 +787,7 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      spriteseet_shark_attack_7: 816430007
+      spriteseet_shark_attack_23: -1612002122
       spriteseet_shark_attack_28: 491903169
       spriteseet_shark_attack_4: -1349073478
       spriteseet_shark_attack_27: 732149778
@@ -817,8 +817,8 @@ TextureImporter:
       spriteseet_shark_attack_12: -886422506
       spriteseet_shark_attack_26: -880222558
       spriteseet_shark_attack_16: -1592669368
-      spriteseet_shark_attack_23: -1612002122
       spriteseet_shark_attack_24: 12593109
+      spriteseet_shark_attack_7: 816430007
   spritePackingTag: 
   pSDRemoveMatte: 0
   pSDShowRemoveMatteOption: 0
