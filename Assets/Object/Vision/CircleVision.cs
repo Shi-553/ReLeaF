@@ -9,6 +9,9 @@ namespace ReLeaf
         [SerializeField, Rename("検知範囲(n/マス)")]
         float radius = 15.0f;
 
-        protected override Collider2D[] GetOverLapAll() => Physics2D.OverlapCircleAll(transform.position, radius / 2);
+        protected override int GetInitCapacity() => (int)(radius / 2 * radius / 2 * 3.14f);
+
+        protected override Collider2D[] GetOverLapAll() =>
+            Physics2D.OverlapCircleAll(transform.position, radius / 2, mask);
     }
 }

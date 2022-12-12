@@ -11,6 +11,9 @@ namespace ReLeaf
         [SerializeField, Rename("角度(度)")]
         float angle = 0;
 
-        protected override Collider2D[] GetOverLapAll() => Physics2D.OverlapBoxAll(transform.position, size / 2, angle);
+        protected override int GetInitCapacity() => (int)(size.x * size.y);
+
+        protected override Collider2D[] GetOverLapAll() =>
+            Physics2D.OverlapBoxAll(transform.position, size / 2, angle, mask);
     }
 }

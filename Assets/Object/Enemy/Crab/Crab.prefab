@@ -580,6 +580,18 @@ PrefabInstance:
       value: 15
       objectReference: {fileID: 0}
     - target: {fileID: 7153099274174081556, guid: 439121564870f344ab5e1de42c966e97, type: 3}
+      propertyPath: radius
+      value: 15
+      objectReference: {fileID: 0}
+    - target: {fileID: 7153099274174081556, guid: 439121564870f344ab5e1de42c966e97, type: 3}
+      propertyPath: mask.m_Bits
+      value: 64
+      objectReference: {fileID: 0}
+    - target: {fileID: 7153099274174081556, guid: 439121564870f344ab5e1de42c966e97, type: 3}
+      propertyPath: useNearSearch
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7153099274174081556, guid: 439121564870f344ab5e1de42c966e97, type: 3}
       propertyPath: targetTags.Array.size
       value: 1
       objectReference: {fileID: 0}

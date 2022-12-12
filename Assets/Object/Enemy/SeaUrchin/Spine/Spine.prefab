@@ -374,6 +374,10 @@ PrefabInstance:
       value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 7153099274174081556, guid: b1751a9d1ced5414c9dd8222cb552f05, type: 3}
+      propertyPath: mask.m_Bits
+      value: 2147483647
+      objectReference: {fileID: 0}
+    - target: {fileID: 7153099274174081556, guid: b1751a9d1ced5414c9dd8222cb552f05, type: 3}
       propertyPath: targetTags.Array.size
       value: 2
       objectReference: {fileID: 0}

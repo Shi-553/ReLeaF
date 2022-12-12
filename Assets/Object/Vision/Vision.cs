@@ -10,8 +10,15 @@ namespace ReLeaf
         [SerializeField]
         string[] targetTags = { "Player" };
 
-        Transform[] targets;
+        [SerializeField]
+        protected LayerMask mask = ~0;
 
+        List<Transform> targets = new();
+        Collider2D[] results;
+        private void Start()
+        {
+            results = new Collider2D[GetInitCapacity()];
+        }
         public IEnumerable<Transform> Targets()
         {
             foreach (var item in targets)
@@ -21,15 +28,25 @@ namespace ReLeaf
             }
         }
 
+        protected abstract int GetInitCapacity();
         protected abstract Collider2D[] GetOverLapAll();
+
+        void UpdateResult()
+        {
+            targets.Clear();
+            foreach (var collider in results)
+            {
+                if (targetTags.Any(t => collider.CompareTag(t)))
+                {
+                    targets.Add(collider.transform);
+                }
+            }
+        }
 
         public bool UpdateTarget()
         {
-            targets = GetOverLapAll()
-                .Where(item =>
-                targetTags.Any(t => item.CompareTag(t)))
-                .Select(c => c.transform)
-                .ToArray();
+            results = GetOverLapAll();
+            UpdateResult();
 
             return targets.Any();
         }
