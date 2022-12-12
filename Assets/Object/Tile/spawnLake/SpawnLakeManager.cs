@@ -101,7 +101,7 @@ namespace ReLeaf
             {
                 yield return wait;
 
-                if (lakeDic.All(t => t.Value == null))
+                if (lakeDic.All(t => t.Value.IsGreening))
                     yield break;
 
                 foreach (var target in targets)
