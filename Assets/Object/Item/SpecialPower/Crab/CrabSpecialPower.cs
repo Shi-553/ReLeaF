@@ -1,4 +1,3 @@
-using System.Collections;
 using UnityEngine;
 
 namespace ReLeaf
@@ -9,13 +8,13 @@ namespace ReLeaf
         CrabSpecialPowerInfo sowSeedSpecialPowerInfo;
         protected override SowSeedSpecialPowerInfo SowSeedSpecialPowerInfo => sowSeedSpecialPowerInfo;
 
-        public override IEnumerator Use(Vector2Int tilePos, Vector2Int dir)
-        {
-            StartCoroutine(base.Use(tilePos, dir));
-            var localRanges = SowSeedSpecialPowerInfo.SeedLocalTilePos.GetLocalTilePosList(dir);
+        //public override IEnumerator Use(Vector2Int tilePos, Vector2Int dir)
+        //{
+        //    StartCoroutine(base.Use(tilePos, dir));
+        //    var localRanges = SowSeedSpecialPowerInfo.SeedLocalTilePos.GetLocalTilePosList(dir);
 
 
-            yield break;
-        }
+        //    yield break;
+        //}
     }
 }
