@@ -27,7 +27,7 @@ namespace Utility
             if (dir.x > 0)
                 return rightList.Value;
 
-            return null;
+            return downList.Value;
         }
     }
 }

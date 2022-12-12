@@ -9,8 +9,8 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 99f1d147658724043899d0053227624f, type: 3}
-  m_Name: CrabSpecialPower
+  m_Script: {fileID: 11500000, guid: f1d4b245c15c4e4438045982d1ae7094, type: 3}
+  m_Name: CrabSpecialPowerInfo
   m_EditorClassIdentifier: 
   seedLocalTilePos:
     upList:

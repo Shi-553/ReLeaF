@@ -113,7 +113,7 @@ namespace ReLeaf
             itemUIs.RemoveAt(Index);
             itemUIs.Add(useItem);
 
-            useItem.Item.Use(mover.TilePos, ItemDir);
+            StartCoroutine(useItem.Item.Use(mover.TilePos, ItemDir));
             SEManager.Singleton.Play(seUseItem, transform.position);
 
             useItem.Uninit();

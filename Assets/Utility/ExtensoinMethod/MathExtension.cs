@@ -6,6 +6,10 @@ namespace Utility
 {
     public static class MathExtension
     {
+        static public float Cross(this Vector2 v1, Vector2 v2)
+        {
+            return (v1.x * v2.y) - (v1.y * v2.x);
+        }
         static public float Map(float value, float start1, float stop1, float start2, float stop2, bool isClamp = false)
         {
             var ret = start2 + (stop2 - start2) * ((value - start1) / (stop1 - start1));

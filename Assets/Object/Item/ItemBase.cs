@@ -1,3 +1,4 @@
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -26,13 +27,8 @@ namespace ReLeaf
             return true;
         }
 
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="tilePos"></param>
-        /// <param name="dir"></param>
-        /// <returns>world tile pos</returns>
+
         public abstract void PreviewRange(Vector2Int tilePos, Vector2Int dir, List<Vector2Int> returns);
-        public abstract void Use(Vector2Int tilePos, Vector2Int dir);
+        public abstract IEnumerator Use(Vector2Int tilePos, Vector2Int dir);
     }
 }

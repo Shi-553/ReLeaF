@@ -65,8 +65,8 @@ namespace ReLeaf
         MoveSE seGrassMove;
 
 
-        public Vector2 Move { get; set; }
-        public bool IsMove => Move != Vector2.zero;
+        public Vector2 Dir { get; set; }
+        public bool IsMove => Dir != Vector2.zero;
         public bool IsLeft { get; private set; }
         public bool IsDash { get; set; }
 
@@ -95,8 +95,8 @@ namespace ReLeaf
             OldTilePos = TilePos;
             TilePos = DungeonManager.Singleton.WorldToTilePos(transform.position);
 
-            if (Move.x != 0)
-                IsLeft = Move.x < 0;
+            if (Dir.x != 0)
+                IsLeft = Dir.x < 0;
 
             var speed = moveSpeed;
 
@@ -123,7 +123,7 @@ namespace ReLeaf
             }
 
 
-            mover.MoveDelta(DungeonManager.CELL_SIZE * speed * Move);
+            mover.MoveDelta(DungeonManager.CELL_SIZE * speed * Dir);
 
             if (WasChangedTilePosThisFrame && IsMove)
             {

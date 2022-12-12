@@ -1,3 +1,4 @@
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -23,7 +24,7 @@ namespace ReLeaf
             }
         }
 
-        public override void Use(Vector2Int tilePos, Vector2Int dir)
+        public override IEnumerator Use(Vector2Int tilePos, Vector2Int dir)
         {
             foreach (var weakLocalTilePos in SowSeedSpecialPowerInfo.SeedLocalTilePos.GetLocalTilePosList(dir))
             {
@@ -31,6 +32,7 @@ namespace ReLeaf
                 DungeonManager.Singleton.SowSeed(pos, true);
 
             }
+            yield break;
         }
     }
 }
