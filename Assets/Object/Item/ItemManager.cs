@@ -108,7 +108,7 @@ namespace ReLeaf
 
         public IEnumerator UseItem()
         {
-            if (ItemCount == 0 && useCo != null)
+            if (ItemCount == 0 || useCo != null)
                 yield break;
 
             var useItem = Current;
