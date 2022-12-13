@@ -55,13 +55,13 @@ namespace ReLeaf
             foreach (var target in GetAttackRange(enemyMover.TilePos, enemyMover.Dir, false))
             {
                 attackMarkerManager.SetMarker<TargetMarker>(target, enemyMover.Dir.GetRotation());
-                SEManager.Singleton.Play(seBeforeAttack, transform.position);
             }
+            SEManager.Singleton.Play(seBeforeAttack, transform.position);
         }
         IEnumerator IEnemyAttacker.OnStartDamageing()
         {
             enemyDamageable.ResetWeekMarker();
-            //SEManager.Singleton.Play(seAttack, transform.position);
+            SEManager.Singleton.Play(seAttack, transform.position);
 
             enemyMover.UpdateTargetStraight(attackTargetPos);
 
@@ -75,7 +75,6 @@ namespace ReLeaf
 
                 if (this == null)
                 yield break;
-                //Ç±Ç±Ç…èëÇ≠Ç∆ëΩèdÇ…ï∑Ç±Ç¶ÇÈ
 
             }
         }
