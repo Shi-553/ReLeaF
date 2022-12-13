@@ -61,7 +61,7 @@ namespace ReLeaf
                     {
                         if (local.x + tilePos.x == currentTilePos.x)
                         {
-                            DungeonManager.Singleton.SowSeed(local + tilePos);
+                            DungeonManager.Singleton.SowSeed(local + tilePos, true);
                             return true;
                         }
                         return false;
@@ -73,7 +73,7 @@ namespace ReLeaf
                     {
                         if (local.y + tilePos.y == currentTilePos.y)
                         {
-                            DungeonManager.Singleton.SowSeed(local + tilePos);
+                            DungeonManager.Singleton.SowSeed(local + tilePos, true);
                             return true;
                         }
                         return false;
