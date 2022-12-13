@@ -18,6 +18,10 @@ namespace ReLeaf
 
         Rigidbody2DMover mover;
 
+        public bool UseManualOperation { get; private set; } = false;
+        bool useDash = true;
+        float manualSpeed;
+
         protected override void Init(bool isFirstInit, bool callByAwake)
         {
             if (!isFirstInit)
@@ -37,42 +41,64 @@ namespace ReLeaf
             dir = toTarget / distance;
         }
 
+        public void UpdateManualOperation(Vector3 target, float speed, bool useDash)
+        {
+            UpdateTarget(target);
+            UseManualOperation = true;
+            this.useDash = useDash;
+            manualSpeed = speed;
+            this.speed = speed;
+        }
 
         void LateUpdate()
         {
             if (GameRuleManager.Singleton.IsPrepare)
                 return;
 
-            UpdateTarget(PlayerCore.Singleton.transform.position);
-
-            if (distance * DungeonManager.CELL_SIZE < nearRange)
+            if (!UseManualOperation)
             {
-                if (PlayerCore.Singleton.Mover.Dir != Vector2.zero)
+                UpdateTarget(PlayerCore.Singleton.transform.position);
+
+                if (distance * DungeonManager.CELL_SIZE < nearRange)
                 {
-                    var dot = Vector2.Dot(PlayerCore.Singleton.Mover.Dir, -dir);
-                    var cross = PlayerCore.Singleton.Mover.Dir.Cross(-dir);
-                    if (dot > 0)
+                    if (PlayerCore.Singleton.Mover.Dir != Vector2.zero)
                     {
-                        if (cross < 0)
-                            cross = Mathf.Min(cross, -0.5f);
-                        else
-                            cross = Mathf.Max(cross, 0.5f);
+                        var dot = Vector2.Dot(PlayerCore.Singleton.Mover.Dir, -dir);
+                        var cross = PlayerCore.Singleton.Mover.Dir.Cross(-dir);
+                        if (dot > 0)
+                        {
+                            if (cross < 0)
+                                cross = Mathf.Min(cross, -0.5f);
+                            else
+                                cross = Mathf.Max(cross, 0.5f);
+                        }
+                        dir = Quaternion.Euler(0, 0, 30 * cross) * dir;
                     }
-                    dir = Quaternion.Euler(0, 0, 30 * cross) * dir;
+                    UpdateTarget(target - dir * nearRange);
                 }
-                UpdateTarget(target - dir * nearRange);
+            }
+            else
+            {
+                UpdateTarget(target);
             }
 
             var distanceMaxOne = Mathf.Min(distance, 1);
-            if (distanceMaxOne > 0.01f)
+            if (distanceMaxOne > 0.1f)
             {
                 Move = DungeonManager.CELL_SIZE * distanceMaxOne * speed * dir;
                 mover.MoveDelta(Move);
             }
+            else
+            {
+                UseManualOperation = false;
+                useDash = true;
+                speed = manualSpeed;
+            }
+
             if (Move.x != 0)
                 IsLeft = Move.x < 0;
 
-            IsDash = distanceMaxOne == 1;
+            IsDash = useDash && distanceMaxOne == 1;
         }
     }
 }

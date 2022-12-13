@@ -60,7 +60,7 @@ namespace ReLeaf
                 return;
             if (context.ReadValue<float>() != 0)
             {
-                itemManager.UseItem();
+                StartCoroutine(itemManager.UseItem());
             }
         }
 

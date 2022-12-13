@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 using Utility;
 
@@ -67,6 +68,8 @@ namespace ReLeaf
 
         List<Vector2Int> previews = new();
 
+        Coroutine useCo;
+
         private void Start()
         {
             itemUIRoot.GetComponentsInChildren(true, itemUIs);
@@ -103,17 +106,18 @@ namespace ReLeaf
             ItemCount++;
         }
 
-        public void UseItem()
+        public IEnumerator UseItem()
         {
-            if (ItemCount == 0)
-                return;
+            if (ItemCount == 0 && useCo != null)
+                yield break;
 
             var useItem = Current;
 
             itemUIs.RemoveAt(Index);
             itemUIs.Add(useItem);
 
-            StartCoroutine(useItem.Item.Use(mover.TilePos, ItemDir));
+            useCo = StartCoroutine(useItem.Item.Use(mover.TilePos, ItemDir));
+
             SEManager.Singleton.Play(seUseItem, transform.position);
 
             useItem.Uninit();
@@ -123,6 +127,10 @@ namespace ReLeaf
             {
                 itemUIs[i].Index = i;
             }
+
+            yield return useCo;
+
+            useCo = null;
         }
 
         public void SelectMoveLeft()
