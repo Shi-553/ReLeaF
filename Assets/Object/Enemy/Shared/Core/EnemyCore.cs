@@ -21,6 +21,10 @@ namespace ReLeaf
         [SerializeField]
         AudioInfo seEnemyDeath;
 
+        [SerializeField]
+        AudioInfo seEnemyDamaged;
+
+
         int greeningCount = 0;
 
         public event Action OnDeath;
@@ -98,6 +102,7 @@ namespace ReLeaf
                 return;
             }
             HP -= atk;
+            SEManager.Singleton.Play(seEnemyDamaged, transform.position);
         }
 
         private void OnTriggerEnter2D(Collider2D collision)
