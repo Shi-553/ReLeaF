@@ -63,12 +63,16 @@ namespace ReLeaf
                 UpdateTarget(target - dir * nearRange);
             }
 
-            if (distance > 0.01f)
+            var distanceMaxOne = Mathf.Min(distance, 1);
+            if (distanceMaxOne > 0.01f)
             {
-                Move = DungeonManager.CELL_SIZE * Mathf.Min(distance, 1) * speed * dir;
+                Move = DungeonManager.CELL_SIZE * distanceMaxOne * speed * dir;
                 mover.MoveDelta(Move);
             }
+            if (Move.x != 0)
+                IsLeft = Move.x < 0;
 
+            IsDash = distanceMaxOne == 1;
         }
     }
 }
