@@ -12,8 +12,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cf0ca5a09e079a642b3654fa43dbf6d7, type: 3}
   m_Name: rock
   m_EditorClassIdentifier: 
-  m_Sprite: {fileID: 21300000, guid: 3416d3de711dbbc4694095a73b6fa821, type: 3}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Sprite: {fileID: 21300000, guid: 608e61deb05c54660bebf5a4dd2ee02d, type: 3}
+  m_Color: {r: 1, g: 0.35086668, b: 0, a: 1}
   m_Flags: 3
   m_ColliderType: 2
   currentTileObject: {fileID: -3407586524441483229, guid: 412edb38542f7334b822468198c5807e, type: 3}
+  defaultCapacity: 10
+  maxSize: 100
+  dontUseTileManager: 0
+  isOverrideTile: 1
+  tileLayerType: 1

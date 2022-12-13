@@ -23,8 +23,7 @@ namespace ReLeaf
 
     public abstract class Plant : TileObject, IMultipleVisual
     {
-        [SerializeField]
-        PlantInfo plantInfo;
+        PlantInfo PlantInfo => Info as PlantInfo;
 
         [SerializeField, ReadOnly]
         float hp;
@@ -43,11 +42,11 @@ namespace ReLeaf
         Coroutine growCo;
         public bool IsFouceGrowing { get; private set; }
 
-        public override void Init(bool isCreated)
+        protected override void InitImpl()
         {
-            base.Init(isCreated);
+            base.InitImpl();
 
-            hp = plantInfo.HpMax;
+            hp = PlantInfo.HpMax;
             if (IsFullGrowth)
             {
                 IsFullGrowth = false;
@@ -63,7 +62,7 @@ namespace ReLeaf
             if (!IsFouceGrowing)
             {
                 // Š®‘S‚É¬’·‚·‚é‚Ü‚Å
-                yield return new WaitForSeconds(plantInfo.GrowTime);
+                yield return new WaitForSeconds(PlantInfo.GrowTime);
             }
             growCo = null;
             IsFullGrowth = true;
@@ -81,8 +80,9 @@ namespace ReLeaf
         [SerializeField, Rename("Œ©‚½–Ú")]
         VisualType visualType;
 
-        public int VisualTypeMax => (int)VisualType.Max;
         int IMultipleVisual.VisualType => (int)visualType;
+
+        public int VisualMax => VisualType.Max.ToInt32();
 
         virtual protected void FullGrowed()
         {
@@ -102,7 +102,7 @@ namespace ReLeaf
                 return;
             }
 
-            foreach (var magnification in plantInfo.DamageMagnifications)
+            foreach (var magnification in PlantInfo.DamageMagnifications)
             {
                 if (magnification.damageType == type)
                 {

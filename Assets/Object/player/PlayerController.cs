@@ -45,7 +45,7 @@ namespace ReLeaf
 
         public void OnMove(InputAction.CallbackContext context)
         {
-            mover.Move = context.ReadValue<Vector2>().normalized;
+            mover.Dir = context.ReadValue<Vector2>().normalized;
         }
 
         public void OnDash(InputAction.CallbackContext context)
@@ -60,7 +60,7 @@ namespace ReLeaf
                 return;
             if (context.ReadValue<float>() != 0)
             {
-                itemManager.UseItem();
+                StartCoroutine(itemManager.UseItem());
             }
         }
 

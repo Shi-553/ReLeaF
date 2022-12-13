@@ -1,3 +1,4 @@
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -7,31 +8,31 @@ namespace ReLeaf
     {
         abstract protected SowSeedSpecialPowerInfo SowSeedSpecialPowerInfo { get; }
 
-        public override List<Vector2Int> PreviewRange(Vector2Int tilePos, Vector2Int dir)
+        public override void PreviewRange(Vector2Int tilePos, Vector2Int dir, List<Vector2Int> returns)
         {
+            returns.Clear();
             var localList = SowSeedSpecialPowerInfo.SeedLocalTilePos.GetLocalTilePosList(dir);
 
-            var returns = new List<Vector2Int>(localList.Length);
             foreach (var weakLocalTilePos in localList)
             {
                 var pos = tilePos + weakLocalTilePos;
-                if (!DungeonManager.Singleton.CanSowSeed(pos, PlantType.Foundation, true))
+                if (!DungeonManager.Singleton.TryGetTile(pos, out var tile) || !tile.CanOrAleeadyGreening(true))
                 {
                     continue;
                 }
                 returns.Add(pos);
             }
-            return returns;
         }
 
-        public override void Use(Vector2Int tilePos, Vector2Int dir)
+        public override IEnumerator Use(Vector2Int tilePos, Vector2Int dir)
         {
             foreach (var weakLocalTilePos in SowSeedSpecialPowerInfo.SeedLocalTilePos.GetLocalTilePosList(dir))
             {
                 var pos = tilePos + weakLocalTilePos;
-                DungeonManager.Singleton.SowSeed(pos, PlantType.Foundation, true);
+                DungeonManager.Singleton.SowSeed(pos, true);
 
             }
+            yield break;
         }
     }
 }

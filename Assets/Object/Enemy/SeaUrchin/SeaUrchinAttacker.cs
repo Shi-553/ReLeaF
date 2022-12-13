@@ -38,6 +38,7 @@ namespace ReLeaf
         List<Vector2Int> buffer = new();
 
         public AttackTransition Transition { get; set; }
+        Coroutine IEnemyAttacker.AttackCo { get; set; }
 
         public EnemyAttackInfo EnemyAttackInfo => seaUrchinAttackInfo;
 
@@ -46,10 +47,21 @@ namespace ReLeaf
 
         List<Spine> currentAttackers = new();
 
+        [SerializeField]
+        AudioInfo seBeforeAttack;
+
+        [SerializeField]
+        AudioInfo seAttack;
+
+        [SerializeField]
+        AudioInfo seAfterAttack;
+
+
         void Start()
         {
             TryGetComponent(out mover);
             TryGetComponent(out enemyDamageable);
+            enemyDamageable.OnDeath += OnDeath;
 
             foreach (var select in selects)
             {
@@ -57,8 +69,15 @@ namespace ReLeaf
             }
         }
 
+        private void OnDeath()
+        {
+            if (Transition == AttackTransition.Aiming)
+            {
+                currentAttackers.ForEach(c => Destroy(c));
+            }
+        }
 
-        public IEnumerable<Vector2Int> GetAttackRange(Vector2Int pos, Vector2Int dir, bool isDamagableOnly)
+        public IEnumerable<Vector2Int> GetAttackRange(Vector2Int pos, Vector2Int dir, bool includeMoveabePos)
         {
             mover.GetCheckPoss(pos, dir, buffer);
             return buffer;
@@ -67,25 +86,27 @@ namespace ReLeaf
 
         void IEnemyAttacker.OnStartAiming()
         {
-            foreach (var target in GetAttackRange(mover.TilePos, mover.Dir, false))
+            foreach (var target in GetAttackRange(mover.TilePos, mover.DirNotZero, true))
             {
-                targetMarkerManager.SetMarker<TargetMarker>(target, mover.Dir.GetRotation());
+                targetMarkerManager.SetMarker<TargetMarker>(target, mover.DirNotZero.GetRotation());
             }
 
             currentAttackers.Clear();
-            var poss = selects[mover.Dir.ToDirection().ToInt32()].InitWorldPositions;
+            var poss = selects[mover.DirNotZero.ToDirection().ToInt32()].InitWorldPositions;
             foreach (var pos in poss)
             {
                 var spine = Instantiate(seaUrchinAttackInfo.SpinePrefab, pos, Quaternion.identity);
-                spine.Init(mover.Dir);
+                spine.Init(mover.DirNotZero);
                 currentAttackers.Add(spine);
             }
+            SEManager.Singleton.Play(seBeforeAttack, transform.position);
         }
         IEnumerator IEnemyAttacker.OnStartDamageing()
         {
             targetMarkerManager.ResetAllMarker();
 
             enemyDamageable.SetWeekMarker();
+            SEManager.Singleton.Play(seAttack, transform.position);
 
             foreach (var spine in currentAttackers)
             {
@@ -96,6 +117,7 @@ namespace ReLeaf
         }
         void IEnemyAttacker.OnStartCoolTime()
         {
+            SEManager.Singleton.Play(seAfterAttack, transform.position);
         }
         void IEnemyAttacker.OnEndCoolTime()
         {

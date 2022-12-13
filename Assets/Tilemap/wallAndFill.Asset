@@ -12,10 +12,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 537fce44bc4132343a6163bf02697d3d, type: 3}
   m_Name: wallAndFill
   m_EditorClassIdentifier: 
-  m_Sprite: {fileID: 21300000, guid: e3e18b624e1e8d140ac91d5176c37d56, type: 3}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Sprite: {fileID: 21300000, guid: 608e61deb05c54660bebf5a4dd2ee02d, type: 3}
+  m_Color: {r: 0.5377358, g: 0.21074374, b: 0, a: 1}
   m_Flags: 3
   m_ColliderType: 2
   currentTileObject: {fileID: -799063905996909885, guid: 8d6ea43fa261c0649a74f6841f4ca1c0, type: 3}
+  defaultCapacity: 10
+  maxSize: 100
+  dontUseTileManager: 0
+  isOverrideTile: 1
+  tileLayerType: 1
   block: {fileID: -799063905996909885, guid: 8d6ea43fa261c0649a74f6841f4ca1c0, type: 3}
   fill: {fileID: -848456482416004739, guid: 532bf521b3b5d7e4bb00fe9c9a0625af, type: 3}

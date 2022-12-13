@@ -19,7 +19,7 @@ namespace ReLeaf
         bool IsAttack => Transition != AttackTransition.None;
         EnemyAttackInfo EnemyAttackInfo { get; }
 
-        IEnumerable<Vector2Int> GetAttackRange(Vector2Int pos, Vector2Int dir, bool isDamagableOnly);
+        IEnumerable<Vector2Int> GetAttackRange(Vector2Int pos, Vector2Int dir, bool includeMoveabePos);
 
         protected void OnStartAiming()
         {
@@ -32,7 +32,17 @@ namespace ReLeaf
         {
         }
 
-        IEnumerator Attack()
+        Coroutine AttackCo { get; protected set; }
+        void Attack()
+        {
+            AttackCo = GlobalCoroutine.Singleton.StartCoroutine(AttackImpl());
+        }
+        void Stop()
+        {
+            if (AttackCo != null)
+                GlobalCoroutine.Singleton.StopCoroutine(AttackCo);
+        }
+        protected IEnumerator AttackImpl()
         {
             Transition = AttackTransition.Aiming;
             OnStartAiming();
@@ -40,7 +50,7 @@ namespace ReLeaf
             yield return new WaitForSeconds(EnemyAttackInfo.AimTime);
 
             Transition = AttackTransition.Damageing;
-            yield return GlobalCoroutine.StartCoroutine(OnStartDamageing());
+            yield return GlobalCoroutine.Singleton.StartCoroutine(OnStartDamageing());
 
             Transition = AttackTransition.CoolTime;
             yield return new WaitUntil(() => Transition == AttackTransition.CoolTime);
@@ -51,6 +61,7 @@ namespace ReLeaf
 
             Transition = AttackTransition.None;
             OnEndCoolTime();
+            AttackCo = null;
         }
     }
 }

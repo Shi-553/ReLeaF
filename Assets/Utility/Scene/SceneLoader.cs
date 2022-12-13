@@ -13,11 +13,11 @@ namespace Utility
         // アクティブなシーン
         public Scene Current { get; private set; }
 #if DEFINE_SCENE_TYPE_ENUM
-        public SceneType CurrentType => (SceneType)Current.buildIndex;
+        public SceneType CurrentType => Current.GetSceneType();
 
         // オーバーライドされて後ろにいったシーン
         public Scene? Background { get; private set; } = null;
-        public SceneType? BackgroundType => (SceneType)Background?.buildIndex;
+        public SceneType? BackgroundType => Background?.GetSceneType();
 
         // オーバーライドされてるときは必ずポーズする
         public bool IsPause => Background.HasValue;
@@ -36,8 +36,10 @@ namespace Utility
 
 
 #endif
-        protected override void Init()
+        protected override void Init(bool isFirstInit, bool callByAwake)
         {
+            if (!isFirstInit)
+                return;
             Current = SceneManager.GetActiveScene();
             if (Current.name == "" && Current.path == "")
             {

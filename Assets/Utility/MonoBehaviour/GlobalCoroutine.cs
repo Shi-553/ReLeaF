@@ -8,14 +8,18 @@ namespace Utility
     public class GlobalCoroutine : SingletonBase<GlobalCoroutine>
     {
         public override bool DontDestroyOnLoad => true;
-        protected override void Init()
+        protected override void Init(bool isFirstInit, bool callByAwake)
         {
         }
-        public static new Coroutine StartCoroutine(IEnumerator routine)
+        public new void StopCoroutine(Coroutine routine)
         {
-            return Singleton.StaticCast<MonoBehaviour>().StartCoroutine(routine);
+            this.StaticCast<MonoBehaviour>().StopCoroutine(routine);
         }
-        public static Coroutine DestroyNextFrame(GameObject gameObject)
+        public new Coroutine StartCoroutine(IEnumerator routine)
+        {
+            return this.StaticCast<MonoBehaviour>().StartCoroutine(routine);
+        }
+        public Coroutine DestroyNextFrame(GameObject gameObject)
         {
             return StartCoroutine(DestroyNextFrameImpl(gameObject));
         }
@@ -25,7 +29,7 @@ namespace Utility
             Destroy(gameObject);
         }
 
-        public static Coroutine WaitNextFrame(Action action)
+        public Coroutine WaitNextFrame(Action action)
         {
             return StartCoroutine(WaitNextFrameImpl(action));
         }

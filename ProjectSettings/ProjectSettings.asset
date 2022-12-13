@@ -539,7 +539,8 @@ PlayerSettings:
     Standalone: DEFINE_SCENE_TYPE_ENUM
   additionalCompilerArguments: {}
   platformArchitecture: {}
-  scriptingBackend: {}
+  scriptingBackend:
+    Standalone: 0
   il2cppCompilerConfiguration: {}
   managedStrippingLevel: {}
   incrementalIl2cppBuild: {}

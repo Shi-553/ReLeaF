@@ -24,14 +24,14 @@ namespace ReLeaf
             switch (enemyAttacker.Transition)
             {
                 case AttackTransition.Aiming:
-                    animancerComponent.Play(info.GetClip(SharkAnimationType.BeforeAttack));
+                    animancerComponent.Play(info.GetClip(SharkAnimationType.BeforeAttack, enemyMover.IsLeftNow));
                     break;
                 case AttackTransition.Damageing:
-                    animancerComponent.Play(info.GetClip(SharkAnimationType.Attack));
+                    animancerComponent.Play(info.GetClip(SharkAnimationType.Attack, enemyMover.IsLeftNow));
                     break;
                 case AttackTransition.None:
                     if (enemyMover.IsMove)
-                        animancerComponent.Play(info.GetClip(SharkAnimationType.Move, enemyMover.IsLeft));
+                        animancerComponent.Play(info.GetClip(SharkAnimationType.Move, enemyMover.IsLeftIfMove));
                     break;
             }
         }

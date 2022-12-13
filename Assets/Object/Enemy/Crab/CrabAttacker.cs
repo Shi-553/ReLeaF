@@ -9,6 +9,7 @@ namespace ReLeaf
     public class CrabAttacker : MonoBehaviour, IEnemyAttacker
     {
         public AttackTransition Transition { get; set; }
+        Coroutine IEnemyAttacker.AttackCo { get; set; }
         public EnemyAttackInfo EnemyAttackInfo => crabAttackInfo;
 
         [SerializeField]
@@ -22,7 +23,13 @@ namespace ReLeaf
 
         Vector2Int[] attackPoss;
 
-        public IEnumerable<Vector2Int> GetAttackRange(Vector2Int pos, Vector2Int dir, bool isDamagableOnly)
+        [SerializeField]
+        AudioInfo seBeforeAttack;
+
+        [SerializeField]
+        AudioInfo seAttack;
+
+        public IEnumerable<Vector2Int> GetAttackRange(Vector2Int pos, Vector2Int dir, bool includeMoveabePos)
         {
             foreach (var local in crabAttackInfo.AttackLocalTilePos.GetLocalTilePosList(dir))
             {
@@ -31,7 +38,7 @@ namespace ReLeaf
                 if (!DungeonManager.Singleton.TryGetTile(attackPos, out var tile))
                     continue;
 
-                if (tile.CanEnemyAttack(isDamagableOnly))
+                if (tile.CanEnemyAttack(includeMoveabePos))
                 {
                     yield return attackPos;
                 }
@@ -40,16 +47,19 @@ namespace ReLeaf
 
         void IEnemyAttacker.OnStartAiming()
         {
-            attackPoss = GetAttackRange(mover.TilePos, mover.Dir, false).ToArray();
+            attackPoss = GetAttackRange(mover.TilePos, mover.DirNotZero, true).ToArray();
             foreach (var attackPos in attackPoss)
             {
                 targetMarkerManager.SetMarker<TargetMarker>(attackPos);
             }
             enemyCore.SetWeekMarker();
+            SEManager.Singleton.Play(seBeforeAttack, transform.position);
         }
         IEnumerator IEnemyAttacker.OnStartDamageing()
         {
             yield return new WaitForSeconds(crabAttackInfo.AttackBeforeDamageTime);
+            if (this == null)
+                yield break;
 
             var player = PlayerCore.Singleton;
             foreach (var attackPos in attackPoss)
@@ -65,6 +75,7 @@ namespace ReLeaf
 
             }
             targetMarkerManager.ResetAllMarker();
+            SEManager.Singleton.Play(seAttack, transform.position);
         }
 
 

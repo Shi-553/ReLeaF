@@ -7,6 +7,8 @@ namespace ReLeaf
     public class StageSelect : MonoBehaviour
     {
         [SerializeField]
+        Transform icons;
+        [SerializeField]
         StageInfo[] stageInfos;
         [SerializeField]
         float fadeoutTime = 2.0f;
@@ -15,27 +17,28 @@ namespace ReLeaf
 
         void Awake()
         {
-            for (int i = 0; i < transform.childCount; i++)
+            for (int i = 0; i < icons.childCount; i++)
             {
-                var child = transform.GetChild(i);
-                var existsInfo = stageInfos.Length > i;
+                var child = icons.GetChild(i);
 
                 var button = child.GetComponent<Button>();
-                button.interactable = existsInfo;
 
-                if (existsInfo)
+                var info = stageInfos[i];
+                if (0 == i)
                 {
-                    var info = stageInfos[i];
-                    child.GetComponentInChildren<Text>().text = info.StageName;
+                    button.interactable = true;
+                    child.Find("Sprite").GetComponent<Image>().sprite = info.Activebutton;
 
                     button.onClick.AddListener(() =>
                     {
+                        StageManager.Singleton.Current = info;
                         SceneLoader.Singleton.LoadScene(info.Scene, fadeoutTime, fadeinTime);
                     });
                 }
                 else
                 {
-                    child.GetComponent<Image>().color = new Color(0.5f, 0.5f, 0.5f);
+                    button.interactable = false;
+                    child.Find("Sprite").GetComponent<Image>().sprite = info.DisableButton;
                 }
             }
         }

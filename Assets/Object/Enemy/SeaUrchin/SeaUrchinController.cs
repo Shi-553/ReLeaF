@@ -11,7 +11,7 @@ namespace ReLeaf
         {
             TryGetComponent(out enemyAttacker);
             TryGetComponent(out mover);
-            mover.Dir = Vector2Int.left;
+            mover.DirNotZero = Vector2Int.left;
         }
 
         void Update()
@@ -22,8 +22,8 @@ namespace ReLeaf
                 return;
 
 
-            mover.Dir = (Quaternion.Euler(0, 0, -90 + mover.Dir.GetRotationZ()) * Vector2.up).ClampOneMagnitude();
-            StartCoroutine(enemyAttacker.Attack());
+            mover.DirNotZero = (Quaternion.Euler(0, 0, -90 + mover.DirNotZero.GetRotationZ()) * Vector2.up).ClampOneMagnitude();
+            enemyAttacker.Attack();
         }
     }
 }

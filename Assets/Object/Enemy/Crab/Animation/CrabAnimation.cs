@@ -31,7 +31,7 @@ namespace ReLeaf
                     break;
                 case AttackTransition.None:
                     if (enemyMover.IsMove)
-                        animancerComponent.Play(info.GetClip(CrabAnimationType.Move));
+                        animancerComponent.Play(info.GetClip(CrabAnimationType.Move, enemyMover.IsLeftIfMove));
                     break;
             }
         }

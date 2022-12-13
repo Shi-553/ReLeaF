@@ -14,10 +14,10 @@ namespace ReLeaf
         public ReadOnlyDictionary<Vector2Int, MarkerBase> Markers;
 
         [SerializeField]
-        bool subscribeOnTileChanged;
+        bool subscribeOnGreening;
 
         IPool pool;
-        IPool GetPool<T>() where T : MarkerBase => pool ??= ComponentPool.Singleton.SetPool(marker as T);
+        IPool GetPool<T>() where T : MarkerBase => pool ??= PoolManager.Singleton.SetPool(marker as T);
 
         [SerializeField]
         MarkerBase marker;
@@ -29,14 +29,14 @@ namespace ReLeaf
 
         private void Start()
         {
-            if (subscribeOnTileChanged)
-                DungeonManager.Singleton.OnTileChanged += OnTileChanged;
+            if (subscribeOnGreening)
+                DungeonManager.Singleton.OnGreening += OnGreening;
         }
 
         private void OnDestroy()
         {
-            if (subscribeOnTileChanged)
-                DungeonManager.Singleton.OnTileChanged -= OnTileChanged;
+            if (subscribeOnGreening)
+                DungeonManager.Singleton.OnGreening -= OnGreening;
             ResetAllMarker();
         }
 
@@ -88,14 +88,14 @@ namespace ReLeaf
             markers.Clear();
 
         }
-        private void OnTileChanged(DungeonManager.TileChangedInfo info)
+        private void OnGreening(DungeonManager.GreeningInfo info)
         {
             if (this != null && !gameObject.activeSelf)
                 return;
 
             foreach (var key in markers.ToArray())
             {
-                key.Value.TileChanged(info);
+                key.Value.OnGreening(info);
             }
         }
     }

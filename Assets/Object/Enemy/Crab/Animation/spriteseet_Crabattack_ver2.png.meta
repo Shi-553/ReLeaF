@@ -1,0 +1,520 @@
+fileFormatVersion: 2
+guid: 7bac8617794be3a46b63d3de9ca31efd
+TextureImporter:
+  internalIDToNameTable: []
+  externalObjects: {}
+  serializedVersion: 12
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 1
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMasterTextureLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 1
+    aniso: 1
+    mipBias: 0
+    wrapU: 0
+    wrapV: 0
+    wrapW: 0
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 220
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 0
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 3
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Server
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: spriteseet_Crabattack_ver2_0
+      rect:
+        serializedVersion: 2
+        x: 9
+        y: 298
+        width: 236
+        height: 144
+      alignment: 9
+      pivot: {x: 0.5, y: 0.15902777}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1e630026712ff28469138d2e6aad4373
+      internalID: -1114590350
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: spriteseet_Crabattack_ver2_1
+      rect:
+        serializedVersion: 2
+        x: 260
+        y: 296
+        width: 235
+        height: 133
+      alignment: 9
+      pivot: {x: 0.5, y: 0.19022556}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c38c975b1763eed4c9b75b048a17b655
+      internalID: 1542177705
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: spriteseet_Crabattack_ver2_2
+      rect:
+        serializedVersion: 2
+        x: 529
+        y: 307
+        width: 194
+        height: 124
+      alignment: 9
+      pivot: {x: 0.5, y: 0.13241936}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e2129abd72c80fb4391da3848e55f724
+      internalID: -292553154
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: spriteseet_Crabattack_ver2_3
+      rect:
+        serializedVersion: 2
+        x: 786
+        y: 319
+        width: 182
+        height: 162
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 7b3d817484fa81347a68adfec07fd344
+      internalID: -43583604
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: spriteseet_Crabattack_ver2_4
+      rect:
+        serializedVersion: 2
+        x: 1041
+        y: 320
+        width: 178
+        height: 158
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 743f50a624f53f84a95e6ea5060f7766
+      internalID: 1236249587
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: spriteseet_Crabattack_ver2_5
+      rect:
+        serializedVersion: 2
+        x: 1291
+        y: 319
+        width: 177
+        height: 156
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 3ebb3831f1e6a0442ba1a68c0824fb32
+      internalID: -1061491582
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: spriteseet_Crabattack_ver2_6
+      rect:
+        serializedVersion: 2
+        x: 1541
+        y: 319
+        width: 178
+        height: 159
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 141cf8b4efe2feb49bcad978a6a926c8
+      internalID: 1986173372
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: spriteseet_Crabattack_ver2_7
+      rect:
+        serializedVersion: 2
+        x: 1791
+        y: 319
+        width: 177
+        height: 156
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 75b1a5b5baea6f843b26bf427b3f122c
+      internalID: 2095741792
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: spriteseet_Crabattack_ver2_8
+      rect:
+        serializedVersion: 2
+        x: 2041
+        y: 319
+        width: 178
+        height: 159
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e6475f04de5f0f14c9a64a550429c6ad
+      internalID: -492080377
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: spriteseet_Crabattack_ver2_9
+      rect:
+        serializedVersion: 2
+        x: 42
+        y: 70
+        width: 176
+        height: 155
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c27b20b19c888054fa329aa55b92a49e
+      internalID: -363615373
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: spriteseet_Crabattack_ver2_10
+      rect:
+        serializedVersion: 2
+        x: 291
+        y: 70
+        width: 179
+        height: 158
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 7edd5e1d81ab04f48829ed54726a1e30
+      internalID: 657400868
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: spriteseet_Crabattack_ver2_11
+      rect:
+        serializedVersion: 2
+        x: 542
+        y: 70
+        width: 176
+        height: 155
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 25677f811d25c6c4e840444bfc6a62dd
+      internalID: 496642226
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: spriteseet_Crabattack_ver2_12
+      rect:
+        serializedVersion: 2
+        x: 791
+        y: 70
+        width: 178
+        height: 158
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ee6cdf5d2916ba24db1a2d069503a7d8
+      internalID: -1274948436
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: spriteseet_Crabattack_ver2_13
+      rect:
+        serializedVersion: 2
+        x: 1042
+        y: 70
+        width: 176
+        height: 155
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e1ea5b59a62612b41bb7d87a7a144f7a
+      internalID: 1737987790
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: spriteseet_Crabattack_ver2_14
+      rect:
+        serializedVersion: 2
+        x: 1291
+        y: 70
+        width: 178
+        height: 158
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 9f78b7ddde9a14b43a50b74e077d7bbf
+      internalID: -35570177
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: spriteseet_Crabattack_ver2_15
+      rect:
+        serializedVersion: 2
+        x: 1542
+        y: 70
+        width: 177
+        height: 155
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 3bdeca4c62567a641bc68c60af1553a3
+      internalID: -30571354
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: spriteseet_Crabattack_ver2_16
+      rect:
+        serializedVersion: 2
+        x: 1791
+        y: 70
+        width: 178
+        height: 158
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f163d531f01374d4ea8b618d90efb7a5
+      internalID: 350766291
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: spriteseet_Crabattack_ver2_17
+      rect:
+        serializedVersion: 2
+        x: 2042
+        y: 70
+        width: 177
+        height: 155
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 74b88e26a2197884bb6fc9bec6e2b53f
+      internalID: -681031710
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    physicsShape: []
+    bones: []
+    spriteID: a388d4692163c474ca08cf8bd2d07136
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    nameFileIdTable:
+      spriteseet_Crabattack_ver2_16: 350766291
+      spriteseet_Crabattack_ver2_5: -1061491582
+      spriteseet_Crabattack_ver2_12: -1274948436
+      spriteseet_Crabattack_ver2_2: -292553154
+      spriteseet_Crabattack_ver2_0: -1114590350
+      spriteseet_Crabattack_ver2_10: 657400868
+      spriteseet_Crabattack_ver2_15: -30571354
+      spriteseet_Crabattack_ver2_18: -1808975339
+      spriteseet_Crabattack_ver2_6: 1986173372
+      spriteseet_Crabattack_ver2_13: 1737987790
+      spriteseet_Crabattack_ver2_7: 2095741792
+      spriteseet_Crabattack_ver2_1: 1542177705
+      spriteseet_Crabattack_ver2_14: -35570177
+      spriteseet_Crabattack_ver2_8: -492080377
+      spriteseet_Crabattack_ver2_11: 496642226
+      spriteseet_Crabattack_ver2_9: -363615373
+      spriteseet_Crabattack_ver2_4: 1236249587
+      spriteseet_Crabattack_ver2_17: -681031710
+      spriteseet_Crabattack_ver2_3: -43583604
+  spritePackingTag: 
+  pSDRemoveMatte: 0
+  pSDShowRemoveMatteOption: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

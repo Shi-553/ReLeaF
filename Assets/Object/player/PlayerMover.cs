@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 using Utility;
 
@@ -64,8 +65,8 @@ namespace ReLeaf
         MoveSE seGrassMove;
 
 
-        public Vector2 Move { get; set; }
-        public bool IsMove => Move != Vector2.zero;
+        public Vector2 Dir { get; set; }
+        public bool IsMove => Dir != Vector2.zero;
         public bool IsLeft { get; private set; }
         public bool IsDash { get; set; }
 
@@ -74,11 +75,18 @@ namespace ReLeaf
 
         public bool WasChangedTilePosThisFrame => OldTilePos != TilePos;
 
+        HashSet<TileObject> underTiles = new(20);
+        HashSet<Vector2Int> waitGreeningTiles = new(10);
+
+        bool CanSowSeed => !GameRuleManager.Singleton.IsPrepare && !isKnockback && IsMove;
+
         private void Awake()
         {
             TryGetComponent(out mover);
             isKnockback = false;
         }
+
+
         void Update()
         {
             if (GameRuleManager.Singleton.IsPrepare)
@@ -87,14 +95,15 @@ namespace ReLeaf
             OldTilePos = TilePos;
             TilePos = DungeonManager.Singleton.WorldToTilePos(transform.position);
 
-            if (Move.x != 0)
-                IsLeft = Move.x < 0;
+            if (Dir.x != 0)
+                IsLeft = Dir.x < 0;
 
             var speed = moveSpeed;
 
             var currentTile = DungeonManager.Singleton.GetTile(TilePos);
 
-            var isFullGrowthPlant = currentTile is Plant plantTile && plantTile.IsFullGrowth;
+            var isFullGrowthPlant = (currentTile is Plant plantTile && plantTile.IsFullGrowth) ||
+                                    (currentTile is not Plant && currentTile.IsAlreadyGreening);
             if (isFullGrowthPlant)
             {
                 energyGauge.RecoveryValue(energyAutoRecoveryPoint * Time.deltaTime);
@@ -114,17 +123,25 @@ namespace ReLeaf
             }
 
 
-            mover.MoveDelta(DungeonManager.CELL_SIZE * speed * Move);
+            mover.MoveDelta(DungeonManager.CELL_SIZE * speed * Dir);
 
             if (WasChangedTilePosThisFrame && IsMove)
             {
                 if (currentTile != null)
                 {
-                    var se = currentTile.TileType == TileType.Plant ? seGrassMove : seSandMove;
+                    var se = currentTile.TileType == TileType.Foundation ? seGrassMove : seSandMove;
                     SEManager.Singleton.Play(se.Get(IsDash), transform.position);
                 }
             }
 
+            if (waitGreeningTiles.Count > 0 && CanSowSeed)
+            {
+                foreach (var underTile in waitGreeningTiles)
+                {
+                    SowSeed(underTile);
+                }
+                waitGreeningTiles.Clear();
+            }
         }
         public IEnumerator KnockBack(Vector3 impulse)
         {
@@ -144,17 +161,46 @@ namespace ReLeaf
                 yield return null;
             }
         }
-        private void OnTriggerStay2D(Collider2D collision)
-        {
-            if (GameRuleManager.Singleton.IsPrepare || isKnockback)
-                return;
-            if (IsMove && collision.gameObject.CompareTag("Sand"))
-            {
-                if (DungeonManager.Singleton.SowSeed(DungeonManager.Singleton.WorldToTilePos(collision.transform.position), PlantType.Foundation))
-                {
-                    energyGauge.RecoveryValue(energyRecoveryPoint);
 
-                }
+
+
+        void SowSeed(Vector2Int tilePos)
+        {
+            if (DungeonManager.Singleton.SowSeed(tilePos))
+            {
+                energyGauge.RecoveryValue(energyRecoveryPoint);
+                underTiles.Add(DungeonManager.Singleton.GetTile(tilePos));
+            }
+        }
+
+        private void OnTriggerEnter2D(Collider2D collision)
+        {
+            if (!collision.TryGetComponent<TileObject>(out var tileObject))
+                return;
+
+            if (!underTiles.Add(tileObject))
+                return;
+
+            if (!tileObject.CanOrAleeadyGreening(false))
+                return;
+
+            if (!CanSowSeed)
+            {
+                waitGreeningTiles.Add(tileObject.TilePos);
+                return;
+            }
+            SowSeed(tileObject.TilePos);
+        }
+        private void OnTriggerExit2D(Collider2D collision)
+        {
+            if (!collision.TryGetComponent<TileObject>(out var tileObject))
+                return;
+
+            underTiles.Remove(tileObject);
+
+            if (!CanSowSeed)
+            {
+                waitGreeningTiles.Remove(tileObject.TilePos);
             }
         }
     }

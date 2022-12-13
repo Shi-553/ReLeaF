@@ -168,7 +168,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 54b06c922a78e394ab6862cbdb891302, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  floatItemMoveSpeed: 5
+  floatItemMoveSpeed: 8
   collectRange: 0.1
   itemManager: {fileID: 4052387953760838874}
 --- !u!58 &6203716136439494101
@@ -237,7 +237,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8edec6174e9630244ae6e11ad4edd6ec, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  subscribeOnTileChanged: 0
+  subscribeOnGreening: 0
   marker: {fileID: 3219640911387259323, guid: 32569a780da112443bfc86fecabc2323, type: 3}
 --- !u!1 &4013356209018127977
 GameObject:
@@ -362,7 +362,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 99
   m_Sprite: {fileID: -1589811457, guid: 946826ac5cc353f4d9fad583b7404d14, type: 3}
-  m_Color: {r: 0, g: 0, b: 0, a: 0.5019608}
+  m_Color: {r: 0, g: 0, b: 0, a: 0.5176471}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -450,6 +450,7 @@ GameObject:
   - component: {fileID: 4453893153597567272}
   - component: {fileID: 5572736206374052513}
   - component: {fileID: 3289195857310044243}
+  - component: {fileID: 285955042789145649}
   m_Layer: 7
   m_Name: player
   m_TagString: Player
@@ -605,7 +606,7 @@ CircleCollider2D:
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
-  m_Radius: 0.24
+  m_Radius: 0.15
 --- !u!114 &5572736206374052513
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -636,3 +637,19 @@ MonoBehaviour:
   damagedFlashingInterval: 0.1
   damagedFlashingAlpha: 0.5
   seDamaged: {fileID: 11400000, guid: 7aa91e4919feaf5489e7df122751deb0, type: 2}
+--- !u!58 &285955042789145649
+CircleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8467192124429001911}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  serializedVersion: 2
+  m_Radius: 0.24

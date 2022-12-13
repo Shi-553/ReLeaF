@@ -7,11 +7,31 @@ namespace Utility
     public class SEManager : SoundManager<SEManager>
     {
         protected override int InitSourceCount => 5;
+        [SerializeField]
+        float spatialBlend = 0.8f;
 
+        /// <summary>
+        /// ˆÊ’uŠÖŒW‚È‚­SE‚ð–Â‚ç‚·
+        /// </summary>
+        public AudioSource Play(AudioInfo info)
+        {
+            var source = GetSource(true);
+            source.clip = info.clip;
+            source.spatialBlend = 0;
+            source.loop = false;
+            source.volume = info.volume;
+            source.Play();
+
+            return source;
+        }
+        /// <summary>
+        /// ‚RDƒTƒEƒ“ƒh‚Æ‚µ‚ÄSE‚ð–Â‚ç‚·
+        /// </summary>
         public AudioSource Play(AudioInfo info, Vector3 pos)
         {
             var source = GetSource(true);
             source.clip = info.clip;
+            source.spatialBlend = spatialBlend;
             source.transform.position = pos;
             source.loop = false;
             source.volume = info.volume;

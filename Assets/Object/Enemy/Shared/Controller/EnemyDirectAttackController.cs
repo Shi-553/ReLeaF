@@ -12,34 +12,43 @@ namespace ReLeaf
         EnemyMover mover;
         IEnemyAttacker attacker;
 
-
         Vector2Int? targetTilePos;
 
         // 絶対到達できないターゲットたち
         HashSet<Vector2Int> impossibleTargets = new();
+
         void Start()
         {
             TryGetComponent(out attacker);
             TryGetComponent(out mover);
         }
 
+        float nullTime = 0;
 
         void Update()
         {
             if (GameRuleManager.Singleton.IsPrepare)
                 return;
-            if (!searchVision.ShouldFoundTarget)
-            {
-                return;
-            }
             if (attacker.IsAttack)
             {
+                nullTime = 1;
                 return;
             }
 
             bool isUpdateTarget = false;
             if (mover.WasChangedTilePosPrevMove || targetTilePos == null)
             {
+                nullTime += Time.deltaTime;
+                if (targetTilePos == null && nullTime < 1)
+                {
+                    return;
+                }
+                nullTime = 0;
+
+                if (!searchVision.UpdateTarget())
+                {
+                    return;
+                }
 
                 // 一番近い直線距離
                 var minDistanceSq = float.MaxValue;
@@ -90,12 +99,13 @@ namespace ReLeaf
             {
                 mover.UpdateTargetStraight(targetTilePos.Value);
                 targetTilePos = null;
-                StartCoroutine(attacker.Attack());
+                attacker.Attack();
             }
             if (result == EnemyMover.MoveResult.Error)
             {
                 targetTilePos = null;
             }
+
         }
     }
 }

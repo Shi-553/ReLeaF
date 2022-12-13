@@ -19,12 +19,7 @@ namespace ReLeaf
 
             }
         }
-        public float ValueRate => value / DungeonManager.Singleton.MaxGreeningCount;
-
-        [SerializeField, Rename("クリアに必要な緑化率")]
-        float targetRate = 0.8f;
-        [SerializeField]
-        Transform targetRateTransform;
+        public float ValueRate => value / StageManager.Singleton.Current.TargetRate / DungeonManager.Singleton.MaxGreeningCount;
 
         [SerializeField]
         Slider slider;
@@ -48,26 +43,20 @@ namespace ReLeaf
             slider.value = ValueRate;
             var sliderRect = slider.GetComponent<RectTransform>();
 
-            var targetRatePos = targetRateTransform.localPosition;
-            targetRatePos.x = Mathf.Lerp(-sliderRect.sizeDelta.x / 2, sliderRect.sizeDelta.x / 2, targetRate);
-            targetRateTransform.localPosition = targetRatePos;
-
-            slider.maxValue = targetRate;  //スライダーの最大値をターゲットの最大値に設定
-
             DungeonManager.Singleton.OnTileChanged += OnTileChanged;
         }
 
         private void OnTileChanged(DungeonManager.TileChangedInfo obj)
         {
-            if (obj.beforeTile.TileType != TileType.Plant &&
-                obj.afterTile.TileType == TileType.Plant)
+            if (obj.beforeTile.TileType != TileType.Foundation &&
+                obj.afterTile.TileType == TileType.Foundation)
                 Value++;
 
-            if (obj.beforeTile.TileType == TileType.Plant &&
-                obj.afterTile.TileType != TileType.Plant)
+            if (obj.beforeTile.TileType == TileType.Foundation &&
+                obj.afterTile.TileType != TileType.Foundation)
                 Value--;
 
-            if (ValueRate >= targetRate)
+            if (ValueRate >= 1.0f)
             {
                 GameRuleManager.Singleton.Finish(true);
             }

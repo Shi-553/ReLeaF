@@ -15,8 +15,10 @@ namespace Utility
         protected abstract int InitSourceCount { get; }
 
 
-        protected override void Init()
+        protected override void Init(bool isFirstInit, bool callByAwake)
         {
+            if (!isFirstInit)
+                return;
             for (int i = 0; i < InitSourceCount; i++)
             {
                 CreateSource();

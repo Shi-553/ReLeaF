@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using DebugLogExtension;
+using UnityEngine;
 using UnityEngine.SceneManagement;
 using Utility.Definition;
 
@@ -15,7 +16,7 @@ namespace Utility
     }
     public abstract class SingletonBase<T> : DefinitionSingletonBase where T : SingletonBase<T>
     {
-        static bool isInit = false;
+        static bool isInitialized = false;
 
         public new abstract bool DontDestroyOnLoad { get; }
 
@@ -24,11 +25,11 @@ namespace Utility
         {
             get
             {
-                if (!isInit)
+                if (!isInitialized)
                 {
-                    isInit = true;
+                    isInitialized = true;
                     singletonInstance = FindObjectOfType<T>();
-                    singletonInstance.Init();
+                    singletonInstance.Init(true, false);
                 }
                 return singletonInstance;
             }
@@ -37,19 +38,20 @@ namespace Utility
 
         sealed protected override void Awake()
         {
-            if (isInit && singletonInstance != this)
+            if (isInitialized && singletonInstance != this)
             {
+                "Destroy Duplicate Instance.".DebugLog();
+
                 Destroy(this);
                 return;
             }
 
-            if (!isInit)
+            Init(!isInitialized, true);
+            if (!isInitialized)
             {
-                isInit = true;
+                isInitialized = true;
                 singletonInstance = this as T;
-                Init();
             }
-
         }
 
 
@@ -71,7 +73,7 @@ namespace Utility
 
             if (!DontDestroyOnLoad)
             {
-                isInit = false;
+                isInitialized = false;
                 singletonInstance = null;
 
                 if (gameObject.GetComponents<Component>().Length <= 2)
@@ -84,7 +86,7 @@ namespace Utility
         /// <summary>
         /// Awakeかさらに早く呼ばれる
         /// </summary>
-        protected abstract void Init();
+        protected abstract void Init(bool isFirstInit, bool callByAwake);
         protected virtual void UninitBeforeSceneUnload(bool isDestroy) { }
         protected virtual void UninitAfterSceneUnload(bool isDestroy) { }
 

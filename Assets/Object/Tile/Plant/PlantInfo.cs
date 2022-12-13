@@ -5,13 +5,9 @@ using Utility;
 namespace ReLeaf
 {
     [ClassSummary("植物({asset.dirname})のパラメータ")]
-    [CreateAssetMenu]
-    public class PlantInfo : ScriptableObject
+    [CreateAssetMenu(menuName = "Tile/PlantInfo")]
+    public class PlantInfo : TileObjectInfo
     {
-        [SerializeField, Rename("植物タイプ")]
-        PlantType plantType;
-        public PlantType PlantType => plantType;
-
         [SerializeField, Rename("最大HP")]
         float hpMax;
         public float HpMax => hpMax;
@@ -24,5 +20,6 @@ namespace ReLeaf
         [SerializeField, Rename("ダメージタイプごとの被ダメージ倍率")]
         DamageMagnification[] damageMagnifications;
         public IReadOnlyCollection<DamageMagnification> DamageMagnifications => damageMagnifications;
+
     }
 }

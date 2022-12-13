@@ -3,31 +3,29 @@ using Utility;
 
 namespace ReLeaf
 {
-    public abstract class TileObject : MonoBehaviour, IPoolableSelfRelease
+    public class TileObject : PoolableMonoBehaviour
     {
-        public static TileObject NullTile;
+        [SerializeField]
+        TileObjectInfo info;
+        protected TileObjectInfo Info => info;
 
-        [SerializeField, Rename("タイルタイプ")]
-        protected TileType tileType = TileType.None;
-        public TileType TileType => tileType;
+        public TileType TileType => info.TileType;
+        public bool CanEnemyMove(bool isAttackMove) => isAttackMove ? CanEnemyAttack(true) : info.CanEnemyMove;
+        public bool CanEnemyAttack(bool includeMoveabePos) => info.CanEnemyAttack || (includeMoveabePos && info.CanEnemyMove);
+        public virtual bool CanGreening(bool useSpecial) => useSpecial ? info.CanGreeningUseSpecial : info.CanGreening;
+        public virtual bool IsAlreadyGreening => info.IsAlreadyGreening;
 
-        public bool CanEnemyMove => TileType == TileType.Plant || TileType == TileType.Sand || TileType == TileType.Messy;
-        public bool CanEnemyAttack(bool isDamagableOnly) => TileType == TileType.Plant || (!isDamagableOnly && (TileType == TileType.Sand || TileType == TileType.Messy));
+        public bool CanOrAleeadyGreening(bool useSpecial) => CanGreening(useSpecial) || IsAlreadyGreening;
 
         public Vector2Int TilePos { get; set; }
         public bool IsInvincible { get; set; }
-        public virtual void Init(bool isCreated)
+
+        protected override void InitImpl()
         {
         }
-
-        public virtual void Uninit()
+        protected override void UninitImpl()
         {
             IsInvincible = false;
         }
-
-        public bool CanSowGrass(bool isSpecial) => TileType == TileType.Sand || (isSpecial && TileType == TileType.Messy);
-
-        IPool IPoolableSelfRelease.Pool { get; set; }
-
     }
 }

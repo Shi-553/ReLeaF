@@ -1,5 +1,4 @@
 using System.Collections;
-using System.Linq;
 using UnityEngine;
 using Utility;
 
@@ -34,6 +33,8 @@ namespace ReLeaf
         {
             float time = 0;
             yield return new WaitForSeconds(info.InitAnimationDelay);
+            if (this == null)
+                yield break;
             while (true)
             {
                 mover.MoveDelta(DungeonManager.CELL_SIZE * info.InitAnimationSpeed * (Vector2)dir);
@@ -42,6 +43,9 @@ namespace ReLeaf
                     yield break;
                 time += Time.deltaTime;
                 yield return null;
+
+                if (this == null)
+                    yield break;
             }
         }
 
@@ -63,9 +67,9 @@ namespace ReLeaf
 
             if (collision.gameObject.CompareTag("Wall") || collision.gameObject.CompareTag("Plant") || collision.gameObject.CompareTag("Player"))
             {
-                if (targetVision.ShouldFoundTarget)
+                if (targetVision.UpdateTarget())
                 {
-                    foreach (var target in targetVision.Targets().ToArray())
+                    foreach (var target in targetVision.Targets())
                     {
                         if (target.TryGetComponent(out Plant plant))
                         {

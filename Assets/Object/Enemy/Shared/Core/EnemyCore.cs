@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 using Utility;
 
@@ -20,6 +21,14 @@ namespace ReLeaf
         [SerializeField]
         AudioInfo seEnemyDeath;
 
+        [SerializeField]
+        AudioInfo seEnemyDamaged;
+
+
+        int greeningCount = 0;
+
+        public event Action OnDeath;
+
         private void Start()
         {
             TryGetComponent(out enemyMover);
@@ -27,6 +36,11 @@ namespace ReLeaf
         }
         private void Death()
         {
+            if (TryGetComponent(out IEnemyAttacker attacker))
+            {
+                attacker.Stop();
+            }
+
             Instantiate(specialPowerPrefab, transform.position, Quaternion.identity, transform.parent);
             for (int x = 0; x < enemyMover.TileSize.x; x++)
             {
@@ -36,15 +50,19 @@ namespace ReLeaf
                 }
             }
             Destroy(gameObject);
+            OnDeath?.Invoke();
         }
 
         public void SetWeekMarker()
         {
-            foreach (var localPos in enemyDamageableInfo.WeakLocalTilePos.GetLocalTilePosList(enemyMover.Dir))
+            greeningCount = 0;
+
+            var localPoss = enemyDamageableInfo.WeakLocalTilePos.GetLocalTilePosList(enemyMover.DirNotZero);
+            foreach (var localPos in localPoss)
             {
                 var worldTilePos = enemyMover.TilePos + localPos;
 
-                if (DungeonManager.Singleton.TryGetTile(worldTilePos, out var tile) && tile.CanEnemyMove)
+                if (DungeonManager.Singleton.TryGetTile(worldTilePos, out var tile) && tile.CanOrAleeadyGreening(true))
                 {
                     var marker = weakMarkerManager.SetMarker<WeakMarker>(worldTilePos);
                     if (marker != null)
@@ -52,7 +70,6 @@ namespace ReLeaf
                         marker.SetEnemyDamageable(this);
                     }
                 }
-
             }
         }
         public void ResetWeekMarker()
@@ -65,7 +82,8 @@ namespace ReLeaf
                 return;
             if (weakMarkerManager.ResetMarker(tilePos))
             {
-                Damaged(atk * (enemyDamageableInfo.WeakLocalTilePos.GetLocalTilePosList(enemyMover.Dir).Length - (weakMarkerManager.Markers.Count)));
+                greeningCount++;
+                Damaged(atk * greeningCount);
                 return;
             }
         }
@@ -73,7 +91,6 @@ namespace ReLeaf
         {
             if (HP == 0)
                 return;
-            Debug.Log(atk + "É_ÉÅÅ[ÉW!");
 
             DamageValueEffectManager.Singleton.SetDamageValueEffect((int)atk, enemyMover.WorldCenter);
 
@@ -85,6 +102,7 @@ namespace ReLeaf
                 return;
             }
             HP -= atk;
+            SEManager.Singleton.Play(seEnemyDamaged, transform.position);
         }
 
         private void OnTriggerEnter2D(Collider2D collision)

@@ -365,15 +365,28 @@ PrefabInstance:
       propertyPath: m_Name
       value: BoxVision
       objectReference: {fileID: 0}
-    - target: {fileID: 5264834172669807669, guid: b1751a9d1ced5414c9dd8222cb552f05, type: 3}
-      propertyPath: m_Size.x
+    - target: {fileID: 7153099274174081556, guid: b1751a9d1ced5414c9dd8222cb552f05, type: 3}
+      propertyPath: size.x
       value: 2
       objectReference: {fileID: 0}
-    - target: {fileID: 5264834172669807669, guid: b1751a9d1ced5414c9dd8222cb552f05, type: 3}
-      propertyPath: m_Size.y
+    - target: {fileID: 7153099274174081556, guid: b1751a9d1ced5414c9dd8222cb552f05, type: 3}
+      propertyPath: size.y
       value: 2
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    - target: {fileID: 7153099274174081556, guid: b1751a9d1ced5414c9dd8222cb552f05, type: 3}
+      propertyPath: mask.m_Bits
+      value: 2147483647
+      objectReference: {fileID: 0}
+    - target: {fileID: 7153099274174081556, guid: b1751a9d1ced5414c9dd8222cb552f05, type: 3}
+      propertyPath: targetTags.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 7153099274174081556, guid: b1751a9d1ced5414c9dd8222cb552f05, type: 3}
+      propertyPath: targetTags.Array.data[1]
+      value: Plant
+      objectReference: {fileID: 0}
+    m_RemovedComponents:
+    - {fileID: 3202823533353177119, guid: b1751a9d1ced5414c9dd8222cb552f05, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: b1751a9d1ced5414c9dd8222cb552f05, type: 3}
 --- !u!114 &613263238219173221 stripped
 MonoBehaviour:
@@ -383,7 +396,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f8369d4027efd4648a3c2dd21539ba90, type: 3}
+  m_Script: {fileID: 11500000, guid: 5362c240de3b1614388f30035ba3370e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!4 &8789280543198621537 stripped

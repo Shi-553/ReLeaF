@@ -1,0 +1,25 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6852ed12f7d16f14e883d04cda5b8f6e, type: 3}
+  m_Name: RobotAnimationInfo
+  m_EditorClassIdentifier: 
+  pairClips:
+  - type: 0
+    left: {fileID: 7400000, guid: 591a34985c5c0574b8bc7e5458eaab9e, type: 2}
+    right: {fileID: 7400000, guid: 354790e15359c154ca2e127a8b8f55c3, type: 2}
+  - type: 1
+    left: {fileID: 7400000, guid: aacbe214e0d23cf4590ef02ba76ad08c, type: 2}
+    right: {fileID: 7400000, guid: 692ef85e3148a834194fb8caec7b05f6, type: 2}
+  - type: 2
+    left: {fileID: 7400000, guid: 17b4b0cf81d6a6c48a917b51a777036e, type: 2}
+    right: {fileID: 7400000, guid: e485c82f26110734ca87f5c37c3161e9, type: 2}
+  singleClips: []

@@ -47,8 +47,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 832f796055b66cb448a7f25f8552903a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  tileType: 3
-  canSowGrass: 0
+  info: {fileID: 11400000, guid: 46cfdd9cee17b684da63d95d5ecabc1d, type: 2}
   plantInfo: {fileID: 11400000, guid: 46cfdd9cee17b684da63d95d5ecabc1d, type: 2}
   hp: 0
   seedObjRoot: {fileID: 2418581233525524103}

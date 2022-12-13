@@ -13,7 +13,7 @@ namespace ReLeaf
 
         [SerializeField]
         CinemachineVirtualCamera virtualCamera;
-        CinemachineTargetGroup targetGroup;
+        CinemachineTargetGroup cinemachineTargetGroup;
 
 
         bool isStartGreening = false;
@@ -24,7 +24,7 @@ namespace ReLeaf
         void Start()
         {
             isStartGreening = false;
-            TryGetComponent(out targetGroup);
+            TryGetComponent(out cinemachineTargetGroup);
         }
 
         public IEnumerator StartGreening(Vector2Int tilePos, bool useCamera, bool isFouce = false)
@@ -58,29 +58,30 @@ namespace ReLeaf
                 yield break;
 
             var player = FindObjectOfType<PlayerMover>();
-            targetGroup.AddMember(player.transform, 1, 1);
+            cinemachineTargetGroup.AddMember(player.transform, 1, 1);
 
             yield return StartGreening(player.TilePos, true);
         }
 
         IEnumerator Greening(Vector2Int startPos)
         {
-            Dictionary<Vector2Int, bool> greenMap = new();
+            // 負荷の低いうちにおおよそ確保しておく
 
-            List<Vector2Int> list1 = new(100);
-            List<Vector2Int> list2 = new(100);
+            Dictionary<Vector2Int, bool> greenMap = new(500);
 
-            var target = list1;
-            var buffer = list2;
+            var target = new List<Vector2Int>(100);
+            var buffer = new List<Vector2Int>(100);
 
             target.Add(startPos);
 
             int targetCount = target.Count;
-            int targetGroupIndex = 0;
+
+            int cinemachineTargetGroupIndex = 0;
 
             var greeningWait = new WaitForSeconds(greeningTime);
 
-            int greeningCount = 0;
+            // 緑化を試した数　低いうちは何があっても次のマスを探し続ける
+            int tryGreeningCount = 0;
 
             while (targetCount > 0)
             {
@@ -90,37 +91,41 @@ namespace ReLeaf
                 {
                     Vector2Int pos = target[i];
 
+                    tryGreeningCount++;
+
                     if (!greenMap.TryAdd(pos, true))
                     {
                         continue;
                     }
+
+                    // 緑化
+                    DungeonManager.Singleton.SowSeed(pos, true, true);
+
+                    //緑化関係なくタイルを取得
                     if (DungeonManager.Singleton.TryGetTile(pos, out var tile))
                     {
                         if (useCamera)
                         {
-                            if (targetGroup.m_Targets.Length > 100)
+                            if (cinemachineTargetGroup.m_Targets.Length > 100)
                             {
-                                targetGroup.m_Targets[2 + targetGroupIndex].target = tile.transform;
-                                targetGroupIndex = (targetGroupIndex + 1) % 98;
+                                // 緑化を始めた地点とプレイヤーをカメラに残したいので、98で折り返す
+                                cinemachineTargetGroup.m_Targets[2 + cinemachineTargetGroupIndex].target = tile.transform;
+                                cinemachineTargetGroupIndex = (cinemachineTargetGroupIndex + 1) % 98;
                             }
                             else
                             {
-                                targetGroup.AddMember(tile.transform, 1, 1);
+                                cinemachineTargetGroup.AddMember(tile.transform, 1, 1);
                             }
-                        }
-
-                        // 緑化できる
-                        if (tile.TileType == TileType.Sand || tile.TileType == TileType.Messy)
-                        {
-                            DungeonManager.Singleton.SowInvincibleSeed(pos, PlantType.Foundation);
                         }
                     }
                     else
                     {
-                        if (greeningCount > 10)
+                        //タイルがなく、10回以上緑化しようとしていたらcontinue
+                        if (tryGreeningCount > 10)
                             continue;
                     }
 
+                    // 既に存在するときに上書きすることでClear()をしなくてよくなる最適化
                     void BufferAdd(Vector2Int nextPos)
                     {
                         if (buffer.Count == bufferIndex)
@@ -137,12 +142,14 @@ namespace ReLeaf
                     BufferAdd(pos + Vector2Int.left);
                 }
 
-                greeningCount++;
                 targetCount = bufferIndex;
+
+                // ターゲットとバッファをスワップしつつループすることでメモリ節約
                 (buffer, target) = (target, buffer);
 
                 yield return greeningWait;
             }
+
             co = null;
         }
     }

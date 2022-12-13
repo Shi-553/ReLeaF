@@ -1,57 +1,66 @@
+using Animancer;
 using System.Collections;
+using TMPro;
 using UnityEngine;
-using UnityEngine.UI;
 using Utility;
 
 namespace ReLeaf
 {
-    public class DamageValueEffect : MonoBehaviour, IPoolableSelfRelease
+    public class DamageValueEffect : PoolableMonoBehaviour
     {
-        public void Init(bool isCreated)
+        protected override void InitImpl()
         {
-            if (isCreated)
+            if (!IsInitialized)
             {
-                TryGetComponent(out animation);
-                text = GetComponentInChildren<Text>();
-                textRect = text.GetComponent<RectTransform>();
+                TryGetComponent(out animancer);
+                text = GetComponentInChildren<TextMeshProUGUI>(true);
+                wait = new WaitForSeconds(info.InitAnimation.length);
             }
-            animation.Play();
+            animancer.Play(info.InitAnimation);
             StartCoroutine(WaitAnimation());
         }
 
-        public void Uninit()
+        protected override void UninitImpl()
         {
         }
 
-        Text text;
-        RectTransform textRect;
-        new Animation animation;
+        TextMeshProUGUI text;
 
         int damage;
+        bool IsHighDamage => damage > info.HighDamageThreshold;
+
 
         [SerializeField]
         DamageValueEffectInfo info;
 
-
-        IPool IPoolableSelfRelease.Pool { get; set; }
+        AnimancerComponent animancer;
+        WaitForSeconds wait;
 
         public void ShowDamageValue(int damage, Vector3 pos)
         {
             this.damage = damage;
-            transform.position = pos + info.Offset;
-            text.text = damage.ToString();
-            var size = textRect.sizeDelta;
-            size.y = MathExtension.Map(damage, 0, info.MaxDamage, info.MinSize, info.MaxSize, true);
-            textRect.sizeDelta = size;
+            transform.position = pos + info.Offset + Vector3.Lerp(-info.RandomOffsetMax, info.RandomOffsetMax, Random.value);
+
+            transform.position += damage * info.DamageOffset * Vector3.up;
+
+            var damageStr = damage.ToString();
+            var damageText = "";
+            foreach (var damageChar in damageStr)
+            {
+                damageText += $"<sprite={damageChar}>";
+            }
+
+            text.text = damageText;
+            text.fontSize = MathExtension.Map(damage, 0, info.MaxDamage, info.MinSize, info.MaxSize, true);
 
 
-            text.color = damage <= 4 ? Color.white : Color.green;
+            text.spriteAsset = IsHighDamage ? info.HighDamageSpriteAsset : info.NormalDamageSpriteAsset;
         }
 
         IEnumerator WaitAnimation()
         {
-            yield return new WaitForSeconds(animation.clip.length);
-            this.StaticCast<IPoolableSelfRelease>().Release();
+            yield return wait;
+            Release();
         }
 
     }

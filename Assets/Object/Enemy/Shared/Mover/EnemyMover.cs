@@ -1,3 +1,4 @@
+using DebugLogExtension;
 using System.Collections.Generic;
 using UnityEngine;
 using Utility;
@@ -23,10 +24,26 @@ namespace ReLeaf
         public Vector2Int MoveTarget { get; private set; }
 
         public bool IsMove => mover.IsMove;
-        public bool IsLeft { get; private set; }
+        public bool IsLeftNow => Dir.x < 0;
+        public bool IsLeftIfMove { get; private set; }
         public Vector2 WorldCenter => DungeonManager.Singleton.TilePosToWorld((Vector2)TilePos + ((Vector2)TileSize - Vector2.one) / 2);
 
-        public Vector2Int Dir { get; set; }
+        Vector2Int dir;
+        Vector2Int Dir
+        {
+            get => dir;
+            set
+            {
+                dir = value;
+                dirNotZero = dir == Vector2Int.zero ? Vector2Int.down : dir;
+            }
+        }
+        Vector2Int dirNotZero;
+        public Vector2Int DirNotZero
+        {
+            get => dirNotZero;
+            set => Dir = value;
+        }
 
         void UpdateDir(bool isNext = false)
         {
@@ -67,20 +84,20 @@ namespace ReLeaf
         {
             Moveing,
             Finish,
-            Error
+            Error,
         }
         public MoveResult Move()
         {
             return Move(enemyMoverInfo.Speed);
         }
 
-        public MoveResult Move(float speedOverride)
+        public MoveResult Move(float speedOverride, bool isAttackMove = false)
         {
             OldTilePos = TilePos;
             GetCheckPoss(TilePos, Dir, buffer);
 
             if (Dir.x != 0)
-                IsLeft = Dir.x < 0;
+                IsLeftIfMove = Dir.x < 0;
 
             var nextTilePos = TilePos + Dir;
 
@@ -90,7 +107,13 @@ namespace ReLeaf
             }
             foreach (var nextPos in buffer)
             {
-                if (!DungeonManager.Singleton.TryGetTile(nextPos, out var tile) || !tile.CanEnemyMove)
+                if (routes.Count == 1 && nextPos == target)
+                    return MoveResult.Finish;
+            }
+
+            foreach (var nextPos in buffer)
+            {
+                if (!DungeonManager.Singleton.TryGetTile(nextPos, out var tile) || !tile.CanEnemyMove(isAttackMove))
                 {
                     return MoveResult.Error;
                 }
@@ -239,13 +262,17 @@ namespace ReLeaf
                 // すると、右下＆左下の組み合わせはありえないので右下＆右上、右上＆左上、左上＆左下の三組を調べて次の方向を出す
 
                 // 反時計回りに格納 右下->右上->左上->左下
-                cornerDirs[0] = routingMapBuffer[new Vector2Int(currnet.x + TileSize.x - 1, currnet.y)];
-                cornerDirs[1] = routingMapBuffer[new Vector2Int(currnet.x + TileSize.x - 1, currnet.y + TileSize.y - 1)];
-                cornerDirs[2] = routingMapBuffer[new Vector2Int(currnet.x, currnet.y + TileSize.y - 1)];
-                cornerDirs[3] = routingMapBuffer[currnet];
+                var a1 = routingMapBuffer.TryGetValue(new Vector2Int(currnet.x + TileSize.x - 1, currnet.y), out cornerDirs[0]);
+                var a2 = routingMapBuffer.TryGetValue(new Vector2Int(currnet.x + TileSize.x - 1, currnet.y + TileSize.y - 1), out cornerDirs[1]);
+                var a3 = routingMapBuffer.TryGetValue(new Vector2Int(currnet.x, currnet.y + TileSize.y - 1), out cornerDirs[2]);
+                var a4 = routingMapBuffer.TryGetValue(currnet, out cornerDirs[3]);
 
+                if (!a1 || !a2 || !a3 || !a4)
+                {
+                    "not found key".DebugLog();
+                }
                 // 0~2の3回
-                for (int i = 0; i < 3; i++)
+                for (int i = 0; i < 2; i++)
                 {
                     Direction corner1 = cornerDirs[((int)currentDir + i) % cornerDirs.Length];
                     Direction corner2 = cornerDirs[((int)currentDir + i + 1) % cornerDirs.Length];
@@ -255,6 +282,14 @@ namespace ReLeaf
                         currentDir = corner1;
                         break;
                     }
+                    if (i == 2)
+                    {
+                        "!!!".DebugLog();
+                    }
+                }
+                for (int i = 0; i < 3; i++)
+                {
+                    cornerDirs[i] = Direction.NONE;
                 }
             }
         }
@@ -371,7 +406,7 @@ namespace ReLeaf
                 if (isTarget)
                     includeTarget = true;
 
-                if (!isTarget && (!DungeonManager.Singleton.TryGetTile(nextPos, out var tile) || !tile.CanEnemyMove))
+                if (!isTarget && (!DungeonManager.Singleton.TryGetTile(nextPos, out var tile) || !tile.CanEnemyMove(true)))
                 {
                     return false;
                 }

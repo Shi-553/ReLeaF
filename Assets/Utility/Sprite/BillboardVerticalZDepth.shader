@@ -26,6 +26,7 @@ Shader "Unlit/BillboardVerticalZDepth"
             {
                 float4 vertex : POSITION;
                 float2 uv : TEXCOORD0;
+                fixed4 color : COLOR;
             };
 
             struct v2f
@@ -33,10 +34,13 @@ Shader "Unlit/BillboardVerticalZDepth"
                 float4 pos : SV_POSITION;
                 float2 uv : TEXCOORD0;
                 UNITY_FOG_COORDS(1)
+                fixed4 color : COLOR;
             };
 
             sampler2D _MainTex;
             float4 _MainTex_ST;
+            
+            half4 _BaseColor;
 
             float rayPlaneIntersection(float3 rayDir, float3 rayPos, float3 planeNormal, float3 planePos)
             {
@@ -51,16 +55,26 @@ Shader "Unlit/BillboardVerticalZDepth"
                 v2f o;
                 o.pos = UnityObjectToClipPos(v.vertex);
                 o.uv = v.uv.xy;
+                o.color = v.color;
 
                 // billboard mesh towards camera
                 float3 vpos = mul((float3x3)unity_ObjectToWorld, v.vertex.xyz);
-                float4 worldCoord = float4(unity_ObjectToWorld._m03, unity_ObjectToWorld._m13, unity_ObjectToWorld._m23, 1);
-                float4 viewPos = mul(UNITY_MATRIX_V, worldCoord) + float4(vpos, 0);
+float4 worldCoord = float4(unity_ObjectToWorld._m03_m13_m23,1);
+float4 viewPivot = mul(UNITY_MATRIX_V, worldCoord);
 
-                o.pos = mul(UNITY_MATRIX_P, viewPos);
+float3 forward = -normalize(viewPivot);
+float3 up = mul(UNITY_MATRIX_V, float3(0,1,0)).xyz;
+float3 right = normalize(cross(up,forward));
+up = cross(forward,right);
+float3x3 facingRotation = float3x3(right, up, forward);
+
+float4 viewPos = float4(viewPivot + mul(vpos, facingRotation), 1.0);
+
+                //o.pos = mul(UNITY_MATRIX_P, viewPos);
 
                 // calculate distance to vertical billboard plane seen at this vertex's screen position
-                float3 planeNormal = normalize(float3(UNITY_MATRIX_V._m20, 0.0, UNITY_MATRIX_V._m22));
+                //float3 planeNormal = normalize(float3(UNITY_MATRIX_V._m20, 0.0, UNITY_MATRIX_V._m22));
+                float3 planeNormal = float3(0,-1,0);
                 float3 planePoint = unity_ObjectToWorld._m03_m13_m23;
                 float3 rayStart = _WorldSpaceCameraPos.xyz;
                 float3 rayDir = -normalize(mul(UNITY_MATRIX_I_V, float4(viewPos.xyz, 1.0)).xyz - rayStart); // convert view to world, minus camera pos
@@ -89,6 +103,8 @@ Shader "Unlit/BillboardVerticalZDepth"
             fixed4 frag(v2f i) : SV_Target
             {
                 fixed4 col = tex2D(_MainTex, i.uv);
+                col *= i.color;
+
                 UNITY_APPLY_FOG(i.fogCoord, col);
 
                 return col;

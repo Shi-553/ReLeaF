@@ -4,49 +4,51 @@ using UnityEngine;
 
 namespace ReLeaf
 {
-    public class Vision : MonoBehaviour
-    {
-        public bool ShouldFoundTarget => Targets().Any();
 
+    public abstract class Vision : MonoBehaviour
+    {
         [SerializeField]
         string[] targetTags = { "Player" };
-        HashSet<Transform> targets = new HashSet<Transform>();
+
+        [SerializeField]
+        protected LayerMask mask = ~0;
+
+        List<Transform> targets = new();
+        Collider2D[] results;
+        private void Start()
+        {
+            results = new Collider2D[GetInitCapacity()];
+        }
         public IEnumerable<Transform> Targets()
         {
             foreach (var item in targets)
             {
                 if (item != null)
-                    yield return item;
+                    yield return item.transform;
             }
         }
 
-        public Transform LastTarget { get; private set; }
-        private void Start()
+        protected abstract int GetInitCapacity();
+        protected abstract Collider2D[] GetOverLapAll();
+
+        void UpdateResult()
         {
             targets.Clear();
-        }
-
-        private void OnTriggerEnter2D(Collider2D collision)
-        {
-            foreach (var tag in targetTags)
+            foreach (var collider in results)
             {
-                if (collision.CompareTag(tag))
+                if (targetTags.Any(t => collider.CompareTag(t)))
                 {
-                    targets.Add(collision.transform);
-                    LastTarget = collision.transform;
-                }
-            }
-        }
-        private void OnTriggerExit2D(Collider2D collision)
-        {
-            foreach (var tag in targetTags)
-            {
-                if (collision.CompareTag(tag))
-                {
-                    targets.Remove(collision.transform);
+                    targets.Add(collider.transform);
                 }
             }
         }
 
+        public bool UpdateTarget()
+        {
+            results = GetOverLapAll();
+            UpdateResult();
+
+            return targets.Any();
+        }
     }
 }

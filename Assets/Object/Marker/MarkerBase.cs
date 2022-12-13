@@ -3,19 +3,20 @@ using Utility;
 
 namespace ReLeaf
 {
-    public abstract class MarkerBase : MonoBehaviour, IPoolable
+    public abstract class MarkerBase : PoolableMonoBehaviour
     {
         protected Vector2Int tilePos;
 
-        public void Init(bool isCreate)
+
+        protected override void InitImpl()
         {
             tilePos = DungeonManager.Singleton.WorldToTilePos(transform.position);
         }
-        public void Uninit()
+        protected override void UninitImpl()
         {
         }
 
-        public virtual void TileChanged(DungeonManager.TileChangedInfo info) { }
+        public virtual void OnGreening(DungeonManager.GreeningInfo info) { }
 
     }
 }
