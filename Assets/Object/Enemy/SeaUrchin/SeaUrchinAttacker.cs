@@ -47,6 +47,16 @@ namespace ReLeaf
 
         List<Spine> currentAttackers = new();
 
+        [SerializeField]
+        AudioInfo seBeforeAttack;
+
+        [SerializeField]
+        AudioInfo seAttack;
+
+        [SerializeField]
+        AudioInfo seAfterAttack;
+
+
         void Start()
         {
             TryGetComponent(out mover);
@@ -89,12 +99,14 @@ namespace ReLeaf
                 spine.Init(mover.DirNotZero);
                 currentAttackers.Add(spine);
             }
+            SEManager.Singleton.Play(seBeforeAttack, transform.position);
         }
         IEnumerator IEnemyAttacker.OnStartDamageing()
         {
             targetMarkerManager.ResetAllMarker();
 
             enemyDamageable.SetWeekMarker();
+            SEManager.Singleton.Play(seAttack, transform.position);
 
             foreach (var spine in currentAttackers)
             {
@@ -105,6 +117,7 @@ namespace ReLeaf
         }
         void IEnemyAttacker.OnStartCoolTime()
         {
+            SEManager.Singleton.Play(seAfterAttack, transform.position);
         }
         void IEnemyAttacker.OnEndCoolTime()
         {
