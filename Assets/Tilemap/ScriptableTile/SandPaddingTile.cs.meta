@@ -3,7 +3,10 @@ guid: 56a161ce9c34a1d4d9542ec5a0c5912f
 MonoImporter:
   externalObjects: {}
   serializedVersion: 2
-  defaultReferences: []
+  defaultReferences:
+  - m_Sprite: {instanceID: 0}
+  - currentTileObject: {instanceID: 0}
+  - sandPrefab: {fileID: 3556380978872311179, guid: e3d8a8d708883744b901a2d0593bf2c3, type: 3}
   executionOrder: 0
   icon: {instanceID: 0}
   userData: 

@@ -5,7 +5,7 @@ namespace Utility
     public abstract class PoolableMonoBehaviour : MonoBehaviour
     {
 
-        IPool Pool { get; set; }
+        public IPool Pool { get; set; }
 
         public virtual PoolableMonoBehaviour Create(Transform parent, IPool pool)
         {

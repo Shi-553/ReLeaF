@@ -59,6 +59,7 @@ namespace ReLeaf
                     {
                         continue;
                     }
+
                     if (tile is not SpawnTarget target)
                     {
                         if (tile is not Sand connectedSand)

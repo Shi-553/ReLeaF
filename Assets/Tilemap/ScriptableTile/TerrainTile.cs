@@ -23,6 +23,7 @@ namespace ReLeaf
         SpwanLake,
         SpwanTarget,
         ConnectedSeed,
+        StageObject,
         Max
     };
 
@@ -57,7 +58,7 @@ namespace ReLeaf
 
         virtual protected void UpdateTileObject(Vector3Int position, ITilemap tilemap) { }
 
-        Tilemap tilemap;
+        protected Tilemap tilemap;
 
         protected PoolArray Pools;
 
@@ -104,9 +105,10 @@ namespace ReLeaf
                     Debug.LogWarning(go.name);
                     Destroy(go);
                 }
-                if (tilemap == null)
+                if (!isInit || tilemap == null)
                 {
-                    tilemap = tm.GetComponent<Tilemap>();
+                    if (tilemap == null)
+                        tilemap = tm.GetComponent<Tilemap>();
                     Init();
                     UpdateTileObject(position, tm);
                     pool = Pool ?? Pools.SetPool(CurrentTileObject.TileType.ToInt32(), CurrentTileObject, defaultCapacity, maxSize);
@@ -126,15 +128,15 @@ namespace ReLeaf
 
                 using (Pool.Get(out createdObject))
                 {
-                    createdObject.IsInvincible = IsInvincible;
                     createdObject.transform.parent = tm.GetComponent<Transform>();
                     createdObject.transform.localPosition = tm.GetComponent<Tilemap>().CellToLocal(position) + new Vector3(DungeonManager.CELL_SIZE, DungeonManager.CELL_SIZE) / 2;
-                    createdObject.TilePos = (Vector2Int)position;
+
+                    InitCreatedObject((Vector2Int)position);
 
                 }
 
                 if (!dontUseTileManager)
-                    DungeonManager.Singleton.tiles[(Vector2Int)position] = createdObject;
+                    DungeonManager.Singleton.tiles[(Vector2Int)position] = createdObject.InstancedTarget;
                 return true;
             }
             else
@@ -142,18 +144,41 @@ namespace ReLeaf
                 if (go != null)
                 {
                     go.transform.position += new Vector3(0, 0, 0.001f);
+                    if (go.TryGetComponent<TileObject>(out var tileObject))
+                    {
+                        createdObject = tileObject;
+                        InitCreatedObject((Vector2Int)position);
+
+                    }
                 }
             }
             return false;
         }
+        void InitCreatedObject(Vector2Int position)
+        {
+            createdObject.CreatedTile = this;
+            createdObject.IsInvincible = IsInvincible;
+            createdObject.TilePos = position;
+
+            if (createdObject != createdObject.InstancedTarget)
+            {
+                createdObject.InstancedTarget.CreatedTile = this;
+                createdObject.InstancedTarget.Pool = createdObject.Pool;
+                createdObject.InstancedTarget.IsInvincible = createdObject.IsInvincible;
+                createdObject.InstancedTarget.TilePos = createdObject.TilePos;
+            }
+
+        }
         public override void GetTileData(Vector3Int position, ITilemap tilemap, ref TileData tileData)
         {
-            tileData.sprite = m_Sprite;
+            tileData.sprite = null;
             tileData.color = m_Color;
             tileData.transform = m_Transform;
             tileData.flags = m_Flags;
             tileData.colliderType = m_ColliderType;
 #if UNITY_EDITOR
+
+            tileData.sprite = m_Sprite;
             if (!Application.isPlaying && currentTileObject != null)
             {
                 tileData.gameObject = currentTileObject.gameObject;

@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 #if UNITY_EDITOR
 using Unity.EditorCoroutines.Editor;
@@ -13,16 +14,33 @@ namespace ReLeaf
     public class SandPaddingTile : SelectTile
     {
         [SerializeField]
-        Vector2Int size;
+        Vector2Int size = Vector2Int.one;
         [SerializeField]
         bool isPreview;
         [SerializeField]
+        bool isScaleWithSize;
+        [SerializeField]
         Vector2 previewOffset;
+
 
         public virtual Vector2Int Size => size;
 
         public override bool StartUp(Vector3Int position, ITilemap tm, GameObject go)
         {
+#if UNITY_EDITOR
+
+            if (!Application.isPlaying && go != null && tilemap == null)
+            {
+                foreach (var map in tm.GetComponent<Transform>().parent.GetComponentsInChildren<Tilemap>())
+                {
+                    if (Enum.TryParse<TileLayerType>(map.name, out var mapType) && mapType == TileLayerType.Ground)
+                    {
+                        tilemap = map;
+                        break;
+                    }
+                }
+            }
+#endif
             var result = base.StartUp(position, tm, go);
             if (result)
             {
@@ -33,12 +51,10 @@ namespace ReLeaf
 
             if (!Application.isPlaying && go != null)
             {
-                var tileObject = go.GetComponentInChildren<TileObject>();
 
-                if (tileObject != null)
+                if (createdObject != null)
                 {
-                    tileObject.TilePos = (Vector2Int)position;
-                    EditorCoroutineUtility.StartCoroutine(ConnectInEditor(tm.GetComponent<Tilemap>(), position, tileObject), this);
+                    EditorCoroutineUtility.StartCoroutine(ConnectInEditor(tilemap, position, createdObject), this);
                 }
 
             }
@@ -53,8 +69,6 @@ namespace ReLeaf
             {
                 for (int y = 0; y < Size.y; y++)
                 {
-                    if (x == 0 && y == 0) continue;
-
                     if (DungeonManager.Singleton.TryGetTile<Sand>(new Vector2Int(position.x + x, position.y + y), out var connectedSand))
                     {
                         connectedSand.Target = obj;
@@ -73,12 +87,12 @@ namespace ReLeaf
             {
                 for (int y = 0; y < Size.y; y++)
                 {
-                    if (x == 0 && y == 0) continue;
-
                     var obj = tm.GetInstantiatedObject(new Vector3Int(position.x + x, position.y + y));
-                    if (obj != null && obj.TryGetComponent<Sand>(out var connectedSand))
+                    if (obj != null)
                     {
-                        connectedSand.Target = tile;
+                        var connectedSand = obj.GetComponentInChildren<Sand>();
+                        if (connectedSand != null)
+                            connectedSand.Target = tile;
                     }
                 }
             }
@@ -87,16 +101,16 @@ namespace ReLeaf
         public override void GetTileData(Vector3Int position, ITilemap tilemap, ref TileData tileData)
         {
             base.GetTileData(position, tilemap, ref tileData);
-            if (!Application.isPlaying)
+            if (!Application.isPlaying && isPreview)
             {
                 tileData.sprite = m_Sprite;
 
                 var tm = tilemap.GetComponent<Tilemap>();
 
-                if (isPreview && !tm.gameObject.CompareTag("EditorOnly") && (currentTileObject != null))
+                if (!tm.gameObject.CompareTag("EditorOnly") && (currentTileObject != null))
                 {
-                    var pos = tm.CellToWorld((Vector3Int)(Size + new Vector2Int(-1, -2))) / 2.0f + (Vector3)previewOffset;
-                    tileData.transform = Matrix4x4.TRS(pos, Quaternion.identity, Vector3.one);
+                    var pos = tm.CellToWorld((Vector3Int)(Size + new Vector2Int(-1, -1))) / 2.0f + (Vector3)previewOffset;
+                    tileData.transform = Matrix4x4.TRS(pos, Quaternion.identity, isScaleWithSize ? new Vector3(Size.x, Size.y) : Vector3.one);
 
                     tileData.flags = TileFlags.LockTransform;
                 }

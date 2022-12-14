@@ -23,4 +23,4 @@ MonoBehaviour:
   tileLayerType: 0
   size: {x: 2, y: 1}
   isPreview: 1
-  previewOffset: {x: 0, y: 0}
+  previewOffset: {x: 0, y: -0.2}

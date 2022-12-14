@@ -110,11 +110,6 @@ namespace ReLeaf
                     SetTile(ref data, terrainTile.TileLayerType);
                     continue;
                 }
-                if (terrainTile.TileLayerType != TileLayerType.Ground)
-                {
-                    Debug.LogError(terrainTile.name + " is only Ground Layer", terrainTile);
-                    continue;
-                }
 
                 SetTile(ref data, terrainTile.TileLayerType);
 
@@ -143,7 +138,8 @@ namespace ReLeaf
             if (obj != null && obj.TryGetComponent<Sand>(out var connectedSand) && connectedSand.Target != null)
             {
                 var targetPos = connectedSand.Target.TilePos;
-                if (GroundTileMap.GetTile((Vector3Int)targetPos) is SandPaddingTile paddingTile)
+
+                if (connectedSand.Target.CreatedTile is SandPaddingTile paddingTile)
                 {
                     for (int x = 0; x < paddingTile.Size.x; x++)
                     {
@@ -155,6 +151,13 @@ namespace ReLeaf
                                 continue;
                             }
                             GroundTileMap.SetTile(pos, sandTile);
+
+
+                            foreach (var layer in tilemapLayerDic.Keys)
+                            {
+                                if (layer != sandTile.TileLayerType)
+                                    tilemapLayerDic[layer].SetTile(pos, null);
+                            }
                         }
                     }
                 }
