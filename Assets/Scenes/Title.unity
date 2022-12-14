@@ -243,10 +243,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e202785faa2975442a20fa088090fde9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  terrainTiles: []
+  terrainTiles:
+  - {fileID: 11400000, guid: 04420c5e4a51bcf46bfdcd69fb347f20, type: 2}
+  - {fileID: 11400000, guid: 1263c40a7eae41447bd0359878251824, type: 2}
+  - {fileID: 11400000, guid: 001da747823b07f45a2ab13eb1073cbe, type: 2}
   terrainTileArrays: []
   groundTilemap: {fileID: 9020821008736504434}
-  toLeafEffect: {fileID: 0}
+  toLeafEffect: {fileID: -8009822704911909708, guid: 3de2c373e89cf4f4c856cbd81c7c4eeb, type: 3}
   <MaxGreeningCount>k__BackingField: 0
 --- !u!213 &85952946
 Sprite:

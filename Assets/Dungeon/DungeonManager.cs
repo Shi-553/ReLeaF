@@ -39,6 +39,7 @@ namespace ReLeaf
         ToLeafEffect toLeafEffect;
         IPool toLeafEffectPool;
 
+
         Dictionary<TileType, TerrainTile[]> terrainTileDic;
 
         public Dictionary<Vector2Int, TileObject> tiles = new();
@@ -95,7 +96,7 @@ namespace ReLeaf
             if (callByAwake)
             {
 
-                toLeafEffectPool = PoolManager.Singleton.SetPool(toLeafEffect);
+                toLeafEffectPool = PoolManager.Singleton.SetPool(toLeafEffect, 1000, 1000, true);
                 foreach (var pos in groundTilemap.cellBounds.allPositionsWithin)
                 {
                     var tile = groundTilemap.GetTile<TerrainTile>(pos);
@@ -104,6 +105,8 @@ namespace ReLeaf
                         MaxGreeningCount++;
                     }
                 }
+                groundTilemap.transform.parent.GetComponentsInChildren<Tilemap>()
+                    .ForEach(tm => tm.RefreshAllTiles());
             }
         }
         public Vector2Int WorldToTilePos(Vector3 worldPos)

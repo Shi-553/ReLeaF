@@ -14,7 +14,11 @@ namespace Utility
             instance.Pool = pool;
             return instance;
         }
-        public virtual void OnDestroyPool() => Destroy(gameObject);
+        public virtual void OnDestroyPool()
+        {
+            if (this != null)
+                Destroy(gameObject);
+        }
         public virtual void OnGetPool() => gameObject.SetActive(true);
         public virtual void OnReleasePool() => gameObject.SetActive(false);
 
