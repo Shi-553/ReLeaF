@@ -47,7 +47,6 @@ jobs:
           targetPlatform: StandaloneWindows64
           buildName: ReLeaF
           versioning: None
-          unityVersion: 2021.3.11f1
           
       - name: atr
         uses: actions/upload-artifact@v3
