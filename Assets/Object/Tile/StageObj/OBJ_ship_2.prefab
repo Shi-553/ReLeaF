@@ -125,6 +125,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8194939723279568415}
   - component: {fileID: -684256324944661847}
+  - component: {fileID: 4420447744752128222}
   m_Layer: 0
   m_Name: OBJ_ship_2
   m_TagString: Untagged
@@ -163,6 +164,32 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   info: {fileID: 11400000, guid: 4284d82a36d9158438e90a2184abb6fa, type: 2}
   type: 5
+--- !u!61 &4420447744752128222
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8194939723279568414}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0.75, y: 0.25}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0, y: 0}
+    oldSize: {x: 0, y: 0}
+    newSize: {x: 0, y: 0}
+    adaptiveTilingThreshold: 0
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 2, y: 1}
+  m_EdgeRadius: 0
 --- !u!1001 &906411384986053994
 PrefabInstance:
   m_ObjectHideFlags: 0

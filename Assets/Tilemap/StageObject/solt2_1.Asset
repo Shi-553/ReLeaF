@@ -15,7 +15,7 @@ MonoBehaviour:
   m_Sprite: {fileID: 21300000, guid: 2345ad513fecc7e4da7c70920dc93e09, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_Flags: 3
-  m_ColliderType: 2
+  m_ColliderType: 0
   currentTileObject: {fileID: -7913552390301891449, guid: 857b6af9b1d40154db4befadea7c35ad, type: 3}
   defaultCapacity: 0
   maxSize: 10
