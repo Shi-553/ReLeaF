@@ -165,6 +165,8 @@ MonoBehaviour:
   attackStartPos: {x: 0, y: 0}
   attackTargetPos: {x: 0, y: 0}
   attackMarkerManager: {fileID: 4430456495496529935}
+  seBeforeAttack: {fileID: 11400000, guid: 071c6b1ad20e5ef479a336f841676159, type: 2}
+  seAttack: {fileID: 11400000, guid: b25f4858142ebb14095c58feefb12f0f, type: 2}
 --- !u!114 &-4858720575995891945
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -207,6 +209,7 @@ MonoBehaviour:
   specialPowerPrefab: {fileID: 7682479516954604330, guid: 110ed167187e534479bf9ad6f98fa9d6, type: 3}
   weakMarkerManager: {fileID: 2990406055205962186}
   seEnemyDeath: {fileID: 11400000, guid: c60d38e1592a9f2488104785a0989e07, type: 2}
+  seEnemyDamaged: {fileID: 11400000, guid: e4530d4e68776254bac46815be6e9f88, type: 2}
 --- !u!114 &7609214511921149064
 MonoBehaviour:
   m_ObjectHideFlags: 0
