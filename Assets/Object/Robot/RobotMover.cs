@@ -8,6 +8,8 @@ namespace ReLeaf
         public override bool DontDestroyOnLoad => false;
         [SerializeField, Rename("スピード(nマス/秒)")]
         float speed = 8.0f;
+        public float Speed => UseManualOperation ? manualSpeed : speed;
+
         [SerializeField, Rename("それ以上近づかない距離(nマス)")]
         float nearRange = 1.0f;
 
@@ -19,7 +21,8 @@ namespace ReLeaf
         Rigidbody2DMover mover;
 
         public bool UseManualOperation { get; private set; } = false;
-        bool useDash = true;
+
+        bool canUseDash = true;
         float manualSpeed;
 
         protected override void Init(bool isFirstInit, bool callByAwake)
@@ -43,11 +46,12 @@ namespace ReLeaf
 
         public void UpdateManualOperation(Vector3 target, float speed, bool useDash)
         {
+            if (speed == 0)
+                return;
             UpdateTarget(target);
             UseManualOperation = true;
-            this.useDash = useDash;
+            this.canUseDash = useDash;
             manualSpeed = speed;
-            this.speed = speed;
         }
 
         void LateUpdate()
@@ -85,20 +89,19 @@ namespace ReLeaf
             var distanceMaxOne = Mathf.Min(distance, 1);
             if (distanceMaxOne > 0.1f)
             {
-                Move = DungeonManager.CELL_SIZE * distanceMaxOne * speed * dir;
+                Move = DungeonManager.CELL_SIZE * distanceMaxOne * Speed * dir;
                 mover.MoveDelta(Move);
             }
             else
             {
                 UseManualOperation = false;
-                useDash = true;
-                speed = manualSpeed;
+                canUseDash = true;
             }
 
             if (Move.x != 0)
                 IsLeft = Move.x < 0;
 
-            IsDash = useDash && distanceMaxOne == 1;
+            IsDash = canUseDash && distanceMaxOne == 1;
         }
     }
 }
