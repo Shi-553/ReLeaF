@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: SharkAttackInfo
   m_EditorClassIdentifier: 
   coolTime: 1
-  aimTime: 1.5
+  aimTime: 1.7
   atk: 3
   speed: 20
   range: 5

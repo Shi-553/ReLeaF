@@ -81,3 +81,5 @@ MonoBehaviour:
       - {x: 3, y: 0}
       - {x: 3, y: -1}
       - {x: 3, y: -2}
+  beforeSpeed: 15
+  speed: 15

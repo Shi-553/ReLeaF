@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: CrabAttackInfo
   m_EditorClassIdentifier: 
   coolTime: 1
-  aimTime: 1.4
+  aimTime: 2
   attackBeforeDamageTime: 0.1
   atk: 2
   attackLocalTilePos:
@@ -31,20 +31,14 @@ MonoBehaviour:
       - {x: 2, y: 3}
       - {x: 2, y: 2}
       - {x: 2, y: 1}
-      - {x: 3, y: 1}
-      - {x: 3, y: 2}
-      - {x: 3, y: 3}
     downList:
       value:
       - {x: 1, y: -1}
       - {x: 0, y: -1}
       - {x: -1, y: -1}
-      - {x: -2, y: -1}
       - {x: 1, y: -2}
       - {x: 0, y: -2}
       - {x: -1, y: -2}
-      - {x: -2, y: -2}
-      - {x: -2, y: -3}
       - {x: -1, y: -3}
       - {x: 0, y: -3}
       - {x: 1, y: -3}
@@ -56,11 +50,8 @@ MonoBehaviour:
       - {x: -1, y: 0}
       - {x: -2, y: 0}
       - {x: -3, y: 0}
-      - {x: -1, y: -2}
       - {x: -1, y: -1}
       - {x: -2, y: -1}
-      - {x: -2, y: -2}
-      - {x: -3, y: -2}
       - {x: -3, y: -1}
       - {x: -3, y: 1}
       - {x: -3, y: 2}
@@ -74,15 +65,12 @@ MonoBehaviour:
       - {x: 2, y: 0}
       - {x: 2, y: -1}
       - {x: 2, y: 2}
-      - {x: 2, y: -2}
-      - {x: 3, y: -2}
-      - {x: 4, y: -2}
-      - {x: 4, y: -1}
-      - {x: 4, y: 0}
-      - {x: 4, y: 1}
-      - {x: 4, y: 2}
       - {x: 3, y: 2}
       - {x: 3, y: 1}
       - {x: 3, y: 0}
       - {x: 3, y: -1}
+      - {x: 1, y: 2}
+      - {x: 1, y: 1}
+      - {x: 1, y: 0}
+      - {x: 1, y: -1}
   knockBackPower: 10
