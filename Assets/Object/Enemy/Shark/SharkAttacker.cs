@@ -51,7 +51,7 @@ namespace ReLeaf
             attackStartPos = enemyMover.TilePos;
 
             enemyMover.GetCheckPoss(enemyMover.TilePos, enemyMover.DirNotZero, buffer);
-            attackTargetPos = buffer.Last() + (enemyMover.DirNotZero * (SharkAttackInfo.Range - 1));
+            attackTargetPos = buffer.Last() + (enemyMover.DirNotZero * (SharkAttackInfo.Range - 2));
 
             foreach (var target in GetAttackRange(enemyMover.TilePos, enemyMover.DirNotZero, true))
             {
@@ -75,7 +75,7 @@ namespace ReLeaf
                 yield return null;
 
                 if (this == null)
-                yield break;
+                    yield break;
             }
         }
         void IEnemyAttacker.OnStartCoolTime()
