@@ -108,6 +108,8 @@ namespace ReLeaf
 
         public IEnumerator UseItem()
         {
+            if (GameRuleManager.Singleton.IsPrepare)
+                yield break;
             if (ItemCount == 0 || useCo != null)
                 yield break;
 
