@@ -87,7 +87,7 @@ namespace ReLeaf
             List<Vector2Int> returns = new(2);
             List<Vector2Int> buffer = new(2);
 
-            for (int i = 0; i < SharkAttackInfo.Range + 1; i++)
+            for (int i = 0; i < SharkAttackInfo.Range; i++)
             {
                 var worldTilePosBase = pos + dir * i;
                 for (int x = 0; x < enemyMover.TileSize.x; x++)
