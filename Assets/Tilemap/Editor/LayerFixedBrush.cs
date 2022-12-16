@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using UnityEditor;
 using UnityEditor.SceneManagement;
@@ -27,6 +28,17 @@ namespace ReLeaf
         [HideInInspector]
         GridLayout beforeGridLayout;
 
+        int angleDegree;
+
+        public override void Pick(GridLayout gridLayout, GameObject brushTarget, BoundsInt position, Vector3Int pickStart)
+        {
+            base.Pick(gridLayout, brushTarget, position, pickStart);
+            angleDegree = 0;
+            UpdateAngle();
+            UpdateAngle();
+        }
+
+
         bool UpdateTilemapDic(GridLayout gridLayout = null)
         {
             if (gridLayout == null)
@@ -53,6 +65,7 @@ namespace ReLeaf
         private List<TileChangeData> tileChangeDataList;
 
         Tilemap GroundTileMap => tilemapLayerDic[TileLayerType.Ground];
+
 
         public override void BoxErase(GridLayout gridLayout, GameObject brushTarget, BoundsInt position)
         {
@@ -100,18 +113,18 @@ namespace ReLeaf
             {
                 TileChangeData data = tileChangeDataList[i];
 
-                if (data.tile is not TerrainTile terrainTile)
+                if (data.tile is not ILayerFixedTile layerFixedTile)
                 {
                     continue;
                 }
 
-                if (terrainTile is not SandPaddingTile paddingTile)
+                if (layerFixedTile is not ISizeableTile paddingTile)
                 {
-                    SetTile(ref data, terrainTile.TileLayerType);
+                    SetTile(ref data, layerFixedTile.TileLayerType);
                     continue;
                 }
 
-                SetTile(ref data, terrainTile.TileLayerType);
+                SetTile(ref data, layerFixedTile.TileLayerType);
 
                 data.tile = sandTile;
 
@@ -139,11 +152,11 @@ namespace ReLeaf
             {
                 var targetPos = connectedSand.Target.TilePos;
 
-                if (connectedSand.Target.CreatedTile is SandPaddingTile paddingTile)
+                if (connectedSand.Target.CreatedTile is ISizeableTile sizeableTile)
                 {
-                    for (int x = 0; x < paddingTile.Size.x; x++)
+                    for (int x = 0; x < sizeableTile.Size.x; x++)
                     {
-                        for (int y = 0; y < paddingTile.Size.y; y++)
+                        for (int y = 0; y < sizeableTile.Size.y; y++)
                         {
                             var pos = new Vector3Int(targetPos.x + x, targetPos.y + y);
                             if (pos.x == data.position.x && pos.y == data.position.y)
@@ -162,8 +175,7 @@ namespace ReLeaf
                     }
                 }
             }
-
-            tilemapLayerDic[paintLayer].SetTile(data, false);
+            tilemapLayerDic[paintLayer].SetTile(data, true);
 
             var tile = data.tile;
             data.tile = null;
@@ -210,6 +222,59 @@ namespace ReLeaf
             EditorSceneManager.MarkSceneDirty(beforeGridLayout.gameObject.scene);
         }
 
+        public override void Rotate(RotationDirection direction, GridLayout.CellLayout layout)
+        {
+            if (direction == RotationDirection.Clockwise)
+            {
+                angleDegree += 90;
+            }
+            else
+            {
+                angleDegree -= 90;
+            }
+
+            angleDegree += 360;
+            angleDegree %= 360;
+            UpdateAngle();
+        }
+
+        void UpdateAngle()
+        {
+            foreach (BrushCell cell in cells)
+            {
+                if (cell.tile is not SandPaddingTile sandPaddingTile)
+                {
+                    if (cell.tile is not RotatedSandPaddingTile rotatedSandPadding)
+                        continue;
+                    sandPaddingTile = rotatedSandPadding.tile;
+                }
+                var sandPaddingTilePath = AssetDatabase.GetAssetPath(sandPaddingTile);
+
+                var parentPath = Path.Combine(Path.GetDirectoryName(sandPaddingTilePath), $"Rotated");
+
+                var parentFullPath = Path.GetFullPath(parentPath);
+                if (!Directory.Exists(parentFullPath))
+                {
+                    Directory.CreateDirectory(parentFullPath);
+                    AssetDatabase.Refresh();
+                }
+
+                var rotatedPath = Path.Combine(parentPath, $"{sandPaddingTile.name}_{angleDegree}.asset");
+
+                var asset = AssetDatabase.LoadAssetAtPath<RotatedSandPaddingTile>(rotatedPath);
+                if (asset != null)
+                {
+                    cell.tile = asset;
+                    continue;
+                }
+
+                var instanced = RotatedSandPaddingTile.CreateRotatedInstance(angleDegree);
+                instanced.tile = sandPaddingTile;
+                AssetDatabase.CreateAsset(instanced, rotatedPath);
+                cell.tile = instanced;
+                AssetDatabase.Refresh();
+            }
+        }
 
         [MenuItem("Assets/Create/Tile/Brush/LayerFixedBrush")]
         public static void CreateLayerFixedBrush()
