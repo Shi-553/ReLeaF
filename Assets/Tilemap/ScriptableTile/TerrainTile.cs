@@ -77,6 +77,7 @@ namespace ReLeaf
         public int maxSize = 100;
         public bool dontUseTileManager = false;
 
+        [NonSerialized]
         public TileObject createdObject;
 
         [SerializeField, Rename("“h‚éƒŒƒCƒ„[–¼")]
