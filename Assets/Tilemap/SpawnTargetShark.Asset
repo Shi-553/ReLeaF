@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Sprite: {fileID: -974664768, guid: 7ad29538470d1804ba097c4efecc3f4e, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_Flags: 0
+  m_Flags: 2
   m_ColliderType: 0
   currentTileObject: {fileID: 6654544181367121164, guid: 08631b86ae3ede14a922abbc1ee718be, type: 3}
   defaultCapacity: 10
@@ -23,4 +23,5 @@ MonoBehaviour:
   tileLayerType: 0
   size: {x: 2, y: 2}
   isPreview: 1
+  isScaleWithSize: 0
   previewOffset: {x: 0, y: -0.2}

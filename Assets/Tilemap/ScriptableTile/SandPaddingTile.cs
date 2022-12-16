@@ -150,7 +150,6 @@ namespace ReLeaf
         public override void GetTileData(Vector3Int position, ITilemap tilemap, ref TileData tileData)
         {
             tile.GetTileData(position, tilemap, ref tileData);
-            tileData.transform = Matrix;
 
             if (!Application.isPlaying && tile.isPreview)
             {
@@ -158,14 +157,14 @@ namespace ReLeaf
 
                 var tm = tilemap.GetComponent<Tilemap>();
 
-                if (!tm.gameObject.CompareTag("EditorOnly") && (tile.CurrentTileObject != null))
+                if ((tile.CurrentTileObject != null))
                 {
                     var pos = tm.CellToWorld((Vector3Int)(Size + new Vector2Int(-1, -1))) / 2.0f + (Vector3)tile.previewOffset;
                     tileData.transform = Matrix4x4.TRS(pos, Rotation, tile.isScaleWithSize ? new Vector3(tile.Size.x, tile.Size.y) : Vector3.one);
 
-                    tileData.flags = TileFlags.LockTransform;
                 }
             }
+            tileData.flags = TileFlags.LockTransform;
         }
     }
 }
