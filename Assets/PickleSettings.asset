@@ -9,10 +9,13 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: db8c80a7de3d37840b2d8ce76f290d8c, type: 3}
-  m_Name: SeaUrchinAttackInfo
+  m_Script: {fileID: 11500000, guid: a2e6911a0b273384b8b64b23d91873ed, type: 3}
+  m_Name: PickleSettings
   m_EditorClassIdentifier: 
-  coolTime: 0.5
-  aimTime: 0.5
-  spinePrefab: {fileID: 3646005126214096454, guid: 36cf135a1f4524341a36bbe8573bf525, type: 3}
-  attackTime: 1
+  _defaultPickerType: 1
+  _defaultObjectProvider: 3
+  _defaultAutoPickMode: 0
+  _defaultToWindowTypeNames:
+  - UnityEngine.Sprite
+  - UnityEngine.Texture2D
+  - UnityEngine.Mesh
