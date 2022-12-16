@@ -107,12 +107,37 @@ namespace ReLeaf
 
                 foreach (var target in targets)
                 {
+
                     var enemy = Object.Instantiate(EnemyInfo.EnemyPrefab,
                         DungeonManager.Singleton.TilePosToWorld(target),
                         Quaternion.identity,
                         enemyRoot);
+
+                    GlobalCoroutine.Singleton.StartCoroutine(SpawnAnimation(enemy.transform, target));
                 }
             }
+        }
+        IEnumerator SpawnAnimation(Transform enemy, Vector2Int target)
+        {
+            var (element, index) = lakeDic.Values.MinBy(lake => (lake.TilePos - target).sqrMagnitude);
+            float time = 0;
+
+            var start = DungeonManager.Singleton.TilePosToWorld(element.TilePos);
+            var end = DungeonManager.Singleton.TilePosToWorld(target);
+
+            while (true)
+            {
+                var t = time / EnemyInfo.SpwanInitAnimationTime;
+
+                enemy.position = Vector3.Lerp(start, end, t * t);
+
+                time += Time.deltaTime;
+                if (time > EnemyInfo.SpwanInitAnimationTime)
+                    break;
+
+                yield return null;
+            }
+            enemy.position = end;
         }
     }
 

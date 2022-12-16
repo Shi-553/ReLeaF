@@ -202,11 +202,12 @@ namespace ReLeaf
 
             List<Vector3Int> posList = new();
 
-            foreach (var tilemap in tilemaps)
+            foreach (var (layer, tilemap) in tilemapLayerDic)
             {
                 foreach (var pos in tilemap.cellBounds.allPositionsWithin)
                 {
-                    if (!tilemap.HasTile(pos))
+                    var tile = tilemap.GetTile(pos);
+                    if (tile == null)
                     {
                         continue;
                     }
@@ -215,9 +216,16 @@ namespace ReLeaf
                         posList.Add(pos);
                         continue;
                     }
+                    if (tile is ILayerFixedTile layerFixedTile && layerFixedTile.TileLayerType != layer)
+                    {
+                        posList.Add(pos);
+                        continue;
+                    }
                 }
 
                 tilemap.SetTiles(posList.ToArray(), new TileBase[posList.Count]);
+                tilemap.gameObject.SetActive(false);
+                tilemap.gameObject.SetActive(true);
             }
             EditorSceneManager.MarkSceneDirty(beforeGridLayout.gameObject.scene);
         }
