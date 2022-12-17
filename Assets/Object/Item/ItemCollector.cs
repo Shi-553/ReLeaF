@@ -1,4 +1,3 @@
-using DebugLogExtension;
 using System.Collections.Generic;
 using UnityEngine;
 using Utility;
@@ -28,7 +27,6 @@ namespace ReLeaf
                 if (other.gameObject.TryGetComponent<ItemBase>(out var item))
                 {
                     floatItems.Add(item);
-                    "add".DebugLog();
                 }
             }
         }
@@ -50,7 +48,6 @@ namespace ReLeaf
                     else
                     {
                         item.ReStart();
-                        "restart".DebugLog();
                     }
                     return true;
                 }
