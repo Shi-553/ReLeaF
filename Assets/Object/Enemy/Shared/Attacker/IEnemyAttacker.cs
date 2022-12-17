@@ -41,7 +41,10 @@ namespace ReLeaf
         {
             if (AttackCo != null)
                 GlobalCoroutine.Singleton.StopCoroutine(AttackCo);
+            StopImpl();
         }
+        protected void StopImpl();
+
         protected IEnumerator AttackImpl()
         {
             Transition = AttackTransition.Aiming;

@@ -43,6 +43,10 @@ namespace ReLeaf
             TryGetComponent(out enemyDamageable);
 
         }
+        void IEnemyAttacker.StopImpl()
+        {
+            attackMarkerManager.ResetAllMarker();
+        }
 
         void IEnemyAttacker.OnStartAiming()
         {

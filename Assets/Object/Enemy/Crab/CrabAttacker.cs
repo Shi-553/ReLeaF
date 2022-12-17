@@ -29,6 +29,10 @@ namespace ReLeaf
         [SerializeField]
         AudioInfo seAttack;
 
+        void IEnemyAttacker.StopImpl()
+        {
+            targetMarkerManager.ResetAllMarker();
+        }
         public IEnumerable<Vector2Int> GetAttackRange(Vector2Int pos, Vector2Int dir, bool includeMoveabePos)
         {
             foreach (var local in crabAttackInfo.AttackLocalTilePos.GetLocalTilePosList(dir))

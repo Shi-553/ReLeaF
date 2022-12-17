@@ -38,6 +38,12 @@ namespace ReLeaf
 
         void Update()
         {
+            if (enemyCore.IsDeath)
+            {
+                animancerComponent.Play(info.GetClip(CrabAnimationType.Death));
+                return;
+            }
+
             switch (enemyAttacker.Transition)
             {
                 case AttackTransition.Aiming:

@@ -30,10 +30,15 @@ namespace ReLeaf
 
         void Update()
         {
+            if (enemyCore.IsDeath)
+            {
+                animancerComponent.Play(info.GetClip(SharkAnimationType.Death, enemyMover.IsLeftNow));
+                return;
+            }
+
             switch (enemyAttacker.Transition)
             {
                 case AttackTransition.Aiming:
-                    animancerComponent.Play(info.GetClip(SharkAnimationType.BeforeAttack, enemyMover.IsLeftNow));
                     break;
                 case AttackTransition.Damageing:
                     animancerComponent.Play(info.GetClip(SharkAnimationType.Attack, enemyMover.IsLeftNow));

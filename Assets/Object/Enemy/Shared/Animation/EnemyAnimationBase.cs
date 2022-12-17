@@ -10,6 +10,7 @@ namespace ReLeaf
 
         protected EnemyMover enemyMover;
         protected IEnemyAttacker enemyAttacker;
+        protected EnemyCore enemyCore;
 
         bool isInit = false;
         public virtual void Init()
@@ -20,6 +21,7 @@ namespace ReLeaf
                 animancerComponent = GetComponentInChildren<AnimancerComponent>();
                 TryGetComponent(out enemyAttacker);
                 TryGetComponent(out enemyMover);
+                TryGetComponent(out enemyCore);
             }
 
         }

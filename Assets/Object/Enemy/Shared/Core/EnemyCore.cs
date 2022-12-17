@@ -11,6 +11,7 @@ namespace ReLeaf
 
         [field: SerializeField, ReadOnly]
         public float HP { get; private set; }
+        public bool IsDeath => HP <= 0;
 
         EnemyMover enemyMover;
 
@@ -49,8 +50,14 @@ namespace ReLeaf
                     DungeonManager.Singleton.ToEnemyPlant(new Vector2Int(enemyMover.TilePos.x + x, enemyMover.TilePos.y + y));
                 }
             }
-            Destroy(gameObject);
+            ResetWeekMarker();
+
             OnDeath?.Invoke();
+
+            foreach (var collider in GetComponentsInChildren<Collider2D>())
+            {
+                collider.enabled = false;
+            }
         }
 
         public void SetWeekMarker()

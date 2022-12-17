@@ -8,6 +8,7 @@ namespace ReLeaf
         Move,
         BeforeAttack,
         Attack,
+        Death
     }
     [CreateAssetMenu(menuName = "Enemy/Shark/SharkAnimationInfo")]
     public class SharkAnimationInfo : AnimationInfoBase<SharkAnimationType>

@@ -9,6 +9,11 @@ namespace ReLeaf
 
         void Update()
         {
+            if (enemyCore.IsDeath)
+            {
+                animancerComponent.Play(info.GetClip(SeaUrhinAnimationType.Death));
+                return;
+            }
             switch (enemyAttacker.Transition)
             {
                 case AttackTransition.Aiming:

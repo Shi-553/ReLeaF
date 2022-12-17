@@ -61,7 +61,6 @@ namespace ReLeaf
         {
             TryGetComponent(out mover);
             TryGetComponent(out enemyDamageable);
-            enemyDamageable.OnDeath += OnDeath;
 
             foreach (var select in selects)
             {
@@ -69,12 +68,13 @@ namespace ReLeaf
             }
         }
 
-        private void OnDeath()
+        void IEnemyAttacker.StopImpl()
         {
             if (Transition == AttackTransition.Aiming)
             {
                 currentAttackers.ForEach(c => Destroy(c));
             }
+            targetMarkerManager.ResetAllMarker();
         }
 
         public IEnumerable<Vector2Int> GetAttackRange(Vector2Int pos, Vector2Int dir, bool includeMoveabePos)
