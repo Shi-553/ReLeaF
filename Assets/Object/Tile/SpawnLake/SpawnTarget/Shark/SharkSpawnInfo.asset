@@ -20,5 +20,5 @@ MonoBehaviour:
   isAlreadyGreening: 0
   type: 0
   enemyPrefab: {fileID: 7609214511921149064, guid: 2a7de3647c92d20429b93cd67b201cf0, type: 3}
-  spwanInterval: 1
+  spwanInterval: 10
   spwanInitAnimationTime: 1
