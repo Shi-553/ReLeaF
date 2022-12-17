@@ -6,27 +6,19 @@ using Utility;
 
 namespace ReLeaf
 {
-    public class SharkAttacker : MonoBehaviour, IEnemyAttacker
+    public class SharkAttacker : EnemyAttacker
     {
 
         [field: SerializeField]
         SharkAttackInfo SharkAttackInfo { get; set; }
-        public EnemyAttackInfo EnemyAttackInfo => SharkAttackInfo;
+        public override EnemyAttackInfo EnemyAttackInfo => SharkAttackInfo;
 
-        [field: SerializeField, ReadOnly]
-        public AttackTransition Transition { get; set; }
-        Coroutine IEnemyAttacker.AttackCo { get; set; }
 
-        EnemyMover enemyMover;
-        EnemyCore enemyDamageable;
 
         [SerializeField, ReadOnly]
         Vector2Int attackStartPos;
         [SerializeField, ReadOnly]
         Vector2Int attackTargetPos;
-
-        [SerializeField]
-        MarkerManager attackMarkerManager;
 
         List<Vector2Int> buffer = new();
 
@@ -37,20 +29,10 @@ namespace ReLeaf
 
 
 
-        private void Awake()
-        {
-            TryGetComponent(out enemyMover);
-            TryGetComponent(out enemyDamageable);
 
-        }
-        void IEnemyAttacker.StopImpl()
+        protected override void OnStartAiming()
         {
-            attackMarkerManager.ResetAllMarker();
-        }
-
-        void IEnemyAttacker.OnStartAiming()
-        {
-            enemyDamageable.SetWeekMarker();
+            enemyCore.SetWeekMarker();
 
             attackStartPos = enemyMover.TilePos;
 
@@ -63,9 +45,9 @@ namespace ReLeaf
             }
             SEManager.Singleton.Play(seBeforeAttack, transform.position);
         }
-        IEnumerator IEnemyAttacker.OnStartDamageing()
+        protected override IEnumerator OnStartDamageing()
         {
-            enemyDamageable.ResetWeekMarker();
+            enemyCore.ResetWeekMarker();
             SEManager.Singleton.Play(seAttack, transform.position);
 
             enemyMover.UpdateTargetStraight(attackTargetPos);
@@ -82,11 +64,11 @@ namespace ReLeaf
                     yield break;
             }
         }
-        void IEnemyAttacker.OnStartCoolTime()
+        protected override void OnStartCoolTime()
         {
             attackMarkerManager.ResetAllMarker();
         }
-        public IEnumerable<Vector2Int> GetAttackRange(Vector2Int pos, Vector2Int dir, bool includeMoveabePos)
+        public override IEnumerable<Vector2Int> GetAttackRange(Vector2Int pos, Vector2Int dir, bool includeMoveabePos)
         {
             List<Vector2Int> returns = new(2);
             List<Vector2Int> buffer = new(2);

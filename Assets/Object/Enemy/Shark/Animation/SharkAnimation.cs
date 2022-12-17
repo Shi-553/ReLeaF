@@ -34,16 +34,18 @@ namespace ReLeaf
             yield return animancerComponent.Play(info.GetClip(SharkAnimationType.Death, enemyMover.IsLeftNow));
         }
 
-        void Update()
+        protected override void ChangeTransition(AttackTransition transition)
         {
+
             if (enemyCore.IsDeath)
             {
                 return;
             }
 
-            switch (enemyAttacker.Transition)
+            switch (transition)
             {
                 case AttackTransition.Aiming:
+                    animancerComponent.Play(info.GetClip(SharkAnimationType.BeforeAttack, enemyMover.IsLeftNow));
                     break;
                 case AttackTransition.Damageing:
                     animancerComponent.Play(info.GetClip(SharkAnimationType.Attack, enemyMover.IsLeftNow));

@@ -8,17 +8,20 @@ namespace ReLeaf
         [SerializeField]
         SeaUrhinAnimationInfo info;
 
+
         public override IEnumerator DeathAnimation()
         {
             yield return animancerComponent.Play(info.GetClip(SeaUrhinAnimationType.Death));
         }
-        void Update()
+
+        protected override void ChangeTransition(AttackTransition transition)
         {
+
             if (enemyCore.IsDeath)
             {
                 return;
             }
-            switch (enemyAttacker.Transition)
+            switch (transition)
             {
                 case AttackTransition.Aiming:
                     animancerComponent.Play(info.GetClip(SeaUrhinAnimationType.BeforeAttack));

@@ -6,20 +6,12 @@ using Utility;
 
 namespace ReLeaf
 {
-    public class CrabAttacker : MonoBehaviour, IEnemyAttacker
+    public class CrabAttacker : EnemyAttacker
     {
-        public AttackTransition Transition { get; set; }
-        Coroutine IEnemyAttacker.AttackCo { get; set; }
-        public EnemyAttackInfo EnemyAttackInfo => crabAttackInfo;
+        public override EnemyAttackInfo EnemyAttackInfo => crabAttackInfo;
 
         [SerializeField]
         CrabAttackInfo crabAttackInfo;
-
-        EnemyMover mover;
-        EnemyCore enemyCore;
-
-        [SerializeField]
-        MarkerManager targetMarkerManager;
 
         Vector2Int[] attackPoss;
 
@@ -29,11 +21,7 @@ namespace ReLeaf
         [SerializeField]
         AudioInfo seAttack;
 
-        void IEnemyAttacker.StopImpl()
-        {
-            targetMarkerManager.ResetAllMarker();
-        }
-        public IEnumerable<Vector2Int> GetAttackRange(Vector2Int pos, Vector2Int dir, bool includeMoveabePos)
+        public override IEnumerable<Vector2Int> GetAttackRange(Vector2Int pos, Vector2Int dir, bool includeMoveabePos)
         {
             foreach (var local in crabAttackInfo.AttackLocalTilePos.GetLocalTilePosList(dir))
             {
@@ -49,17 +37,17 @@ namespace ReLeaf
             }
         }
 
-        void IEnemyAttacker.OnStartAiming()
+        protected override void OnStartAiming()
         {
-            attackPoss = GetAttackRange(mover.TilePos, mover.DirNotZero, true).ToArray();
+            attackPoss = GetAttackRange(enemyMover.TilePos, enemyMover.DirNotZero, true).ToArray();
             foreach (var attackPos in attackPoss)
             {
-                targetMarkerManager.SetMarker<TargetMarker>(attackPos);
+                attackMarkerManager.SetMarker<TargetMarker>(attackPos);
             }
             enemyCore.SetWeekMarker();
             SEManager.Singleton.Play(seBeforeAttack, transform.position);
         }
-        IEnumerator IEnemyAttacker.OnStartDamageing()
+        protected override IEnumerator OnStartDamageing()
         {
             yield return new WaitForSeconds(crabAttackInfo.AttackBeforeDamageTime);
             if (this == null)
@@ -78,19 +66,14 @@ namespace ReLeaf
                 plant.Damaged(crabAttackInfo.ATK, DamageType.Direct);
 
             }
-            targetMarkerManager.ResetAllMarker();
+            attackMarkerManager.ResetAllMarker();
             SEManager.Singleton.Play(seAttack, transform.position);
         }
 
 
-        void IEnemyAttacker.OnEndCoolTime()
+        protected override void OnEndCoolTime()
         {
             enemyCore.ResetWeekMarker();
-        }
-        void Start()
-        {
-            TryGetComponent(out mover);
-            TryGetComponent(out enemyCore);
         }
 
         private void OnTriggerStay2D(Collider2D collider)
@@ -99,7 +82,7 @@ namespace ReLeaf
             {
                 if (collider.gameObject.TryGetComponent<Plant>(out var plant))
                 {
-                    if (MathExtension.DuringExists(plant.TilePos, mover.TilePos, mover.TilePos + mover.TileSize, false))
+                    if (MathExtension.DuringExists(plant.TilePos, enemyMover.TilePos, enemyMover.TilePos + enemyMover.TileSize, false))
                     {
                         plant.Damaged(crabAttackInfo.ATK, DamageType.Direct);
                         return;

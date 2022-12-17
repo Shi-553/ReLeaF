@@ -5,7 +5,7 @@ namespace ReLeaf
 {
     public class SeaUrchinController : MonoBehaviour
     {
-        IEnemyAttacker enemyAttacker;
+        EnemyAttacker enemyAttacker;
         EnemyMover mover;
         void Start()
         {

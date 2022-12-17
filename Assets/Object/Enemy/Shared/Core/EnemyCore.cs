@@ -38,7 +38,7 @@ namespace ReLeaf
         }
         private IEnumerator Death()
         {
-            if (TryGetComponent(out IEnemyAttacker attacker))
+            if (TryGetComponent(out EnemyAttacker attacker))
             {
                 attacker.Stop();
             }

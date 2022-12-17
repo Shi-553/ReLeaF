@@ -42,14 +42,15 @@ namespace ReLeaf
             yield return animancerComponent.Play(info.GetClip(CrabAnimationType.Death));
         }
 
-        void Update()
+        protected override void ChangeTransition(AttackTransition transition)
         {
+
             if (enemyCore.IsDeath)
             {
                 return;
             }
 
-            switch (enemyAttacker.Transition)
+            switch (transition)
             {
                 case AttackTransition.Aiming:
                     animancerComponent.Play(info.GetClip(CrabAnimationType.BeforeAttack));

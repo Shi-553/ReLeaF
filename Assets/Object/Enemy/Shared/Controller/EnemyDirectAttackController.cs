@@ -10,7 +10,7 @@ namespace ReLeaf
         Vision searchVision;
 
         EnemyMover mover;
-        IEnemyAttacker attacker;
+        EnemyAttacker attacker;
 
         Vector2Int? targetTilePos;
 
