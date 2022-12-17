@@ -108,6 +108,7 @@ namespace ReLeaf
             yield return StartCoroutine(allGreening.StartGreeningWithPlayer());
             gameclearText.SetActive(true);
             SEManager.Singleton.Play(clearBGM);
+            PlayerController.Singleton.enabled = false;
         }
 
     }
