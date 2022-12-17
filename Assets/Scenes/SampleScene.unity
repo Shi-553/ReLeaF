@@ -840,6 +840,7 @@ GameObject:
   - component: {fileID: 247599788}
   - component: {fileID: 247599790}
   - component: {fileID: 247599789}
+  - component: {fileID: 247599791}
   m_Layer: 5
   m_Name: BackgroundLightEffect
   m_TagString: Untagged
@@ -905,6 +906,19 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 247599787}
   m_CullTransparentMesh: 1
+--- !u!114 &247599791
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 247599787}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e316a430928dff443a592129bab5711d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  rotateSpeed: 10
 --- !u!1 &281115132
 GameObject:
   m_ObjectHideFlags: 0
@@ -16117,7 +16131,7 @@ Tilemap:
       m_TileColorIndex: 1
       m_TileObjectToInstantiateIndex: 4
       dummyAlignment: 0
-      m_AllTileFlags: 2
+      m_AllTileFlags: 0
   - first: {x: 7, y: 1, z: 0}
     second:
       serializedVersion: 2
