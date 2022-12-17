@@ -29,11 +29,15 @@ namespace ReLeaf
             transform.position = target;
         }
 
+        public override IEnumerator DeathAnimation()
+        {
+            yield return animancerComponent.Play(info.GetClip(SharkAnimationType.Death, enemyMover.IsLeftNow));
+        }
+
         void Update()
         {
             if (enemyCore.IsDeath)
             {
-                animancerComponent.Play(info.GetClip(SharkAnimationType.Death, enemyMover.IsLeftNow));
                 return;
             }
 

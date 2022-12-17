@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 
 namespace ReLeaf
@@ -7,11 +8,14 @@ namespace ReLeaf
         [SerializeField]
         SeaUrhinAnimationInfo info;
 
+        public override IEnumerator DeathAnimation()
+        {
+            yield return animancerComponent.Play(info.GetClip(SeaUrhinAnimationType.Death));
+        }
         void Update()
         {
             if (enemyCore.IsDeath)
             {
-                animancerComponent.Play(info.GetClip(SeaUrhinAnimationType.Death));
                 return;
             }
             switch (enemyAttacker.Transition)

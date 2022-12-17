@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using UnityEngine;
 using Utility;
 
@@ -35,7 +36,7 @@ namespace ReLeaf
             TryGetComponent(out enemyMover);
             HP = enemyDamageableInfo.HPMax;
         }
-        private void Death()
+        private IEnumerator Death()
         {
             if (TryGetComponent(out IEnemyAttacker attacker))
             {
@@ -58,6 +59,11 @@ namespace ReLeaf
             {
                 collider.enabled = false;
             }
+            if (TryGetComponent<EnemyAnimationBase>(out var animationBase))
+            {
+                yield return animationBase.DeathAnimation();
+            }
+            Destroy(gameObject);
         }
 
         public void SetWeekMarker()
@@ -105,7 +111,7 @@ namespace ReLeaf
             {
                 HP = 0;
                 SEManager.Singleton.Play(seEnemyDeath, transform.position);
-                Death();
+                StartCoroutine(Death());
                 return;
             }
             HP -= atk;
@@ -118,7 +124,7 @@ namespace ReLeaf
             {
                 if (collision.TryGetComponent<Plant>(out var plant) && plant.IsInvincible)
                 {
-                    Death();
+                    StartCoroutine(Death());
                 }
             }
         }

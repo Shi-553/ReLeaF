@@ -34,5 +34,10 @@ namespace ReLeaf
         {
             yield break;
         }
+
+        public virtual IEnumerator DeathAnimation()
+        {
+            yield break;
+        }
     }
 }
