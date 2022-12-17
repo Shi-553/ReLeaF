@@ -109,7 +109,10 @@ namespace ReLeaf
                 {
                     var targetWorldPos = DungeonManager.Singleton.TilePosToWorld(target);
 
-                    var (element, index) = lakeDic.Values.MinBy(lake => (lake.TilePos - target).sqrMagnitude);
+                    var (element, index) = lakeDic.Values
+                        .Where(lake => !lake.IsGreening)
+                        .MinBy(lake => (lake.TilePos - target).sqrMagnitude);
+
                     var currentWorldPos = DungeonManager.Singleton.TilePosToWorld(element.TilePos);
 
                     var enemy = Object.Instantiate(EnemyInfo.EnemyPrefab,
