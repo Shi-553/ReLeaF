@@ -43,12 +43,11 @@ namespace ReLeaf
                 attacker.Stop();
             }
 
-            Instantiate(specialPowerPrefab, transform.position, Quaternion.identity, transform.parent);
             for (int x = 0; x < enemyMover.TileSize.x; x++)
             {
                 for (int y = 0; y < enemyMover.TileSize.y; y++)
                 {
-                    DungeonManager.Singleton.ToEnemyPlant(new Vector2Int(enemyMover.TilePos.x + x, enemyMover.TilePos.y + y));
+                    DungeonManager.Singleton.SowSeed(new Vector2Int(enemyMover.TilePos.x + x, enemyMover.TilePos.y + y), true);
                 }
             }
             ResetWeekMarker();
@@ -64,6 +63,7 @@ namespace ReLeaf
                 yield return animationBase.DeathAnimation();
             }
             Destroy(gameObject);
+            Instantiate(specialPowerPrefab, transform.position, Quaternion.identity, transform.parent);
         }
 
         public void SetWeekMarker()
