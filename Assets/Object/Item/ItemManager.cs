@@ -86,11 +86,11 @@ namespace ReLeaf
             }
         }
 
-        public void AddItem(ItemBase itemBase)
+        public bool AddItem(ItemBase itemBase)
         {
             if (itemUIs.Count <= ItemCount)
             {
-                return;
+                return false;
             }
             var item = itemUIs[ItemCount];
             item.Init(itemBase);
@@ -104,6 +104,7 @@ namespace ReLeaf
 
             SEManager.Singleton.Play(seGetItem, transform.position);
             ItemCount++;
+            return true;
         }
 
         public IEnumerator UseItem()
