@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Sprite: {fileID: -1114590350, guid: 7bac8617794be3a46b63d3de9ca31efd, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_Flags: 2
+  m_Flags: 0
   m_ColliderType: 0
   currentTileObject: {fileID: 382204469888927471, guid: 50b64b54a2574fa45a60b7385084a33d, type: 3}
   defaultCapacity: 10

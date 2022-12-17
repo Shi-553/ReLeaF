@@ -139,10 +139,8 @@ namespace ReLeaf
                         }
                         data.position = new(pos.x + x, pos.y + y, pos.z);
                         SetTile(ref data, sandTile.TileLayerType);
-
                     }
                 }
-
             }
         }
         void SetTile(ref TileChangeData data, TileLayerType paintLayer)
@@ -175,7 +173,7 @@ namespace ReLeaf
                     }
                 }
             }
-            tilemapLayerDic[paintLayer].SetTile(data, true);
+            tilemapLayerDic[paintLayer].SetTile(data, false);
 
             var tile = data.tile;
             data.tile = null;

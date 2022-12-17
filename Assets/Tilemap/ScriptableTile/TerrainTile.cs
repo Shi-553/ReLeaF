@@ -46,7 +46,6 @@ namespace ReLeaf
         [SerializeField]
         protected Color m_Color = Color.white;
 
-        protected Matrix4x4 m_Transform = Matrix4x4.identity;
 
 
         [SerializeField]
@@ -183,7 +182,6 @@ namespace ReLeaf
         {
             tileData.sprite = null;
             tileData.color = m_Color;
-            tileData.transform = m_Transform;
             tileData.flags = m_Flags;
             tileData.colliderType = m_ColliderType;
 #if UNITY_EDITOR

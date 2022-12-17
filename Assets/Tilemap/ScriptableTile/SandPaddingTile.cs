@@ -161,7 +161,6 @@ namespace ReLeaf
                 {
                     var pos = tm.CellToWorld((Vector3Int)(Size + new Vector2Int(-1, -1))) / 2.0f + (Vector3)tile.previewOffset;
                     tileData.transform = Matrix4x4.TRS(pos, Rotation, tile.isScaleWithSize ? new Vector3(tile.Size.x, tile.Size.y) : Vector3.one);
-
                 }
             }
             tileData.flags = TileFlags.LockTransform;
