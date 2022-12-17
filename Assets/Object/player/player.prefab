@@ -201,7 +201,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   itemUIRoot: {fileID: 0}
   selectFrame: {fileID: 0}
-  seedMarkerManager: {fileID: 8685453909214998006}
+  specialPreviewMarkerManager: {fileID: 8685453909214998006}
   seGetItem: {fileID: 11400000, guid: 55ca8ca85fa3fd540894d4ec9dc3b1d1, type: 2}
   seUseItem: {fileID: 11400000, guid: 3f4e968a5953efd4896a676770419698, type: 2}
 --- !u!50 &354325909066514047

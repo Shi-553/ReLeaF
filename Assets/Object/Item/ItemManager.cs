@@ -13,7 +13,7 @@ namespace ReLeaf
         [SerializeField]
         Transform selectFrame;
         [SerializeField]
-        MarkerManager seedMarkerManager;
+        MarkerManager specialPreviewMarkerManager;
 
         [SerializeField]
         AudioInfo seGetItem;
@@ -153,7 +153,7 @@ namespace ReLeaf
 
             if (mover.WasChangedTilePosThisFrame || WasChangedItemDirThisFrame || previewd != Current.Item)
             {
-                seedMarkerManager.ResetAllMarker();
+                specialPreviewMarkerManager.ResetAllMarker();
                 if (ItemCount == 0)
                 {
                     return;
@@ -163,7 +163,7 @@ namespace ReLeaf
 
                 foreach (var p in previews)
                 {
-                    seedMarkerManager.SetMarker<SeedMarker>(p);
+                    specialPreviewMarkerManager.SetMarker<SpecialPreviewMarker>(p);
                 }
             }
             OldItemDir = ItemDir;
