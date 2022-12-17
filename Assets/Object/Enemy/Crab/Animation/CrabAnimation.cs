@@ -24,7 +24,7 @@ namespace ReLeaf
             {
                 var t = time / SpwanInitAnimationTime;
 
-                transform.localScale = Vector3.Lerp(Vector2.one / 2, Vector2.one, t);
+                transform.localScale = Vector3.Lerp(Vector3.one / 2, Vector3.one, t);
                 transform.position = new Vector3(Mathf.Lerp(current.x, target.x, t), MathExtension.LerpPairs(pairs, t * (2 - t)), Mathf.Lerp(current.z, target.z, t));
 
                 time += Time.deltaTime;
@@ -33,6 +33,7 @@ namespace ReLeaf
 
                 yield return null;
             }
+            transform.localScale = Vector3.one;
             transform.position = target;
         }
 
