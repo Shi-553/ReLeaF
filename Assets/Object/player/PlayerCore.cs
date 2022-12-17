@@ -35,6 +35,10 @@ namespace ReLeaf
 
             spriteRenderer = GetComponentInChildren<SpriteRenderer>();
         }
+        private void Start()
+        {
+            hpGauge.Slider = PlayerStatusUI.Singleton.HPSlider;
+        }
 
 
         public void Damaged(float damage, Vector3 impulse)

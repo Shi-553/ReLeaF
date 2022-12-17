@@ -8,10 +8,10 @@ namespace ReLeaf
     public class ItemManager : MonoBehaviour
     {
         List<ItemUI> itemUIs = new List<ItemUI>();
-        [SerializeField]
-        RectTransform itemUIRoot;
-        [SerializeField]
-        Transform selectFrame;
+
+        RectTransform ItemUIRoot => ItemSelectorUI.Singleton.ItemsRoot;
+        Transform Selector => ItemSelectorUI.Singleton.Selector;
+
         [SerializeField]
         MarkerManager specialPreviewMarkerManager;
 
@@ -29,11 +29,11 @@ namespace ReLeaf
                 itemCount = value;
                 if (itemCount == 0)
                 {
-                    selectFrame.gameObject.SetActive(false);
+                    Selector.gameObject.SetActive(false);
                 }
                 else
                 {
-                    selectFrame.gameObject.SetActive(true);
+                    Selector.gameObject.SetActive(true);
                 }
 
                 // update index
@@ -72,7 +72,7 @@ namespace ReLeaf
 
         private void Start()
         {
-            itemUIRoot.GetComponentsInChildren(true, itemUIs);
+            ItemUIRoot.GetComponentsInChildren(true, itemUIs);
             itemOffset = itemUIs[1].transform.localPosition - itemUIs[0].transform.localPosition;
             mainCamera = Camera.main;
 
@@ -96,7 +96,7 @@ namespace ReLeaf
             item.Init(itemBase);
 
             var screen = mainCamera.WorldToScreenPoint(itemBase.transform.position);
-            if (RectTransformUtility.ScreenPointToLocalPointInRectangle(itemUIRoot, screen, mainCamera, out var local))
+            if (RectTransformUtility.ScreenPointToLocalPointInRectangle(ItemUIRoot, screen, mainCamera, out var local))
             {
                 item.transform.localPosition = local;
             }
@@ -147,7 +147,7 @@ namespace ReLeaf
 
         private void LateUpdate()
         {
-            selectFrame.transform.position = Current.transform.position;
+            Selector.transform.position = Current.transform.position;
         }
         private void Update()
         {
