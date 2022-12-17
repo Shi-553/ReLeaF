@@ -13,8 +13,6 @@ namespace ReLeaf
         public override IEnumerator SpawnAnimation(Vector3 current, Vector3 target, float SpwanInitAnimationTime)
         {
             float time = 0;
-            transform.position = current;
-            yield return null;
             animancerComponent.Play(info.GetClip(CrabAnimationType.Move, current.x > target.x));
 
             SortedList<float, float> pairs = new(){

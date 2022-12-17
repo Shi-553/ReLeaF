@@ -10,11 +10,22 @@ namespace ReLeaf
 
         protected EnemyMover enemyMover;
         protected IEnemyAttacker enemyAttacker;
+
+        bool isInit = false;
+        public virtual void Init()
+        {
+            if (!isInit)
+            {
+                isInit = true;
+                animancerComponent = GetComponentInChildren<AnimancerComponent>();
+                TryGetComponent(out enemyAttacker);
+                TryGetComponent(out enemyMover);
+            }
+
+        }
         void Start()
         {
-            animancerComponent = GetComponentInChildren<AnimancerComponent>();
-            TryGetComponent(out enemyAttacker);
-            TryGetComponent(out enemyMover);
+            Init();
         }
 
         public virtual IEnumerator SpawnAnimation(Vector3 current, Vector3 target, float SpwanInitAnimationTime)

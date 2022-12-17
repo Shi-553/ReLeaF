@@ -117,8 +117,11 @@ namespace ReLeaf
                         Quaternion.identity,
                         enemyRoot);
 
+                    enemy.transform.position = currentWorldPos;
 
-                    var co = enemy.GetComponent<EnemyAnimationBase>().SpawnAnimation(currentWorldPos, targetWorldPos, EnemyInfo.SpwanInitAnimationTime);
+                    var enemyAnimation = enemy.GetComponent<EnemyAnimationBase>();
+                    enemyAnimation.Init();
+                    var co = enemyAnimation.SpawnAnimation(currentWorldPos, targetWorldPos, EnemyInfo.SpwanInitAnimationTime);
 
                     GlobalCoroutine.Singleton.StartCoroutine(co);
                 }
