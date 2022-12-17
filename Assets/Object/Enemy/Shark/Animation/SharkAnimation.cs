@@ -1,22 +1,33 @@
-using Animancer;
+using System.Collections;
 using UnityEngine;
 
 namespace ReLeaf
 {
-    public class SharkAnimation : MonoBehaviour
+    public class SharkAnimation : EnemyAnimationBase
     {
         [SerializeField]
         SharkAnimationInfo info;
 
-        AnimancerComponent animancerComponent;
-
-        EnemyMover enemyMover;
-        IEnemyAttacker enemyAttacker;
-        void Start()
+        public override IEnumerator SpawnAnimation(Vector3 current, Vector3 target, float SpwanInitAnimationTime)
         {
-            animancerComponent = GetComponentInChildren<AnimancerComponent>();
-            TryGetComponent(out enemyAttacker);
-            TryGetComponent(out enemyMover);
+            float time = 0;
+            transform.position = current;
+            yield return null;
+            animancerComponent.Play(info.GetClip(SharkAnimationType.Move, current.x > target.x));
+            while (true)
+            {
+                var t = time / SpwanInitAnimationTime;
+
+                transform.localScale = Vector3.Lerp(Vector2.one / 2, Vector2.one, t);
+                transform.position = Vector3.Lerp(current, target, t);
+
+                time += Time.deltaTime;
+                if (time > SpwanInitAnimationTime)
+                    break;
+
+                yield return null;
+            }
+            transform.position = target;
         }
 
         void Update()

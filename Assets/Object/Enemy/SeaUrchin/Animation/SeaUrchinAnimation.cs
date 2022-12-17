@@ -1,21 +1,11 @@
-using Animancer;
 using UnityEngine;
 
 namespace ReLeaf
 {
-    public class SeaUrchinAnimation : MonoBehaviour
+    public class SeaUrchinAnimation : EnemyAnimationBase
     {
         [SerializeField]
         SeaUrhinAnimationInfo info;
-
-        AnimancerComponent animancerComponent;
-
-        IEnemyAttacker enemyAttacker;
-        void Start()
-        {
-            animancerComponent = GetComponentInChildren<AnimancerComponent>();
-            TryGetComponent(out enemyAttacker);
-        }
 
         void Update()
         {
