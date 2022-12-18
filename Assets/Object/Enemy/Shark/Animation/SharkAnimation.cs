@@ -29,24 +29,29 @@ namespace ReLeaf
             transform.position = target;
         }
 
-        void Update()
+        public override IEnumerator DeathAnimation()
         {
+            yield return animancerComponent.Play(info.GetClip(SharkAnimationType.Death, enemyMover.IsLeftNow));
+        }
+
+        protected override void ChangeTransition(AttackTransition transition)
+        {
+
             if (enemyCore.IsDeath)
             {
-                animancerComponent.Play(info.GetClip(SharkAnimationType.Death, enemyMover.IsLeftNow));
                 return;
             }
 
-            switch (enemyAttacker.Transition)
+            switch (transition)
             {
                 case AttackTransition.Aiming:
+                    animancerComponent.Play(info.GetClip(SharkAnimationType.BeforeAttack, enemyMover.IsLeftNow));
                     break;
                 case AttackTransition.Damageing:
                     animancerComponent.Play(info.GetClip(SharkAnimationType.Attack, enemyMover.IsLeftNow));
                     break;
                 case AttackTransition.None:
-                    if (enemyMover.IsMove)
-                        animancerComponent.Play(info.GetClip(SharkAnimationType.Move, enemyMover.IsLeftIfMove));
+                    animancerComponent.Play(info.GetClip(SharkAnimationType.Move, enemyMover.IsLeftIfMove));
                     break;
             }
         }

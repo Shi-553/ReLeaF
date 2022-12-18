@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using UnityEngine;
 using Utility;
 
@@ -35,19 +36,18 @@ namespace ReLeaf
             TryGetComponent(out enemyMover);
             HP = enemyDamageableInfo.HPMax;
         }
-        private void Death()
+        private IEnumerator Death()
         {
-            if (TryGetComponent(out IEnemyAttacker attacker))
+            if (TryGetComponent(out EnemyAttacker attacker))
             {
                 attacker.Stop();
             }
 
-            Instantiate(specialPowerPrefab, transform.position, Quaternion.identity, transform.parent);
             for (int x = 0; x < enemyMover.TileSize.x; x++)
             {
                 for (int y = 0; y < enemyMover.TileSize.y; y++)
                 {
-                    DungeonManager.Singleton.ToEnemyPlant(new Vector2Int(enemyMover.TilePos.x + x, enemyMover.TilePos.y + y));
+                    DungeonManager.Singleton.SowSeed(new Vector2Int(enemyMover.TilePos.x + x, enemyMover.TilePos.y + y), true);
                 }
             }
             ResetWeekMarker();
@@ -58,6 +58,12 @@ namespace ReLeaf
             {
                 collider.enabled = false;
             }
+            if (TryGetComponent<EnemyAnimationBase>(out var animationBase))
+            {
+                yield return animationBase.DeathAnimation();
+            }
+            Destroy(gameObject);
+            Instantiate(specialPowerPrefab, transform.position, Quaternion.identity, transform.parent);
         }
 
         public void SetWeekMarker()
@@ -105,7 +111,7 @@ namespace ReLeaf
             {
                 HP = 0;
                 SEManager.Singleton.Play(seEnemyDeath, transform.position);
-                Death();
+                StartCoroutine(Death());
                 return;
             }
             HP -= atk;
@@ -118,7 +124,7 @@ namespace ReLeaf
             {
                 if (collision.TryGetComponent<Plant>(out var plant) && plant.IsInvincible)
                 {
-                    Death();
+                    StartCoroutine(Death());
                 }
             }
         }

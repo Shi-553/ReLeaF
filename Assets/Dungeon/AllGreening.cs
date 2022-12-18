@@ -6,7 +6,7 @@ using Utility;
 
 namespace ReLeaf
 {
-    public class AllGreening : MonoBehaviour
+    public class AllGreening : SingletonBase<AllGreening>
     {
         [SerializeField, Rename("ŽŸ‚Ìƒ}ƒX‚ð—Î‰»‚·‚é‚Ü‚Å‚ÌŽžŠÔ")]
         float greeningTime = 0.1f;
@@ -21,6 +21,11 @@ namespace ReLeaf
 
         Coroutine co;
 
+        public override bool DontDestroyOnLoad => false;
+
+        protected override void Init(bool isFirstInit, bool callByAwake)
+        {
+        }
         void Start()
         {
             isStartGreening = false;
@@ -152,5 +157,6 @@ namespace ReLeaf
 
             co = null;
         }
+
     }
 }

@@ -34,9 +34,6 @@ namespace ReLeaf
         public bool IsGameOver => State == GameRuleState.GameOver;
 
 
-        [SerializeField]
-        AllGreening allGreening;
-
 
         [SerializeField]
         GameObject gameReadyText;
@@ -105,7 +102,7 @@ namespace ReLeaf
         }
         IEnumerator WaitGreening()
         {
-            yield return StartCoroutine(allGreening.StartGreeningWithPlayer());
+            yield return StartCoroutine(AllGreening.Singleton.StartGreeningWithPlayer());
             gameclearText.SetActive(true);
             SEManager.Singleton.Play(clearBGM);
             PlayerController.Singleton.enabled = false;

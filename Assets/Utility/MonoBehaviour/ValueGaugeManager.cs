@@ -17,7 +17,8 @@ namespace Utility
             set
             {
                 this.value = value;
-                slider.value = ValueRate;
+                if (Slider != null)
+                    Slider.value = ValueRate;
             }
         }
         public float ValueRate => value / valueMax;
@@ -25,8 +26,7 @@ namespace Utility
         [SerializeField, Rename("0をちょうど下回ったフレームにtrueを返すか")]
         bool canOverConsumeOnlyOnce = false;
 
-        [SerializeField]
-        Slider slider;
+        public Slider Slider { get; set; }
         private void Awake()
         {
             Value = valueMax;

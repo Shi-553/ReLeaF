@@ -37,15 +37,20 @@ namespace ReLeaf
             transform.position = target;
         }
 
-        void Update()
+        public override IEnumerator DeathAnimation()
         {
+            yield return animancerComponent.Play(info.GetClip(CrabAnimationType.Death));
+        }
+
+        protected override void ChangeTransition(AttackTransition transition)
+        {
+
             if (enemyCore.IsDeath)
             {
-                animancerComponent.Play(info.GetClip(CrabAnimationType.Death));
                 return;
             }
 
-            switch (enemyAttacker.Transition)
+            switch (transition)
             {
                 case AttackTransition.Aiming:
                     animancerComponent.Play(info.GetClip(CrabAnimationType.BeforeAttack));
@@ -54,8 +59,7 @@ namespace ReLeaf
                     animancerComponent.Play(info.GetClip(CrabAnimationType.Attack));
                     break;
                 case AttackTransition.None:
-                    if (enemyMover.IsMove)
-                        animancerComponent.Play(info.GetClip(CrabAnimationType.Move, enemyMover.IsLeftIfMove));
+                    animancerComponent.Play(info.GetClip(CrabAnimationType.Move, enemyMover.IsLeftIfMove));
                     break;
             }
         }

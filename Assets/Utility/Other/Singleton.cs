@@ -63,7 +63,10 @@ namespace Utility
 
 #if DEFINE_SCENE_TYPE_ENUM
             if (!InManagerScene)
-                SceneManager.MoveGameObjectToScene(transform.root.gameObject, SceneManager.GetSceneByBuildIndex(SceneType.Manager.GetBuildIndex()));
+            {
+                transform.parent = null;
+                SceneManager.MoveGameObjectToScene(transform.gameObject, SceneManager.GetSceneByBuildIndex(SceneType.Manager.GetBuildIndex()));
+            }
 #endif
         }
 

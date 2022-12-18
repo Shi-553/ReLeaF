@@ -173,8 +173,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 73019f0509bfc64478a530375787cd3a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  <Transition>k__BackingField: 0
+  attackMarkerManager: {fileID: 4430456495496529935}
   crabAttackInfo: {fileID: 11400000, guid: 6e7c3bc147154ce48bf6db032aa011a7, type: 2}
-  targetMarkerManager: {fileID: 4430456495496529935}
   seBeforeAttack: {fileID: 11400000, guid: 944dc60fe853d5e498d219726e227aa6, type: 2}
   seAttack: {fileID: 11400000, guid: a968b2b4dac08ae4c8203f7bf729d3cf, type: 2}
 --- !u!114 &-4858720575995891945

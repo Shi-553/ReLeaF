@@ -7,7 +7,7 @@ using Utility;
 namespace ReLeaf
 {
 
-    public class SeaUrchinAttacker : MonoBehaviour, IEnemyAttacker
+    public class SeaUrchinAttacker : EnemyAttacker
     {
         [Serializable]
         class SpineInitPosSelect
@@ -33,17 +33,10 @@ namespace ReLeaf
         [SerializeField]
         SpineInitPosSelect[] selects;
 
-        EnemyCore enemyDamageable;
-        EnemyMover mover;
         List<Vector2Int> buffer = new();
 
-        public AttackTransition Transition { get; set; }
-        Coroutine IEnemyAttacker.AttackCo { get; set; }
+        public override EnemyAttackInfo EnemyAttackInfo => seaUrchinAttackInfo;
 
-        public EnemyAttackInfo EnemyAttackInfo => seaUrchinAttackInfo;
-
-        [SerializeField]
-        MarkerManager targetMarkerManager;
 
         List<Spine> currentAttackers = new();
 
@@ -59,8 +52,6 @@ namespace ReLeaf
 
         void Start()
         {
-            TryGetComponent(out mover);
-            TryGetComponent(out enemyDamageable);
 
             foreach (var select in selects)
             {
@@ -68,44 +59,45 @@ namespace ReLeaf
             }
         }
 
-        void IEnemyAttacker.StopImpl()
+        public override void Stop()
         {
+            base.Stop();
+
             if (Transition == AttackTransition.Aiming)
             {
                 currentAttackers.ForEach(c => Destroy(c));
             }
-            targetMarkerManager.ResetAllMarker();
         }
 
-        public IEnumerable<Vector2Int> GetAttackRange(Vector2Int pos, Vector2Int dir, bool includeMoveabePos)
+        public override IEnumerable<Vector2Int> GetAttackRange(Vector2Int pos, Vector2Int dir, bool includeMoveabePos)
         {
-            mover.GetCheckPoss(pos, dir, buffer);
+            enemyMover.GetCheckPoss(pos, dir, buffer);
             return buffer;
         }
 
 
-        void IEnemyAttacker.OnStartAiming()
+        protected override void OnStartAiming()
         {
-            foreach (var target in GetAttackRange(mover.TilePos, mover.DirNotZero, true))
+            foreach (var target in GetAttackRange(enemyMover.TilePos, enemyMover.DirNotZero, true))
             {
-                targetMarkerManager.SetMarker<TargetMarker>(target, mover.DirNotZero.GetRotation());
+                attackMarkerManager.SetMarker<TargetMarker>(target, enemyMover.DirNotZero.GetRotation());
             }
 
             currentAttackers.Clear();
-            var poss = selects[mover.DirNotZero.ToDirection().ToInt32()].InitWorldPositions;
+            var poss = selects[enemyMover.DirNotZero.ToDirection().ToInt32()].InitWorldPositions;
             foreach (var pos in poss)
             {
                 var spine = Instantiate(seaUrchinAttackInfo.SpinePrefab, pos, Quaternion.identity);
-                spine.Init(mover.DirNotZero);
+                spine.Init(enemyMover.DirNotZero);
                 currentAttackers.Add(spine);
             }
             SEManager.Singleton.Play(seBeforeAttack, transform.position);
         }
-        IEnumerator IEnemyAttacker.OnStartDamageing()
+        protected override IEnumerator OnStartDamageing()
         {
-            targetMarkerManager.ResetAllMarker();
+            attackMarkerManager.ResetAllMarker();
 
-            enemyDamageable.SetWeekMarker();
+            enemyCore.SetWeekMarker();
             SEManager.Singleton.Play(seAttack, transform.position);
 
             foreach (var spine in currentAttackers)
@@ -115,13 +107,13 @@ namespace ReLeaf
 
             yield return new WaitForSeconds(seaUrchinAttackInfo.AttackTime);
         }
-        void IEnemyAttacker.OnStartCoolTime()
+        protected override void OnStartCoolTime()
         {
             SEManager.Singleton.Play(seAfterAttack, transform.position);
         }
-        void IEnemyAttacker.OnEndCoolTime()
+        protected override void OnEndCoolTime()
         {
-            enemyDamageable.ResetWeekMarker();
+            enemyCore.ResetWeekMarker();
         }
     }
 }

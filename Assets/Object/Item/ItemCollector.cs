@@ -39,9 +39,16 @@ namespace ReLeaf
 
             floatItems.RemoveWhere(item =>
             {
-                if ((item.transform.position - transform.position).sqrMagnitude < collectRange * collectRange * DungeonManager.CELL_SIZE && item.Fetch())
+                if ((item.transform.position - transform.position).sqrMagnitude < collectRange * collectRange * DungeonManager.CELL_SIZE && !item.IsFetched)
                 {
-                    itemManager.AddItem(item);
+                    if (itemManager.AddItem(item))
+                    {
+                        item.Fetch();
+                    }
+                    else
+                    {
+                        item.ReStart();
+                    }
                     return true;
                 }
 

@@ -85,6 +85,10 @@ namespace ReLeaf
             TryGetComponent(out mover);
             isKnockback = false;
         }
+        private void Start()
+        {
+            energyGauge.Slider = PlayerStatusUI.Singleton.EnelgySlider;
+        }
 
 
         void Update()
