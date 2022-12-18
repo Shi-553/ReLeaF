@@ -144,6 +144,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   enabledLake: {fileID: 2270141761399917225}
   disabledLake: {fileID: 2636451088652698671}
+  enemyRoot: {fileID: 0}
 --- !u!1 &8367800265185384045
 GameObject:
   m_ObjectHideFlags: 0

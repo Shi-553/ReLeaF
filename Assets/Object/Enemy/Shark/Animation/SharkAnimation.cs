@@ -51,8 +51,7 @@ namespace ReLeaf
                     animancerComponent.Play(info.GetClip(SharkAnimationType.Attack, enemyMover.IsLeftNow));
                     break;
                 case AttackTransition.None:
-                    if (enemyMover.IsMove)
-                        animancerComponent.Play(info.GetClip(SharkAnimationType.Move, enemyMover.IsLeftIfMove));
+                    animancerComponent.Play(info.GetClip(SharkAnimationType.Move, enemyMover.IsLeftIfMove));
                     break;
             }
         }

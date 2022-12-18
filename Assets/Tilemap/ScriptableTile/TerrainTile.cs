@@ -31,7 +31,7 @@ namespace ReLeaf
     public enum TileLayerType
     {
         Ground,
-        Wall
+        Wall,
     }
     public interface ILayerFixedTile
     {
@@ -136,8 +136,11 @@ namespace ReLeaf
 
                 using (Pool.Get(out createdObject))
                 {
-                    createdObject.transform.parent = tm.GetComponent<Transform>();
-                    createdObject.transform.localPosition = tm.GetComponent<Tilemap>().CellToLocal(position) + new Vector3(DungeonManager.CELL_SIZE, DungeonManager.CELL_SIZE) / 2;
+                    var parent = tilemap.transform;
+                    if (TileLayerType == TileLayerType.Ground)
+                        parent = parent.parent;
+                    createdObject.transform.parent = parent;
+                    createdObject.transform.localPosition = tilemap.CellToLocal(position) + new Vector3(DungeonManager.CELL_SIZE, DungeonManager.CELL_SIZE) / 2;
 
                     InitCreatedObject((Vector2Int)position);
 

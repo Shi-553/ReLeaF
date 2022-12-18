@@ -61,27 +61,11 @@ namespace ReLeaf
         public abstract bool IsSizeReverseXY { get; }
 
         Quaternion Rotation => Quaternion.Euler(0, 0, Angle);
-        Matrix4x4 Matrix => Matrix4x4.Rotate(Rotation);
-
         public TileLayerType TileLayerType => tile.TileLayerType;
 
 
         public override bool StartUp(Vector3Int position, ITilemap tm, GameObject go)
         {
-#if UNITY_EDITOR
-
-            if (!Application.isPlaying && go != null && tile.tilemap == null)
-            {
-                foreach (var map in tm.GetComponent<Transform>().parent.GetComponentsInChildren<Tilemap>())
-                {
-                    if (Enum.TryParse<TileLayerType>(map.name, out var mapType) && mapType == TileLayerType.Ground)
-                    {
-                        tile.tilemap = map;
-                        break;
-                    }
-                }
-            }
-#endif
             var result = tile.StartUp(position, tm, go);
             if (result)
             {
@@ -102,7 +86,7 @@ namespace ReLeaf
 
                 if (tile.createdObject != null)
                 {
-                    EditorCoroutineUtility.StartCoroutine(ConnectInEditor(tile.tilemap, position, tile.createdObject), this);
+                    EditorCoroutineUtility.StartCoroutine(ConnectInEditor(tm.GetComponent<Tilemap>(), position, tile.createdObject), this);
                 }
 
             }

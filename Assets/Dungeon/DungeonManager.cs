@@ -33,7 +33,7 @@ namespace ReLeaf
         TileArray[] terrainTileArrays;
 
         [SerializeField]
-        Tilemap groundTilemap;
+        Tilemap tilemap;
 
         [SerializeField, Pickle, Rename("緑化時のエフェクト")]
         ToLeafEffect toLeafEffect;
@@ -46,6 +46,7 @@ namespace ReLeaf
 
         [field: SerializeField, ReadOnly]
         public int MaxGreeningCount { get; private set; }
+
 
         public readonly struct TileChangedInfo
         {
@@ -97,31 +98,41 @@ namespace ReLeaf
             {
 
                 toLeafEffectPool = PoolManager.Singleton.SetPool(toLeafEffect, 1000, 1000, true);
-                foreach (var pos in groundTilemap.cellBounds.allPositionsWithin)
+                foreach (var pos in tilemap.cellBounds.allPositionsWithin)
                 {
-                    var tile = groundTilemap.GetTile<TerrainTile>(pos);
+                    var tile = tilemap.GetTile<TerrainTile>(pos);
                     if (tile != null && tile.CurrentTileObject.CanGreening(true))
                     {
                         MaxGreeningCount++;
                     }
                 }
-                groundTilemap.transform.parent.GetComponentsInChildren<Tilemap>()
+                tilemap.transform.parent.GetComponentsInChildren<Tilemap>()
                     .ForEach(tm => tm.RefreshAllTiles());
+
             }
+        }
+        private void Start()
+        {
+            if (tilemap.TryGetComponent<TilemapCollider2D>(out var tilemapCollider))
+            {
+                tilemapCollider.enabled = false;
+                tilemapCollider.enabled = true;
+            }
+
         }
         public Vector2Int WorldToTilePos(Vector3 worldPos)
         {
-            return (Vector2Int)groundTilemap.WorldToCell(worldPos);
+            return (Vector2Int)tilemap.WorldToCell(worldPos);
         }
         public Vector2 TilePosToWorld(Vector2Int tilePos)
         {
-            return (Vector2)groundTilemap.CellToWorld((Vector3Int)tilePos) + new Vector2(CELL_SIZE, CELL_SIZE) / 2;
+            return (Vector2)tilemap.CellToWorld((Vector3Int)tilePos) + new Vector2(CELL_SIZE, CELL_SIZE) / 2;
         }
         public Vector2 TilePosToWorld(Vector2 tilePos)
         {
             var floor = Vector2Int.FloorToInt(tilePos);
             var smallNumber = tilePos - floor;
-            return (Vector2)groundTilemap.CellToWorld((Vector3Int)floor) + (smallNumber * CELL_SIZE) + new Vector2(CELL_SIZE, CELL_SIZE) / 2;
+            return (Vector2)tilemap.CellToWorld((Vector3Int)floor) + (smallNumber * CELL_SIZE) + new Vector2(CELL_SIZE, CELL_SIZE) / 2;
         }
         public bool TryGetTile(Vector2Int pos, out TileObject tile) => tiles.TryGetValue(pos, out tile);
         public TileObject GetTile(Vector2Int pos) => tiles.GetValueOrDefault(pos, null);
@@ -184,7 +195,7 @@ namespace ReLeaf
             before.Release();
 
             var after = terrainTileDic[type][index];
-            groundTilemap.SetTile((Vector3Int)pos, after);
+            tilemap.SetTile((Vector3Int)pos, after);
 
             if (TryGetTile(pos, out var afterTile))
             {
