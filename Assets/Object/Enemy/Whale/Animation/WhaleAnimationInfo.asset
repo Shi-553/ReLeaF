@@ -1,0 +1,28 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8033d816cf467ce41a7554cc40698f6c, type: 3}
+  m_Name: WhaleAnimationInfo
+  m_EditorClassIdentifier: 
+  pairClips:
+  - type: 0
+    left: {fileID: 7400000, guid: b7e489d7c67004b4faa6102c28ea46f9, type: 2}
+    right: {fileID: 7400000, guid: bad1f59c1fa134f49a1472d3196ffbd2, type: 2}
+  - type: 1
+    left: {fileID: 7400000, guid: a98b62e8fc81e574bab359e9b6b4b532, type: 2}
+    right: {fileID: 7400000, guid: d96404a2b99e78a41a5b056c43e5ea54, type: 2}
+  - type: 2
+    left: {fileID: 7400000, guid: 1a540a80949fa1849922349457bb68f2, type: 2}
+    right: {fileID: 7400000, guid: 1a540a80949fa1849922349457bb68f2, type: 2}
+  - type: 3
+    left: {fileID: 7400000, guid: 5df7d6493e660e6409243fd6fc917f1f, type: 2}
+    right: {fileID: 7400000, guid: f350d9ff1c333d948b53f8174ba7011c, type: 2}
+  singleClips: []

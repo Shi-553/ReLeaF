@@ -5,7 +5,7 @@ namespace ReLeaf
 {
     [ClassSummary("Crabの攻撃パラメータ")]
     [CreateAssetMenu(menuName = "Enemy/Crab/CrabAttackInfo")]
-    public class CrabAttackInfo : EnemyAttackInfo
+    public class EnemyDontMoveAttackInfo : EnemyAttackInfo
     {
 
         [SerializeField, Rename("攻撃モーション開始から実際にダメージ発生までの時間(秒)")]

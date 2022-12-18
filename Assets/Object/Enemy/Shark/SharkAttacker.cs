@@ -102,7 +102,7 @@ namespace ReLeaf
             return returns;
         }
 
-        private void OnCollisionEnter2D(Collision2D collision)
+        private void OnCollisionStay2D(Collision2D collision)
         {
             if (Transition != AttackTransition.Damageing)
             {
@@ -116,7 +116,7 @@ namespace ReLeaf
                 }
             }
         }
-        private void OnTriggerStay2D(Collider2D collider)
+        protected override void OnTriggerStay2D(Collider2D collider)
         {
             if (collider.gameObject.CompareTag("Plant"))
             {

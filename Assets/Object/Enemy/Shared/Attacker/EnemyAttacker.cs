@@ -43,6 +43,10 @@ namespace ReLeaf
             TryGetComponent(out enemyCore);
             Init();
         }
+        protected void Start()
+        {
+            OnChangeTransition?.Invoke(AttackTransition.None);
+        }
 
         protected virtual void OnStartAiming()
         {
@@ -99,6 +103,21 @@ namespace ReLeaf
             OnChangeTransition?.Invoke(Transition);
             OnEndCoolTime();
             AttackCo = null;
+        }
+
+        protected virtual void OnTriggerStay2D(Collider2D collider)
+        {
+            if (collider.gameObject.CompareTag("Plant"))
+            {
+                if (collider.gameObject.TryGetComponent<Plant>(out var plant))
+                {
+                    if (MathExtension.DuringExists(plant.TilePos, enemyMover.TilePos, enemyMover.TilePos + enemyMover.TileSize, false))
+                    {
+                        plant.Damaged(999, DamageType.Direct);
+                        return;
+                    }
+                }
+            }
         }
     }
 }

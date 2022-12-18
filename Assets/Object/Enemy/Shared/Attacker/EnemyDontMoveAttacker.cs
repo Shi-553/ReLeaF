@@ -6,12 +6,12 @@ using Utility;
 
 namespace ReLeaf
 {
-    public class CrabAttacker : EnemyAttacker
+    public class EnemyDontMoveAttacker : EnemyAttacker
     {
-        public override EnemyAttackInfo EnemyAttackInfo => crabAttackInfo;
+        public override EnemyAttackInfo EnemyAttackInfo => dontMoveAttackInfo;
 
         [SerializeField]
-        CrabAttackInfo crabAttackInfo;
+        EnemyDontMoveAttackInfo dontMoveAttackInfo;
 
         Vector2Int[] attackPoss;
 
@@ -23,7 +23,7 @@ namespace ReLeaf
 
         public override IEnumerable<Vector2Int> GetAttackRange(Vector2Int pos, Vector2Int dir, bool includeMoveabePos)
         {
-            foreach (var local in crabAttackInfo.AttackLocalTilePos.GetLocalTilePosList(dir))
+            foreach (var local in dontMoveAttackInfo.AttackLocalTilePos.GetLocalTilePosList(dir))
             {
                 var attackPos = pos + local;
 
@@ -49,7 +49,7 @@ namespace ReLeaf
         }
         protected override IEnumerator OnStartDamageing()
         {
-            yield return new WaitForSeconds(crabAttackInfo.AttackBeforeDamageTime);
+            yield return new WaitForSeconds(dontMoveAttackInfo.AttackBeforeDamageTime);
             if (this == null)
                 yield break;
 
@@ -58,12 +58,12 @@ namespace ReLeaf
             {
                 if (player.Mover.TilePos == attackPos)
                 {
-                    player.Damaged(crabAttackInfo.ATK, (player.transform.position - transform.position).normalized * crabAttackInfo.KnockBackPower);
+                    player.Damaged(dontMoveAttackInfo.ATK, (player.transform.position - transform.position).normalized * dontMoveAttackInfo.KnockBackPower);
                 }
                 if (!DungeonManager.Singleton.TryGetTile<Plant>(attackPos, out var plant))
                     continue;
 
-                plant.Damaged(crabAttackInfo.ATK, DamageType.Direct);
+                plant.Damaged(dontMoveAttackInfo.ATK, DamageType.Direct);
 
             }
             attackMarkerManager.ResetAllMarker();
@@ -76,19 +76,5 @@ namespace ReLeaf
             enemyCore.ResetWeekMarker();
         }
 
-        private void OnTriggerStay2D(Collider2D collider)
-        {
-            if (collider.gameObject.CompareTag("Plant"))
-            {
-                if (collider.gameObject.TryGetComponent<Plant>(out var plant))
-                {
-                    if (MathExtension.DuringExists(plant.TilePos, enemyMover.TilePos, enemyMover.TilePos + enemyMover.TileSize, false))
-                    {
-                        plant.Damaged(crabAttackInfo.ATK, DamageType.Direct);
-                        return;
-                    }
-                }
-            }
-        }
     }
 }

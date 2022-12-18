@@ -50,9 +50,8 @@ namespace ReLeaf
         AudioInfo seAfterAttack;
 
 
-        void Start()
+        protected override void Init()
         {
-
             foreach (var select in selects)
             {
                 select.Init();

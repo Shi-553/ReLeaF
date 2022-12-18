@@ -25,7 +25,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2055798861108935454}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.25, y: 0, z: 0}
+  m_LocalPosition: {x: 1.5, y: 0.25, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -61,7 +61,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.8, y: 0.4}
+  m_Size: {x: 3.3, y: 0.8}
   m_EdgeRadius: 0
 --- !u!1 &3549203390911731473
 GameObject:
@@ -124,9 +124,9 @@ GameObject:
   - component: {fileID: 1197057677586801177}
   - component: {fileID: 7609214511921149064}
   - component: {fileID: 7484773499943557005}
-  - component: {fileID: 9029419914283558646}
+  - component: {fileID: 8244107265584697165}
   m_Layer: 0
-  m_Name: Crab
+  m_Name: Whale
   m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -175,9 +175,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   <Transition>k__BackingField: 0
   attackMarkerManager: {fileID: 4430456495496529935}
-  dontMoveAttackInfo: {fileID: 11400000, guid: 6e7c3bc147154ce48bf6db032aa011a7, type: 2}
-  seBeforeAttack: {fileID: 11400000, guid: 944dc60fe853d5e498d219726e227aa6, type: 2}
-  seAttack: {fileID: 11400000, guid: a968b2b4dac08ae4c8203f7bf729d3cf, type: 2}
+  dontMoveAttackInfo: {fileID: 11400000, guid: 66627e3004370fc4ba335da88d5891fe, type: 2}
+  seBeforeAttack: {fileID: 0}
+  seAttack: {fileID: 0}
 --- !u!114 &-4858720575995891945
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -202,9 +202,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 10d0b6ec76a936e459b7a7d9939f8841, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemyDamageableInfo: {fileID: 11400000, guid: 2bda01a80a88c954cb5f00420c06f53b, type: 2}
+  enemyDamageableInfo: {fileID: 11400000, guid: 7ae50f6831aed274da2870a60542ef0d, type: 2}
   <HP>k__BackingField: 0
-  specialPowerPrefab: {fileID: 7682479516954604330, guid: 48ac2c60bb094d24d9740abe1079d5d8, type: 3}
+  specialPowerPrefab: {fileID: 0}
   weakMarkerManager: {fileID: 2990406055205962186}
   seEnemyDeath: {fileID: 11400000, guid: c60d38e1592a9f2488104785a0989e07, type: 2}
   seEnemyDamaged: {fileID: 11400000, guid: e4530d4e68776254bac46815be6e9f88, type: 2}
@@ -223,7 +223,7 @@ MonoBehaviour:
   <TilePos>k__BackingField: {x: 0, y: 0}
   <OldTilePos>k__BackingField: {x: 0, y: 0}
   <MoveTarget>k__BackingField: {x: 0, y: 0}
-  enemyMoverInfo: {fileID: 11400000, guid: 30bf65f9ba83a024ab3b493498ac6584, type: 2}
+  enemyMoverInfo: {fileID: 11400000, guid: c1e38946ab869eb4b8a5aac3ff525e0a, type: 2}
 --- !u!50 &7484773499943557005
 Rigidbody2D:
   serializedVersion: 4
@@ -245,7 +245,7 @@ Rigidbody2D:
   m_SleepingMode: 0
   m_CollisionDetection: 0
   m_Constraints: 4
---- !u!114 &9029419914283558646
+--- !u!114 &8244107265584697165
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -254,10 +254,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 5442024061459843501}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: bf86aac9adabb124da8f40474d9edc1b, type: 3}
+  m_Script: {fileID: 11500000, guid: 27bfdeab40fd84449acd9977c9e6eeac, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  info: {fileID: 11400000, guid: 4a08f6b05504599438f92bc5fcdb942c, type: 2}
+  info: {fileID: 11400000, guid: 5e99f42275961f54996f3c592fbebe6c, type: 2}
 --- !u!1 &5759868525542624290
 GameObject:
   m_ObjectHideFlags: 0
@@ -268,8 +268,8 @@ GameObject:
   m_Component:
   - component: {fileID: 4259055798260498217}
   - component: {fileID: 3893573754564588802}
-  - component: {fileID: 7722148096185822145}
-  - component: {fileID: 6705507377740966996}
+  - component: {fileID: 5652854265834856156}
+  - component: {fileID: 442540375433687214}
   m_Layer: 0
   m_Name: Sprite
   m_TagString: Untagged
@@ -285,7 +285,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5759868525542624290}
   m_LocalRotation: {x: -0.258819, y: 0, z: 0, w: 0.9659259}
-  m_LocalPosition: {x: 0, y: -0.19, z: -0.054}
+  m_LocalPosition: {x: 0.15799999, y: -0.28499985, z: -0.054}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -333,7 +333,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 20
-  m_Sprite: {fileID: 1062397980, guid: 5ab77553eb8b53548b921a1994a66f6f, type: 3}
+  m_Sprite: {fileID: -1595143756, guid: 692071f9b335f1d4ba322eeda803687c, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -344,21 +344,7 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &7722148096185822145
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5759868525542624290}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0ad50f81b1d25c441943c37a89ba23f6, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _Animator: {fileID: 6705507377740966996}
-  _ActionOnDisable: 0
---- !u!95 &6705507377740966996
+--- !u!95 &5652854265834856156
 Animator:
   serializedVersion: 5
   m_ObjectHideFlags: 0
@@ -378,6 +364,20 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
+--- !u!114 &442540375433687214
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5759868525542624290}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0ad50f81b1d25c441943c37a89ba23f6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _Animator: {fileID: 5652854265834856156}
+  _ActionOnDisable: 0
 --- !u!1 &7950887957925595506
 GameObject:
   m_ObjectHideFlags: 0
@@ -450,7 +450,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8242962315939319434}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: -0.19, z: 0.001}
+  m_LocalPosition: {x: 0.158, y: -0.285, z: 0.001}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -498,7 +498,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 19
-  m_Sprite: {fileID: 1062397980, guid: 5ab77553eb8b53548b921a1994a66f6f, type: 3}
+  m_Sprite: {fileID: -1595143756, guid: 692071f9b335f1d4ba322eeda803687c, type: 3}
   m_Color: {r: 0, g: 0, b: 0, a: 0.56078434}
   m_FlipX: 0
   m_FlipY: 0

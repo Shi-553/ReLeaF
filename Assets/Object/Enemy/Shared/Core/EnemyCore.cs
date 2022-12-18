@@ -63,7 +63,9 @@ namespace ReLeaf
                 yield return animationBase.DeathAnimation();
             }
             Destroy(gameObject);
-            Instantiate(specialPowerPrefab, transform.position, Quaternion.identity, transform.parent);
+
+            if (specialPowerPrefab != null)
+                Instantiate(specialPowerPrefab, transform.position, Quaternion.identity, transform.parent);
         }
 
         public void SetWeekMarker()
