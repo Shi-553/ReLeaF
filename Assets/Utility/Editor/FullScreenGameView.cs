@@ -45,8 +45,7 @@ public static class FullscreenGameView
     private static readonly object falseObject = false; // Only box once. This is a matter of principle.
     private static EditorWindow _instance;
 
-    private static readonly bool fullscreen = true;
-
+    private static bool fullscreen = false;
     static FullscreenGameView()
     {
         EditorApplication.playModeStateChanged -= ToggleFullScreen;
@@ -58,6 +57,7 @@ public static class FullscreenGameView
     [MenuItem("Window/General/Game (Fullscreen) %#&2", priority = 2)]
     public static void Toggle()
     {
+        fullscreen = !fullscreen;
         ToggleFullScreen(PlayModeStateChange.EnteredPlayMode);
     }
 
