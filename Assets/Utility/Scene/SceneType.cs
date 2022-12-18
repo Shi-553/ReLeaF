@@ -10,6 +10,8 @@ public enum SceneType
 
     Title = 2,
 
+    Stage1 = 3,
+
 }
 public static class SceneTypeExtension
 {
@@ -20,6 +22,7 @@ public static class SceneTypeExtension
           SceneType.Title => 0,              
           SceneType.SampleScene => 1,              
           SceneType.Manager => 2,              
+          SceneType.Stage1 => 3,              
           _ => 0,                                
       };                                         
    }
@@ -30,6 +33,7 @@ public static class SceneTypeExtension
           0 => SceneType.Title,              
           1 => SceneType.SampleScene,              
           2 => SceneType.Manager,              
+          3 => SceneType.Stage1,              
           _ => 0,                                
       };                                         
    }
