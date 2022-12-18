@@ -1,6 +1,5 @@
-using System;
 using System.Collections.Generic;
-using System.Linq;
+using System.IO;
 using UnityEditor;
 using UnityEditor.SceneManagement;
 using UnityEditor.Tilemaps;
@@ -16,60 +15,27 @@ namespace ReLeaf
         [SerializeField]
         TerrainTile sandTile;
 
-        [SerializeField]
-        [HideInInspector]
-        List<Tilemap> tilemaps = new();
-        [SerializeField]
-        [HideInInspector]
-        Dictionary<TileLayerType, Tilemap> tilemapLayerDic = new();
 
-        [SerializeField]
-        [HideInInspector]
-        GridLayout beforeGridLayout;
+        int angleDegree;
 
-        bool UpdateTilemapDic(GridLayout gridLayout = null)
+        public override void Pick(GridLayout gridLayout, GameObject brushTarget, BoundsInt position, Vector3Int pickStart)
         {
-            if (gridLayout == null)
-                gridLayout = Object.FindObjectOfType<GridLayout>();
-
-            if (gridLayout == null)
-                return false;
-
-            beforeGridLayout = gridLayout;
-
-            gridLayout.GetComponentsInChildren(tilemaps);
-
-            tilemapLayerDic.Clear();
-            foreach (var map in tilemaps)
-            {
-                if (Enum.TryParse<TileLayerType>(map.name, out var mapType))
-                    tilemapLayerDic.Add(mapType, map);
-            }
-            return tilemapLayerDic.Count != 0;
+            base.Pick(gridLayout, brushTarget, position, pickStart);
+            angleDegree = 0;
+            UpdateAngle();
+            UpdateAngle();
         }
+
+
 
         [SerializeField]
         [HideInInspector]
         private List<TileChangeData> tileChangeDataList;
 
-        Tilemap GroundTileMap => tilemapLayerDic[TileLayerType.Ground];
 
-        public override void BoxErase(GridLayout gridLayout, GameObject brushTarget, BoundsInt position)
-        {
-            if (!UpdateTilemapDic(gridLayout))
-                return;
-
-            foreach (var tilemap in tilemaps)
-            {
-                base.BoxErase(gridLayout, tilemap.gameObject, position);
-            }
-        }
 
         public override void BoxFill(GridLayout gridLayout, GameObject brushTarget, BoundsInt position)
         {
-            if (!UpdateTilemapDic(gridLayout))
-                return;
-
             int count = 0;
             var listSize = position.size.x * position.size.y * position.size.z;
             if (tileChangeDataList == null || tileChangeDataList.Capacity != listSize)
@@ -100,18 +66,18 @@ namespace ReLeaf
             {
                 TileChangeData data = tileChangeDataList[i];
 
-                if (data.tile is not TerrainTile terrainTile)
+                if (data.tile is not ILayerFixedTile layerFixedTile)
                 {
                     continue;
                 }
 
-                if (terrainTile is not SandPaddingTile paddingTile)
+                if (layerFixedTile is not ISizeableTile paddingTile)
                 {
-                    SetTile(ref data, terrainTile.TileLayerType);
+                    SetTile(brushTarget, ref data, layerFixedTile.TileLayerType);
                     continue;
                 }
 
-                SetTile(ref data, terrainTile.TileLayerType);
+                SetTile(brushTarget, ref data, layerFixedTile.TileLayerType);
 
                 data.tile = sandTile;
 
@@ -125,91 +91,122 @@ namespace ReLeaf
                             continue;
                         }
                         data.position = new(pos.x + x, pos.y + y, pos.z);
-                        SetTile(ref data, sandTile.TileLayerType);
-
+                        SetTile(brushTarget, ref data, sandTile.TileLayerType);
                     }
                 }
-
             }
         }
-        void SetTile(ref TileChangeData data, TileLayerType paintLayer)
+        void SetTile(GameObject brushTarget, ref TileChangeData data, TileLayerType paintLayer)
         {
-            var obj = GroundTileMap.GetInstantiatedObject(data.position);
+            var tilemap = brushTarget.GetComponent<Tilemap>();
+
+            var obj = tilemap.GetInstantiatedObject(data.position);
             if (obj != null && obj.TryGetComponent<Sand>(out var connectedSand) && connectedSand.Target != null)
             {
                 var targetPos = connectedSand.Target.TilePos;
 
-                if (connectedSand.Target.CreatedTile is SandPaddingTile paddingTile)
+                if (connectedSand.Target.CreatedTile is ISizeableTile sizeableTile)
                 {
-                    for (int x = 0; x < paddingTile.Size.x; x++)
+                    for (int x = 0; x < sizeableTile.Size.x; x++)
                     {
-                        for (int y = 0; y < paddingTile.Size.y; y++)
+                        for (int y = 0; y < sizeableTile.Size.y; y++)
                         {
                             var pos = new Vector3Int(targetPos.x + x, targetPos.y + y);
                             if (pos.x == data.position.x && pos.y == data.position.y)
                             {
                                 continue;
                             }
-                            GroundTileMap.SetTile(pos, sandTile);
-
-
-                            foreach (var layer in tilemapLayerDic.Keys)
-                            {
-                                if (layer != sandTile.TileLayerType)
-                                    tilemapLayerDic[layer].SetTile(pos, null);
-                            }
+                            tilemap.SetTile(pos, sandTile);
                         }
                     }
                 }
             }
-
-            tilemapLayerDic[paintLayer].SetTile(data, false);
-
-            var tile = data.tile;
-            data.tile = null;
-
-            foreach (var layer in tilemapLayerDic.Keys)
-            {
-                if (layer != paintLayer)
-                    tilemapLayerDic[layer].SetTile(data, false);
-            }
-
-            data.tile = tile;
+            tilemap.SetTile(data, false);
         }
 
         void ClearOverlappedTile()
         {
-            if (!UpdateTilemapDic())
-                return;
+            var tilemap = Object.FindObjectOfType<Tilemap>();
 
-            var tilemaps = tilemapLayerDic.Values.ToArray();
-
-            Undo.RecordObjects(tilemaps, "ClearOverlappedTile");
+            Undo.RecordObject(tilemap, "ClearOverlappedTile");
 
             HashSet<Vector3Int> allTiles = new();
 
             List<Vector3Int> posList = new();
 
-            foreach (var tilemap in tilemaps)
+            foreach (var pos in tilemap.cellBounds.allPositionsWithin)
             {
-                foreach (var pos in tilemap.cellBounds.allPositionsWithin)
+                var tile = tilemap.GetTile(pos);
+                if (tile == null)
                 {
-                    if (!tilemap.HasTile(pos))
-                    {
-                        continue;
-                    }
-                    if (pos.z != 0 || !allTiles.Add(pos))
-                    {
-                        posList.Add(pos);
-                        continue;
-                    }
+                    continue;
                 }
-
-                tilemap.SetTiles(posList.ToArray(), new TileBase[posList.Count]);
+                if (pos.z != 0 || !allTiles.Add(pos))
+                {
+                    posList.Add(pos);
+                    continue;
+                }
             }
-            EditorSceneManager.MarkSceneDirty(beforeGridLayout.gameObject.scene);
+
+            tilemap.SetTiles(posList.ToArray(), new TileBase[posList.Count]);
+            tilemap.gameObject.SetActive(false);
+            tilemap.gameObject.SetActive(true);
+            EditorSceneManager.MarkSceneDirty(tilemap.gameObject.scene);
         }
 
+        public override void Rotate(RotationDirection direction, GridLayout.CellLayout layout)
+        {
+            if (direction == RotationDirection.Clockwise)
+            {
+                angleDegree += 90;
+            }
+            else
+            {
+                angleDegree -= 90;
+            }
+
+            angleDegree += 360;
+            angleDegree %= 360;
+            UpdateAngle();
+        }
+
+        void UpdateAngle()
+        {
+            foreach (BrushCell cell in cells)
+            {
+                if (cell.tile is not SandPaddingTile sandPaddingTile)
+                {
+                    if (cell.tile is not RotatedSandPaddingTile rotatedSandPadding)
+                        continue;
+                    sandPaddingTile = rotatedSandPadding.tile;
+                }
+                var sandPaddingTilePath = AssetDatabase.GetAssetPath(sandPaddingTile);
+
+                var parentPath = Path.Combine(Path.GetDirectoryName(sandPaddingTilePath), $"Rotated");
+
+                var parentFullPath = Path.GetFullPath(parentPath);
+                if (!Directory.Exists(parentFullPath))
+                {
+                    Directory.CreateDirectory(parentFullPath);
+                    AssetDatabase.Refresh();
+                }
+
+                var rotatedPath = Path.Combine(parentPath, $"{sandPaddingTile.name}_{angleDegree}.asset");
+
+                var asset = AssetDatabase.LoadAssetAtPath<RotatedSandPaddingTile>(rotatedPath);
+                if (asset != null)
+                {
+                    cell.tile = asset;
+                    continue;
+                }
+
+                var instanced = RotatedSandPaddingTile.CreateRotatedInstance(angleDegree);
+                instanced.tile = sandPaddingTile;
+                AssetDatabase.CreateAsset(instanced, rotatedPath);
+                cell.tile = instanced;
+                AssetDatabase.Refresh();
+            }
+        }
 
         [MenuItem("Assets/Create/Tile/Brush/LayerFixedBrush")]
         public static void CreateLayerFixedBrush()

@@ -1052,6 +1052,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 028e19efb0c086046a92d2aa6f466796, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  <Transition>k__BackingField: 0
+  attackMarkerManager: {fileID: 4430456495496529935}
   seaUrchinAttackInfo: {fileID: 11400000, guid: 3afd77ffd717ee04ebff3f16221a2c46, type: 2}
   selects:
   - Direction: 0
@@ -1062,7 +1064,6 @@ MonoBehaviour:
     root: {fileID: 3233460124220268424}
   - Direction: 3
     root: {fileID: 3386820391931691243}
-  targetMarkerManager: {fileID: 4430456495496529935}
   seBeforeAttack: {fileID: 11400000, guid: 4c74f3f3364b9d540a44e5bfd4093cf4, type: 2}
   seAttack: {fileID: 11400000, guid: 8f86395ea8f656743beaeabb931bd1cd, type: 2}
   seAfterAttack: {fileID: 11400000, guid: 15fd29229fd07ce4d965e29abbd6590a, type: 2}

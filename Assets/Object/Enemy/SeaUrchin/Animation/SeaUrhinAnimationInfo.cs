@@ -7,7 +7,8 @@ namespace ReLeaf
     {
         BeforeAttack,
         Attack,
-        AfterAttack
+        AfterAttack,
+        Death
     }
     [CreateAssetMenu(menuName = "Enemy/SeaUrchin/SeaUrhinAnimationInfo")]
     class SeaUrhinAnimationInfo : AnimationInfoBase<SeaUrhinAnimationType>

@@ -20,6 +20,7 @@ MonoBehaviour:
   defaultCapacity: 0
   maxSize: 10
   dontUseTileManager: 0
+  createdObject: {fileID: 0}
   tileLayerType: 1
   size: {x: 1, y: 2}
   isPreview: 1

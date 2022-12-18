@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: db8c80a7de3d37840b2d8ce76f290d8c, type: 3}
   m_Name: SeaUrchinAttackInfo
   m_EditorClassIdentifier: 
-  coolTime: 1
-  aimTime: 1
+  coolTime: 0.5
+  aimTime: 0.5
   spinePrefab: {fileID: 3646005126214096454, guid: 36cf135a1f4524341a36bbe8573bf525, type: 3}
-  attackTime: 1.5
+  attackTime: 1

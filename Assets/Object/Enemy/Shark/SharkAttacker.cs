@@ -6,27 +6,19 @@ using Utility;
 
 namespace ReLeaf
 {
-    public class SharkAttacker : MonoBehaviour, IEnemyAttacker
+    public class SharkAttacker : EnemyAttacker
     {
 
         [field: SerializeField]
         SharkAttackInfo SharkAttackInfo { get; set; }
-        public EnemyAttackInfo EnemyAttackInfo => SharkAttackInfo;
+        public override EnemyAttackInfo EnemyAttackInfo => SharkAttackInfo;
 
-        [field: SerializeField, ReadOnly]
-        public AttackTransition Transition { get; set; }
-        Coroutine IEnemyAttacker.AttackCo { get; set; }
 
-        EnemyMover enemyMover;
-        EnemyCore enemyDamageable;
 
         [SerializeField, ReadOnly]
         Vector2Int attackStartPos;
         [SerializeField, ReadOnly]
         Vector2Int attackTargetPos;
-
-        [SerializeField]
-        MarkerManager attackMarkerManager;
 
         List<Vector2Int> buffer = new();
 
@@ -37,16 +29,10 @@ namespace ReLeaf
 
 
 
-        private void Awake()
-        {
-            TryGetComponent(out enemyMover);
-            TryGetComponent(out enemyDamageable);
 
-        }
-
-        void IEnemyAttacker.OnStartAiming()
+        protected override void OnStartAiming()
         {
-            enemyDamageable.SetWeekMarker();
+            enemyCore.SetWeekMarker();
 
             attackStartPos = enemyMover.TilePos;
 
@@ -59,9 +45,9 @@ namespace ReLeaf
             }
             SEManager.Singleton.Play(seBeforeAttack, transform.position);
         }
-        IEnumerator IEnemyAttacker.OnStartDamageing()
+        protected override IEnumerator OnStartDamageing()
         {
-            enemyDamageable.ResetWeekMarker();
+            enemyCore.ResetWeekMarker();
             SEManager.Singleton.Play(seAttack, transform.position);
 
             enemyMover.UpdateTargetStraight(attackTargetPos);
@@ -78,16 +64,16 @@ namespace ReLeaf
                     yield break;
             }
         }
-        void IEnemyAttacker.OnStartCoolTime()
+        protected override void OnStartCoolTime()
         {
             attackMarkerManager.ResetAllMarker();
         }
-        public IEnumerable<Vector2Int> GetAttackRange(Vector2Int pos, Vector2Int dir, bool includeMoveabePos)
+        public override IEnumerable<Vector2Int> GetAttackRange(Vector2Int pos, Vector2Int dir, bool includeMoveabePos)
         {
             List<Vector2Int> returns = new(2);
             List<Vector2Int> buffer = new(2);
 
-            for (int i = 0; i < SharkAttackInfo.Range + 1; i++)
+            for (int i = 0; i < SharkAttackInfo.Range; i++)
             {
                 var worldTilePosBase = pos + dir * i;
                 for (int x = 0; x < enemyMover.TileSize.x; x++)
@@ -116,7 +102,7 @@ namespace ReLeaf
             return returns;
         }
 
-        private void OnCollisionEnter2D(Collision2D collision)
+        private void OnCollisionStay2D(Collision2D collision)
         {
             if (Transition != AttackTransition.Damageing)
             {
@@ -130,7 +116,7 @@ namespace ReLeaf
                 }
             }
         }
-        private void OnTriggerStay2D(Collider2D collider)
+        protected override void OnTriggerStay2D(Collider2D collider)
         {
             if (collider.gameObject.CompareTag("Plant"))
             {
