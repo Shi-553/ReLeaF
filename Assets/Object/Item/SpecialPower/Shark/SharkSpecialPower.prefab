@@ -96,7 +96,7 @@ GameObject:
   - component: {fileID: 1829997419381970576}
   - component: {fileID: 4384070283387547719}
   - component: {fileID: -2967682933614005779}
-  - component: {fileID: 8761138932211803277}
+  - component: {fileID: 3143629960310884017}
   m_Layer: 0
   m_Name: SharkSpecialPower
   m_TagString: Item
@@ -154,7 +154,7 @@ CircleCollider2D:
   m_Radius: 0.25
 --- !u!95 &-2967682933614005779
 Animator:
-  serializedVersion: 4
+  serializedVersion: 5
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -171,8 +171,8 @@ Animator:
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorControllerStateOnDisable: 0
---- !u!114 &8761138932211803277
+  m_KeepAnimatorStateOnDisable: 0
+--- !u!114 &3143629960310884017
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -181,10 +181,8 @@ MonoBehaviour:
   m_GameObject: {fileID: 7682479516954604330}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c75c0dcb6d50eb64abd727a90406ca2b, type: 3}
+  m_Script: {fileID: 11500000, guid: 0ad50f81b1d25c441943c37a89ba23f6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   _Animator: {fileID: -2967682933614005779}
   _ActionOnDisable: 0
-  _PlayAutomatically: 0
-  _Animations: []

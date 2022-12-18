@@ -111,17 +111,27 @@ namespace ReLeaf
         {
             if (GameRuleManager.Singleton.IsPrepare)
                 yield break;
-            if (ItemCount == 0 || useCo != null)
+            if (ItemCount == 0)
                 yield break;
+
+            if (useCo != null)
+            {
+                Current.Item.UseCount++;
+                yield break;
+            }
 
             var useItem = Current;
 
-            itemUIs.RemoveAt(Index);
-            itemUIs.Add(useItem);
 
             useCo = StartCoroutine(useItem.Item.Use(mover.TilePos, ItemDir));
 
             SEManager.Singleton.Play(seUseItem, transform.position);
+
+
+            yield return useCo;
+
+            itemUIs.RemoveAt(Index);
+            itemUIs.Add(useItem);
 
             useItem.Uninit();
             ItemCount--;
@@ -130,8 +140,6 @@ namespace ReLeaf
             {
                 itemUIs[i].Index = i;
             }
-
-            yield return useCo;
 
             useCo = null;
         }
