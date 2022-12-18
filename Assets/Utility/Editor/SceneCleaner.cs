@@ -1,3 +1,5 @@
+#if UNITY_EDITOR
+
 using DebugLogExtension;
 using System.Collections.Generic;
 using System.Linq;
@@ -59,3 +61,5 @@ public class SceneCleaner : EditorWindow
         }
     }
 }
+
+#endif
