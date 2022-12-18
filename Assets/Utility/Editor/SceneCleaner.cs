@@ -1,6 +1,3 @@
-#if UNITY_EDITOR
-
-using DebugLogExtension;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEditor;
@@ -21,7 +18,7 @@ public class SceneCleaner : EditorWindow
         m_Objects.Clear();
         m_Objects.AddRange(objs);
         var count = m_Objects.Count(o => o != null && o.hideFlags.HasFlag(HideFlags.HideInHierarchy));
-        $"非表示オブジェクトは{count}個".DebugLog();
+        Debug.Log("非表示オブジェクトは" + count + "個");
     }
 
     [MenuItem("Window/SceneCleaner")]
@@ -38,7 +35,6 @@ public class SceneCleaner : EditorWindow
         m_Objects.Clear();
         m_Objects.AddRange(objs);
     }
-
 
     void OnGUI()
     {
@@ -62,4 +58,3 @@ public class SceneCleaner : EditorWindow
     }
 }
 
-#endif
