@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a3ff18b651bbff34091b2475c3db1b4c, type: 3}
   m_Name: Stage 2
   m_EditorClassIdentifier: 
-  scene: 0
+  scene: 5
   activebutton: {fileID: 21300000, guid: 2b95bb0e301a33a4db6a4472897142e8, type: 3}
   disableButton: {fileID: 21300000, guid: 6c28e5e9a921989418787c579ad905f5, type: 3}
-  targetRate: 0.5
+  targetRate: 0.7
