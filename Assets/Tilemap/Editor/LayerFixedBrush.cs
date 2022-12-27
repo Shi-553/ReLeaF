@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.IO;
 using UnityEditor;
@@ -17,7 +18,7 @@ namespace ReLeaf
 
         private void OnEnable()
         {
-            GridPaintingState.gridBrush = this;
+            GridPaintingState.scenePaintTargetChanged += _ => GridPaintingState.gridBrush = this;
         }
 
         int angleDegree;
@@ -26,7 +27,6 @@ namespace ReLeaf
         {
             base.Pick(gridLayout, brushTarget, position, pickStart);
             angleDegree = 0;
-            UpdateAngle();
             UpdateAngle();
         }
 
@@ -40,6 +40,12 @@ namespace ReLeaf
 
         public override void BoxFill(GridLayout gridLayout, GameObject brushTarget, BoundsInt position)
         {
+            if (brushTarget == null)
+                return;
+
+            if (!brushTarget.TryGetComponent<Tilemap>(out var map))
+                return;
+
             int count = 0;
             var listSize = position.size.x * position.size.y * position.size.z;
             if (tileChangeDataList == null || tileChangeDataList.Capacity != listSize)
@@ -77,11 +83,11 @@ namespace ReLeaf
 
                 if (layerFixedTile is not ISizeableTile paddingTile)
                 {
-                    SetTile(brushTarget, ref data, layerFixedTile.TileLayerType);
+                    SetTile(map, ref data);
                     continue;
                 }
 
-                SetTile(brushTarget, ref data, layerFixedTile.TileLayerType);
+                SetTile(map, ref data);
 
                 data.tile = sandTile;
 
@@ -95,14 +101,38 @@ namespace ReLeaf
                             continue;
                         }
                         data.position = new(pos.x + x, pos.y + y, pos.z);
-                        SetTile(brushTarget, ref data, sandTile.TileLayerType);
+                        SetTile(map, ref data);
                     }
                 }
             }
         }
-        void SetTile(GameObject brushTarget, ref TileChangeData data, TileLayerType paintLayer)
+        public override void BoxErase(GridLayout gridLayout, GameObject brushTarget, BoundsInt position)
         {
-            var tilemap = brushTarget.GetComponent<Tilemap>();
+            if (brushTarget == null)
+                return;
+
+            if (!brushTarget.TryGetComponent<Tilemap>(out var map))
+                return;
+
+            var identity = Matrix4x4.identity;
+            var listSize = Math.Abs(position.size.x * position.size.y * position.size.z);
+            if (tileChangeDataList == null || tileChangeDataList.Capacity != listSize)
+                tileChangeDataList = new List<TileChangeData>(listSize);
+            tileChangeDataList.Clear();
+            foreach (Vector3Int location in position.allPositionsWithin)
+            {
+                tileChangeDataList.Add(new TileChangeData { position = location, tile = null, transform = identity, color = Color.white });
+            }
+
+            for (int i = 0; i < tileChangeDataList.Count; i++)
+            {
+                TileChangeData data = tileChangeDataList[i];
+                SetTile(map, ref data);
+            }
+        }
+
+        void SetTile(Tilemap tilemap, ref TileChangeData data)
+        {
 
             var obj = tilemap.GetInstantiatedObject(data.position);
             if (obj != null && obj.TryGetComponent<Sand>(out var connectedSand) && connectedSand.Target != null)

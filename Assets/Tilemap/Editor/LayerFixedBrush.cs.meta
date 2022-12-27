@@ -3,7 +3,8 @@ guid: edf18801ae5126c48b214127c3087719
 MonoImporter:
   externalObjects: {}
   serializedVersion: 2
-  defaultReferences: []
+  defaultReferences:
+  - sandTile: {fileID: 11400000, guid: 001da747823b07f45a2ab13eb1073cbe, type: 2}
   executionOrder: 0
   icon: {instanceID: 0}
   userData: 

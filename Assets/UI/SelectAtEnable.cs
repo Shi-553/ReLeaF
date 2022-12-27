@@ -18,8 +18,15 @@ namespace ReLeaf
         }
         public void Select()
         {
-            if (EventSystem.current)
+            if (EventSystem.current != null)
+            {
                 EventSystem.current.SetSelectedGameObject(Target);
+                if (EventSystem.current.currentInputModule != null)
+                {
+                    EventSystem.current.currentInputModule.enabled = false;
+                    EventSystem.current.currentInputModule.enabled = true;
+                }
+            }
         }
     }
 }

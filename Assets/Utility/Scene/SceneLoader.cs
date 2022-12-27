@@ -100,7 +100,6 @@ namespace Utility
             // audioListener.enabled = true;
 
             yield return Resources.UnloadUnusedAssets();
-
             audioListener.enabled = false;
             yield return SceneManager.LoadSceneAsync(type.GetBuildIndex(), LoadSceneMode.Additive);
 
