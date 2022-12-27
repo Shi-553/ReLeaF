@@ -1,4 +1,3 @@
-using DebugLogExtension;
 using System.Collections.Generic;
 using UnityEngine;
 using Utility;
@@ -262,15 +261,11 @@ namespace ReLeaf
                 // すると、右下＆左下の組み合わせはありえないので右下＆右上、右上＆左上、左上＆左下の三組を調べて次の方向を出す
 
                 // 反時計回りに格納 右下->右上->左上->左下
-                var a1 = routingMapBuffer.TryGetValue(new Vector2Int(currnet.x + TileSize.x - 1, currnet.y), out cornerDirs[0]);
-                var a2 = routingMapBuffer.TryGetValue(new Vector2Int(currnet.x + TileSize.x - 1, currnet.y + TileSize.y - 1), out cornerDirs[1]);
-                var a3 = routingMapBuffer.TryGetValue(new Vector2Int(currnet.x, currnet.y + TileSize.y - 1), out cornerDirs[2]);
-                var a4 = routingMapBuffer.TryGetValue(currnet, out cornerDirs[3]);
+                routingMapBuffer.TryGetValue(new Vector2Int(currnet.x + TileSize.x - 1, currnet.y), out cornerDirs[0]);
+                routingMapBuffer.TryGetValue(new Vector2Int(currnet.x + TileSize.x - 1, currnet.y + TileSize.y - 1), out cornerDirs[1]);
+                routingMapBuffer.TryGetValue(new Vector2Int(currnet.x, currnet.y + TileSize.y - 1), out cornerDirs[2]);
+                routingMapBuffer.TryGetValue(currnet, out cornerDirs[3]);
 
-                if (!a1 || !a2 || !a3 || !a4)
-                {
-                    "not found key".DebugLog();
-                }
                 // 0~2の3回
                 for (int i = 0; i < 2; i++)
                 {
@@ -284,7 +279,7 @@ namespace ReLeaf
                     }
                     if (i == 2)
                     {
-                        "!!!".DebugLog();
+                        return false;
                     }
                 }
                 for (int i = 0; i < 3; i++)

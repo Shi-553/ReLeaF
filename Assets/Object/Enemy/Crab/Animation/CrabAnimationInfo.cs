@@ -7,7 +7,8 @@ namespace ReLeaf
     {
         Move,
         BeforeAttack,
-        Attack
+        Attack,
+        Death
     }
     [CreateAssetMenu(menuName = "Enemy/Crab/CrabAnimationInfo")]
     public class CrabAnimationInfo : AnimationInfoBase<CrabAnimationType>

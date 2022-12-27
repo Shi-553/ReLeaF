@@ -15,6 +15,8 @@ namespace Utility
         /// </summary>
         public AudioSource Play(AudioInfo info)
         {
+            if (info == null)
+                return null;
             var source = GetSource(true);
             source.clip = info.clip;
             source.spatialBlend = 0;
@@ -29,6 +31,9 @@ namespace Utility
         /// </summary>
         public AudioSource Play(AudioInfo info, Vector3 pos)
         {
+
+            if (info == null)
+                return null;
             var source = GetSource(true);
             source.clip = info.clip;
             source.spatialBlend = spatialBlend;

@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using UnityEngine.Tilemaps;
 using Utility;
 
 namespace ReLeaf
@@ -11,7 +12,7 @@ namespace ReLeaf
 
         public virtual TileObject InstancedTarget => this;
 
-        public TerrainTile CreatedTile { get; set; }
+        public TileBase CreatedTile { get; set; }
 
         public TileType TileType => info.TileType;
         public virtual bool CanEnemyMove(bool isAttackMove) => isAttackMove ? CanEnemyAttack(true) : info.CanEnemyMove;

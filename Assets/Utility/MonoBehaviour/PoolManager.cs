@@ -13,17 +13,15 @@ namespace Utility
         readonly Dictionary<Type, IPool> pools = new();
         public IReadOnlyDictionary<Type, IPool> Pools => pools;
 
-        public override bool DontDestroyOnLoad => true;
+        public override bool DontDestroyOnLoad => false;
         protected override void Init(bool isFirstInit, bool callByAwake)
         {
         }
 
-        protected override void UninitAfterSceneUnload(bool isDestroy)
-        {
-            Uninit();
-        }
         public void Uninit()
         {
+            transform.GetChildren()
+                .ForEach(t => Destroy(t.gameObject));
             foreach (var pool in pools.Values)
             {
                 foreach (var p in pool)
@@ -32,8 +30,6 @@ namespace Utility
                 }
             }
             pools.Clear();
-            transform.GetChildren()
-                .ForEach(t => Destroy(t.gameObject));
         }
 
         public IPool GetPool<T>() where T : PoolableMonoBehaviour
@@ -113,15 +109,24 @@ namespace Utility
                 value.Init();
             }
         }
+        private T GetImpl<T>() where T : PoolableMonoBehaviour
+        {
+            while (true)
+            {
+                var val = ObjectPool.Get() as T;
+                if (val != null)
+                    return val;
+            }
+        }
         public T Get<T>() where T : PoolableMonoBehaviour
         {
-            var val = ObjectPool.Get() as T;
+            var val = GetImpl<T>();
             val.Init();
             return val;
         }
         public PoolInitializeHelper<T> Get<T>(out T val) where T : PoolableMonoBehaviour
         {
-            return new PoolInitializeHelper<T>(val = ObjectPool.Get() as T);
+            return new PoolInitializeHelper<T>(val = GetImpl<T>());
         }
         public void Release<T>(T element) where T : PoolableMonoBehaviour
         {
@@ -132,7 +137,7 @@ namespace Utility
             }
         }
 
-        public void Clear() => ObjectPool.Clear();
+        public void Clear() => ObjectPool?.Clear();
 
         public void Resize(int size)
         {
@@ -140,7 +145,7 @@ namespace Utility
 
             for (int i = 0; i < size; i++)
             {
-                poolables[i] = ObjectPool.Get();
+                poolables[i] = GetImpl<PoolableMonoBehaviour>();
             }
             for (int i = 0; i < size; i++)
             {
@@ -196,10 +201,9 @@ namespace Utility
     {
         readonly IPool[] pools;
 
-        // thisでキャプチャ
         readonly Transform parent;
 
-        ObjectPool<PoolableMonoBehaviour> IPool.ObjectPool => pools[0].ObjectPool;
+        ObjectPool<PoolableMonoBehaviour> IPool.ObjectPool => pools[0]?.ObjectPool;
 
         public PoolArray(Transform parent, int size)
         {

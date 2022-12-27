@@ -7,9 +7,12 @@ namespace Utility
     public class EditTilePosAttribute : PropertyAttribute
     {
         readonly public Direction direction;
-        public EditTilePosAttribute(Direction dir)
+        readonly public bool canSelectMyselfTilePos;
+
+        public EditTilePosAttribute(Direction dir, bool canSelectMyselfTilePos = false)
         {
             direction = dir;
+            this.canSelectMyselfTilePos = canSelectMyselfTilePos;
         }
     }
 }

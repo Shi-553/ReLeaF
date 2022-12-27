@@ -1,5 +1,6 @@
 using DebugLogExtension;
 using Pickle;
+using System;
 #if UNITY_EDITOR
 using UnityEditor;
 #endif
@@ -30,18 +31,21 @@ namespace ReLeaf
     public enum TileLayerType
     {
         Ground,
-        Wall
+        Wall,
     }
-    public class TerrainTile : TileBase
+    public interface ILayerFixedTile
+    {
+        public TileLayerType TileLayerType { get; }
+    }
+    public class TerrainTile : TileBase, ILayerFixedTile
     {
 
         [SerializeField]
-        protected Sprite m_Sprite;
+        public Sprite m_Sprite;
 
         [SerializeField]
         protected Color m_Color = Color.white;
 
-        protected Matrix4x4 m_Transform = Matrix4x4.identity;
 
 
         [SerializeField]
@@ -58,7 +62,8 @@ namespace ReLeaf
 
         virtual protected void UpdateTileObject(Vector3Int position, ITilemap tilemap) { }
 
-        protected Tilemap tilemap;
+        [NonSerialized]
+        public Tilemap tilemap;
 
         protected PoolArray Pools;
 
@@ -71,7 +76,8 @@ namespace ReLeaf
         public int maxSize = 100;
         public bool dontUseTileManager = false;
 
-        protected TileObject createdObject;
+        [NonSerialized]
+        public TileObject createdObject;
 
         [SerializeField, Rename("“h‚éƒŒƒCƒ„[–¼")]
         TileLayerType tileLayerType;
@@ -79,7 +85,7 @@ namespace ReLeaf
         public TileLayerType TileLayerType => tileLayerType;
 
         bool isInit = false;
-        void OnEnable()
+        public void OnEnable()
         {
             tilemap = null;
             isInit = false;
@@ -98,6 +104,8 @@ namespace ReLeaf
 
         public override bool StartUp(Vector3Int position, ITilemap tm, GameObject go)
         {
+            createdObject = null;
+
             if (Application.isPlaying)
             {
                 if (go != null)
@@ -114,7 +122,7 @@ namespace ReLeaf
                     pool = Pool ?? Pools.SetPool(CurrentTileObject.TileType.ToInt32(), CurrentTileObject, defaultCapacity, maxSize);
                 }
 
-                if (!dontUseTileManager && DungeonManager.Singleton.tiles.ContainsKey((Vector2Int)position))
+                if (!dontUseTileManager && DungeonManager.Singleton.TryGetTile((Vector2Int)position, out createdObject))
                 {
                     return false;
                 }
@@ -128,8 +136,11 @@ namespace ReLeaf
 
                 using (Pool.Get(out createdObject))
                 {
-                    createdObject.transform.parent = tm.GetComponent<Transform>();
-                    createdObject.transform.localPosition = tm.GetComponent<Tilemap>().CellToLocal(position) + new Vector3(DungeonManager.CELL_SIZE, DungeonManager.CELL_SIZE) / 2;
+                    var parent = tilemap.transform;
+                    if (TileLayerType == TileLayerType.Ground)
+                        parent = parent.parent;
+                    createdObject.transform.parent = parent;
+                    createdObject.transform.localPosition = tilemap.CellToLocal(position) + new Vector3(DungeonManager.CELL_SIZE, DungeonManager.CELL_SIZE) / 2;
 
                     InitCreatedObject((Vector2Int)position);
 
@@ -162,8 +173,8 @@ namespace ReLeaf
 
             if (createdObject != createdObject.InstancedTarget)
             {
+                createdObject.InstancedTarget.Init();
                 createdObject.InstancedTarget.CreatedTile = this;
-                createdObject.InstancedTarget.Pool = createdObject.Pool;
                 createdObject.InstancedTarget.IsInvincible = createdObject.IsInvincible;
                 createdObject.InstancedTarget.TilePos = createdObject.TilePos;
             }
@@ -173,7 +184,6 @@ namespace ReLeaf
         {
             tileData.sprite = null;
             tileData.color = m_Color;
-            tileData.transform = m_Transform;
             tileData.flags = m_Flags;
             tileData.colliderType = m_ColliderType;
 #if UNITY_EDITOR

@@ -8,12 +8,12 @@ namespace ReLeaf
     public class ItemManager : MonoBehaviour
     {
         List<ItemUI> itemUIs = new List<ItemUI>();
+
+        RectTransform ItemUIRoot => ItemSelectorUI.Singleton.ItemsRoot;
+        Transform Selector => ItemSelectorUI.Singleton.Selector;
+
         [SerializeField]
-        RectTransform itemUIRoot;
-        [SerializeField]
-        Transform selectFrame;
-        [SerializeField]
-        MarkerManager seedMarkerManager;
+        MarkerManager specialPreviewMarkerManager;
 
         [SerializeField]
         AudioInfo seGetItem;
@@ -29,11 +29,11 @@ namespace ReLeaf
                 itemCount = value;
                 if (itemCount == 0)
                 {
-                    selectFrame.gameObject.SetActive(false);
+                    Selector.gameObject.SetActive(false);
                 }
                 else
                 {
-                    selectFrame.gameObject.SetActive(true);
+                    Selector.gameObject.SetActive(true);
                 }
 
                 // update index
@@ -62,7 +62,7 @@ namespace ReLeaf
         public bool WasChangedItemDirThisFrame => ItemDir != OldItemDir;
 
         PlayerMover mover;
-        ItemBase previewd;
+        ItemUI previewd;
 
         Vector3 itemOffset;
 
@@ -72,7 +72,7 @@ namespace ReLeaf
 
         private void Start()
         {
-            itemUIRoot.GetComponentsInChildren(true, itemUIs);
+            ItemUIRoot.GetComponentsInChildren(true, itemUIs);
             itemOffset = itemUIs[1].transform.localPosition - itemUIs[0].transform.localPosition;
             mainCamera = Camera.main;
 
@@ -86,17 +86,17 @@ namespace ReLeaf
             }
         }
 
-        public void AddItem(ItemBase itemBase)
+        public bool AddItem(ItemBase itemBase)
         {
             if (itemUIs.Count <= ItemCount)
             {
-                return;
+                return false;
             }
             var item = itemUIs[ItemCount];
             item.Init(itemBase);
 
             var screen = mainCamera.WorldToScreenPoint(itemBase.transform.position);
-            if (RectTransformUtility.ScreenPointToLocalPointInRectangle(itemUIRoot, screen, mainCamera, out var local))
+            if (RectTransformUtility.ScreenPointToLocalPointInRectangle(ItemUIRoot, screen, mainCamera, out var local))
             {
                 item.transform.localPosition = local;
             }
@@ -104,23 +104,34 @@ namespace ReLeaf
 
             SEManager.Singleton.Play(seGetItem, transform.position);
             ItemCount++;
+            return true;
         }
 
         public IEnumerator UseItem()
         {
             if (GameRuleManager.Singleton.IsPrepare)
                 yield break;
-            if (ItemCount == 0 || useCo != null)
+            if (ItemCount == 0)
                 yield break;
+
+            if (useCo != null)
+            {
+                Current.Item.UseCount++;
+                yield break;
+            }
 
             var useItem = Current;
 
-            itemUIs.RemoveAt(Index);
-            itemUIs.Add(useItem);
 
             useCo = StartCoroutine(useItem.Item.Use(mover.TilePos, ItemDir));
 
             SEManager.Singleton.Play(seUseItem, transform.position);
+
+
+            yield return useCo;
+
+            itemUIs.RemoveAt(Index);
+            itemUIs.Add(useItem);
 
             useItem.Uninit();
             ItemCount--;
@@ -129,8 +140,6 @@ namespace ReLeaf
             {
                 itemUIs[i].Index = i;
             }
-
-            yield return useCo;
 
             useCo = null;
         }
@@ -144,28 +153,27 @@ namespace ReLeaf
             Index++;
         }
 
-        private void LateUpdate()
-        {
-            selectFrame.transform.position = Current.transform.position;
-        }
         private void Update()
         {
+            Selector.transform.position = Current.transform.position;
 
-            if (mover.WasChangedTilePosThisFrame || WasChangedItemDirThisFrame || previewd != Current.Item)
+            if (mover.WasChangedTilePosThisFrame || WasChangedItemDirThisFrame || previewd != Current)
             {
-                seedMarkerManager.ResetAllMarker();
+                specialPreviewMarkerManager.ResetAllMarker();
+                previewd = Current;
                 if (ItemCount == 0)
                 {
                     return;
                 }
-                previewd = Current.Item;
-                previewd.PreviewRange(mover.TilePos, ItemDir, previews);
+
+                previewd.Item.PreviewRange(mover.TilePos, ItemDir, previews);
 
                 foreach (var p in previews)
                 {
-                    seedMarkerManager.SetMarker<SeedMarker>(p);
+                    specialPreviewMarkerManager.SetMarker<SpecialPreviewMarker>(p);
                 }
             }
+
             OldItemDir = ItemDir;
         }
     }

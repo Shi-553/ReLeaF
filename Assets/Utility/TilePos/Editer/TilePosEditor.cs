@@ -23,7 +23,7 @@ namespace Utility
         }
 
         float cellSize = 50;
-        Vector2Int centerTileSize = Vector2Int.one;
+        static Vector2Int centerTileSize = Vector2Int.one;
 
         Vector2Int lineCount;
         Vector2Int centerTilePos;
@@ -32,7 +32,7 @@ namespace Utility
         Vector2 gridOffsetLimited;
 
         Vector2 dragOffset;
-        Direction centerDirection;
+        EditTilePosAttribute att;
 
         int boldGridDistance = 5;
 
@@ -63,7 +63,7 @@ namespace Utility
 
 
 
-        static public void Open(SerializedProperty tiles, Direction centerDirection)
+        static public void Open(SerializedProperty tiles, EditTilePosAttribute attribute)
         {
             var window = GetWindow<TilePosEditor>();
             window.titleContent = new GUIContent("TilePosEditor");
@@ -72,7 +72,7 @@ namespace Utility
                 Debug.LogWarning("Array Not Found.");
                 return;
             }
-            window.centerDirection = centerDirection;
+            window.att = attribute;
         }
 
 
@@ -103,7 +103,7 @@ namespace Utility
                 {
                     if (TrySetTiles(serializedProperty))
                     {
-                        centerDirection = att.direction;
+                        this.att = att;
                         Repaint();
                         return;
                     }
@@ -156,7 +156,7 @@ namespace Utility
         void DrawCenter()
         {
 
-            Handles.color = Color.white;
+            Handles.color = Color.yellow;
 
             for (int x = 0; x < centerTileSize.x; x++)
             {
@@ -165,16 +165,16 @@ namespace Utility
                     var centerPos = new Vector2Int(x, y);
                     var pos = TilePosToScreenPos(centerPos);
 
-                    if (centerDirection == Direction.NONE)
+                    if (att.direction == Direction.NONE)
                     {
-                        Handles.DrawSolidDisc(pos, Vector3.forward, cellSize / 2);
+                        Handles.DrawSolidDisc(pos, Vector3.forward, cellSize / 3);
                         continue;
                     }
 
                     var cellHeight = new Vector2(0, cellSize / 2);
                     var cellWidth = new Vector2(cellSize / 2, 0);
 
-                    if (centerDirection == Direction.UP || centerDirection == Direction.DOWN)
+                    if (att.direction == Direction.UP || att.direction == Direction.DOWN)
                     {
                         Handles.DrawLine(pos + cellHeight, pos - cellHeight);
                     }
@@ -183,7 +183,7 @@ namespace Utility
                         Handles.DrawLine(pos + cellWidth, pos - cellWidth);
                     }
 
-                    switch (centerDirection)
+                    switch (att.direction)
                     {
                         case Direction.UP:
                             Handles.DrawLine(pos - cellHeight, pos + cellWidth / 2);
@@ -208,6 +208,7 @@ namespace Utility
         void DrawTiles()
         {
 
+            Handles.color = Color.white;
             for (int i = 0; i < tiles.arraySize; i++)
             {
                 var tilePos = tiles.GetArrayElementAtIndex(i).vector2IntValue;
@@ -248,7 +249,7 @@ namespace Utility
 
         bool TryAddTilePos(Vector2Int target)
         {
-            if (MathExtension.DuringExists(target, Vector2Int.zero, centerTileSize))
+            if (!att.canSelectMyselfTilePos && MathExtension.DuringExists(target, Vector2Int.zero, centerTileSize))
                 return false;
 
             if (!TryGetTilePosIndex(target, out var _))
@@ -331,7 +332,6 @@ namespace Utility
 
             UpdateCenter();
 
-            DrawCenter();
 
             if (tiles == null)
             {
@@ -377,6 +377,9 @@ namespace Utility
             {
                 // null判定できない・・・
             }
+
+            DrawCenter();
+
             DrawGrid();
 
 

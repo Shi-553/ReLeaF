@@ -6,7 +6,7 @@ using Utility;
 
 namespace ReLeaf
 {
-    public class PlayerController : MonoBehaviour, ReLeafInputAction.IPlayerActions
+    public class PlayerController : SingletonBase<PlayerController>, ReLeafInputAction.IPlayerActions
     {
         PlayerInput playerInput;
         ReLeafInputAction reLeafInputAction;
@@ -19,19 +19,24 @@ namespace ReLeaf
         CinemachineVirtualCamera cinemachine;
         CinemachineFramingTransposer cinemachineFramingTransposer;
 
-        private void Awake()
+        public override bool DontDestroyOnLoad => false;
+
+        protected override void Init(bool isFirstInit, bool callByAwake)
         {
-            TryGetComponent(out mover);
+            if (callByAwake)
+            {
+                TryGetComponent(out mover);
 
-            reLeafInputAction = new ReLeafInputAction();
-            TryGetComponent(out playerInput);
-            playerInput.defaultActionMap = reLeafInputAction.Player.Get().name;
-            playerInput.actions = reLeafInputAction.asset;
-            reLeafInputAction.Player.SetCallbacks(this);
+                reLeafInputAction = new ReLeafInputAction();
+                TryGetComponent(out playerInput);
+                playerInput.defaultActionMap = reLeafInputAction.Player.Get().name;
+                playerInput.actions = reLeafInputAction.asset;
+                reLeafInputAction.Player.SetCallbacks(this);
 
-            itemManager = GetComponentInChildren<ItemManager>();
+                itemManager = GetComponentInChildren<ItemManager>();
 
-            cinemachineFramingTransposer = cinemachine.GetCinemachineComponent<CinemachineFramingTransposer>();
+                cinemachineFramingTransposer = cinemachine.GetCinemachineComponent<CinemachineFramingTransposer>();
+            }
         }
 
         void OnDisable()
@@ -119,5 +124,6 @@ namespace ReLeaf
             }
 
         }
+
     }
 }

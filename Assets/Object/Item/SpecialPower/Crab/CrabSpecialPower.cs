@@ -1,4 +1,5 @@
 using System.Collections;
+using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
@@ -10,7 +11,12 @@ namespace ReLeaf
         CrabSpecialPowerInfo sowSeedSpecialPowerInfo;
         protected override SowSeedSpecialPowerInfo SowSeedSpecialPowerInfo => sowSeedSpecialPowerInfo;
 
-        public override IEnumerator Use(Vector2Int tilePos, Vector2Int dir)
+        public override void PreviewRange(Vector2Int tilePos, Vector2Int dir, List<Vector2Int> returns)
+        {
+            if (!IsUsing)
+                base.PreviewRange(tilePos, dir, returns);
+        }
+        protected override IEnumerator UseImpl(Vector2Int tilePos, Vector2Int dir)
         {
             var localRanges = SowSeedSpecialPowerInfo.SeedLocalTilePos.GetLocalTilePosList(dir).ToList();
 

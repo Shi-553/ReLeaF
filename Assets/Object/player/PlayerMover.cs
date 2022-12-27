@@ -7,7 +7,7 @@ using Utility;
 namespace ReLeaf
 {
     [ClassSummary("プレイヤーの移動")]
-    public partial class PlayerMover : MonoBehaviour
+    public partial class PlayerMover : SingletonBase<PlayerMover>
     {
 
         [SerializeField, Rename("プレイヤーの移動スピード(nマス/秒)")]
@@ -64,8 +64,31 @@ namespace ReLeaf
         [SerializeField]
         MoveSE seGrassMove;
 
+        public Vector2 SpecialDir { get; private set; }
+        public float SpecialSpeed { get; private set; }
+        public bool IsSpecialMoving { get; private set; }
+        public void StartSpecialMove(Vector2 dir, float speed)
+        {
+            IsSpecialMoving = true;
+            SpecialDir = dir;
+            SpecialSpeed = speed;
+        }
+        public void FinishSpecialMove()
+        {
+            IsSpecialMoving = false;
+        }
 
-        public Vector2 Dir { get; set; }
+        Vector2 dir;
+        public Vector2 Dir
+        {
+            get => IsSpecialMoving ? SpecialDir : dir;
+            set => dir = value;
+        }
+        public float Speed
+        {
+            get => IsSpecialMoving ? SpecialSpeed : moveSpeed;
+            set => moveSpeed = value;
+        }
         public bool IsMove => Dir != Vector2.zero;
         public bool IsLeft { get; private set; }
         public bool IsDash { get; set; }
@@ -80,10 +103,19 @@ namespace ReLeaf
 
         bool CanSowSeed => !GameRuleManager.Singleton.IsPrepare && !isKnockback && IsMove;
 
-        private void Awake()
+        public override bool DontDestroyOnLoad => false;
+
+        protected override void Init(bool isFirstInit, bool callByAwake)
         {
-            TryGetComponent(out mover);
-            isKnockback = false;
+            if (isFirstInit)
+            {
+                TryGetComponent(out mover);
+                isKnockback = false;
+            }
+        }
+        private void Start()
+        {
+            energyGauge.Slider = PlayerStatusUI.Singleton.EnelgySlider;
         }
 
 
@@ -98,30 +130,33 @@ namespace ReLeaf
             if (Dir.x != 0)
                 IsLeft = Dir.x < 0;
 
-            var speed = moveSpeed;
+            var speed = Speed;
 
             var currentTile = DungeonManager.Singleton.GetTile(TilePos);
 
             var isFullGrowthPlant = (currentTile is Plant plantTile && plantTile.IsFullGrowth) ||
                                     (currentTile is not Plant && currentTile.IsAlreadyGreening);
-            if (isFullGrowthPlant)
-            {
-                energyGauge.RecoveryValue(energyAutoRecoveryPoint * Time.deltaTime);
-            }
 
-            if (IsDash)
+            if (!IsSpecialMoving)
             {
-                // 緑化マスではエネルギー消費無し
-                if (isFullGrowthPlant || energyGauge.ConsumeValue(dashConsumeEnergy * Time.deltaTime))
+                if (isFullGrowthPlant)
                 {
-                    speed *= dashSpeedMagnification;
+                    energyGauge.RecoveryValue(energyAutoRecoveryPoint * Time.deltaTime);
                 }
-                else
+
+                if (IsDash)
                 {
-                    IsDash = false;
+                    // 緑化マスではエネルギー消費無し
+                    if (isFullGrowthPlant || energyGauge.ConsumeValue(dashConsumeEnergy * Time.deltaTime))
+                    {
+                        speed *= dashSpeedMagnification;
+                    }
+                    else
+                    {
+                        IsDash = false;
+                    }
                 }
             }
-
 
             mover.MoveDelta(DungeonManager.CELL_SIZE * speed * Dir);
 
@@ -203,5 +238,6 @@ namespace ReLeaf
                 waitGreeningTiles.Remove(tileObject.TilePos);
             }
         }
+
     }
 }

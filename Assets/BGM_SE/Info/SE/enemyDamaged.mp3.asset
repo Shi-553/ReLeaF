@@ -13,4 +13,4 @@ MonoBehaviour:
   m_Name: enemyDamaged.mp3
   m_EditorClassIdentifier: 
   clip: {fileID: 8300000, guid: ca2b33480241aa94897b2636fc532f7d, type: 3}
-  volume: 1
+  volume: 0.5

@@ -1,25 +1,27 @@
-using Animancer;
+using System.Collections;
 using UnityEngine;
 
 namespace ReLeaf
 {
-    public class SeaUrchinAnimation : MonoBehaviour
+    public class SeaUrchinAnimation : EnemyAnimationBase
     {
         [SerializeField]
         SeaUrhinAnimationInfo info;
 
-        AnimancerComponent animancerComponent;
 
-        IEnemyAttacker enemyAttacker;
-        void Start()
+        public override IEnumerator DeathAnimation()
         {
-            animancerComponent = GetComponentInChildren<AnimancerComponent>();
-            TryGetComponent(out enemyAttacker);
+            yield return animancerComponent.Play(info.GetClip(SeaUrhinAnimationType.Death));
         }
 
-        void Update()
+        protected override void ChangeTransition(AttackTransition transition)
         {
-            switch (enemyAttacker.Transition)
+
+            if (enemyCore.IsDeath)
+            {
+                return;
+            }
+            switch (transition)
             {
                 case AttackTransition.Aiming:
                     animancerComponent.Play(info.GetClip(SeaUrhinAnimationType.BeforeAttack));

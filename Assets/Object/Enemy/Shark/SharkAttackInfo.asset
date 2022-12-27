@@ -12,8 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 708c65be91c23b64a8bfe5bd46517c4d, type: 3}
   m_Name: SharkAttackInfo
   m_EditorClassIdentifier: 
-  coolTime: 1
-  aimTime: 1.5
+  coolTime: 1.5
+  aimTime: 1.7
   atk: 3
   speed: 20
   range: 5

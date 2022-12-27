@@ -199,9 +199,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d3ef9ce04b6979640804763c78b3895e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  itemUIRoot: {fileID: 0}
-  selectFrame: {fileID: 0}
-  seedMarkerManager: {fileID: 8685453909214998006}
+  specialPreviewMarkerManager: {fileID: 8685453909214998006}
   seGetItem: {fileID: 11400000, guid: 55ca8ca85fa3fd540894d4ec9dc3b1d1, type: 2}
   seUseItem: {fileID: 11400000, guid: 3f4e968a5953efd4896a676770419698, type: 2}
 --- !u!50 &354325909066514047
@@ -286,7 +284,6 @@ MonoBehaviour:
   valueMax: 10
   value: 0
   canOverConsumeOnlyOnce: 0
-  slider: {fileID: 0}
 --- !u!1 &7388926275364266459
 GameObject:
   m_ObjectHideFlags: 0
@@ -432,7 +429,6 @@ MonoBehaviour:
   valueMax: 10
   value: 0
   canOverConsumeOnlyOnce: 1
-  slider: {fileID: 0}
 --- !u!1 &8467192124429001911
 GameObject:
   m_ObjectHideFlags: 0
@@ -506,9 +502,9 @@ MonoBehaviour:
   moveSpeed: 5
   dashSpeedMagnification: 2
   knockBackDampingRate: 0.9
-  dashConsumeEnergy: 5
-  energyRecoveryPoint: 0.1
-  energyAutoRecoveryPoint: 0
+  dashConsumeEnergy: 4
+  energyRecoveryPoint: 0.11
+  energyAutoRecoveryPoint: 0.05
   energyGauge: {fileID: 5839813641606943567}
   seSandMove:
     walk:

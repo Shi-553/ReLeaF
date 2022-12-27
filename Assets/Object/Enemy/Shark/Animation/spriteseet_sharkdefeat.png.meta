@@ -1,0 +1,607 @@
+fileFormatVersion: 2
+guid: f8641bcd83e12ce44a8bc832beea318b
+TextureImporter:
+  internalIDToNameTable: []
+  externalObjects: {}
+  serializedVersion: 12
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 1
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMasterTextureLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 1
+    aniso: 1
+    mipBias: 0
+    wrapU: 0
+    wrapV: 0
+    wrapW: 0
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 300
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 0
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 3
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Server
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: spriteseet_sharkdefeat_0
+      rect:
+        serializedVersion: 2
+        x: 55
+        y: 289
+        width: 360
+        height: 159
+      alignment: 9
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e9822a5575ae2c241b5c3bc0d663b4ab
+      internalID: 1989933905
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: spriteseet_sharkdefeat_1
+      rect:
+        serializedVersion: 2
+        x: 587
+        y: 292
+        width: 354
+        height: 196
+      alignment: 9
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 8ccf1dcbd29e2db4d817be8a3586a299
+      internalID: -346212209
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: spriteseet_sharkdefeat_2
+      rect:
+        serializedVersion: 2
+        x: 1086
+        y: 292
+        width: 355
+        height: 198
+      alignment: 9
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f62b617a827b20c4eb5e94678b7c0afc
+      internalID: -1103685947
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: spriteseet_sharkdefeat_3
+      rect:
+        serializedVersion: 2
+        x: 1586
+        y: 292
+        width: 354
+        height: 202
+      alignment: 9
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 66913004e1541ef49acd4b4787dfc3ed
+      internalID: -1690822147
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: spriteseet_sharkdefeat_4
+      rect:
+        serializedVersion: 2
+        x: 2085
+        y: 292
+        width: 356
+        height: 198
+      alignment: 9
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ca6073a4f6e3b634ebe19e33977d0790
+      internalID: 1720849420
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: spriteseet_sharkdefeat_5
+      rect:
+        serializedVersion: 2
+        x: 2585
+        y: 292
+        width: 357
+        height: 199
+      alignment: 9
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 816b6af1f7341fc43b9d72813d34a29b
+      internalID: -732681125
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: spriteseet_sharkdefeat_6
+      rect:
+        serializedVersion: 2
+        x: 3085
+        y: 292
+        width: 356
+        height: 202
+      alignment: 9
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 8010708d92c98694380f2cbf293cb31f
+      internalID: 442174052
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: spriteseet_sharkdefeat_7
+      rect:
+        serializedVersion: 2
+        x: 3587
+        y: 292
+        width: 354
+        height: 199
+      alignment: 9
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1328943e1807278488222c7d021815e1
+      internalID: -1147762732
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: spriteseet_sharkdefeat_8
+      rect:
+        serializedVersion: 2
+        x: 4086
+        y: 292
+        width: 355
+        height: 198
+      alignment: 9
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 7a476a6be6077ca42b70c131c1326220
+      internalID: 298759643
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: spriteseet_sharkdefeat_9
+      rect:
+        serializedVersion: 2
+        x: 4586
+        y: 292
+        width: 354
+        height: 196
+      alignment: 9
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 4633dd7eb1357394eba62dbeffb4a455
+      internalID: -674474586
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: spriteseet_sharkdefeat_10
+      rect:
+        serializedVersion: 2
+        x: 5085
+        y: 292
+        width: 357
+        height: 199
+      alignment: 9
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 168bf73f0e15ff44f82cb8f79d692b40
+      internalID: -823219401
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: spriteseet_sharkdefeat_11
+      rect:
+        serializedVersion: 2
+        x: 86
+        y: 39
+        width: 358
+        height: 159
+      alignment: 9
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e4e23906279b69c40b6a2f27ca2380cf
+      internalID: 1443164568
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: spriteseet_sharkdefeat_12
+      rect:
+        serializedVersion: 2
+        x: 560
+        y: 42
+        width: 354
+        height: 196
+      alignment: 9
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 5136d749d5963e44792d2ff2d6d9f5e6
+      internalID: -999913566
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: spriteseet_sharkdefeat_13
+      rect:
+        serializedVersion: 2
+        x: 1059
+        y: 42
+        width: 355
+        height: 198
+      alignment: 9
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d13e0d3b38f0db34ea365d8007f6c5c7
+      internalID: 1042545820
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: spriteseet_sharkdefeat_14
+      rect:
+        serializedVersion: 2
+        x: 1559
+        y: 42
+        width: 354
+        height: 202
+      alignment: 9
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1456e62ac76b75f4cbb519e33141b56b
+      internalID: -1792253602
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: spriteseet_sharkdefeat_15
+      rect:
+        serializedVersion: 2
+        x: 2059
+        y: 42
+        width: 356
+        height: 198
+      alignment: 9
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 00b548756e8960e448e8335c8eba8fa3
+      internalID: -680880694
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: spriteseet_sharkdefeat_16
+      rect:
+        serializedVersion: 2
+        x: 2558
+        y: 42
+        width: 357
+        height: 199
+      alignment: 9
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e9b0779469e8942499cefd7e438220f7
+      internalID: -988526463
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: spriteseet_sharkdefeat_17
+      rect:
+        serializedVersion: 2
+        x: 3059
+        y: 42
+        width: 356
+        height: 202
+      alignment: 9
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c8b5aa1d15bef3945ae3acddfefbe313
+      internalID: 1132491699
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: spriteseet_sharkdefeat_18
+      rect:
+        serializedVersion: 2
+        x: 3560
+        y: 42
+        width: 354
+        height: 199
+      alignment: 9
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 33fd14ed8ca538c46a7e395d48cc06bd
+      internalID: 800432117
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: spriteseet_sharkdefeat_19
+      rect:
+        serializedVersion: 2
+        x: 4059
+        y: 42
+        width: 355
+        height: 198
+      alignment: 9
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 89d2da85c7bca4746ab3e09c40746bf6
+      internalID: -286653650
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: spriteseet_sharkdefeat_20
+      rect:
+        serializedVersion: 2
+        x: 4559
+        y: 42
+        width: 354
+        height: 196
+      alignment: 9
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 5a4541248f87ef240b5816779e3ef178
+      internalID: -176114024
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: spriteseet_sharkdefeat_21
+      rect:
+        serializedVersion: 2
+        x: 5058
+        y: 42
+        width: 357
+        height: 199
+      alignment: 9
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a691a63bf35ee9147990c013417d573d
+      internalID: 1570585026
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    physicsShape: []
+    bones: []
+    spriteID: 381dbea4a2b764444beffeda693d4ae9
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    nameFileIdTable:
+      spriteseet_sharkdefeat_12: -999913566
+      spriteseet_sharkdefeat_11: 1443164568
+      spriteseet_sharkdefeat_8: 298759643
+      spriteseet_sharkdefeat_15: -680880694
+      spriteseet_sharkdefeat_21: 1570585026
+      spriteseet_sharkdefeat_3: -1690822147
+      spriteseet_sharkdefeat_5: -732681125
+      spriteseet_sharkdefeat_1: -346212209
+      spriteseet_sharkdefeat_2: -1103685947
+      spriteseet_sharkdefeat_17: 1132491699
+      spriteseet_sharkdefeat_13: 1042545820
+      spriteseet_sharkdefeat_4: 1720849420
+      spriteseet_sharkdefeat_20: -176114024
+      spriteseet_sharkdefeat_16: -988526463
+      spriteseet_sharkdefeat_6: 442174052
+      spriteseet_sharkdefeat_14: -1792253602
+      spriteseet_sharkdefeat_0: 1989933905
+      spriteseet_sharkdefeat_7: -1147762732
+      spriteseet_sharkdefeat_18: 800432117
+      spriteseet_sharkdefeat_9: -674474586
+      spriteseet_sharkdefeat_19: -286653650
+      spriteseet_sharkdefeat_10: -823219401
+  spritePackingTag: 
+  pSDRemoveMatte: 0
+  pSDShowRemoveMatteOption: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

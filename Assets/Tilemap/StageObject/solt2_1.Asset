@@ -17,6 +17,7 @@ MonoBehaviour:
   m_Flags: 3
   m_ColliderType: 0
   currentTileObject: {fileID: -7913552390301891449, guid: 857b6af9b1d40154db4befadea7c35ad, type: 3}
+  tilemap: {fileID: 0}
   defaultCapacity: 0
   maxSize: 10
   dontUseTileManager: 0

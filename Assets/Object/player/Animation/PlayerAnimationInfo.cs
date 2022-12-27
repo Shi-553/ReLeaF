@@ -7,7 +7,8 @@ namespace ReLeaf
     {
         Standby,
         Walk,
-        Run
+        Run,
+        Damaged
     }
     [CreateAssetMenu(menuName = "Player/AnimationInfo")]
     public class PlayerAnimationInfo : AnimationInfoBase<PlayerAnimationType>
