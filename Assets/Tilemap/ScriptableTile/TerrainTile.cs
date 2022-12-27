@@ -175,7 +175,6 @@ namespace ReLeaf
             {
                 createdObject.InstancedTarget.Init();
                 createdObject.InstancedTarget.CreatedTile = this;
-                createdObject.InstancedTarget.Pool = createdObject.Pool;
                 createdObject.InstancedTarget.IsInvincible = createdObject.IsInvincible;
                 createdObject.InstancedTarget.TilePos = createdObject.TilePos;
             }

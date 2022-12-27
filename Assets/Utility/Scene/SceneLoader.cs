@@ -96,18 +96,13 @@ namespace Utility
             }
 
             definitionSingletonBases.ForEach(s => s.UninitAfterSceneUnloadDefinition());
-
+            definitionSingletonBases.ForEach(s => s.TryDestroy());
             // audioListener.enabled = true;
-
-            audioListener.enabled = false;
-            yield return SceneManager.LoadSceneAsync(type.GetBuildIndex(), LoadSceneMode.Additive);
 
             yield return Resources.UnloadUnusedAssets();
 
-
-
-
-
+            audioListener.enabled = false;
+            yield return SceneManager.LoadSceneAsync(type.GetBuildIndex(), LoadSceneMode.Additive);
 
 
             Current = SceneManager.GetSceneByBuildIndex(type.GetBuildIndex());

@@ -25,7 +25,12 @@ namespace Utility
 
         public void Release()
         {
-            Pool.Release(this);
+            if (Pool != null)
+            {
+                Pool.Release(this);
+                return;
+            }
+            OnReleasePool();
         }
 
 

@@ -34,6 +34,7 @@ namespace Utility
             pools.Clear();
             transform.GetChildren()
                 .ForEach(t => Destroy(t.gameObject));
+
         }
 
         public IPool GetPool<T>() where T : PoolableMonoBehaviour
@@ -132,7 +133,7 @@ namespace Utility
             }
         }
 
-        public void Clear() => ObjectPool.Clear();
+        public void Clear() => ObjectPool?.Clear();
 
         public void Resize(int size)
         {
@@ -196,10 +197,9 @@ namespace Utility
     {
         readonly IPool[] pools;
 
-        // thisでキャプチャ
         readonly Transform parent;
 
-        ObjectPool<PoolableMonoBehaviour> IPool.ObjectPool => pools[0].ObjectPool;
+        ObjectPool<PoolableMonoBehaviour> IPool.ObjectPool => pools[0]?.ObjectPool;
 
         public PoolArray(Transform parent, int size)
         {

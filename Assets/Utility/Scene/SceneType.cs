@@ -15,26 +15,30 @@ public enum SceneType
 }
 public static class SceneTypeExtension
 {
-   public static int GetBuildIndex(this SceneType type)
-   {
-      return type switch                         
-      {                                          
-          SceneType.Title => 0,              
-          SceneType.SampleScene => 1,              
-          SceneType.Manager => 2,              
-          SceneType.stage1 => 3,              
-          _ => 0,                                
-      };                                         
-   }
-   public static SceneType GetSceneType(this Scene scene)
-   {
-      return scene.buildIndex switch                         
-      {                                          
-          0 => SceneType.Title,              
-          1 => SceneType.SampleScene,              
-          2 => SceneType.Manager,              
-          3 => SceneType.stage1,              
-          _ => 0,                                
-      };                                         
-   }
+    public static int GetBuildIndex(this SceneType type)
+    {
+        return type switch
+        {
+            SceneType.Title => 0,
+            SceneType.SampleScene => 1,
+            SceneType.Manager => 2,
+            SceneType.stage1 => 3,
+            _ => 0,
+        };
+    }
+    public static SceneType GetSceneType(this Scene scene)
+    {
+        return GetSceneType(scene.buildIndex);
+    }
+    public static SceneType GetSceneType(int buildIndex)
+    {
+        return buildIndex switch
+        {
+            0 => SceneType.Title,
+            1 => SceneType.SampleScene,
+            2 => SceneType.Manager,
+            3 => SceneType.stage1,
+            _ => 0,
+        };
+    }
 }

@@ -138,8 +138,13 @@ namespace Utility
 
             builder.AppendLine("   public static SceneType GetSceneType(this Scene scene)");
             builder.AppendLine("   {");
+            builder.AppendLine("      return GetSceneType(scene.buildIndex);                         ");
+            builder.AppendLine("   }");
 
-            builder.AppendLine("      return scene.buildIndex switch                         ");
+            builder.AppendLine("   public static SceneType GetSceneType(int buildIndex)");
+            builder.AppendLine("   {");
+
+            builder.AppendLine("      return buildIndex switch                         ");
             builder.AppendLine("      {                                          ");
 
 

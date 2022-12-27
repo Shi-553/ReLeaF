@@ -15,6 +15,10 @@ namespace ReLeaf
         [SerializeField]
         TerrainTile sandTile;
 
+        private void OnEnable()
+        {
+            GridPaintingState.gridBrush = this;
+        }
 
         int angleDegree;
 

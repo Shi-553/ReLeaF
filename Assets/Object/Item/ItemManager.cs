@@ -153,12 +153,9 @@ namespace ReLeaf
             Index++;
         }
 
-        private void LateUpdate()
-        {
-            Selector.transform.position = Current.transform.position;
-        }
         private void Update()
         {
+            Selector.transform.position = Current.transform.position;
 
             if (mover.WasChangedTilePosThisFrame || WasChangedItemDirThisFrame || previewd != Current.Item)
             {
