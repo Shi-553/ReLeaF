@@ -115,10 +115,10 @@ namespace ReLeaf
             }
 
             mover.IsStop = true;
+            tilePos = DungeonManager.Singleton.WorldToTilePos(mover.transform.position);
             GlobalCoroutine.Singleton.StartCoroutine(mover.GetComponent<RobotAnimation>().Thrust());
             yield return new WaitForSeconds(0.5f);
 
-            tilePos = DungeonManager.Singleton.WorldToTilePos(mover.transform.position);
             foreach (var localPos in info.ThrustingList)
             {
                 DungeonManager.Singleton.SowSeed(tilePos + localPos, true);
