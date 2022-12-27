@@ -18,7 +18,7 @@ namespace Utility
 
             if (GUI.Button(buttonPos, "Edit"))
             {
-                TilePosEditor.Open(property, att.direction);
+                TilePosEditor.Open(property, att);
             }
 
             do
