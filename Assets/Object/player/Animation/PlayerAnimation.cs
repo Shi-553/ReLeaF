@@ -1,4 +1,5 @@
 using Animancer;
+using System.Collections;
 using UnityEngine;
 
 namespace ReLeaf
@@ -10,32 +11,44 @@ namespace ReLeaf
 
         AnimancerComponent animancerComponent;
         PlayerMover mover;
+        PlayerCore core;
 
         private void Awake()
         {
             TryGetComponent(out mover);
+            TryGetComponent(out core);
             animancerComponent = GetComponentInChildren<AnimancerComponent>();
+
+            core.OnDamaged += () => StartCoroutine(OnDamaged());
         }
-        public void AnimationPlay(AnimationClip clip)
+
+        bool isDamagedAnimation = false;
+
+        private IEnumerator OnDamaged()
         {
-            if (!animancerComponent.IsPlayingClip(clip))
-                animancerComponent.Play(clip);
+            isDamagedAnimation = true;
+            yield return animancerComponent.Play(info.GetClip(PlayerAnimationType.Damaged, mover.IsLeft));
+            isDamagedAnimation = false;
         }
 
         private void Update()
         {
+            if (isDamagedAnimation)
+            {
+                return;
+            }
             if (mover.IsDash)
             {
-                AnimationPlay(info.GetClip(PlayerAnimationType.Run, mover.IsLeft));
+                animancerComponent.Play(info.GetClip(PlayerAnimationType.Run, mover.IsLeft));
                 return;
             }
             if (mover.IsMove)
             {
-                AnimationPlay(info.GetClip(PlayerAnimationType.Walk, mover.IsLeft));
+                animancerComponent.Play(info.GetClip(PlayerAnimationType.Walk, mover.IsLeft));
                 return;
             }
 
-            AnimationPlay(info.GetClip(PlayerAnimationType.Standby, mover.IsLeft));
+            animancerComponent.Play(info.GetClip(PlayerAnimationType.Standby, mover.IsLeft));
             return;
         }
     }
