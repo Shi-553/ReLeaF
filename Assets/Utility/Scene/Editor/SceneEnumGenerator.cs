@@ -49,15 +49,16 @@ namespace Utility
             var scriptString = CreateScriptString();
 
             File.WriteAllText(scriptPath, scriptString, Encoding.UTF8);
+            Debug.Log($"SceneTypeを生成しました。{scriptPath}");
             if (isRefresh)
             {
                 AssetDatabase.Refresh();
             }
             else
             {
+                Debug.Log("Ctrl+Rでリフレッシュ");
                 EditorApplication.playModeStateChanged += ChangedToRefresh;
             }
-            Debug.Log($"SceneTypeを生成しました。{scriptPath}");
 
             var target = EditorUserBuildSettings.activeBuildTarget;
             var group = BuildPipeline.GetBuildTargetGroup(target);
@@ -65,11 +66,11 @@ namespace Utility
 
         }
 
+
         private static void ChangedToRefresh(PlayModeStateChange state)
         {
             if (state == PlayModeStateChange.ExitingEditMode)
             {
-                AssetDatabase.Refresh();
                 EditorApplication.playModeStateChanged -= ChangedToRefresh;
             }
         }
