@@ -348,6 +348,24 @@ namespace ReLeaf
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Point"",
+                    ""type"": ""Value"",
+                    ""id"": ""4da8b9c1-acfb-48bf-9d6a-93871b47db0b"",
+                    ""expectedControlType"": ""Vector2"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": true
+                },
+                {
+                    ""name"": ""LeftClick"",
+                    ""type"": ""Button"",
+                    ""id"": ""be48c9ef-b02a-4158-bec3-8e76dac9707b"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -658,6 +676,28 @@ namespace ReLeaf
                     ""action"": ""Submit"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""5ecabe72-b2c7-4111-a451-a30188101e44"",
+                    ""path"": ""<Mouse>/position"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard&Mouse"",
+                    ""action"": ""Point"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""0a45fff0-c808-4758-bb23-c8e6c82edd95"",
+                    ""path"": ""<Mouse>/leftButton"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard&Mouse"",
+                    ""action"": ""LeftClick"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -738,6 +778,8 @@ namespace ReLeaf
             m_UI_Navigate = m_UI.FindAction("Navigate", throwIfNotFound: true);
             m_UI_Pause = m_UI.FindAction("Pause", throwIfNotFound: true);
             m_UI_Submit = m_UI.FindAction("Submit", throwIfNotFound: true);
+            m_UI_Point = m_UI.FindAction("Point", throwIfNotFound: true);
+            m_UI_LeftClick = m_UI.FindAction("LeftClick", throwIfNotFound: true);
         }
 
         public void Dispose()
@@ -873,6 +915,8 @@ namespace ReLeaf
         private readonly InputAction m_UI_Navigate;
         private readonly InputAction m_UI_Pause;
         private readonly InputAction m_UI_Submit;
+        private readonly InputAction m_UI_Point;
+        private readonly InputAction m_UI_LeftClick;
         public struct UIActions
         {
             private @ReLeafInputAction m_Wrapper;
@@ -880,6 +924,8 @@ namespace ReLeaf
             public InputAction @Navigate => m_Wrapper.m_UI_Navigate;
             public InputAction @Pause => m_Wrapper.m_UI_Pause;
             public InputAction @Submit => m_Wrapper.m_UI_Submit;
+            public InputAction @Point => m_Wrapper.m_UI_Point;
+            public InputAction @LeftClick => m_Wrapper.m_UI_LeftClick;
             public InputActionMap Get() { return m_Wrapper.m_UI; }
             public void Enable() { Get().Enable(); }
             public void Disable() { Get().Disable(); }
@@ -898,6 +944,12 @@ namespace ReLeaf
                     @Submit.started -= m_Wrapper.m_UIActionsCallbackInterface.OnSubmit;
                     @Submit.performed -= m_Wrapper.m_UIActionsCallbackInterface.OnSubmit;
                     @Submit.canceled -= m_Wrapper.m_UIActionsCallbackInterface.OnSubmit;
+                    @Point.started -= m_Wrapper.m_UIActionsCallbackInterface.OnPoint;
+                    @Point.performed -= m_Wrapper.m_UIActionsCallbackInterface.OnPoint;
+                    @Point.canceled -= m_Wrapper.m_UIActionsCallbackInterface.OnPoint;
+                    @LeftClick.started -= m_Wrapper.m_UIActionsCallbackInterface.OnLeftClick;
+                    @LeftClick.performed -= m_Wrapper.m_UIActionsCallbackInterface.OnLeftClick;
+                    @LeftClick.canceled -= m_Wrapper.m_UIActionsCallbackInterface.OnLeftClick;
                 }
                 m_Wrapper.m_UIActionsCallbackInterface = instance;
                 if (instance != null)
@@ -911,6 +963,12 @@ namespace ReLeaf
                     @Submit.started += instance.OnSubmit;
                     @Submit.performed += instance.OnSubmit;
                     @Submit.canceled += instance.OnSubmit;
+                    @Point.started += instance.OnPoint;
+                    @Point.performed += instance.OnPoint;
+                    @Point.canceled += instance.OnPoint;
+                    @LeftClick.started += instance.OnLeftClick;
+                    @LeftClick.performed += instance.OnLeftClick;
+                    @LeftClick.canceled += instance.OnLeftClick;
                 }
             }
         }
@@ -974,6 +1032,8 @@ namespace ReLeaf
             void OnNavigate(InputAction.CallbackContext context);
             void OnPause(InputAction.CallbackContext context);
             void OnSubmit(InputAction.CallbackContext context);
+            void OnPoint(InputAction.CallbackContext context);
+            void OnLeftClick(InputAction.CallbackContext context);
         }
     }
 }

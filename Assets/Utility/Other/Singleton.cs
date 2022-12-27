@@ -29,8 +29,11 @@ namespace Utility
                 if (!isInitialized)
                 {
                     singletonInstance = FindObjectOfType<T>();
-                    singletonInstance.Init(true, false);
-                    isInitialized = true;
+                    if (singletonInstance != null)
+                    {
+                        singletonInstance.Init(true, false);
+                        isInitialized = true;
+                    }
                 }
                 return singletonInstance;
             }

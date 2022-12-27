@@ -104,7 +104,7 @@ namespace ReLeaf
         }
         public void Damaged(float atk)
         {
-            if (HP == 0)
+            if (HP == 0 || DamageValueEffectManager.Singleton == null)
                 return;
 
             DamageValueEffectManager.Singleton.SetDamageValueEffect((int)atk, enemyMover.WorldCenter);

@@ -36,10 +36,12 @@ namespace ReLeaf
 
                 cinemachineFramingTransposer = cinemachine.GetCinemachineComponent<CinemachineFramingTransposer>();
 
-                SceneLoader.Singleton.OnChangePause += OnChangePause;
             }
         }
-
+        private void Start()
+        {
+            SceneLoader.Singleton.OnChangePause += OnChangePause;
+        }
         private void OnChangePause(bool sw)
         {
             if (sw)
