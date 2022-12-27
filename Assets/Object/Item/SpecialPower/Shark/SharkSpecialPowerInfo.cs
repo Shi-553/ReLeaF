@@ -8,7 +8,7 @@ namespace ReLeaf
     public class SharkSpecialPowerInfo : SowSeedSpecialPowerInfo
     {
 
-        [SerializeField, Rename("突きで緑化するローカルポジション"), EditTilePos(Direction.UP)]
+        [SerializeField, Rename("突きで緑化するローカルポジション"), EditTilePos(Direction.NONE, true)]
         ArrayWrapper<Vector2Int> thrustingList;
         public Vector2Int[] ThrustingList => thrustingList.Value;
 
