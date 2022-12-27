@@ -38,7 +38,7 @@ namespace ReLeaf
                         image.color = currentColor;
                 }
 
-                time += Time.deltaTime;
+                time += Time.unscaledDeltaTime;
                 if (time > flashingTime)
                     break;
                 yield return null;

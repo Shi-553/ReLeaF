@@ -1,7 +1,6 @@
 using Cinemachine;
 using UnityEngine;
 using UnityEngine.InputSystem;
-using UnityEngine.SceneManagement;
 using Utility;
 
 namespace ReLeaf
@@ -36,7 +35,17 @@ namespace ReLeaf
                 itemManager = GetComponentInChildren<ItemManager>();
 
                 cinemachineFramingTransposer = cinemachine.GetCinemachineComponent<CinemachineFramingTransposer>();
+
+                SceneLoader.Singleton.OnChangePause += OnChangePause;
             }
+        }
+
+        private void OnChangePause(bool sw)
+        {
+            if (sw)
+                reLeafInputAction.Disable();
+            else
+                reLeafInputAction.Enable();
         }
 
         void OnDisable()
@@ -98,31 +107,6 @@ namespace ReLeaf
             if (!context.performed)
                 return;
             SetItemDir(context.ReadValue<Vector2>());
-        }
-
-
-        void Update()
-        {
-            if (GameRuleManager.Singleton.IsPrepare)
-                return;
-
-            if (Keyboard.current.escapeKey.wasPressedThisFrame)
-            {
-#if UNITY_EDITOR
-                UnityEditor.EditorApplication.isPlaying = false;
-#elif UNITY_STANDALONE
-      UnityEngine.Application.Quit();
-#endif
-            }
-            if (Keyboard.current.f1Key.wasPressedThisFrame)
-            {
-                SceneManager.LoadScene(0);
-            }
-            if (Keyboard.current.f2Key.wasPressedThisFrame)
-            {
-                GameRuleManager.Singleton.Finish(true);
-            }
-
         }
 
     }

@@ -1,5 +1,8 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
+using System.Linq;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 using Utility.Definition;
@@ -19,10 +22,14 @@ namespace Utility
         public Scene? Background { get; private set; } = null;
         public SceneType? BackgroundType => Background?.GetSceneType();
 
+        public Scene CurrentBase => IsPause ? Background.Value : Current;
+        public SceneType CurrentBaseType => CurrentBase.GetSceneType();
+
         // オーバーライドされてるときは必ずポーズする
         public bool IsPause => Background.HasValue;
         public bool IsOverride => Background.HasValue;
 
+        public event Action<bool> OnChangePause;
 
         Coroutine changeing;
 
@@ -49,7 +56,7 @@ namespace Utility
         }
 
 #if DEFINE_SCENE_TYPE_ENUM
-        public void LoadScene(SceneType scene, float fadeoutTime = 0, float fadeinTime = 0)
+        public void LoadScene(SceneType scene, float fadeoutTime = 1.0f, float fadeinTime = 1.0f)
         {
             if (changeing == null)
             {
@@ -57,7 +64,7 @@ namespace Utility
             }
         }
 
-        IEnumerator LoadSceneAsync(SceneType type, float fadeoutTime = 0, float fadeinTime = 0)
+        IEnumerator LoadSceneAsync(SceneType type, float fadeoutTime, float fadeinTime)
         {
             audioListener.enabled = false;
             loading.SetActive(true);
@@ -66,10 +73,11 @@ namespace Utility
                 float counter = 0;
                 while (true)
                 {
-                    fadeImage.color = new Color(0, 0, 0, (counter / fadeoutTime) * (counter / fadeoutTime));
+                    var t = counter / fadeoutTime;
+                    fadeImage.color = new Color(0, 0, 0, t * t);
                     if (fadeoutTime <= counter)
                         break;
-                    counter += Time.deltaTime;
+                    counter += Time.unscaledDeltaTime;
 
                     yield return null;
                 }
@@ -116,10 +124,11 @@ namespace Utility
                 float counter = 0;
                 while (true)
                 {
-                    fadeImage.color = new Color(0, 0, 0, (1 - (counter / fadeinTime)) * (1 - (counter / fadeinTime)));
+                    var t = 1 - (counter / fadeinTime);
+                    fadeImage.color = new Color(0, 0, 0, t * (2 - t));
                     if (fadeinTime <= counter)
                         break;
-                    counter += Time.deltaTime;
+                    counter += Time.unscaledDeltaTime;
 
                     yield return null;
                 }
@@ -145,8 +154,20 @@ namespace Utility
             }
         }
 
+        GameObject oldSelected;
+        Selectable[] allSelectables;
+        bool[] interactibes;
+
         IEnumerator OverrideAsync(SceneType scene)
         {
+            oldSelected = EventSystem.current.currentSelectedGameObject;
+            allSelectables = FindObjectsOfType<Selectable>();
+            interactibes = allSelectables.Select(s => s.interactable).ToArray();
+
+            allSelectables.ForEach(s => s.interactable = false);
+
+            OnChangePause?.Invoke(true);
+
             Time.timeScale = 0;
 
             yield return SceneManager.LoadSceneAsync(scene.GetBuildIndex(), LoadSceneMode.Additive);
@@ -165,6 +186,10 @@ namespace Utility
         {
             Time.timeScale = 0;
 
+            foreach (var obj in Current.GetRootGameObjects())
+            {
+                obj.SetActive(false);
+            }
             yield return SceneManager.UnloadSceneAsync(Current.buildIndex);
 
             Debug.Log($"Unoverride to <b>{CurrentType}</b>");
@@ -174,9 +199,15 @@ namespace Utility
             SceneManager.SetActiveScene(Current);
 
 
+            OnChangePause?.Invoke(false);
             Time.timeScale = 1;
 
             changeing = null;
+
+            allSelectables.Zip(interactibes, (s, i) => Tuple.Create(s, i))
+                .ForEach((t) => t.Item1.interactable = t.Item2);
+
+            EventSystemUtility.SetSelectedGameObjectNoFade(oldSelected);
         }
 
 #endif
