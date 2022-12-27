@@ -53,11 +53,19 @@ namespace ReLeaf
             this.canUseDash = useDash;
             manualSpeed = speed;
         }
+        public bool IsStop { get; set; }
 
         void LateUpdate()
         {
             if (GameRuleManager.Singleton.IsPrepare)
                 return;
+
+            if (IsStop)
+            {
+                IsDash = false;
+                Move = Vector2.zero;
+                return;
+            }
 
             if (!UseManualOperation)
             {

@@ -65,6 +65,7 @@ namespace ReLeaf
 
             IsFetched = true;
             gameObject.SetActive(false);
+            UseCount = 0;
 
             return true;
         }
@@ -74,8 +75,17 @@ namespace ReLeaf
             StartCoroutine(RandomMove());
         }
 
+        public int UseCount { get; set; }
+        public bool IsUsing => UseCount > 0;
 
         public abstract void PreviewRange(Vector2Int tilePos, Vector2Int dir, List<Vector2Int> returns);
-        public abstract IEnumerator Use(Vector2Int tilePos, Vector2Int dir);
+        public IEnumerator Use(Vector2Int tilePos, Vector2Int dir)
+        {
+            UseCount++;
+            return UseImpl(tilePos, dir);
+        }
+        protected abstract IEnumerator UseImpl(Vector2Int tilePos, Vector2Int dir);
+
+
     }
 }
