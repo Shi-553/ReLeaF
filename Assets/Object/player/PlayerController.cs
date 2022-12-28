@@ -52,7 +52,7 @@ namespace ReLeaf
 
         void OnDisable()
         {
-            reLeafInputAction.Disable();
+            reLeafInputAction?.Disable();
         }
         void SetItemDir(Vector2 value)
         {
