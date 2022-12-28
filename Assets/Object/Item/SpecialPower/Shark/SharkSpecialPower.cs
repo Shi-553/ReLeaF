@@ -12,19 +12,22 @@ namespace ReLeaf
         SharkSpecialPowerInfo info;
         protected override ISowSeedSpecialPowerInfo SowSeedSpecialPowerInfo => info;
 
+        Vector2Int previewdTilePos;
+
         public override void PreviewRange(Vector2Int tilePos, Vector2Int dir, List<Vector2Int> returns)
         {
             if (!IsUsing)
             {
+                previewdTilePos = tilePos;
                 base.PreviewRange(tilePos, dir, returns);
                 return;
             }
             returns.Clear();
 
-            tilePos = DungeonManager.Singleton.WorldToTilePos(RobotMover.Singleton.transform.position);
+            previewdTilePos = DungeonManager.Singleton.WorldToTilePos(RobotMover.Singleton.transform.position);
             foreach (var weakLocalTilePos in info.ThrustingList)
             {
-                var pos = tilePos + weakLocalTilePos;
+                var pos = previewdTilePos + weakLocalTilePos;
                 if (!DungeonManager.Singleton.TryGetTile(pos, out var tile) || !tile.CanOrAleeadyGreening(true))
                 {
                     continue;
@@ -106,7 +109,7 @@ namespace ReLeaf
                     });
 
                 }
-                mover.UpdateManualOperation(PlayerMover.Singleton.transform.position + (Vector3)(Vector2)dir * 2, info.Speed, false);
+                mover.UpdateManualOperation(PlayerMover.Singleton.transform.position + (Vector3)(Vector2)dir * 2.0f, info.Speed, false);
 
                 if (!isRunning)
                     break;
@@ -115,13 +118,12 @@ namespace ReLeaf
             }
 
             mover.IsStop = true;
-            tilePos = DungeonManager.Singleton.WorldToTilePos(mover.transform.position);
             mover.GetComponent<RobotAnimation>().Thrust();
             yield return new WaitForSeconds(0.5f);
 
             foreach (var localPos in info.ThrustingList)
             {
-                DungeonManager.Singleton.SowSeed(tilePos + localPos, true);
+                DungeonManager.Singleton.SowSeed(previewdTilePos + localPos, true);
             }
 
             mover.IsStop = false;
