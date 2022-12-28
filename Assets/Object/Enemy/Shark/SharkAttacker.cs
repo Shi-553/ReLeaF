@@ -27,8 +27,12 @@ namespace ReLeaf
         [SerializeField]
         AudioInfo seAttack;
 
+        EnemyDirectAttackController enemyDirectAttackController;
 
-
+        protected override void Init()
+        {
+            TryGetComponent(out enemyDirectAttackController);
+        }
 
         protected override void OnStartAiming()
         {
@@ -38,12 +42,15 @@ namespace ReLeaf
 
             enemyMover.GetCheckPoss(enemyMover.TilePos, enemyMover.DirNotZero, buffer);
             attackTargetPos = buffer.Last() + (enemyMover.DirNotZero * (SharkAttackInfo.Range));
-
-            foreach (var target in GetAttackRange(enemyMover.TilePos, enemyMover.DirNotZero, true))
+            var ranges = GetAttackRange(enemyMover.TilePos, enemyMover.DirNotZero, true).ToArray();
+            foreach (var target in ranges)
             {
                 attackMarkerManager.SetMarker<TargetMarker>(target, enemyMover.DirNotZero.GetRotation());
             }
             SEManager.Singleton.Play(seBeforeAttack, transform.position);
+
+            if (ranges.Length <= 4)
+                enemyDirectAttackController.AddImpossibleLastTargets();
         }
         protected override IEnumerator OnStartDamageing()
         {

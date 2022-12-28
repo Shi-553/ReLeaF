@@ -13,9 +13,15 @@ namespace ReLeaf
         EnemyAttacker attacker;
 
         Vector2Int? targetTilePos;
+        Vector2Int lastTargetTilePos;
 
         // 絶対到達できないターゲットたち
         HashSet<Vector2Int> impossibleTargets = new();
+
+        public void AddImpossibleLastTargets()
+        {
+            impossibleTargets.Add(lastTargetTilePos);
+        }
 
         [SerializeField]
         bool isMoveAttacker = false;
@@ -108,6 +114,8 @@ namespace ReLeaf
             var result = mover.Move();
             if (result == EnemyMover.MoveResult.Finish)
             {
+                lastTargetTilePos = targetTilePos.Value;
+                impossibleTargets.Clear();
                 mover.UpdateTargetStraight(targetTilePos.Value);
                 targetTilePos = null;
                 attacker.Attack();
