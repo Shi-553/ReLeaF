@@ -1081,7 +1081,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   enemyDamageableInfo: {fileID: 11400000, guid: 47f3fb6460f899e48be3927196f19a7d, type: 2}
   <HP>k__BackingField: 0
-  specialPowerPrefab: {fileID: 7682479516954604330, guid: 110ed167187e534479bf9ad6f98fa9d6, type: 3}
+  specialPowerPrefab: {fileID: 7682479516954604330, guid: 0f51aeaf37149ba4585ae0bc3eb13d41, type: 3}
   weakMarkerManager: {fileID: 2990406055205962186}
   seEnemyDeath: {fileID: 11400000, guid: c60d38e1592a9f2488104785a0989e07, type: 2}
   seEnemyDamaged: {fileID: 11400000, guid: e4530d4e68776254bac46815be6e9f88, type: 2}
@@ -1261,7 +1261,7 @@ MonoBehaviour:
   _ActionOnDisable: 0
 --- !u!95 &3804248155474295329
 Animator:
-  serializedVersion: 4
+  serializedVersion: 5
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -1278,7 +1278,7 @@ Animator:
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorControllerStateOnDisable: 0
+  m_KeepAnimatorStateOnDisable: 0
 --- !u!1 &5902468053282067066
 GameObject:
   m_ObjectHideFlags: 0

@@ -5,8 +5,12 @@ namespace ReLeaf
 {
     [ClassSummary("Sharkのスペシャルパワーパラメータ")]
     [CreateAssetMenu(menuName = "Item/SpecialPower/SharkSpecialPower")]
-    public class SharkSpecialPowerInfo : SowSeedSpecialPowerInfo
+    public class SharkSpecialPowerInfo : ScriptableObject, ISowSeedSpecialPowerInfo
     {
+        [SerializeField, Rename("種をまくマス")]
+        LocalTilePos seedLocalTilePos;
+        public Vector2Int[] GetSeedLocalTilePos(Vector2Int dir) => seedLocalTilePos.GetLocalTilePosList(dir);
+
 
         [SerializeField, Rename("突きで緑化するローカルポジション"), EditTilePos(Direction.NONE, true)]
         ArrayWrapper<Vector2Int> thrustingList;

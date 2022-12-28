@@ -10,7 +10,7 @@ namespace ReLeaf
     {
         [SerializeField]
         SharkSpecialPowerInfo info;
-        protected override SowSeedSpecialPowerInfo SowSeedSpecialPowerInfo => info;
+        protected override ISowSeedSpecialPowerInfo SowSeedSpecialPowerInfo => info;
 
         public override void PreviewRange(Vector2Int tilePos, Vector2Int dir, List<Vector2Int> returns)
         {
@@ -39,7 +39,7 @@ namespace ReLeaf
             GlobalCoroutine.Singleton.StartCoroutine(MovePlayer(dir));
 
 
-            var localRanges = SowSeedSpecialPowerInfo.SeedLocalTilePos.GetLocalTilePosList(dir).ToList();
+            var localRanges = SowSeedSpecialPowerInfo.GetSeedLocalTilePos(dir).ToList();
 
             var (minLocalTilePos, maxLocalTilePos) = localRanges.Aggregate(
                 (localRanges[0], localRanges[0]),
@@ -116,13 +116,14 @@ namespace ReLeaf
 
             mover.IsStop = true;
             tilePos = DungeonManager.Singleton.WorldToTilePos(mover.transform.position);
-            GlobalCoroutine.Singleton.StartCoroutine(mover.GetComponent<RobotAnimation>().Thrust());
+            mover.GetComponent<RobotAnimation>().Thrust();
             yield return new WaitForSeconds(0.5f);
 
             foreach (var localPos in info.ThrustingList)
             {
                 DungeonManager.Singleton.SowSeed(tilePos + localPos, true);
             }
+
             mover.IsStop = false;
         }
 

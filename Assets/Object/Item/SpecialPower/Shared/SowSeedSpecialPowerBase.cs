@@ -6,14 +6,13 @@ namespace ReLeaf
 {
     public abstract class SowSeedSpecialPowerBase : ItemBase
     {
-        abstract protected SowSeedSpecialPowerInfo SowSeedSpecialPowerInfo { get; }
+        abstract protected ISowSeedSpecialPowerInfo SowSeedSpecialPowerInfo { get; }
 
         public override void PreviewRange(Vector2Int tilePos, Vector2Int dir, List<Vector2Int> returns)
         {
             returns.Clear();
-            var localList = SowSeedSpecialPowerInfo.SeedLocalTilePos.GetLocalTilePosList(dir);
 
-            foreach (var weakLocalTilePos in localList)
+            foreach (var weakLocalTilePos in SowSeedSpecialPowerInfo.GetSeedLocalTilePos(dir))
             {
                 var pos = tilePos + weakLocalTilePos;
                 if (!DungeonManager.Singleton.TryGetTile(pos, out var tile) || !tile.CanOrAleeadyGreening(true))
@@ -26,7 +25,7 @@ namespace ReLeaf
 
         protected override IEnumerator UseImpl(Vector2Int tilePos, Vector2Int dir)
         {
-            foreach (var weakLocalTilePos in SowSeedSpecialPowerInfo.SeedLocalTilePos.GetLocalTilePosList(dir))
+            foreach (var weakLocalTilePos in SowSeedSpecialPowerInfo.GetSeedLocalTilePos(dir))
             {
                 var pos = tilePos + weakLocalTilePos;
                 DungeonManager.Singleton.SowSeed(pos, true);

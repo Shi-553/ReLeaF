@@ -23,7 +23,11 @@ namespace ReLeaf
                 animancerComponent.Play(clip);
         }
         bool isSpecial = false;
-        public IEnumerator Thrust()
+        public Coroutine Thrust()
+        {
+            return StartCoroutine(ThrustImpl());
+        }
+        IEnumerator ThrustImpl()
         {
             isSpecial = true;
             yield return animancerComponent.Play(info.GetClip(RobotAnimationType.Special, mover.IsLeft));
