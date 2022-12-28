@@ -12,6 +12,8 @@ public enum SceneType
 
     stage2 = 3,
 
+    stage3 = 4,
+
 }
 public static class SceneTypeExtension
 {
@@ -23,6 +25,7 @@ public static class SceneTypeExtension
           SceneType.SampleScene => 1,              
           SceneType.Manager => 2,              
           SceneType.stage2 => 3,              
+          SceneType.stage3 => 4,              
           _ => 0,                                
       };                                         
    }
@@ -34,6 +37,7 @@ public static class SceneTypeExtension
           1 => SceneType.SampleScene,              
           2 => SceneType.Manager,              
           3 => SceneType.stage2,              
+          4 => SceneType.stage3,              
           _ => 0,                                
       };                                         
    }
