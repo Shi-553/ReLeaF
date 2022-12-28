@@ -17,6 +17,9 @@ namespace ReLeaf
         // 絶対到達できないターゲットたち
         HashSet<Vector2Int> impossibleTargets = new();
 
+        [SerializeField]
+        bool isMoveAttacker = false;
+
         void Start()
         {
             TryGetComponent(out attacker);
@@ -59,6 +62,14 @@ namespace ReLeaf
                     var tilePos = DungeonManager.Singleton.WorldToTilePos(target.position);
                     if (impossibleTargets.Contains(tilePos))
                         continue;
+                    if (isMoveAttacker)
+                    {
+                        if (!DungeonManager.Singleton.TryGetTile(tilePos, out var tile) || !tile.CanEnemyMoveAttack(true) || !tile.InstancedParent.CanEnemyMoveAttack(true))
+                        {
+                            impossibleTargets.Add(tilePos);
+                            continue;
+                        }
+                    }
 
                     var distanceSq = (tilePos - mover.GetNearest(tilePos)).sqrMagnitude;
                     if (distanceSq < minDistanceSq)

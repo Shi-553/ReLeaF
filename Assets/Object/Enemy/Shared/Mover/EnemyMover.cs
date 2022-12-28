@@ -112,7 +112,7 @@ namespace ReLeaf
 
             foreach (var nextPos in buffer)
             {
-                if (!DungeonManager.Singleton.TryGetTile(nextPos, out var tile) || !tile.CanEnemyMove(isAttackMove))
+                if (!DungeonManager.Singleton.TryGetTile(nextPos, out var tile) || !tile.CanEnemyMove(isAttackMove) || !tile.InstancedParent.CanEnemyMove(isAttackMove))
                 {
                     return MoveResult.Error;
                 }

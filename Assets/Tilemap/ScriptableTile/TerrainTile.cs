@@ -147,7 +147,7 @@ namespace ReLeaf
                 }
 
                 if (!dontUseTileManager)
-                    DungeonManager.Singleton.tiles[(Vector2Int)position] = createdObject.InstancedTarget;
+                    DungeonManager.Singleton.tiles[(Vector2Int)position] = createdObject.InstancingTarget;
                 return true;
             }
             else
@@ -170,13 +170,15 @@ namespace ReLeaf
             createdObject.CreatedTile = this;
             createdObject.IsInvincible = IsInvincible;
             createdObject.TilePos = position;
+            createdObject.InstancedParent = createdObject;
 
-            if (createdObject != createdObject.InstancedTarget)
+            if (createdObject != createdObject.InstancingTarget)
             {
-                createdObject.InstancedTarget.Init();
-                createdObject.InstancedTarget.CreatedTile = this;
-                createdObject.InstancedTarget.IsInvincible = createdObject.IsInvincible;
-                createdObject.InstancedTarget.TilePos = createdObject.TilePos;
+                createdObject.InstancingTarget.InstancedParent = createdObject;
+                createdObject.InstancingTarget.Init();
+                createdObject.InstancingTarget.CreatedTile = this;
+                createdObject.InstancingTarget.IsInvincible = createdObject.IsInvincible;
+                createdObject.InstancingTarget.TilePos = createdObject.TilePos;
             }
 
         }

@@ -191,6 +191,9 @@ namespace ReLeaf
 
             if (TryGetTile(pos, out var afterTile))
             {
+                if (before != before.InstancedParent)
+                    afterTile.InstancedParent = before.InstancedParent;
+
                 OnTileChanged?.Invoke(new TileChangedInfo(pos, before, afterTile));
                 return afterTile;
             }
