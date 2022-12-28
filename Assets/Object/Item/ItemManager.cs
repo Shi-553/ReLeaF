@@ -176,5 +176,10 @@ namespace ReLeaf
 
             OldItemDir = ItemDir;
         }
+
+        private void OnDestroy()
+        {
+            specialPreviewMarkerManager.ResetAllMarker();
+        }
     }
 }

@@ -127,6 +127,8 @@ namespace ReLeaf
             PlayerController.Singleton.enabled = false;
             PlayerCore.Singleton.gameObject.SetActive(false);
             RobotMover.Singleton.gameObject.SetActive(false);
+            Destroy(PlayerCore.Singleton.gameObject);
+            Destroy(RobotMover.Singleton.gameObject);
             playingUIRoot.SetActive(false);
         }
     }
