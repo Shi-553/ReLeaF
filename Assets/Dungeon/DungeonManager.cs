@@ -1,4 +1,3 @@
-using Pickle;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -34,14 +33,6 @@ namespace ReLeaf
 
         [SerializeField]
         Tilemap tilemap;
-
-        [SerializeField, Pickle, Rename("緑化時のエフェクト")]
-        ToLeafEffect toLeafEffect;
-        [SerializeField, Pickle, Rename("塩化時のエフェクト")]
-        ToSandEffect toSandEffect;
-
-        IPool toLeafEffectPool;
-        IPool toSandEffectPool;
 
 
         Dictionary<TileType, TerrainTile[]> terrainTileDic;
@@ -100,9 +91,6 @@ namespace ReLeaf
             }
             if (callByAwake)
             {
-
-                toLeafEffectPool = PoolManager.Singleton.SetPool(toLeafEffect, 1000, 1000, true);
-                toSandEffectPool = PoolManager.Singleton.SetPool(toSandEffect, 50, 200, true);
                 foreach (var pos in tilemap.cellBounds.allPositionsWithin)
                 {
                     var tile = tilemap.GetTile<TerrainTile>(pos);
@@ -168,8 +156,7 @@ namespace ReLeaf
             {
                 OnGreening?.Invoke(new GreeningInfo(tilePos, tile.IsAlreadyGreening));
 
-                var effect = toLeafEffectPool.Get<ToLeafEffect>();
-                effect.transform.position = TilePosToWorld(tilePos);
+                TileEffectManager.Singleton.SetEffect(TileEffectType.ToLeaf, TilePosToWorld(tilePos));
             }
 
             if (!tile.CanGreening(isSpecial))
@@ -215,8 +202,7 @@ namespace ReLeaf
         {
             ChangeTile(tilePos, TileType.Messy, visual.VisualType);
 
-            var effect = toSandEffectPool.Get<ToSandEffect>();
-            effect.transform.position = TilePosToWorld(tilePos);
+            TileEffectManager.Singleton.SetEffect(TileEffectType.ToSand, TilePosToWorld(tilePos));
         }
         public void ToSand(Vector2Int tilePos)
         {

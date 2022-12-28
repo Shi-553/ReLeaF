@@ -1548,7 +1548,6 @@ MonoBehaviour:
     - {fileID: 11400000, guid: 81a1563989d403044b505a819f2a84ff, type: 2}
     - {fileID: 11400000, guid: 9421bdc41130d9b459fc14ced76c705b, type: 2}
   tilemap: {fileID: 9020821008736504434}
-  toLeafEffect: {fileID: -8009822704911909708, guid: 3de2c373e89cf4f4c856cbd81c7c4eeb, type: 3}
   <MaxGreeningCount>k__BackingField: 0
 --- !u!114 &521728148
 MonoBehaviour:

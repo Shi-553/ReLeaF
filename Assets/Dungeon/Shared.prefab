@@ -706,6 +706,53 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
+--- !u!1 &1539728797
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1539728798}
+  - component: {fileID: 1539728799}
+  m_Layer: 0
+  m_Name: TileEffectManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1539728798
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1539728797}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 2.7740085, y: 2.728178, z: -0.06673803}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 910080987893294024}
+  m_RootOrder: 4
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1539728799
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1539728797}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dc291b1ef2400d9499f976fcd60e7dad, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  tileEffects:
+  - {fileID: -8009822704911909708, guid: 3de2c373e89cf4f4c856cbd81c7c4eeb, type: 3}
+  - {fileID: 3797039637821607636, guid: 4f186e0b62068c14a93010e6ebfa40e1, type: 3}
 --- !u!1 &1647787233
 GameObject:
   m_ObjectHideFlags: 0
@@ -1794,6 +1841,7 @@ Transform:
   - {fileID: 910080988192251232}
   - {fileID: 910080987624034137}
   - {fileID: 910080987928591719}
+  - {fileID: 1539728798}
   m_Father: {fileID: 910080988294562538}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
