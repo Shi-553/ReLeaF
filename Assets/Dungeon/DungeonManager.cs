@@ -37,7 +37,11 @@ namespace ReLeaf
 
         [SerializeField, Pickle, Rename("緑化時のエフェクト")]
         ToLeafEffect toLeafEffect;
+        [SerializeField, Pickle, Rename("塩化時のエフェクト")]
+        ToSandEffect toSandEffect;
+
         IPool toLeafEffectPool;
+        IPool toSandEffectPool;
 
 
         Dictionary<TileType, TerrainTile[]> terrainTileDic;
@@ -98,6 +102,7 @@ namespace ReLeaf
             {
 
                 toLeafEffectPool = PoolManager.Singleton.SetPool(toLeafEffect, 1000, 1000, true);
+                toSandEffectPool = PoolManager.Singleton.SetPool(toSandEffect, 50, 200, true);
                 foreach (var pos in tilemap.cellBounds.allPositionsWithin)
                 {
                     var tile = tilemap.GetTile<TerrainTile>(pos);
@@ -209,6 +214,9 @@ namespace ReLeaf
         public void Messy(Vector2Int tilePos, IMultipleVisual visual)
         {
             ChangeTile(tilePos, TileType.Messy, visual.VisualType);
+
+            var effect = toSandEffectPool.Get<ToSandEffect>();
+            effect.transform.position = TilePosToWorld(tilePos);
         }
         public void ToSand(Vector2Int tilePos)
         {
