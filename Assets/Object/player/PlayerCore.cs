@@ -94,7 +94,7 @@ namespace ReLeaf
         }
         void Death()
         {
-            spriteRenderer.enabled = false;
+            gameObject.SetActive(false);
             GameRuleManager.Singleton.Finish(false);
         }
 

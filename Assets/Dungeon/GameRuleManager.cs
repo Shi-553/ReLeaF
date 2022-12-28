@@ -36,11 +36,13 @@ namespace ReLeaf
 
 
         [SerializeField]
-        GameObject gameReadyText;
+        GameObject gameReadyObj;
         [SerializeField]
-        GameObject gamestartText;
+        GameObject gamestartObj;
         [SerializeField]
-        GameObject gameclearText;
+        GameObject gameclearObj;
+        [SerializeField]
+        GameObject gameoverObj;
 
         [SerializeField]
         AudioInfo bgmStage1;
@@ -65,17 +67,17 @@ namespace ReLeaf
         protected virtual IEnumerator Start()
         {
             yield return new WaitForSeconds(1);
-            gameReadyText.SetActive(true);
+            gameReadyObj.SetActive(true);
             SEManager.Singleton.Play(seReady);
             yield return new WaitForSeconds(1);
-            gameReadyText.SetActive(false);
-            gamestartText.SetActive(true);
+            gameReadyObj.SetActive(false);
+            gamestartObj.SetActive(true);
             SEManager.Singleton.Play(seStart);
 
             State = GameRuleState.Playing;
 
             yield return new WaitForSeconds(1);
-            gamestartText.SetActive(false);
+            gamestartObj.SetActive(false);
 
             BGMManager.Singleton.Play(bgmStage1);
         }
@@ -93,6 +95,12 @@ namespace ReLeaf
                 StartCoroutine(WaitClearSound());
                 StartCoroutine(WaitGreening());
             }
+            else
+            {
+                gameoverObj.SetActive(true);
+                PlayerController.Singleton.enabled = false;
+
+            }
         }
         IEnumerator WaitClearSound()
         {
@@ -103,7 +111,7 @@ namespace ReLeaf
         IEnumerator WaitGreening()
         {
             yield return StartCoroutine(AllGreening.Singleton.StartGreeningWithPlayer());
-            gameclearText.SetActive(true);
+            gameclearObj.SetActive(true);
             SEManager.Singleton.Play(clearBGM);
             PlayerController.Singleton.enabled = false;
         }
