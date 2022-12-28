@@ -89,7 +89,7 @@ namespace Utility
             BGMManager.Singleton.StopAll();
             SEManager.Singleton.StopAll();
 
-            var definitionSingletonBases = FindObjectsOfType<DefinitionSingletonBase>();
+            var definitionSingletonBases = FindObjectsOfType<DefinitionSingletonBase>(true);
             definitionSingletonBases.ForEach(s => s.UninitBeforeSceneUnloadDefinition());
 
             // とりあえずマネージャーシーンをアクティブに
