@@ -249,7 +249,6 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 001da747823b07f45a2ab13eb1073cbe, type: 2}
   terrainTileArrays: []
   tilemap: {fileID: 9020821008736504434}
-  toLeafEffect: {fileID: -8009822704911909708, guid: 3de2c373e89cf4f4c856cbd81c7c4eeb, type: 3}
   <MaxGreeningCount>k__BackingField: 0
 --- !u!213 &85952946
 Sprite:
@@ -1678,6 +1677,7 @@ Transform:
   - {fileID: 812973352}
   - {fileID: 621338742}
   - {fileID: 1562164629}
+  - {fileID: 1913449412}
   m_Father: {fileID: 0}
   m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -1927,9 +1927,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 33710eafa3e808a45a1e6578ea3854f2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  gameReadyText: {fileID: 0}
-  gamestartText: {fileID: 0}
-  gameclearText: {fileID: 0}
+  gameReadyObj: {fileID: 0}
+  gamestartObj: {fileID: 0}
+  gameclearObj: {fileID: 0}
+  gameoverObj: {fileID: 0}
   bgmStage1: {fileID: 0}
   seReady: {fileID: 0}
   seStart: {fileID: 0}
@@ -3243,6 +3244,53 @@ Transform:
   m_Father: {fileID: 593113328784407098}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1913449411
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1913449412}
+  - component: {fileID: 1913449413}
+  m_Layer: 0
+  m_Name: TileEffectManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1913449412
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1913449411}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 2.7740088, y: 8.969681, z: -18.578989}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 680637147}
+  m_RootOrder: 3
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1913449413
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1913449411}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dc291b1ef2400d9499f976fcd60e7dad, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  tileEffects:
+  - {fileID: -8009822704911909708, guid: 3de2c373e89cf4f4c856cbd81c7c4eeb, type: 3}
+  - {fileID: 3797039637821607636, guid: 4f186e0b62068c14a93010e6ebfa40e1, type: 3}
 --- !u!1 &1934392672
 GameObject:
   m_ObjectHideFlags: 0
