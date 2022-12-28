@@ -94,7 +94,6 @@ namespace ReLeaf
         }
         void Death()
         {
-            gameObject.SetActive(false);
             GameRuleManager.Singleton.Finish(false);
         }
 

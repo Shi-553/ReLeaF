@@ -45,6 +45,9 @@ namespace ReLeaf
         GameObject gameoverObj;
 
         [SerializeField]
+        GameObject playingUIRoot;
+
+        [SerializeField]
         AudioInfo bgmStage1;
         [SerializeField]
         AudioInfo seReady;
@@ -90,20 +93,20 @@ namespace ReLeaf
 
             if (isGameClear)
             {
-                BGMManager.Singleton.Stop();
-                SEManager.Singleton.Play(stageClear1);
                 StartCoroutine(WaitClearSound());
                 StartCoroutine(WaitGreening());
             }
             else
             {
                 gameoverObj.SetActive(true);
-                PlayerController.Singleton.enabled = false;
+                Finish();
 
             }
         }
         IEnumerator WaitClearSound()
         {
+            BGMManager.Singleton.Stop();
+            SEManager.Singleton.Play(stageClear1);
             yield return new WaitForSeconds(stageClear1.clip.length);
             SEManager.Singleton.Play(stageClear2);
 
@@ -113,8 +116,18 @@ namespace ReLeaf
             yield return StartCoroutine(AllGreening.Singleton.StartGreeningWithPlayer());
             gameclearObj.SetActive(true);
             SEManager.Singleton.Play(clearBGM);
-            PlayerController.Singleton.enabled = false;
+            Finish();
         }
 
+        /// <summary>
+        /// èIóπéûÇÃã§í èàóù
+        /// </summary>
+        void Finish()
+        {
+            PlayerController.Singleton.enabled = false;
+            PlayerCore.Singleton.gameObject.SetActive(false);
+            RobotMover.Singleton.gameObject.SetActive(false);
+            playingUIRoot.SetActive(false);
+        }
     }
 }
