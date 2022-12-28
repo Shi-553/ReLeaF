@@ -28,11 +28,19 @@ namespace Utility
             {
                 if (!isInitialized)
                 {
-                    singletonInstance = FindObjectOfType<T>();
                     if (singletonInstance != null)
                     {
-                        singletonInstance.Init(true, false);
                         isInitialized = true;
+                    }
+                    else
+                    {
+                        singletonInstance = FindObjectOfType<T>();
+
+                        if (singletonInstance != null)
+                        {
+                            singletonInstance.Init(true, false);
+                            isInitialized = true;
+                        }
                     }
                 }
                 return singletonInstance;
@@ -42,7 +50,7 @@ namespace Utility
 
         sealed protected override void Awake()
         {
-            if (isInitialized && singletonInstance != this)
+            if (isInitialized && singletonInstance != null && singletonInstance != this)
             {
                 "Destroy Duplicate Instance.".DebugLog();
 
@@ -77,7 +85,6 @@ namespace Utility
         public sealed override void UninitAfterSceneUnloadDefinition()
         {
             UninitAfterSceneUnload(!DontDestroyOnLoad);
-
         }
         public sealed override void TryDestroy()
         {
@@ -89,6 +96,11 @@ namespace Utility
                 if (gameObject != null)
                     Destroy(gameObject);
             }
+        }
+
+        protected virtual void OnDestroy()
+        {
+            isInitialized = false;
         }
 
         /// <summary>
