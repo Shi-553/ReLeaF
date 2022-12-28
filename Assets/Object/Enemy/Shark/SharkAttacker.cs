@@ -37,7 +37,7 @@ namespace ReLeaf
             attackStartPos = enemyMover.TilePos;
 
             enemyMover.GetCheckPoss(enemyMover.TilePos, enemyMover.DirNotZero, buffer);
-            attackTargetPos = buffer.Last() + (enemyMover.DirNotZero * (SharkAttackInfo.Range - 1));
+            attackTargetPos = buffer.Last() + (enemyMover.DirNotZero * (SharkAttackInfo.Range));
 
             foreach (var target in GetAttackRange(enemyMover.TilePos, enemyMover.DirNotZero, true))
             {
