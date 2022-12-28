@@ -106,7 +106,7 @@ namespace ReLeaf
                     });
 
                 }
-                mover.UpdateManualOperation(mover.transform.position + (Vector3)(Vector2)dir, info.Speed, false);
+                mover.UpdateManualOperation(PlayerMover.Singleton.transform.position + (Vector3)(Vector2)dir * 2, info.Speed, false);
 
                 if (!isRunning)
                     break;
@@ -132,14 +132,30 @@ namespace ReLeaf
         {
             isRunning = true;
             float time = 0;
+
+            var playerRigidbody = PlayerMover.Singleton.GetComponent<Rigidbody2D>();
+            var beforePlayerPos = playerRigidbody.position;
+            var checkPlayerPos = false;
+
             while (true)
             {
-                time += Time.deltaTime;
+                yield return new WaitForFixedUpdate();
+                time += Time.fixedDeltaTime;
+
+
+                var playerPos = playerRigidbody.position;
 
                 if (UseCount > 1 || time > info.DashDuration)
                     break;
 
-                yield return null;
+                checkPlayerPos = !checkPlayerPos;
+
+                if (checkPlayerPos)
+                {
+                    if ((beforePlayerPos - playerPos).sqrMagnitude < 0.001f)
+                        break;
+                    beforePlayerPos = playerPos;
+                }
             }
             isRunning = false;
         }
