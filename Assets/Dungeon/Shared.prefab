@@ -1673,7 +1673,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 910080988456663700}
-  - component: {fileID: 910080988456663703}
+  - component: {fileID: 4413373856441279299}
   m_Layer: 5
   m_Name: GreeningRate
   m_TagString: Untagged
@@ -1704,7 +1704,7 @@ RectTransform:
   m_AnchoredPosition: {x: 355.99994, y: -361}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &910080988456663703
+--- !u!114 &4413373856441279299
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -1713,10 +1713,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 910080988456663701}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d6ee0ef4d2de4c74d813db5a64ec0e38, type: 3}
+  m_Script: {fileID: 11500000, guid: 5799571a030eb204a9a8a5e938754f10, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  value: 0
   slider: {fileID: 1144050834150343331}
 --- !u!1 &910080988477484385
 GameObject:

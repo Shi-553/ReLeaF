@@ -1503,6 +1503,7 @@ GameObject:
   m_Component:
   - component: {fileID: 521728146}
   - component: {fileID: 521728147}
+  - component: {fileID: 521728148}
   m_Layer: 0
   m_Name: DungeonManager
   m_TagString: Untagged
@@ -1549,6 +1550,20 @@ MonoBehaviour:
   tilemap: {fileID: 9020821008736504434}
   toLeafEffect: {fileID: -8009822704911909708, guid: 3de2c373e89cf4f4c856cbd81c7c4eeb, type: 3}
   <MaxGreeningCount>k__BackingField: 0
+--- !u!114 &521728148
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 521728145}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d6ee0ef4d2de4c74d813db5a64ec0e38, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  targetRate: 0.7
+  value: 0
 --- !u!1001 &556091339
 PrefabInstance:
   m_ObjectHideFlags: 0
