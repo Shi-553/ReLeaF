@@ -13,8 +13,9 @@ MonoBehaviour:
   m_Name: StageObjectInfo
   m_EditorClassIdentifier: 
   tileType: 10
-  canEnemyMove: 0
-  canEnemyAttack: 0
+  canEnemyMove: 1
+  canEnemyAttack: 1
+  canEnemyMoveAttack: 1
   canGreening: 1
   canGreeningUseSpecial: 1
   isAlreadyGreening: 0
