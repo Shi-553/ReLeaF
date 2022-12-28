@@ -16,6 +16,8 @@ namespace ReLeaf
 
         private void Pause(InputAction.CallbackContext obj)
         {
+            if (GameRuleManager.Singleton.IsFinished)
+                return;
             var loader = SceneLoader.Singleton;
             if (loader.IsPause)
                 loader.UnoverrideScene();
