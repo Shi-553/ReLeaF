@@ -9,8 +9,7 @@ namespace ReLeaf
         [SerializeField]
         GameObject target;
         GameObject Target => target != null ? target : gameObject;
-        [SerializeField]
-        AudioInfo seMenuMove;
+      
 
         void Start()
         {
