@@ -32,18 +32,15 @@ namespace Utility
 
                     if (fieldInfo != null)
                     {
-                        return (TAttribute[])fieldInfo.GetCustomAttributes<TAttribute>(inherit);
+                        var arrs = (TAttribute[])fieldInfo.GetCustomAttributes<TAttribute>(inherit);
+                        if (arrs.Length > 0)
+                            return arrs;
+                        targetObjectType = fieldInfo.FieldType;
+                        break;
                     }
 
                     t = t.BaseType;
                 } while (t != null);
-
-
-                var propertyInfo = targetObjectType.GetProperty(pathSegment, AllBindingFlags);
-                if (propertyInfo != null)
-                {
-                    return (TAttribute[])propertyInfo.GetCustomAttributes<TAttribute>(inherit);
-                }
             }
             return new TAttribute[] { };
         }

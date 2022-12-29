@@ -16,14 +16,26 @@ namespace ReLeaf
         [SerializeField]
         AnimationClip toStageSelect;
 
+        AnimancerComponent animancer;
         void Start()
         {
-            startButton.onClick.AddListener(() => StartStageSelect());
+            animancer = GetComponentInParent<AnimancerComponent>();
+
+            if (TitleState.Singleton.IsSkipTitle)
+            {
+                toStageSelect.SampleAnimation(animancer.gameObject, toStageSelect.length);
+
+                toActiveObj.ForEach(x => x.SetActive(true));
+                gameObject.SetActive(false);
+            }
+            else
+                startButton.onClick.AddListener(() => StartStageSelect());
         }
         void StartStageSelect()
         {
+            TitleState.Singleton.IsSkipTitle = true;
             startButton.enabled = false;
-            GetComponentInParent<AnimancerComponent>().Play(toStageSelect);
+            animancer.Play(toStageSelect);
             toActiveObj.ForEach(x => x.SetActive(true));
             StartCoroutine(WaitAnimation());
         }

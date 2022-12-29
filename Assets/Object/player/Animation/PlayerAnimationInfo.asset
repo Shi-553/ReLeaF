@@ -22,4 +22,7 @@ MonoBehaviour:
   - type: 2
     left: {fileID: 7400000, guid: 9135f4f668304c14fbf4e98c21af61ef, type: 2}
     right: {fileID: 7400000, guid: aa9205005682e8f48b904b92130d35d2, type: 2}
+  - type: 3
+    left: {fileID: 7400000, guid: fdfbf933258f2c74eaa0457ee197620b, type: 2}
+    right: {fileID: 7400000, guid: ba97a280db299cd49b19e954050bd624, type: 2}
   singleClips: []

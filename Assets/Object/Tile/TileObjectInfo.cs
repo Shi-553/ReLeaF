@@ -20,6 +20,10 @@ namespace ReLeaf
         bool canEnemyAttack;
         public bool CanEnemyAttack => canEnemyAttack;
 
+        [SerializeField, Rename("敵の移動攻撃を受けるか")]
+        bool canEnemyMoveAttack;
+        public bool CanEnemyMoveAttack => canEnemyMoveAttack;
+
         [SerializeField, Rename("緑化できるか")]
         bool canGreening;
         public bool CanGreening => canGreening;

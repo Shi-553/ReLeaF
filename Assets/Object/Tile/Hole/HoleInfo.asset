@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   tileType: 1
   canEnemyMove: 0
-  canEnemyAttack: 0
+  canEnemyAttack: 1
   canGreening: 0
   canGreeningUseSpecial: 0
   isAlreadyGreening: 0

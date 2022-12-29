@@ -10,13 +10,18 @@ namespace ReLeaf
         TileObjectInfo info;
         protected TileObjectInfo Info => info;
 
-        public virtual TileObject InstancedTarget => this;
+        // インスタンス化する子供
+        public virtual TileObject InstancingTarget => this;
+
+        // このタイルをインスタンス化した親
+        public TileObject InstancedParent { get; set; }
 
         public TileBase CreatedTile { get; set; }
 
         public TileType TileType => info.TileType;
-        public virtual bool CanEnemyMove(bool isAttackMove) => isAttackMove ? CanEnemyAttack(true) : info.CanEnemyMove;
+        public virtual bool CanEnemyMove(bool isAttackMove) => isAttackMove ? CanEnemyMoveAttack(true) : info.CanEnemyMove;
         public bool CanEnemyAttack(bool includeMoveabePos) => info.CanEnemyAttack || (includeMoveabePos && info.CanEnemyMove);
+        public bool CanEnemyMoveAttack(bool includeMoveabePos) => info.CanEnemyMoveAttack || (includeMoveabePos && info.CanEnemyMove);
         public virtual bool CanGreening(bool useSpecial) => useSpecial ? info.CanGreeningUseSpecial : info.CanGreening;
         public virtual bool IsAlreadyGreening => info.IsAlreadyGreening;
 

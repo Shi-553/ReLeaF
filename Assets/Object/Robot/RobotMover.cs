@@ -11,7 +11,11 @@ namespace ReLeaf
         public float Speed => UseManualOperation ? manualSpeed : speed;
 
         [SerializeField, Rename("それ以上近づかない距離(nマス)")]
-        float nearRange = 1.0f;
+        float minDistance = 1.0f;
+
+        [SerializeField, Rename("目的地にこれより近づいたら止まる距離(nマス)")]
+        float nearThreshold = 0.1f;
+        float NearThreshold => UseManualOperation ? manualNearThreshold : nearThreshold;
 
         public Vector2 Move { get; set; }
         public bool IsMove => Move != Vector2.zero;
@@ -24,6 +28,7 @@ namespace ReLeaf
 
         bool canUseDash = true;
         float manualSpeed;
+        float manualNearThreshold = 0.1f;
 
         protected override void Init(bool isFirstInit, bool callByAwake)
         {
@@ -36,6 +41,7 @@ namespace ReLeaf
         Vector3 toTarget;
         Vector3 dir;
         float distance;
+        public float Distance => distance;
         void UpdateTarget(Vector3 target)
         {
             this.target = target;
@@ -44,13 +50,14 @@ namespace ReLeaf
             dir = toTarget / distance;
         }
 
-        public void UpdateManualOperation(Vector3 target, float speed, bool useDash)
+        public void UpdateManualOperation(Vector3 target, float speed, bool useDash, float manualNearThreshold = 0.1f)
         {
             if (speed == 0)
                 return;
             UpdateTarget(target);
             UseManualOperation = true;
             this.canUseDash = useDash;
+            this.manualNearThreshold = manualNearThreshold;
             manualSpeed = speed;
         }
         public bool IsStop { get; set; }
@@ -71,7 +78,7 @@ namespace ReLeaf
             {
                 UpdateTarget(PlayerCore.Singleton.transform.position);
 
-                if (distance * DungeonManager.CELL_SIZE < nearRange)
+                if (distance * DungeonManager.CELL_SIZE < minDistance)
                 {
                     if (PlayerCore.Singleton.Mover.Dir != Vector2.zero)
                     {
@@ -86,7 +93,7 @@ namespace ReLeaf
                         }
                         dir = Quaternion.Euler(0, 0, 30 * cross) * dir;
                     }
-                    UpdateTarget(target - dir * nearRange);
+                    UpdateTarget(target - dir * minDistance);
                 }
             }
             else
@@ -95,7 +102,7 @@ namespace ReLeaf
             }
 
             var distanceMaxOne = Mathf.Min(distance, 1);
-            if (distanceMaxOne > 0.1f)
+            if (distanceMaxOne > NearThreshold)
             {
                 Move = DungeonManager.CELL_SIZE * distanceMaxOne * Speed * dir;
                 mover.MoveDelta(Move);

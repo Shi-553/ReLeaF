@@ -10,21 +10,24 @@ namespace ReLeaf
     {
         [SerializeField]
         SharkSpecialPowerInfo info;
-        protected override SowSeedSpecialPowerInfo SowSeedSpecialPowerInfo => info;
+        protected override ISowSeedSpecialPowerInfo SowSeedSpecialPowerInfo => info;
+
+        Vector2Int previewdTilePos;
 
         public override void PreviewRange(Vector2Int tilePos, Vector2Int dir, List<Vector2Int> returns)
         {
             if (!IsUsing)
             {
+                previewdTilePos = tilePos;
                 base.PreviewRange(tilePos, dir, returns);
                 return;
             }
             returns.Clear();
 
-            tilePos = DungeonManager.Singleton.WorldToTilePos(RobotMover.Singleton.transform.position);
+            previewdTilePos = DungeonManager.Singleton.WorldToTilePos(RobotMover.Singleton.transform.position);
             foreach (var weakLocalTilePos in info.ThrustingList)
             {
-                var pos = tilePos + weakLocalTilePos;
+                var pos = previewdTilePos + weakLocalTilePos;
                 if (!DungeonManager.Singleton.TryGetTile(pos, out var tile) || !tile.CanOrAleeadyGreening(true))
                 {
                     continue;
@@ -39,7 +42,7 @@ namespace ReLeaf
             GlobalCoroutine.Singleton.StartCoroutine(MovePlayer(dir));
 
 
-            var localRanges = SowSeedSpecialPowerInfo.SeedLocalTilePos.GetLocalTilePosList(dir).ToList();
+            var localRanges = SowSeedSpecialPowerInfo.GetSeedLocalTilePos(dir).ToList();
 
             var (minLocalTilePos, maxLocalTilePos) = localRanges.Aggregate(
                 (localRanges[0], localRanges[0]),
@@ -106,7 +109,7 @@ namespace ReLeaf
                     });
 
                 }
-                mover.UpdateManualOperation(mover.transform.position + (Vector3)(Vector2)dir, info.Speed, false);
+                mover.UpdateManualOperation(PlayerMover.Singleton.transform.position + (Vector3)(Vector2)dir * 2.0f, info.Speed, false);
 
                 if (!isRunning)
                     break;
@@ -115,14 +118,14 @@ namespace ReLeaf
             }
 
             mover.IsStop = true;
-            GlobalCoroutine.Singleton.StartCoroutine(mover.GetComponent<RobotAnimation>().Thrust());
+            mover.GetComponent<RobotAnimation>().Thrust();
             yield return new WaitForSeconds(0.5f);
 
-            tilePos = DungeonManager.Singleton.WorldToTilePos(mover.transform.position);
             foreach (var localPos in info.ThrustingList)
             {
-                DungeonManager.Singleton.SowSeed(tilePos + localPos, true);
+                DungeonManager.Singleton.SowSeed(previewdTilePos + localPos, true);
             }
+
             mover.IsStop = false;
         }
 
@@ -131,14 +134,30 @@ namespace ReLeaf
         {
             isRunning = true;
             float time = 0;
+
+            var playerRigidbody = PlayerMover.Singleton.GetComponent<Rigidbody2D>();
+            var beforePlayerPos = playerRigidbody.position;
+            var checkPlayerPos = false;
+
             while (true)
             {
-                time += Time.deltaTime;
+                yield return new WaitForFixedUpdate();
+                time += Time.fixedDeltaTime;
+
+
+                var playerPos = playerRigidbody.position;
 
                 if (UseCount > 1 || time > info.DashDuration)
                     break;
 
-                yield return null;
+                checkPlayerPos = !checkPlayerPos;
+
+                if (checkPlayerPos)
+                {
+                    if ((beforePlayerPos - playerPos).sqrMagnitude < 0.001f)
+                        break;
+                    beforePlayerPos = playerPos;
+                }
             }
             isRunning = false;
         }

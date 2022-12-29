@@ -6,6 +6,6 @@ namespace ReLeaf
     {
         public SpawnLakeEnemyInfo EnemyInfo => Info as SpawnLakeEnemyInfo;
 
-        public override TileObject InstancedTarget => transform.GetComponentsInChildren<TileObject>().Last();
+        public override TileObject InstancingTarget => transform.GetComponentsInChildren<TileObject>().Last();
     }
 }

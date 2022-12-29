@@ -77,7 +77,7 @@ namespace ReLeaf
                 rotateable.Rotate(Rotation, (Vector2)(Size - Vector2Int.one) * 0.25f);
             }
             tile.createdObject.CreatedTile = this;
-            tile.createdObject.InstancedTarget.CreatedTile = this;
+            tile.createdObject.InstancingTarget.CreatedTile = this;
 
 #if UNITY_EDITOR
 

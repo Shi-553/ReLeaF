@@ -9,7 +9,7 @@ namespace ReLeaf
     {
         [SerializeField]
         CrabSpecialPowerInfo sowSeedSpecialPowerInfo;
-        protected override SowSeedSpecialPowerInfo SowSeedSpecialPowerInfo => sowSeedSpecialPowerInfo;
+        protected override ISowSeedSpecialPowerInfo SowSeedSpecialPowerInfo => sowSeedSpecialPowerInfo;
 
         public override void PreviewRange(Vector2Int tilePos, Vector2Int dir, List<Vector2Int> returns)
         {
@@ -18,7 +18,7 @@ namespace ReLeaf
         }
         protected override IEnumerator UseImpl(Vector2Int tilePos, Vector2Int dir)
         {
-            var localRanges = SowSeedSpecialPowerInfo.SeedLocalTilePos.GetLocalTilePosList(dir).ToList();
+            var localRanges = SowSeedSpecialPowerInfo.GetSeedLocalTilePos(dir).ToList();
 
             var (minLocalTilePos, maxLocalTilePos) = localRanges.Aggregate(
                 (localRanges[0], localRanges[0]),

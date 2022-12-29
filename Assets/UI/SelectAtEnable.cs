@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using UnityEngine.EventSystems;
+using Utility;
 
 namespace ReLeaf
 {
@@ -18,8 +19,16 @@ namespace ReLeaf
         }
         public void Select()
         {
-            if (EventSystem.current)
-                EventSystem.current.SetSelectedGameObject(Target);
+            if (EventSystem.current != null)
+            {
+                EventSystemUtility.SetSelectedGameObjectNoFade(Target);
+
+                if (EventSystem.current.currentInputModule != null)
+                {
+                    EventSystem.current.currentInputModule.enabled = false;
+                    EventSystem.current.currentInputModule.enabled = true;
+                }
+            }
         }
     }
 }

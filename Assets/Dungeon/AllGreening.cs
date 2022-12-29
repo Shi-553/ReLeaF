@@ -71,6 +71,7 @@ namespace ReLeaf
         IEnumerator Greening(Vector2Int startPos)
         {
             // 負荷の低いうちにおおよそ確保しておく
+            var worldStartPos = DungeonManager.Singleton.TilePosToWorld(startPos);
 
             Dictionary<Vector2Int, bool> greenMap = new(500);
 
@@ -109,13 +110,27 @@ namespace ReLeaf
                     //緑化関係なくタイルを取得
                     if (DungeonManager.Singleton.TryGetTile(pos, out var tile))
                     {
-                        if (useCamera)
+                        if (useCamera && tile.CanOrAleeadyGreening(true))
                         {
                             if (cinemachineTargetGroup.m_Targets.Length > 100)
                             {
-                                // 緑化を始めた地点とプレイヤーをカメラに残したいので、98で折り返す
-                                cinemachineTargetGroup.m_Targets[2 + cinemachineTargetGroupIndex].target = tile.transform;
-                                cinemachineTargetGroupIndex = (cinemachineTargetGroupIndex + 1) % 98;
+                                // 最大100回
+                                for (int j = 0; j < 100; j++)
+                                {
+                                    var currentDir = (Vector2)cinemachineTargetGroup.m_Targets[2 + cinemachineTargetGroupIndex].target.position - worldStartPos;
+                                    var overrideDir = (Vector2)tile.transform.position - worldStartPos;
+
+                                    if (Mathf.Sign(currentDir.x) == Mathf.Sign(overrideDir.x) &&
+                                        Mathf.Sign(currentDir.y) == Mathf.Sign(overrideDir.y))
+                                    {
+                                        // 緑化を始めた地点とプレイヤーをカメラに残したいので、98で折り返す
+                                        cinemachineTargetGroup.m_Targets[2 + cinemachineTargetGroupIndex].target = tile.transform;
+                                        cinemachineTargetGroupIndex = (cinemachineTargetGroupIndex + 1) % 98;
+
+                                        break;
+                                    }
+                                    cinemachineTargetGroupIndex = (cinemachineTargetGroupIndex + 1) % 98;
+                                }
                             }
                             else
                             {

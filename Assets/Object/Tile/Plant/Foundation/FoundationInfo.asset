@@ -15,10 +15,10 @@ MonoBehaviour:
   tileType: 3
   canEnemyMove: 0
   canEnemyAttack: 1
+  canEnemyMoveAttack: 1
   canGreening: 0
   canGreeningUseSpecial: 0
   isAlreadyGreening: 1
   hpMax: 1
   growTime: 0.5
   damageMagnifications: []
-  toLeafEffect: {fileID: 4742772883075391010, guid: 47a4a79c5aedb0f4abbe6415d44b76d9, type: 3}

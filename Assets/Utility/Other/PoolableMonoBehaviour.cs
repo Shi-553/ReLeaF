@@ -16,16 +16,27 @@ namespace Utility
         }
         public virtual void OnDestroyPool()
         {
-            if (this != null)
-                Destroy(gameObject);
+            if (this == null)
+                return;
+            Destroy(gameObject);
         }
-        public virtual void OnGetPool() => gameObject.SetActive(true);
+        public virtual void OnGetPool()
+        {
+            if (this == null)
+                return;
+            gameObject.SetActive(true);
+        }
         public virtual void OnReleasePool() => gameObject.SetActive(false);
 
 
         public void Release()
         {
-            Pool.Release(this);
+            if (Pool != null)
+            {
+                Pool.Release(this);
+                return;
+            }
+            OnReleasePool();
         }
 
 

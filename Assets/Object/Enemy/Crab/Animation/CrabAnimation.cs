@@ -22,6 +22,9 @@ namespace ReLeaf
             };
             while (true)
             {
+                if (this == null)
+                    yield break;
+
                 var t = time / SpwanInitAnimationTime;
 
                 transform.localScale = Vector3.Lerp(Vector3.one / 2, Vector3.one, t);

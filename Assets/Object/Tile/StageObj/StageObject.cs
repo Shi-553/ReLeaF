@@ -25,7 +25,7 @@ namespace ReLeaf
             Max,
         }
 
-        public override TileObject InstancedTarget => transform.GetComponentsInChildren<TileObject>().Last();
+        public override TileObject InstancingTarget => transform.GetComponentsInChildren<TileObject>().Last();
 
         [SerializeField]
         StageObjectType type;

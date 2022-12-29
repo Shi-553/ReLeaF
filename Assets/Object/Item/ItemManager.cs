@@ -62,7 +62,7 @@ namespace ReLeaf
         public bool WasChangedItemDirThisFrame => ItemDir != OldItemDir;
 
         PlayerMover mover;
-        ItemBase previewd;
+        ItemUI previewd;
 
         Vector3 itemOffset;
 
@@ -153,29 +153,33 @@ namespace ReLeaf
             Index++;
         }
 
-        private void LateUpdate()
-        {
-            Selector.transform.position = Current.transform.position;
-        }
         private void Update()
         {
+            Selector.transform.position = Current.transform.position;
 
-            if (mover.WasChangedTilePosThisFrame || WasChangedItemDirThisFrame || previewd != Current.Item)
+            if (mover.WasChangedTilePosThisFrame || WasChangedItemDirThisFrame || previewd != Current)
             {
                 specialPreviewMarkerManager.ResetAllMarker();
+                previewd = Current;
                 if (ItemCount == 0)
                 {
                     return;
                 }
-                previewd = Current.Item;
-                previewd.PreviewRange(mover.TilePos, ItemDir, previews);
+
+                previewd.Item.PreviewRange(mover.TilePos, ItemDir, previews);
 
                 foreach (var p in previews)
                 {
                     specialPreviewMarkerManager.SetMarker<SpecialPreviewMarker>(p);
                 }
             }
+
             OldItemDir = ItemDir;
+        }
+
+        private void OnDestroy()
+        {
+            specialPreviewMarkerManager.ResetAllMarker();
         }
     }
 }

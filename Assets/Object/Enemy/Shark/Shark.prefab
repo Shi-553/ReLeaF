@@ -160,11 +160,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0a81c3f30fa39bf4cb7afa11099138ad, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  <SharkAttackInfo>k__BackingField: {fileID: 11400000, guid: 573058ee99460034396cb62d41c559c4, type: 2}
   <Transition>k__BackingField: 0
+  attackMarkerManager: {fileID: 4430456495496529935}
+  <SharkAttackInfo>k__BackingField: {fileID: 11400000, guid: 573058ee99460034396cb62d41c559c4, type: 2}
   attackStartPos: {x: 0, y: 0}
   attackTargetPos: {x: 0, y: 0}
-  attackMarkerManager: {fileID: 4430456495496529935}
   seBeforeAttack: {fileID: 11400000, guid: 071c6b1ad20e5ef479a336f841676159, type: 2}
   seAttack: {fileID: 11400000, guid: b25f4858142ebb14095c58feefb12f0f, type: 2}
 --- !u!114 &-4858720575995891945
@@ -192,6 +192,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   searchVision: {fileID: 3643397740765400334}
+  isMoveAttacker: 1
 --- !u!114 &1197057677586801177
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -348,7 +349,7 @@ SpriteRenderer:
   m_SpriteSortPoint: 0
 --- !u!95 &7894784152793238379
 Animator:
-  serializedVersion: 4
+  serializedVersion: 5
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -365,7 +366,7 @@ Animator:
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorControllerStateOnDisable: 0
+  m_KeepAnimatorStateOnDisable: 0
 --- !u!114 &2188233885046996716
 MonoBehaviour:
   m_ObjectHideFlags: 0

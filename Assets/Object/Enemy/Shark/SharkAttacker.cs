@@ -27,8 +27,12 @@ namespace ReLeaf
         [SerializeField]
         AudioInfo seAttack;
 
+        EnemyDirectAttackController enemyDirectAttackController;
 
-
+        protected override void Init()
+        {
+            TryGetComponent(out enemyDirectAttackController);
+        }
 
         protected override void OnStartAiming()
         {
@@ -37,13 +41,16 @@ namespace ReLeaf
             attackStartPos = enemyMover.TilePos;
 
             enemyMover.GetCheckPoss(enemyMover.TilePos, enemyMover.DirNotZero, buffer);
-            attackTargetPos = buffer.Last() + (enemyMover.DirNotZero * (SharkAttackInfo.Range - 2));
-
-            foreach (var target in GetAttackRange(enemyMover.TilePos, enemyMover.DirNotZero, true))
+            attackTargetPos = buffer.Last() + (enemyMover.DirNotZero * (SharkAttackInfo.Range));
+            var ranges = GetAttackRange(enemyMover.TilePos, enemyMover.DirNotZero, true).ToArray();
+            foreach (var target in ranges)
             {
                 attackMarkerManager.SetMarker<TargetMarker>(target, enemyMover.DirNotZero.GetRotation());
             }
             SEManager.Singleton.Play(seBeforeAttack, transform.position);
+
+            if (ranges.Length <= 4)
+                enemyDirectAttackController.AddImpossibleLastTargets();
         }
         protected override IEnumerator OnStartDamageing()
         {
@@ -73,31 +80,58 @@ namespace ReLeaf
             List<Vector2Int> returns = new(2);
             List<Vector2Int> buffer = new(2);
 
-            for (int i = 0; i < SharkAttackInfo.Range; i++)
+            // ƒ_ƒ‚Èê‡ false‚ð•Ô‚·
+            bool CheckAndAdd(Vector2Int pos)
+            {
+                if (returns.Contains(pos))
+                    return true;
+
+                if (!DungeonManager.Singleton.TryGetTile(pos, out var tile))
+                {
+                    return false;
+                }
+                if (tile.CanEnemyMoveAttack(includeMoveabePos) && tile.InstancedParent.CanEnemyMoveAttack(includeMoveabePos))
+                {
+                    buffer.Add(pos);
+                    return true;
+                }
+
+                return false;
+            }
+            var range = SharkAttackInfo.Range + 1;
+
+            for (int i = 0; i < range; i++)
             {
                 var worldTilePosBase = pos + dir * i;
-                for (int x = 0; x < enemyMover.TileSize.x; x++)
+
+                // c‚©‰¡‚©‚Åx‚Æy‚Ìƒ‹[ƒv‡‚ð•Ï‚¦‚Ä‚é
+                if (dir.x != 0)
+                {
+                    for (int x = 0; x < enemyMover.TileSize.x; x++)
+                    {
+                        for (int y = 0; y < enemyMover.TileSize.y; y++)
+                        {
+                            if (!CheckAndAdd(new Vector2Int(worldTilePosBase.x + x, worldTilePosBase.y + y)))
+                                return returns;
+                        }
+                        returns.AddRange(buffer);
+                        buffer.Clear();
+                    }
+                }
+                else
                 {
                     for (int y = 0; y < enemyMover.TileSize.y; y++)
                     {
-                        var worldTilePos = new Vector2Int(worldTilePosBase.x + x, worldTilePosBase.y + y);
-                        if (returns.Contains(worldTilePos))
-                            continue;
-                        if (!DungeonManager.Singleton.TryGetTile(worldTilePos, out var tile))
+                        for (int x = 0; x < enemyMover.TileSize.x; x++)
                         {
-                            return returns;
+                            if (!CheckAndAdd(new Vector2Int(worldTilePosBase.x + x, worldTilePosBase.y + y)))
+                                return returns;
                         }
-                        if (tile.CanEnemyAttack(includeMoveabePos))
-                        {
-                            buffer.Add(worldTilePos);
-                            continue;
-                        }
-
-                        return returns;
+                        returns.AddRange(buffer);
+                        buffer.Clear();
                     }
+
                 }
-                returns.AddRange(buffer);
-                buffer.Clear();
             }
             return returns;
         }
@@ -130,11 +164,13 @@ namespace ReLeaf
                             return;
                         }
                     }
-
-                    if (MathExtension.DuringExists(plant.TilePos, enemyMover.TilePos, enemyMover.TilePos + enemyMover.TileSize, false))
+                    else
                     {
-                        plant.Damaged(SharkAttackInfo.ATK, DamageType.Direct);
-                        return;
+                        if (MathExtension.DuringExists(plant.TilePos, enemyMover.TilePos, enemyMover.TilePos + enemyMover.TileSize, false))
+                        {
+                            plant.Damaged(SharkAttackInfo.ATK, DamageType.Direct);
+                            return;
+                        }
                     }
                 }
             }

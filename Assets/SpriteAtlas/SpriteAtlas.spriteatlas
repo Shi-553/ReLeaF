@@ -298,6 +298,18 @@ SpriteAtlas:
   - {fileID: -34460191, guid: 946826ac5cc353f4d9fad583b7404d14, type: 3}
   - {fileID: 379289595, guid: 946826ac5cc353f4d9fad583b7404d14, type: 3}
   - {fileID: 21300000, guid: b0c5a0ecdbd82aa4d8cc07be72d2ea10, type: 3}
+  - {fileID: -68895118, guid: 9786caad732370f409e14224d6b2304f, type: 3}
+  - {fileID: 1485135924, guid: 9786caad732370f409e14224d6b2304f, type: 3}
+  - {fileID: -1351016059, guid: 9786caad732370f409e14224d6b2304f, type: 3}
+  - {fileID: -1095280690, guid: 9786caad732370f409e14224d6b2304f, type: 3}
+  - {fileID: 606164548, guid: 9786caad732370f409e14224d6b2304f, type: 3}
+  - {fileID: 1858221263, guid: 9786caad732370f409e14224d6b2304f, type: 3}
+  - {fileID: 1228837795, guid: 9786caad732370f409e14224d6b2304f, type: 3}
+  - {fileID: 1768286449, guid: 9786caad732370f409e14224d6b2304f, type: 3}
+  - {fileID: -1836481896, guid: 9786caad732370f409e14224d6b2304f, type: 3}
+  - {fileID: -193958469, guid: 9786caad732370f409e14224d6b2304f, type: 3}
+  - {fileID: 1616170013, guid: 9786caad732370f409e14224d6b2304f, type: 3}
+  - {fileID: -1343339805, guid: 9786caad732370f409e14224d6b2304f, type: 3}
   - {fileID: -346212209, guid: f8641bcd83e12ce44a8bc832beea318b, type: 3}
   - {fileID: 1989933905, guid: f8641bcd83e12ce44a8bc832beea318b, type: 3}
   - {fileID: -1690822147, guid: f8641bcd83e12ce44a8bc832beea318b, type: 3}
@@ -562,6 +574,18 @@ SpriteAtlas:
   - spriteseet_11
   - spriteseet_10
   - SeaUrchin_spine
+  - spriteseet_damage_11
+  - spriteseet_damage_10
+  - spriteseet_damage_0
+  - spriteseet_damage_1
+  - spriteseet_damage_2
+  - spriteseet_damage_3
+  - spriteseet_damage_4
+  - spriteseet_damage_5
+  - spriteseet_damage_6
+  - spriteseet_damage_7
+  - spriteseet_damage_8
+  - spriteseet_damage_9
   - spriteseet_sharkdefeat_1
   - spriteseet_sharkdefeat_0
   - spriteseet_sharkdefeat_3

@@ -128,7 +128,7 @@ GameObject:
   - component: {fileID: 4420447744752128222}
   m_Layer: 0
   m_Name: OBJ_ship_2
-  m_TagString: Untagged
+  m_TagString: Wall
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -162,7 +162,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1465f12468275c849ba9a7e839596b73, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  info: {fileID: 11400000, guid: 4284d82a36d9158438e90a2184abb6fa, type: 2}
+  info: {fileID: 11400000, guid: 3021e4cc6cecc72428a86248493023e7, type: 2}
   type: 5
 --- !u!61 &4420447744752128222
 BoxCollider2D:

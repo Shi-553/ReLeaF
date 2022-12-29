@@ -226,7 +226,7 @@ Tilemap:
       m_TileColorIndex: 4
       m_TileObjectToInstantiateIndex: 3
       dummyAlignment: 0
-      m_AllTileFlags: 2147483651
+      m_AllTileFlags: 3
   - first: {x: 3, y: 2, z: 0}
     second:
       serializedVersion: 2
@@ -517,7 +517,7 @@ TilemapRenderer:
   m_Mode: 0
   m_DetectChunkCullingBounds: 0
   m_MaskInteraction: 0
---- !u!114 &4751257370002943973
+--- !u!114 &2327594246587554025
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}

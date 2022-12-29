@@ -12,6 +12,7 @@ namespace Utility
             protected abstract void Awake();
             public abstract void UninitBeforeSceneUnloadDefinition();
             public abstract void UninitAfterSceneUnloadDefinition();
+            public abstract void TryDestroy();
         }
     }
     public abstract class SingletonBase<T> : DefinitionSingletonBase where T : SingletonBase<T>
@@ -27,9 +28,20 @@ namespace Utility
             {
                 if (!isInitialized)
                 {
-                    isInitialized = true;
-                    singletonInstance = FindObjectOfType<T>();
-                    singletonInstance.Init(true, false);
+                    if (singletonInstance != null)
+                    {
+                        isInitialized = true;
+                    }
+                    else
+                    {
+                        singletonInstance = FindObjectOfType<T>();
+
+                        if (singletonInstance != null)
+                        {
+                            singletonInstance.Init(true, false);
+                            isInitialized = true;
+                        }
+                    }
                 }
                 return singletonInstance;
             }
@@ -38,7 +50,7 @@ namespace Utility
 
         sealed protected override void Awake()
         {
-            if (isInitialized && singletonInstance != this)
+            if (isInitialized && singletonInstance != null && singletonInstance != this)
             {
                 "Destroy Duplicate Instance.".DebugLog();
 
@@ -64,7 +76,7 @@ namespace Utility
 #if DEFINE_SCENE_TYPE_ENUM
             if (!InManagerScene)
             {
-                transform.parent = null;
+                transform.SetParent(null, false);
                 SceneManager.MoveGameObjectToScene(transform.gameObject, SceneManager.GetSceneByBuildIndex(SceneType.Manager.GetBuildIndex()));
             }
 #endif
@@ -73,17 +85,22 @@ namespace Utility
         public sealed override void UninitAfterSceneUnloadDefinition()
         {
             UninitAfterSceneUnload(!DontDestroyOnLoad);
-
+        }
+        public sealed override void TryDestroy()
+        {
             if (!DontDestroyOnLoad)
             {
                 isInitialized = false;
                 singletonInstance = null;
 
-                if (gameObject.GetComponents<Component>().Length <= 2)
+                if (gameObject != null)
                     Destroy(gameObject);
-                else
-                    Destroy(this);
             }
+        }
+
+        protected virtual void OnDestroy()
+        {
+            isInitialized = false;
         }
 
         /// <summary>

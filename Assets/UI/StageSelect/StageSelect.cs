@@ -10,10 +10,6 @@ namespace ReLeaf
         Transform icons;
         [SerializeField]
         StageInfo[] stageInfos;
-        [SerializeField]
-        float fadeoutTime = 2.0f;
-        [SerializeField]
-        float fadeinTime = 1.0f;
 
         void Awake()
         {
@@ -32,7 +28,7 @@ namespace ReLeaf
                     button.onClick.AddListener(() =>
                     {
                         StageManager.Singleton.Current = info;
-                        SceneLoader.Singleton.LoadScene(info.Scene, fadeoutTime, fadeinTime);
+                        SceneLoader.Singleton.LoadScene(info.Scene, 3.0f);
                     });
                 }
                 else

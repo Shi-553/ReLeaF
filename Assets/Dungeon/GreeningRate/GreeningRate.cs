@@ -1,12 +1,14 @@
 using UnityEngine;
 using Utility;
-using Slider = UnityEngine.UI.Slider;
 
 namespace ReLeaf
 {
     [ClassSummary("緑化率マネージャー")]
     public class GreeningRate : MonoBehaviour
     {
+        [SerializeField, Rename("クリアに必要な緑化率")]
+        float targetRate = 0.7f;
+
         [SerializeField, ReadOnly]
         float value;
         public float Value
@@ -15,14 +17,12 @@ namespace ReLeaf
             set
             {
                 this.value = value;
-                slider.value = ValueRate;
+                GreeningRateUI.Singleton.Slider.value = ValueRate;
 
             }
         }
-        public float ValueRate => value / StageManager.Singleton.Current.TargetRate / DungeonManager.Singleton.MaxGreeningCount;
+        public float ValueRate => value / targetRate / DungeonManager.Singleton.MaxGreeningCount;
 
-        [SerializeField]
-        Slider slider;
 
         public static GreeningRate Instance { get; private set; }
         private void Awake()
@@ -40,8 +40,7 @@ namespace ReLeaf
         private void Start()
         {
             value = 0;
-            slider.value = ValueRate;
-            var sliderRect = slider.GetComponent<RectTransform>();
+            GreeningRateUI.Singleton.Slider.value = ValueRate;
 
             DungeonManager.Singleton.OnTileChanged += OnTileChanged;
         }

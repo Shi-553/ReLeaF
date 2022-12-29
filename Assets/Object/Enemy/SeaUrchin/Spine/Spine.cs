@@ -78,7 +78,7 @@ namespace ReLeaf
                         }
                         if (target.TryGetComponent(out PlayerCore player))
                         {
-                            player.Damaged(info.ATK, (transform.position - target.position).normalized * info.KnockBackPower);
+                            player.Damaged(info.ATK, (target.position - transform.position).normalized * info.KnockBackPower);
                             continue;
                         }
                     }

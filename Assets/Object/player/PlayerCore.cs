@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using UnityEngine;
 using Utility;
 
@@ -21,6 +22,9 @@ namespace ReLeaf
         public float damagedFlashingAlpha = 0.5f;
 
         public bool IsInvincible { get; set; }
+        public bool IsDamaged { get; private set; }
+        public event Action OnDamaged;
+
         public override bool DontDestroyOnLoad => false;
 
         [SerializeField]
@@ -45,7 +49,7 @@ namespace ReLeaf
         {
             if (!GameRuleManager.Singleton.IsPlaying)
                 return;
-            if (IsInvincible)
+            if (IsInvincible || IsDamaged)
                 return;
 
             if (hpGauge.ConsumeValue(damage))
@@ -62,7 +66,10 @@ namespace ReLeaf
         }
         IEnumerator Damaged()
         {
-            IsInvincible = true;
+            IsDamaged = true;
+
+            OnDamaged?.Invoke();
+
             float time = 0;
             var color = spriteRenderer.color;
             var flashingColor = new Color(spriteRenderer.color.r, spriteRenderer.color.g, spriteRenderer.color.b, damagedFlashingAlpha);
@@ -83,11 +90,10 @@ namespace ReLeaf
             }
             spriteRenderer.enabled = true;
 
-            IsInvincible = false;
+            IsDamaged = false;
         }
         void Death()
         {
-            spriteRenderer.enabled = false;
             GameRuleManager.Singleton.Finish(false);
         }
 
