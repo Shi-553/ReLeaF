@@ -20,22 +20,14 @@ namespace ReLeaf
                 var button = child.GetComponent<Button>();
 
                 var info = stageInfos[i];
-                if (0 == i)
-                {
-                    button.interactable = true;
-                    child.Find("Sprite").GetComponent<Image>().sprite = info.Activebutton;
+                button.interactable = true;
+                child.Find("Sprite").GetComponent<Image>().sprite = info.Activebutton;
 
-                    button.onClick.AddListener(() =>
-                    {
-                        StageManager.Singleton.Current = info;
-                        SceneLoader.Singleton.LoadScene(info.Scene, 3.0f);
-                    });
-                }
-                else
+                button.onClick.AddListener(() =>
                 {
-                    button.interactable = false;
-                    child.Find("Sprite").GetComponent<Image>().sprite = info.DisableButton;
-                }
+                    StageManager.Singleton.Current = info;
+                    SceneLoader.Singleton.LoadScene(info.Scene, 3.0f);
+                });
             }
         }
     }
