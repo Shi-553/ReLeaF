@@ -92,7 +92,7 @@ namespace Utility
                 .AppendLine("public enum SceneType")
                 .AppendLine("{");
 
-            List<int> indexs = new();
+            Dictionary<int, string> sceneTypeDic = new();
 
 #if DEFINE_SCENE_TYPE_ENUM
             foreach (string type in typeof(SceneType).GetEnumNames())
@@ -101,19 +101,22 @@ namespace Utility
                 {
                     int oldIndex = (int)Enum.Parse<SceneType>(type);
 
-                    builder.AppendLine($"    {type} = {oldIndex},{Environment.NewLine}");
-
-                    indexs.Add(oldIndex);
+                    sceneTypeDic.Add(oldIndex, type);
                 }
             }
 #endif
 
-            int index = indexs.Count == 0 ? 0 : indexs.Max() + 1;
+            int index = sceneTypeDic.Count == 0 ? 0 : sceneTypeDic.Keys.Max() + 1;
 
             foreach (var name in sceneNames)
             {
-                builder.AppendLine($"    {name} = {index},{Environment.NewLine}");
+                sceneTypeDic.Add(index, name);
                 index++;
+            }
+
+            foreach (var sceneType in sceneTypeDic.OrderBy(t => sceneNamesOriginal.IndexOf(t.Value)))
+            {
+                builder.AppendLine($"    {sceneType.Value} = {sceneType.Key},{Environment.NewLine}");
             }
 
             builder.AppendLine("}");

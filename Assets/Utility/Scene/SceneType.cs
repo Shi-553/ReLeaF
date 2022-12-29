@@ -4,21 +4,19 @@
 /// <summary>
 public enum SceneType
 {
+    Title = 2,
+
     SampleScene = 0,
 
     Manager = 1,
 
-    Title = 2,
+    Menu = 4,
 
     stage1 = 3,
-
-    Menu = 4,
 
     stage2 = 5,
 
     stage3 = 6,
-
-    stage4 = 7,
 
 }
 public static class SceneTypeExtension
@@ -34,7 +32,6 @@ public static class SceneTypeExtension
           SceneType.stage1 => 4,              
           SceneType.stage2 => 5,              
           SceneType.stage3 => 6,              
-          SceneType.stage4 => 7,              
           _ => 0,                                
       };                                         
    }
@@ -53,7 +50,6 @@ public static class SceneTypeExtension
           4 => SceneType.stage1,              
           5 => SceneType.stage2,              
           6 => SceneType.stage3,              
-          7 => SceneType.stage4,              
           _ => 0,                                
       };                                         
    }

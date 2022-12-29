@@ -15,4 +15,3 @@ MonoBehaviour:
   scene: 0
   activebutton: {fileID: 21300000, guid: c9e8876eff123e14895797819de47f1c, type: 3}
   disableButton: {fileID: 21300000, guid: 2a34726e4b7f45e41a337f0737cff686, type: 3}
-  targetRate: 0.5
