@@ -34,7 +34,6 @@ namespace ReLeaf
         void StartStageSelect()
         {
             TitleState.Singleton.IsSkipTitle = true;
-            startButton.enabled = false;
             animancer.Play(toStageSelect);
             toActiveObj.ForEach(x => x.SetActive(true));
             StartCoroutine(WaitAnimation());
