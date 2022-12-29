@@ -1239,6 +1239,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   target: {fileID: 0}
+  seMenuMove: {fileID: 0}
 --- !u!114 &481584025
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1780,6 +1781,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8170263960615008392, guid: db9edc26f4891e541ab0b7eb14e52f50, type: 3}
+      propertyPath: seClick
+      value: 
+      objectReference: {fileID: 11400000, guid: 368a254ca49eab74eb797f91ff52b162, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: db9edc26f4891e541ab0b7eb14e52f50, type: 3}
 --- !u!1 &782830820
@@ -1931,12 +1936,14 @@ MonoBehaviour:
   gamestartObj: {fileID: 0}
   gameclearObj: {fileID: 0}
   gameoverObj: {fileID: 0}
+  playingUIRoot: {fileID: 0}
   bgmStage1: {fileID: 0}
   seReady: {fileID: 0}
   seStart: {fileID: 0}
   clearBGM: {fileID: 0}
   stageClear1: {fileID: 0}
   stageClear2: {fileID: 0}
+  gameOverBGM: {fileID: 0}
 --- !u!1 &858538502
 GameObject:
   m_ObjectHideFlags: 0
@@ -2088,6 +2095,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8170263960615008392, guid: db9edc26f4891e541ab0b7eb14e52f50, type: 3}
+      propertyPath: seClick
+      value: 
+      objectReference: {fileID: 11400000, guid: 368a254ca49eab74eb797f91ff52b162, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: db9edc26f4891e541ab0b7eb14e52f50, type: 3}
 --- !u!1001 &951260317
@@ -2185,6 +2196,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8170263960615008392, guid: db9edc26f4891e541ab0b7eb14e52f50, type: 3}
+      propertyPath: seClick
+      value: 
+      objectReference: {fileID: 11400000, guid: 368a254ca49eab74eb797f91ff52b162, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: db9edc26f4891e541ab0b7eb14e52f50, type: 3}
 --- !u!1 &1088853378
@@ -2240,6 +2255,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   target: {fileID: 465668157}
+  seMenuMove: {fileID: 0}
 --- !u!114 &1088853381
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2882,6 +2898,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8170263960615008392, guid: db9edc26f4891e541ab0b7eb14e52f50, type: 3}
+      propertyPath: seClick
+      value: 
+      objectReference: {fileID: 11400000, guid: 368a254ca49eab74eb797f91ff52b162, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: db9edc26f4891e541ab0b7eb14e52f50, type: 3}
 --- !u!1 &1562164628
@@ -3104,6 +3124,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8170263960615008392, guid: db9edc26f4891e541ab0b7eb14e52f50, type: 3}
+      propertyPath: seClick
+      value: 
+      objectReference: {fileID: 11400000, guid: 368a254ca49eab74eb797f91ff52b162, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: db9edc26f4891e541ab0b7eb14e52f50, type: 3}
 --- !u!224 &1791416823 stripped
@@ -3210,6 +3234,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8170263960615008392, guid: db9edc26f4891e541ab0b7eb14e52f50, type: 3}
+      propertyPath: seClick
+      value: 
+      objectReference: {fileID: 11400000, guid: 368a254ca49eab74eb797f91ff52b162, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: db9edc26f4891e541ab0b7eb14e52f50, type: 3}
 --- !u!1 &1909550639
@@ -3539,6 +3567,7 @@ MonoBehaviour:
   toActiveObj:
   - {fileID: 1088853378}
   toStageSelect: {fileID: 7400000, guid: 478e5476193241a41b8620550871433a, type: 2}
+  seClick: {fileID: 11400000, guid: e16adc3a6c4c41c42aab2d202771408d, type: 2}
 --- !u!4 &593113328784407098
 Transform:
   m_ObjectHideFlags: 0

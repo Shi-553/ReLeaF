@@ -16,6 +16,9 @@ namespace ReLeaf
         [SerializeField]
         AnimationClip toStageSelect;
 
+        [SerializeField]
+        AudioInfo seClick;
+
         AnimancerComponent animancer;
         void Start()
         {
@@ -33,6 +36,7 @@ namespace ReLeaf
         }
         void StartStageSelect()
         {
+            SEManager.Singleton.Play(seClick, transform.position);
             TitleState.Singleton.IsSkipTitle = true;
             animancer.Play(toStageSelect);
             toActiveObj.ForEach(x => x.SetActive(true));
