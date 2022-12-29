@@ -34,5 +34,8 @@ namespace ReLeaf
                     break;
             }
         }
+        protected override void OnMove()
+        {
+        }
     }
 }

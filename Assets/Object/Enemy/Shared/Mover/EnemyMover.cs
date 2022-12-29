@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 using Utility;
@@ -21,6 +22,8 @@ namespace ReLeaf
         /// </summary>
         [field: SerializeField, ReadOnly]
         public Vector2Int MoveTarget { get; private set; }
+
+        public event Action OnMove;
 
         public bool IsMove => mover.IsMove;
         public bool IsLeftNow => Dir.x < 0;
@@ -92,6 +95,8 @@ namespace ReLeaf
 
         public MoveResult Move(float speedOverride, bool isAttackMove = false)
         {
+            OnMove?.Invoke();
+
             OldTilePos = TilePos;
             GetCheckPoss(TilePos, Dir, buffer);
 

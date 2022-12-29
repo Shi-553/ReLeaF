@@ -23,9 +23,11 @@ namespace ReLeaf
                 TryGetComponent(out enemyMover);
                 TryGetComponent(out enemyCore);
                 enemyAttacker.OnChangeTransition += ChangeTransition;
+                enemyMover.OnMove += OnMove;
             }
         }
         protected abstract void ChangeTransition(AttackTransition transition);
+        protected abstract void OnMove();
 
         void Start()
         {

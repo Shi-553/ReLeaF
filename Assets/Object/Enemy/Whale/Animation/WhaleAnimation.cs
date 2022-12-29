@@ -20,9 +20,6 @@ namespace ReLeaf
             }
             switch (transition)
             {
-                case AttackTransition.None:
-                    animancerComponent.Play(info.GetClip(WhaleAnimationType.Move, enemyMover.IsLeftIfMove));
-                    break;
                 case AttackTransition.Aiming:
                     animancerComponent.Play(info.GetClip(WhaleAnimationType.BeforeAttack, enemyMover.IsLeftNow));
                     break;
@@ -30,6 +27,11 @@ namespace ReLeaf
                     animancerComponent.Play(info.GetClip(WhaleAnimationType.Attack, enemyMover.IsLeftNow));
                     break;
             }
+        }
+        protected override void OnMove()
+        {
+            if (!enemyAttacker.IsAttack)
+                animancerComponent.Play(info.GetClip(WhaleAnimationType.Move, enemyMover.IsLeftIfMove));
         }
     }
 }
