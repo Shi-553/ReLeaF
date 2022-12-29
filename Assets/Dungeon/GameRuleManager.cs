@@ -59,6 +59,8 @@ namespace ReLeaf
         AudioInfo stageClear1;
         [SerializeField]
         AudioInfo stageClear2;
+        [SerializeField]
+        AudioInfo gameOverBGM;
 
         protected override void Init(bool isFirstInit, bool callByAwake)
         {
@@ -98,6 +100,7 @@ namespace ReLeaf
             }
             else
             {
+                BGMManager.Singleton.Play(gameOverBGM);
                 gameoverObj.SetActive(true);
                 Finish();
 
