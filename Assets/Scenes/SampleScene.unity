@@ -2036,18 +2036,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 910080987624034134, guid: 2cd630823031a59448638e4aefcd42e8, type: 3}
-      propertyPath: gameOverBGM
-      value: 
-      objectReference: {fileID: 11400000, guid: c25e5d5bf3adc094699abdce994d85ec, type: 2}
-    - target: {fileID: 910080988004608199, guid: 2cd630823031a59448638e4aefcd42e8, type: 3}
-      propertyPath: m_AnchorMax.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 910080988004608199, guid: 2cd630823031a59448638e4aefcd42e8, type: 3}
-      propertyPath: m_AnchorMax.y
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 910080988294562538, guid: 2cd630823031a59448638e4aefcd42e8, type: 3}
       propertyPath: m_RootOrder
       value: 2
@@ -2095,22 +2083,6 @@ PrefabInstance:
     - target: {fileID: 910080988294562539, guid: 2cd630823031a59448638e4aefcd42e8, type: 3}
       propertyPath: m_Name
       value: Shared
-      objectReference: {fileID: 0}
-    - target: {fileID: 1144050834633375618, guid: 2cd630823031a59448638e4aefcd42e8, type: 3}
-      propertyPath: m_AnchorMax.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1144050834633375618, guid: 2cd630823031a59448638e4aefcd42e8, type: 3}
-      propertyPath: m_AnchorMax.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1144050835764734374, guid: 2cd630823031a59448638e4aefcd42e8, type: 3}
-      propertyPath: m_AnchorMax.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1144050835764734374, guid: 2cd630823031a59448638e4aefcd42e8, type: 3}
-      propertyPath: m_AnchorMax.y
-      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2cd630823031a59448638e4aefcd42e8, type: 3}

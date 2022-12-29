@@ -1634,6 +1634,7 @@ MonoBehaviour:
   clearBGM: {fileID: 11400000, guid: c4d8fe8b3fcb79e40ada69b098aca8ba, type: 2}
   stageClear1: {fileID: 11400000, guid: 291e49e1af0f0ef479acbcb7f55c3b92, type: 2}
   stageClear2: {fileID: 11400000, guid: 368a254ca49eab74eb797f91ff52b162, type: 2}
+  gameOverBGM: {fileID: 11400000, guid: c25e5d5bf3adc094699abdce994d85ec, type: 2}
 --- !u!1 &910080987689981880
 GameObject:
   m_ObjectHideFlags: 0
