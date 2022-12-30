@@ -97,7 +97,7 @@ namespace ReLeaf
             attackMarkerManager.ResetAllMarker();
 
             enemyCore.SetWeekMarker();
-            SEManager.Singleton.Play(seAttack, transform.position);
+            SEManager.Singleton.Play(seAttack, transform.position,0.4f);
 
             foreach (var spine in currentAttackers)
             {
@@ -108,7 +108,7 @@ namespace ReLeaf
         }
         protected override void OnStartCoolTime()
         {
-            SEManager.Singleton.Play(seAfterAttack, transform.position);
+            SEManager.Singleton.Play(seAfterAttack, transform.position,0.4f);
         }
         protected override void OnEndCoolTime()
         {

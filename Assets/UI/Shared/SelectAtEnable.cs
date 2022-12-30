@@ -9,6 +9,8 @@ namespace ReLeaf
         [SerializeField]
         GameObject target;
         GameObject Target => target != null ? target : gameObject;
+      
+
         void Start()
         {
             Select();
@@ -16,19 +18,23 @@ namespace ReLeaf
         void OnEnable()
         {
             Select();
+           
         }
         public void Select()
         {
             if (EventSystem.current != null)
             {
+               
                 EventSystemUtility.SetSelectedGameObjectNoFade(Target);
-
+             
                 if (EventSystem.current.currentInputModule != null)
                 {
                     EventSystem.current.currentInputModule.enabled = false;
                     EventSystem.current.currentInputModule.enabled = true;
+                   
                 }
             }
+            
         }
     }
 }

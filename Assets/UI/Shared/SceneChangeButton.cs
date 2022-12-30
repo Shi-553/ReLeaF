@@ -18,6 +18,8 @@ namespace ReLeaf
         [SerializeField]
         ChangedTarget changedTarget;
 
+       
+
         void Start()
         {
             GetComponent<Button>().onClick.AddListener(OnClick);
@@ -30,17 +32,19 @@ namespace ReLeaf
                 SceneLoader.Singleton.UnoverrideScene();
                 return;
             }
+           
 
             if (changedTarget == ChangedTarget.StageSelect ||
                 changedTarget == ChangedTarget.Title)
             {
                 TitleState.Singleton.IsSkipTitle = changedTarget == ChangedTarget.StageSelect;
             }
-
+            
             SceneLoader.Singleton.LoadScene(GetSceneType());
         }
         SceneType GetSceneType()
         {
+           
             return changedTarget switch
             {
                 ChangedTarget.Title => SceneType.Title,
@@ -50,5 +54,7 @@ namespace ReLeaf
                 _ => SceneType.Title,
             };
         }
+
+
     }
 }
