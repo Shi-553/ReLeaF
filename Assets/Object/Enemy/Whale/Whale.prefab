@@ -161,6 +161,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   searchVision: {fileID: 3643397740765400334}
+  isMoveAttacker: 0
 --- !u!114 &6589404231911195076
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -176,8 +177,8 @@ MonoBehaviour:
   <Transition>k__BackingField: 0
   attackMarkerManager: {fileID: 4430456495496529935}
   dontMoveAttackInfo: {fileID: 11400000, guid: 66627e3004370fc4ba335da88d5891fe, type: 2}
-  seBeforeAttack: {fileID: 0}
-  seAttack: {fileID: 0}
+  seBeforeAttack: {fileID: 11400000, guid: fab00b3fd45034d4eb98df8e0d58a8d7, type: 2}
+  seAttack: {fileID: 11400000, guid: e5d3fa4e297a27b4da05264bce4c4b98, type: 2}
 --- !u!114 &-4858720575995891945
 MonoBehaviour:
   m_ObjectHideFlags: 0
