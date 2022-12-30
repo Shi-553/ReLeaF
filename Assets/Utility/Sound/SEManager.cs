@@ -45,21 +45,6 @@ namespace Utility
             return source;
         }
 
-        public AudioSource Play(AudioInfo info, Vector3 pos,float volume)
-        {
-
-            if (info == null)
-                return null;
-            var source = GetSource(true);
-            source.clip = info.clip;
-            source.spatialBlend = spatialBlend;
-            source.transform.position = pos;
-            source.loop = false;
-            source.volume = volume;
-            source.Play();
-
-            return source;
-        }
         public AudioSource PlayLoop(AudioInfo info, Transform target)
         {
             var source = GetSource(true);
