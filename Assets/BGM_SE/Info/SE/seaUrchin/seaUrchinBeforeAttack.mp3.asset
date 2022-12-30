@@ -13,4 +13,4 @@ MonoBehaviour:
   m_Name: seaUrchinBeforeAttack.mp3
   m_EditorClassIdentifier: 
   clip: {fileID: 8300000, guid: dfad5e63d6ecddf428c896bc6c9d342b, type: 3}
-  volume: 1
+  volume: 0.2

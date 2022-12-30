@@ -6,8 +6,7 @@ namespace ReLeaf
 {
     public class ClickToGreening : MonoBehaviour
     {
-        [SerializeField]
-        AudioInfo seClick;
+       
         void Start()
         {
             GetComponent<Button>().onClick.AddListener(() =>
@@ -17,8 +16,6 @@ namespace ReLeaf
                 if (hit)
                 {
                     var tilePos = DungeonManager.Singleton.WorldToTilePos(hit.point);
-                    SEManager.Singleton.Play(seClick, transform.position,1.0f);
-                    SEManager.Singleton.Play(seClick, transform.position, 1.0f);
                     GlobalCoroutine.Singleton.StartCoroutine(FindObjectOfType<AllGreening>().StartGreening(tilePos, false, true));
                 }
             });

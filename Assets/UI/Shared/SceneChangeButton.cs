@@ -18,16 +18,10 @@ namespace ReLeaf
         [SerializeField]
         ChangedTarget changedTarget;
 
-        [SerializeField]
-        AudioInfo seMenuOpen;
-        [SerializeField]
-        AudioInfo seMenuClose;
-        [SerializeField]
-        AudioInfo seMenuClick;
+       
 
         void Start()
         {
-            SEManager.Singleton.Play(seMenuOpen, transform.position);
             GetComponent<Button>().onClick.AddListener(OnClick);
         }
 
@@ -35,14 +29,10 @@ namespace ReLeaf
         {
             if (changedTarget == ChangedTarget.UnPause)
             {
-                SEManager.Singleton.Play(seMenuClose, transform.position);
                 SceneLoader.Singleton.UnoverrideScene();
                 return;
             }
-            else
-            {
-                SEManager.Singleton.Play(seMenuClick, transform.position);
-            }
+           
 
             if (changedTarget == ChangedTarget.StageSelect ||
                 changedTarget == ChangedTarget.Title)
