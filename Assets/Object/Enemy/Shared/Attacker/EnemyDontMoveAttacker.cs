@@ -56,7 +56,7 @@ namespace ReLeaf
             var player = PlayerCore.Singleton;
             foreach (var attackPos in attackPoss)
             {
-                if (player.Mover.TilePos == attackPos)
+                if (player != null && player.Mover.TilePos == attackPos)
                 {
 
                     player.Damaged(dontMoveAttackInfo.ATK, (player.transform.position - (Vector3)enemyMover.WorldCenter).normalized * dontMoveAttackInfo.KnockBackPower);
