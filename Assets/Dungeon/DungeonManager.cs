@@ -133,8 +133,7 @@ namespace ReLeaf
 
         public bool TryGetTile<T>(Vector2Int pos, out T tile) where T : TileObject
         {
-            tiles.TryGetValue(pos, out var tileBase);
-            if (tileBase is T t)
+            if (tiles.GetValueOrDefault(pos) is T t)
             {
                 tile = t;
                 return true;
