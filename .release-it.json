@@ -9,8 +9,7 @@
     "commit": false,
     "push": false,
     "requireUpstream": false,
-    "requireCleanWorkingDir": false,
-    "tag": false
+    "requireCleanWorkingDir": false
   },
   "npm": {
     "publish": false,
