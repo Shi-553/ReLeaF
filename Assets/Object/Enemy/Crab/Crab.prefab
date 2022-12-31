@@ -161,6 +161,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   searchVision: {fileID: 3643397740765400334}
+  isMoveAttacker: 0
 --- !u!114 &6589404231911195076
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -8,12 +8,21 @@ namespace ReLeaf
     {
         [SerializeField, Rename("検知範囲(n/マス)")]
         Vector2 size = Vector2.one;
+        Vector2 Size => size * DungeonManager.CELL_SIZE;
         [SerializeField, Rename("角度(度)")]
         float angle = 0;
 
-        protected override int GetInitCapacity() => (int)(size.x * size.y);
+        protected override int GetInitCapacity() => (int)(Size.x * Size.y);
 
         protected override Collider2D[] GetOverLapAll() =>
-            Physics2D.OverlapBoxAll(transform.position, size / 2, angle, mask);
+            Physics2D.OverlapBoxAll(transform.position, Size, angle, mask);
+
+#if UNITY_EDITOR
+        private void OnDrawGizmosSelected()
+        {
+            Gizmos.matrix = Matrix4x4.TRS(transform.position, Quaternion.Euler(0, 0, angle), Size);
+            Gizmos.DrawWireCube(Vector3.zero, Vector3.one);
+        }
+#endif
     }
 }
