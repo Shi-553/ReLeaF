@@ -25,7 +25,7 @@ namespace ReLeaf
             Max,
         }
 
-        public override TileObject InstancingTarget => transform.GetComponentsInChildren<TileObject>().Last();
+        public override TileObject InstancingTarget => transform.GetComponentsInChildren<TileObject>(true).Last();
 
         [SerializeField]
         StageObjectType type;
@@ -38,6 +38,11 @@ namespace ReLeaf
             var model = transform.Find("model");
             model.localRotation = rotation;
             model.localPosition = pos;
+        }
+        protected override void InitImpl()
+        {
+            base.InitImpl();
+            InstancingTarget.gameObject.SetActive(true);
         }
     }
 }
