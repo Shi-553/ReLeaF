@@ -385,6 +385,10 @@ PrefabInstance:
       propertyPath: targetTags.Array.data[1]
       value: Plant
       objectReference: {fileID: 0}
+    - target: {fileID: 7153099274174081556, guid: b1751a9d1ced5414c9dd8222cb552f05, type: 3}
+      propertyPath: targetTags.Array.data[2]
+      value: Wall
+      objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 3202823533353177119, guid: b1751a9d1ced5414c9dd8222cb552f05, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: b1751a9d1ced5414c9dd8222cb552f05, type: 3}

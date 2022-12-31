@@ -244,7 +244,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   terrainTiles:
-  - {fileID: 11400000, guid: 04420c5e4a51bcf46bfdcd69fb347f20, type: 2}
+  - {fileID: 11400000, guid: 166d001927ca49442b7b421b1722cf0f, type: 2}
   - {fileID: 11400000, guid: 1263c40a7eae41447bd0359878251824, type: 2}
   - {fileID: 11400000, guid: 001da747823b07f45a2ab13eb1073cbe, type: 2}
   terrainTileArrays: []
@@ -3237,7 +3237,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 3867404719554941120}
-  m_Father: {fileID: 593113328784407098}
+  m_Father: {fileID: 5023065968764256356}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1913449411
@@ -3549,7 +3549,6 @@ MonoBehaviour:
   toActiveObj:
   - {fileID: 1088853378}
   toStageSelect: {fileID: 7400000, guid: 478e5476193241a41b8620550871433a, type: 2}
-  seClick: {fileID: 11400000, guid: e16adc3a6c4c41c42aab2d202771408d, type: 2}
 --- !u!4 &593113328784407098
 Transform:
   m_ObjectHideFlags: 0
@@ -3563,9 +3562,8 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 5188875251139655626}
-  - {fileID: 1909550640}
   m_Father: {fileID: 5023065968764256356}
-  m_RootOrder: 1
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &972358583673266098
 GameObject:
@@ -3695,6 +3693,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 51372288}
+  - {fileID: 1909550640}
   - {fileID: 593113328784407098}
   m_Father: {fileID: 0}
   m_RootOrder: 2

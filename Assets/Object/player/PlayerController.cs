@@ -50,6 +50,11 @@ namespace ReLeaf
                 reLeafInputAction.Enable();
         }
 
+        protected override void OnDestroy()
+        {
+            base.OnDestroy();
+            reLeafInputAction?.Disable();
+        }
         void OnDisable()
         {
             reLeafInputAction?.Disable();

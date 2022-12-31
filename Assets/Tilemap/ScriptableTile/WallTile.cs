@@ -20,8 +20,8 @@ namespace ReLeaf
             base.InitImpl();
 
             poolArray = Pools.SetPoolArray((int)currentTileObject.TileType, 2);
-            poolArray.SetPool(0, block);
-            poolArray.SetPool(1, fill);
+            poolArray.SetPool(0, block, defaultCapacity / 2, maxSize / 2, true);
+            poolArray.SetPool(1, fill, defaultCapacity / 2, maxSize / 2, true);
         }
         protected override void UpdateTileObject(Vector3Int position, ITilemap tilemap)
         {

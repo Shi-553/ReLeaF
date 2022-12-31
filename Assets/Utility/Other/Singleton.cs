@@ -100,7 +100,8 @@ namespace Utility
 
         protected virtual void OnDestroy()
         {
-            isInitialized = false;
+            if (singletonInstance == this)
+                isInitialized = false;
         }
 
         /// <summary>

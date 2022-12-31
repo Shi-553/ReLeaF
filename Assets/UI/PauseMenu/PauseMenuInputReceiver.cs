@@ -7,13 +7,17 @@ namespace ReLeaf
     public class PauseMenuInputReceiver : MonoBehaviour
     {
         ReLeafInputAction inputAction;
-        
+
         private void OnEnable()
         {
             inputAction = new();
             inputAction.UI.Pause.started += Pause;
             inputAction.UI.Enable();
-           
+
+        }
+        private void OnDisable()
+        {
+            inputAction.Disable();
         }
 
         private void Pause(InputAction.CallbackContext obj)

@@ -26,6 +26,14 @@ namespace ReLeaf
 
         public IReadOnlyDictionary<Vector2Int, SpawnLake> Dic => lakeDic;
 
+        public void Reset()
+        {
+            if (coroutine != null)
+            {
+                GlobalCoroutine.Singleton.StopCoroutine(coroutine);
+                coroutine = null;
+            }
+        }
         public bool TryAdd(SpawnLake s)
         {
             if (lakeDic.ContainsKey(s.TilePos + Vector2Int.up) ||
@@ -91,9 +99,7 @@ namespace ReLeaf
                 coroutine = GlobalCoroutine.Singleton.StartCoroutine(SpawnInvertal());
                 return;
             }
-
-            if (coroutine != null)
-                GlobalCoroutine.Singleton.StopCoroutine(coroutine);
+            Reset();
         }
 
         IEnumerator SpawnInvertal()
@@ -153,7 +159,10 @@ namespace ReLeaf
                 return;
             spawnLakes.Clear();
         }
-
+        protected override void UninitBeforeSceneUnload(bool isDestroy)
+        {
+            groups.ForEach(group => group.Reset());
+        }
         void Start()
         {
             foreach (var lake in spawnLakes.Values)

@@ -44,6 +44,8 @@ namespace ReLeaf
 
         protected override void InitImpl()
         {
+            if (!gameObject.activeInHierarchy)
+                return;
             base.InitImpl();
 
             hp = PlantInfo.HpMax;

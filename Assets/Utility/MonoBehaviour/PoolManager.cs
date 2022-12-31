@@ -13,7 +13,7 @@ namespace Utility
         readonly Dictionary<Type, IEnumerablePool> pools = new();
         public IReadOnlyDictionary<Type, IEnumerablePool> Pools => pools;
 
-        public override bool DontDestroyOnLoad => false;
+        public override bool DontDestroyOnLoad => true;
         protected override void Init(bool isFirstInit, bool callByAwake)
         {
         }
@@ -95,7 +95,7 @@ namespace Utility
 
     }
 
-    public interface IEnumerablePool : IEnumerable<IEnumerablePool>
+    public interface IEnumerablePool : IEnumerable<Pool>
     {
         public void Clear();
     }
@@ -108,6 +108,9 @@ namespace Utility
         readonly Transform parent;
         readonly PoolableMonoBehaviour prefab;
 
+        public int DefaultCapacity { get; private set; }
+        public int MaxSize { get; private set; }
+
         public Pool(Transform parent, PoolableMonoBehaviour p, int defaultCapacity = 10, int maxSize = 100, bool setSizeWithCapacity = false)
         {
             this.parent = parent;
@@ -117,6 +120,9 @@ namespace Utility
             if (p == null)
                 Debug.LogError("Pool Prefab null!!!");
 #endif
+
+            DefaultCapacity = defaultCapacity;
+            MaxSize = maxSize;
 
             pool = new ObjectPool<PoolableMonoBehaviour>(
                              createFunc: () => prefab.Create(this.parent, this),
@@ -171,6 +177,7 @@ namespace Utility
             {
                 element.Uninit();
                 pool.Release(element);
+
             }
         }
 
@@ -178,6 +185,8 @@ namespace Utility
 
         public void Resize(int size)
         {
+            if (pool.CountInactive >= size)
+                return;
             var poolables = new PoolableMonoBehaviour[size];
 
             for (int i = 0; i < size; i++)
@@ -190,7 +199,7 @@ namespace Utility
             }
         }
 
-        public IEnumerator<IEnumerablePool> GetEnumerator()
+        public IEnumerator<Pool> GetEnumerator()
         {
             yield return this;
         }
@@ -269,11 +278,17 @@ namespace Utility
             return newPool;
         }
 
-        public IEnumerator<IEnumerablePool> GetEnumerator()
+        public IEnumerator<Pool> GetEnumerator()
         {
-            foreach (var p in pools)
+            foreach (var enumerablePool in pools)
             {
-                yield return p;
+                if (enumerablePool == null)
+                    continue;
+
+                foreach (var p in enumerablePool)
+                {
+                    yield return p;
+                }
             }
         }
 

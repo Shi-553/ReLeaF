@@ -107,6 +107,7 @@ namespace Utility
             // とりあえずマネージャーシーンをアクティブに
             SceneManager.SetActiveScene(gameObject.scene);
 
+
             yield return SceneManager.UnloadSceneAsync(Current);
 
             if (IsPause)
@@ -161,6 +162,7 @@ namespace Utility
             changeing = null;
 
             OnFinishFadein?.Invoke();
+
         }
 
         public void OverrideScene(SceneType scene)
