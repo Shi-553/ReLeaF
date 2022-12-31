@@ -68,10 +68,21 @@ namespace ReLeaf
                 return;
             State = GameRuleState.Prepare;
         }
-
-        protected virtual IEnumerator Start()
+        protected override void UninitBeforeSceneUnload(bool isDestroy)
         {
-            yield return new WaitForSeconds(1);
+            SceneLoader.Singleton.OnFinishFadein -= Ready;
+        }
+        protected virtual void Start()
+        {
+            SceneLoader.Singleton.OnFinishFadein += Ready;
+        }
+        void Ready()
+        {
+            StartCoroutine(WaitReady());
+        }
+        IEnumerator WaitReady()
+        {
+            yield return new WaitForSeconds(0.5f);
             gameReadyObj.SetActive(true);
             SEManager.Singleton.Play(seReady);
             yield return new WaitForSeconds(1);

@@ -15,7 +15,7 @@ namespace Utility
         /// </summary>
         public AudioSource Play(AudioInfo info)
         {
-            if (info == null)
+            if (!CanPlayStart || info == null)
                 return null;
             var source = GetSource(true);
             source.clip = info.clip;
@@ -31,8 +31,7 @@ namespace Utility
         /// </summary>
         public AudioSource Play(AudioInfo info, Vector3 pos)
         {
-
-            if (info == null)
+            if (!CanPlayStart || info == null)
                 return null;
             var source = GetSource(true);
             source.clip = info.clip;
@@ -47,6 +46,8 @@ namespace Utility
 
         public AudioSource PlayLoop(AudioInfo info, Transform target)
         {
+            if (!CanPlayStart || info == null)
+                return null;
             var source = GetSource(true);
             source.clip = info.clip;
             source.loop = true;

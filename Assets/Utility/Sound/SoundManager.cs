@@ -14,6 +14,7 @@ namespace Utility
 
         protected abstract int InitSourceCount { get; }
 
+        public bool CanPlayStart { get; set; } = true;
 
         protected override void Init(bool isFirstInit, bool callByAwake)
         {

@@ -13,5 +13,5 @@ MonoBehaviour:
   m_Name: ToLeafInfo
   m_EditorClassIdentifier: 
   tileEffectType: 0
-  defaultCapacity: 1000
-  maxSize: 1000
+  defaultCapacity: 1200
+  maxSize: 1200

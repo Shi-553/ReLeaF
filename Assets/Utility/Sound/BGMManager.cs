@@ -6,6 +6,8 @@
 
         public void Play(AudioInfo info)
         {
+            if (!CanPlayStart)
+                return;
             StopAll();
             var source = GetSource(false);
             source.clip = info.clip;

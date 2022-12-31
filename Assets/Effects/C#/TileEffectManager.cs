@@ -25,7 +25,8 @@ namespace ReLeaf
                         tileEffect.VisualType,
                         tileEffect,
                         tileEffect.TileEffectInfo.DefaultCapacity,
-                        tileEffect.TileEffectInfo.MaxSize);
+                        tileEffect.TileEffectInfo.MaxSize,
+                        true);
                 }
 
             }

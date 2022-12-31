@@ -29,6 +29,7 @@ namespace Utility
         public bool IsPause => Background.HasValue;
         public bool IsOverride => Background.HasValue;
 
+        public event Action OnFinishFadein;
         public event Action<bool> OnChangePause;
 
         Coroutine changeing;
@@ -55,6 +56,13 @@ namespace Utility
             fadeImage = loading.GetComponentInChildren<Image>();
         }
 
+        private IEnumerator Start()
+        {
+            yield return null;
+
+            OnFinishFadein?.Invoke();
+        }
+
 #if DEFINE_SCENE_TYPE_ENUM
         public void LoadScene(SceneType scene, float fadeoutTime = 1.0f, float fadeinTime = 1.0f)
         {
@@ -66,6 +74,9 @@ namespace Utility
 
         IEnumerator LoadSceneAsync(SceneType type, float fadeoutTime, float fadeinTime)
         {
+            var eventSystem = EventSystem.current;
+            eventSystem.enabled = false;
+
             audioListener.enabled = false;
             loading.SetActive(true);
             if (fadeoutTime > 0)
@@ -86,8 +97,9 @@ namespace Utility
 
             Time.timeScale = 0;
 
-            BGMManager.Singleton.StopAll();
-            SEManager.Singleton.StopAll();
+            BGMManager.Singleton.CanPlayStart = false;
+            SEManager.Singleton.CanPlayStart = false;
+
 
             var definitionSingletonBases = FindObjectsOfType<DefinitionSingletonBase>(true);
             definitionSingletonBases.ForEach(s => s.UninitBeforeSceneUnloadDefinition());
@@ -105,17 +117,27 @@ namespace Utility
 
             definitionSingletonBases.ForEach(s => s.UninitAfterSceneUnloadDefinition());
             definitionSingletonBases.ForEach(s => s.TryDestroy());
-            // audioListener.enabled = true;
+            audioListener.enabled = true;
+
+            BGMManager.Singleton.StopAll();
+            SEManager.Singleton.StopAll();
+            BGMManager.Singleton.CanPlayStart = true;
+            SEManager.Singleton.CanPlayStart = true;
+
+            eventSystem.enabled = true;
 
             yield return Resources.UnloadUnusedAssets();
-            audioListener.enabled = false;
+
+
             yield return SceneManager.LoadSceneAsync(type.GetBuildIndex(), LoadSceneMode.Additive);
+            audioListener.enabled = false;
 
 
             Current = SceneManager.GetSceneByBuildIndex(type.GetBuildIndex());
             SceneManager.SetActiveScene(Current);
 
             Debug.Log($"Changed to <b>{CurrentType}</b>");
+            yield return null;
 
             Time.timeScale = 1;
 
@@ -128,7 +150,7 @@ namespace Utility
                     fadeImage.color = new Color(0, 0, 0, t * (2 - t));
                     if (fadeinTime <= counter)
                         break;
-                    counter += Time.unscaledDeltaTime;
+                    counter += 1 / 60.0f;
 
                     yield return null;
                 }
@@ -137,6 +159,8 @@ namespace Utility
 
             loading.SetActive(false);
             changeing = null;
+
+            OnFinishFadein?.Invoke();
         }
 
         public void OverrideScene(SceneType scene)
