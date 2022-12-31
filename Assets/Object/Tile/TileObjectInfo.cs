@@ -36,5 +36,9 @@ namespace ReLeaf
         bool isAlreadyGreening;
         public bool IsAlreadyGreening => isAlreadyGreening;
 
+        [SerializeField, Rename("草花のない草下地でしか緑化できないか")]
+        bool isOnlyNormalFoundation;
+        public bool IsOnlyNormalFoundation => isOnlyNormalFoundation;
+
     }
 }

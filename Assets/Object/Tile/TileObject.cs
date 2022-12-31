@@ -25,6 +25,8 @@ namespace ReLeaf
         public virtual bool CanGreening(bool useSpecial) => useSpecial ? info.CanGreeningUseSpecial : info.CanGreening;
         public virtual bool IsAlreadyGreening => info.IsAlreadyGreening;
 
+        public bool IsOnlyNormalFoundation => info.IsOnlyNormalFoundation;
+
         public bool CanOrAleeadyGreening(bool useSpecial) => CanGreening(useSpecial) || IsAlreadyGreening;
 
         public Vector2Int TilePos { get; set; }

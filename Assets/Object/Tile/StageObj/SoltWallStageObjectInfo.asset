@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 46b5c867a576f374c8e8bfd65eb3e179, type: 3}
-  m_Name: BlockStageObjectInfo
+  m_Name: SoltWallStageObjectInfo
   m_EditorClassIdentifier: 
   tileType: 10
   canEnemyMove: 0
@@ -19,3 +19,4 @@ MonoBehaviour:
   canGreening: 1
   canGreeningUseSpecial: 1
   isAlreadyGreening: 0
+  isOnlyNormalFoundation: 1

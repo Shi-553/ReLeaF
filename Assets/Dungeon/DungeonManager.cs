@@ -159,7 +159,14 @@ namespace ReLeaf
                 return true;
             }
 
-            var atfer = ChangeTile(tile.TilePos, TileType.Foundation);
+            var isOnlyNormalFoundation = tile.InstancedParent.IsOnlyNormalFoundation ||
+                (tile is Sand sand &&
+                sand.Target != null &&
+                sand.Target.IsOnlyNormalFoundation);
+
+            var index = isOnlyNormalFoundation ? 1 : 0;
+
+            var atfer = ChangeTile(tile.TilePos, TileType.Foundation, index);
             if (atfer != null)
                 atfer.IsInvincible = isInvincible;
 
