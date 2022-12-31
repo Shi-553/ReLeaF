@@ -53,12 +53,10 @@ namespace ReLeaf
         protected override void OnDestroy()
         {
             base.OnDestroy();
+            SceneLoader.Singleton.OnChangePause -= OnChangePause;
             reLeafInputAction?.Disable();
         }
-        void OnDisable()
-        {
-            reLeafInputAction?.Disable();
-        }
+
         void SetItemDir(Vector2 value)
         {
             itemManager.ItemDir = value.ClampOneMagnitude();
