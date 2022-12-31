@@ -5,9 +5,9 @@ namespace Utility
     public abstract class PoolableMonoBehaviour : MonoBehaviour
     {
 
-        public IPool Pool { get; set; }
+        public Pool Pool { get; set; }
 
-        public virtual PoolableMonoBehaviour Create(Transform parent, IPool pool)
+        public virtual PoolableMonoBehaviour Create(Transform parent, Pool pool)
         {
             var instance = Instantiate(this, parent);
             instance.IsInitialized = false;

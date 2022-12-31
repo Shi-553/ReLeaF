@@ -50,7 +50,7 @@ namespace ReLeaf
             selected = currentTileObject as IMultipleVisual;
         }
 
-        protected override IPool Pool => poolArray.GetPool(selected.VisualType);
+        protected override Pool Pool => poolArray.GetPool(selected.VisualType);
 
 #if UNITY_EDITOR
         [MenuItem("Assets/Create/Tile/RandomTile")]

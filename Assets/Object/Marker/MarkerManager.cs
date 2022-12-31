@@ -16,8 +16,8 @@ namespace ReLeaf
         [SerializeField]
         bool subscribeOnGreening;
 
-        IPool pool;
-        IPool GetPool<T>() where T : MarkerBase => pool ??= PoolManager.Singleton.SetPool(marker as T);
+        Pool pool;
+        Pool GetPool<T>() where T : MarkerBase => pool ??= PoolManager.Singleton.SetPool(marker as T);
 
         [SerializeField]
         MarkerBase marker;

@@ -38,7 +38,7 @@ namespace ReLeaf
             }
         }
 
-        protected override IPool Pool => poolArray.GetPool(currentTileObject == block ? 0 : 1);
+        protected override Pool Pool => poolArray.GetPool(currentTileObject == block ? 0 : 1);
         public override void RefreshTile(Vector3Int position, ITilemap tilemap)
         {
             tilemap.RefreshTile(position);

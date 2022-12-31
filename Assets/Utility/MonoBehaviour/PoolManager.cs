@@ -10,8 +10,8 @@ namespace Utility
 
     public class PoolManager : SingletonBase<PoolManager>
     {
-        readonly Dictionary<Type, IPool> pools = new();
-        public IReadOnlyDictionary<Type, IPool> Pools => pools;
+        readonly Dictionary<Type, IEnumerablePool> pools = new();
+        public IReadOnlyDictionary<Type, IEnumerablePool> Pools => pools;
 
         public override bool DontDestroyOnLoad => false;
         protected override void Init(bool isFirstInit, bool callByAwake)
@@ -24,29 +24,30 @@ namespace Utility
                 .ForEach(t => Destroy(t.gameObject));
             foreach (var pool in pools.Values)
             {
-                foreach (var p in pool)
-                {
-                    p?.Clear();
-                }
+                pool?.Clear();
             }
             pools.Clear();
         }
 
-        public IPool GetPool<T>() where T : PoolableMonoBehaviour
+        public Pool GetPool<T>() where T : PoolableMonoBehaviour
         {
             var type = typeof(T);
-            if (pools.TryGetValue(type, out var pool))
+            if (pools.TryGetValue(type, out var enumerablePool) && enumerablePool is Pool pool)
             {
                 return pool;
             }
             return null;
         }
-        public IPool SetPool<T>(T prefab, int defaultCapacity = 10, int maxSize = 100, bool setSizeWithCapacity = false) where T : PoolableMonoBehaviour
+        public Pool SetPool<T>(T prefab, int defaultCapacity = 10, int maxSize = 100, bool setSizeWithCapacity = false) where T : PoolableMonoBehaviour
         {
             var type = typeof(T);
-            if (pools.TryGetValue(type, out var pool))
+            if (pools.TryGetValue(type, out var enumerablePool))
             {
-                return pool;
+                if (enumerablePool is Pool pool)
+                    return pool;
+
+                Debug.LogError("Aleady Using");
+                return null;
             }
 
             var poolParent = new GameObject(type.Name).transform;
@@ -62,7 +63,7 @@ namespace Utility
         public PoolArray GetPoolArray<T>() where T : PoolableMonoBehaviour
         {
             var type = typeof(T);
-            if (pools.TryGetValue(type, out var pool) && pool is PoolArray array)
+            if (pools.TryGetValue(type, out var enumerablePool) && enumerablePool is PoolArray array)
             {
                 return array;
             }
@@ -72,11 +73,12 @@ namespace Utility
         public PoolArray SetPoolArray<T>(int size) where T : PoolableMonoBehaviour
         {
             var type = typeof(T);
-            if (pools.TryGetValue(type, out var pool))
+            if (pools.TryGetValue(type, out var enumerablePool))
             {
-                if (pool is PoolArray array)
+                if (enumerablePool is PoolArray array)
                     return array;
 
+                Debug.LogError("Aleady Using");
                 return null;
             }
 
@@ -93,72 +95,14 @@ namespace Utility
 
     }
 
-    public interface IPool : IEnumerable<IPool>
+    public interface IEnumerablePool : IEnumerable<IEnumerablePool>
     {
-        ObjectPool<PoolableMonoBehaviour> ObjectPool { get; }
-
-        public readonly struct PoolInitializeHelper<T> : IDisposable where T : PoolableMonoBehaviour
-        {
-            readonly T value;
-            public PoolInitializeHelper(T value)
-            {
-                this.value = value;
-            }
-            public void Dispose()
-            {
-                value.Init();
-            }
-        }
-        private T GetImpl<T>() where T : PoolableMonoBehaviour
-        {
-            while (true)
-            {
-                var val = ObjectPool.Get() as T;
-                if (val != null)
-                    return val;
-            }
-        }
-        public T Get<T>() where T : PoolableMonoBehaviour
-        {
-            var val = GetImpl<T>();
-            val.Init();
-            return val;
-        }
-        public PoolInitializeHelper<T> Get<T>(out T val) where T : PoolableMonoBehaviour
-        {
-            return new PoolInitializeHelper<T>(val = GetImpl<T>());
-        }
-        public void Release<T>(T element) where T : PoolableMonoBehaviour
-        {
-            if (element.IsInitialized)
-            {
-                element.Uninit();
-                ObjectPool.Release(element);
-            }
-        }
-
-        public void Clear() => ObjectPool?.Clear();
-
-        public void Resize(int size)
-        {
-            var poolables = new PoolableMonoBehaviour[size];
-
-            for (int i = 0; i < size; i++)
-            {
-                poolables[i] = GetImpl<PoolableMonoBehaviour>();
-            }
-            for (int i = 0; i < size; i++)
-            {
-                ObjectPool.Release(poolables[i]);
-            }
-
-        }
+        public void Clear();
     }
 
-    public class Pool : IPool
+    public class Pool : IEnumerablePool
     {
         protected ObjectPool<PoolableMonoBehaviour> pool;
-        ObjectPool<PoolableMonoBehaviour> IPool.ObjectPool => pool;
 
         // thisでキャプチャ
         readonly Transform parent;
@@ -185,11 +129,68 @@ namespace Utility
 
             if (setSizeWithCapacity)
             {
-                this.StaticCast<IPool>().Resize(defaultCapacity);
+                Resize(defaultCapacity);
             }
         }
 
-        public IEnumerator<IPool> GetEnumerator()
+
+        public readonly struct PoolInitializeHelper<T> : IDisposable where T : PoolableMonoBehaviour
+        {
+            readonly T value;
+            public PoolInitializeHelper(T value)
+            {
+                this.value = value;
+            }
+            public void Dispose()
+            {
+                value.Init();
+            }
+        }
+        private T GetImpl<T>() where T : PoolableMonoBehaviour
+        {
+            while (true)
+            {
+                var val = pool.Get() as T;
+                if (val != null)
+                    return val;
+            }
+        }
+        public T Get<T>() where T : PoolableMonoBehaviour
+        {
+            var val = GetImpl<T>();
+            val.Init();
+            return val;
+        }
+        public PoolInitializeHelper<T> Get<T>(out T val) where T : PoolableMonoBehaviour
+        {
+            return new PoolInitializeHelper<T>(val = GetImpl<T>());
+        }
+        public void Release<T>(T element) where T : PoolableMonoBehaviour
+        {
+            if (element.IsInitialized)
+            {
+                element.Uninit();
+                pool.Release(element);
+            }
+        }
+
+        public void Clear() => pool?.Clear();
+
+        public void Resize(int size)
+        {
+            var poolables = new PoolableMonoBehaviour[size];
+
+            for (int i = 0; i < size; i++)
+            {
+                poolables[i] = GetImpl<PoolableMonoBehaviour>();
+            }
+            for (int i = 0; i < size; i++)
+            {
+                pool.Release(poolables[i]);
+            }
+        }
+
+        public IEnumerator<IEnumerablePool> GetEnumerator()
         {
             yield return this;
         }
@@ -197,33 +198,39 @@ namespace Utility
         IEnumerator IEnumerable.GetEnumerator() => GetEnumerator();
     }
 
-    public class PoolArray : IPool
+    public class PoolArray : IEnumerablePool
     {
-        readonly IPool[] pools;
+        readonly IEnumerablePool[] pools;
 
         readonly Transform parent;
 
-        ObjectPool<PoolableMonoBehaviour> IPool.ObjectPool => pools[0]?.ObjectPool;
+        public void Clear() => pools.ForEach(pool => pool?.Clear());
 
         public PoolArray(Transform parent, int size)
         {
             this.parent = parent;
 
-            pools = new IPool[size];
+            pools = new IEnumerablePool[size];
         }
 
-        public IPool GetPool(int index)
+        public Pool GetPool(int index)
         {
-            if (pools[index] != null)
-                return pools[index];
+            if (pools[index] is Pool pool)
+                return pool;
 
             return null;
         }
 
-        public IPool SetPool<T>(int index, T prefab, int defaultCapacity = 10, int maxSize = 100, bool setSizeWithCapacity = false) where T : PoolableMonoBehaviour
+        public Pool SetPool<T>(int index, T prefab, int defaultCapacity = 10, int maxSize = 100, bool setSizeWithCapacity = false) where T : PoolableMonoBehaviour
         {
             if (pools[index] != null)
-                return pools[index];
+            {
+                if (pools[index] is Pool pool)
+                    return pool;
+
+                Debug.LogError("Aleady Using");
+                return null;
+            }
 
             var newPool = new Pool(parent, prefab, defaultCapacity, maxSize, setSizeWithCapacity);
 
@@ -248,7 +255,7 @@ namespace Utility
                 if (pools[index] is PoolArray array)
                     return array;
 
-                Debug.LogError("Aleady Pool is Not Array");
+                Debug.LogError("Aleady Using");
                 return null;
             }
 
@@ -262,7 +269,7 @@ namespace Utility
             return newPool;
         }
 
-        public IEnumerator<IPool> GetEnumerator()
+        public IEnumerator<IEnumerablePool> GetEnumerator()
         {
             foreach (var p in pools)
             {

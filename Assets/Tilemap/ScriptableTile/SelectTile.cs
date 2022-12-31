@@ -24,7 +24,7 @@ namespace ReLeaf
         }
 
 
-        protected override IPool Pool => poolArray.GetPool(MultipleVisual.VisualType);
+        protected override Pool Pool => poolArray.GetPool(MultipleVisual.VisualType);
 
 
 #if UNITY_EDITOR

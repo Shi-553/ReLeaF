@@ -7,7 +7,7 @@ namespace ReLeaf
     {
         public override bool DontDestroyOnLoad => false;
 
-        IPool effectPool;
+        Pool effectPool;
         [SerializeField]
         DamageValueEffect effectPrefab;
 

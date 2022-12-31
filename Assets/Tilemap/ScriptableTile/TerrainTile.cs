@@ -67,8 +67,8 @@ namespace ReLeaf
 
         protected PoolArray Pools;
 
-        IPool pool;
-        protected virtual IPool Pool => pool;
+        Pool pool;
+        protected virtual Pool Pool => pool;
 
         public bool IsInvincible { get; set; }
 
