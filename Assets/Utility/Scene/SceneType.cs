@@ -6,11 +6,11 @@ public enum SceneType
 {
     Title = 2,
 
-    SampleScene = 0,
-
     Manager = 1,
 
     Menu = 4,
+
+    SampleScene = 0,
 
     stage1 = 3,
 
@@ -26,9 +26,9 @@ public static class SceneTypeExtension
       return type switch                         
       {                                          
           SceneType.Title => 0,              
-          SceneType.SampleScene => 1,              
-          SceneType.Manager => 2,              
-          SceneType.Menu => 3,              
+          SceneType.Manager => 1,              
+          SceneType.Menu => 2,              
+          SceneType.SampleScene => 3,              
           SceneType.stage1 => 4,              
           SceneType.stage2 => 5,              
           SceneType.stage3 => 6,              
@@ -44,9 +44,9 @@ public static class SceneTypeExtension
       return buildIndex switch                         
       {                                          
           0 => SceneType.Title,              
-          1 => SceneType.SampleScene,              
-          2 => SceneType.Manager,              
-          3 => SceneType.Menu,              
+          1 => SceneType.Manager,              
+          2 => SceneType.Menu,              
+          3 => SceneType.SampleScene,              
           4 => SceneType.stage1,              
           5 => SceneType.stage2,              
           6 => SceneType.stage3,              
