@@ -90,14 +90,14 @@ namespace ReLeaf
                 spine.Init(enemyMover.DirNotZero);
                 currentAttackers.Add(spine);
             }
-            SEManager.Singleton.Play(seBeforeAttack, transform.position);
+            SEManager.Singleton.Play(seBeforeAttack, enemyMover.WorldCenter);
         }
         protected override IEnumerator OnStartDamageing()
         {
             attackMarkerManager.ResetAllMarker();
 
             enemyCore.SetWeekMarker();
-            SEManager.Singleton.Play(seAttack, transform.position);
+            SEManager.Singleton.Play(seAttack, enemyMover.WorldCenter);
 
             foreach (var spine in currentAttackers)
             {
@@ -108,7 +108,7 @@ namespace ReLeaf
         }
         protected override void OnStartCoolTime()
         {
-            SEManager.Singleton.Play(seAfterAttack, transform.position);
+            SEManager.Singleton.Play(seAfterAttack, enemyMover.WorldCenter);
         }
         protected override void OnEndCoolTime()
         {

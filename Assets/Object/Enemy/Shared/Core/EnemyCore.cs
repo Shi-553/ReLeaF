@@ -112,12 +112,12 @@ namespace ReLeaf
             if (HP - atk <= 0)
             {
                 HP = 0;
-                SEManager.Singleton.Play(seEnemyDeath, transform.position);
+                SEManager.Singleton.Play(seEnemyDeath, enemyMover.WorldCenter);
                 StartCoroutine(Death());
                 return;
             }
             HP -= atk;
-            SEManager.Singleton.Play(seEnemyDamaged, transform.position);
+            SEManager.Singleton.Play(seEnemyDamaged, enemyMover.WorldCenter);
         }
 
         private void OnTriggerEnter2D(Collider2D collision)

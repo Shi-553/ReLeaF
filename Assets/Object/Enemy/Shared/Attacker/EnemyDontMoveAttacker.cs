@@ -45,7 +45,7 @@ namespace ReLeaf
                 attackMarkerManager.SetMarker<TargetMarker>(attackPos);
             }
             enemyCore.SetWeekMarker();
-            SEManager.Singleton.Play(seBeforeAttack, transform.position);
+            SEManager.Singleton.Play(seBeforeAttack, enemyMover.WorldCenter);
         }
         protected override IEnumerator OnStartDamageing()
         {
@@ -68,7 +68,7 @@ namespace ReLeaf
 
             }
             attackMarkerManager.ResetAllMarker();
-            SEManager.Singleton.Play(seAttack, transform.position);
+            SEManager.Singleton.Play(seAttack, enemyMover.WorldCenter);
         }
 
 

@@ -47,7 +47,7 @@ namespace ReLeaf
             {
                 attackMarkerManager.SetMarker<TargetMarker>(target, enemyMover.DirNotZero.GetRotation());
             }
-            SEManager.Singleton.Play(seBeforeAttack, transform.position);
+            SEManager.Singleton.Play(seBeforeAttack, enemyMover.WorldCenter);
 
             if (ranges.Length <= 4)
                 enemyDirectAttackController.AddImpossibleLastTargets();
@@ -55,7 +55,7 @@ namespace ReLeaf
         protected override IEnumerator OnStartDamageing()
         {
             enemyCore.ResetWeekMarker();
-            SEManager.Singleton.Play(seAttack, transform.position);
+            SEManager.Singleton.Play(seAttack, enemyMover.WorldCenter);
 
             enemyMover.UpdateTargetStraight(attackTargetPos);
 
