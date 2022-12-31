@@ -4,7 +4,7 @@ namespace Utility
 {
     public enum Direction
     {
-        NONE = -1, UP, LEFT, DOWN, RIGHT
+        NONE = -1, UP, LEFT, DOWN, RIGHT, TARGET
     }
 
     public static class DirectionExtension

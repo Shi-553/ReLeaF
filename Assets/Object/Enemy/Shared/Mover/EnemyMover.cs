@@ -229,15 +229,11 @@ namespace ReLeaf
             // ターゲットから戻って経路を確認する
 
             var currnet = tempTarget;
-            // 四隅を入れる
-            Direction[] cornerDirs = new Direction[4];
 
             // 最初はターゲットの位置をみる
-            Direction currentDir = routingMapBuffer[target];
+            Direction currentDir = routingMapBuffer[tempTarget];
 
             ToTargetDir = currentDir.GetVector2Int();
-
-            bool isSizeOne = TileSize == Vector2Int.one;
 
             while (true)
             {
@@ -254,43 +250,7 @@ namespace ReLeaf
 
                 routes.Push(currnet);
 
-
-                if (isSizeOne)
-                {
-                    currentDir = routingMapBuffer[currnet];
-                    continue;
-                }
-
-
-                // 例えば、一つ前が左(Direction.UP)だった場合、戻るために上に移動する。
-                // すると、右下＆左下の組み合わせはありえないので右下＆右上、右上＆左上、左上＆左下の三組を調べて次の方向を出す
-
-                // 反時計回りに格納 右下->右上->左上->左下
-                routingMapBuffer.TryGetValue(new Vector2Int(currnet.x + TileSize.x - 1, currnet.y), out cornerDirs[0]);
-                routingMapBuffer.TryGetValue(new Vector2Int(currnet.x + TileSize.x - 1, currnet.y + TileSize.y - 1), out cornerDirs[1]);
-                routingMapBuffer.TryGetValue(new Vector2Int(currnet.x, currnet.y + TileSize.y - 1), out cornerDirs[2]);
-                routingMapBuffer.TryGetValue(currnet, out cornerDirs[3]);
-
-                // 0~2の3回
-                for (int i = 0; i < 2; i++)
-                {
-                    Direction corner1 = cornerDirs[((int)currentDir + i) % cornerDirs.Length];
-                    Direction corner2 = cornerDirs[((int)currentDir + i + 1) % cornerDirs.Length];
-
-                    if (corner1 == corner2)
-                    {
-                        currentDir = corner1;
-                        break;
-                    }
-                    if (i == 2)
-                    {
-                        return false;
-                    }
-                }
-                for (int i = 0; i < 3; i++)
-                {
-                    cornerDirs[i] = Direction.NONE;
-                }
+                currentDir = routingMapBuffer[currnet];
             }
         }
 
@@ -303,13 +263,8 @@ namespace ReLeaf
         {
             tempMapQueue.Enqueue(TilePos);
 
-            for (int i = 0; i < TileSize.x; i++)
-            {
-                for (int j = 0; j < TileSize.y; j++)
-                {
-                    routingMapBuffer[new Vector2Int(TilePos.x + i, TilePos.y + j)] = Direction.NONE;
-                }
-            }
+            routingMapBuffer[TilePos] = Direction.NONE;
+
             while (tempMapQueue.Count != 0)
             {
                 tempQueue = tempMapQueue.Dequeue();
@@ -383,7 +338,6 @@ namespace ReLeaf
                 checkPoss.Add(tilePos + checkDir * i);
             }
         }
-
         /// <summary>
         /// 通行可能で既に通ってない場合キューに入れる
         /// </summary>
@@ -394,29 +348,29 @@ namespace ReLeaf
             GetCheckPoss(tempQueue, dir, buffer);
             bool includeTarget = false;
 
+            var nextPivotPos = tempQueue + dir.GetVector2Int();
+
+            // 既に通った
+            if (routingMapBuffer.ContainsKey(nextPivotPos))
+            {
+                return false;
+            }
+
             foreach (var nextPos in buffer)
             {
-                // 既に通った
-                if (routingMapBuffer.ContainsKey(nextPos))
-                {
-                    return false;
-                }
-
                 var isTarget = nextPos == target;
                 if (isTarget)
                     includeTarget = true;
 
-                if (!isTarget && (!DungeonManager.Singleton.TryGetTile(nextPos, out var tile) || !tile.CanEnemyMove(true)))
+                if (!isTarget && (!DungeonManager.Singleton.TryGetTile<TileObject>(nextPos, out var tile) || !tile.CanEnemyMove(true) || (tile != tile.InstancedParent && !tile.InstancedParent.CanEnemyMove(true))))
                 {
                     return false;
                 }
             }
-            tempMapQueue.Enqueue(tempQueue + dir.GetVector2Int());
 
-            foreach (var nextPos in buffer)
-            {
-                routingMapBuffer[nextPos] = dir;
-            }
+            tempMapQueue.Enqueue(nextPivotPos);
+
+            routingMapBuffer[nextPivotPos] = dir;
 
             if (includeTarget)
             {
