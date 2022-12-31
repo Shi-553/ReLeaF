@@ -47,7 +47,7 @@ namespace ReLeaf
             var damageText = "";
             foreach (var damageChar in damageStr)
             {
-                damageText += $"<sprite={damageChar}>";
+                damageText += $"<sprite index={damageChar}>";
             }
 
             text.text = damageText;
