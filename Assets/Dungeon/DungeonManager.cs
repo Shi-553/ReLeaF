@@ -7,35 +7,27 @@ using Utility;
 
 namespace ReLeaf
 {
+    [Serializable]
+    class TileArray
+    {
+        [SerializeField]
+        public TerrainTile[] tiles;
+
+        public void Sort()
+        {
+            tiles = tiles
+                .OrderBy(t => (t.CurrentTileObject as IMultipleVisual).VisualType)
+                .ToArray();
+        }
+    }
     [ClassSummary("タイルマップマネージャー")]
     public class DungeonManager : SingletonBase<DungeonManager>
     {
         public override bool DontDestroyOnLoad => false;
 
-        [Serializable]
-        class TileArray
-        {
-            [SerializeField]
-            public TerrainTile[] tiles;
-
-            public void Sort()
-            {
-                tiles = tiles
-                    .OrderBy(t => (t.CurrentTileObject as IMultipleVisual).VisualType)
-                    .ToArray();
-            }
-        }
-
-        [SerializeField]
-        TerrainTile[] terrainTiles;
-        [SerializeField]
-        TileArray[] terrainTileArrays;
 
         [SerializeField]
         Tilemap tilemap;
-
-
-        Dictionary<TileType, TerrainTile[]> terrainTileDic;
 
         public Dictionary<Vector2Int, TileObject> tiles = new();
 
@@ -73,22 +65,6 @@ namespace ReLeaf
 
         protected override void Init(bool isFirstInit, bool callByAwake)
         {
-            if (isFirstInit)
-            {
-                terrainTileArrays.ForEach(arr => arr.Sort());
-
-                terrainTileDic = terrainTileArrays.ToDictionary(t => t.tiles.First().CurrentTileObject.TileType, t => t.tiles);
-
-                foreach (var terrainTile in terrainTiles)
-                {
-                    terrainTileDic.Add(terrainTile.CurrentTileObject.TileType, new[] { terrainTile });
-                }
-
-                foreach (var terrainTile in terrainTileDic)
-                {
-                    terrainTile.Value.ForEach(tag => tag.Init());
-                }
-            }
             if (callByAwake)
             {
                 foreach (var pos in tilemap.cellBounds.allPositionsWithin)
@@ -201,7 +177,7 @@ namespace ReLeaf
             tiles.Remove(pos);
             before.Release();
 
-            var after = terrainTileDic[type][index];
+            var after = DungeonTilePalette.Singleton.TerrainTileDic[type][index];
             tilemap.SetTile((Vector3Int)pos, after);
 
             if (TryGetTile(pos, out var afterTile))

@@ -53,7 +53,8 @@ namespace ReLeaf
         protected override void OnDestroy()
         {
             base.OnDestroy();
-            SceneLoader.Singleton.OnChangePause -= OnChangePause;
+            if (SceneLoader.Singleton != null)
+                SceneLoader.Singleton.OnChangePause -= OnChangePause;
             reLeafInputAction?.Disable();
         }
 

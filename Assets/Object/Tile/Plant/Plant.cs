@@ -1,4 +1,3 @@
-using Pickle;
 using System;
 using System.Collections;
 using UnityEngine;
@@ -33,8 +32,6 @@ namespace ReLeaf
         protected GameObject seedObjRoot;
         [SerializeField]
         protected GameObject plantObjRoot;
-        [SerializeField, Pickle(LookupType = ObjectProviderType.Assets)]
-        protected TileObject messyObj;
 
         public bool IsFullGrowth { get; private set; }
 
@@ -76,6 +73,8 @@ namespace ReLeaf
             Normal,
             BlackGrass,
             BlockCover,
+            DokudamiLeaf,
+            DokudamiFlower,
             Max
         }
 

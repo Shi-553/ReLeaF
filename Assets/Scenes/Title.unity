@@ -243,11 +243,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e202785faa2975442a20fa088090fde9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  terrainTiles:
-  - {fileID: 11400000, guid: 166d001927ca49442b7b421b1722cf0f, type: 2}
-  - {fileID: 11400000, guid: 1263c40a7eae41447bd0359878251824, type: 2}
-  - {fileID: 11400000, guid: 001da747823b07f45a2ab13eb1073cbe, type: 2}
-  terrainTileArrays: []
   tilemap: {fileID: 9020821008736504434}
   <MaxGreeningCount>k__BackingField: 0
 --- !u!213 &85952946
@@ -1692,6 +1687,7 @@ Transform:
   - {fileID: 621338742}
   - {fileID: 1562164629}
   - {fileID: 1913449412}
+  - {fileID: 975323588}
   m_Father: {fileID: 0}
   m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -2195,6 +2191,54 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: db9edc26f4891e541ab0b7eb14e52f50, type: 3}
+--- !u!1 &975323587
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 975323588}
+  - component: {fileID: 975323589}
+  m_Layer: 0
+  m_Name: DungeonTilePalette
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &975323588
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 975323587}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 6.241502, z: -18.51225}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 680637147}
+  m_RootOrder: 4
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &975323589
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 975323587}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c449a4732916f9649911e59ac502c272, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  terrainTiles:
+  - {fileID: 11400000, guid: 166d001927ca49442b7b421b1722cf0f, type: 2}
+  - {fileID: 11400000, guid: 001da747823b07f45a2ab13eb1073cbe, type: 2}
+  terrainTileArrays: []
 --- !u!1 &1088853378
 GameObject:
   m_ObjectHideFlags: 0
