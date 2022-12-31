@@ -46,6 +46,7 @@ jobs:
         with:
           targetPlatform: StandaloneWindows64
           buildName: ReLeaF
+          versioning: None
           
       - name: atr
         uses: actions/upload-artifact@v3
