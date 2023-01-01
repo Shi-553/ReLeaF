@@ -13,4 +13,4 @@ MonoBehaviour:
   m_Name: gameOverBGM.mp3
   m_EditorClassIdentifier: 
   clip: {fileID: 8300000, guid: 80f96d0544d89c9459deb5614f7f034b, type: 3}
-  volume: 1
+  volume: 0.5

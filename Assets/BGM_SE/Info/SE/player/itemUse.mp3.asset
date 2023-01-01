@@ -13,4 +13,4 @@ MonoBehaviour:
   m_Name: itemUse.mp3
   m_EditorClassIdentifier: 
   clip: {fileID: 8300000, guid: 3c9a2780eadb6cb4486906e6a932b826, type: 3}
-  volume: 1
+  volume: 0.9

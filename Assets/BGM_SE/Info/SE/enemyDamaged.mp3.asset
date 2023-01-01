@@ -12,5 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a395ec5eab51d534994e4abcffd019dd, type: 3}
   m_Name: enemyDamaged.mp3
   m_EditorClassIdentifier: 
-  clip: {fileID: 8300000, guid: ca2b33480241aa94897b2636fc532f7d, type: 3}
-  volume: 0.5
+  clip: {fileID: 8300000, guid: 24ce2c0612f15754886db2df9739bd65, type: 3}
+  volume: 1

@@ -9,8 +9,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a395ec5eab51d534994e4abcffd019dd, type: 3}
-  m_Name: seaUrchinBeforeAttack.mp3
+  m_Script: {fileID: 11500000, guid: 5b96bd4890c61dd4ebc05b4ab03d3631, type: 3}
+  m_Name: SEManagerInfo
   m_EditorClassIdentifier: 
-  clip: {fileID: 8300000, guid: dfad5e63d6ecddf428c896bc6c9d342b, type: 3}
-  volume: 1
+  spatialBlend: 1

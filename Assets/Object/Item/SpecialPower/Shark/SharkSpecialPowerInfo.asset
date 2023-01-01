@@ -135,5 +135,6 @@ MonoBehaviour:
     - {x: -3, y: -1}
     - {x: -4, y: 0}
     - {x: -3, y: 1}
+    - {x: 0, y: 0}
   speed: 8
   dashDuration: 1

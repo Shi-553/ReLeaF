@@ -104,7 +104,7 @@ namespace ReLeaf
             }
             item.Index = ItemCount;
 
-            SEManager.Singleton.Play(seGetItem, transform.position);
+            SEManager.Singleton.Play(seGetItem);
             ItemCount++;
             return true;
         }
@@ -127,7 +127,7 @@ namespace ReLeaf
 
             useCo = StartCoroutine(useItem.Item.Use(mover.TilePos, ItemDir));
 
-            SEManager.Singleton.Play(seUseItem, transform.position);
+            SEManager.Singleton.Play(seUseItem);
 
 
             yield return useCo;
