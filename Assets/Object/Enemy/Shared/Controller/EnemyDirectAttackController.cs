@@ -87,6 +87,17 @@ namespace ReLeaf
                     }
                 }
 
+                if (minDistanceSq <= 1)
+                {
+                    targetTilePos = minElement;
+                    lastTargetTilePos = targetTilePos;
+                    impossibleTargets.Clear();
+                    mover.UpdateTargetStraight(targetTilePos);
+                    hasTarget = false;
+                    attacker.Attack();
+                    return;
+                }
+
                 // ターゲットがないか今のターゲットより近いとき
                 if (!hasTarget || minDistanceSq < (targetTilePos - mover.GetNearest(targetTilePos)).sqrMagnitude)
                 {
