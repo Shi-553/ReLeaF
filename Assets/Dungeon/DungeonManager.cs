@@ -76,7 +76,7 @@ namespace ReLeaf
                     }
                 }
                 tilemap.transform.parent.GetComponentsInChildren<Tilemap>()
-                    .ForEach(tm => tm.RefreshAllTiles());
+                     .ForEach(tm => tm.RefreshAllTiles());
 
             }
         }
@@ -96,15 +96,7 @@ namespace ReLeaf
             }
         }
 
-        private void Start()
-        {
-            if (tilemap.TryGetComponent<TilemapCollider2D>(out var tilemapCollider))
-            {
-                tilemapCollider.enabled = false;
-                tilemapCollider.enabled = true;
-            }
 
-        }
         public Vector2Int WorldToTilePos(Vector3 worldPos)
         {
             return (Vector2Int)tilemap.WorldToCell(worldPos);
