@@ -107,6 +107,7 @@ namespace ReLeaf
                     // 到達不可能なターゲット
                     impossibleTargets.Add(targetTilePos.Value);
                     targetTilePos = null;
+                    nullTime = 1;
                     return;
                 }
             }
