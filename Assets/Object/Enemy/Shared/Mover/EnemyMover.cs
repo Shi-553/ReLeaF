@@ -338,6 +338,7 @@ namespace ReLeaf
                 checkPoss.Add(tilePos + checkDir * i);
             }
         }
+
         /// <summary>
         /// 通行可能で既に通ってない場合キューに入れる
         /// </summary>
@@ -362,7 +363,7 @@ namespace ReLeaf
                 if (isTarget)
                     includeTarget = true;
 
-                if (!isTarget && (!DungeonManager.Singleton.TryGetTile<TileObject>(nextPos, out var tile) || !tile.CanEnemyMove(true) || (tile != tile.InstancedParent && !tile.InstancedParent.CanEnemyMove(true))))
+                if (!includeTarget && (!DungeonManager.Singleton.TryGetTile<TileObject>(nextPos, out var tile) || !tile.CanEnemyMove(true) || (tile != tile.InstancedParent && !tile.InstancedParent.CanEnemyMove(true))))
                 {
                     return false;
                 }
