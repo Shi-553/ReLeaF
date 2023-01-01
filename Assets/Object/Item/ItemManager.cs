@@ -70,6 +70,8 @@ namespace ReLeaf
 
         Coroutine useCo;
 
+        bool IsUseingNow => useCo != null;
+
         private void Start()
         {
             ItemUIRoot.GetComponentsInChildren(true, itemUIs);
@@ -114,7 +116,7 @@ namespace ReLeaf
             if (ItemCount == 0)
                 yield break;
 
-            if (useCo != null)
+            if (IsUseingNow)
             {
                 Current.Item.UseCount++;
                 yield break;
@@ -146,10 +148,18 @@ namespace ReLeaf
 
         public void SelectMoveLeft()
         {
+            if (IsUseingNow)
+            {
+                return;
+            }
             Index--;
         }
         public void SelectMoveRight()
         {
+            if (IsUseingNow)
+            {
+                return;
+            }
             Index++;
         }
 
@@ -161,7 +171,7 @@ namespace ReLeaf
             {
                 specialPreviewMarkerManager.ResetAllMarker();
                 previewd = Current;
-                if (ItemCount == 0)
+                if (ItemCount == 0 || previewd == null || previewd.Item == null)
                 {
                     return;
                 }
