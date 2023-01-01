@@ -68,17 +68,8 @@ namespace ReLeaf
                         continue;
                     }
 
-                    if (tile is not SpawnTarget target)
-                    {
-                        if (tile is not Sand connectedSand)
-                        {
-                            continue;
-                        }
-                        target = connectedSand.Target as SpawnTarget;
-
-                        if (target == null)
-                            continue;
-                    }
+                    if (tile.Parent is not SpawnTarget target)
+                        continue;
 
                     targets.Add(target.TilePos);
                     EnemyInfo = target.EnemyInfo;

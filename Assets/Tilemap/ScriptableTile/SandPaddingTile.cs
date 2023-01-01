@@ -94,22 +94,22 @@ namespace ReLeaf
 #endif
             return result;
         }
-        IEnumerator Connect(Vector2Int position, TileObject obj)
+        IEnumerator Connect(Vector2Int position, TileObject parent)
         {
             yield return null;
             for (int x = 0; x < Size.x; x++)
             {
                 for (int y = 0; y < Size.y; y++)
                 {
-                    if (DungeonManager.Singleton.TryGetTile<Sand>(new Vector2Int(position.x + x, position.y + y), out var connectedSand))
+                    if (DungeonManager.Singleton.TryGetTile(new Vector2Int(position.x + x, position.y + y), out var tile))
                     {
-                        connectedSand.Target = obj;
+                        tile.Parent = parent;
                     }
                 }
             }
         }
 #if UNITY_EDITOR
-        IEnumerator ConnectInEditor(Tilemap tm, Vector3Int position, TileObject tile)
+        IEnumerator ConnectInEditor(Tilemap tm, Vector3Int position, TileObject parent)
         {
             yield return null;
             if (tm == null)
@@ -122,9 +122,11 @@ namespace ReLeaf
                     var obj = tm.GetInstantiatedObject(new Vector3Int(position.x + x, position.y + y));
                     if (obj != null)
                     {
-                        var connectedSand = obj.GetComponentInChildren<Sand>();
-                        if (connectedSand != null)
-                            connectedSand.Target = tile;
+                        foreach (var tile in obj.GetComponentsInChildren<TileObject>(true))
+                        {
+                            if (tile != parent)
+                                tile.Parent = parent;
+                        }
                     }
                 }
             }

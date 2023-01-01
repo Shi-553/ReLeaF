@@ -92,7 +92,7 @@ namespace ReLeaf
             groundTileParent.parent = PoolManager.Singleton.transform;
             foreach (var tile in tiles.Values)
             {
-                tile.InstancedParent.Release();
+                tile.ParentOrThis.Release();
             }
         }
 
@@ -151,12 +151,7 @@ namespace ReLeaf
                 return true;
             }
 
-            var isOnlyNormalFoundation = tile.InstancedParent.IsOnlyNormalFoundation ||
-                (tile is Sand sand &&
-                sand.Target != null &&
-                sand.Target.IsOnlyNormalFoundation);
-
-            var index = isOnlyNormalFoundation ? 1 : 0;
+            var index = (tile.IsOnlyNormalFoundation || tile.ParentOrThis.IsOnlyNormalFoundation) ? 1 : 0;
 
             var atfer = ChangeTile(tile.TilePos, TileType.Foundation, index);
             if (atfer != null)
@@ -181,8 +176,8 @@ namespace ReLeaf
 
             if (TryGetTile(pos, out var afterTile))
             {
-                if (before != before.InstancedParent)
-                    afterTile.InstancedParent = before.InstancedParent;
+                if (before.HasParent)
+                    afterTile.Parent = before.Parent;
 
                 OnTileChanged?.Invoke(new TileChangedInfo(pos, before, afterTile));
                 return afterTile;

@@ -186,11 +186,11 @@ namespace ReLeaf
             createdObject.CreatedTile = this;
             createdObject.IsInvincible = IsInvincible;
             createdObject.TilePos = position;
-            createdObject.InstancedParent = createdObject;
+            createdObject.Parent = null;
 
             if (createdObject != createdObject.InstancingTarget)
             {
-                createdObject.InstancingTarget.InstancedParent = createdObject;
+                createdObject.InstancingTarget.Parent = createdObject;
                 createdObject.InstancingTarget.Init();
                 createdObject.InstancingTarget.CreatedTile = this;
                 createdObject.InstancingTarget.IsInvincible = createdObject.IsInvincible;

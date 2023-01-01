@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using UnityEditor;
 using UnityEditor.SceneManagement;
 using UnityEditor.Tilemaps;
@@ -131,30 +132,36 @@ namespace ReLeaf
             }
         }
 
-        void SetTile(Tilemap tilemap, ref TileChangeData data)
+        void FillSizeableTile(Tilemap tilemap, ref TileChangeData data)
         {
-
             var obj = tilemap.GetInstantiatedObject(data.position);
-            if (obj != null && obj.TryGetComponent<Sand>(out var connectedSand) && connectedSand.Target != null)
+            if (obj == null)
             {
-                var targetPos = connectedSand.Target.TilePos;
+                return;
+            }
+            var tile = obj.GetComponentsInChildren<TileObject>(true).FirstOrDefault(t => t.HasParent);
 
-                if (connectedSand.Target.CreatedTile is ISizeableTile sizeableTile)
+            if (tile == null || !tile.HasParent || tile.Parent.CreatedTile is not ISizeableTile sizeableTile)
+            {
+                return;
+            }
+            var targetPos = tile.Parent.TilePos;
+            for (int x = 0; x < sizeableTile.Size.x; x++)
+            {
+                for (int y = 0; y < sizeableTile.Size.y; y++)
                 {
-                    for (int x = 0; x < sizeableTile.Size.x; x++)
+                    var pos = new Vector3Int(targetPos.x + x, targetPos.y + y);
+                    if (pos.x == data.position.x && pos.y == data.position.y)
                     {
-                        for (int y = 0; y < sizeableTile.Size.y; y++)
-                        {
-                            var pos = new Vector3Int(targetPos.x + x, targetPos.y + y);
-                            if (pos.x == data.position.x && pos.y == data.position.y)
-                            {
-                                continue;
-                            }
-                            tilemap.SetTile(pos, sandTile);
-                        }
+                        continue;
                     }
+                    tilemap.SetTile(pos, sandTile);
                 }
             }
+        }
+        void SetTile(Tilemap tilemap, ref TileChangeData data)
+        {
+            FillSizeableTile(tilemap, ref data);
             tilemap.SetTile(data, false);
         }
 

@@ -117,7 +117,7 @@ namespace ReLeaf
 
             foreach (var nextPos in buffer)
             {
-                if (!DungeonManager.Singleton.TryGetTile(nextPos, out var tile) || !tile.CanEnemyMove(isAttackMove) || !tile.InstancedParent.CanEnemyMove(isAttackMove))
+                if (!DungeonManager.Singleton.TryGetTile(nextPos, out var tile) || !tile.CanEnemyMove(isAttackMove) || !tile.ParentOrThis.CanEnemyMove(isAttackMove))
                 {
                     return MoveResult.Error;
                 }
@@ -361,9 +361,19 @@ namespace ReLeaf
             {
                 var isTarget = nextPos == target;
                 if (isTarget)
+                {
                     includeTarget = true;
-
-                if (!includeTarget && (!DungeonManager.Singleton.TryGetTile<TileObject>(nextPos, out var tile) || !tile.CanEnemyMove(true) || (tile != tile.InstancedParent && !tile.InstancedParent.CanEnemyMove(true))))
+                    break;
+                }
+                if (!DungeonManager.Singleton.TryGetTile<TileObject>(nextPos, out var tile))
+                {
+                    return false;
+                }
+                if (!tile.CanEnemyMove(false))
+                {
+                    return false;
+                }
+                if (tile.HasParent && !tile.Parent.CanEnemyMove(false))
                 {
                     return false;
                 }

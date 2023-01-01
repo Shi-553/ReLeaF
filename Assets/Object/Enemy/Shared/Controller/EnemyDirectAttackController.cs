@@ -12,7 +12,8 @@ namespace ReLeaf
         EnemyMover mover;
         EnemyAttacker attacker;
 
-        Vector2Int? targetTilePos;
+        bool hasTarget = false;
+        Vector2Int targetTilePos;
         Vector2Int lastTargetTilePos;
 
         // 絶対到達できないターゲットたち
@@ -45,10 +46,10 @@ namespace ReLeaf
             }
 
             bool isUpdateTarget = false;
-            if (mover.WasChangedTilePosPrevMove || targetTilePos == null)
+            if (mover.WasChangedTilePosPrevMove || !hasTarget)
             {
                 nullTime += Time.deltaTime;
-                if (targetTilePos == null && nullTime < 1)
+                if (!hasTarget && nullTime < 1)
                 {
                     return;
                 }
@@ -68,9 +69,10 @@ namespace ReLeaf
                     var tilePos = DungeonManager.Singleton.WorldToTilePos(target.position);
                     if (impossibleTargets.Contains(tilePos))
                         continue;
+
                     if (isMoveAttacker)
                     {
-                        if (!DungeonManager.Singleton.TryGetTile(tilePos, out var tile) || !tile.CanEnemyMoveAttack(true) || !tile.InstancedParent.CanEnemyMoveAttack(true))
+                        if (!DungeonManager.Singleton.TryGetTile(tilePos, out var tile) || !tile.CanEnemyMoveAttack(true) || !tile.ParentOrThis.CanEnemyMoveAttack(true))
                         {
                             impossibleTargets.Add(tilePos);
                             continue;
@@ -86,27 +88,28 @@ namespace ReLeaf
                 }
 
                 // ターゲットがないか今のターゲットより近いとき
-                if (targetTilePos == null || minDistanceSq < (targetTilePos.Value - mover.GetNearest(targetTilePos.Value)).sqrMagnitude)
+                if (!hasTarget || minDistanceSq < (targetTilePos - mover.GetNearest(targetTilePos)).sqrMagnitude)
                 {
                     if (minDistanceSq != float.MaxValue)
                     {
                         isUpdateTarget = true;
                         targetTilePos = minElement;
+                        hasTarget = true;
                     }
                 }
             }
 
-            if (targetTilePos == null)
+            if (!hasTarget)
                 return;
 
             // 経路探索更新
             if (isUpdateTarget)
             {
-                if (!mover.UpdateTargetAutoRouting(targetTilePos.Value))
+                if (!mover.UpdateTargetAutoRouting(targetTilePos))
                 {
                     // 到達不可能なターゲット
-                    impossibleTargets.Add(targetTilePos.Value);
-                    targetTilePos = null;
+                    impossibleTargets.Add(targetTilePos);
+                    hasTarget = false;
                     nullTime = 1;
                     return;
                 }
@@ -115,15 +118,17 @@ namespace ReLeaf
             var result = mover.Move();
             if (result == EnemyMover.MoveResult.Finish)
             {
-                lastTargetTilePos = targetTilePos.Value;
+                lastTargetTilePos = targetTilePos;
                 impossibleTargets.Clear();
-                mover.UpdateTargetStraight(targetTilePos.Value);
-                targetTilePos = null;
+                mover.UpdateTargetStraight(targetTilePos);
+                hasTarget = false;
                 attacker.Attack();
             }
             if (result == EnemyMover.MoveResult.Error)
             {
-                targetTilePos = null;
+                impossibleTargets.Add(targetTilePos);
+                hasTarget = false;
+                nullTime = 1;
             }
 
         }

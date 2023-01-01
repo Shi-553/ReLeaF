@@ -90,7 +90,7 @@ namespace ReLeaf
                 {
                     return false;
                 }
-                if (tile.CanEnemyMoveAttack(includeMoveabePos) && tile.InstancedParent.CanEnemyMoveAttack(includeMoveabePos))
+                if (tile.CanEnemyMoveAttack(includeMoveabePos) && tile.ParentOrThis.CanEnemyMoveAttack(includeMoveabePos))
                 {
                     buffer.Add(pos);
                     return true;
