@@ -38,6 +38,9 @@ namespace ReLeaf
         }
         private IEnumerator Death()
         {
+            HP = 0;
+            SEManager.Singleton.Play(seEnemyDeath, enemyMover.WorldCenter);
+
             if (TryGetComponent(out EnemyAttacker attacker))
             {
                 attacker.Stop();
@@ -104,15 +107,14 @@ namespace ReLeaf
         }
         public void Damaged(float atk)
         {
-            if (HP == 0 || DamageValueEffectManager.Singleton == null)
+            if (HP == 0)
                 return;
 
-            DamageValueEffectManager.Singleton.SetDamageValueEffect((int)atk, enemyMover.WorldCenter);
+            if (DamageValueEffectManager.Singleton != null)
+                DamageValueEffectManager.Singleton.SetDamageValueEffect((int)atk, enemyMover.WorldCenter);
 
             if (HP - atk <= 0)
             {
-                HP = 0;
-                SEManager.Singleton.Play(seEnemyDeath, enemyMover.WorldCenter);
                 StartCoroutine(Death());
                 return;
             }
