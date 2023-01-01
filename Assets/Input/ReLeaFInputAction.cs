@@ -244,7 +244,7 @@ namespace ReLeaf
                     ""id"": ""84d552f9-0410-4835-9755-f54576e927fc"",
                     ""path"": ""<Mouse>/scroll/y"",
                     ""interactions"": """",
-                    ""processors"": """",
+                    ""processors"": ""Invert"",
                     ""groups"": ""Keyboard&Mouse"",
                     ""action"": ""SelectItem"",
                     ""isComposite"": false,
