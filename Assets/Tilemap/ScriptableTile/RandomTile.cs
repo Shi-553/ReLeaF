@@ -32,7 +32,8 @@ namespace ReLeaf
 
             randomIndex = new RandomIndex(randomInfos.Select(r => r.probability).ToArray());
 
-            poolArray = Pools.SetPoolArray((int)currentTileObject.TileType, randomInfos.Length);
+            selected = currentTileObject as IMultipleVisual;
+            poolArray = Pools.SetPoolArray((int)currentTileObject.TileType, selected.VisualMax);
 
             foreach (var info in randomInfos)
             {
