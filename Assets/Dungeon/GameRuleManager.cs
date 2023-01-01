@@ -139,8 +139,8 @@ namespace ReLeaf
         void Finish()
         {
             PlayerController.Singleton.enabled = false;
-            Destroy(PlayerCore.Singleton.gameObject);
-            Destroy(RobotMover.Singleton.gameObject);
+            PlayerCore.Singleton.gameObject.SetActive(false);
+            RobotMover.Singleton.gameObject.SetActive(false);
 
             foreach (var item in FindObjectsOfType<ItemBase>())
             {

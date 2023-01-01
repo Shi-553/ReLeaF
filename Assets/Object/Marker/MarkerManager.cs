@@ -37,9 +37,11 @@ namespace ReLeaf
         {
             if (subscribeOnGreening)
                 DungeonManager.Singleton.OnGreening -= OnGreening;
+        }
+        private void OnDisable()
+        {
             ResetAllMarker();
         }
-
 
 
         public T SetMarker<T>(Vector2Int worldTilePos) where T : MarkerBase
