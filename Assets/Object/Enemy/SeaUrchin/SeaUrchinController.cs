@@ -7,16 +7,18 @@ namespace ReLeaf
     {
         EnemyAttacker enemyAttacker;
         EnemyMover mover;
+        EnemyCore core;
         void Start()
         {
             TryGetComponent(out enemyAttacker);
             TryGetComponent(out mover);
+            TryGetComponent(out core);
             mover.DirNotZero = Vector2Int.left;
         }
 
         void Update()
         {
-            if (!GameRuleManager.Singleton.IsPlaying)
+            if (!GameRuleManager.Singleton.IsPlaying || core.IsDeath)
                 return;
             if (enemyAttacker.IsAttack)
                 return;

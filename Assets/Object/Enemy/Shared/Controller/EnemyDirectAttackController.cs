@@ -9,6 +9,7 @@ namespace ReLeaf
         [SerializeField]
         Vision searchVision;
 
+        EnemyCore core;
         EnemyMover mover;
         EnemyAttacker attacker;
 
@@ -31,13 +32,14 @@ namespace ReLeaf
         {
             TryGetComponent(out attacker);
             TryGetComponent(out mover);
+            TryGetComponent(out core);
         }
 
         float nullTime = 0;
 
         void Update()
         {
-            if (GameRuleManager.Singleton.IsPrepare)
+            if (GameRuleManager.Singleton.IsPrepare || core.IsDeath)
                 return;
             if (attacker.IsAttack)
             {

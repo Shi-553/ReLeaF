@@ -34,17 +34,11 @@ namespace ReLeaf
 
         public override IEnumerator DeathAnimation()
         {
-            yield return animancerComponent.Play(info.GetClip(SharkAnimationType.Death, enemyMover.IsLeftNow));
+            return animancerComponent.Play(info.GetClip(SharkAnimationType.Death, enemyMover.IsLeftNow));
         }
 
-        protected override void ChangeTransition(AttackTransition transition)
+        protected override void ChangeTransitionImpl(AttackTransition transition)
         {
-
-            if (enemyCore.IsDeath)
-            {
-                return;
-            }
-
             switch (transition)
             {
                 case AttackTransition.Aiming:
@@ -55,7 +49,7 @@ namespace ReLeaf
                     break;
             }
         }
-        protected override void OnMove()
+        protected override void OnMoveImpl()
         {
             if (!enemyAttacker.IsAttack)
                 animancerComponent.Play(info.GetClip(SharkAnimationType.Move, enemyMover.IsLeftIfMove));

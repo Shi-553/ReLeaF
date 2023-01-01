@@ -126,7 +126,7 @@ namespace ReLeaf
             {
                 if (collision.TryGetComponent<Plant>(out var plant) && plant.IsInvincible)
                 {
-                    StartCoroutine(Death());
+                    Damaged(999);
                 }
             }
         }

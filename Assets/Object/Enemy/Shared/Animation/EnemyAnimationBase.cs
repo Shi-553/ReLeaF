@@ -26,8 +26,19 @@ namespace ReLeaf
                 enemyMover.OnMove += OnMove;
             }
         }
-        protected abstract void ChangeTransition(AttackTransition transition);
-        protected abstract void OnMove();
+        void ChangeTransition(AttackTransition transition)
+        {
+            if (!enemyCore.IsDeath)
+                ChangeTransitionImpl(transition);
+        }
+        protected abstract void ChangeTransitionImpl(AttackTransition transition);
+
+        void OnMove()
+        {
+            if (!enemyCore.IsDeath)
+                OnMoveImpl();
+        }
+        protected abstract void OnMoveImpl();
 
         void Start()
         {
