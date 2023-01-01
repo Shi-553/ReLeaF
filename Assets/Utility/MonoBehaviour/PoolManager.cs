@@ -158,7 +158,10 @@ namespace Utility
             {
                 var val = pool.Get() as T;
                 if (val != null)
+                {
+                    val.FasterInit();
                     return val;
+                }
             }
         }
         public T Get<T>() where T : PoolableMonoBehaviour

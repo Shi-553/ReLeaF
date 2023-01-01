@@ -42,11 +42,17 @@ namespace Utility
 
         public bool IsInitialized { get; protected set; }
 
+        public void FasterInit()
+        {
+            if (!IsInitialized)
+                FasterInitOnlyOnceImpl();
+        }
         public void Init()
         {
             InitImpl();
             IsInitialized = true;
         }
+        protected virtual void FasterInitOnlyOnceImpl() { }
         protected abstract void InitImpl();
 
         public void Uninit()

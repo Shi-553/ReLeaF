@@ -174,6 +174,7 @@ namespace ReLeaf
                     if (go.TryGetComponent<TileObject>(out var tileObject))
                     {
                         createdObject = tileObject;
+                        tileObject.FasterInit();
                         InitCreatedObject((Vector2Int)position);
 
                     }
@@ -190,11 +191,13 @@ namespace ReLeaf
 
             if (createdObject != createdObject.InstancingTarget)
             {
+                createdObject.InstancingTarget.FasterInit();
                 createdObject.InstancingTarget.Parent = createdObject;
-                createdObject.InstancingTarget.Init();
+                createdObject.InstancingTarget.gameObject.SetActive(true);
                 createdObject.InstancingTarget.CreatedTile = this;
                 createdObject.InstancingTarget.IsInvincible = createdObject.IsInvincible;
                 createdObject.InstancingTarget.TilePos = createdObject.TilePos;
+                createdObject.InstancingTarget.Init();
             }
 
         }
