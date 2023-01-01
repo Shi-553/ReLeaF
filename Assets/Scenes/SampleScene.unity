@@ -184,7 +184,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 68698067a2de44b4b924120b3fb837f4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  greeningTime: 0.1
+  info: {fileID: 11400000, guid: 0bfa5e18a0d4e36439716ae02a81fd10, type: 2}
   virtualCamera: {fileID: 505983909}
 --- !u!4 &71099174 stripped
 Transform:
@@ -1195,7 +1195,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d6ee0ef4d2de4c74d813db5a64ec0e38, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  targetRate: 0.5
+  targetRate: 0
   value: 0
 --- !u!1001 &610652919
 PrefabInstance:

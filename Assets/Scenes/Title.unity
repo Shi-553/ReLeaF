@@ -1872,7 +1872,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 68698067a2de44b4b924120b3fb837f4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  greeningTime: 0.0001
+  info: {fileID: 11400000, guid: af3edcb1e33efc3499af028c7445b69b, type: 2}
   virtualCamera: {fileID: 0}
 --- !u!4 &806003221
 Transform:

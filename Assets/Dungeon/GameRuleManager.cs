@@ -121,7 +121,7 @@ namespace ReLeaf
         {
             BGMManager.Singleton.Stop();
             SEManager.Singleton.Play(stageClear1);
-            yield return new WaitForSeconds(stageClear1.clip.length);
+            yield return new WaitForSeconds(stageClear1.clip.length - 0.2f);
             SEManager.Singleton.Play(stageClear2);
 
         }

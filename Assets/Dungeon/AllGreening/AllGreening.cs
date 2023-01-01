@@ -8,8 +8,8 @@ namespace ReLeaf
 {
     public class AllGreening : SingletonBase<AllGreening>
     {
-        [SerializeField, Rename("次のマスを緑化するまでの時間")]
-        float greeningTime = 0.1f;
+        [SerializeField]
+        AllGreeningInfo info;
 
         [SerializeField]
         CinemachineVirtualCamera virtualCamera;
@@ -84,7 +84,7 @@ namespace ReLeaf
 
             int cinemachineTargetGroupIndex = 0;
 
-            var greeningWait = new WaitForSeconds(greeningTime);
+            var greeningWait = new WaitForSeconds(info.GreeningTime);
 
             // 緑化を試した数　低いうちは何があっても次のマスを探し続ける
             int tryGreeningCount = 0;
