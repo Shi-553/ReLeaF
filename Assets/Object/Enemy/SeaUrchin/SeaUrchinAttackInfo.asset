@@ -13,6 +13,6 @@ MonoBehaviour:
   m_Name: SeaUrchinAttackInfo
   m_EditorClassIdentifier: 
   coolTime: 0.5
-  aimTime: 0.5
+  aimTime: 0.8
   spinePrefab: {fileID: 3646005126214096454, guid: 36cf135a1f4524341a36bbe8573bf525, type: 3}
   attackTime: 1
