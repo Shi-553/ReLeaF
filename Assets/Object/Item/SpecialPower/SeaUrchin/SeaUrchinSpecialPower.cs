@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Utility;
 using UnityEngine;
 
 namespace ReLeaf
@@ -10,7 +11,8 @@ namespace ReLeaf
         SeaUrchinSpecialPowerInfo info;
         protected override ISowSeedSpecialPowerInfo SowSeedSpecialPowerInfo => info;
 
-
+        [SerializeField]
+        AudioInfo seUrchinSpecial;
         Vector2Int target;
 
         public override void PreviewRange(Vector2Int tilePos, Vector2Int dir, List<Vector2Int> returns)
@@ -33,12 +35,11 @@ namespace ReLeaf
             mover.UpdateManualOperation(worldTarget, info.Speed, true);
 
             yield return new WaitUntil(() => mover.Distance < info.StartSowSeedDistance);
-
             mover.IsStop = true;
             mover.GetComponent<RobotAnimation>().Thrust();
 
             yield return new WaitForSeconds(0.5f);
-
+            SEManager.Singleton.Play(seUrchinSpecial);
             yield return base.UseImpl(target, dir);
 
             mover.IsStop = false;
