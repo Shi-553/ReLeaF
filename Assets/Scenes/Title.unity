@@ -3549,6 +3549,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2029668576}
   - component: {fileID: 2029668577}
+  - component: {fileID: 2029668578}
   m_Layer: 5
   m_Name: TitleMenu
   m_TagString: Untagged
@@ -3595,6 +3596,18 @@ MonoBehaviour:
   toActiveObj:
   - {fileID: 1088853378}
   toStageSelect: {fileID: 7400000, guid: 478e5476193241a41b8620550871433a, type: 2}
+--- !u!114 &2029668578
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2029668575}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c39f4f50730baa34f80f0c9f716e9a6f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!4 &593113328784407098
 Transform:
   m_ObjectHideFlags: 0
