@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using Utility;
 using UnityEngine;
 
 namespace ReLeaf
@@ -10,6 +11,9 @@ namespace ReLeaf
         [SerializeField]
         CrabSpecialPowerInfo sowSeedSpecialPowerInfo;
         protected override ISowSeedSpecialPowerInfo SowSeedSpecialPowerInfo => sowSeedSpecialPowerInfo;
+
+        [SerializeField]
+        AudioInfo seCrabSpecial;
 
         public override void PreviewRange(Vector2Int tilePos, Vector2Int dir, List<Vector2Int> returns)
         {
@@ -50,6 +54,7 @@ namespace ReLeaf
 
             mover.UpdateManualOperation(maxPos, sowSeedSpecialPowerInfo.Speed, false);
 
+            SEManager.Singleton.Play(seCrabSpecial);
 
             Vector2Int currentTilePos = tilePos + Vector2Int.one;
             while (true)

@@ -19,7 +19,7 @@ namespace ReLeaf
         AudioInfo seGetItem;
 
         [SerializeField]
-        AudioInfo seUseItem;
+        AudioInfo seUseItem, seMove;
 
         int itemCount = 0;
         int ItemCount
@@ -123,11 +123,12 @@ namespace ReLeaf
             }
 
             var useItem = Current;
-
+            SEManager.Singleton.Play(seMove);
+            SEManager.Singleton.Play(seUseItem);
 
             useCo = StartCoroutine(useItem.Item.Use(mover.TilePos, ItemDir));
 
-            SEManager.Singleton.Play(seUseItem);
+
 
 
             yield return useCo;
@@ -144,6 +145,8 @@ namespace ReLeaf
             }
 
             useCo = null;
+
+
         }
 
         public void SelectMoveLeft()
