@@ -12,4 +12,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5859a3bec61ecef46b46f8a555b8b95f, type: 3}
   m_Name: SpeedUpItemInfo
   m_EditorClassIdentifier: 
-  speedUp: 2
+  speedUp: 1
