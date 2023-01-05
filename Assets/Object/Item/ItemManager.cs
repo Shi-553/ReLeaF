@@ -90,10 +90,16 @@ namespace ReLeaf
 
         public bool AddItem(ItemBase itemBase)
         {
+            if (itemBase.IsImmediate)
+            {
+                StartCoroutine(itemBase.Use(mover.TilePos, ItemDir));
+                return true;
+            }
             if (itemUIs.Count <= ItemCount)
             {
                 return false;
             }
+
             var item = itemUIs[ItemCount];
             item.Init(itemBase);
 
@@ -123,7 +129,7 @@ namespace ReLeaf
             }
 
             var useItem = Current;
-           
+
             SEManager.Singleton.Play(seUseItem);
 
             useCo = StartCoroutine(useItem.Item.Use(mover.TilePos, ItemDir));

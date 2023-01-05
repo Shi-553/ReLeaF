@@ -29,6 +29,8 @@ namespace ReLeaf
 
         [SerializeField]
         AudioInfo seDamaged;
+        [SerializeField]
+        AudioInfo seRecovered;
 
         protected override void Init(bool isFirstInit, bool callByAwake)
         {
@@ -97,5 +99,11 @@ namespace ReLeaf
             GameRuleManager.Singleton.Finish(false);
         }
 
+
+        public void HPRecoverAll()
+        {
+            SEManager.Singleton.Play(seRecovered);
+            hpGauge.RecoveryValue(hpGauge.ValueMax);
+        }
     }
 }

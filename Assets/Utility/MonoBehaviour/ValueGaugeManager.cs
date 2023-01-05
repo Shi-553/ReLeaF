@@ -8,6 +8,7 @@ namespace Utility
     {
         [SerializeField, Rename("{gameObject.name}の最大値")]
         float valueMax = 10;
+        public float ValueMax => valueMax;
 
         [SerializeField, ReadOnly]
         float value;

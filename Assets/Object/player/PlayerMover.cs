@@ -64,6 +64,9 @@ namespace ReLeaf
         [SerializeField]
         MoveSE seGrassMove;
 
+        [SerializeField]
+        AudioInfo seSpeedUp;
+
         public Vector2 SpecialDir { get; private set; }
         public float SpecialSpeed { get; private set; }
         public bool IsSpecialMoving { get; private set; }
@@ -239,5 +242,10 @@ namespace ReLeaf
             }
         }
 
+        public void SpeedUp(float add)
+        {
+            SEManager.Singleton.Play(seSpeedUp);
+            moveSpeed += add;
+        }
     }
 }

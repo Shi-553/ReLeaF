@@ -98,6 +98,7 @@ SpriteAtlas:
   - {fileID: 519317114, guid: 5ab77553eb8b53548b921a1994a66f6f, type: 3}
   - {fileID: -1182276395, guid: 5ab77553eb8b53548b921a1994a66f6f, type: 3}
   - {fileID: 616156991, guid: 5ab77553eb8b53548b921a1994a66f6f, type: 3}
+  - {fileID: 21300000, guid: d818cd63e609bbd42964f41e571f1019, type: 3}
   - {fileID: 21300000, guid: c0e187b3409748240ab251bd37064940, type: 3}
   - {fileID: -145370474, guid: bba63c35942e0f7408f4abaed3b4ace9, type: 3}
   - {fileID: -2056190887, guid: bba63c35942e0f7408f4abaed3b4ace9, type: 3}
@@ -286,6 +287,8 @@ SpriteAtlas:
   - {fileID: -1660104636, guid: ab9ae79a663794a4abd83f2b559ae221, type: 3}
   - {fileID: 189143659, guid: ab9ae79a663794a4abd83f2b559ae221, type: 3}
   - {fileID: 21300000, guid: 030685bb378713b4e93916c6376d8666, type: 3}
+  - {fileID: 21300000, guid: a069aafb36a038b4b95e5ce083b986f4, type: 3}
+  - {fileID: 21300000, guid: 0658235c75549fe419cfd74f3c371ce6, type: 3}
   - {fileID: -59194123, guid: 946826ac5cc353f4d9fad583b7404d14, type: 3}
   - {fileID: 1368857009, guid: 946826ac5cc353f4d9fad583b7404d14, type: 3}
   - {fileID: -1836472151, guid: 946826ac5cc353f4d9fad583b7404d14, type: 3}
@@ -333,6 +336,7 @@ SpriteAtlas:
   - {fileID: 1132491699, guid: f8641bcd83e12ce44a8bc832beea318b, type: 3}
   - {fileID: 800432117, guid: f8641bcd83e12ce44a8bc832beea318b, type: 3}
   - {fileID: -286653650, guid: f8641bcd83e12ce44a8bc832beea318b, type: 3}
+  - {fileID: 21300000, guid: 2189e15e42eadd34a9b266b029d70c93, type: 3}
   - {fileID: 410774857, guid: b04530de77ec7b3459fa12de6625c2c1, type: 3}
   - {fileID: 1167658518, guid: b04530de77ec7b3459fa12de6625c2c1, type: 3}
   - {fileID: -1122445301, guid: b04530de77ec7b3459fa12de6625c2c1, type: 3}
@@ -375,6 +379,7 @@ SpriteAtlas:
   - spriteseet_Crabwalk_idou_ver2_7
   - spriteseet_Crabwalk_idou_ver2_4
   - spriteseet_Crabwalk_idou_ver2_5
+  - item_sp_uni
   - robotfollow_runL
   - spriteseet_whale_dfeat_18
   - spriteseet_whale_dfeat_19
@@ -563,6 +568,8 @@ SpriteAtlas:
   - spriteseet_robotattack_14
   - spriteseet_robotattack_15
   - item_sp_kani
+  - item_sp_same
+  - item_hp
   - spriteseet_2
   - spriteseet_3
   - spriteseet_0
@@ -610,6 +617,7 @@ SpriteAtlas:
   - spriteseet_sharkdefeat_17
   - spriteseet_sharkdefeat_18
   - spriteseet_sharkdefeat_19
+  - item_speedup
   - spriteseet_robotfollow_3
   - spriteseet_robotfollow_0
   - spriteseet_robotfollow_1
