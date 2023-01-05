@@ -1,3 +1,4 @@
+using Pickle;
 using System;
 using System.Collections;
 using UnityEngine;
@@ -16,8 +17,8 @@ namespace ReLeaf
 
         EnemyMover enemyMover;
 
-        [SerializeField]
-        GameObject specialPowerPrefab;
+        [SerializeField, Pickle(ObjectProviderType.Assets)]
+        ItemBase specialPowerPrefab;
         [SerializeField]
         MarkerManager weakMarkerManager;
         [SerializeField]
@@ -68,7 +69,7 @@ namespace ReLeaf
             Destroy(gameObject);
 
             if (specialPowerPrefab != null)
-                Instantiate(specialPowerPrefab, transform.position, Quaternion.identity, transform.parent);
+                Instantiate(specialPowerPrefab, transform.position, Quaternion.identity, transform.parent).Init(); ;
         }
 
         public void SetWeekMarker()

@@ -23,12 +23,12 @@ namespace ReLeaf
         AnimancerComponent animancer;
         bool isFirst = true;
 
-        protected void Awake()
+        public void Init()
         {
             Init(isFirst);
             isFirst = false;
         }
-        public virtual void Init(bool isFirst)
+        protected virtual void Init(bool isFirst)
         {
             if (isFirst)
             {
@@ -71,7 +71,7 @@ namespace ReLeaf
         }
         public void ReStart()
         {
-            Init(isFirst);
+            Init();
             StartCoroutine(RandomMove());
         }
 
