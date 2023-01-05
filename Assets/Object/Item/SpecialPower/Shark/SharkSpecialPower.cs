@@ -41,6 +41,8 @@ namespace ReLeaf
 
             GlobalCoroutine.Singleton.StartCoroutine(MovePlayer(dir));
 
+            using var _ = RobotGreening.Singleton.StartGreening();
+
 
             var localRanges = SowSeedSpecialPowerInfo.GetSeedLocalTilePos(dir).ToList();
 

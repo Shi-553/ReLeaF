@@ -18,6 +18,8 @@ namespace ReLeaf
         }
         protected override IEnumerator UseImpl(Vector2Int tilePos, Vector2Int dir)
         {
+            using var _ = RobotGreening.Singleton.StartGreening();
+
             var localRanges = SowSeedSpecialPowerInfo.GetSeedLocalTilePos(dir).ToList();
 
             var (minLocalTilePos, maxLocalTilePos) = localRanges.Aggregate(

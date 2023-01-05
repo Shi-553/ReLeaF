@@ -23,6 +23,7 @@ namespace ReLeaf
 
         protected override IEnumerator UseImpl(Vector2Int tilePos, Vector2Int dir)
         {
+            using var _ = RobotGreening.Singleton.StartGreening();
             target = tilePos + (dir * info.Distance);
 
             var worldTarget = DungeonManager.Singleton.TilePosToWorld(target);
