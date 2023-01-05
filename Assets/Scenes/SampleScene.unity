@@ -823,6 +823,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1909550640}
     m_Modifications:
+    - target: {fileID: 3893573754564588802, guid: 2a7de3647c92d20429b93cd67b201cf0, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: -1756437049, guid: 7ad29538470d1804ba097c4efecc3f4e, type: 3}
     - target: {fileID: 5442024061459843501, guid: 2a7de3647c92d20429b93cd67b201cf0, type: 3}
       propertyPath: m_Name
       value: Shark
@@ -833,11 +837,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8780205405150213191, guid: 2a7de3647c92d20429b93cd67b201cf0, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -3.263
+      value: -4.17
       objectReference: {fileID: 0}
     - target: {fileID: 8780205405150213191, guid: 2a7de3647c92d20429b93cd67b201cf0, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -14.769
+      value: -14.43
       objectReference: {fileID: 0}
     - target: {fileID: 8780205405150213191, guid: 2a7de3647c92d20429b93cd67b201cf0, type: 3}
       propertyPath: m_LocalPosition.z

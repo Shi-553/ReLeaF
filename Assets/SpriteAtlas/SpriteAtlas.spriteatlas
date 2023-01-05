@@ -285,6 +285,7 @@ SpriteAtlas:
   - {fileID: -423974210, guid: ab9ae79a663794a4abd83f2b559ae221, type: 3}
   - {fileID: -1660104636, guid: ab9ae79a663794a4abd83f2b559ae221, type: 3}
   - {fileID: 189143659, guid: ab9ae79a663794a4abd83f2b559ae221, type: 3}
+  - {fileID: 21300000, guid: 030685bb378713b4e93916c6376d8666, type: 3}
   - {fileID: -59194123, guid: 946826ac5cc353f4d9fad583b7404d14, type: 3}
   - {fileID: 1368857009, guid: 946826ac5cc353f4d9fad583b7404d14, type: 3}
   - {fileID: -1836472151, guid: 946826ac5cc353f4d9fad583b7404d14, type: 3}
@@ -561,6 +562,7 @@ SpriteAtlas:
   - spriteseet_robotattack_11
   - spriteseet_robotattack_14
   - spriteseet_robotattack_15
+  - item_sp_kani
   - spriteseet_2
   - spriteseet_3
   - spriteseet_0
