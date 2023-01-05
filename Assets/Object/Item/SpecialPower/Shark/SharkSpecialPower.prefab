@@ -165,6 +165,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   icon: {fileID: 21300000, guid: a069aafb36a038b4b95e5ce083b986f4, type: 3}
+  useSe: {fileID: 11400000, guid: 3f4e968a5953efd4896a676770419698, type: 2}
   isImmediate: 0
   initAnimation: {fileID: 7400000, guid: 89c05b64b7dcd6a42bfb61cc3db3aa6c, type: 2}
   info: {fileID: 11400000, guid: c1eab68f2518a194f99fa6f651d16709, type: 2}

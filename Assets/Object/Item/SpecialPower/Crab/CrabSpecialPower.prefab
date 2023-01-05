@@ -165,6 +165,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   icon: {fileID: 21300000, guid: 030685bb378713b4e93916c6376d8666, type: 3}
+  useSe: {fileID: 11400000, guid: 3f4e968a5953efd4896a676770419698, type: 2}
   isImmediate: 0
   initAnimation: {fileID: 7400000, guid: 89c05b64b7dcd6a42bfb61cc3db3aa6c, type: 2}
   sowSeedSpecialPowerInfo: {fileID: 11400000, guid: 6fdd19cc8e2b1a74b8bce433706f70e8, type: 2}

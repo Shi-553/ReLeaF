@@ -18,8 +18,6 @@ namespace ReLeaf
         [SerializeField]
         AudioInfo seGetItem;
 
-        [SerializeField]
-        AudioInfo seUseItem;
 
         int itemCount = 0;
         int ItemCount
@@ -122,15 +120,14 @@ namespace ReLeaf
             if (ItemCount == 0)
                 yield break;
 
+            var useItem = Current;
+
             if (IsUseingNow)
             {
-                Current.Item.UseCount++;
+                StartCoroutine(useItem.Item.Use(mover.TilePos, ItemDir));
                 yield break;
             }
 
-            var useItem = Current;
-
-            SEManager.Singleton.Play(seUseItem);
 
             useCo = StartCoroutine(useItem.Item.Use(mover.TilePos, ItemDir));
 
