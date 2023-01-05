@@ -1304,7 +1304,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d6ee0ef4d2de4c74d813db5a64ec0e38, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  targetRate: 0.7
+  targetRate: 0.63
   value: 0
 --- !u!1001 &575264890
 PrefabInstance:
