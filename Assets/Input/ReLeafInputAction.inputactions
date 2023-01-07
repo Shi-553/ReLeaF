@@ -140,17 +140,6 @@
                 },
                 {
                     "name": "",
-                    "id": "f5887901-b2c1-459f-b356-fd4091c80a99",
-                    "path": "<Keyboard>/shift",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "Keyboard&Mouse",
-                    "action": "Dash",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
                     "id": "e0661f63-c401-49c9-9adb-3fb517ed3507",
                     "path": "<Gamepad>/leftTrigger",
                     "interactions": "",
@@ -660,6 +649,17 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "Keyboard&Mouse",
+                    "action": "Submit",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "bb7e433b-3819-40ba-84d0-37895346636b",
+                    "path": "<Keyboard>/numpadEnter",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
                     "action": "Submit",
                     "isComposite": false,
                     "isPartOfComposite": false

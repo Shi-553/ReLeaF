@@ -82,7 +82,13 @@ namespace ReLeaf
         public Vector2 Dir
         {
             get => IsSpecialMoving ? SpecialDir : dir;
-            set => dir = value;
+            set
+            {
+                dir = value;
+
+                if (!IsMove)
+                    isDash = false;
+            }
         }
         public float Speed
         {
@@ -91,7 +97,16 @@ namespace ReLeaf
         }
         public bool IsMove => Dir != Vector2.zero;
         public bool IsLeft { get; private set; }
-        public bool IsDash { get; set; }
+
+        bool isDash;
+        public bool IsDash
+        {
+            get => isDash;
+            set
+            {
+                isDash = IsMove ? value : false;
+            }
+        }
 
         public Vector2Int OldTilePos { get; private set; }
         public Vector2Int TilePos { get; private set; }

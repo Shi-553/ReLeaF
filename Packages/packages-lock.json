@@ -1,5 +1,12 @@
 {
   "dependencies": {
+    "com.coffee.unmask": {
+      "version": "https://github.com/mob-sakai/UnmaskForUGUI.git",
+      "depth": 0,
+      "source": "git",
+      "dependencies": {},
+      "hash": "0a70db88bfd11f8599d7b787e8e7f52d907befe2"
+    },
     "com.mpozek.pickle": {
       "version": "https://github.com/MPozek/Pickle.git",
       "depth": 0,

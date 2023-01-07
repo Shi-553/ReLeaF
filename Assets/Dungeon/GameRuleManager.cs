@@ -117,7 +117,7 @@ namespace ReLeaf
 
             }
         }
-        IEnumerator WaitClearSound()
+        protected IEnumerator WaitClearSound()
         {
             BGMManager.Singleton.Stop();
             SEManager.Singleton.Play(stageClear1);
