@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using UnityEngine;
 using Utility;
@@ -21,6 +22,9 @@ namespace ReLeaf
 
         WaitForSeconds wait;
         Transform enemyRoot;
+
+        public bool CanSpawn { get; set; } = true;
+        public bool IsGreening => lakeDic.All(t => t.Value.IsGreening);
 
         public SpawnLakeGroup(SpawnLake lake, Transform enemyRoot)
         {
@@ -83,7 +87,7 @@ namespace ReLeaf
 
         private void OnChangeState(GameRuleState obj)
         {
-            if (obj == GameRuleState.Playing)
+            if (obj == GameRuleState.Playing && CanSpawn)
             {
                 foreach (var target in targets)
                 {
@@ -94,36 +98,51 @@ namespace ReLeaf
             Reset();
         }
 
+        public List<EnemyMover> SpawnAllNow()
+        {
+            List<EnemyMover> movers = new();
+            foreach (var target in targets)
+            {
+                movers.Add(Spawn(target));
+            }
+            return movers;
+        }
+
+        EnemyMover Spawn(Vector2Int target)
+        {
+            var targetWorldPos = DungeonManager.Singleton.TilePosToWorld(target);
+
+            var (element, index) = lakeDic.Values
+                .Where(lake => !lake.IsGreening)
+                .MinBy(lake => (lake.TilePos - target).sqrMagnitude);
+
+            var currentWorldPos = DungeonManager.Singleton.TilePosToWorld(element.TilePos);
+
+            var enemy = Object.Instantiate(EnemyInfo.EnemyPrefab,
+                targetWorldPos,
+                Quaternion.identity,
+                enemyRoot);
+
+            enemy.transform.position = currentWorldPos;
+
+            var enemyAnimation = enemy.GetComponent<EnemyAnimationBase>();
+            enemyAnimation.Init();
+            var co = enemyAnimation.SpawnAnimation(currentWorldPos, targetWorldPos, EnemyInfo.SpwanInitAnimationTime);
+
+            GlobalCoroutine.Singleton.StartCoroutine(co);
+
+            return enemy;
+        }
         IEnumerator SpawnInvertal(Vector2Int target)
         {
             while (true)
             {
                 yield return wait;
 
-                if (lakeDic.All(t => t.Value.IsGreening))
+                if (IsGreening || CanSpawn)
                     yield break;
 
-                var targetWorldPos = DungeonManager.Singleton.TilePosToWorld(target);
-
-                var (element, index) = lakeDic.Values
-                    .Where(lake => !lake.IsGreening)
-                    .MinBy(lake => (lake.TilePos - target).sqrMagnitude);
-
-                var currentWorldPos = DungeonManager.Singleton.TilePosToWorld(element.TilePos);
-
-                var enemy = Object.Instantiate(EnemyInfo.EnemyPrefab,
-                    targetWorldPos,
-                    Quaternion.identity,
-                    enemyRoot);
-
-                enemy.transform.position = currentWorldPos;
-
-                var enemyAnimation = enemy.GetComponent<EnemyAnimationBase>();
-                enemyAnimation.Init();
-                var co = enemyAnimation.SpawnAnimation(currentWorldPos, targetWorldPos, EnemyInfo.SpwanInitAnimationTime);
-
-                GlobalCoroutine.Singleton.StartCoroutine(co);
-
+                var enemy = Spawn(target);
                 yield return null;
 
                 var initTilePos = enemy.TilePos;
@@ -144,6 +163,8 @@ namespace ReLeaf
         Transform enemyRoot;
 
         List<SpawnLakeGroup> groups = new();
+
+        public ReadOnlyCollection<SpawnLakeGroup> Groups => groups.AsReadOnly();
 
         SortedDictionary<Vector2IntComparer, SpawnLake> spawnLakes = new();
 
