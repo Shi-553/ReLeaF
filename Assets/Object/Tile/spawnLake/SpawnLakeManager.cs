@@ -139,7 +139,7 @@ namespace ReLeaf
             {
                 yield return wait;
 
-                if (IsGreening || CanSpawn)
+                if (IsGreening || !CanSpawn)
                     yield break;
 
                 var enemy = Spawn(target);
