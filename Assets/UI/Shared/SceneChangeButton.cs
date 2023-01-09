@@ -12,13 +12,13 @@ namespace ReLeaf
             StageSelect,
             NextStage,
             Retry,
-            UnPause
+            UnPause,
         }
 
         [SerializeField]
         ChangedTarget changedTarget;
 
-       
+
 
         void Start()
         {
@@ -32,19 +32,19 @@ namespace ReLeaf
                 SceneLoader.Singleton.UnoverrideScene();
                 return;
             }
-           
+
 
             if (changedTarget == ChangedTarget.StageSelect ||
                 changedTarget == ChangedTarget.Title)
             {
                 TitleState.Singleton.IsSkipTitle = changedTarget == ChangedTarget.StageSelect;
             }
-            
+
             SceneLoader.Singleton.LoadScene(GetSceneType());
         }
         SceneType GetSceneType()
         {
-           
+
             return changedTarget switch
             {
                 ChangedTarget.Title => SceneType.Title,

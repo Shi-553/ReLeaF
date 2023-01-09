@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.Tilemaps;
 
 namespace ReLeaf
 {
@@ -20,10 +21,19 @@ namespace ReLeaf
             }
         }
 #if UNITY_EDITOR
+        Tilemap tilemap;
+        Tilemap Tilemap
+        {
+            get
+            {
+                tilemap = tilemap == null ? FindObjectOfType<Tilemap>() : tilemap;
+                return tilemap;
+            }
+        }
         private void OnDrawGizmosSelected()
         {
-            var tilePos = DungeonManager.Singleton.WorldToTilePos(transform.position);
-            var worldPos = DungeonManager.Singleton.TilePosToWorld(tilePos) + Size / 2 - new Vector2(DungeonManager.CELL_SIZE / 2, DungeonManager.CELL_SIZE / 2);
+            var tilePos = Tilemap.WorldToCell(transform.position);
+            var worldPos = Tilemap.CellToWorld(tilePos) + (Vector3)Size / 2;
 
             Gizmos.matrix = Matrix4x4.TRS(worldPos, Quaternion.identity, Size);
             Gizmos.DrawWireCube(Vector3.zero, Vector3.one);
