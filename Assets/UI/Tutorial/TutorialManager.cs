@@ -62,12 +62,12 @@ namespace ReLeaf
 
             PlayerController.Singleton.PlayerInput.enabled = false;
             {
-                text.text = "ƒƒ{ƒbƒg‚Æ‹¦—Í‚µ‚Ä»”™‚ğ—Î‰»‚µ‚æ‚¤I";
+                text.text = "ãƒ­ãƒœãƒƒãƒˆã¨å”åŠ›ã—ã¦ç ‚æ¼ ã‚’ç·‘åŒ–ã—ã‚ˆã†ï¼";
                 yield return WaitClick();
             }
 
             {
-                text.text = "—Î‰»ƒQ[ƒW‚ğ–ƒ^ƒ“‚É‚·‚é‚ÆƒNƒŠƒAI";
+                text.text = "ç·‘åŒ–ã‚²ãƒ¼ã‚¸ã‚’æº€ã‚¿ãƒ³ã«ã™ã‚‹ã¨ã‚¯ãƒªã‚¢ï¼";
                 greeningRateMask.SetActive(true);
                 yield return WaitClick();
                 greeningRateMask.SetActive(false);
@@ -77,37 +77,37 @@ namespace ReLeaf
 
             {
                 var actionString = GetActionSpriteTag(PlayerController.Singleton.ReLeafInputAction.Player.Move);
-                text.text = $"‚Ü‚¸‚Í{actionString}‚Å•à‚¢‚Ä—Î‰»‚µ‚æ‚¤I";
+                text.text = $"ã¾ãšã¯{actionString}ã§æ­©ã„ã¦ç·‘åŒ–ã—ã‚ˆã†ï¼";
                 yield return WaitAction(PlayerController.Singleton.ReLeafInputAction.Player.Move);
             }
 
             {
-                text.text = "‚¢‚¢‚ËII";
+                text.text = "ã„ã„ã­ï¼ï¼";
                 yield return new WaitForSeconds(niceWaitTime);
             }
 
             {
-                text.text = "•à‚­‚Æ—Î‰»ƒGƒlƒ‹ƒM[(EP)‚ª—­‚Ü‚é‚æI";
+                text.text = "æ­©ãã¨ç·‘åŒ–ã‚¨ãƒãƒ«ã‚®ãƒ¼(EP)ãŒæºœã¾ã‚‹ã‚ˆï¼";
                 yield return new WaitForSeconds(autoNextWaitTime);
             }
 
             {
                 var actionString = GetActionSpriteTag(PlayerController.Singleton.ReLeafInputAction.Player.Dash);
 
-                text.text = $"ˆÚ“®’†‚É{actionString}‚ÅEP‚ğg‚Á‚Äƒ_ƒbƒVƒ…I";
+                text.text = $"ç§»å‹•ä¸­ã«{actionString}ã§EPã‚’ä½¿ã£ã¦ãƒ€ãƒƒã‚·ãƒ¥ï¼";
                 PlayerMover.Singleton.IsDash = false;
                 yield return WaitAction(PlayerController.Singleton.ReLeafInputAction.Player.Dash);
             }
 
             {
-                text.text = "Å‚IIII";
+                text.text = "æœ€é«˜ï¼ï¼ï¼ï¼";
                 yield return new WaitForSeconds(niceWaitTime);
             }
 
 
             {
                 wallRemover.RemoveWall();
-                text.text = "‚»‚Ì‚Ü‚Üã‚Éi‚à‚¤I";
+                text.text = "ãã®ã¾ã¾ä¸Šã«é€²ã‚‚ã†ï¼";
                 yield return WaitOnEnter();
             }
 
@@ -118,17 +118,17 @@ namespace ReLeaf
             GameRuleManager.Singleton.Pause();
 
             {
-                text.text = "ŒÎ‚©‚ç“G‚ª—N‚¢‚¿‚á‚Á‚½I";
+                text.text = "æ¹–ã‹ã‚‰æ•µãŒæ¹§ã„ã¡ã‚ƒã£ãŸï¼";
                 yield return WaitClick();
             }
             {
-                text.text = "Ô‚¢UŒ‚ƒ}ƒX‚Í”ğ‚¯‚æ‚¤I";
+                text.text = "èµ¤ã„æ”»æ’ƒãƒã‚¹ã¯é¿ã‘ã‚ˆã†ï¼";
                 yield return WaitClick();
             }
 
             GameRuleManager.Singleton.UnPause();
             {
-                text.text = "‰©F‚¢ã“_ƒ}ƒX‚ğ“¥‚ñ‚Å“|‚»‚¤I";
+                text.text = "é»„è‰²ã„å¼±ç‚¹ãƒã‚¹ã‚’è¸ã‚“ã§å€’ãã†ï¼";
                 yield return new WaitUntil(() => enemys.All(e => e == null || e.gameObject == null));
             }
 
@@ -136,13 +136,13 @@ namespace ReLeaf
 
             itemManager.CanUse = false;
             {
-                text.text = "ƒiƒCƒXII—‚Æ‚µ‚½ƒAƒCƒeƒ€‚ğE‚¨‚¤I";
+                text.text = "ãƒŠã‚¤ã‚¹ï¼ï¼è½ã¨ã—ãŸã‚¢ã‚¤ãƒ†ãƒ ã‚’æ‹¾ãŠã†ï¼";
 
                 float time = Time.time;
                 yield return new WaitUntil(() => itemManager.ItemCount != 0);
                 var duration = Time.time - time;
 
-                // æ‚é‚Ì‚É‚©‚©‚Á‚½ŠÔ‚Ì•ª’Z‚­‚·‚é
+                // å–ã‚‹ã®ã«ã‹ã‹ã£ãŸæ™‚é–“ã®åˆ†çŸ­ãã™ã‚‹
                 yield return new WaitForSeconds(autoNextWaitTime - duration);
             }
 
@@ -154,9 +154,9 @@ namespace ReLeaf
                 var useActionString = GetActionSpriteTag(PlayerController.Singleton.ReLeafInputAction.Player.UseItem);
                 var aimActionString = PlayerController.Singleton.PlayerInput.currentControlScheme == "Gamepad" ?
                     GetActionSpriteTag(PlayerController.Singleton.ReLeafInputAction.Player.Look) :
-                    $"{ACTION_TEXT_COLOR}ƒ}ƒEƒX{NORMAL_TEXT_COLOR}";
+                    $"{ACTION_TEXT_COLOR}ãƒã‚¦ã‚¹{NORMAL_TEXT_COLOR}";
 
-                text.text = $"{aimActionString.DebugLog()}‚Å‘_‚Á‚Ä{useActionString}‚ÅŒÎ‚ğ—Î‰»‚µ‚æ‚¤I";
+                text.text = $"{aimActionString.DebugLog()}ã§ç‹™ã£ã¦{useActionString}ã§æ¹–ã‚’ç·‘åŒ–ã—ã‚ˆã†ï¼";
 
                 yield return new WaitUntil(() => itemManager.ItemCount == 0);
                 yield return new WaitForSeconds(1);
@@ -164,7 +164,7 @@ namespace ReLeaf
                 if (lake.IsGreening)
                     break;
 
-                text.text = "‚à‚¤ˆê“xIŒÎ‚ğ‘S‚Ä—Î‰»‚µ‚æ‚¤I";
+                text.text = "ã‚‚ã†ä¸€åº¦ï¼æ¹–ã‚’å…¨ã¦ç·‘åŒ–ã—ã‚ˆã†ï¼";
 
                 yield return new WaitForSeconds(2);
 
@@ -175,16 +175,16 @@ namespace ReLeaf
 
 
             {
-                text.text = "ƒuƒ‰ƒ{[II“G‚ª—N‚©‚È‚­‚È‚Á‚½‚æI";
+                text.text = "ãƒ–ãƒ©ãƒœãƒ¼ï¼ï¼æ•µãŒæ¹§ã‹ãªããªã£ãŸã‚ˆï¼";
                 yield return new WaitForSeconds(autoNextWaitTime);
             }
 
             {
-                text.text = "ƒ`ƒ…[ƒgƒŠƒAƒ‹‚Í‚±‚ê‚ÅI‚í‚èI";
+                text.text = "ãƒãƒ¥ãƒ¼ãƒˆãƒªã‚¢ãƒ«ã¯ã“ã‚Œã§çµ‚ã‚ã‚Šï¼";
                 yield return new WaitForSeconds(autoNextWaitTime);
             }
             {
-                text.text = "—Î‰»ƒQ[ƒW‚ğ–ƒ^ƒ“‚É‚µ‚ÄI—¹‚µ‚æ‚¤I";
+                text.text = "ç·‘åŒ–ã‚²ãƒ¼ã‚¸ã‚’æº€ã‚¿ãƒ³ã«ã—ã¦çµ‚äº†ã—ã‚ˆã†ï¼";
                 yield return new WaitForSeconds(autoNextWaitTime);
             }
 
