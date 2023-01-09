@@ -201,7 +201,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   specialPreviewMarkerManager: {fileID: 8685453909214998006}
   seGetItem: {fileID: 11400000, guid: 55ca8ca85fa3fd540894d4ec9dc3b1d1, type: 2}
-  seUseItem: {fileID: 11400000, guid: 3f4e968a5953efd4896a676770419698, type: 2}
 --- !u!50 &354325909066514047
 Rigidbody2D:
   serializedVersion: 4
@@ -358,7 +357,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 99
+  m_SortingOrder: 100
   m_Sprite: {fileID: -1589811457, guid: 946826ac5cc353f4d9fad583b7404d14, type: 3}
   m_Color: {r: 0, g: 0, b: 0, a: 0.5176471}
   m_FlipX: 0
@@ -526,6 +525,7 @@ MonoBehaviour:
       list:
       - {fileID: 11400000, guid: 2d647e75c15227948b952e1175a315c4, type: 2}
       - {fileID: 11400000, guid: 0c1d8da08c8bdec43b11e9983dfc3b81, type: 2}
+  seSpeedUp: {fileID: 11400000, guid: 772e8f02ac89f7e4cad4fa2f5e89e4c5, type: 2}
 --- !u!50 &7234929495377642534
 Rigidbody2D:
   serializedVersion: 4
@@ -635,6 +635,7 @@ MonoBehaviour:
   damagedFlashingInterval: 0.1
   damagedFlashingAlpha: 0.5
   seDamaged: {fileID: 11400000, guid: 7aa91e4919feaf5489e7df122751deb0, type: 2}
+  seRecovered: {fileID: 0}
 --- !u!58 &285955042789145649
 CircleCollider2D:
   m_ObjectHideFlags: 0
