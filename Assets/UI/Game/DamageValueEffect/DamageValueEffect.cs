@@ -13,7 +13,7 @@ namespace ReLeaf
             if (!IsInitialized)
             {
                 TryGetComponent(out animancer);
-                text = GetComponentInChildren<TextMeshProUGUI>(true);
+                text = GetComponentInChildren<TextMeshPro>(true);
                 wait = new WaitForSeconds(info.InitAnimation.length);
             }
             animancer.Play(info.InitAnimation);
@@ -24,7 +24,7 @@ namespace ReLeaf
         {
         }
 
-        TextMeshProUGUI text;
+        TextMeshPro text;
 
         int damage;
         bool IsHighDamage => damage > info.HighDamageThreshold;
@@ -41,8 +41,6 @@ namespace ReLeaf
             this.damage = damage;
             transform.position = pos + info.Offset + Vector3.Lerp(-info.RandomOffsetMax, info.RandomOffsetMax, Random.value);
 
-            transform.position += damage * info.DamageOffset * Vector3.up;
-
             var damageStr = damage.ToString();
             var damageText = "";
             foreach (var damageChar in damageStr)
@@ -53,7 +51,7 @@ namespace ReLeaf
             text.text = damageText;
             text.fontSize = MathExtension.Map(damage, 0, info.MaxDamage, info.MinSize, info.MaxSize, true);
 
-
+            text.sortingOrder = 100 + damage;
             text.spriteAsset = IsHighDamage ? info.HighDamageSpriteAsset : info.NormalDamageSpriteAsset;
         }
 

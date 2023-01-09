@@ -36,11 +36,6 @@ namespace ReLeaf
         float maxSize = 70;
         public float MaxSize => maxSize;
 
-        [SerializeField, Rename("ダメージ値ごとのオフセット(大ダメージを前に出すため)")]
-        float damageOffset = 0.001f;
-        public float DamageOffset => damageOffset;
-
-
         [SerializeField, Rename("表示座標のオフセット")]
         Vector3 offset;
         public Vector3 Offset => offset;
