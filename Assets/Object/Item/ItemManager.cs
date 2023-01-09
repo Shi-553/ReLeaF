@@ -19,6 +19,8 @@ namespace ReLeaf
         AudioInfo seGetItem;
 
 
+        public bool CanUse { get; set; } = true;
+
         int itemCount = 0;
         public int ItemCount
         {
@@ -115,6 +117,8 @@ namespace ReLeaf
 
         public IEnumerator UseItem()
         {
+            if (!CanUse)
+                yield break;
             if (GameRuleManager.Singleton.IsPrepare)
                 yield break;
             if (ItemCount == 0)

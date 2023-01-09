@@ -142,13 +142,20 @@ namespace ReLeaf
 
             var itemManager = PlayerController.Singleton.GetComponentInChildren<ItemManager>();
 
+            itemManager.CanUse = false;
             {
                 text.text = "ナイス！！落としたアイテムを拾おう！";
-                yield return new WaitForSeconds(autoNextWaitTime);
+
+                float time = Time.time;
                 yield return new WaitUntil(() => itemManager.ItemCount != 0);
+                var duration = Time.time - time;
+
+                // 取るのにかかった時間の分短くする
+                yield return new WaitForSeconds(autoNextWaitTime - duration);
             }
 
 
+            itemManager.CanUse = true;
             while (true)
             {
                 text.text = ACTION_DISP_COLOR;
