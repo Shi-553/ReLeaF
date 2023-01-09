@@ -17,7 +17,7 @@ namespace Utility
             get => value;
             set
             {
-                this.value = value;
+                this.value = Mathf.Min(valueMax, value);
                 if (Slider != null)
                     Slider.value = ValueRate;
             }
@@ -27,10 +27,13 @@ namespace Utility
         [SerializeField, Rename("0をちょうど下回ったフレームにtrueを返すか")]
         bool canOverConsumeOnlyOnce = false;
 
+        [SerializeField, Rename("デフォルト{gameObject.name}(1なら最大値)")]
+        float defaultValueRate = 1;
+
         public Slider Slider { get; set; }
         private void Awake()
         {
-            Value = valueMax;
+            Value = valueMax * defaultValueRate;
         }
 
         // ぽいんと消費

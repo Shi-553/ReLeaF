@@ -8,7 +8,11 @@ namespace ReLeaf
     public class PlayerController : SingletonBase<PlayerController>, ReLeafInputAction.IPlayerActions
     {
         PlayerInput playerInput;
-        ReLeafInputAction reLeafInputAction;
+        public PlayerInput PlayerInput => playerInput;
+
+
+        public ReLeafInputAction ReLeafInputAction { get; private set; }
+
 
         ItemManager itemManager;
 
@@ -26,11 +30,11 @@ namespace ReLeaf
             {
                 TryGetComponent(out mover);
 
-                reLeafInputAction = new ReLeafInputAction();
+                ReLeafInputAction = new ReLeafInputAction();
                 TryGetComponent(out playerInput);
-                playerInput.defaultActionMap = reLeafInputAction.Player.Get().name;
-                playerInput.actions = reLeafInputAction.asset;
-                reLeafInputAction.Player.SetCallbacks(this);
+                PlayerInput.defaultActionMap = ReLeafInputAction.Player.Get().name;
+                PlayerInput.actions = ReLeafInputAction.asset;
+                ReLeafInputAction.Player.SetCallbacks(this);
 
                 itemManager = GetComponentInChildren<ItemManager>();
 
@@ -45,9 +49,9 @@ namespace ReLeaf
         private void OnChangePause(bool sw)
         {
             if (sw)
-                reLeafInputAction.Disable();
+                ReLeafInputAction.Disable();
             else
-                reLeafInputAction.Enable();
+                ReLeafInputAction.Enable();
         }
 
         protected override void OnDestroy()
@@ -55,7 +59,7 @@ namespace ReLeaf
             base.OnDestroy();
             if (SceneLoader.Singleton != null)
                 SceneLoader.Singleton.OnChangePause -= OnChangePause;
-            reLeafInputAction?.Disable();
+            ReLeafInputAction?.Disable();
         }
 
         void SetItemDir(Vector2 value)

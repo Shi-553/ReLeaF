@@ -20,9 +20,9 @@ namespace ReLeaf
 
 
         int itemCount = 0;
-        int ItemCount
+        public int ItemCount
         {
-            set
+            private set
             {
                 itemCount = value;
                 if (itemCount == 0)
