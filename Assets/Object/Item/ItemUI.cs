@@ -26,6 +26,7 @@ namespace ReLeaf
         {
             Item = item;
             image.sprite = item.Icon;
+            image.useSpriteMesh = true;
             gameObject.SetActive(true);
         }
 

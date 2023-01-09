@@ -3278,6 +3278,18 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 5023065968764256356}
     m_Modifications:
+    - target: {fileID: 5602146042616845195, guid: 11a2b9be22ccf54489a1db0fd3bd44f8, type: 3}
+      propertyPath: seMove
+      value: 
+      objectReference: {fileID: 11400000, guid: 54fa52b0b0750394ea371f90df547088, type: 2}
+    - target: {fileID: 5602146042616845195, guid: 11a2b9be22ccf54489a1db0fd3bd44f8, type: 3}
+      propertyPath: sePaint
+      value: 
+      objectReference: {fileID: 11400000, guid: 85bb354a461e58249b5e73df82070dd8, type: 2}
+    - target: {fileID: 5602146042616845195, guid: 11a2b9be22ccf54489a1db0fd3bd44f8, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 5602146042616845200, guid: 11a2b9be22ccf54489a1db0fd3bd44f8, type: 3}
       propertyPath: m_RootOrder
       value: 7
@@ -3335,6 +3347,14 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 5023065968764256356}
     m_Modifications:
+    - target: {fileID: 4052387953760838874, guid: 7145dcadd5ab20341bfef2b0cf89dc63, type: 3}
+      propertyPath: seMove
+      value: 
+      objectReference: {fileID: 11400000, guid: 07a7e91102a5c864d962dd4c8f004b87, type: 2}
+    - target: {fileID: 4052387953760838874, guid: 7145dcadd5ab20341bfef2b0cf89dc63, type: 3}
+      propertyPath: seUseItem
+      value: 
+      objectReference: {fileID: 11400000, guid: 3f4e968a5953efd4896a676770419698, type: 2}
     - target: {fileID: 8467192124429001911, guid: 7145dcadd5ab20341bfef2b0cf89dc63, type: 3}
       propertyPath: m_Name
       value: player

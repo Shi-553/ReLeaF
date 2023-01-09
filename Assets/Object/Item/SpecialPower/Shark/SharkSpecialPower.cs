@@ -14,6 +14,8 @@ namespace ReLeaf
 
         Vector2Int previewdTilePos;
 
+        [SerializeField]
+        AudioInfo seSharkSpecialMove,seSharkSpecial;
         public override void PreviewRange(Vector2Int tilePos, Vector2Int dir, List<Vector2Int> returns)
         {
             if (!IsUsing)
@@ -40,6 +42,8 @@ namespace ReLeaf
             GlobalCoroutine.Singleton.StartCoroutine(WaitRunning());
 
             GlobalCoroutine.Singleton.StartCoroutine(MovePlayer(dir));
+
+            using var _ = RobotGreening.Singleton.StartGreening();
 
 
             var localRanges = SowSeedSpecialPowerInfo.GetSeedLocalTilePos(dir).ToList();
@@ -73,6 +77,8 @@ namespace ReLeaf
             var mover = RobotMover.Singleton;
 
             mover.transform.position = minPos;
+
+            SEManager.Singleton.Play(seSharkSpecialMove);
 
             Vector2Int currentTilePos = tilePos + Vector2Int.one;
             while (true)
@@ -109,6 +115,7 @@ namespace ReLeaf
                     });
 
                 }
+              
                 mover.UpdateManualOperation(PlayerMover.Singleton.transform.position + (Vector3)(Vector2)dir * 2.0f, info.Speed, false);
 
                 if (!isRunning)
@@ -120,7 +127,7 @@ namespace ReLeaf
             mover.IsStop = true;
             mover.GetComponent<RobotAnimation>().Thrust();
             yield return new WaitForSeconds(0.5f);
-
+            SEManager.Singleton.Play(seSharkSpecial);
             foreach (var localPos in info.ThrustingList)
             {
                 DungeonManager.Singleton.SowSeed(previewdTilePos + localPos, true);

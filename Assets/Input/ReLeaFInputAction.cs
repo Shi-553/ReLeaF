@@ -679,6 +679,17 @@ namespace ReLeaf
                 },
                 {
                     ""name"": """",
+                    ""id"": ""2cb73eaa-bf58-4c0c-a3e0-ed7fcb5b850c"",
+                    ""path"": ""<Keyboard>/space"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard&Mouse"",
+                    ""action"": ""Submit"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
                     ""id"": ""5ecabe72-b2c7-4111-a451-a30188101e44"",
                     ""path"": ""<Mouse>/position"",
                     ""interactions"": """",

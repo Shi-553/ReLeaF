@@ -30,6 +30,8 @@ namespace ReLeaf
         float manualSpeed;
         float manualNearThreshold = 0.1f;
 
+       
+
         protected override void Init(bool isFirstInit, bool callByAwake)
         {
             if (!isFirstInit)

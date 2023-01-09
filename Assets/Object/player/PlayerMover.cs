@@ -13,6 +13,8 @@ namespace ReLeaf
         [SerializeField, Rename("プレイヤーの移動スピード(nマス/秒)")]
         float moveSpeed = 5;
 
+        float addedMoveSpeed = 0;
+
         [SerializeField, Rename("ダッシュ中の移動スピード倍率(n倍)")]
         float dashSpeedMagnification = 2;
 
@@ -63,6 +65,9 @@ namespace ReLeaf
         MoveSE seSandMove;
         [SerializeField]
         MoveSE seGrassMove;
+
+        [SerializeField]
+        AudioInfo seSpeedUp;
 
         public Vector2 SpecialDir { get; private set; }
         public float SpecialSpeed { get; private set; }
@@ -158,6 +163,8 @@ namespace ReLeaf
                 }
             }
 
+            speed += addedMoveSpeed;
+
             mover.MoveDelta(DungeonManager.CELL_SIZE * speed * Dir);
 
             if (WasChangedTilePosThisFrame && IsMove)
@@ -239,5 +246,10 @@ namespace ReLeaf
             }
         }
 
+        public void SpeedUp(float add)
+        {
+            SEManager.Singleton.Play(seSpeedUp);
+            addedMoveSpeed += add;
+        }
     }
 }

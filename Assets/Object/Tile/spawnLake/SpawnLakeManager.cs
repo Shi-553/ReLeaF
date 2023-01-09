@@ -13,6 +13,10 @@ namespace ReLeaf
         readonly Dictionary<Vector2Int, SpawnLake> lakeDic;
         readonly HashSet<Vector2Int> targets = new();
 
+        public IReadOnlyDictionary<Vector2Int, SpawnLake> Dic => lakeDic;
+
+        List<Coroutine> coroutines = new();
+
         public SpawnLakeEnemyInfo EnemyInfo { get; private set; }
 
         WaitForSeconds wait;
@@ -24,15 +28,9 @@ namespace ReLeaf
             this.enemyRoot = enemyRoot;
         }
 
-        public IReadOnlyDictionary<Vector2Int, SpawnLake> Dic => lakeDic;
-
         public void Reset()
         {
-            if (coroutine != null)
-            {
-                GlobalCoroutine.Singleton.StopCoroutine(coroutine);
-                coroutine = null;
-            }
+            coroutines.ForEach(c => GlobalCoroutine.Singleton.StopCoroutine(c));
         }
         public bool TryAdd(SpawnLake s)
         {
@@ -82,18 +80,21 @@ namespace ReLeaf
             GameRuleManager.Singleton.OnChangeState += OnChangeState;
         }
 
-        Coroutine coroutine;
+
         private void OnChangeState(GameRuleState obj)
         {
             if (obj == GameRuleState.Playing)
             {
-                coroutine = GlobalCoroutine.Singleton.StartCoroutine(SpawnInvertal());
+                foreach (var target in targets)
+                {
+                    coroutines.Add(GlobalCoroutine.Singleton.StartCoroutine(SpawnInvertal(target)));
+                }
                 return;
             }
             Reset();
         }
 
-        IEnumerator SpawnInvertal()
+        IEnumerator SpawnInvertal(Vector2Int target)
         {
             while (true)
             {
@@ -102,29 +103,31 @@ namespace ReLeaf
                 if (lakeDic.All(t => t.Value.IsGreening))
                     yield break;
 
-                foreach (var target in targets)
-                {
-                    var targetWorldPos = DungeonManager.Singleton.TilePosToWorld(target);
+                var targetWorldPos = DungeonManager.Singleton.TilePosToWorld(target);
 
-                    var (element, index) = lakeDic.Values
-                        .Where(lake => !lake.IsGreening)
-                        .MinBy(lake => (lake.TilePos - target).sqrMagnitude);
+                var (element, index) = lakeDic.Values
+                    .Where(lake => !lake.IsGreening)
+                    .MinBy(lake => (lake.TilePos - target).sqrMagnitude);
 
-                    var currentWorldPos = DungeonManager.Singleton.TilePosToWorld(element.TilePos);
+                var currentWorldPos = DungeonManager.Singleton.TilePosToWorld(element.TilePos);
 
-                    var enemy = Object.Instantiate(EnemyInfo.EnemyPrefab,
-                        targetWorldPos,
-                        Quaternion.identity,
-                        enemyRoot);
+                var enemy = Object.Instantiate(EnemyInfo.EnemyPrefab,
+                    targetWorldPos,
+                    Quaternion.identity,
+                    enemyRoot);
 
-                    enemy.transform.position = currentWorldPos;
+                enemy.transform.position = currentWorldPos;
 
-                    var enemyAnimation = enemy.GetComponent<EnemyAnimationBase>();
-                    enemyAnimation.Init();
-                    var co = enemyAnimation.SpawnAnimation(currentWorldPos, targetWorldPos, EnemyInfo.SpwanInitAnimationTime);
+                var enemyAnimation = enemy.GetComponent<EnemyAnimationBase>();
+                enemyAnimation.Init();
+                var co = enemyAnimation.SpawnAnimation(currentWorldPos, targetWorldPos, EnemyInfo.SpwanInitAnimationTime);
 
-                    GlobalCoroutine.Singleton.StartCoroutine(co);
-                }
+                GlobalCoroutine.Singleton.StartCoroutine(co);
+
+                yield return null;
+
+                var initTilePos = enemy.TilePos;
+                yield return new WaitUntil(() => enemy.TilePos != initTilePos);
             }
         }
     }

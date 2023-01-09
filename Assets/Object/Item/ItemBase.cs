@@ -2,6 +2,7 @@ using Animancer;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Utility;
 
 namespace ReLeaf
 {
@@ -10,6 +11,9 @@ namespace ReLeaf
         [SerializeField]
         Sprite icon;
         public Sprite Icon => icon;
+
+        [SerializeField]
+        AudioInfo useSe;
 
         [SerializeField]
         bool isImmediate = false;
@@ -23,12 +27,12 @@ namespace ReLeaf
         AnimancerComponent animancer;
         bool isFirst = true;
 
-        protected void Awake()
+        public void Init()
         {
             Init(isFirst);
             isFirst = false;
         }
-        public virtual void Init(bool isFirst)
+        protected virtual void Init(bool isFirst)
         {
             if (isFirst)
             {
@@ -71,18 +75,24 @@ namespace ReLeaf
         }
         public void ReStart()
         {
-            Init(isFirst);
+            Init();
             StartCoroutine(RandomMove());
         }
 
-        public int UseCount { get; set; }
+        public int UseCount { get; private set; }
         public bool IsUsing => UseCount > 0;
 
         public abstract void PreviewRange(Vector2Int tilePos, Vector2Int dir, List<Vector2Int> returns);
         public IEnumerator Use(Vector2Int tilePos, Vector2Int dir)
         {
             UseCount++;
-            return UseImpl(tilePos, dir);
+
+            if (UseCount == 1)
+            {
+                SEManager.Singleton.Play(useSe);
+                yield return UseImpl(tilePos, dir);
+            }
+            yield break;
         }
         protected abstract IEnumerator UseImpl(Vector2Int tilePos, Vector2Int dir);
 

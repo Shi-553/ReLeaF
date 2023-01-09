@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using Utility;
 using UnityEngine;
 
 namespace ReLeaf
@@ -11,6 +12,9 @@ namespace ReLeaf
         CrabSpecialPowerInfo sowSeedSpecialPowerInfo;
         protected override ISowSeedSpecialPowerInfo SowSeedSpecialPowerInfo => sowSeedSpecialPowerInfo;
 
+        [SerializeField]
+        AudioInfo seCrabSpecial;
+
         public override void PreviewRange(Vector2Int tilePos, Vector2Int dir, List<Vector2Int> returns)
         {
             if (!IsUsing)
@@ -18,6 +22,8 @@ namespace ReLeaf
         }
         protected override IEnumerator UseImpl(Vector2Int tilePos, Vector2Int dir)
         {
+            using var _ = RobotGreening.Singleton.StartGreening();
+
             var localRanges = SowSeedSpecialPowerInfo.GetSeedLocalTilePos(dir).ToList();
 
             var (minLocalTilePos, maxLocalTilePos) = localRanges.Aggregate(
@@ -50,6 +56,7 @@ namespace ReLeaf
 
             mover.UpdateManualOperation(maxPos, sowSeedSpecialPowerInfo.Speed, false);
 
+            SEManager.Singleton.Play(seCrabSpecial);
 
             Vector2Int currentTilePos = tilePos + Vector2Int.one;
             while (true)
