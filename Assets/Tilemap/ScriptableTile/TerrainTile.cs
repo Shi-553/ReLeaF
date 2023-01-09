@@ -180,7 +180,6 @@ namespace ReLeaf
                         InitCreatedObject((Vector2Int)position);
 
                     }
-                    return true;
                 }
             }
             return false;

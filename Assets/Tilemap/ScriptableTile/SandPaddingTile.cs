@@ -67,18 +67,23 @@ namespace ReLeaf
         public override bool StartUp(Vector3Int position, ITilemap tm, GameObject go)
         {
             var result = tile.StartUp(position, tm, go);
-            if (!result)
-            {
-                return false;
-            }
-            GlobalCoroutine.Singleton.StartCoroutine(Connect((Vector2Int)position, tile.createdObject));
 
+            if (tile.createdObject != null)
+            {
+                tile.createdObject.CreatedTile = this;
+                tile.createdObject.InstancingTarget.CreatedTile = this;
+            }
             if (tile.createdObject is IRotateable rotateable)
             {
                 rotateable.Rotate(Rotation, (Vector2)(Size - Vector2Int.one) * 0.25f);
             }
-            tile.createdObject.CreatedTile = this;
-            tile.createdObject.InstancingTarget.CreatedTile = this;
+
+            if (result)
+            {
+                GlobalCoroutine.Singleton.StartCoroutine(Connect((Vector2Int)position, tile.createdObject));
+            }
+
+
 
 #if UNITY_EDITOR
 
