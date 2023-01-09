@@ -6,6 +6,7 @@ namespace ReLeaf
 {
     public enum GameRuleState
     {
+        None,
         Prepare,
         Playing,
         GameClear,
@@ -33,6 +34,25 @@ namespace ReLeaf
         public bool IsGameClear => State == GameRuleState.GameClear;
         public bool IsGameOver => State == GameRuleState.GameOver;
 
+        public void Pause() => state = GameRuleState.Prepare;
+        public void UnPause() => state = GameRuleState.Playing;
+
+        public bool isWaitFinish;
+        public bool IsWaitFinish
+        {
+            get => isWaitFinish;
+            set
+            {
+                isWaitFinish = value;
+
+                if (!isWaitFinish && waitState != GameRuleState.None)
+                {
+                    Finish(waitState);
+                    waitState = GameRuleState.None;
+                }
+            }
+        }
+        GameRuleState waitState = GameRuleState.None;
 
 
         [SerializeField]
@@ -102,9 +122,20 @@ namespace ReLeaf
         {
             if (!IsPlaying)
                 return;
-            State = isGameClear ? GameRuleState.GameClear : GameRuleState.GameOver;
+            Finish(isGameClear ? GameRuleState.GameClear : GameRuleState.GameOver);
+        }
+        void Finish(GameRuleState state)
+        {
+            if (IsWaitFinish)
+            {
+                waitState = state;
+                return;
+            }
+            if (!IsPlaying)
+                return;
+            State = state;
 
-            if (isGameClear)
+            if (state == GameRuleState.GameClear)
             {
                 StartCoroutine(WaitClearSound());
                 StartCoroutine(WaitGreening());

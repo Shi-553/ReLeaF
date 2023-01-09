@@ -1,3 +1,4 @@
+using Pickle;
 using System.Collections;
 using System.Linq;
 using TMPro;
@@ -31,19 +32,25 @@ namespace ReLeaf
 
         [SerializeField]
         OnEnterChecker enterChecker;
-        [SerializeField]
-        EnemyCore enemy;
+
+        [SerializeField, Pickle]
+        ItemBase itemPrefab;
 
         void Start()
         {
+            GameRuleManager.Singleton.IsWaitFinish = true;
             eventCount = 0;
+            gameObject.SetActive(false);
             GameRuleManager.Singleton.OnChangeState += OnChangeState;
         }
 
         private void OnChangeState(GameRuleState obj)
         {
             if (obj == GameRuleState.Playing)
+            {
+                gameObject.SetActive(true);
                 StartCoroutine(TutorialMain());
+            }
         }
 
         IEnumerator TutorialMain()
@@ -112,22 +119,33 @@ namespace ReLeaf
                 yield return WaitOnEnter();
             }
 
+
+
+            var enemys = lake.SpawnAllNow();
+
+            GameRuleManager.Singleton.Pause();
+
             {
-                text.text = "敵がいるよ！赤い攻撃マスは避けよう！";
+                text.text = "湖から敵が湧いちゃった！";
                 yield return new WaitForSeconds(autoNextWaitTime);
             }
 
+            GameRuleManager.Singleton.UnPause();
             {
                 text.text = "黄色い弱点マスを踏んで倒そう！";
-                yield return new WaitUntil(() => enemy == null || enemy.gameObject == null);
+                yield return new WaitUntil(() => enemys.All(e => e == null || e.gameObject == null));
             }
 
+            var itemManager = PlayerController.Singleton.GetComponentInChildren<ItemManager>();
 
             {
                 text.text = "ナイス！！落としたアイテムを拾おう！";
-                yield return new WaitForSeconds(niceWaitTime);
+                yield return new WaitForSeconds(autoNextWaitTime);
+                yield return new WaitUntil(() => itemManager.ItemCount != 0);
             }
 
+
+            while (true)
             {
                 text.text = ACTION_DISP_COLOR;
 
@@ -135,34 +153,27 @@ namespace ReLeaf
                 {
                     text.text += $"{displayString}";
                 }
-                text.text += $" {NOMAL_COLOR}アイテムを使ってみよう！";
-                yield return WaitAction(PlayerController.Singleton.ReLeafInputAction.Player.UseItem);
-            }
+                text.text += $" {NOMAL_COLOR}湖にアイテムを使ってみよう！";
 
-            var enemys = lake.SpawnAllNow();
+                yield return new WaitUntil(() => itemManager.ItemCount == 0);
+                yield return new WaitForSeconds(1);
+
+                if (lake.IsGreening)
+                    break;
+
+                text.text = $"{NOMAL_COLOR}もう一度！";
+
+                yield return new WaitForSeconds(2);
+
+                var item = Instantiate(itemPrefab);
+                item.Fetch();
+                itemManager.AddItem(item);
+            }
 
 
             {
-                text.text = "湖から敵が湧いちゃった！";
+                text.text = "ブラボー！！これで敵が湧かなくなったよ！";
                 yield return new WaitForSeconds(autoNextWaitTime);
-            }
-
-            while (!lake.IsGreening)
-            {
-                text.text = "敵を倒して、アイテムを使って湖を緑化しよう！";
-                yield return new WaitUntil(() => lake.IsGreening || enemys.All(e => e == null || e.gameObject == null));
-
-                if (!lake.IsGreening)
-                {
-                    yield return new WaitForSeconds(autoNextWaitTime);
-                    enemys = lake.SpawnAllNow();
-                }
-            }
-
-
-            {
-                text.text = "ブラボー！！！！！！！";
-                yield return new WaitForSeconds(niceWaitTime);
             }
 
             {
@@ -175,6 +186,8 @@ namespace ReLeaf
             }
 
             gameObject.SetActive(false);
+            GameRuleManager.Singleton.IsWaitFinish = false;
+
         }
 
         public bool TryGetDisplayString(InputAction action, out string displayString)

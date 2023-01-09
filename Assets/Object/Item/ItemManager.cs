@@ -22,9 +22,9 @@ namespace ReLeaf
         AudioInfo seUseItem;
 
         int itemCount = 0;
-        int ItemCount
+        public int ItemCount
         {
-            set
+            private set
             {
                 itemCount = value;
                 if (itemCount == 0)
@@ -123,7 +123,7 @@ namespace ReLeaf
             }
 
             var useItem = Current;
-           
+
             SEManager.Singleton.Play(seUseItem);
 
             useCo = StartCoroutine(useItem.Item.Use(mover.TilePos, ItemDir));
