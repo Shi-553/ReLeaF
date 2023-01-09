@@ -1,6 +1,8 @@
+using DebugLogExtension;
 using Pickle;
 using System.Collections;
 using System.Linq;
+using System.Text.RegularExpressions;
 using TMPro;
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -15,9 +17,6 @@ namespace ReLeaf
         [SerializeField]
         Button nextButton;
         int eventCount = 0;
-
-        readonly static string ACTION_DISP_COLOR = "<color=#0000FF>";
-        readonly static string NOMAL_COLOR = "<color=black>";
 
         [SerializeField]
         GameObject greeningRateMask;
@@ -35,6 +34,9 @@ namespace ReLeaf
 
         [SerializeField, Pickle]
         ItemBase itemPrefab;
+
+        readonly static string ACTION_TEXT_COLOR = "<color=#1A4FF3>";
+        readonly static string NORMAL_TEXT_COLOR = "<color=black>";
 
         void Start()
         {
@@ -74,14 +76,8 @@ namespace ReLeaf
             PlayerController.Singleton.PlayerInput.enabled = true;
 
             {
-                text.text = ACTION_DISP_COLOR;
-
-                if (TryGetDisplayString(PlayerController.Singleton.ReLeafInputAction.Player.Move, out var moveDisplayString))
-                {
-                    text.text += $"{moveDisplayString}";
-                }
-
-                text.text += $" {NOMAL_COLOR}まずは歩いて緑化しよう！";
+                var actionString = GetActionSpriteTag(PlayerController.Singleton.ReLeafInputAction.Player.Move);
+                text.text = $"まずは{actionString}で歩いて緑化しよう！";
                 yield return WaitAction(PlayerController.Singleton.ReLeafInputAction.Player.Move);
             }
 
@@ -91,18 +87,14 @@ namespace ReLeaf
             }
 
             {
-                text.text = $"歩くと緑化エネルギー(EP)が溜まるよ！";
+                text.text = "歩くと緑化エネルギー(EP)が溜まるよ！";
                 yield return new WaitForSeconds(autoNextWaitTime);
             }
 
             {
-                text.text = ACTION_DISP_COLOR;
+                var actionString = GetActionSpriteTag(PlayerController.Singleton.ReLeafInputAction.Player.Dash);
 
-                if (TryGetDisplayString(PlayerController.Singleton.ReLeafInputAction.Player.Dash, out var dashDisplayString))
-                {
-                    text.text += $"移動＋{dashDisplayString}";
-                }
-                text.text += $" {NOMAL_COLOR}EPを使ってダッシュ！";
+                text.text = $"移動中に{actionString}でEPを使ってダッシュ！";
                 PlayerMover.Singleton.IsDash = false;
                 yield return WaitAction(PlayerController.Singleton.ReLeafInputAction.Player.Dash);
             }
@@ -158,13 +150,13 @@ namespace ReLeaf
             itemManager.CanUse = true;
             while (true)
             {
-                text.text = ACTION_DISP_COLOR;
 
-                if (TryGetDisplayString(PlayerController.Singleton.ReLeafInputAction.Player.UseItem, out var displayString))
-                {
-                    text.text += $"{displayString}";
-                }
-                text.text += $" {NOMAL_COLOR}湖にアイテムを使ってみよう！";
+                var useActionString = GetActionSpriteTag(PlayerController.Singleton.ReLeafInputAction.Player.UseItem);
+                var aimActionString = PlayerController.Singleton.PlayerInput.currentControlScheme == "Gamepad" ?
+                    GetActionSpriteTag(PlayerController.Singleton.ReLeafInputAction.Player.Look) :
+                    $"{ACTION_TEXT_COLOR}マウス{NORMAL_TEXT_COLOR}";
+
+                text.text = $"{aimActionString.DebugLog()}で狙って{useActionString}で湖を緑化しよう！";
 
                 yield return new WaitUntil(() => itemManager.ItemCount == 0);
                 yield return new WaitForSeconds(1);
@@ -172,7 +164,7 @@ namespace ReLeaf
                 if (lake.IsGreening)
                     break;
 
-                text.text = $"{NOMAL_COLOR}もう一度！";
+                text.text = "もう一度！湖を全て緑化しよう！";
 
                 yield return new WaitForSeconds(2);
 
@@ -201,19 +193,9 @@ namespace ReLeaf
 
         }
 
-        public string ToReadableString(string actionString)
+        public string GetActionSpriteTag(InputAction action)
         {
-            return actionString
-                .Replace("LeftButton", "左クリック", System.StringComparison.OrdinalIgnoreCase)
-                .Replace("Left", "L ", System.StringComparison.OrdinalIgnoreCase)
-                .Replace("Right", "R ", System.StringComparison.OrdinalIgnoreCase)
-                .Replace("Trigger", "トリガー", System.StringComparison.OrdinalIgnoreCase)
-                .Replace("Space", "スペースキー", System.StringComparison.OrdinalIgnoreCase);
-        }
-
-        public bool TryGetDisplayString(InputAction action, out string displayString)
-        {
-            displayString = "";
+            var displayString = "";
 
             var currentControlScheme = PlayerController.Singleton.PlayerInput.currentControlScheme;
 
@@ -226,13 +208,14 @@ namespace ReLeaf
                 {
                     action.GetBindingDisplayString(i, out string device, out var add);
 
-                    displayString += $"{add.ToUpper()} ";
+                    displayString += add.ToUpper();
                 }
             }
 
-            displayString = ToReadableString(displayString);
+            if (displayString.Length == 4 && new Regex("^[WASD]{4}$", RegexOptions.IgnoreCase).IsMatch(displayString))
+                displayString = "WASD";
 
-            return !string.IsNullOrEmpty(displayString);
+            return $"<sprite name={displayString}>";
         }
 
 
