@@ -176,12 +176,12 @@ namespace ReLeaf
 
 
             {
-                text.text = "ブラボー！！緑化されて敵が湧かなくなったよ！";
+                text.text = "ブラボー！！敵が湧かなくなったよ！";
                 yield return new WaitForSeconds(autoNextWaitTime);
             }
 
             {
-                text.text = "チュートリアルはこれで終わり！お疲れ様！";
+                text.text = "チュートリアルはこれで終わり！";
                 yield return new WaitForSeconds(autoNextWaitTime);
             }
             {
@@ -192,6 +192,16 @@ namespace ReLeaf
             gameObject.SetActive(false);
             GameRuleManager.Singleton.IsWaitFinish = false;
 
+        }
+
+        public string ToReadableString(string actionString)
+        {
+            return actionString
+                .Replace("LeftButton", "左クリック", System.StringComparison.OrdinalIgnoreCase)
+                .Replace("Left", "L ", System.StringComparison.OrdinalIgnoreCase)
+                .Replace("Right", "R ", System.StringComparison.OrdinalIgnoreCase)
+                .Replace("Trigger", "トリガー", System.StringComparison.OrdinalIgnoreCase)
+                .Replace("Space", "スペースキー", System.StringComparison.OrdinalIgnoreCase);
         }
 
         public bool TryGetDisplayString(InputAction action, out string displayString)
@@ -212,6 +222,8 @@ namespace ReLeaf
                     displayString += $"{add.ToUpper()} ";
                 }
             }
+
+            displayString = ToReadableString(displayString);
 
             return !string.IsNullOrEmpty(displayString);
         }

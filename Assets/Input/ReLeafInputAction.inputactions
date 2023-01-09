@@ -195,17 +195,6 @@
                 },
                 {
                     "name": "",
-                    "id": "884e1798-f806-44fb-8007-b946aa763da9",
-                    "path": "<Mouse>/rightButton",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "UseItem",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
                     "id": "84d552f9-0410-4835-9755-f54576e927fc",
                     "path": "<Mouse>/scroll/y",
                     "interactions": "",
