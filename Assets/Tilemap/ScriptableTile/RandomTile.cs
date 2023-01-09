@@ -45,10 +45,15 @@ namespace ReLeaf
             }
         }
 
-        override protected void UpdateTileObject(Vector3Int position, ITilemap tilemap)
+        override protected bool UpdateTileObject(Vector3Int position, ITilemap tilemap, TileObject oldTileObject)
         {
+            if (oldTileObject != null)
+                return false;
+
             currentTileObject = randomInfos[randomIndex.Get()].multipleVisualTile;
             selected = currentTileObject as IMultipleVisual;
+
+            return true;
         }
 
         protected override Pool Pool => poolArray.GetPool(selected.VisualType);

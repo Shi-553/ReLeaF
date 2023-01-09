@@ -9,9 +9,9 @@ namespace ReLeaf
     public class WallTile : TerrainTile
     {
         [Pickle]
-        public TileObject block;
+        public Wall block;
         [Pickle]
-        public TileObject fill;
+        public Wall fill;
 
         PoolArray poolArray;
 
@@ -23,19 +23,27 @@ namespace ReLeaf
             poolArray.SetPool(0, block, defaultCapacity / 2, maxSize / 2, true);
             poolArray.SetPool(1, fill, defaultCapacity / 2, maxSize / 2, true);
         }
-        protected override void UpdateTileObject(Vector3Int position, ITilemap tilemap)
+        protected override bool UpdateTileObject(Vector3Int position, ITilemap tilemap, TileObject oldTileObject)
         {
+            Wall newWall;
             if (HasWallTile(tilemap, position + Vector3Int.up) &&
                 HasWallTile(tilemap, position + Vector3Int.down) &&
                 HasWallTile(tilemap, position + Vector3Int.left) &&
                 HasWallTile(tilemap, position + Vector3Int.right))
             {
-                currentTileObject = fill;
+                newWall = fill;
             }
             else
             {
-                currentTileObject = block;
+                newWall = block;
             }
+
+            currentTileObject = newWall;
+
+            if (oldTileObject is not Wall wall)
+                return true;
+
+            return wall.IsFill != newWall.IsFill;
         }
 
         protected override Pool Pool => poolArray.GetPool(currentTileObject == block ? 0 : 1);

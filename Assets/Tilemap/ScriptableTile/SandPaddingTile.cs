@@ -67,10 +67,11 @@ namespace ReLeaf
         public override bool StartUp(Vector3Int position, ITilemap tm, GameObject go)
         {
             var result = tile.StartUp(position, tm, go);
-            if (result)
+            if (!result)
             {
-                GlobalCoroutine.Singleton.StartCoroutine(Connect((Vector2Int)position, tile.createdObject));
+                return false;
             }
+            GlobalCoroutine.Singleton.StartCoroutine(Connect((Vector2Int)position, tile.createdObject));
 
             if (tile.createdObject is IRotateable rotateable)
             {

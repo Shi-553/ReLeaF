@@ -60,7 +60,7 @@ namespace ReLeaf
         protected TileObject currentTileObject;
         public TileObject CurrentTileObject => currentTileObject;
 
-        virtual protected void UpdateTileObject(Vector3Int position, ITilemap tilemap) { }
+        protected virtual bool UpdateTileObject(Vector3Int position, ITilemap tilemap, TileObject oldTileObject) => oldTileObject == null;
 
         [NonSerialized]
         public Tilemap tilemap;
@@ -79,7 +79,6 @@ namespace ReLeaf
 
         public int defaultCapacity = 10;
         public int maxSize = 100;
-        public bool dontUseTileManager = false;
 
         [NonSerialized]
         public TileObject createdObject;
@@ -135,16 +134,19 @@ namespace ReLeaf
                         }
                     }
                     Init();
-                    UpdateTileObject(position, tm);
                     pool = Pool ?? Pools.SetPool(CurrentTileObject.TileType.ToInt32(), CurrentTileObject, defaultCapacity, maxSize);
                 }
 
-                if (!dontUseTileManager && DungeonManager.Singleton.TryGetTile((Vector2Int)position, out createdObject))
+                var oldTileObject = DungeonManager.Singleton.GetTile((Vector2Int)position);
+
+                if (!UpdateTileObject(position, tm, oldTileObject))
                 {
                     return false;
                 }
 
-                UpdateTileObject(position, tm);
+                if (oldTileObject != null)
+                    oldTileObject.Release();
+
                 if (currentTileObject == null)
                 {
                     $"currentTileObject == null".DebugLog();
@@ -162,8 +164,8 @@ namespace ReLeaf
 
                 }
 
-                if (!dontUseTileManager)
-                    DungeonManager.Singleton.tiles[(Vector2Int)position] = createdObject.InstancingTarget;
+                DungeonManager.Singleton.tiles[(Vector2Int)position] = createdObject.InstancingTarget;
+
                 return true;
             }
             else
@@ -178,6 +180,7 @@ namespace ReLeaf
                         InitCreatedObject((Vector2Int)position);
 
                     }
+                    return true;
                 }
             }
             return false;
