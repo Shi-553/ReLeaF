@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 5602146041309804555}
   - component: {fileID: 5602146041309804553}
   - component: {fileID: 5602146041309804554}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Sprite
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -132,7 +132,7 @@ GameObject:
   - component: {fileID: 5602146041864617711}
   - component: {fileID: 5602146041864617709}
   - component: {fileID: 5602146041864617710}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Shadow
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -234,7 +234,7 @@ GameObject:
   - component: {fileID: 5602146042616845206}
   - component: {fileID: 5602146042616845207}
   - component: {fileID: 3636241937331150268}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Robot
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -248,7 +248,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5602146042616845201}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -2.124, y: -14.741, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -355,6 +355,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 5602146041309804552}
     m_Modifications:
+    - target: {fileID: 192883158, guid: b12b45da902ad0949a1811570844d02d, type: 3}
+      propertyPath: m_Layer
+      value: 11
+      objectReference: {fileID: 0}
     - target: {fileID: 299343630647188153, guid: b12b45da902ad0949a1811570844d02d, type: 3}
       propertyPath: m_RootOrder
       value: 0
@@ -402,6 +406,14 @@ PrefabInstance:
     - target: {fileID: 3526245721887322378, guid: b12b45da902ad0949a1811570844d02d, type: 3}
       propertyPath: m_Name
       value: Fx_Robot
+      objectReference: {fileID: 0}
+    - target: {fileID: 3526245721887322378, guid: b12b45da902ad0949a1811570844d02d, type: 3}
+      propertyPath: m_Layer
+      value: 11
+      objectReference: {fileID: 0}
+    - target: {fileID: 6706281542980321258, guid: b12b45da902ad0949a1811570844d02d, type: 3}
+      propertyPath: m_Layer
+      value: 11
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b12b45da902ad0949a1811570844d02d, type: 3}

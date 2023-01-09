@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 8702589012477600436}
   - component: {fileID: 8702589012477600438}
   - component: {fileID: 8702589012477600439}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: P_weakground
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4881,7 +4881,7 @@ GameObject:
   - component: {fileID: 8702589013634652123}
   - component: {fileID: 8702589013634652120}
   - component: {fileID: 8702589013634652121}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Fx_Special_Preview
   m_TagString: Untagged
   m_Icon: {fileID: 0}

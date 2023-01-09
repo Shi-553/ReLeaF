@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 1970448350074198494}
   - component: {fileID: 7748951756940689831}
   - component: {fileID: 1983228245126168437}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Spine
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -130,7 +130,7 @@ GameObject:
   - component: {fileID: 3957421356740738369}
   - component: {fileID: 5976692080916401290}
   - component: {fileID: 4069091458714931996}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Shadow
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -227,7 +227,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3262723677492120122}
   - component: {fileID: 1012767330110542109}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Sprite
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -364,6 +364,10 @@ PrefabInstance:
     - target: {fileID: 3381274335361389526, guid: b1751a9d1ced5414c9dd8222cb552f05, type: 3}
       propertyPath: m_Name
       value: BoxVision
+      objectReference: {fileID: 0}
+    - target: {fileID: 3381274335361389526, guid: b1751a9d1ced5414c9dd8222cb552f05, type: 3}
+      propertyPath: m_Layer
+      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 7153099274174081556, guid: b1751a9d1ced5414c9dd8222cb552f05, type: 3}
       propertyPath: size.x

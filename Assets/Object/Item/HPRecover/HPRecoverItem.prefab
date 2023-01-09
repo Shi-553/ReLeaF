@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2681503460819188752}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: Root
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -42,7 +42,7 @@ GameObject:
   m_Component:
   - component: {fileID: 202589962108348052}
   - component: {fileID: 3919280643754549772}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: Sprite
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -129,7 +129,7 @@ GameObject:
   - component: {fileID: 4384070283387547719}
   - component: {fileID: 5349036178957737471}
   - component: {fileID: 5694029219464464850}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: HPRecoverItem
   m_TagString: Item
   m_Icon: {fileID: 0}

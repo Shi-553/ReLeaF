@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 202589962108348052}
   - component: {fileID: 3919280643754549772}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: Sprite
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -93,7 +93,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5288991525443611127}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: Root
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -129,7 +129,7 @@ GameObject:
   - component: {fileID: 4384070283387547719}
   - component: {fileID: -2967682933614005779}
   - component: {fileID: 3143629960310884017}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: SharkSpecialPower
   m_TagString: Item
   m_Icon: {fileID: 0}
