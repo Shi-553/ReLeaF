@@ -40,9 +40,6 @@ namespace ReLeaf
             TryGetComponent(out mover);
 
             spriteRenderer = GetComponentInChildren<SpriteRenderer>();
-        }
-        private void Start()
-        {
             hpGauge.Slider = PlayerStatusUI.Singleton.HPSlider;
         }
 

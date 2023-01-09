@@ -31,7 +31,7 @@ namespace Utility
         float defaultValueRate = 1;
 
         public Slider Slider { get; set; }
-        private void Awake()
+        private void Start()
         {
             Value = valueMax * defaultValueRate;
         }
