@@ -127,7 +127,11 @@ namespace ReLeaf
 
             {
                 text.text = "湖から敵が湧いちゃった！";
-                yield return new WaitForSeconds(autoNextWaitTime);
+                yield return WaitClick();
+            }
+            {
+                text.text = "赤い攻撃マスは避けよう！";
+                yield return WaitClick();
             }
 
             GameRuleManager.Singleton.UnPause();
@@ -172,12 +176,12 @@ namespace ReLeaf
 
 
             {
-                text.text = "ブラボー！！これで敵が湧かなくなったよ！";
+                text.text = "ブラボー！！緑化されて敵が湧かなくなったよ！";
                 yield return new WaitForSeconds(autoNextWaitTime);
             }
 
             {
-                text.text = "これでチュートリアルは完了！";
+                text.text = "チュートリアルはこれで終わり！お疲れ様！";
                 yield return new WaitForSeconds(autoNextWaitTime);
             }
             {
