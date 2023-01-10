@@ -176,8 +176,7 @@ namespace ReLeaf
         IEnumerator MovePlayer(Vector2Int dir)
         {
             PlayerMover.Singleton.StartSpecialMove(dir, info.Speed);
-            var invincible = PlayerCore.Singleton.IsInvincible;
-            PlayerCore.Singleton.IsInvincible = true;
+            PlayerCore.Singleton.AddInvincible(true);
             var playerAnimation = PlayerCore.Singleton.GetComponent<PlayerAnimation>();
             playerAnimation.Grasp(true);
 
@@ -186,7 +185,7 @@ namespace ReLeaf
             PlayerMover.Singleton.FinishSpecialMove();
 
             playerAnimation.Grasp(false);
-            PlayerCore.Singleton.IsInvincible = invincible;
+            PlayerCore.Singleton.RemoveInvincible();
 
         }
     }
