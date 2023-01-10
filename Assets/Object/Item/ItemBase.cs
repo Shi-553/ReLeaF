@@ -8,9 +8,7 @@ namespace ReLeaf
 {
     public abstract class ItemBase : MonoBehaviour
     {
-        [SerializeField]
-        Sprite icon;
-        public Sprite Icon => icon;
+        public Sprite Icon => GetComponentInChildren<SpriteRenderer>().sprite;
 
         [SerializeField]
         AudioInfo useSe;

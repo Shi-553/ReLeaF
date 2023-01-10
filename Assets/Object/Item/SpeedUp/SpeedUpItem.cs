@@ -16,6 +16,8 @@ namespace ReLeaf
         protected override IEnumerator UseImpl(Vector2Int tilePos, Vector2Int dir)
         {
             PlayerMover.Singleton.SpeedUp(info.SpeedUp);
+
+            StatusChangeManager.Singleton.AddStatus(new(info.Duration, Icon));
             yield break;
         }
     }
