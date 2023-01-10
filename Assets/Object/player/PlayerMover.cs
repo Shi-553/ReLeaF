@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -175,7 +175,8 @@ namespace ReLeaf
                 }
             }
 
-            speed += addedMoveSpeed;
+            if (!IsSpecialMoving)
+                speed += addedMoveSpeed;
 
             mover.MoveDelta(DungeonManager.CELL_SIZE * speed * Dir);
 

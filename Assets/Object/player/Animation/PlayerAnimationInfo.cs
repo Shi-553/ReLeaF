@@ -1,4 +1,4 @@
-﻿using UnityEngine;
+using UnityEngine;
 using Utility;
 
 namespace ReLeaf
@@ -8,7 +8,8 @@ namespace ReLeaf
         Standby,
         Walk,
         Run,
-        Damaged
+        Damaged,
+        Grasp
     }
     [CreateAssetMenu(menuName = "Player/AnimationInfo")]
     public class PlayerAnimationInfo : AnimationInfoBase<PlayerAnimationType>

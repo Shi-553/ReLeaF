@@ -71,11 +71,12 @@ namespace ReLeaf
                 (minLocalTilePos, maxLocalTilePos) = (maxLocalTilePos, minLocalTilePos);
             }
 
-            var minPos = DungeonManager.Singleton.TilePosToWorld(minLocalTilePos + tilePos);
+            var minPos = PlayerCore.Singleton.transform.position;
             var maxPos = DungeonManager.Singleton.TilePosToWorld(maxLocalTilePos + tilePos);
 
             var mover = RobotMover.Singleton;
 
+            mover.GetComponentInChildren<SpriteRenderer>().sortingOrder++;
             mover.transform.position = minPos;
 
             SEManager.Singleton.Play(seSharkSpecialMove);
@@ -133,6 +134,8 @@ namespace ReLeaf
                 DungeonManager.Singleton.SowSeed(previewdTilePos + localPos, true);
             }
 
+            mover.GetComponentInChildren<SpriteRenderer>().sortingOrder--;
+
             mover.IsStop = false;
         }
 
@@ -154,7 +157,9 @@ namespace ReLeaf
 
                 var playerPos = playerRigidbody.position;
 
-                if (UseCount > 1 || time > info.DashDuration)
+                if (UseCount > 1 && time > 0.05f)
+                    break;
+                if (time > info.DashDuration)
                     break;
 
                 checkPlayerPos = !checkPlayerPos;
@@ -173,12 +178,14 @@ namespace ReLeaf
             PlayerMover.Singleton.StartSpecialMove(dir, info.Speed);
             var invincible = PlayerCore.Singleton.IsInvincible;
             PlayerCore.Singleton.IsInvincible = true;
+            var playerAnimation = PlayerCore.Singleton.GetComponent<PlayerAnimation>();
+            playerAnimation.Grasp(true);
 
             yield return new WaitWhile(() => isRunning);
 
-
             PlayerMover.Singleton.FinishSpecialMove();
 
+            playerAnimation.Grasp(false);
             PlayerCore.Singleton.IsInvincible = invincible;
 
         }
