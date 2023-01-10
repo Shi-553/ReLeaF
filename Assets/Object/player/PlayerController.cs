@@ -1,4 +1,3 @@
-using Cinemachine;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using Utility;
@@ -18,10 +17,6 @@ namespace ReLeaf
 
         PlayerMover mover;
 
-        [SerializeField]
-        CinemachineVirtualCamera cinemachine;
-        CinemachineFramingTransposer cinemachineFramingTransposer;
-
         public override bool DontDestroyOnLoad => false;
 
         protected override void Init(bool isFirstInit, bool callByAwake)
@@ -37,8 +32,6 @@ namespace ReLeaf
                 ReLeafInputAction.Player.SetCallbacks(this);
 
                 itemManager = GetComponentInChildren<ItemManager>();
-
-                cinemachineFramingTransposer = cinemachine.GetCinemachineComponent<CinemachineFramingTransposer>();
 
             }
         }
@@ -64,6 +57,8 @@ namespace ReLeaf
 
         void SetItemDir(Vector2 value)
         {
+            if (value == Vector2.zero)
+                return;
             itemManager.ItemDir = value.ClampOneMagnitude();
         }
 
@@ -90,11 +85,6 @@ namespace ReLeaf
 
         public void OnAim(InputAction.CallbackContext context)
         {
-            if (!context.performed)
-                return;
-            Vector3 mouseScreenPos = context.ReadValue<Vector2>();
-            mouseScreenPos.z = cinemachineFramingTransposer.m_CameraDistance;
-            SetItemDir(Camera.main.ScreenToWorldPoint(mouseScreenPos) - transform.position);
         }
 
         public void OnSelectItem(InputAction.CallbackContext context)

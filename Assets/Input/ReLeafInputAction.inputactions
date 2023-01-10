@@ -151,12 +151,12 @@
                 },
                 {
                     "name": "",
-                    "id": "417d7d59-6b4c-489f-b678-6faf85bda2a7",
-                    "path": "<Mouse>/position",
+                    "id": "448d035a-50aa-45b7-8bff-3f4f88831aeb",
+                    "path": "<Mouse>/delta",
                     "interactions": "",
-                    "processors": "",
+                    "processors": "StickDeadzone(min=2)",
                     "groups": "Keyboard&Mouse",
-                    "action": "Aim",
+                    "action": "Look",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
