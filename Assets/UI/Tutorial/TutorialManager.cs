@@ -1,4 +1,3 @@
-using DebugLogExtension;
 using Pickle;
 using System.Collections;
 using System.Linq;
@@ -27,13 +26,24 @@ namespace ReLeaf
         float niceWaitTime = 2;
 
         [SerializeField]
-        WallRemover wallRemover;
+        WallRemover firstWallRemover;
+        [SerializeField]
+        OnEnterChecker firstEnterChecker;
 
         [SerializeField]
-        OnEnterChecker enterChecker;
+        WallRemover secoundWallRemover;
+        [SerializeField]
+        OnEnterChecker secoundEnterChecker;
+
+        [SerializeField]
+        WallRemover thirdWallRemover;
 
         [SerializeField, Pickle]
-        ItemBase itemPrefab;
+        ItemBase itemPrefab1;
+        [SerializeField, Pickle]
+        ItemBase itemPrefab2;
+        [SerializeField, Pickle]
+        ItemBase itemPrefab3;
 
         readonly static string ACTION_TEXT_COLOR = "<color=#1A4FF3>";
         readonly static string NORMAL_TEXT_COLOR = "<color=black>";
@@ -106,9 +116,9 @@ namespace ReLeaf
 
 
             {
-                wallRemover.RemoveWall();
+                firstWallRemover.RemoveWall();
                 text.text = "そのまま上に進もう！";
-                yield return WaitOnEnter();
+                yield return WaitOnEnter(firstEnterChecker);
             }
 
 
@@ -156,7 +166,7 @@ namespace ReLeaf
                     GetActionSpriteTag(PlayerController.Singleton.ReLeafInputAction.Player.Look) :
                     $"{ACTION_TEXT_COLOR}マウス{NORMAL_TEXT_COLOR}";
 
-                text.text = $"{aimActionString.DebugLog()}で狙って{useActionString}で湖を緑化しよう！";
+                text.text = $"{aimActionString}で狙って{useActionString}で湖を緑化しよう！";
 
                 yield return new WaitUntil(() => itemManager.ItemCount == 0);
                 yield return new WaitForSeconds(1);
@@ -168,9 +178,7 @@ namespace ReLeaf
 
                 yield return new WaitForSeconds(2);
 
-                var item = Instantiate(itemPrefab);
-                item.Fetch();
-                itemManager.AddItem(item);
+                AddItem(itemPrefab1);
             }
 
 
@@ -179,20 +187,63 @@ namespace ReLeaf
                 yield return new WaitForSeconds(autoNextWaitTime);
             }
 
+            secoundWallRemover.RemoveWall();
             {
-                text.text = "チュートリアルはこれで終わり！";
-                yield return new WaitForSeconds(autoNextWaitTime);
+                text.text = "右のエリアに進もう！";
+                yield return WaitOnEnter(secoundEnterChecker);
             }
+
+            GameRuleManager.Singleton.Pause();
+
+            itemManager.CanUse = false;
             {
-                text.text = "緑化ゲージを満タンにして終了しよう！";
-                yield return new WaitForSeconds(autoNextWaitTime);
+                AddItem(itemPrefab1);
+                AddItem(itemPrefab2);
+                AddItem(itemPrefab3);
+
+
+                text.text = $"アイテムは５つまで持てるよ！";
+                yield return WaitClick();
             }
+
+            itemManager.CanUse = true;
+            {
+                var selectActionString = PlayerController.Singleton.PlayerInput.currentControlScheme == "Gamepad" ?
+                $"<sprite name=LEFTSHOLDER><sprite name=RIGHTSHOLDER>" :
+                $"<sprite name=SCROLL/Y>";
+                text.text = $"使うアイテムを{selectActionString}で切り替えてみよう！";
+                yield return new WaitUntil(() => itemManager.Index != 0);
+            }
+
+            itemManager.CanUse = false;
+            {
+                text.text = $"OK!ここからは実戦だよ！";
+                yield return WaitClick();
+            }
+
+            {
+                text.text = "緑化ゲージを満タンにしてクリアしよう！";
+                yield return WaitClick();
+            }
+            itemManager.CanUse = true;
+
+
+            GameRuleManager.Singleton.UnPause();
+
+            thirdWallRemover.RemoveWall();
 
             gameObject.SetActive(false);
             GameRuleManager.Singleton.IsWaitFinish = false;
 
         }
+        void AddItem(ItemBase itemPrefab)
+        {
+            var itemManager = PlayerController.Singleton.GetComponentInChildren<ItemManager>();
 
+            var item = Instantiate(itemPrefab);
+            item.Fetch();
+            itemManager.AddItem(item);
+        }
         public string GetActionSpriteTag(InputAction action)
         {
             var displayString = "";
@@ -219,15 +270,15 @@ namespace ReLeaf
         }
 
 
-        IEnumerator WaitOnEnter()
+        IEnumerator WaitOnEnter(OnEnterChecker onEnterChecker)
         {
-            enterChecker.OnEnter += OnEnter;
+            onEnterChecker.OnEnter += OnEnter;
 
             var nowCount = eventCount;
 
             yield return new WaitUntil(() => eventCount != nowCount);
 
-            enterChecker.OnEnter -= OnEnter;
+            onEnterChecker.OnEnter -= OnEnter;
         }
         private void OnEnter(Collider2D obj)
         {

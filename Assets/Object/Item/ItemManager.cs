@@ -44,9 +44,9 @@ namespace ReLeaf
         }
 
         int index = 0;
-        int Index
+        public int Index
         {
-            set
+            private set
             {
                 index = (ItemCount != 0) ? ((value + ItemCount) % ItemCount) : 0;
 
@@ -155,7 +155,7 @@ namespace ReLeaf
 
         public void SelectMoveLeft()
         {
-            if (IsUseingNow)
+            if (IsUseingNow || !CanUse)
             {
                 return;
             }
@@ -163,7 +163,7 @@ namespace ReLeaf
         }
         public void SelectMoveRight()
         {
-            if (IsUseingNow)
+            if (IsUseingNow || !CanUse)
             {
                 return;
             }
