@@ -80,6 +80,8 @@ namespace ReLeaf
         public int UseCount { get; private set; }
         public bool IsUsing => UseCount > 0;
 
+        public bool IsFinishUse { protected set; get; }
+
         public abstract void PreviewRange(Vector2Int tilePos, Vector2Int dir, List<Vector2Int> returns);
         public IEnumerator Use(Vector2Int tilePos, Vector2Int dir)
         {
@@ -89,8 +91,10 @@ namespace ReLeaf
             {
                 SEManager.Singleton.Play(useSe);
                 yield return UseImpl(tilePos, dir);
+                IsFinishUse = true;
+                Destroy(gameObject);
             }
-            yield break;
+
         }
         protected abstract IEnumerator UseImpl(Vector2Int tilePos, Vector2Int dir);
 

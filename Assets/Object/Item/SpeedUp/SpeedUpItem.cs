@@ -19,6 +19,8 @@ namespace ReLeaf
 
             StatusChangeManager.Singleton.AddStatus(new(info.Duration, Icon));
 
+            IsFinishUse = true;
+
             yield return new WaitForSeconds(info.Duration);
 
             PlayerMover.Singleton.SpeedDown(info.SpeedUp);
