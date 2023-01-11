@@ -76,6 +76,10 @@ namespace ReLeaf
         AudioInfo seDamaged;
         [SerializeField]
         AudioInfo seRecovered;
+        [SerializeField]
+        AudioInfo seInvincible;
+
+        float damagedTime;
 
         protected override void Init(bool isFirstInit, bool callByAwake)
         {
@@ -90,10 +94,20 @@ namespace ReLeaf
 
         public void Damaged(float damage, Vector3 impulse)
         {
+            
             if (!GameRuleManager.Singleton.IsPlaying)
                 return;
             if (IsInvincible)
+            {
+                var duration = Time.time - damagedTime;
+                if (duration > 0.3)
+                {// 0.3ミリ秒経ってたら鳴らす
+                    SEManager.Singleton.Play(seInvincible);
+                }
                 return;
+            }
+
+            damagedTime = Time.time;
 
             if (hpGauge.ConsumeValue(damage))
             {

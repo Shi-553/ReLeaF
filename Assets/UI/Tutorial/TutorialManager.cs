@@ -6,6 +6,7 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.UI;
+using Utility;
 
 namespace ReLeaf
 {
@@ -19,6 +20,9 @@ namespace ReLeaf
 
         [SerializeField]
         GameObject greeningRateMask;
+
+        [SerializeField]
+        AudioInfo seRight;
 
         [SerializeField]
         float autoNextWaitTime = 3;
