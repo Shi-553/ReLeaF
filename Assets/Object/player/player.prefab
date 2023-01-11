@@ -747,6 +747,7 @@ MonoBehaviour:
   damagedFlashingAlpha: 0.5
   seDamaged: {fileID: 11400000, guid: 7aa91e4919feaf5489e7df122751deb0, type: 2}
   seRecovered: {fileID: 0}
+  seInvincible: {fileID: 11400000, guid: 36dc8438661aba44ca60426cb040d2a6, type: 2}
 --- !u!58 &285955042789145649
 CircleCollider2D:
   m_ObjectHideFlags: 0
