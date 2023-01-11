@@ -18,7 +18,10 @@ namespace ReLeaf
             PlayerMover.Singleton.SpeedUp(info.SpeedUp);
 
             StatusChangeManager.Singleton.AddStatus(new(info.Duration, Icon));
-            yield break;
+
+            yield return new WaitForSeconds(info.Duration);
+
+            PlayerMover.Singleton.SpeedDown(info.SpeedUp);
         }
     }
 }

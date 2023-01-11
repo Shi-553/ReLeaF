@@ -259,10 +259,14 @@ namespace ReLeaf
             }
         }
 
-        public void SpeedUp(float add)
+        public void SpeedUp(float value)
         {
             SEManager.Singleton.Play(seSpeedUp);
-            addedMoveSpeed += add;
+            addedMoveSpeed += value;
+        }
+        public void SpeedDown(float value)
+        {
+            addedMoveSpeed -= value;
         }
     }
 }
