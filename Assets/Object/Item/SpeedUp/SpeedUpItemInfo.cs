@@ -5,7 +5,7 @@ namespace ReLeaf
 {
     [ClassSummary("スピードアップアイテムのパラメータ")]
     [CreateAssetMenu(menuName = "Item/SpeedUpItemInfo")]
-    public class SpeedUpItemInfo : ScriptableObject
+    public class SpeedUpItemInfo : ItemBaseInfo
     {
         [SerializeField, Rename("スピードアップ量(nマス/秒)")]
         float speedUp = 2;
@@ -14,5 +14,8 @@ namespace ReLeaf
         float duration = 10;
         public float Duration => duration;
 
+        public override string Description => description
+            .Replace("{" + nameof(speedUp) + "}", speedUp.ToString("0.#"))
+            .Replace("{" + nameof(duration) + "}", duration.ToString("0.#"));
     }
 }

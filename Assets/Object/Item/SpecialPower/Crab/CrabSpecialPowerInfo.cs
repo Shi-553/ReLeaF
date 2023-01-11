@@ -1,11 +1,11 @@
-﻿using UnityEngine;
+using UnityEngine;
 using Utility;
 
 namespace ReLeaf
 {
     [ClassSummary("カニのスペシャルパワーパラメータ")]
     [CreateAssetMenu(menuName = "Item/SpecialPower/CrabSpecialPower")]
-    public class CrabSpecialPowerInfo : ScriptableObject, ISowSeedSpecialPowerInfo
+    public class CrabSpecialPowerInfo : ItemBaseInfo, ISowSeedSpecialPowerInfo
     {
         [SerializeField, Rename("種をまくマス")]
         LocalTilePos seedLocalTilePos;
@@ -20,6 +20,11 @@ namespace ReLeaf
         [SerializeField, Rename("緑化時のスピード(nマス/秒)")]
         float speed = 10;
         public float Speed => speed;
+
+
+        [SerializeField, Rename("塗る瞬間の音")]
+        AudioInfo seCrabSpecial;
+        public AudioInfo SeCrabSpecial => seCrabSpecial;
 
     }
 }

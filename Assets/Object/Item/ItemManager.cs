@@ -39,6 +39,8 @@ namespace ReLeaf
                 // update index
                 if (itemCount == index)
                     Index--;
+
+                UpdateDescription();
             }
             get => itemCount;
         }
@@ -49,9 +51,14 @@ namespace ReLeaf
             private set
             {
                 index = (ItemCount != 0) ? ((value + ItemCount) % ItemCount) : 0;
-
+                UpdateDescription();
             }
             get => index;
+        }
+        void UpdateDescription()
+        {
+            var description = itemCount == 0 ? "" : Current.Item.ItemBaseInfo.Description;
+            ItemDescription.Singleton.SetItemDescription(description);
         }
         ItemUI Current => itemUIs[index];
 
@@ -90,7 +97,7 @@ namespace ReLeaf
 
         public bool AddItem(ItemBase itemBase)
         {
-            if (itemBase.IsImmediate)
+            if (itemBase.ItemBaseInfo.IsImmediate)
             {
                 StartCoroutine(itemBase.Use(mover.TilePos, ItemDir));
                 return true;

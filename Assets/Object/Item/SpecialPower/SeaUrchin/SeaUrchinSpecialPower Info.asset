@@ -12,6 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2f81e02dd8ae4ec4cabcf5e1645dd3f9, type: 3}
   m_Name: SeaUrchinSpecialPower Info
   m_EditorClassIdentifier: 
+  useSe: {fileID: 11400000, guid: 3f4e968a5953efd4896a676770419698, type: 2}
+  isImmediate: 0
+  initAnimation: {fileID: 7400000, guid: 89c05b64b7dcd6a42bfb61cc3db3aa6c, type: 2}
+  description: "\u9060\u304F\u3092\u5E83\u304F\u7DD1\u5316"
   seedLocalTilePos:
     value:
     - {x: -2, y: 0}
@@ -42,3 +46,4 @@ MonoBehaviour:
   distance: 5
   speed: 15
   startSowSeedDistance: 1
+  seUrchinSpecial: {fileID: 11400000, guid: 0a02220859db7d5479f07170ca29d7e7, type: 2}

@@ -3,25 +3,30 @@ using Utility;
 
 namespace ReLeaf
 {
-    [ClassSummary("SeaUrchin‚ÌƒXƒyƒVƒƒƒ‹ƒpƒ[ƒpƒ‰ƒ[ƒ^")]
+    [ClassSummary("SeaUrchinã®ã‚¹ãƒšã‚·ãƒ£ãƒ«ãƒ‘ãƒ¯ãƒ¼ãƒ‘ãƒ©ãƒ¡ãƒ¼ã‚¿")]
     [CreateAssetMenu(menuName = "Item/SpecialPower/SeaUrchinSpecialPower")]
-    public class SeaUrchinSpecialPowerInfo : ScriptableObject, ISowSeedSpecialPowerInfo
+    public class SeaUrchinSpecialPowerInfo : ItemBaseInfo, ISowSeedSpecialPowerInfo
     {
-        [SerializeField, Rename("í‚ğ‚Ü‚­ƒ}ƒX"), EditTilePos(Direction.NONE, true)]
+        [SerializeField, Rename("ç¨®ã‚’ã¾ããƒã‚¹"), EditTilePos(Direction.NONE, true)]
         ArrayWrapper<Vector2Int> seedLocalTilePos;
         public Vector2Int[] GetSeedLocalTilePos(Vector2Int dir) => seedLocalTilePos.Value;
 
-        [SerializeField, Rename("—Î‰»ŠJn’n“_‚Ü‚Å‚Ì‹——£(nƒ}ƒX)")]
+        [SerializeField, Rename("ç·‘åŒ–é–‹å§‹åœ°ç‚¹ã¾ã§ã®è·é›¢(nãƒã‚¹)")]
         int distance = 5;
         public int Distance => distance;
 
-        [SerializeField, Rename("—Î‰»ŠJn’n“_‚É‚¢‚­ƒXƒs[ƒh(nƒ}ƒX/•b)")]
+        [SerializeField, Rename("ç·‘åŒ–é–‹å§‹åœ°ç‚¹ã«ã„ãã‚¹ãƒ”ãƒ¼ãƒ‰(nãƒã‚¹/ç§’)")]
         float speed = 10;
         public float Speed => speed;
 
-        [SerializeField, Rename("‚±‚ê‚æ‚è‹ß‚Ã‚¢‚½‚ç‚Â‚Â‚«ƒ‚[ƒVƒ‡ƒ“‚ğn‚ß‚éA—Î‰»ŠJn’n“_‚Ü‚Å‚Ì‹——£(nƒ}ƒX)")]
+        [SerializeField, Rename("ã“ã‚Œã‚ˆã‚Šè¿‘ã¥ã„ãŸã‚‰ã¤ã¤ããƒ¢ãƒ¼ã‚·ãƒ§ãƒ³ã‚’å§‹ã‚ã‚‹ã€ç·‘åŒ–é–‹å§‹åœ°ç‚¹ã¾ã§ã®è·é›¢(nãƒã‚¹)")]
         float startSowSeedDistance = 1.0f;
         public float StartSowSeedDistance => startSowSeedDistance;
 
+
+        [SerializeField, Rename("ç·‘åŒ–ã™ã‚‹ç¬é–“ã®éŸ³")]
+        AudioInfo seUrchinSpecial;
+
+        public AudioInfo SeUrchinSpecial => seUrchinSpecial;
     }
 }

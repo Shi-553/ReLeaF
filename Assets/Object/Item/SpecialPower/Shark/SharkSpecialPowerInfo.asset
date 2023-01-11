@@ -12,6 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a15223c52d10644478a10f158f0304bb, type: 3}
   m_Name: SharkSpecialPowerInfo
   m_EditorClassIdentifier: 
+  useSe: {fileID: 11400000, guid: 3f4e968a5953efd4896a676770419698, type: 2}
+  isImmediate: 0
+  initAnimation: {fileID: 7400000, guid: 89c05b64b7dcd6a42bfb61cc3db3aa6c, type: 2}
+  description: "\u7A81\u9032\u306E\u5F8C\u5468\u308A\u3092\u7DD1\u5316"
   seedLocalTilePos:
     upList:
       value:
@@ -119,22 +123,24 @@ MonoBehaviour:
     - {x: -1, y: -1}
     - {x: -1, y: -2}
     - {x: 0, y: -3}
-    - {x: 0, y: 4}
     - {x: -1, y: 3}
     - {x: -2, y: 2}
     - {x: 1, y: 3}
-    - {x: 2, y: 2}
     - {x: 3, y: 1}
-    - {x: 4, y: 0}
     - {x: 3, y: -1}
-    - {x: 2, y: -2}
     - {x: 1, y: -3}
-    - {x: 0, y: -4}
     - {x: -1, y: -3}
     - {x: -2, y: -2}
     - {x: -3, y: -1}
-    - {x: -4, y: 0}
     - {x: -3, y: 1}
     - {x: 0, y: 0}
+    - {x: 2, y: 2}
+    - {x: 2, y: -2}
+    - {x: 0, y: -4}
+    - {x: 4, y: 0}
+    - {x: 0, y: 4}
+    - {x: -4, y: 0}
   speed: 8
   dashDuration: 1
+  seSharkSpecialMove: {fileID: 11400000, guid: 669a035695520fa4bacad65c8b7d623f, type: 2}
+  seSharkSpecial: {fileID: 11400000, guid: 0a02220859db7d5479f07170ca29d7e7, type: 2}

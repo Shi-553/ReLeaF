@@ -164,11 +164,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 599fc59ada1e0cb43bc4dc801684bb92, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  icon: {fileID: 21300000, guid: 2189e15e42eadd34a9b266b029d70c93, type: 3}
-  useSe: {fileID: 11400000, guid: 772e8f02ac89f7e4cad4fa2f5e89e4c5, type: 2}
-  isImmediate: 0
-  initAnimation: {fileID: 7400000, guid: 89c05b64b7dcd6a42bfb61cc3db3aa6c, type: 2}
-  info: {fileID: 11400000, guid: 6f298eac6bd17984e95ebc83a38e4923, type: 2}
+  itemBaseInfo: {fileID: 11400000, guid: 6f298eac6bd17984e95ebc83a38e4923, type: 2}
 --- !u!58 &4384070283387547719
 CircleCollider2D:
   m_ObjectHideFlags: 0

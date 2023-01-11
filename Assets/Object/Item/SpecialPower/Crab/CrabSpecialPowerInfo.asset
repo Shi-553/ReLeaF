@@ -12,6 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f1d4b245c15c4e4438045982d1ae7094, type: 3}
   m_Name: CrabSpecialPowerInfo
   m_EditorClassIdentifier: 
+  useSe: {fileID: 11400000, guid: 3f4e968a5953efd4896a676770419698, type: 2}
+  isImmediate: 0
+  initAnimation: {fileID: 7400000, guid: 89c05b64b7dcd6a42bfb61cc3db3aa6c, type: 2}
+  description: "\u6A2A\u306B\u5E83\u304F\u7DD1\u5316"
   seedLocalTilePos:
     upList:
       value:
@@ -79,3 +83,4 @@ MonoBehaviour:
       - {x: 1, y: -3}
   beforeSpeed: 15
   speed: 15
+  seCrabSpecial: {fileID: 11400000, guid: 0a02220859db7d5479f07170ca29d7e7, type: 2}

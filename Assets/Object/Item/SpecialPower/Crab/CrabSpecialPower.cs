@@ -8,12 +8,9 @@ namespace ReLeaf
 {
     public class CrabSpecialPower : SowSeedSpecialPowerBase
     {
-        [SerializeField]
-        CrabSpecialPowerInfo sowSeedSpecialPowerInfo;
-        protected override ISowSeedSpecialPowerInfo SowSeedSpecialPowerInfo => sowSeedSpecialPowerInfo;
+        CrabSpecialPowerInfo Info => ItemBaseInfo as CrabSpecialPowerInfo;
+        protected override ISowSeedSpecialPowerInfo SowSeedSpecialPowerInfo => Info;
 
-        [SerializeField]
-        AudioInfo seCrabSpecial;
 
         public override void PreviewRange(Vector2Int tilePos, Vector2Int dir, List<Vector2Int> returns)
         {
@@ -49,14 +46,14 @@ namespace ReLeaf
 
             var mover = RobotMover.Singleton;
 
-            mover.UpdateManualOperation(minPos, sowSeedSpecialPowerInfo.BeforeSpeed, true);
+            mover.UpdateManualOperation(minPos, Info.BeforeSpeed, true);
 
             yield return new WaitUntil(() => !mover.UseManualOperation);
 
 
-            mover.UpdateManualOperation(maxPos, sowSeedSpecialPowerInfo.Speed, false);
+            mover.UpdateManualOperation(maxPos, Info.Speed, false);
 
-            SEManager.Singleton.Play(seCrabSpecial);
+            SEManager.Singleton.Play(Info.SeCrabSpecial);
 
             Vector2Int currentTilePos = tilePos + Vector2Int.one;
             while (true)

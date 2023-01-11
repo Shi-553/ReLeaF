@@ -8,19 +8,14 @@ namespace ReLeaf
 {
     public abstract class ItemBase : MonoBehaviour
     {
+        [SerializeField]
+        ItemBaseInfo itemBaseInfo;
+        public ItemBaseInfo ItemBaseInfo => itemBaseInfo;
+
         public Sprite Icon => GetComponentInChildren<SpriteRenderer>().sprite;
 
-        [SerializeField]
-        AudioInfo useSe;
-
-        [SerializeField]
-        bool isImmediate = false;
-        public bool IsImmediate => isImmediate;
 
         public bool IsFetched { get; private set; }
-
-        [SerializeField]
-        AnimationClip initAnimation;
 
         AnimancerComponent animancer;
         bool isFirst = true;
@@ -38,7 +33,7 @@ namespace ReLeaf
             }
 
             animancer.Stop();
-            animancer.Play(initAnimation);
+            animancer.Play(itemBaseInfo.InitAnimation);
             IsFetched = false;
         }
         IEnumerator RandomMove()
@@ -89,7 +84,7 @@ namespace ReLeaf
 
             if (UseCount == 1)
             {
-                SEManager.Singleton.Play(useSe);
+                SEManager.Singleton.Play(itemBaseInfo.UseSe);
                 yield return UseImpl(tilePos, dir);
                 IsFinishUse = true;
                 Destroy(gameObject);
