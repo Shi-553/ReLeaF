@@ -59,6 +59,7 @@ namespace ReLeaf
         {
             if (value == Vector2.zero)
                 return;
+
             itemManager.ItemDir = value.ClampOneMagnitude();
         }
 
@@ -83,8 +84,25 @@ namespace ReLeaf
             }
         }
 
+        [SerializeField]
+        float maxMouseSameDelta = 20;
+        Vector2 sameDelta = Vector2.zero;
+
         public void OnAim(InputAction.CallbackContext context)
         {
+            if (!context.performed)
+                return;
+
+            var delta = context.ReadValue<Vector2>();
+            delta.Scale(new(1920.0f / Screen.width, 1080.0f / Screen.height));
+
+            sameDelta += delta;
+
+            if (sameDelta.sqrMagnitude > maxMouseSameDelta * maxMouseSameDelta)
+            {
+                sameDelta = sameDelta.normalized * maxMouseSameDelta;
+                SetItemDir(sameDelta);
+            }
         }
 
         public void OnSelectItem(InputAction.CallbackContext context)

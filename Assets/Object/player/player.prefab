@@ -582,7 +582,7 @@ Transform:
   - {fileID: 6343584020993813714}
   - {fileID: 8952460560872525487}
   - {fileID: 2063755640}
-  - {fileID: 4406050192324024680}
+  - {fileID: 4807629780689135894}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -598,7 +598,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1b610d6421e5e5742a2bca35ea99c347, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cinemachine: {fileID: 0}
+  maxMouseSameDelta: 20
 --- !u!114 &358065531368087245
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -778,6 +778,10 @@ PrefabInstance:
       propertyPath: m_RootOrder
       value: 6
       objectReference: {fileID: 0}
+    - target: {fileID: 5910640368729380448, guid: 7c1094d2c021eb54cb42def237ca0887, type: 3}
+      propertyPath: m_RootOrder
+      value: 6
+      objectReference: {fileID: 0}
     - target: {fileID: 8489845451928302094, guid: 7c1094d2c021eb54cb42def237ca0887, type: 3}
       propertyPath: m_RootOrder
       value: 6
@@ -824,8 +828,8 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 7c1094d2c021eb54cb42def237ca0887, type: 3}
---- !u!224 &4406050192324024680 stripped
-RectTransform:
-  m_CorrespondingSourceObject: {fileID: 3286394657845650974, guid: 7c1094d2c021eb54cb42def237ca0887, type: 3}
+--- !u!4 &4807629780689135894 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 5910640368729380448, guid: 7c1094d2c021eb54cb42def237ca0887, type: 3}
   m_PrefabInstance: {fileID: 1206667596789874550}
   m_PrefabAsset: {fileID: 0}

@@ -2726,14 +2726,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 5023065968764256356}
     m_Modifications:
-    - target: {fileID: 4406050192324024680, guid: 7145dcadd5ab20341bfef2b0cf89dc63, type: 3}
-      propertyPath: m_SizeDelta.x
-      value: 50
-      objectReference: {fileID: 0}
-    - target: {fileID: 4406050192324024680, guid: 7145dcadd5ab20341bfef2b0cf89dc63, type: 3}
-      propertyPath: m_SizeDelta.y
-      value: 50
-      objectReference: {fileID: 0}
     - target: {fileID: 8467192124429001911, guid: 7145dcadd5ab20341bfef2b0cf89dc63, type: 3}
       propertyPath: m_Name
       value: player
@@ -2782,10 +2774,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 8467192124429001914, guid: 7145dcadd5ab20341bfef2b0cf89dc63, type: 3}
-      propertyPath: cinemachine
-      value: 
-      objectReference: {fileID: 505983909}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 7145dcadd5ab20341bfef2b0cf89dc63, type: 3}
 --- !u!1839735485 &9020821008736504434

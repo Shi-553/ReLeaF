@@ -175,17 +175,6 @@ namespace ReLeaf
                 },
                 {
                     ""name"": """",
-                    ""id"": ""448d035a-50aa-45b7-8bff-3f4f88831aeb"",
-                    ""path"": ""<Mouse>/delta"",
-                    ""interactions"": """",
-                    ""processors"": ""StickDeadzone(min=2)"",
-                    ""groups"": ""Keyboard&Mouse"",
-                    ""action"": ""Look"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
                     ""id"": ""d776264c-9065-4d3b-9346-5713e1ffabe0"",
                     ""path"": ""<Gamepad>/rightStick"",
                     ""interactions"": """",
@@ -293,6 +282,17 @@ namespace ReLeaf
                     ""action"": ""SelectItem"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""448d035a-50aa-45b7-8bff-3f4f88831aeb"",
+                    ""path"": ""<Mouse>/delta"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard&Mouse"",
+                    ""action"": ""Aim"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         },
