@@ -143,4 +143,4 @@ MonoBehaviour:
   speed: 8
   dashDuration: 1
   seSharkSpecialMove: {fileID: 11400000, guid: 669a035695520fa4bacad65c8b7d623f, type: 2}
-  seSharkSpecial: {fileID: 11400000, guid: 0a02220859db7d5479f07170ca29d7e7, type: 2}
+  seSharkSpecial: {fileID: 11400000, guid: 85bb354a461e58249b5e73df82070dd8, type: 2}

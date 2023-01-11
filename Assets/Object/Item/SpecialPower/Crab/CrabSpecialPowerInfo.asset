@@ -83,4 +83,4 @@ MonoBehaviour:
       - {x: 1, y: -3}
   beforeSpeed: 15
   speed: 15
-  seCrabSpecial: {fileID: 11400000, guid: 0a02220859db7d5479f07170ca29d7e7, type: 2}
+  seCrabSpecial: {fileID: 11400000, guid: 85bb354a461e58249b5e73df82070dd8, type: 2}
