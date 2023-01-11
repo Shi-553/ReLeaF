@@ -10,7 +10,6 @@ namespace ReLeaf
 
         public override void PreviewRange(Vector2Int tilePos, Vector2Int dir, List<Vector2Int> returns)
         {
-            returns.Clear();
 
             foreach (var weakLocalTilePos in SowSeedSpecialPowerInfo.GetSeedLocalTilePos(dir))
             {

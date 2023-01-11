@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Utility;
@@ -186,6 +186,7 @@ namespace ReLeaf
                     return;
                 }
 
+                previews.Clear();
                 previewd.Item.PreviewRange(mover.TilePos, ItemDir, previews);
 
                 foreach (var p in previews)
