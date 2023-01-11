@@ -4,22 +4,30 @@ using Utility;
 
 namespace ReLeaf
 {
-    [ClassSummary("A•¨({asset.dirname})‚Ìƒpƒ‰ƒ[ƒ^")]
+    [ClassSummary("æ¤ç‰©({asset.dirname})ã®ãƒ‘ãƒ©ãƒ¡ãƒ¼ã‚¿")]
     [CreateAssetMenu(menuName = "Tile/PlantInfo")]
     public class PlantInfo : TileObjectInfo
     {
-        [SerializeField, Rename("Å‘åHP")]
+        [SerializeField, Rename("æœ€å¤§HP")]
         float hpMax;
         public float HpMax => hpMax;
 
-        [SerializeField, Rename("¬’·‚É‚©‚©‚éŠÔ(•b)")]
+        [SerializeField, Rename("æˆé•·ã«ã‹ã‹ã‚‹æ™‚é–“(ç§’)")]
         float growTime = 10.0f;
         public float GrowTime => growTime;
 
 
-        [SerializeField, Rename("ƒ_ƒ[ƒWƒ^ƒCƒv‚²‚Æ‚Ì”íƒ_ƒ[ƒW”{—¦")]
+        [SerializeField, Rename("ãƒ€ãƒ¡ãƒ¼ã‚¸ã‚¿ã‚¤ãƒ—ã”ã¨ã®è¢«ãƒ€ãƒ¡ãƒ¼ã‚¸å€ç‡")]
         DamageMagnification[] damageMagnifications;
         public IReadOnlyCollection<DamageMagnification> DamageMagnifications => damageMagnifications;
+
+        [SerializeField]
+        Material leafMaterial;
+        public Material Material => leafMaterial;
+
+        [SerializeField]
+        Material weakMarkerdMaterial;
+        public Material WeakMarkerdMaterial => weakMarkerdMaterial;
 
     }
 }

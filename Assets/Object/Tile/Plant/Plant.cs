@@ -14,9 +14,9 @@ namespace ReLeaf
     [Serializable]
     public struct DamageMagnification
     {
-        [SerializeField, Rename("É_ÉÅÅ[ÉWÉ^ÉCÉv")]
+        [SerializeField, Rename("„ÉÄ„É°„Éº„Ç∏„Çø„Ç§„Éó")]
         public DamageType damageType;
-        [SerializeField, Rename("î{ó¶")]
+        [SerializeField, Rename("ÂÄçÁéá")]
         public float magnification;
     }
 
@@ -33,14 +33,23 @@ namespace ReLeaf
         [SerializeField]
         protected GameObject plantObjRoot;
 
+        protected MeshRenderer plantMeshRenderer;
+
         public bool IsFullGrowth { get; private set; }
 
 
         Coroutine growCo;
         public bool IsFouceGrowing { get; private set; }
 
+        protected virtual void Awake()
+        {
+            plantMeshRenderer = plantObjRoot.GetComponentInChildren<MeshRenderer>();
+        }
+
         protected override void InitImpl()
         {
+            isSetWeakMarker = false;
+
             if (!gameObject.activeInHierarchy)
                 return;
             base.InitImpl();
@@ -60,7 +69,7 @@ namespace ReLeaf
         {
             if (!IsFouceGrowing)
             {
-                // äÆëSÇ…ê¨í∑Ç∑ÇÈÇ‹Ç≈
+                // ÂÆåÂÖ®„Å´ÊàêÈï∑„Åô„Çã„Åæ„Åß
                 yield return new WaitForSeconds(PlantInfo.GrowTime);
             }
             growCo = null;
@@ -78,7 +87,7 @@ namespace ReLeaf
             Max
         }
 
-        [SerializeField, Rename("å©ÇΩñ⁄")]
+        [SerializeField, Rename("Ë¶ã„ÅüÁõÆ")]
         VisualType visualType;
 
         int IMultipleVisual.VisualType => (int)visualType;
@@ -89,6 +98,7 @@ namespace ReLeaf
         {
             seedObjRoot.SetActive(false);
             plantObjRoot.SetActive(true);
+            SetWeakMarker();
         }
 
         public virtual void Damaged(float damage, DamageType type)
@@ -121,5 +131,23 @@ namespace ReLeaf
             DungeonManager.Singleton.Messy(TilePos, this);
         }
 
+        bool isSetWeakMarker;
+        public bool IsSetWeakMarker
+        {
+            get => isSetWeakMarker;
+            set
+            {
+                isSetWeakMarker = value;
+                if (hp > 0)
+                {
+                    SetWeakMarker();
+                }
+            }
+        }
+
+        void SetWeakMarker()
+        {
+            plantMeshRenderer.material = IsSetWeakMarker ? PlantInfo.WeakMarkerdMaterial : PlantInfo.Material;
+        }
     }
 }

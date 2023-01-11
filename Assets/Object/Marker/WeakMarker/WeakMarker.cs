@@ -7,6 +7,18 @@ namespace ReLeaf
         public void SetEnemyDamageable(IEnemyDamageable damageable)
         {
             enemyDamageable = damageable;
+
+            if (DungeonManager.Singleton.TryGetTile<Plant>(tilePos, out var plant))
+            {
+                plant.IsSetWeakMarker = true;
+            }
+        }
+        protected override void UninitImpl()
+        {
+            if (DungeonManager.Singleton.TryGetTile<Plant>(tilePos, out var plant))
+            {
+                plant.IsSetWeakMarker = false;
+            }
         }
         public override void OnGreening(DungeonManager.GreeningInfo info)
         {

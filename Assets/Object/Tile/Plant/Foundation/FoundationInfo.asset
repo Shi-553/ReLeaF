@@ -19,6 +19,9 @@ MonoBehaviour:
   canGreening: 0
   canGreeningUseSpecial: 0
   isAlreadyGreening: 1
+  isOnlyNormalFoundation: 0
   hpMax: 1
   growTime: 0.5
   damageMagnifications: []
+  leafMaterial: {fileID: 2100000, guid: e91d6d356bb9a27448f0a487165c12c4, type: 2}
+  weakMarkerdMaterial: {fileID: 2100000, guid: e1d76b027ae9d6d45a94e9aa2a0284dc, type: 2}
