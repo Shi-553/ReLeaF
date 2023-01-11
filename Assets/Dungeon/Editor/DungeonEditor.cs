@@ -1,68 +1,127 @@
+using System.Linq;
 using UnityEditor;
+using UnityEditor.SceneManagement;
 using UnityEngine;
 using UnityEngine.Tilemaps;
 
 namespace ReLeaf
 {
-
     public class DungeonEditor : EditorWindow
     {
-        static Tilemap groundTilemap;
-        static Tilemap wallTilemap;
-        static TileBase wallTile;
-        static bool isReGenerate = true;
+        static DungeonEditorInfo info;
+        static DungeonEditorInfo Info => info = info == null ?
+           AssetDatabase.LoadAssetAtPath<DungeonEditorInfo>(AssetDatabase.GUIDToAssetPath(AssetDatabase.FindAssets("t:" + nameof(DungeonEditorInfo)).FirstOrDefault()))
+            : info;
+
+        static Tilemap tilemap;
+        static Tilemap Tilemap => tilemap = tilemap == null ? FindObjectOfType<Tilemap>() : tilemap;
+
+        static bool isReGenerate = false;
 
         [MenuItem("Window/2D/DungeonCreateEditor")]
         static void Open()
         {
             var window = GetWindow<DungeonEditor>();
             window.titleContent = new GUIContent("DungeonCreateEditor");
+
         }
+
         private void OnGUI()
         {
-
             GUILayout.Label("Generate Wall", EditorStyles.boldLabel);
-
-            groundTilemap = EditorGUILayout.ObjectField("Ground Layer", groundTilemap, typeof(Tilemap), true) as Tilemap;
-            wallTilemap = EditorGUILayout.ObjectField("Wall Layer", wallTilemap, typeof(Tilemap), true) as Tilemap;
-
-            wallTile = EditorGUILayout.ObjectField("Wall Tile", wallTile, typeof(TileBase), true) as TileBase;
 
             isReGenerate = EditorGUILayout.Toggle("Is ReGenerate", isReGenerate);
 
-            if (GUILayout.Button("Generate Wall!!"))
+            GUILayout.Space(10);
+
+            if (GUILayout.Button("Remove Auto Generated Wall", GUILayout.Height(30)))
             {
-                if (groundTilemap == null || wallTilemap == null || wallTile == null)
+                Undo.RegisterCompleteObjectUndo(Tilemap, "Remove Auto Generated Wall");
+
+                foreach (var tilePos in Tilemap.cellBounds.allPositionsWithin)
                 {
-                    Debug.LogError("Null Reference Exception");
-                    return;
+                    var tile = Tilemap.GetTile<TerrainTile>(tilePos);
+                    if (tile == Info.AltWallTile)
+                    {
+                        Tilemap.SetTile(tilePos, null);
+                    }
                 }
+                EditorSceneManager.MarkSceneDirty(Tilemap.gameObject.scene);
+            }
+            GUILayout.Space(10);
+            if (GUILayout.Button("Remove Normal Wall", GUILayout.Height(30)))
+            {
+                Undo.RegisterCompleteObjectUndo(Tilemap, "Remove Normal Wall");
+
+                foreach (var tilePos in Tilemap.cellBounds.allPositionsWithin)
+                {
+                    var tile = Tilemap.GetTile<TerrainTile>(tilePos);
+                    if (tile == Info.WallTile)
+                    {
+                        Tilemap.SetTile(tilePos, null);
+                    }
+                }
+                EditorSceneManager.MarkSceneDirty(Tilemap.gameObject.scene);
+            }
+            GUILayout.Space(10);
+            if (GUILayout.Button("Generate Wall!!", GUILayout.Height(30)))
+            {
+                EditorSceneManager.MarkSceneDirty(Tilemap.gameObject.scene);
+
                 if (isReGenerate)
                 {
-                    wallTilemap.ClearAllTiles();
+                    foreach (var tilePos in Tilemap.cellBounds.allPositionsWithin)
+                    {
+                        var tile = Tilemap.GetTile(tilePos);
+                        if (tile == Info.AltWallTile)
+                        {
+                            Tilemap.SetTile(tilePos, null);
+                        }
+                    }
                 }
-                foreach (var tilePos in groundTilemap.cellBounds.allPositionsWithin)
+                foreach (var tilePos in Tilemap.cellBounds.allPositionsWithin)
                 {
-                    if (groundTilemap.GetTile(tilePos) == null)
+                    if (!NeedToGenerate(tilePos))
                     {
                         continue;
                     }
-                    for (int i = -1; i < 2; i++)
-                    {
-                        for (int j = -1; j < 2; j++)
-                        {
-                            var pos = new Vector3Int(tilePos.x + i, tilePos.y + j, tilePos.z);
 
-                            if (groundTilemap.GetTile(pos) == null &&
-                                wallTilemap.GetTile(pos) == null)
+                    for (int x = -Info.Left; x <= Info.Right; x++)
+                    {
+                        for (int y = -Info.Down; y <= Info.Up; y++)
+                        {
+                            var pos = new Vector3Int(tilePos.x + x, tilePos.y + y, tilePos.z);
+                            var tile = Tilemap.GetTile(pos);
+                            if (tile == null)
                             {
-                                wallTilemap.SetTile(pos, wallTile);
+                                Tilemap.SetTile(pos, Info.AltWallTile);
                             }
                         }
                     }
                 }
-
             }
+        }
+
+        /// <summary>
+        /// 生成する必要があるかどうか
+        /// </summary>
+        bool NeedToGenerate(Vector3Int tilePos)
+        {
+            var current = Tilemap.GetTile(tilePos);
+            if (current == null || current == Info.AltWallTile || current == Info.WallTile)
+                return false;
+
+            for (int x = -1; x <= 1; x++)
+            {
+                for (int y = -1; y <= 1; y++)
+                {
+                    var pos = new Vector3Int(tilePos.x + x, tilePos.y + y, tilePos.z);
+                    var tile = Tilemap.GetTile(pos);
+                    if (tile == null || tile == Info.AltWallTile || tile == Info.WallTile)
+                        return true;
+                }
+            }
+            return false;
         }
     }
 }
