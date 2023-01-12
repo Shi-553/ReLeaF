@@ -34,6 +34,7 @@ namespace ReLeaf
         [field: SerializeField, ReadOnly]
         public int MaxGreeningCount { get; private set; }
 
+        bool CanChangeTile { get; set; } = true;
 
         public readonly struct TileChangedInfo
         {
@@ -82,6 +83,7 @@ namespace ReLeaf
         }
         protected override void UninitBeforeSceneUnload(bool isDestroy)
         {
+            CanChangeTile = false;
             foreach (var tile in tiles.Values)
             {
                 tile.Release();
@@ -157,7 +159,7 @@ namespace ReLeaf
 
         TileObject ChangeTile(Vector2Int pos, TileType type, int index = 0)
         {
-            if (!tiles.TryGetValue(pos, out var before) || before.TileType == type)
+            if (!CanChangeTile || !tiles.TryGetValue(pos, out var before) || before.TileType == type)
             {
                 return null;
             }
