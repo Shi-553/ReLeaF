@@ -71,9 +71,7 @@ namespace ReLeaf
         }
         ItemUI Current => itemUIs[index];
 
-        Camera mainCamera;
-
-        public Vector2Int ItemDir { get; set; }
+        public Vector2Int ItemDir { get; set; } = Vector2Int.up;
         public Vector2Int OldItemDir { get; private set; }
         public bool WasChangedItemDirThisFrame => ItemDir != OldItemDir;
 
@@ -92,7 +90,6 @@ namespace ReLeaf
         {
             ItemUIRoot.GetComponentsInChildren(true, itemUIs);
             itemOffset = itemUIs[1].transform.localPosition - itemUIs[0].transform.localPosition;
-            mainCamera = Camera.main;
 
             mover = GetComponentInParent<PlayerMover>();
             ItemCount = 0;
