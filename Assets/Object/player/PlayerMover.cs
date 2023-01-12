@@ -230,20 +230,23 @@ namespace ReLeaf
 
         private void OnTriggerEnter2D(Collider2D collision)
         {
+            // タイルじゃないときreturn
             if (!collision.TryGetComponent<TileObject>(out var tileObject))
                 return;
-
+            // 緑化できないときreturn
+            if (!tileObject.CanGreening(false))
+                return;
+            // 既に処理済みの場合return
             if (!underTiles.Add(tileObject))
                 return;
 
-            if (!tileObject.CanOrAleeadyGreening(false))
-                return;
 
             if (!CanSowSeed)
             {
                 waitGreeningTiles.Add(tileObject.TilePos);
                 return;
             }
+
             SowSeed(tileObject.TilePos);
         }
         private void OnTriggerExit2D(Collider2D collision)
