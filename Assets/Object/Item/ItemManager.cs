@@ -117,14 +117,9 @@ namespace ReLeaf
             }
 
             var item = itemUIs[ItemCount];
+            item.Index = ItemCount;
             item.Init(itemBase);
 
-            var screen = mainCamera.WorldToScreenPoint(itemBase.transform.position);
-            if (RectTransformUtility.ScreenPointToLocalPointInRectangle(ItemUIRoot, screen, mainCamera, out var local))
-            {
-                item.transform.localPosition = local;
-            }
-            item.Index = ItemCount;
 
             SEManager.Singleton.Play(seGetItem);
             ItemCount++;

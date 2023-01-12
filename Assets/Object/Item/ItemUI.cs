@@ -28,6 +28,7 @@ namespace ReLeaf
             image.sprite = item.Icon;
             image.useSpriteMesh = true;
             gameObject.SetActive(true);
+            transform.localPosition = GetItemLocalPos(Index);
         }
 
         public void Uninit()
