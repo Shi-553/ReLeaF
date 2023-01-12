@@ -165,11 +165,10 @@ namespace ReLeaf
         }
 
         /// <summary>
-        /// I—¹‚Ì‹¤’Êˆ—
+        /// çµ‚äº†æ™‚ã®å…±é€šå‡¦ç†
         /// </summary>
         void Finish()
         {
-            PlayerController.Singleton.enabled = false;
             PlayerCore.Singleton.gameObject.SetActive(false);
             RobotMover.Singleton.gameObject.SetActive(false);
 

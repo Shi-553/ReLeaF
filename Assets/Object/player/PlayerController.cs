@@ -67,9 +67,9 @@ namespace ReLeaf
             }
         }
 
-        protected override void OnDestroy()
+        public void OnDisable()
         {
-            base.OnDestroy();
+            SetCursorLock(false);
             if (SceneLoader.Singleton != null)
                 SceneLoader.Singleton.OnChangePause -= OnChangePause;
             ReLeafInputAction?.Disable();
