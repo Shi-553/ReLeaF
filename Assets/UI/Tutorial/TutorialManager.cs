@@ -298,7 +298,8 @@ namespace ReLeaf
 
             var nowCount = eventCount;
 
-            yield return new WaitUntil(() => eventCount != nowCount);
+            yield return null;
+            yield return new WaitUntil(() => eventCount != nowCount || Mouse.current.leftButton.wasReleasedThisFrame);
 
             nextButton.gameObject.SetActive(false);
             nextButton.onClick.RemoveListener(OnClick);
