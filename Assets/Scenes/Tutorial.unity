@@ -1837,6 +1837,7 @@ MonoBehaviour:
   text: {fileID: 151273605}
   nextButton: {fileID: 659976553}
   greeningRateMask: {fileID: 2144374799}
+  seRight: {fileID: 0}
   autoNextWaitTime: 3
   niceWaitTime: 2
   firstWallRemover: {fileID: 638193967}
@@ -1906,7 +1907,7 @@ Canvas:
   m_SortingBucketNormalizedSize: 0
   m_AdditionalShaderChannelsFlag: 25
   m_SortingLayerID: 0
-  m_SortingOrder: 2000
+  m_SortingOrder: 1200
   m_TargetDisplay: 0
 --- !u!224 &1015560493
 RectTransform:
