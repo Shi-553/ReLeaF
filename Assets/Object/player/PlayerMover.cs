@@ -36,6 +36,8 @@ namespace ReLeaf
 
         bool isKnockback = false;
 
+        public Room LastRoom { get; private set; }
+
         [Serializable]
         class SequentialSE
         {
@@ -233,6 +235,10 @@ namespace ReLeaf
             // タイルじゃないときreturn
             if (!collision.TryGetComponent<TileObject>(out var tileObject))
                 return;
+
+            if (tileObject.TileType == TileType.Entrance && tileObject is EntranceTile entrance)
+                LastRoom = entrance.Room;
+
             // 緑化できないときreturn
             if (!tileObject.CanOrAleeadyGreening(false))
                 return;

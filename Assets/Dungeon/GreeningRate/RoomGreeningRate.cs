@@ -23,7 +23,9 @@ namespace ReLeaf
 
         protected override void UpdateValue()
         {
-            RoomGreeningRateUI.Singleton.Slider.value = ValueRate;
+            var playerRoom = PlayerMover.Singleton.LastRoom;
+            if (playerRoom == null || playerRoom == room)
+                RoomGreeningRateUI.Singleton.Slider.value = ValueRate;
         }
         protected override void Finish()
         {

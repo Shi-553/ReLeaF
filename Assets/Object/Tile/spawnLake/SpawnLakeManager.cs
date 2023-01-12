@@ -48,7 +48,13 @@ namespace ReLeaf
             }
             return false;
         }
-
+        public void SetGroupInLake()
+        {
+            foreach (var lake in lakeDic.Values)
+            {
+                lake.Group = this;
+            }
+        }
         public IEnumerator SetSpwanTarget()
         {
             yield return null;
@@ -182,14 +188,19 @@ namespace ReLeaf
         {
             foreach (var lake in spawnLakes.Values)
             {
-                // Šù‘¶‚ÌƒOƒ‹[ƒv‚É“ü‚ê‚½‚çcontinue
+                // æ—¢å­˜ã®ã‚°ãƒ«ãƒ¼ãƒ—ã«å…¥ã‚ŒãŸã‚‰continue
                 if (groups.Any(g => g.TryAdd(lake)))
+                {
                     continue;
-
+                }
                 groups.Add(new SpawnLakeGroup(lake, enemyRoot));
             }
 
-            groups.ForEach(g => StartCoroutine(g.SetSpwanTarget()));
+            groups.ForEach(g =>
+            {
+                g.SetGroupInLake();
+                StartCoroutine(g.SetSpwanTarget());
+            });
         }
 
         public void AddEnabledLake(SpawnLake spawnLake)

@@ -1,6 +1,10 @@
+using System.Collections;
 using System.Collections.Generic;
+#if UNITY_EDITOR
 using UnityEditor;
+#endif
 using UnityEngine;
+using Utility;
 
 namespace ReLeaf
 {
@@ -24,18 +28,21 @@ namespace ReLeaf
             minTile = tilePos;
 
             AddRoomTile(tilePos);
+
         }
+
 
         void AddRoomTile(Vector2Int pos)
         {
             if (!DungeonManager.Singleton.TryGetTile(pos, out var tile))
                 return;
 
-            if (tile.TileType == TileType.Wall || tile.TileType == TileType.Entrance)
+            if (tile.TileType == TileType.Wall)
                 return;
 
             if (!roomTilePoss.Add(pos))
                 return;
+
 
             if (maxTile.y < pos.y) maxTile.y = pos.y;
             if (maxTile.x < pos.x) maxTile.x = pos.x;
@@ -43,6 +50,12 @@ namespace ReLeaf
             if (minTile.y > pos.y) minTile.y = pos.y;
             if (minTile.x > pos.x) minTile.x = pos.x;
 
+
+            if (tile.TileType == TileType.Entrance && tile is EntranceTile entrance)
+            {
+                entrance.Room = this;
+                return;
+            }
 
             AddRoomTile(pos + Vector2Int.up);
             AddRoomTile(pos + Vector2Int.down);
@@ -52,14 +65,93 @@ namespace ReLeaf
 
         public void GreeningRoom()
         {
-            var enemys = GetComponentsInChildren<EnemyCore>();
+            StartCoroutine(RoomBlast());
+        }
 
+
+        IEnumerator RoomBlast()
+        {
+            using var _ = RobotGreening.Singleton.StartGreening();
+
+            RobotMover.Singleton.GetComponentInChildren<SpriteRenderer>().sortingOrder++;
+
+            yield return null;
+
+            HashSet<SpawnLakeGroup> groups = new();
+            foreach (var pos in roomTilePoss)
+            {
+                if (DungeonManager.Singleton.TryGetTile<SpawnLake>(pos, out var lake))
+                {
+                    groups.Add(lake.Group);
+                }
+            }
+            groups.ForEach(g => g.CanSpawn = false);
+
+
+            var wait = new WaitForSeconds(1);
+
+
+
+            foreach (var group in groups)
+            {
+                Vector2 center = Vector2.zero;
+                group.Dic.Values.ForEach(lake => center += lake.TilePos);
+                center /= group.Dic.Count;
+
+                yield return Move(DungeonManager.Singleton.TilePosToWorld(center));
+                yield return Attack();
+                group.Dic.Values.ForEach(lake => DungeonManager.Singleton.SowSeed(lake.TilePos, true));
+            }
+
+
+            var enemys = GetComponentsInChildren<EnemyCore>();
 
             foreach (var enemy in enemys)
             {
+                yield return Move(enemy.transform.GetChild(0));
+                yield return Attack();
                 enemy.Damaged(999);
             }
+
+
+            RobotMover.Singleton.IsStop = false;
+
+            RobotMover.Singleton.GetComponentInChildren<SpriteRenderer>().sortingOrder--;
         }
+        IEnumerator Attack()
+        {
+            RobotMover.Singleton.IsStop = true;
+            RobotMover.Singleton.GetComponent<RobotAnimation>().Thrust();
+            yield return new WaitForSeconds(0.5f);
+
+        }
+        IEnumerator Move(Vector3 target)
+        {
+
+            RobotMover.Singleton.IsStop = false;
+            while (true)
+            {
+                RobotMover.Singleton.UpdateManualOperation(target, 30, true, 1);
+
+                yield return null;
+                if (!RobotMover.Singleton.UseManualOperation)
+                    yield break;
+            }
+        }
+        IEnumerator Move(Transform target)
+        {
+
+            RobotMover.Singleton.IsStop = false;
+            while (true)
+            {
+                RobotMover.Singleton.UpdateManualOperation(target.position, 30, true, 1);
+
+                yield return null;
+                if (!RobotMover.Singleton.UseManualOperation)
+                    yield break;
+            }
+        }
+
 
 #if UNITY_EDITOR
         void AddRoomTileInEdior(Vector2Int pos)
@@ -68,10 +160,13 @@ namespace ReLeaf
             if (tile == null)
                 return;
 
-            if (tile.CurrentTileObject.TileType == TileType.Wall || tile.CurrentTileObject.TileType == TileType.Entrance)
+            if (tile.CurrentTileObject.TileType == TileType.Wall)
                 return;
 
             if (!roomTilePoss.Add(pos))
+                return;
+
+            if (tile.CurrentTileObject.TileType == TileType.Entrance)
                 return;
 
             AddRoomTileInEdior(pos + Vector2Int.up);

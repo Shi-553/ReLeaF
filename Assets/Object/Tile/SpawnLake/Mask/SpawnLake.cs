@@ -8,7 +8,13 @@ namespace ReLeaf
         public override bool CanGreening(bool useSpecial) => useSpecial && !IsGreening;
         public override bool IsAlreadyGreening => IsGreening;
 
+        public SpawnLakeGroup Group { get; set; }
 
+        protected override void InitImpl()
+        {
+            base.InitImpl();
+            SpawnLakeManager.Singleton.AddEnabledLake(this);
+        }
 
         public void Greening()
         {
