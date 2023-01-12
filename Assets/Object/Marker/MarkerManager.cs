@@ -1,4 +1,4 @@
-﻿using System.Collections.Generic;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
 using UnityEngine;
@@ -27,14 +27,19 @@ namespace ReLeaf
             Markers = new ReadOnlyDictionary<Vector2Int, MarkerBase>(markers);
         }
 
+        bool isStarted = false;
         private void Start()
         {
+            isStarted = true;
             if (subscribeOnGreening)
                 DungeonManager.Singleton.OnGreening += OnGreening;
         }
 
         private void OnDestroy()
         {
+            if (!isStarted)
+                return;
+
             if (subscribeOnGreening)
                 DungeonManager.Singleton.OnGreening -= OnGreening;
         }
