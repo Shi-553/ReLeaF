@@ -25,6 +25,7 @@ namespace ReLeaf
         SpwanTarget,
         ConnectedSeed,
         StageObject,
+        Entrance,
         Max
     };
 
@@ -147,7 +148,7 @@ namespace ReLeaf
 
                 }
 
-                DungeonManager.Singleton.tiles[(Vector2Int)position] = createdObject.InstancingTarget;
+                DungeonManager.Singleton.SetNewTile((Vector2Int)position, createdObject.InstancingTarget);
 
                 return true;
             }

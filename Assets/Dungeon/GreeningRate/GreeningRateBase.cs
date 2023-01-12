@@ -3,10 +3,12 @@ using Utility;
 
 namespace ReLeaf
 {
-    [ClassSummary("—Î‰»—¦ƒ}ƒl[ƒWƒƒ[")]
-    public class GreeningRate : MonoBehaviour
+    public abstract class GreeningRateBase : MonoBehaviour
     {
-        [SerializeField, Rename("ƒNƒŠƒA‚É•K—v‚È—Î‰»—¦")]
+        [field: SerializeField, ReadOnly]
+        public int MaxGreeningCount { get; protected set; }
+
+        [SerializeField, Rename("ç›®æ¨™ç·‘åŒ–çŽ‡")]
         float targetRate = 0.7f;
 
         [SerializeField, ReadOnly]
@@ -14,39 +16,36 @@ namespace ReLeaf
         public float Value
         {
             get => value;
-            set
+            protected set
             {
                 this.value = value;
-                GreeningRateUI.Singleton.Slider.value = ValueRate;
-
+                UpdateValue();
             }
         }
-        public float ValueRate => value / targetRate / DungeonManager.Singleton.MaxGreeningCount;
+        public float ValueRate => value / targetRate / MaxGreeningCount;
 
 
-        public static GreeningRate Instance { get; private set; }
-        private void Awake()
-        {
-            if (Instance == null)
-            {
-                Instance = this;
-            }
-            else
-            {
-                Destroy(gameObject);
-                return;
-            }
-        }
-        private void Start()
+        protected abstract void CalculateMaxGreeningCount();
+        protected abstract void UpdateValue();
+        protected abstract void Finish();
+
+        protected virtual bool IsValidChange(DungeonManager.TileChangedInfo obj) => true;
+
+        protected virtual void Start()
         {
             value = 0;
-            GreeningRateUI.Singleton.Slider.value = ValueRate;
+            UpdateValue();
 
             DungeonManager.Singleton.OnTileChanged += OnTileChanged;
+
+            CalculateMaxGreeningCount();
         }
 
         private void OnTileChanged(DungeonManager.TileChangedInfo obj)
         {
+            if (!IsValidChange(obj))
+                return;
+
             if (obj.beforeTile.TileType != TileType.Foundation &&
                 obj.afterTile.TileType == TileType.Foundation)
                 Value++;
@@ -57,7 +56,8 @@ namespace ReLeaf
 
             if (ValueRate >= 1.0f)
             {
-                GameRuleManager.Singleton.Finish(true);
+                DungeonManager.Singleton.OnTileChanged -= OnTileChanged;
+                Finish();
             }
         }
     }

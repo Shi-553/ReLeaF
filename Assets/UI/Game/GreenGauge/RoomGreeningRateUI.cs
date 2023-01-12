@@ -1,10 +1,10 @@
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.UI;
 using Utility;
 
 namespace ReLeaf
 {
-    public class GreeningRateUI : SingletonBase<GreeningRateUI>
+    public class RoomGreeningRateUI : SingletonBase<RoomGreeningRateUI>
     {
         [SerializeField]
         Slider slider;

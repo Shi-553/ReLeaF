@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using UnityEngine;
 using UnityEngine.Tilemaps;
@@ -28,11 +29,16 @@ namespace ReLeaf
 
         [SerializeField]
         Tilemap tilemap;
+        public Tilemap Tilemap => tilemap;
 
-        public Dictionary<Vector2Int, TileObject> tiles = new();
+        Dictionary<Vector2Int, TileObject> tileDic = new();
 
-        [field: SerializeField, ReadOnly]
-        public int MaxGreeningCount { get; private set; }
+        public ReadOnlyDictionary<Vector2Int, TileObject> TileDic;
+
+        public void SetNewTile(Vector2Int pos, TileObject newTile)
+        {
+            tileDic[pos] = newTile;
+        }
 
         bool CanChangeTile { get; set; } = true;
 
@@ -66,25 +72,19 @@ namespace ReLeaf
 
         protected override void Init(bool isFirstInit, bool callByAwake)
         {
+            if (isFirstInit)
+            {
+                TileDic = new(tileDic);
+            }
             if (callByAwake)
             {
-                foreach (var pos in tilemap.cellBounds.allPositionsWithin)
-                {
-                    var tile = tilemap.GetTile<TerrainTile>(pos);
-                    if (tile != null && tile.CurrentTileObject.CanGreening(true))
-                    {
-                        MaxGreeningCount++;
-                    }
-                }
-                tilemap.transform.parent.GetComponentsInChildren<Tilemap>()
-                     .ForEach(tm => tm.RefreshAllTiles());
-
+                tilemap.RefreshAllTiles();
             }
         }
         protected override void UninitBeforeSceneUnload(bool isDestroy)
         {
             CanChangeTile = false;
-            foreach (var tile in tiles.Values)
+            foreach (var tile in tileDic.Values)
             {
                 tile.Release();
                 if (tile.HasParent)
@@ -107,13 +107,13 @@ namespace ReLeaf
             var smallNumber = tilePos - floor;
             return (Vector2)tilemap.CellToWorld((Vector3Int)floor) + (smallNumber * CELL_SIZE) + new Vector2(CELL_SIZE, CELL_SIZE) / 2;
         }
-        public bool TryGetTile(Vector2Int pos, out TileObject tile) => tiles.TryGetValue(pos, out tile);
-        public TileObject GetTile(Vector2Int pos) => tiles.GetValueOrDefault(pos, null);
+        public bool TryGetTile(Vector2Int pos, out TileObject tile) => tileDic.TryGetValue(pos, out tile);
+        public TileObject GetTile(Vector2Int pos) => tileDic.GetValueOrDefault(pos, null);
 
 
         public bool TryGetTile<T>(Vector2Int pos, out T tile) where T : TileObject
         {
-            if (tiles.GetValueOrDefault(pos) is T t)
+            if (tileDic.GetValueOrDefault(pos) is T t)
             {
                 tile = t;
                 return true;
@@ -121,7 +121,7 @@ namespace ReLeaf
             tile = null;
             return false;
         }
-        public TileObject GetTile<T>(Vector2Int pos) where T : TileObject => tiles.GetValueOrDefault(pos, null) as T;
+        public TileObject GetTile<T>(Vector2Int pos) where T : TileObject => tileDic.GetValueOrDefault(pos, null) as T;
 
 
         public bool SowSeed(Vector2Int tilePos, bool isSpecial = false, bool isInvincible = false)
@@ -159,12 +159,12 @@ namespace ReLeaf
 
         TileObject ChangeTile(Vector2Int pos, TileType type, int index = 0)
         {
-            if (!CanChangeTile || !tiles.TryGetValue(pos, out var before) || before.TileType == type)
+            if (!CanChangeTile || !tileDic.TryGetValue(pos, out var before) || before.TileType == type)
             {
                 return null;
             }
 
-            tiles.Remove(pos);
+            tileDic.Remove(pos);
             before.Release();
 
             var after = DungeonTilePalette.Singleton.TerrainTileDic[type][index];

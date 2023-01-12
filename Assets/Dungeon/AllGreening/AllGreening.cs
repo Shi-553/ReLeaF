@@ -11,7 +11,6 @@ namespace ReLeaf
         [SerializeField]
         AllGreeningInfo info;
 
-        [SerializeField]
         CinemachineVirtualCamera virtualCamera;
         CinemachineTargetGroup cinemachineTargetGroup;
 
@@ -25,6 +24,8 @@ namespace ReLeaf
 
         protected override void Init(bool isFirstInit, bool callByAwake)
         {
+            if (isFirstInit)
+                virtualCamera = FindObjectOfType<CinemachineVirtualCamera>();
         }
         void Start()
         {
@@ -70,7 +71,7 @@ namespace ReLeaf
 
         IEnumerator Greening(Vector2Int startPos)
         {
-            // •‰‰×‚Ì’á‚¢‚¤‚¿‚É‚¨‚¨‚æ‚»Šm•Û‚µ‚Ä‚¨‚­
+            // è² è·ã®ä½ã„ã†ã¡ã«ãŠãŠã‚ˆãç¢ºä¿ã—ã¦ãŠã
             var worldStartPos = DungeonManager.Singleton.TilePosToWorld(startPos);
 
             Dictionary<Vector2Int, bool> greenMap = new(500);
@@ -86,7 +87,7 @@ namespace ReLeaf
 
             var greeningWait = new WaitForSeconds(info.GreeningTime);
 
-            // —Î‰»‚ğ‚µ‚½”@’á‚¢‚¤‚¿‚Í‰½‚ª‚ ‚Á‚Ä‚àŸ‚Ìƒ}ƒX‚ğ’T‚µ‘±‚¯‚é
+            // ç·‘åŒ–ã‚’è©¦ã—ãŸæ•°ã€€ä½ã„ã†ã¡ã¯ä½•ãŒã‚ã£ã¦ã‚‚æ¬¡ã®ãƒã‚¹ã‚’æ¢ã—ç¶šã‘ã‚‹
             int tryGreeningCount = 0;
 
             while (targetCount > 0)
@@ -104,17 +105,17 @@ namespace ReLeaf
                         continue;
                     }
 
-                    // —Î‰»
+                    // ç·‘åŒ–
                     DungeonManager.Singleton.SowSeed(pos, true, true);
 
-                    //—Î‰»ŠÖŒW‚È‚­ƒ^ƒCƒ‹‚ğæ“¾
+                    //ç·‘åŒ–é–¢ä¿‚ãªãã‚¿ã‚¤ãƒ«ã‚’å–å¾—
                     if (DungeonManager.Singleton.TryGetTile(pos, out var tile))
                     {
                         if (useCamera && tile.CanOrAleeadyGreening(true))
                         {
                             if (cinemachineTargetGroup.m_Targets.Length > 100)
                             {
-                                // Å‘å100‰ñ
+                                // æœ€å¤§100å›
                                 for (int j = 0; j < 100; j++)
                                 {
                                     var currentDir = (Vector2)cinemachineTargetGroup.m_Targets[2 + cinemachineTargetGroupIndex].target.position - worldStartPos;
@@ -123,7 +124,7 @@ namespace ReLeaf
                                     if (Mathf.Sign(currentDir.x) == Mathf.Sign(overrideDir.x) &&
                                         Mathf.Sign(currentDir.y) == Mathf.Sign(overrideDir.y))
                                     {
-                                        // —Î‰»‚ğn‚ß‚½’n“_‚ÆƒvƒŒƒCƒ„[‚ğƒJƒƒ‰‚Éc‚µ‚½‚¢‚Ì‚ÅA98‚ÅÜ‚è•Ô‚·
+                                        // ç·‘åŒ–ã‚’å§‹ã‚ãŸåœ°ç‚¹ã¨ãƒ—ãƒ¬ã‚¤ãƒ¤ãƒ¼ã‚’ã‚«ãƒ¡ãƒ©ã«æ®‹ã—ãŸã„ã®ã§ã€98ã§æŠ˜ã‚Šè¿”ã™
                                         cinemachineTargetGroup.m_Targets[2 + cinemachineTargetGroupIndex].target = tile.transform;
                                         cinemachineTargetGroupIndex = (cinemachineTargetGroupIndex + 1) % 98;
 
@@ -140,12 +141,12 @@ namespace ReLeaf
                     }
                     else
                     {
-                        //ƒ^ƒCƒ‹‚ª‚È‚­A10‰ñˆÈã—Î‰»‚µ‚æ‚¤‚Æ‚µ‚Ä‚¢‚½‚çcontinue
+                        //ã‚¿ã‚¤ãƒ«ãŒãªãã€10å›ä»¥ä¸Šç·‘åŒ–ã—ã‚ˆã†ã¨ã—ã¦ã„ãŸã‚‰continue
                         if (tryGreeningCount > 10)
                             continue;
                     }
 
-                    // Šù‚É‘¶İ‚·‚é‚Æ‚«‚Éã‘‚«‚·‚é‚±‚Æ‚ÅClear()‚ğ‚µ‚È‚­‚Ä‚æ‚­‚È‚éÅ“K‰»
+                    // æ—¢ã«å­˜åœ¨ã™ã‚‹ã¨ãã«ä¸Šæ›¸ãã™ã‚‹ã“ã¨ã§Clear()ã‚’ã—ãªãã¦ã‚ˆããªã‚‹æœ€é©åŒ–
                     void BufferAdd(Vector2Int nextPos)
                     {
                         if (buffer.Count == bufferIndex)
@@ -164,7 +165,7 @@ namespace ReLeaf
 
                 targetCount = bufferIndex;
 
-                // ƒ^[ƒQƒbƒg‚Æƒoƒbƒtƒ@‚ğƒXƒƒbƒv‚µ‚Â‚Âƒ‹[ƒv‚·‚é‚±‚Æ‚Åƒƒ‚ƒŠß–ñ
+                // ã‚¿ãƒ¼ã‚²ãƒƒãƒˆã¨ãƒãƒƒãƒ•ã‚¡ã‚’ã‚¹ãƒ¯ãƒƒãƒ—ã—ã¤ã¤ãƒ«ãƒ¼ãƒ—ã™ã‚‹ã“ã¨ã§ãƒ¡ãƒ¢ãƒªç¯€ç´„
                 (buffer, target) = (target, buffer);
 
                 yield return greeningWait;
