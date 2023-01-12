@@ -35,6 +35,7 @@ namespace ReLeaf
                 else
                 {
                     Selector.gameObject.SetActive(true);
+                    Selector.transform.position = Current.transform.position;
                 }
 
                 // update index
