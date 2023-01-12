@@ -48,11 +48,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   info: {fileID: 11400000, guid: 46cfdd9cee17b684da63d95d5ecabc1d, type: 2}
-  plantInfo: {fileID: 11400000, guid: 46cfdd9cee17b684da63d95d5ecabc1d, type: 2}
   hp: 0
   seedObjRoot: {fileID: 2418581233525524103}
   plantObjRoot: {fileID: 8532531564102778469}
-  messyObj: {fileID: 7807124981315745271, guid: d7ee3b48df6541349b07bb43f417562a, type: 3}
   visualType: 0
 --- !u!61 &-3087161009963491585
 BoxCollider2D:
