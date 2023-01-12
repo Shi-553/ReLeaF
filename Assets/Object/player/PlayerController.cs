@@ -33,6 +33,7 @@ namespace ReLeaf
 
                 itemManager = GetComponentInChildren<ItemManager>();
 
+                SetCursorLock(true);
             }
         }
         private void Start()
@@ -41,10 +42,29 @@ namespace ReLeaf
         }
         private void OnChangePause(bool sw)
         {
+            SetCursorLock(!sw);
+
             if (sw)
+            {
                 ReLeafInputAction.Disable();
+            }
             else
+            {
                 ReLeafInputAction.Enable();
+            }
+        }
+
+        void SetCursorLock(bool sw)
+        {
+            Cursor.visible = !sw;
+            if (sw)
+            {
+                Cursor.lockState = CursorLockMode.Locked;
+            }
+            else
+            {
+                Cursor.lockState = CursorLockMode.None;
+            }
         }
 
         protected override void OnDestroy()
