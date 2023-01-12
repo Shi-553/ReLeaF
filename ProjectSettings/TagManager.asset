@@ -19,10 +19,10 @@ TagManager:
   - UI
   - Plant
   - Player
-  - 
-  - 
-  - 
-  - 
+  - Enemy
+  - FX
+  - MiniMap
+  - Robot
   - 
   - 
   - 

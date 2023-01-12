@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 192883159}
   - component: {fileID: 192883161}
   - component: {fileID: 192883160}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: P_fog
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4823,7 +4823,7 @@ GameObject:
   - component: {fileID: 299343630647188153}
   - component: {fileID: 9208885910109109219}
   - component: {fileID: 8567031072339127465}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Fx_Robot
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -9637,7 +9637,7 @@ GameObject:
   - component: {fileID: 8827110048526069391}
   - component: {fileID: 7284214289426071530}
   - component: {fileID: 9143714872492867710}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: P_kirakira
   m_TagString: Untagged
   m_Icon: {fileID: 0}

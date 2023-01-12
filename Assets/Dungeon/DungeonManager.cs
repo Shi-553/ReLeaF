@@ -20,7 +20,7 @@ namespace ReLeaf
                 .ToArray();
         }
     }
-    [ClassSummary("タイルマップマネージャー")]
+    [ClassSummary("繧ｿ繧､繝ｫ繝槭ャ繝励�槭ロ繝ｼ繧ｸ繝｣繝ｼ")]
     public class DungeonManager : SingletonBase<DungeonManager>
     {
         public override bool DontDestroyOnLoad => false;
@@ -82,17 +82,11 @@ namespace ReLeaf
         }
         protected override void UninitBeforeSceneUnload(bool isDestroy)
         {
-            var wallTileParent = tilemap.transform.Find(TerrainTile.WALL_TILE_PARENT_NAME);
-            var groundTileParent = tilemap.transform.parent.Find(TerrainTile.GROUND_TILE_PARENT_NAME);
-
-            wallTileParent.gameObject.SetActive(false);
-            groundTileParent.gameObject.SetActive(false);
-
-            wallTileParent.parent = PoolManager.Singleton.transform;
-            groundTileParent.parent = PoolManager.Singleton.transform;
             foreach (var tile in tiles.Values)
             {
-                tile.ParentOrThis.Release();
+                tile.Release();
+                if (tile.HasParent)
+                    tile.Parent.Release();
             }
         }
 

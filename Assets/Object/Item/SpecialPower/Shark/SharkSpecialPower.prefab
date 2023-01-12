@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 202589962108348052}
   - component: {fileID: 3919280643754549772}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: Sprite
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -93,7 +93,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5288991525443611127}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: Root
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -129,7 +129,7 @@ GameObject:
   - component: {fileID: 4384070283387547719}
   - component: {fileID: -2967682933614005779}
   - component: {fileID: 3143629960310884017}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: SharkSpecialPower
   m_TagString: Item
   m_Icon: {fileID: 0}
@@ -164,13 +164,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 49585b37ca2a93f42aca5935549b7bed, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  icon: {fileID: 21300000, guid: a069aafb36a038b4b95e5ce083b986f4, type: 3}
-  useSe: {fileID: 11400000, guid: 3f4e968a5953efd4896a676770419698, type: 2}
-  isImmediate: 0
-  initAnimation: {fileID: 7400000, guid: 89c05b64b7dcd6a42bfb61cc3db3aa6c, type: 2}
-  info: {fileID: 11400000, guid: c1eab68f2518a194f99fa6f651d16709, type: 2}
-  seSharkSpecialMove: {fileID: 11400000, guid: 669a035695520fa4bacad65c8b7d623f, type: 2}
-  seSharkSpecial: {fileID: 11400000, guid: 85bb354a461e58249b5e73df82070dd8, type: 2}
+  itemBaseInfo: {fileID: 11400000, guid: c1eab68f2518a194f99fa6f651d16709, type: 2}
 --- !u!58 &4384070283387547719
 CircleCollider2D:
   m_ObjectHideFlags: 0

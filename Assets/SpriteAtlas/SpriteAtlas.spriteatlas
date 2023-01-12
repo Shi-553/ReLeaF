@@ -222,6 +222,7 @@ SpriteAtlas:
   - {fileID: -1058380343, guid: 0bcd01884c1b3df48811bbe9ebcef4b9, type: 3}
   - {fileID: -386109083, guid: 0bcd01884c1b3df48811bbe9ebcef4b9, type: 3}
   - {fileID: 1054185683, guid: 0bcd01884c1b3df48811bbe9ebcef4b9, type: 3}
+  - {fileID: 21300000, guid: 458caa49888ce0f4f9c21bed1afac733, type: 3}
   - {fileID: 146137392, guid: d16e0c9909424b24999bdab14a10b22b, type: 3}
   - {fileID: 1728704386, guid: d16e0c9909424b24999bdab14a10b22b, type: 3}
   - {fileID: -331010484, guid: d16e0c9909424b24999bdab14a10b22b, type: 3}
@@ -286,6 +287,7 @@ SpriteAtlas:
   - {fileID: -423974210, guid: ab9ae79a663794a4abd83f2b559ae221, type: 3}
   - {fileID: -1660104636, guid: ab9ae79a663794a4abd83f2b559ae221, type: 3}
   - {fileID: 189143659, guid: ab9ae79a663794a4abd83f2b559ae221, type: 3}
+  - {fileID: 21300000, guid: 8e354b3be01fb0c498090d90d4e876e1, type: 3}
   - {fileID: 21300000, guid: 030685bb378713b4e93916c6376d8666, type: 3}
   - {fileID: 21300000, guid: a069aafb36a038b4b95e5ce083b986f4, type: 3}
   - {fileID: 21300000, guid: 0658235c75549fe419cfd74f3c371ce6, type: 3}
@@ -503,6 +505,7 @@ SpriteAtlas:
   - spriteseet_Crabdefeat_4
   - spriteseet_Crabdefeat_5
   - spriteseet_Crabdefeat_6
+  - specialshark_R
   - spriteseet_whale_attackhit_8
   - spriteseet_whale_attackhit_9
   - spriteseet_whale_attackhit_2
@@ -567,6 +570,7 @@ SpriteAtlas:
   - spriteseet_robotattack_11
   - spriteseet_robotattack_14
   - spriteseet_robotattack_15
+  - specialshark_L
   - item_sp_kani
   - item_sp_same
   - item_hp

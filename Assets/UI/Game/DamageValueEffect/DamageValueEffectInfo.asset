@@ -17,8 +17,7 @@ MonoBehaviour:
   highDamageSpriteAsset: {fileID: 11400000, guid: 5613dade7c41f5a4488cbfd4dd234336, type: 2}
   highDamageThreshold: 4
   maxDamage: 10
-  minSize: 20
-  maxSize: 80
-  damageOffset: 0.001
+  minSize: 2
+  maxSize: 8
   offset: {x: 0, y: 0.6, z: -0.6}
   randomOffsetMax: {x: 0.2, y: 0, z: 0}

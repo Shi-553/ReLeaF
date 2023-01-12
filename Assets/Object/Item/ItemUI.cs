@@ -1,4 +1,4 @@
-﻿using UnityEngine;
+using UnityEngine;
 using UnityEngine.UI;
 using Utility;
 
@@ -32,7 +32,6 @@ namespace ReLeaf
 
         public void Uninit()
         {
-            Destroy(Item.gameObject);
 
             Item = null;
             image.sprite = null;

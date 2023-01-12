@@ -1,4 +1,3 @@
-using Cinemachine;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using Utility;
@@ -8,15 +7,15 @@ namespace ReLeaf
     public class PlayerController : SingletonBase<PlayerController>, ReLeafInputAction.IPlayerActions
     {
         PlayerInput playerInput;
-        ReLeafInputAction reLeafInputAction;
+        public PlayerInput PlayerInput => playerInput;
+
+
+        public ReLeafInputAction ReLeafInputAction { get; private set; }
+
 
         ItemManager itemManager;
 
         PlayerMover mover;
-
-        [SerializeField]
-        CinemachineVirtualCamera cinemachine;
-        CinemachineFramingTransposer cinemachineFramingTransposer;
 
         public override bool DontDestroyOnLoad => false;
 
@@ -26,15 +25,13 @@ namespace ReLeaf
             {
                 TryGetComponent(out mover);
 
-                reLeafInputAction = new ReLeafInputAction();
+                ReLeafInputAction = new ReLeafInputAction();
                 TryGetComponent(out playerInput);
-                playerInput.defaultActionMap = reLeafInputAction.Player.Get().name;
-                playerInput.actions = reLeafInputAction.asset;
-                reLeafInputAction.Player.SetCallbacks(this);
+                PlayerInput.defaultActionMap = ReLeafInputAction.Player.Get().name;
+                PlayerInput.actions = ReLeafInputAction.asset;
+                ReLeafInputAction.Player.SetCallbacks(this);
 
                 itemManager = GetComponentInChildren<ItemManager>();
-
-                cinemachineFramingTransposer = cinemachine.GetCinemachineComponent<CinemachineFramingTransposer>();
 
             }
         }
@@ -45,9 +42,9 @@ namespace ReLeaf
         private void OnChangePause(bool sw)
         {
             if (sw)
-                reLeafInputAction.Disable();
+                ReLeafInputAction.Disable();
             else
-                reLeafInputAction.Enable();
+                ReLeafInputAction.Enable();
         }
 
         protected override void OnDestroy()
@@ -55,11 +52,14 @@ namespace ReLeaf
             base.OnDestroy();
             if (SceneLoader.Singleton != null)
                 SceneLoader.Singleton.OnChangePause -= OnChangePause;
-            reLeafInputAction?.Disable();
+            ReLeafInputAction?.Disable();
         }
 
         void SetItemDir(Vector2 value)
         {
+            if (value == Vector2.zero)
+                return;
+
             itemManager.ItemDir = value.ClampOneMagnitude();
         }
 
@@ -84,13 +84,25 @@ namespace ReLeaf
             }
         }
 
+        [SerializeField]
+        float maxMouseSameDelta = 20;
+        Vector2 sameDelta = Vector2.zero;
+
         public void OnAim(InputAction.CallbackContext context)
         {
             if (!context.performed)
                 return;
-            Vector3 mouseScreenPos = context.ReadValue<Vector2>();
-            mouseScreenPos.z = cinemachineFramingTransposer.m_CameraDistance;
-            SetItemDir(Camera.main.ScreenToWorldPoint(mouseScreenPos) - transform.position);
+
+            var delta = context.ReadValue<Vector2>();
+            delta.Scale(new(1920.0f / Screen.width, 1080.0f / Screen.height));
+
+            sameDelta += delta;
+
+            if (sameDelta.sqrMagnitude > maxMouseSameDelta * maxMouseSameDelta)
+            {
+                sameDelta = sameDelta.normalized * maxMouseSameDelta;
+                SetItemDir(sameDelta);
+            }
         }
 
         public void OnSelectItem(InputAction.CallbackContext context)

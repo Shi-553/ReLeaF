@@ -11,8 +11,6 @@ namespace ReLeaf
         [SerializeField]
         DamageValueEffect effectPrefab;
 
-        [SerializeField]
-        Transform effectParent;
         protected override void Init(bool isFirstInit, bool callByAwake)
         {
         }
@@ -24,7 +22,7 @@ namespace ReLeaf
         public void SetDamageValueEffect(int damage, Vector2 pos)
         {
             var damageValueEffect = effectPool.Get<DamageValueEffect>();
-            damageValueEffect.transform.SetParent(effectParent, false);
+            damageValueEffect.transform.SetParent(transform, false);
             damageValueEffect.ShowDamageValue(damage, (Vector3)pos);
         }
     }

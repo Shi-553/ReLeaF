@@ -22,18 +22,27 @@ namespace ReLeaf
             core.OnDamaged += () => StartCoroutine(OnDamaged());
         }
 
-        bool isDamagedAnimation = false;
+        int lockAnimation = 0;
 
         private IEnumerator OnDamaged()
         {
-            isDamagedAnimation = true;
+            lockAnimation++;
             yield return animancerComponent.Play(info.GetClip(PlayerAnimationType.Damaged, mover.IsLeft));
-            isDamagedAnimation = false;
+            lockAnimation--;
+        }
+
+        public void Grasp(bool sw)
+        {
+            lockAnimation += sw ? 1 : -1;
+            if (sw)
+            {
+                animancerComponent.Play(info.GetClip(PlayerAnimationType.Grasp, mover.IsLeft));
+            }
         }
 
         private void Update()
         {
-            if (isDamagedAnimation)
+            if (lockAnimation > 0)
             {
                 return;
             }

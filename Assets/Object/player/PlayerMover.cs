@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -87,7 +87,13 @@ namespace ReLeaf
         public Vector2 Dir
         {
             get => IsSpecialMoving ? SpecialDir : dir;
-            set => dir = value;
+            set
+            {
+                dir = value;
+
+                if (!IsMove)
+                    isDash = false;
+            }
         }
         public float Speed
         {
@@ -96,7 +102,16 @@ namespace ReLeaf
         }
         public bool IsMove => Dir != Vector2.zero;
         public bool IsLeft { get; private set; }
-        public bool IsDash { get; set; }
+
+        bool isDash;
+        public bool IsDash
+        {
+            get => isDash;
+            set
+            {
+                isDash = IsMove ? value : false;
+            }
+        }
 
         public Vector2Int OldTilePos { get; private set; }
         public Vector2Int TilePos { get; private set; }
@@ -116,11 +131,8 @@ namespace ReLeaf
             {
                 TryGetComponent(out mover);
                 isKnockback = false;
+                energyGauge.Slider = PlayerStatusUI.Singleton.EnelgySlider;
             }
-        }
-        private void Start()
-        {
-            energyGauge.Slider = PlayerStatusUI.Singleton.EnelgySlider;
         }
 
 
@@ -163,7 +175,8 @@ namespace ReLeaf
                 }
             }
 
-            speed += addedMoveSpeed;
+            if (!IsSpecialMoving)
+                speed += addedMoveSpeed;
 
             mover.MoveDelta(DungeonManager.CELL_SIZE * speed * Dir);
 
@@ -217,20 +230,23 @@ namespace ReLeaf
 
         private void OnTriggerEnter2D(Collider2D collision)
         {
+            // タイルじゃないときreturn
             if (!collision.TryGetComponent<TileObject>(out var tileObject))
                 return;
-
+            // 緑化できないときreturn
+            if (!tileObject.CanGreening(false))
+                return;
+            // 既に処理済みの場合return
             if (!underTiles.Add(tileObject))
                 return;
 
-            if (!tileObject.CanOrAleeadyGreening(false))
-                return;
 
             if (!CanSowSeed)
             {
                 waitGreeningTiles.Add(tileObject.TilePos);
                 return;
             }
+
             SowSeed(tileObject.TilePos);
         }
         private void OnTriggerExit2D(Collider2D collision)
@@ -246,10 +262,14 @@ namespace ReLeaf
             }
         }
 
-        public void SpeedUp(float add)
+        public void SpeedUp(float value)
         {
             SEManager.Singleton.Play(seSpeedUp);
-            addedMoveSpeed += add;
+            addedMoveSpeed += value;
+        }
+        public void SpeedDown(float value)
+        {
+            addedMoveSpeed -= value;
         }
     }
 }

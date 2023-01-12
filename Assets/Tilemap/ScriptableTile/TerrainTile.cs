@@ -60,15 +60,10 @@ namespace ReLeaf
         protected TileObject currentTileObject;
         public TileObject CurrentTileObject => currentTileObject;
 
-        virtual protected void UpdateTileObject(Vector3Int position, ITilemap tilemap) { }
+        protected virtual bool UpdateTileObject(Vector3Int position, ITilemap tilemap, TileObject oldTileObject) => oldTileObject == null;
 
         [NonSerialized]
         public Tilemap tilemap;
-
-        public static string WALL_TILE_PARENT_NAME = "wallTileParent";
-        public static string GROUND_TILE_PARENT_NAME = "groundTileParent";
-        Transform wallTileParent;
-        Transform groundTileParent;
 
         protected PoolArray Pools;
 
@@ -79,12 +74,11 @@ namespace ReLeaf
 
         public int defaultCapacity = 10;
         public int maxSize = 100;
-        public bool dontUseTileManager = false;
 
         [NonSerialized]
         public TileObject createdObject;
 
-        [SerializeField, Rename("“h‚éƒŒƒCƒ„[–¼")]
+        [SerializeField, Rename("å¡—ã‚‹ãƒ¬ã‚¤ãƒ¤ãƒ¼å")]
         TileLayerType tileLayerType;
 
         public TileLayerType TileLayerType => tileLayerType;
@@ -123,28 +117,22 @@ namespace ReLeaf
                     if (tilemap == null)
                     {
                         tilemap = tm.GetComponent<Tilemap>();
-                        wallTileParent = tilemap.transform.Find(WALL_TILE_PARENT_NAME);
-                        groundTileParent = tilemap.transform.parent.Find(GROUND_TILE_PARENT_NAME);
-                        if (wallTileParent == null)
-                        {
-                            wallTileParent = new GameObject(WALL_TILE_PARENT_NAME).transform;
-                            groundTileParent = new GameObject(GROUND_TILE_PARENT_NAME).transform;
 
-                            wallTileParent.parent = tilemap.transform;
-                            groundTileParent.parent = tilemap.transform.parent;
-                        }
                     }
                     Init();
-                    UpdateTileObject(position, tm);
                     pool = Pool ?? Pools.SetPool(CurrentTileObject.TileType.ToInt32(), CurrentTileObject, defaultCapacity, maxSize);
                 }
 
-                if (!dontUseTileManager && DungeonManager.Singleton.TryGetTile((Vector2Int)position, out createdObject))
+                var oldTileObject = DungeonManager.Singleton.GetTile((Vector2Int)position);
+
+                if (!UpdateTileObject(position, tm, oldTileObject))
                 {
                     return false;
                 }
 
-                UpdateTileObject(position, tm);
+                if (oldTileObject != null)
+                    oldTileObject.Release();
+
                 if (currentTileObject == null)
                 {
                     $"currentTileObject == null".DebugLog();
@@ -153,17 +141,14 @@ namespace ReLeaf
 
                 using (Pool.Get(out createdObject))
                 {
-                    var parent = (TileLayerType == TileLayerType.Ground) ? groundTileParent : wallTileParent;
-
-                    createdObject.transform.parent = parent;
                     createdObject.transform.localPosition = tilemap.CellToLocal(position) + new Vector3(DungeonManager.CELL_SIZE, DungeonManager.CELL_SIZE) / 2;
 
                     InitCreatedObject((Vector2Int)position);
 
                 }
 
-                if (!dontUseTileManager)
-                    DungeonManager.Singleton.tiles[(Vector2Int)position] = createdObject.InstancingTarget;
+                DungeonManager.Singleton.tiles[(Vector2Int)position] = createdObject.InstancingTarget;
+
                 return true;
             }
             else

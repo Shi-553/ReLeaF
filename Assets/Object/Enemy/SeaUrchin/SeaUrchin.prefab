@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1322483945}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Spine
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -42,7 +42,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1462335708}
   - component: {fileID: 1462335710}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Sprite
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -125,7 +125,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8222792772733894559}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Spine (3)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -157,7 +157,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8539617326360158869}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Spine (6)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -190,7 +190,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8884771338601714944}
   - component: {fileID: 4370973950197000921}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Sprite
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -274,7 +274,7 @@ GameObject:
   m_Component:
   - component: {fileID: 767361940721569557}
   - component: {fileID: 8437670575716031185}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Sprite
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -358,7 +358,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4844317150829214822}
   - component: {fileID: 4693390535996560461}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Center
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -382,6 +382,7 @@ Transform:
   - {fileID: 4499686259979100841}
   - {fileID: 2008047643462466421}
   - {fileID: 1333503956157322571}
+  - {fileID: 4042104563429923410}
   m_Father: {fileID: 8780205405150213191}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -420,7 +421,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5713995693564372829}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Left
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -454,7 +455,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4847563329696072154}
   - component: {fileID: 8654698190089273044}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Sprite
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -537,7 +538,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7206548563216434367}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Spine (7)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -569,7 +570,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3792941068175527112}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Spine (2)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -602,7 +603,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3910535788445653822}
   - component: {fileID: 2990406055205962186}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: WeakMarker
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -648,7 +649,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1003096096173110992}
   - component: {fileID: 2238783322801904973}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Sprite
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -733,7 +734,7 @@ GameObject:
   - component: {fileID: 2008047643462466421}
   - component: {fileID: 5860305613232775152}
   - component: {fileID: 932926830076444035}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Shadow
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -795,7 +796,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 18
+  m_SortingOrder: 100
   m_Sprite: {fileID: 1374738452, guid: 11690a8039fc9cb4294fd627dd5e8b65, type: 3}
   m_Color: {r: 0, g: 0, b: 0, a: 0.5019608}
   m_FlipX: 0
@@ -830,7 +831,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3026151617116564006}
   - component: {fileID: 8253554287723523874}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Sprite
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -913,7 +914,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7242116258052968218}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Spine (4)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -945,7 +946,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2291322365232264826}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Spine (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -977,7 +978,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3233460124220268424}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Down
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1017,7 +1018,7 @@ GameObject:
   - component: {fileID: -7446011514711887426}
   - component: {fileID: 1936818950298701677}
   - component: {fileID: 5352183028037687695}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: SeaUrchin
   m_TagString: Enemy
   m_Icon: {fileID: 0}
@@ -1171,7 +1172,7 @@ GameObject:
   - component: {fileID: 3893573754564588802}
   - component: {fileID: 8066511632967416722}
   - component: {fileID: 3804248155474295329}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Sprite
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1233,7 +1234,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 20
+  m_SortingOrder: 100
   m_Sprite: {fileID: 1374738452, guid: 11690a8039fc9cb4294fd627dd5e8b65, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -1289,7 +1290,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1109380107573758459}
   - component: {fileID: 2241899903905853006}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Sprite
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1372,7 +1373,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1333503956157322571}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: SpinePositions
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1407,7 +1408,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3386820391931691243}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Right
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1440,7 +1441,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5669331114830985615}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Up
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1474,7 +1475,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4499686259979100841}
   - component: {fileID: 4430456495496529935}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: TargetMarker
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1519,7 +1520,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2332531819280149186}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Spine (5)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1552,7 +1553,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8985942890308241824}
   - component: {fileID: 3251985851118817174}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Sprite
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1626,3 +1627,105 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!1001 &1550344553462529100
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 4844317150829214822}
+    m_Modifications:
+    - target: {fileID: 3286394657845650974, guid: 3e7d547ed398f8a46b8649bd2dfe0501, type: 3}
+      propertyPath: m_Pivot.x
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 3286394657845650974, guid: 3e7d547ed398f8a46b8649bd2dfe0501, type: 3}
+      propertyPath: m_Pivot.y
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 3286394657845650974, guid: 3e7d547ed398f8a46b8649bd2dfe0501, type: 3}
+      propertyPath: m_RootOrder
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 3286394657845650974, guid: 3e7d547ed398f8a46b8649bd2dfe0501, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 3286394657845650974, guid: 3e7d547ed398f8a46b8649bd2dfe0501, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 3286394657845650974, guid: 3e7d547ed398f8a46b8649bd2dfe0501, type: 3}
+      propertyPath: m_AnchorMin.x
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 3286394657845650974, guid: 3e7d547ed398f8a46b8649bd2dfe0501, type: 3}
+      propertyPath: m_AnchorMin.y
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 3286394657845650974, guid: 3e7d547ed398f8a46b8649bd2dfe0501, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 100
+      objectReference: {fileID: 0}
+    - target: {fileID: 3286394657845650974, guid: 3e7d547ed398f8a46b8649bd2dfe0501, type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 100
+      objectReference: {fileID: 0}
+    - target: {fileID: 3286394657845650974, guid: 3e7d547ed398f8a46b8649bd2dfe0501, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3286394657845650974, guid: 3e7d547ed398f8a46b8649bd2dfe0501, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3286394657845650974, guid: 3e7d547ed398f8a46b8649bd2dfe0501, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3286394657845650974, guid: 3e7d547ed398f8a46b8649bd2dfe0501, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3286394657845650974, guid: 3e7d547ed398f8a46b8649bd2dfe0501, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3286394657845650974, guid: 3e7d547ed398f8a46b8649bd2dfe0501, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3286394657845650974, guid: 3e7d547ed398f8a46b8649bd2dfe0501, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3286394657845650974, guid: 3e7d547ed398f8a46b8649bd2dfe0501, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3286394657845650974, guid: 3e7d547ed398f8a46b8649bd2dfe0501, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3286394657845650974, guid: 3e7d547ed398f8a46b8649bd2dfe0501, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3286394657845650974, guid: 3e7d547ed398f8a46b8649bd2dfe0501, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3286394657845650974, guid: 3e7d547ed398f8a46b8649bd2dfe0501, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8350336118055490409, guid: 3e7d547ed398f8a46b8649bd2dfe0501, type: 3}
+      propertyPath: m_Name
+      value: EnemyMiniMapIcon
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 3e7d547ed398f8a46b8649bd2dfe0501, type: 3}
+--- !u!224 &4042104563429923410 stripped
+RectTransform:
+  m_CorrespondingSourceObject: {fileID: 3286394657845650974, guid: 3e7d547ed398f8a46b8649bd2dfe0501, type: 3}
+  m_PrefabInstance: {fileID: 1550344553462529100}
+  m_PrefabAsset: {fileID: 0}

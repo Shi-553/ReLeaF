@@ -1,11 +1,11 @@
-﻿using UnityEngine;
+using UnityEngine;
 using Utility;
 
 namespace ReLeaf
 {
     [ClassSummary("Sharkのスペシャルパワーパラメータ")]
     [CreateAssetMenu(menuName = "Item/SpecialPower/SharkSpecialPower")]
-    public class SharkSpecialPowerInfo : ScriptableObject, ISowSeedSpecialPowerInfo
+    public class SharkSpecialPowerInfo : ItemBaseInfo, ISowSeedSpecialPowerInfo
     {
         [SerializeField, Rename("種をまくマス")]
         LocalTilePos seedLocalTilePos;
@@ -23,5 +23,11 @@ namespace ReLeaf
         [SerializeField, Rename("スペシャルダッシュ最大時間")]
         float dashDuration = 1;
         public float DashDuration => dashDuration;
+
+        [SerializeField]
+        AudioInfo seSharkSpecialMove, seSharkSpecial;
+
+        public AudioInfo SeSharkSpecialMove => seSharkSpecialMove;
+        public AudioInfo SeSharkSpecial => seSharkSpecial;
     }
 }

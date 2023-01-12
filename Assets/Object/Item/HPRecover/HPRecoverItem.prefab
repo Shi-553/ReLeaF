@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2681503460819188752}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: Root
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -42,7 +42,7 @@ GameObject:
   m_Component:
   - component: {fileID: 202589962108348052}
   - component: {fileID: 3919280643754549772}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: Sprite
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -129,7 +129,7 @@ GameObject:
   - component: {fileID: 4384070283387547719}
   - component: {fileID: 5349036178957737471}
   - component: {fileID: 5694029219464464850}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: HPRecoverItem
   m_TagString: Item
   m_Icon: {fileID: 0}
@@ -164,10 +164,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0ef328e13ce924c44adce4259c16f222, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  icon: {fileID: 21300000, guid: 0658235c75549fe419cfd74f3c371ce6, type: 3}
-  useSe: {fileID: 11400000, guid: 49241ce48b6d67146ba2695c9daa009b, type: 2}
-  isImmediate: 0
-  initAnimation: {fileID: 7400000, guid: 89c05b64b7dcd6a42bfb61cc3db3aa6c, type: 2}
+  itemBaseInfo: {fileID: 11400000, guid: 1119878a923dd334b97f8a1ba04e23fe, type: 2}
 --- !u!58 &4384070283387547719
 CircleCollider2D:
   m_ObjectHideFlags: 0

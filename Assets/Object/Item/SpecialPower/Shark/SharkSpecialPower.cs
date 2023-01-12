@@ -8,14 +8,11 @@ namespace ReLeaf
 {
     public class SharkSpecialPower : SowSeedSpecialPowerBase
     {
-        [SerializeField]
-        SharkSpecialPowerInfo info;
-        protected override ISowSeedSpecialPowerInfo SowSeedSpecialPowerInfo => info;
+        SharkSpecialPowerInfo Info => ItemBaseInfo as SharkSpecialPowerInfo;
+        protected override ISowSeedSpecialPowerInfo SowSeedSpecialPowerInfo => Info;
 
         Vector2Int previewdTilePos;
 
-        [SerializeField]
-        AudioInfo seSharkSpecialMove,seSharkSpecial;
         public override void PreviewRange(Vector2Int tilePos, Vector2Int dir, List<Vector2Int> returns)
         {
             if (!IsUsing)
@@ -24,10 +21,9 @@ namespace ReLeaf
                 base.PreviewRange(tilePos, dir, returns);
                 return;
             }
-            returns.Clear();
 
             previewdTilePos = DungeonManager.Singleton.WorldToTilePos(RobotMover.Singleton.transform.position);
-            foreach (var weakLocalTilePos in info.ThrustingList)
+            foreach (var weakLocalTilePos in Info.ThrustingList)
             {
                 var pos = previewdTilePos + weakLocalTilePos;
                 if (!DungeonManager.Singleton.TryGetTile(pos, out var tile) || !tile.CanOrAleeadyGreening(true))
@@ -71,14 +67,15 @@ namespace ReLeaf
                 (minLocalTilePos, maxLocalTilePos) = (maxLocalTilePos, minLocalTilePos);
             }
 
-            var minPos = DungeonManager.Singleton.TilePosToWorld(minLocalTilePos + tilePos);
+            var minPos = PlayerCore.Singleton.transform.position;
             var maxPos = DungeonManager.Singleton.TilePosToWorld(maxLocalTilePos + tilePos);
 
             var mover = RobotMover.Singleton;
 
+            mover.GetComponentInChildren<SpriteRenderer>().sortingOrder++;
             mover.transform.position = minPos;
 
-            SEManager.Singleton.Play(seSharkSpecialMove);
+            SEManager.Singleton.Play(Info.SeSharkSpecialMove);
 
             Vector2Int currentTilePos = tilePos + Vector2Int.one;
             while (true)
@@ -115,8 +112,8 @@ namespace ReLeaf
                     });
 
                 }
-              
-                mover.UpdateManualOperation(PlayerMover.Singleton.transform.position + (Vector3)(Vector2)dir * 2.0f, info.Speed, false);
+
+                mover.UpdateManualOperation(PlayerMover.Singleton.transform.position + (Vector3)(Vector2)dir * 2.0f, Info.Speed, false);
 
                 if (!isRunning)
                     break;
@@ -127,11 +124,13 @@ namespace ReLeaf
             mover.IsStop = true;
             mover.GetComponent<RobotAnimation>().Thrust();
             yield return new WaitForSeconds(0.5f);
-            SEManager.Singleton.Play(seSharkSpecial);
-            foreach (var localPos in info.ThrustingList)
+            SEManager.Singleton.Play(Info.SeSharkSpecial);
+            foreach (var localPos in Info.ThrustingList)
             {
                 DungeonManager.Singleton.SowSeed(previewdTilePos + localPos, true);
             }
+
+            mover.GetComponentInChildren<SpriteRenderer>().sortingOrder--;
 
             mover.IsStop = false;
         }
@@ -154,7 +153,9 @@ namespace ReLeaf
 
                 var playerPos = playerRigidbody.position;
 
-                if (UseCount > 1 || time > info.DashDuration)
+                if (UseCount > 1 && time > 0.05f)
+                    break;
+                if (time > Info.DashDuration)
                     break;
 
                 checkPlayerPos = !checkPlayerPos;
@@ -170,16 +171,17 @@ namespace ReLeaf
         }
         IEnumerator MovePlayer(Vector2Int dir)
         {
-            PlayerMover.Singleton.StartSpecialMove(dir, info.Speed);
-            var invincible = PlayerCore.Singleton.IsInvincible;
-            PlayerCore.Singleton.IsInvincible = true;
+            PlayerMover.Singleton.StartSpecialMove(dir, Info.Speed);
+            PlayerCore.Singleton.AddInvincible(true);
+            var playerAnimation = PlayerCore.Singleton.GetComponent<PlayerAnimation>();
+            playerAnimation.Grasp(true);
 
             yield return new WaitWhile(() => isRunning);
 
-
             PlayerMover.Singleton.FinishSpecialMove();
 
-            PlayerCore.Singleton.IsInvincible = invincible;
+            playerAnimation.Grasp(false);
+            PlayerCore.Singleton.RemoveInvincible();
 
         }
     }

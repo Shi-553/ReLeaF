@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 202589962108348052}
   - component: {fileID: 3919280643754549772}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: Sprite
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -93,7 +93,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2513068284379451174}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: Root
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -129,7 +129,7 @@ GameObject:
   - component: {fileID: 4384070283387547719}
   - component: {fileID: 5349036178957737471}
   - component: {fileID: 5694029219464464850}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: CrabSpecialPower
   m_TagString: Item
   m_Icon: {fileID: 0}
@@ -164,12 +164,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4e53a661ad922e448b55f0667b26f11e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  icon: {fileID: 21300000, guid: 030685bb378713b4e93916c6376d8666, type: 3}
-  useSe: {fileID: 11400000, guid: 3f4e968a5953efd4896a676770419698, type: 2}
-  isImmediate: 0
-  initAnimation: {fileID: 7400000, guid: 89c05b64b7dcd6a42bfb61cc3db3aa6c, type: 2}
-  sowSeedSpecialPowerInfo: {fileID: 11400000, guid: 6fdd19cc8e2b1a74b8bce433706f70e8, type: 2}
-  seCrabSpecial: {fileID: 11400000, guid: 85bb354a461e58249b5e73df82070dd8, type: 2}
+  itemBaseInfo: {fileID: 11400000, guid: 6fdd19cc8e2b1a74b8bce433706f70e8, type: 2}
 --- !u!58 &4384070283387547719
 CircleCollider2D:
   m_ObjectHideFlags: 0

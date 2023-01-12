@@ -1,24 +1,21 @@
 using System.Collections;
 using System.Collections.Generic;
-using Utility;
 using UnityEngine;
+using Utility;
 
 namespace ReLeaf
 {
     public class SeaUrchinSpecialPower : SowSeedSpecialPowerBase
     {
-        [SerializeField]
-        SeaUrchinSpecialPowerInfo info;
-        protected override ISowSeedSpecialPowerInfo SowSeedSpecialPowerInfo => info;
+        SeaUrchinSpecialPowerInfo Info => ItemBaseInfo as SeaUrchinSpecialPowerInfo;
+        protected override ISowSeedSpecialPowerInfo SowSeedSpecialPowerInfo => Info;
 
-        [SerializeField]
-        AudioInfo seUrchinSpecial;
         Vector2Int target;
 
         public override void PreviewRange(Vector2Int tilePos, Vector2Int dir, List<Vector2Int> returns)
         {
             if (!IsUsing)
-                target = tilePos + (dir * info.Distance);
+                target = tilePos + (dir * Info.Distance);
 
             base.PreviewRange(target, dir, returns);
         }
@@ -26,21 +23,21 @@ namespace ReLeaf
         protected override IEnumerator UseImpl(Vector2Int tilePos, Vector2Int dir)
         {
             using var _ = RobotGreening.Singleton.StartGreening();
-            target = tilePos + (dir * info.Distance);
+            target = tilePos + (dir * Info.Distance);
 
             var worldTarget = DungeonManager.Singleton.TilePosToWorld(target);
 
 
             var mover = RobotMover.Singleton;
 
-            mover.UpdateManualOperation(worldTarget, info.Speed, true);
+            mover.UpdateManualOperation(worldTarget, Info.Speed, true);
 
-            yield return new WaitUntil(() => mover.Distance < info.StartSowSeedDistance);
+            yield return new WaitUntil(() => mover.Distance < Info.StartSowSeedDistance);
             mover.IsStop = true;
             mover.GetComponent<RobotAnimation>().Thrust();
 
             yield return new WaitForSeconds(0.5f);
-            SEManager.Singleton.Play(seUrchinSpecial);
+            SEManager.Singleton.Play(Info.SeUrchinSpecial);
             yield return base.UseImpl(target, dir);
 
             mover.IsStop = false;

@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Utility;
@@ -19,10 +19,12 @@ namespace ReLeaf
         AudioInfo seGetItem;
 
 
+        public bool CanUse { get; set; } = true;
+
         int itemCount = 0;
-        int ItemCount
+        public int ItemCount
         {
-            set
+            private set
             {
                 itemCount = value;
                 if (itemCount == 0)
@@ -37,19 +39,26 @@ namespace ReLeaf
                 // update index
                 if (itemCount == index)
                     Index--;
+
+                UpdateDescription();
             }
             get => itemCount;
         }
 
         int index = 0;
-        int Index
+        public int Index
         {
-            set
+            private set
             {
                 index = (ItemCount != 0) ? ((value + ItemCount) % ItemCount) : 0;
-
+                UpdateDescription();
             }
             get => index;
+        }
+        void UpdateDescription()
+        {
+            var description = itemCount == 0 ? "" : Current.Item.ItemBaseInfo.Description;
+            ItemDescription.Singleton.SetItemDescription(description);
         }
         ItemUI Current => itemUIs[index];
 
@@ -88,7 +97,7 @@ namespace ReLeaf
 
         public bool AddItem(ItemBase itemBase)
         {
-            if (itemBase.IsImmediate)
+            if (itemBase.ItemBaseInfo.IsImmediate)
             {
                 StartCoroutine(itemBase.Use(mover.TilePos, ItemDir));
                 return true;
@@ -115,6 +124,8 @@ namespace ReLeaf
 
         public IEnumerator UseItem()
         {
+            if (!CanUse)
+                yield break;
             if (GameRuleManager.Singleton.IsPrepare)
                 yield break;
             if (ItemCount == 0)
@@ -131,10 +142,7 @@ namespace ReLeaf
 
             useCo = StartCoroutine(useItem.Item.Use(mover.TilePos, ItemDir));
 
-
-
-
-            yield return useCo;
+            yield return new WaitUntil(() => useItem.Item.IsFinishUse);
 
             itemUIs.RemoveAt(Index);
             itemUIs.Add(useItem);
@@ -154,7 +162,7 @@ namespace ReLeaf
 
         public void SelectMoveLeft()
         {
-            if (IsUseingNow)
+            if (IsUseingNow || !CanUse)
             {
                 return;
             }
@@ -162,7 +170,7 @@ namespace ReLeaf
         }
         public void SelectMoveRight()
         {
-            if (IsUseingNow)
+            if (IsUseingNow || !CanUse)
             {
                 return;
             }
@@ -182,6 +190,7 @@ namespace ReLeaf
                     return;
                 }
 
+                previews.Clear();
                 previewd.Item.PreviewRange(mover.TilePos, ItemDir, previews);
 
                 foreach (var p in previews)

@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 6966686172075150729}
   - component: {fileID: 5747905615155628725}
   - component: {fileID: 1337254762606520911}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: P_leaf
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4882,7 +4882,7 @@ GameObject:
   - component: {fileID: 8964118149204527980}
   - component: {fileID: 8964118149204527981}
   - component: {fileID: 3797039637821607636}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Fx_deathLeaf
   m_TagString: Untagged
   m_Icon: {fileID: 0}

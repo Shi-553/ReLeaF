@@ -6,8 +6,7 @@ namespace ReLeaf
 {
     public class SpeedUpItem : ItemBase
     {
-        [SerializeField]
-        SpeedUpItemInfo info;
+        SpeedUpItemInfo Info => ItemBaseInfo as SpeedUpItemInfo;
 
         public override void PreviewRange(Vector2Int tilePos, Vector2Int dir, List<Vector2Int> returns)
         {
@@ -15,8 +14,15 @@ namespace ReLeaf
 
         protected override IEnumerator UseImpl(Vector2Int tilePos, Vector2Int dir)
         {
-            PlayerMover.Singleton.SpeedUp(info.SpeedUp);
-            yield break;
+            PlayerMover.Singleton.SpeedUp(Info.SpeedUp);
+
+            StatusChangeManager.Singleton.AddStatus(new(Info.Duration, Icon));
+
+            IsFinishUse = true;
+
+            yield return new WaitForSeconds(Info.Duration);
+
+            PlayerMover.Singleton.SpeedDown(Info.SpeedUp);
         }
     }
 }
