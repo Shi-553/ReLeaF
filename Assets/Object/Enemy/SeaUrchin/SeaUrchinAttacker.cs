@@ -62,10 +62,7 @@ namespace ReLeaf
         {
             base.Stop();
 
-            if (Transition == AttackTransition.Aiming)
-            {
-                currentAttackers.ForEach(c => Destroy(c));
-            }
+            currentAttackers.ForEach(c => Destroy(c));
         }
 
         public override IEnumerable<Vector2Int> GetAttackRange(Vector2Int pos, Vector2Int dir, bool includeMoveabePos)
@@ -82,7 +79,6 @@ namespace ReLeaf
                 attackMarkerManager.SetMarker<TargetMarker>(target, enemyMover.DirNotZero.GetRotation());
             }
 
-            currentAttackers.Clear();
             var poss = selects[enemyMover.DirNotZero.ToDirection().ToInt32()].InitWorldPositions;
             foreach (var pos in poss)
             {
@@ -104,6 +100,7 @@ namespace ReLeaf
                 spine.ShotStart();
             }
 
+            currentAttackers.Clear();
             yield return new WaitForSeconds(seaUrchinAttackInfo.AttackTime);
         }
         protected override void OnStartCoolTime()
