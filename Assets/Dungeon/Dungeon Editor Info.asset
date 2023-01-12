@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   wallTile: {fileID: 11400000, guid: 91e63bea85a0d134383a89075a5e72a0, type: 2}
   altWallTile: {fileID: 11400000, guid: c9b9e9a917e3d6c45ad27c8701b7e18a, type: 2}
-  left: 12
-  right: 12
+  left: 25
+  right: 25
   down: 5
-  up: 8
+  up: 10
