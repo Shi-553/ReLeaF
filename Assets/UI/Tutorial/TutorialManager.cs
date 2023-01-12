@@ -200,6 +200,7 @@ namespace ReLeaf
             GameRuleManager.Singleton.Pause();
 
             itemManager.CanUse = false;
+            itemManager.CanMoveSelect = false;
             {
                 AddItem(itemPrefab1);
                 AddItem(itemPrefab2);
@@ -210,18 +211,19 @@ namespace ReLeaf
                 yield return WaitClick();
             }
 
-            itemManager.CanUse = true;
+            itemManager.CanMoveSelect = true;
             {
                 var selectActionString = PlayerController.Singleton.PlayerInput.currentControlScheme == "Gamepad" ?
                 $"<sprite name=LEFTSHOLDER><sprite name=RIGHTSHOLDER>" :
                 $"<sprite name=SCROLL/Y>";
                 text.text = $"使うアイテムを{selectActionString}で切り替えてみよう！";
                 yield return new WaitUntil(() => itemManager.Index != 0);
+                yield return new WaitForSeconds(2);
             }
 
-            itemManager.CanUse = false;
+            itemManager.CanMoveSelect = false;
             {
-                text.text = $"OK!ここからは実戦だよ！";
+                text.text = $"OK！！ここからは実戦だよ！";
                 yield return WaitClick();
             }
 
@@ -230,6 +232,7 @@ namespace ReLeaf
                 yield return WaitClick();
             }
             itemManager.CanUse = true;
+            itemManager.CanMoveSelect = true;
 
 
             GameRuleManager.Singleton.UnPause();

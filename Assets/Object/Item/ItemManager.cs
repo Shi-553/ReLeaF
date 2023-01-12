@@ -20,6 +20,7 @@ namespace ReLeaf
 
 
         public bool CanUse { get; set; } = true;
+        public bool CanMoveSelect { get; set; } = true;
 
         int itemCount = 0;
         public int ItemCount
@@ -169,7 +170,7 @@ namespace ReLeaf
 
         public void SelectMoveLeft()
         {
-            if (IsUseingNow || !CanUse)
+            if (IsUseingNow || !CanMoveSelect)
             {
                 return;
             }
@@ -177,7 +178,7 @@ namespace ReLeaf
         }
         public void SelectMoveRight()
         {
-            if (IsUseingNow || !CanUse)
+            if (IsUseingNow || !CanMoveSelect)
             {
                 return;
             }
