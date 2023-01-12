@@ -65,11 +65,6 @@ namespace ReLeaf
         [NonSerialized]
         public Tilemap tilemap;
 
-        public static string WALL_TILE_PARENT_NAME = "wallTileParent";
-        public static string GROUND_TILE_PARENT_NAME = "groundTileParent";
-        Transform wallTileParent;
-        Transform groundTileParent;
-
         protected PoolArray Pools;
 
         Pool pool;
@@ -83,7 +78,7 @@ namespace ReLeaf
         [NonSerialized]
         public TileObject createdObject;
 
-        [SerializeField, Rename("“h‚éƒŒƒCƒ„[–¼")]
+        [SerializeField, Rename("å¡—ã‚‹ãƒ¬ã‚¤ãƒ¤ãƒ¼å")]
         TileLayerType tileLayerType;
 
         public TileLayerType TileLayerType => tileLayerType;
@@ -122,16 +117,7 @@ namespace ReLeaf
                     if (tilemap == null)
                     {
                         tilemap = tm.GetComponent<Tilemap>();
-                        wallTileParent = tilemap.transform.Find(WALL_TILE_PARENT_NAME);
-                        groundTileParent = tilemap.transform.parent.Find(GROUND_TILE_PARENT_NAME);
-                        if (wallTileParent == null)
-                        {
-                            wallTileParent = new GameObject(WALL_TILE_PARENT_NAME).transform;
-                            groundTileParent = new GameObject(GROUND_TILE_PARENT_NAME).transform;
 
-                            wallTileParent.parent = tilemap.transform;
-                            groundTileParent.parent = tilemap.transform.parent;
-                        }
                     }
                     Init();
                     pool = Pool ?? Pools.SetPool(CurrentTileObject.TileType.ToInt32(), CurrentTileObject, defaultCapacity, maxSize);
@@ -155,9 +141,6 @@ namespace ReLeaf
 
                 using (Pool.Get(out createdObject))
                 {
-                    var parent = (TileLayerType == TileLayerType.Ground) ? groundTileParent : wallTileParent;
-
-                    createdObject.transform.parent = parent;
                     createdObject.transform.localPosition = tilemap.CellToLocal(position) + new Vector3(DungeonManager.CELL_SIZE, DungeonManager.CELL_SIZE) / 2;
 
                     InitCreatedObject((Vector2Int)position);
