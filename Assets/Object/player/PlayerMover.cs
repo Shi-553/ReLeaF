@@ -234,7 +234,7 @@ namespace ReLeaf
             if (!collision.TryGetComponent<TileObject>(out var tileObject))
                 return;
             // 緑化できないときreturn
-            if (!tileObject.CanGreening(false))
+            if (!tileObject.CanOrAleeadyGreening(false))
                 return;
             // 既に処理済みの場合return
             if (!underTiles.Add(tileObject))
