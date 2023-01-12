@@ -57,8 +57,15 @@ namespace ReLeaf
         }
         void UpdateDescription()
         {
-            var description = itemCount == 0 ? "" : Current.Item.ItemBaseInfo.Description;
-            ItemDescription.Singleton.SetItemDescription(description);
+            if (itemCount == 0)
+            {
+                ItemDescription.Singleton.ResetItemDescription();
+            }
+            else
+            {
+                var description = Current.Item.ItemBaseInfo.Description;
+                ItemDescription.Singleton.SetItemDescription(description, itemOffset * Index);
+            }
         }
         ItemUI Current => itemUIs[index];
 
