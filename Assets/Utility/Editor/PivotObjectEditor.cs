@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+using System;
+using System.Collections.Generic;
 using System.Linq;
 using UnityEditor;
 using UnityEditor.EditorTools;
@@ -10,6 +11,9 @@ namespace EditorScripts
     public abstract class PivotObjectEditor<T> : InspectorExtension<T> where T : Transform
     {
         bool isPivot = false;
+        bool isOldPivot = false;
+
+        Type beforeToolType;
 
         SerializedObject current;
 
@@ -31,9 +35,22 @@ namespace EditorScripts
             {
                 defaultEditor.OnInspectorGUI();
                 isPivot = GUILayout.Toggle(isPivot, "Edit Pivot", "Button", GUILayout.Width(100));
+
+                if (isOldPivot)
+                {
+                    if (beforeToolType != null)
+                        ToolManager.SetActiveTool(beforeToolType);
+                    isOldPivot = false;
+                }
                 return;
             }
 
+            if (!isOldPivot)
+            {
+                beforeToolType = ToolManager.activeToolType;
+                ToolManager.SetActiveTool<PivotObjectEditorTool>();
+                isOldPivot = true;
+            }
 
             //子たち
             var childrens = components.SelectMany(t =>
@@ -50,6 +67,8 @@ namespace EditorScripts
             (Vector3, Quaternion)[] posRotates = childrens.Select(t => (t.position, t.rotation)).ToArray();
 
             defaultEditor.OnInspectorGUI();
+
+
             isPivot = GUILayout.Toggle(isPivot, "Edit Pivot", "Button", GUILayout.Width(100));
 
             if (current.UpdateIfRequiredOrScript())
