@@ -1,4 +1,4 @@
-﻿using DebugLogExtension;
+using DebugLogExtension;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using Utility.Definition;
@@ -40,6 +40,10 @@ namespace Utility
                         {
                             singletonInstance.Init(true, false);
                             isInitialized = true;
+                        }
+                        else
+                        {
+                            return null;
                         }
                     }
                 }

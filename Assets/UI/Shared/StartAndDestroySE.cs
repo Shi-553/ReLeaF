@@ -16,7 +16,7 @@ namespace ReLeaf
 
         void OnDestroy()
         {
-            SEManager.Singleton.Play(seDestroy);
+            SEManager.Singleton?.Play(seDestroy);
         }
     }
 }
