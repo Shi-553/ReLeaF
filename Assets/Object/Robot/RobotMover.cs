@@ -6,14 +6,14 @@ namespace ReLeaf
     public class RobotMover : SingletonBase<RobotMover>
     {
         public override bool DontDestroyOnLoad => false;
-        [SerializeField, Rename("ƒXƒs[ƒh(nƒ}ƒX/•b)")]
+        [SerializeField, Rename("ã‚¹ãƒ”ãƒ¼ãƒ‰(nãƒžã‚¹/ç§’)")]
         float speed = 8.0f;
         public float Speed => UseManualOperation ? manualSpeed : speed;
 
-        [SerializeField, Rename("‚»‚êˆÈã‹ß‚Ã‚©‚È‚¢‹——£(nƒ}ƒX)")]
+        [SerializeField, Rename("ãã‚Œä»¥ä¸Šè¿‘ã¥ã‹ãªã„è·é›¢(nãƒžã‚¹)")]
         float minDistance = 1.0f;
 
-        [SerializeField, Rename("–Ú“I’n‚É‚±‚ê‚æ‚è‹ß‚Ã‚¢‚½‚çŽ~‚Ü‚é‹——£(nƒ}ƒX)")]
+        [SerializeField, Rename("ç›®çš„åœ°ã«ã“ã‚Œã‚ˆã‚Šè¿‘ã¥ã„ãŸã‚‰æ­¢ã¾ã‚‹è·é›¢(nãƒžã‚¹)")]
         float nearThreshold = 0.1f;
         float NearThreshold => UseManualOperation ? manualNearThreshold : nearThreshold;
 
@@ -78,24 +78,27 @@ namespace ReLeaf
 
             if (!UseManualOperation)
             {
-                UpdateTarget(PlayerCore.Singleton.transform.position);
-
-                if (distance * DungeonManager.CELL_SIZE < minDistance)
+                if (PlayerCore.Singleton.transform.position != transform.position)
                 {
-                    if (PlayerCore.Singleton.Mover.Dir != Vector2.zero)
+                    UpdateTarget(PlayerCore.Singleton.transform.position);
+
+                    if (distance * DungeonManager.CELL_SIZE < minDistance)
                     {
-                        var dot = Vector2.Dot(PlayerCore.Singleton.Mover.Dir, -dir);
-                        var cross = PlayerCore.Singleton.Mover.Dir.Cross(-dir);
-                        if (dot > 0)
+                        if (PlayerCore.Singleton.Mover.Dir != Vector2.zero)
                         {
-                            if (cross < 0)
-                                cross = Mathf.Min(cross, -0.5f);
-                            else
-                                cross = Mathf.Max(cross, 0.5f);
+                            var dot = Vector2.Dot(PlayerCore.Singleton.Mover.Dir, -dir);
+                            var cross = PlayerCore.Singleton.Mover.Dir.Cross(-dir);
+                            if (dot > 0)
+                            {
+                                if (cross < 0)
+                                    cross = Mathf.Min(cross, -0.5f);
+                                else
+                                    cross = Mathf.Max(cross, 0.5f);
+                            }
+                            dir = Quaternion.Euler(0, 0, 30 * cross) * dir;
                         }
-                        dir = Quaternion.Euler(0, 0, 30 * cross) * dir;
+                        UpdateTarget(target - dir * minDistance);
                     }
-                    UpdateTarget(target - dir * minDistance);
                 }
             }
             else
@@ -104,7 +107,8 @@ namespace ReLeaf
             }
 
             var distanceMaxOne = Mathf.Min(distance, 1);
-            if (distanceMaxOne > NearThreshold)
+
+            if (distance > NearThreshold)
             {
                 Move = DungeonManager.CELL_SIZE * distanceMaxOne * Speed * dir;
                 mover.MoveDelta(Move);
