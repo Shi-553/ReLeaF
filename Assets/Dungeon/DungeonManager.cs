@@ -35,6 +35,25 @@ namespace ReLeaf
 
         public ReadOnlyDictionary<Vector2Int, TileObject> TileDic;
 
+#if UNITY_EDITOR
+        [Serializable]
+        struct SelealizeTileCount
+        {
+            [ReadOnly]
+            public TileType type;
+            [ReadOnly]
+            public int tileCount;
+
+            public SelealizeTileCount(TileType type, int tileCount)
+            {
+                this.type = type;
+                this.tileCount = tileCount;
+            }
+        }
+        [SerializeField]
+        List<SelealizeTileCount> selealizeTileCounts = new();
+        Dictionary<TileType, int> tileCounts = new();
+#endif
         public void SetNewTile(Vector2Int pos, TileObject newTile)
         {
             tileDic[pos] = newTile;
@@ -79,6 +98,23 @@ namespace ReLeaf
             if (callByAwake)
             {
                 tilemap.RefreshAllTiles();
+#if UNITY_EDITOR
+                for (int i = 0; i < (int)TileType.Max; i++)
+                {
+                    tileCounts.Add((TileType)i, 0);
+                }
+                foreach (var tile in tileDic.Values)
+                {
+                    tileCounts[tile.TileType]++;
+                }
+                foreach (var pair in tileCounts)
+                {
+                    if (pair.Value == 0)
+                        continue;
+                    selealizeTileCounts.Add(new(pair.Key, pair.Value));
+                }
+
+#endif
             }
         }
         protected override void UninitBeforeSceneUnload(bool isDestroy)
