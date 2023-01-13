@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 #if UNITY_EDITOR
 using UnityEditor;
 #endif
@@ -8,6 +9,13 @@ using Utility;
 
 namespace ReLeaf
 {
+    public interface IRoomBlastTarget
+    {
+        public Vector3 Position { get; }
+
+        public void BeginGreening() { }
+        public void Greening();
+    }
     public class Room : MonoBehaviour
     {
 
@@ -94,42 +102,29 @@ namespace ReLeaf
 
             yield return null;
 
-            HashSet<SpawnLakeGroup> groups = new();
+            var wait = new WaitForSeconds(1);
+
+            HashSet<IRoomBlastTarget> targets = new();
+
             foreach (var pos in roomTilePoss)
             {
                 if (DungeonManager.Singleton.TryGetTile<SpawnLake>(pos, out var lake))
                 {
-                    groups.Add(lake.Group);
+                    targets.Add(lake.Group);
                 }
             }
-            groups.ForEach(g => g.CanSpawn = false);
+
+            targets.AddRange(GetComponentsInChildren<IRoomBlastTarget>());
 
 
-            var wait = new WaitForSeconds(1);
+            targets.ForEach(g => g.BeginGreening());
 
-
-
-            foreach (var group in groups)
+            foreach (var target in targets)
             {
-                Vector2 center = Vector2.zero;
-                group.Dic.Values.ForEach(lake => center += lake.TilePos);
-                center /= group.Dic.Count;
-
-                yield return Move(DungeonManager.Singleton.TilePosToWorld(center));
+                yield return Move(target);
                 yield return Attack();
-                group.Dic.Values.ForEach(lake => DungeonManager.Singleton.SowSeed(lake.TilePos, true));
+                target.Greening();
             }
-
-
-            var enemys = GetComponentsInChildren<EnemyCore>();
-
-            foreach (var enemy in enemys)
-            {
-                yield return Move(enemy.transform.GetChild(0));
-                yield return Attack();
-                enemy.Damaged(999);
-            }
-
 
             RoomVirtualCamera.Singleton.EndRoomBlast();
             RobotMover.Singleton.IsStop = false;
@@ -143,26 +138,12 @@ namespace ReLeaf
             yield return new WaitForSeconds(0.5f);
 
         }
-        IEnumerator Move(Vector3 target)
+        IEnumerator Move(IRoomBlastTarget target)
         {
-
             RobotMover.Singleton.IsStop = false;
             while (true)
             {
-                RobotMover.Singleton.UpdateManualOperation(target, 30, true, 1);
-
-                yield return null;
-                if (!RobotMover.Singleton.UseManualOperation)
-                    yield break;
-            }
-        }
-        IEnumerator Move(Transform target)
-        {
-
-            RobotMover.Singleton.IsStop = false;
-            while (true)
-            {
-                RobotMover.Singleton.UpdateManualOperation(target.position, 30, true, 1);
+                RobotMover.Singleton.UpdateManualOperation(target.Position, 30, true, 1);
 
                 yield return null;
                 if (!RobotMover.Singleton.UseManualOperation)

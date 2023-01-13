@@ -9,7 +9,7 @@ using Object = UnityEngine.Object;
 
 namespace ReLeaf
 {
-    public class SpawnLakeGroup
+    public class SpawnLakeGroup : IRoomBlastTarget
     {
         readonly Dictionary<Vector2Int, SpawnLake> lakeDic;
         readonly HashSet<Vector2Int> targets = new();
@@ -25,6 +25,7 @@ namespace ReLeaf
 
         public bool CanSpawn { get; set; } = true;
         public bool IsGreening => lakeDic.All(t => t.Value.IsGreening);
+
 
         public SpawnLakeGroup(SpawnLake lake, Transform enemyRoot)
         {
@@ -154,6 +155,25 @@ namespace ReLeaf
                 var initTilePos = enemy.TilePos;
                 yield return new WaitUntil(() => enemy.TilePos != initTilePos);
             }
+        }
+
+        public Vector3 Position
+        {
+            get
+            {
+                Vector2 center = Vector2.zero;
+                Dic.Values.ForEach(lake => center += lake.TilePos);
+                center /= Dic.Count;
+                return center;
+            }
+        }
+        void IRoomBlastTarget.BeginGreening()
+        {
+            CanSpawn = false;
+        }
+        public void Greening()
+        {
+            Dic.Values.ForEach(lake => DungeonManager.Singleton.SowSeed(lake.TilePos, true));
         }
     }
 

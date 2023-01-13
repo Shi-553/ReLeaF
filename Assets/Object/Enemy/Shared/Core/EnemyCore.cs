@@ -6,7 +6,7 @@ using Utility;
 
 namespace ReLeaf
 {
-    public class EnemyCore : MonoBehaviour, IEnemyDamageable
+    public class EnemyCore : MonoBehaviour, IEnemyDamageable, IRoomBlastTarget
     {
         [SerializeField]
         EnemyDamageableInfo enemyDamageableInfo;
@@ -14,6 +14,7 @@ namespace ReLeaf
         [field: SerializeField, ReadOnly]
         public float HP { get; private set; }
         public bool IsDeath => HP <= 0;
+
 
         EnemyMover enemyMover;
 
@@ -132,6 +133,12 @@ namespace ReLeaf
                     Damaged(999);
                 }
             }
+        }
+
+        public Vector3 Position => enemyMover.WorldCenter;
+        public void Greening()
+        {
+            Damaged(999);
         }
     }
 }
