@@ -21,6 +21,15 @@ namespace EditorScripts
         {
             current = serializedObject;
         }
+        protected override void Uninit()
+        {
+            if (isOldPivot)
+            {
+                if (beforeToolType != null)
+                    ToolManager.SetActiveTool(beforeToolType);
+                isOldPivot = false;
+            }
+        }
         public override void OnInspectorGUI()
         {
             //１つでも子供がいないのを選択していたらお断りする

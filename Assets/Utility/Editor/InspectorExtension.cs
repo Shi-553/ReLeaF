@@ -1,4 +1,4 @@
-﻿using System.Linq;
+using System.Linq;
 using System.Reflection;
 using UnityEditor;
 using UnityEngine;
@@ -28,9 +28,11 @@ namespace EditorScripts
             Init();
         }
         protected virtual void Init() { }
+        protected virtual void Uninit() { }
 
         void OnDisable()
         {
+            Uninit();
             //When OnDisable is called, the default editor we created should be destroyed to avoid memory leakage.
             //Also, make sure to call any required methods like OnDisable
             MethodInfo disableMethod = defaultEditor.GetType().GetMethod("OnDisable", BindingFlags.Instance | BindingFlags.NonPublic | BindingFlags.Public);
