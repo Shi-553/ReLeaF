@@ -1,11 +1,9 @@
 using System.Collections;
 using System.Collections.Generic;
-using Unity.VisualScripting;
 #if UNITY_EDITOR
 using UnityEditor;
 #endif
 using UnityEngine;
-using Utility;
 
 namespace ReLeaf
 {
@@ -104,11 +102,11 @@ namespace ReLeaf
 
             var wait = new WaitForSeconds(1);
 
-            HashSet<IRoomBlastTarget> targets = new();
+            List<IRoomBlastTarget> targets = new();
 
             foreach (var pos in roomTilePoss)
             {
-                if (DungeonManager.Singleton.TryGetTile<SpawnLake>(pos, out var lake))
+                if (DungeonManager.Singleton.TryGetTile<SpawnLake>(pos, out var lake) && !targets.Contains(lake.Group))
                 {
                     targets.Add(lake.Group);
                 }
@@ -119,8 +117,13 @@ namespace ReLeaf
 
             targets.ForEach(g => g.BeginGreening());
 
-            foreach (var target in targets)
+            targets.Sort((a, b) =>
+            (int)((a.Position - RobotMover.Singleton.transform.position).sqrMagnitude - (b.Position - RobotMover.Singleton.transform.position).sqrMagnitude));
+
+            for (int i = 0; i < targets.Count; i++)
             {
+                var target = targets[i];
+
                 yield return Move(target);
                 yield return Attack();
                 target.Greening();
@@ -130,6 +133,7 @@ namespace ReLeaf
             RobotMover.Singleton.IsStop = false;
 
             RobotMover.Singleton.GetComponentInChildren<SpriteRenderer>().sortingOrder--;
+            RobotMover.Singleton.UpdateManualOperation(PlayerCore.Singleton.transform.position, 50, true, 1);
         }
         IEnumerator Attack()
         {
@@ -143,7 +147,9 @@ namespace ReLeaf
             RobotMover.Singleton.IsStop = false;
             while (true)
             {
-                RobotMover.Singleton.UpdateManualOperation(target.Position, 30, true, 1);
+                var targetPos = target.Position;
+
+                RobotMover.Singleton.UpdateManualOperation(targetPos, 50, true, 1);
 
                 yield return null;
                 if (!RobotMover.Singleton.UseManualOperation)
