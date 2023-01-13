@@ -88,6 +88,10 @@ namespace ReLeaf
 
             RobotMover.Singleton.GetComponentInChildren<SpriteRenderer>().sortingOrder++;
 
+            RoomVirtualCamera.Singleton.BeginRoomBlast(
+                DungeonManager.Singleton.TilePosToWorld(minTile),
+                DungeonManager.Singleton.TilePosToWorld(maxTile));
+
             yield return null;
 
             HashSet<SpawnLakeGroup> groups = new();
@@ -127,6 +131,7 @@ namespace ReLeaf
             }
 
 
+            RoomVirtualCamera.Singleton.EndRoomBlast();
             RobotMover.Singleton.IsStop = false;
 
             RobotMover.Singleton.GetComponentInChildren<SpriteRenderer>().sortingOrder--;

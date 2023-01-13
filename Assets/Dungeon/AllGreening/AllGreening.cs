@@ -11,6 +11,7 @@ namespace ReLeaf
         [SerializeField]
         AllGreeningInfo info;
 
+        [SerializeField]
         CinemachineVirtualCamera virtualCamera;
         CinemachineTargetGroup cinemachineTargetGroup;
 
@@ -24,8 +25,6 @@ namespace ReLeaf
 
         protected override void Init(bool isFirstInit, bool callByAwake)
         {
-            if (isFirstInit)
-                virtualCamera = FindObjectOfType<CinemachineVirtualCamera>();
         }
         void Start()
         {
@@ -52,6 +51,7 @@ namespace ReLeaf
             this.useCamera = useCamera;
             if (useCamera)
             {
+                virtualCamera.Priority = 30;
                 virtualCamera.LookAt = transform;
                 virtualCamera.Follow = transform;
             }
