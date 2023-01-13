@@ -20,6 +20,8 @@ namespace ReLeaf
         Vector2Int maxTile;
         Vector2Int minTile;
 
+        public Transform EnemyRoot { get; private set; }
+
         public void Awake()
         {
             var tilePos = DungeonManager.Singleton.WorldToTilePos(transform.position);
@@ -29,8 +31,17 @@ namespace ReLeaf
 
             AddRoomTile(tilePos);
 
-        }
+            var enemy = GetComponentInChildren<EnemyCore>();
+            EnemyRoot = enemy != null ? enemy.transform.parent : transform;
 
+        }
+        private void Start()
+        {
+            if (ContainsRoom(PlayerMover.Singleton.TilePos))
+            {
+                PlayerMover.Singleton.LastRoom = this;
+            }
+        }
 
         void AddRoomTile(Vector2Int pos)
         {
@@ -43,6 +54,8 @@ namespace ReLeaf
             if (!roomTilePoss.Add(pos))
                 return;
 
+            if (tile is ISetRoomTile roomTile)
+                roomTile.SetRoom(this);
 
             if (maxTile.y < pos.y) maxTile.y = pos.y;
             if (maxTile.x < pos.x) maxTile.x = pos.x;
@@ -51,9 +64,8 @@ namespace ReLeaf
             if (minTile.x > pos.x) minTile.x = pos.x;
 
 
-            if (tile.TileType == TileType.Entrance && tile is EntranceTile entrance)
+            if (tile.TileType == TileType.Entrance)
             {
-                entrance.Room = this;
                 return;
             }
 

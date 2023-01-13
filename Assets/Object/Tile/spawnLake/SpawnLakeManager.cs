@@ -165,8 +165,6 @@ namespace ReLeaf
         Transform enabledLake;
         [SerializeField]
         Transform disabledLake;
-        [SerializeField]
-        Transform enemyRoot;
 
         List<SpawnLakeGroup> groups = new();
 
@@ -193,7 +191,7 @@ namespace ReLeaf
                 {
                     continue;
                 }
-                groups.Add(new SpawnLakeGroup(lake, enemyRoot));
+                groups.Add(new SpawnLakeGroup(lake, lake.Room.EnemyRoot));
             }
 
             groups.ForEach(g =>

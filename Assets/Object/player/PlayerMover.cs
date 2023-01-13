@@ -36,7 +36,21 @@ namespace ReLeaf
 
         bool isKnockback = false;
 
-        public Room LastRoom { get; private set; }
+        public event Action OnChangeRoom;
+
+        Room lastRoom;
+        public Room LastRoom
+        {
+            get => lastRoom;
+            set
+            {
+                if (lastRoom != value)
+                {
+                    OnChangeRoom?.Invoke();
+                    lastRoom = value;
+                }
+            }
+        }
 
         [Serializable]
         class SequentialSE
