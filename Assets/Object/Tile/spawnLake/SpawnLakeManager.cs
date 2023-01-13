@@ -164,7 +164,7 @@ namespace ReLeaf
                 Vector2 center = Vector2.zero;
                 Dic.Values.ForEach(lake => center += lake.TilePos);
                 center /= Dic.Count;
-                return center;
+                return DungeonManager.Singleton.TilePosToWorld(center);
             }
         }
         void IRoomBlastTarget.BeginGreening()
