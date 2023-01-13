@@ -15,7 +15,7 @@ namespace ReLeaf
         }
         protected override void UninitImpl()
         {
-            if (DungeonManager.Singleton.TryGetTile<Plant>(tilePos, out var plant))
+            if (DungeonManager.Singleton != null && DungeonManager.Singleton.TryGetTile<Plant>(tilePos, out var plant))
             {
                 plant.IsSetWeakMarker = false;
             }
