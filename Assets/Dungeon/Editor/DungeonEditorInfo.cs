@@ -13,18 +13,5 @@ namespace ReLeaf
         [SerializeField]
         TerrainTile altWallTile;
         public TerrainTile AltWallTile => altWallTile;
-
-        [SerializeField]
-        int left = 10;
-        public int Left => left;
-        [SerializeField]
-        int right = 10;
-        public int Right => right;
-        [SerializeField]
-        int down = 5;
-        public int Down => down;
-        [SerializeField]
-        int up = 7;
-        public int Up => up;
     }
 }
