@@ -27,20 +27,15 @@ namespace ReLeaf
             Markers = new ReadOnlyDictionary<Vector2Int, MarkerBase>(markers);
         }
 
-        bool isStarted = false;
         private void Start()
         {
-            isStarted = true;
             if (subscribeOnGreening)
                 DungeonManager.Singleton.OnGreening += OnGreening;
         }
 
         private void OnDestroy()
         {
-            if (!isStarted)
-                return;
-
-            if (subscribeOnGreening)
+            if (subscribeOnGreening && DungeonManager.Singleton != null)
                 DungeonManager.Singleton.OnGreening -= OnGreening;
         }
         private void OnDisable()
