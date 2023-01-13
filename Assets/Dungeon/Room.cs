@@ -65,7 +65,8 @@ namespace ReLeaf
 
         public void GreeningRoom()
         {
-            StartCoroutine(RoomBlast());
+            if (GameRuleManager.Singleton.IsPlaying)
+                StartCoroutine(RoomBlast());
         }
 
 
