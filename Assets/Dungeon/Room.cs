@@ -1,3 +1,4 @@
+using Cinemachine;
 using System.Collections;
 using System.Collections.Generic;
 #if UNITY_EDITOR
@@ -98,9 +99,8 @@ namespace ReLeaf
                 DungeonManager.Singleton.TilePosToWorld(minTile),
                 DungeonManager.Singleton.TilePosToWorld(maxTile));
 
-            yield return null;
-
-            var wait = new WaitForSeconds(1);
+            var blendTime = Camera.main.GetComponent<CinemachineBrain>().m_DefaultBlend.m_Time;
+            yield return new WaitForSeconds(blendTime);
 
             List<IRoomBlastTarget> targets = new();
 
