@@ -36,7 +36,7 @@ namespace ReLeaf
 
         bool isKnockback = false;
 
-        public event Action OnChangeRoom;
+        public event Action<Room> OnChangeRoom;
 
         Room lastRoom;
         public Room LastRoom
@@ -46,8 +46,8 @@ namespace ReLeaf
             {
                 if (lastRoom != value)
                 {
-                    OnChangeRoom?.Invoke();
                     lastRoom = value;
+                    OnChangeRoom?.Invoke(LastRoom);
                 }
             }
         }

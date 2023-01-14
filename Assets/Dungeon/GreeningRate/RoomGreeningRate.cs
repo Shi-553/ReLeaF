@@ -8,8 +8,15 @@ namespace ReLeaf
         {
             TryGetComponent(out room);
             base.Start();
-
+            PlayerMover.Singleton.OnChangeRoom += OnChangeRoom;
         }
+
+        private void OnChangeRoom(Room playerRoom)
+        {
+            if (playerRoom == null || playerRoom == room)
+                RoomGreeningRateUI.Singleton.Slider.value = ValueRate;
+        }
+
         protected override void CalculateMaxGreeningCount()
         {
             foreach (var pos in room.RoomTilePoss)
@@ -23,9 +30,7 @@ namespace ReLeaf
 
         protected override void UpdateValue()
         {
-            var playerRoom = PlayerMover.Singleton.LastRoom;
-            if (playerRoom == null || playerRoom == room)
-                RoomGreeningRateUI.Singleton.Slider.value = ValueRate;
+            OnChangeRoom(PlayerMover.Singleton.LastRoom);
         }
         protected override void Finish()
         {
