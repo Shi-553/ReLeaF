@@ -1,21 +1,14 @@
 namespace ReLeaf
 {
-    public class SpawnLake : TileObject, ISetRoomTile
+    public class SpawnLake : TileObject
     {
-
         public bool IsGreening { get; private set; }
 
         public override bool CanGreening(bool useSpecial) => useSpecial && !IsGreening;
         public override bool IsAlreadyGreening => IsGreening;
 
-        public SpawnLakeGroup Group { get; set; }
-
-        public Room Room { get; private set; }
-        public void SetRoom(Room room) => Room = room;
-
-        protected override void InitImpl()
+        private void Start()
         {
-            base.InitImpl();
             SpawnLakeManager.Singleton.AddEnabledLake(this);
         }
 

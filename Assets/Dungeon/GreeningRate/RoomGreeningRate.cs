@@ -13,8 +13,8 @@ namespace ReLeaf
 
         private void OnChangeRoom(Room playerRoom)
         {
-            if (playerRoom == null || playerRoom == room)
-                RoomGreeningRateUI.Singleton.Slider.value = ValueRate;
+            if (playerRoom == room)
+                RoomGreeningRateUI.Singleton.SetValue(ValueRate);
         }
 
         protected override void CalculateMaxGreeningCount()

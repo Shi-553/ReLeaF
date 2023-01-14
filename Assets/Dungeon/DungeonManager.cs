@@ -29,7 +29,7 @@ namespace ReLeaf
 
         [SerializeField]
         Tilemap tilemap;
-        public Tilemap Tilemap => tilemap;
+        public Tilemap Tilemap => tilemap = (tilemap != null) ? tilemap : FindObjectOfType<Tilemap>();
 
         Dictionary<Vector2Int, TileObject> tileDic = new();
 

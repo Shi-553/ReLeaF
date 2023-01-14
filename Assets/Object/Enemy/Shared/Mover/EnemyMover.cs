@@ -18,7 +18,7 @@ namespace ReLeaf
 
 
         /// <summary>
-        /// ˆÚ“®‚Ég‚¤ƒ^[ƒQƒbƒgˆÊ’uA¶‰ºŠî€
+        /// ç§»å‹•ã«ä½¿ã†ã‚¿ãƒ¼ã‚²ãƒƒãƒˆä½ç½®ã€å·¦ä¸‹åŸºæº–
         /// </summary>
         [field: SerializeField, ReadOnly]
         public Vector2Int MoveTarget { get; private set; }
@@ -78,8 +78,21 @@ namespace ReLeaf
 
         void Start()
         {
+            Init(DungeonManager.Singleton.WorldToTilePos(transform.position));
+        }
+
+        bool isInit = false;
+        public void Init(Vector2Int pos)
+        {
+            if (isInit)
+            {
+                return;
+            }
+
+            isInit = true;
+
             TryGetComponent(out mover);
-            TilePos = DungeonManager.Singleton.WorldToTilePos(mover.Position);
+            TilePos = pos;
         }
 
         public enum MoveResult
@@ -152,7 +165,7 @@ namespace ReLeaf
 
         Vector2Int target = Vector2Int.zero;
 
-        // ©“®‘€ì(©—R‚ÈˆÊ’u‚ğw’è‚µ‚ÄŒo˜H’Tõ)
+        // è‡ªå‹•æ“ä½œ(è‡ªç”±ãªä½ç½®ã‚’æŒ‡å®šã—ã¦çµŒè·¯æ¢ç´¢)
         public bool UpdateTargetAutoRouting(Vector2Int targetTilePos)
         {
             target = targetTilePos;
@@ -160,7 +173,7 @@ namespace ReLeaf
             return ret;
         }
 
-        // ƒ}ƒjƒ…ƒAƒ‹‘€ì(’¼üˆÊ’u‚ğw’è)
+        // ãƒãƒ‹ãƒ¥ã‚¢ãƒ«æ“ä½œ(ç›´ç·šä½ç½®ã‚’æŒ‡å®š)
         public void UpdateTargetStraight(Vector2Int targetTilePos)
         {
             target = targetTilePos;
@@ -171,7 +184,7 @@ namespace ReLeaf
 
 
         /// <summary>
-        /// min <= target < max ‚È‚çtarget‚ğ•Ô‚·
+        /// min <= target < max ãªã‚‰targetã‚’è¿”ã™
         /// </summary>
         int GetNearest(int target, int min, int max)
         {
@@ -188,16 +201,16 @@ namespace ReLeaf
                 GetNearest(target.y, TilePos.y, TilePos.y + TileSize.y - 1));
         }
 
-        // ‚»‚Ìƒ}ƒX‚É“’B‚µ‚½‚Æ‚«A—ˆ‚½•ûŒü‚ğ‹L˜^
+        // ãã®ãƒã‚¹ã«åˆ°é”ã—ãŸã¨ãã€æ¥ãŸæ–¹å‘ã‚’è¨˜éŒ²
         Dictionary<Vector2Int, Direction> routingMapBuffer = new();
 
         Queue<Vector2Int> tempMapQueue = new();
 
-        // ƒXƒ^[ƒg‚µ‚½ƒ}ƒX‚©‚çƒS[ƒ‹‚Ìè‘O‚Ìƒ}ƒX‚Ü‚Å
+        // ã‚¹ã‚¿ãƒ¼ãƒˆã—ãŸãƒã‚¹ã‹ã‚‰ã‚´ãƒ¼ãƒ«ã®æ‰‹å‰ã®ãƒã‚¹ã¾ã§
         Stack<Vector2Int> routes = new();
         public Stack<Vector2Int> Routing => routes;
 
-        // ÅŒã‚É‚Ç‚ÌŒü‚«‚Åƒ^[ƒQƒbƒg‚ÉŒü‚©‚¤‚©
+        // æœ€å¾Œã«ã©ã®å‘ãã§ã‚¿ãƒ¼ã‚²ãƒƒãƒˆã«å‘ã‹ã†ã‹
         public Vector2Int ToTargetDir { get; private set; }
 
         List<Vector2Int> buffer = new();
@@ -208,7 +221,7 @@ namespace ReLeaf
 
         bool UpdateDirRouting()
         {
-            // ƒ^[ƒQƒbƒg‚ª“¯‚¶ƒ^ƒCƒ‹
+            // ã‚¿ãƒ¼ã‚²ãƒƒãƒˆãŒåŒã˜ã‚¿ã‚¤ãƒ«
             if (MathExtension.DuringExists(target, TilePos, TilePos + TileSize))
             {
                 UpdateTargetStraight(target);
@@ -220,17 +233,17 @@ namespace ReLeaf
 
             if (!FindShortestPath())
             {
-                // “’B•s‰Â”\
+                // åˆ°é”ä¸å¯èƒ½
                 return false;
             }
             routes.Clear();
 
 
-            // ƒ^[ƒQƒbƒg‚©‚ç–ß‚Á‚ÄŒo˜H‚ğŠm”F‚·‚é
+            // ã‚¿ãƒ¼ã‚²ãƒƒãƒˆã‹ã‚‰æˆ»ã£ã¦çµŒè·¯ã‚’ç¢ºèªã™ã‚‹
 
             var currnet = tempTarget;
 
-            // Å‰‚Íƒ^[ƒQƒbƒg‚ÌˆÊ’u‚ğ‚İ‚é
+            // æœ€åˆã¯ã‚¿ãƒ¼ã‚²ãƒƒãƒˆã®ä½ç½®ã‚’ã¿ã‚‹
             Direction currentDir = routingMapBuffer[tempTarget];
 
             ToTargetDir = currentDir.GetVector2Int();
@@ -245,7 +258,7 @@ namespace ReLeaf
 
                 var dir = currentDir.GetVector2Int();
 
-                // ˆê‚Â–ß‚é
+                // ä¸€ã¤æˆ»ã‚‹
                 currnet -= dir;
 
                 routes.Push(currnet);
@@ -256,9 +269,9 @@ namespace ReLeaf
 
 
         /// <summary>
-        /// Å’ZŒo˜H‚ğ’T‚·
+        /// æœ€çŸ­çµŒè·¯ã‚’æ¢ã™
         /// </summary>
-        /// <returns>“’B‰Â”\‚©</returns>
+        /// <returns>åˆ°é”å¯èƒ½ã‹</returns>
         bool FindShortestPath()
         {
             tempMapQueue.Enqueue(TilePos);
@@ -291,14 +304,14 @@ namespace ReLeaf
         }
 
         /// <summary>
-        /// ¶‰ºŠî€‚Ìtilepos‚©‚çdir‚ÉˆÚ“®‚µ‚½‚¢‚Æ‚«AáŠQ•¨‚È‚Ç‚ğ”»’è‚µ‚È‚¢‚Æ‚¢‚¯‚È‚¢ˆÊ’u‚ğ•Ô‚·
+        /// å·¦ä¸‹åŸºæº–ã®tileposã‹ã‚‰dirã«ç§»å‹•ã—ãŸã„ã¨ãã€éšœå®³ç‰©ãªã©ã‚’åˆ¤å®šã—ãªã„ã¨ã„ã‘ãªã„ä½ç½®ã‚’è¿”ã™
         /// </summary>
         public void GetCheckPoss(Vector2Int tilePos, Vector2Int dir, List<Vector2Int> checkPoss)
         {
             GetCheckPoss(tilePos, dir.ToDirection(), checkPoss);
         }
         /// <summary>
-        /// ¶‰ºŠî€‚Ìtilepos‚©‚çdir‚ÉˆÚ“®‚µ‚½‚¢‚Æ‚«AáŠQ•¨‚È‚Ç‚ğ”»’è‚µ‚È‚¢‚Æ‚¢‚¯‚È‚¢ˆÊ’u‚ğ•Ô‚·
+        /// å·¦ä¸‹åŸºæº–ã®tileposã‹ã‚‰dirã«ç§»å‹•ã—ãŸã„ã¨ãã€éšœå®³ç‰©ãªã©ã‚’åˆ¤å®šã—ãªã„ã¨ã„ã‘ãªã„ä½ç½®ã‚’è¿”ã™
         /// </summary>
         public void GetCheckPoss(Vector2Int tilePos, Direction dir, List<Vector2Int> checkPoss)
         {
@@ -340,10 +353,10 @@ namespace ReLeaf
         }
 
         /// <summary>
-        /// ’Ês‰Â”\‚ÅŠù‚É’Ê‚Á‚Ä‚È‚¢ê‡ƒLƒ…[‚É“ü‚ê‚é
+        /// é€šè¡Œå¯èƒ½ã§æ—¢ã«é€šã£ã¦ãªã„å ´åˆã‚­ãƒ¥ãƒ¼ã«å…¥ã‚Œã‚‹
         /// </summary>
         /// <param name="nextPos"></param>
-        /// <returns>‚»‚±‚ªƒ^[ƒQƒbƒg‚©‚Ç‚¤‚©</returns>
+        /// <returns>ãã“ãŒã‚¿ãƒ¼ã‚²ãƒƒãƒˆã‹ã©ã†ã‹</returns>
         bool TryEnqueueAndCheckTarget(Direction dir)
         {
             GetCheckPoss(tempQueue, dir, buffer);
@@ -351,7 +364,7 @@ namespace ReLeaf
 
             var nextPivotPos = tempQueue + dir.GetVector2Int();
 
-            // Šù‚É’Ê‚Á‚½
+            // æ—¢ã«é€šã£ãŸ
             if (routingMapBuffer.ContainsKey(nextPivotPos))
             {
                 return false;

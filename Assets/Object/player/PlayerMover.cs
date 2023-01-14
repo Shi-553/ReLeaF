@@ -274,6 +274,12 @@ namespace ReLeaf
             if (!collision.TryGetComponent<TileObject>(out var tileObject))
                 return;
 
+            if (tileObject.TileType == TileType.Entrance && tileObject is EntranceTile entrance)
+            {
+                if (!entrance.Room.ContainsRoom(TilePos))
+                    LastRoom = null;
+            }
+
             underTiles.Remove(tileObject);
 
             if (!CanSowSeed)

@@ -49,6 +49,11 @@ namespace ReLeaf
         [SerializeField, Pickle]
         ItemBase itemPrefab3;
 
+        [SerializeField]
+        SpawnLakeGroup crabSpawn;
+        [SerializeField]
+        SpawnLakeGroup sharkSpawn;
+
         readonly static string ACTION_TEXT_COLOR = "<color=#1A4FF3>";
         readonly static string NORMAL_TEXT_COLOR = "<color=black>";
 
@@ -71,9 +76,6 @@ namespace ReLeaf
 
         IEnumerator TutorialMain()
         {
-            var lake = SpawnLakeManager.Singleton.Groups.First();
-            lake.CanSpawn = false;
-
             PlayerController.Singleton.PlayerInput.enabled = false;
             {
                 text.text = "ロボットと協力して砂漠を緑化しよう！";
@@ -127,7 +129,7 @@ namespace ReLeaf
 
 
 
-            var enemys = lake.SpawnAllNow();
+            var enemys = crabSpawn.SpawnAllNow();
 
             GameRuleManager.Singleton.Pause();
 
@@ -175,7 +177,7 @@ namespace ReLeaf
                 yield return new WaitUntil(() => itemManager.ItemCount == 0);
                 yield return new WaitForSeconds(1);
 
-                if (lake.IsGreening)
+                if (crabSpawn.IsGreening)
                     break;
 
                 text.text = "もう一度！湖を全て緑化しよう！";
@@ -237,6 +239,7 @@ namespace ReLeaf
 
             GameRuleManager.Singleton.UnPause();
 
+            sharkSpawn.Targets.ForEach(t => t.StartSpawnInterval());
             thirdWallRemover.RemoveWall();
 
             gameObject.SetActive(false);

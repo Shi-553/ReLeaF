@@ -1,9 +1,6 @@
 using Cinemachine;
 using System.Collections;
 using System.Collections.Generic;
-#if UNITY_EDITOR
-using UnityEditor;
-#endif
 using UnityEngine;
 
 namespace ReLeaf
@@ -38,6 +35,12 @@ namespace ReLeaf
 
             AddRoomTile(tilePos);
 
+            foreach (var setRoom in GetComponentsInChildren<ISetRoom>())
+            {
+                setRoom.SetRoom(this);
+            }
+
+
             var enemy = GetComponentInChildren<EnemyCore>();
             EnemyRoot = enemy != null ? enemy.transform.parent : transform;
 
@@ -61,7 +64,7 @@ namespace ReLeaf
             if (!roomTilePoss.Add(pos))
                 return;
 
-            if (tile is ISetRoomTile roomTile)
+            if (tile is ISetRoom roomTile)
                 roomTile.SetRoom(this);
 
             if (maxTile.y < pos.y) maxTile.y = pos.y;
@@ -104,16 +107,7 @@ namespace ReLeaf
 
             List<IRoomBlastTarget> targets = new();
 
-            foreach (var pos in roomTilePoss)
-            {
-                if (DungeonManager.Singleton.TryGetTile<SpawnLake>(pos, out var lake) && !targets.Contains(lake.Group))
-                {
-                    targets.Add(lake.Group);
-                }
-            }
-
-            targets.AddRange(GetComponentsInChildren<IRoomBlastTarget>());
-
+            GetComponentsInChildren(targets);
 
             targets.ForEach(g => g.BeginGreening());
 
@@ -167,6 +161,8 @@ namespace ReLeaf
 
             if (tile.CurrentTileObject.TileType == TileType.Wall)
                 return;
+            if (tile.CurrentTileObject.TileType == TileType.SpwanLake)
+                return;
 
             if (!roomTilePoss.Add(pos))
                 return;
@@ -179,39 +175,21 @@ namespace ReLeaf
             AddRoomTileInEdior(pos + Vector2Int.left);
             AddRoomTileInEdior(pos + Vector2Int.right);
         }
-        void ResetGizmo()
+
+        private void OnDrawGizmosSelected()
         {
             roomTilePoss.Clear();
             AddRoomTileInEdior((Vector2Int)DungeonManager.Singleton.Tilemap.WorldToCell(transform.position));
-        }
-        private void OnDrawGizmosSelected()
-        {
             foreach (var pos in roomTilePoss)
             {
                 Gizmos.DrawSphere(DungeonManager.Singleton.TilePosToWorld(pos), 0.1f);
             }
         }
-        [CustomEditor(typeof(Room))]
-        public class RoomEditor : Editor
+        private void OnDrawGizmos()
         {
-            private void OnEnable()
-            {
-                var room = target as Room;
-
-                room.ResetGizmo();
-            }
-
-            public override void OnInspectorGUI()
-            {
-                var room = target as Room;
-                base.OnInspectorGUI();
-
-                if (GUILayout.Button("Reset Gizmo"))
-                {
-                    room.ResetGizmo();
-                }
-            }
+            Gizmos.DrawSphere(transform.position, 0.15f);
         }
+
 #endif
     }
 }
