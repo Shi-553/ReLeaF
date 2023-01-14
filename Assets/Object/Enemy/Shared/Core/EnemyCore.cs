@@ -11,12 +11,23 @@ namespace ReLeaf
         [SerializeField]
         EnemyDamageableInfo enemyDamageableInfo;
 
-        [field: SerializeField, ReadOnly]
-        public float HP { get; private set; }
-        public bool IsDeath => HP <= 0;
+        [SerializeField, ReadOnly]
+        float hp;
+        public float HP
+        {
+            get => hp;
+            private set
+            {
+                hp = value;
+                if (hp <= 0)
+                    IsDeath = true;
+            }
+        }
+        public bool IsDeath { get; private set; }
 
 
         EnemyMover enemyMover;
+        EnemyAttacker attacker;
 
         [SerializeField, Pickle(ObjectProviderType.Assets)]
         ItemBase specialPowerPrefab;
@@ -37,16 +48,14 @@ namespace ReLeaf
         {
             TryGetComponent(out enemyMover);
             HP = enemyDamageableInfo.HPMax;
+            TryGetComponent(out attacker);
         }
         private IEnumerator Death()
         {
             HP = 0;
             SEManager.Singleton.Play(seEnemyDeath, enemyMover.WorldCenter);
 
-            if (TryGetComponent(out EnemyAttacker attacker))
-            {
-                attacker.Stop();
-            }
+            attacker.Stop();
 
             for (int x = 0; x < enemyMover.TileSize.x; x++)
             {
@@ -136,9 +145,15 @@ namespace ReLeaf
         }
 
         public Vector3 Position => enemyMover.WorldCenter;
+        public void BeginGreening()
+        {
+            attacker.Stop();
+            IsDeath = true;
+        }
         public void Greening()
         {
             Damaged(999);
         }
+
     }
 }

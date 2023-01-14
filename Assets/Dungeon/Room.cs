@@ -11,7 +11,7 @@ namespace ReLeaf
     {
         public Vector3 Position { get; }
 
-        public void BeginGreening() { }
+        public void BeginGreening();
         public void Greening();
     }
     public class Room : MonoBehaviour
