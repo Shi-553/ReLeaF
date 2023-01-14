@@ -62,7 +62,11 @@ namespace ReLeaf
         {
             base.Stop();
 
-            currentAttackers.ForEach(c => Destroy(c));
+            currentAttackers.ForEach(c =>
+            {
+                if (c != null && c.gameObject != null)
+                    Destroy(c.gameObject);
+            });
         }
 
         public override IEnumerable<Vector2Int> GetAttackRange(Vector2Int pos, Vector2Int dir, bool includeMoveabePos)
