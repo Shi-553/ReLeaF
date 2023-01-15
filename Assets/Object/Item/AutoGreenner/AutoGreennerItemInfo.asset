@@ -99,5 +99,5 @@ MonoBehaviour:
     - {x: 1, y: -4}
     - {x: 2, y: -4}
     - {x: 3, y: -4}
-  oneGreeningTime: 5
+  oneGreeningTime: 3
   greeningSe: {fileID: 11400000, guid: 85bb354a461e58249b5e73df82070dd8, type: 2}
