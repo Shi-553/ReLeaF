@@ -154,6 +154,7 @@ namespace ReLeaf
                 outerWallTrans.position = fixedCenterPos;
 
                 maskTrans.localScale = new Vector2(maxX - minX + 1, maxY - minY + 1) / 2;
+                maskTrans.localScale -= maskTrans.localScale / 100.0f;
                 maskTrans.position = centerPos;
 
                 for (int x = minX; x <= maxX; x++)
