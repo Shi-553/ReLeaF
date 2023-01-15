@@ -147,6 +147,7 @@ namespace ReLeaf
         public Vector3 Position => enemyMover.WorldCenter;
         public void BeginGreening()
         {
+            ResetWeekMarker();
             attacker.Stop();
             IsDeath = true;
         }
