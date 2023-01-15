@@ -1,4 +1,4 @@
-﻿using System.Collections.Generic;
+using System.Collections.Generic;
 using System.Linq;
 using UnityEditor;
 using UnityEngine;
@@ -325,7 +325,7 @@ namespace Utility
 
         private void OnGUI()
         {
-            var guiArea = new Rect(10, 10, 200, 100);
+            var guiArea = new Rect(10, 10, 200, 50);
 
             lineCount.x = Mathf.CeilToInt(position.width / cellSize);
             lineCount.y = Mathf.CeilToInt(position.height / cellSize);
