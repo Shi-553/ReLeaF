@@ -74,10 +74,10 @@ namespace ReLeaf
             // 負荷の低いうちにおおよそ確保しておく
             var worldStartPos = DungeonManager.Singleton.TilePosToWorld(startPos);
 
-            Dictionary<Vector2Int, bool> greenMap = new(500);
+            HashSet<Vector2Int> greenMap = new(500);
 
-            var target = new List<Vector2Int>(100);
-            var buffer = new List<Vector2Int>(100);
+            List<Vector2Int> target = new(100);
+            List<Vector2Int> buffer = new(100);
 
             target.Add(startPos);
 
@@ -100,7 +100,7 @@ namespace ReLeaf
 
                     tryGreeningCount++;
 
-                    if (!greenMap.TryAdd(pos, true))
+                    if (!greenMap.Add(pos))
                     {
                         continue;
                     }
