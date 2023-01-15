@@ -56,7 +56,10 @@ SpriteAtlas:
     secondaryTextureSettings: {}
     variantMultiplier: 1
     packables:
-    - {fileID: 102900000, guid: f5b0b9e99013fc846a22a0a2f8a5878e, type: 3}
+    - {fileID: 102900000, guid: 3fc7620868e45594d876cef9aacc79bd, type: 3}
+    - {fileID: 102900000, guid: 1f4cdf33f6d5c6647ae8978fc0ccc570, type: 3}
+    - {fileID: 102900000, guid: 3dbb6341632bc35488e694cb42c201a4, type: 3}
+    - {fileID: 102900000, guid: e05b582207f4d584c84eeb838fb4be3c, type: 3}
     bindAsDefault: 1
     isAtlasV2: 0
     cachedData: {fileID: 0}
@@ -289,7 +292,6 @@ SpriteAtlas:
   - {fileID: 189143659, guid: ab9ae79a663794a4abd83f2b559ae221, type: 3}
   - {fileID: 21300000, guid: 8e354b3be01fb0c498090d90d4e876e1, type: 3}
   - {fileID: 21300000, guid: 030685bb378713b4e93916c6376d8666, type: 3}
-  - {fileID: 21300000, guid: 342f15fb2dd4e47469a82ef8ca54b2ef, type: 3}
   - {fileID: 21300000, guid: a069aafb36a038b4b95e5ce083b986f4, type: 3}
   - {fileID: 21300000, guid: 0658235c75549fe419cfd74f3c371ce6, type: 3}
   - {fileID: -59194123, guid: 946826ac5cc353f4d9fad583b7404d14, type: 3}
@@ -573,7 +575,6 @@ SpriteAtlas:
   - spriteseet_robotattack_15
   - specialshark_L
   - item_sp_kani
-  - T_wallTop_x16
   - item_sp_same
   - item_hp
   - spriteseet_2

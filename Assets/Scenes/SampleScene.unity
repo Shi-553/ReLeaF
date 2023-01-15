@@ -2390,7 +2390,7 @@ SpriteRenderer:
   m_FlipY: 0
   m_DrawMode: 2
   m_Size: {x: 80, y: 50}
-  m_AdaptiveModeThreshold: 0.5
+  m_AdaptiveModeThreshold: 0.024
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 2
@@ -3534,14 +3534,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Shared
       objectReference: {fileID: 0}
-    - target: {fileID: 910080988294562539, guid: 2cd630823031a59448638e4aefcd42e8, type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 910080988456663700, guid: 2cd630823031a59448638e4aefcd42e8, type: 3}
-      propertyPath: m_AnchoredPosition.x
-      value: -94.87988
-      objectReference: {fileID: 0}
     - target: {fileID: 1144050834633375618, guid: 2cd630823031a59448638e4aefcd42e8, type: 3}
       propertyPath: m_AnchorMax.x
       value: 0
@@ -3565,10 +3557,6 @@ PrefabInstance:
     - target: {fileID: 3970359540729452401, guid: 2cd630823031a59448638e4aefcd42e8, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6364987515173531192, guid: 2cd630823031a59448638e4aefcd42e8, type: 3}
-      propertyPath: m_PositionMode
-      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2cd630823031a59448638e4aefcd42e8, type: 3}
