@@ -48,9 +48,6 @@ namespace ReLeaf
                 attackMarkerManager.SetMarker<TargetMarker>(target, enemyMover.DirNotZero.GetRotation());
             }
             SEManager.Singleton.Play(seBeforeAttack, enemyMover.WorldCenter);
-
-            if (ranges.Length <= 4)
-                enemyDirectAttackController.AddImpossibleLastTargets();
         }
         protected override IEnumerator OnStartDamageing()
         {
@@ -80,7 +77,7 @@ namespace ReLeaf
             List<Vector2Int> returns = new(2);
             List<Vector2Int> buffer = new(2);
 
-            // ƒ_ƒ‚Èê‡ false‚ğ•Ô‚·
+            // ãƒ€ãƒ¡ãªå ´åˆ falseã‚’è¿”ã™
             bool CheckAndAdd(Vector2Int pos)
             {
                 if (returns.Contains(pos))
@@ -104,7 +101,7 @@ namespace ReLeaf
             {
                 var worldTilePosBase = pos + dir * i;
 
-                // c‚©‰¡‚©‚Åx‚Æy‚Ìƒ‹[ƒv‡‚ğ•Ï‚¦‚Ä‚é
+                // ç¸¦ã‹æ¨ªã‹ã§xã¨yã®ãƒ«ãƒ¼ãƒ—é †ã‚’å¤‰ãˆã¦ã‚‹
                 if (dir.x != 0)
                 {
                     for (int x = 0; x < enemyMover.TileSize.x; x++)

@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 namespace ReLeaf
@@ -15,15 +16,10 @@ namespace ReLeaf
 
         bool hasTarget = false;
         Vector2Int targetTilePos;
-        Vector2Int lastTargetTilePos;
 
-        // â‘Î“’B‚Å‚«‚È‚¢ƒ^[ƒQƒbƒg‚½‚¿
+        // çµ¶å¯¾åˆ°é”ã§ããªã„ã‚¿ãƒ¼ã‚²ãƒƒãƒˆãŸã¡
         HashSet<Vector2Int> impossibleTargets = new();
 
-        public void AddImpossibleLastTargets()
-        {
-            impossibleTargets.Add(lastTargetTilePos);
-        }
 
         [SerializeField]
         bool isMoveAttacker = false;
@@ -48,6 +44,14 @@ namespace ReLeaf
             }
 
             bool isUpdateTarget = false;
+            if (hasTarget && mover.WasChangedTilePosPrevMove)
+            {
+                if (!DungeonManager.Singleton.TryGetTile(targetTilePos, out var tile) || !tile.CanEnemyAttack(false))
+                {
+                    hasTarget = false;
+                }
+            }
+
             if (mover.WasChangedTilePosPrevMove || !hasTarget)
             {
                 nullTime += Time.deltaTime;
@@ -62,10 +66,10 @@ namespace ReLeaf
                     return;
                 }
 
-                // ˆê”Ô‹ß‚¢’¼ü‹——£
-                var minDistanceSq = float.MaxValue;
-                // ’¼ü‹——£‚ªˆê”Ô‹ß‚¢‚â‚Â
-                Vector2Int minElement = Vector2Int.zero;
+                // ä¸€ç•ªè¿‘ã„ç›´ç·šè·é›¢
+                var minDistance = float.MaxValue;
+                // ç›´ç·šè·é›¢ãŒä¸€ç•ªè¿‘ã„ã‚„ã¤
+                List<Vector2Int> minElements = new();
                 foreach (var target in searchVision.Targets())
                 {
                     var tilePos = DungeonManager.Singleton.WorldToTilePos(target.position);
@@ -81,29 +85,33 @@ namespace ReLeaf
                         }
                     }
 
-                    var distanceSq = (tilePos - mover.GetNearest(tilePos)).sqrMagnitude;
-                    if (distanceSq < minDistanceSq)
+                    var distance = (tilePos - mover.GetNearest(tilePos)).magnitude;
+                    if (distance == minDistance || (minDistance > 1 && distance - 1 == minDistance))
                     {
-                        minDistanceSq = distanceSq;
-                        minElement = tilePos;
+                        minElements.Add(tilePos);
+                    }
+                    else if (distance < minDistance)
+                    {
+                        if (distance + 1 < minDistance)
+                            minElements.Clear();
+                        minDistance = distance;
+                        minElements.Add(tilePos);
                     }
                 }
 
-                if (minDistanceSq <= 1)
+                if (minDistance != float.MaxValue)
                 {
-                    targetTilePos = minElement;
-                    lastTargetTilePos = targetTilePos;
-                    impossibleTargets.Clear();
-                    mover.UpdateTargetStraight(targetTilePos);
-                    hasTarget = false;
-                    attacker.Attack();
-                    return;
-                }
+                    var minElement = minElements[Random.Range(0, minElements.Count)];
 
-                // ƒ^[ƒQƒbƒg‚ª‚È‚¢‚©¡‚Ìƒ^[ƒQƒbƒg‚æ‚è‹ß‚¢‚Æ‚«
-                if (!hasTarget || minDistanceSq < (targetTilePos - mover.GetNearest(targetTilePos)).sqrMagnitude)
-                {
-                    if (minDistanceSq != float.MaxValue)
+                    if (minDistance <= 1)
+                    {
+                        targetTilePos = minElement;
+                        Attack();
+                        return;
+                    }
+
+                    // ã‚¿ãƒ¼ã‚²ãƒƒãƒˆãŒãªã„ã‹ä»Šã®ã‚¿ãƒ¼ã‚²ãƒƒãƒˆã‚ˆã‚Šè¿‘ã„ã¨ã
+                    if (!hasTarget || minDistance - 1 < (targetTilePos - mover.GetNearest(targetTilePos)).magnitude)
                     {
                         isUpdateTarget = true;
                         targetTilePos = minElement;
@@ -115,12 +123,12 @@ namespace ReLeaf
             if (!hasTarget)
                 return;
 
-            // Œo˜H’TõXV
+            // çµŒè·¯æ¢ç´¢æ›´æ–°
             if (isUpdateTarget)
             {
                 if (!mover.UpdateTargetAutoRouting(targetTilePos))
                 {
-                    // “’B•s‰Â”\‚Èƒ^[ƒQƒbƒg
+                    // åˆ°é”ä¸å¯èƒ½ãªã‚¿ãƒ¼ã‚²ãƒƒãƒˆ
                     impossibleTargets.Add(targetTilePos);
                     hasTarget = false;
                     nullTime = 1;
@@ -131,11 +139,7 @@ namespace ReLeaf
             var result = mover.Move();
             if (result == EnemyMover.MoveResult.Finish)
             {
-                lastTargetTilePos = targetTilePos;
-                impossibleTargets.Clear();
-                mover.UpdateTargetStraight(targetTilePos);
-                hasTarget = false;
-                attacker.Attack();
+                Attack();
             }
             if (result == EnemyMover.MoveResult.Error)
             {
@@ -143,7 +147,34 @@ namespace ReLeaf
                 hasTarget = false;
                 nullTime = 1;
             }
+        }
+        List<Vector2Int> buffer = new();
+        void Attack()
+        {
+            impossibleTargets.Clear();
+            mover.UpdateTargetStraight(targetTilePos);
+            hasTarget = false;
 
+            if (isMoveAttacker)
+            {
+                mover.GetCheckPoss(mover.TilePos, mover.DirNotZero, buffer);
+
+                var isMovable = buffer.All(b =>
+                {
+                    if (!DungeonManager.Singleton.TryGetTile(b, out var tile))
+                        return false;
+                    return tile.CanEnemyMoveAttack(true) && tile.ParentOrThis.CanEnemyMoveAttack(true);
+                });
+
+                if (!isMovable)
+                {
+                    impossibleTargets.Add(targetTilePos);
+                    nullTime = 1;
+                    return;
+                }
+            }
+            attacker.Attack();
         }
     }
+
 }
