@@ -618,6 +618,7 @@ MonoBehaviour:
   energyRecoveryPoint: 0.11
   energyAutoRecoveryPoint: 0.05
   energyGauge: {fileID: 5839813641606943567}
+  rangeCollider: {fileID: 285955042789145649}
   seSandMove:
     walk:
       list:

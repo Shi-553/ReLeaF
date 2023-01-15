@@ -13,7 +13,6 @@ namespace ReLeaf
         [SerializeField, Rename("プレイヤーの移動スピード(nマス/秒)")]
         float moveSpeed = 5;
 
-        float addedMoveSpeed = 0;
 
         [SerializeField, Rename("ダッシュ中の移動スピード倍率(n倍)")]
         float dashSpeedMagnification = 2;
@@ -33,6 +32,9 @@ namespace ReLeaf
         [SerializeField]
         ValueGaugeManager energyGauge;
         Rigidbody2DMover mover;
+
+        [SerializeField]
+        CircleCollider2D rangeCollider;
 
         bool isKnockback = false;
 
@@ -288,6 +290,7 @@ namespace ReLeaf
             }
         }
 
+        float addedMoveSpeed = 0;
         public void SpeedUp(float value)
         {
             SEManager.Singleton.Play(seSpeedUp);
@@ -296,6 +299,17 @@ namespace ReLeaf
         public void SpeedDown(float value)
         {
             addedMoveSpeed -= value;
+        }
+
+
+        public void AddGreeningRange(float value)
+        {
+            SEManager.Singleton.Play(seSpeedUp);
+            rangeCollider.radius += value;
+        }
+        public void RemoveGreeningRange(float value)
+        {
+            rangeCollider.radius -= value;
         }
     }
 }

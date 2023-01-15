@@ -1,0 +1,20 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fa348be7177ed5b408bdb92299b80049, type: 3}
+  m_Name: AddGreeningRangeItem Info
+  m_EditorClassIdentifier: 
+  useSe: {fileID: 0}
+  isImmediate: 0
+  initAnimation: {fileID: 7400000, guid: 89c05b64b7dcd6a42bfb61cc3db3aa6c, type: 2}
+  description: "{duration}\u79D2\u9593\u3001\u7DD1\u5316\u7BC4\u56F2\u3092\u62E1\u5927"
+  addRange: 0.25
+  duration: 10
