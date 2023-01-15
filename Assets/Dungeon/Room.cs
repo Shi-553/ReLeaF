@@ -1,6 +1,7 @@
 using Cinemachine;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 namespace ReLeaf
@@ -10,6 +11,8 @@ namespace ReLeaf
         public Vector3 Position { get; }
 
         public void BeginGreening();
+
+        public bool CanGreening() => true;
         public void Greening();
     }
     public class Room : MonoBehaviour
@@ -108,6 +111,8 @@ namespace ReLeaf
             List<IRoomBlastTarget> targets = new();
 
             GetComponentsInChildren(targets);
+
+            targets = targets.Where(t => t.CanGreening()).ToList();
 
             targets.ForEach(g => g.BeginGreening());
 

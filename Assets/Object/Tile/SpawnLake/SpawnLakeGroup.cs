@@ -94,6 +94,8 @@ namespace ReLeaf
             CanSpawn = false;
             Stop();
         }
+        public bool CanGreening() => !IsGreening;
+
         public void Greening()
         {
             SpawnLakeDic.Values.ForEach(lake => DungeonManager.Singleton.SowSeed(lake.TilePos, true));
@@ -137,6 +139,7 @@ namespace ReLeaf
             Gizmos.color = Color.red;
             Gizmos.DrawSphere(transform.position, 0.15f);
         }
+
 #endif
     }
 }
