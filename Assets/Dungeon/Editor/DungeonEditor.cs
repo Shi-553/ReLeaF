@@ -160,7 +160,7 @@ namespace ReLeaf
                 maskTrans.position = centerPos;
 
 
-                centerPos.z = 1.0f;
+                centerPos.z = 0.1f;
                 SpawnLake.position = centerPos;
                 SpawnLake.localScale = maskTrans.localScale;
 
