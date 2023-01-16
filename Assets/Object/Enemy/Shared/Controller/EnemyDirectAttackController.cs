@@ -17,12 +17,16 @@ namespace ReLeaf
         bool hasTarget = false;
         Vector2Int targetTilePos;
 
+        float lastMinDistance = float.MaxValue;
+
         // 絶対到達できないターゲットたち
         HashSet<Vector2Int> impossibleTargets = new();
 
 
         [SerializeField]
         bool isMoveAttacker = false;
+
+        bool isMoveIntermediate = false;
 
         void Start()
         {
@@ -39,9 +43,14 @@ namespace ReLeaf
                 return;
             if (attacker.IsAttack)
             {
+                if (isMoveIntermediate)
+                {
+                    mover.Rigidbody2DMover.Position = Vector2.Lerp(mover.Rigidbody2DMover.Position, DungeonManager.Singleton.TilePosToWorld(mover.TilePos), 0.1f);
+                }
                 nullTime = 1;
                 return;
             }
+            isMoveIntermediate = false;
 
             bool isUpdateTarget = false;
             if (hasTarget && mover.WasChangedTilePosPrevMove)
@@ -92,7 +101,7 @@ namespace ReLeaf
                     }
                     else if (distance < minDistance)
                     {
-                        if (distance + 1 < minDistance)
+                        if (minDistance > 1 && distance + 1 < minDistance)
                             minElements.Clear();
                         minDistance = distance;
                         minElements.Add(tilePos);
@@ -105,17 +114,19 @@ namespace ReLeaf
 
                     if (minDistance <= 1)
                     {
+                        isMoveIntermediate = true;
                         targetTilePos = minElement;
                         Attack();
                         return;
                     }
 
                     // ターゲットがないか今のターゲットより近いとき
-                    if (!hasTarget || minDistance - 1 < (targetTilePos - mover.GetNearest(targetTilePos)).magnitude)
+                    if (!hasTarget || minDistance < lastMinDistance)
                     {
                         isUpdateTarget = true;
                         targetTilePos = minElement;
                         hasTarget = true;
+                        lastMinDistance = minDistance;
                     }
                 }
             }

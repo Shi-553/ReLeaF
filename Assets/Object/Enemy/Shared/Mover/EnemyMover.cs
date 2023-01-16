@@ -8,6 +8,7 @@ namespace ReLeaf
     public partial class EnemyMover : MonoBehaviour
     {
         Rigidbody2DMover mover;
+        public Rigidbody2DMover Rigidbody2DMover => mover;
 
 
         [field: SerializeField, ReadOnly]
