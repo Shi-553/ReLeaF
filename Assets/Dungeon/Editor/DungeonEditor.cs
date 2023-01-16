@@ -101,7 +101,7 @@ namespace ReLeaf
 
             GUILayout.Space(10);
 
-            if (GUILayout.Button("壁を自動生成", GUILayout.Height(30)))
+            if (GUILayout.Button("壁を自動生成＆湖を自動調整", GUILayout.Height(30)))
             {
                 EditorSceneManager.MarkSceneDirty(Tilemap.gameObject.scene);
 
