@@ -98,6 +98,7 @@ namespace ReLeaf
         {
             if (!context.started)
                 return;
+
             if (context.ReadValue<float>() != 0)
             {
                 StartCoroutine(itemManager.UseItem());

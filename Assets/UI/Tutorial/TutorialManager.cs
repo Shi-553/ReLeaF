@@ -76,7 +76,8 @@ namespace ReLeaf
 
         IEnumerator TutorialMain()
         {
-            PlayerController.Singleton.PlayerInput.enabled = false;
+            PlayerController.Singleton.ReLeafInputAction?.Disable();
+            GameRuleManager.Singleton.Pause();
             {
                 text.text = "ロボットと協力して砂漠を緑化しよう！";
                 yield return WaitClick();
@@ -89,7 +90,8 @@ namespace ReLeaf
                 greeningRateMask.SetActive(false);
             }
 
-            PlayerController.Singleton.PlayerInput.enabled = true;
+            PlayerController.Singleton.ReLeafInputAction?.Enable();
+            GameRuleManager.Singleton.UnPause();
 
             {
                 var actionString = GetActionSpriteTag(PlayerController.Singleton.ReLeafInputAction.Player.Move);
@@ -132,6 +134,7 @@ namespace ReLeaf
             var enemys = crabSpawn.SpawnAllNow();
 
             GameRuleManager.Singleton.Pause();
+            PlayerController.Singleton.ReLeafInputAction?.Disable();
 
             {
                 text.text = "湖から敵が湧いちゃった！";
@@ -143,6 +146,7 @@ namespace ReLeaf
             }
 
             GameRuleManager.Singleton.UnPause();
+            PlayerController.Singleton.ReLeafInputAction?.Enable();
             {
                 text.text = "黄色い弱点マスを踏んで倒そう！";
                 yield return new WaitUntil(() => enemys.All(e => e == null || e.gameObject == null));
@@ -200,9 +204,9 @@ namespace ReLeaf
             }
 
             GameRuleManager.Singleton.Pause();
+            PlayerController.Singleton.ReLeafInputAction?.Disable();
 
             itemManager.CanUse = false;
-            itemManager.CanMoveSelect = false;
             {
                 AddItem(itemPrefab1);
                 AddItem(itemPrefab2);
@@ -213,7 +217,7 @@ namespace ReLeaf
                 yield return WaitClick();
             }
 
-            itemManager.CanMoveSelect = true;
+            PlayerController.Singleton.ReLeafInputAction?.Enable();
             {
                 var selectActionString = PlayerController.Singleton.PlayerInput.currentControlScheme == "Gamepad" ?
                 $"<sprite name=LEFTSHOLDER><sprite name=RIGHTSHOLDER>" :
@@ -223,7 +227,7 @@ namespace ReLeaf
                 yield return new WaitForSeconds(2);
             }
 
-            itemManager.CanMoveSelect = false;
+            PlayerController.Singleton.ReLeafInputAction?.Disable();
             {
                 text.text = $"OK！！ここからは実戦だよ！";
                 yield return WaitClick();
@@ -234,10 +238,10 @@ namespace ReLeaf
                 yield return WaitClick();
             }
             itemManager.CanUse = true;
-            itemManager.CanMoveSelect = true;
 
 
             GameRuleManager.Singleton.UnPause();
+            PlayerController.Singleton.ReLeafInputAction?.Enable();
 
             sharkSpawn.Targets.ForEach(t => t.StartSpawnInterval());
             thirdWallRemover.RemoveWall();
