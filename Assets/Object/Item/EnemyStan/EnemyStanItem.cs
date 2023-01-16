@@ -16,7 +16,7 @@ namespace ReLeaf
 
         protected override IEnumerator UseImpl(Vector2Int tilePos, Vector2Int dir)
         {
-            //StatusChangeManager.Singleton.AddStatus(new(Info.Duration, Icon));
+            IsFinishUse = true;
 
             List<EnemyCore> cores = new();
 
