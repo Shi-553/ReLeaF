@@ -35,12 +35,16 @@ namespace ReLeaf
             TryGetComponent(out core);
         }
 
+
         float nullTime = 0;
 
         void Update()
         {
-            if (GameRuleManager.Singleton.IsPrepare || core.IsDeath)
+            if (GameRuleManager.Singleton.IsPrepare || !core.IsValid)
+            {
+                hasTarget = false;
                 return;
+            }
             if (attacker.IsAttack)
             {
                 if (isMoveIntermediate)

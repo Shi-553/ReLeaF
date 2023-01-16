@@ -12,8 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1f8227aa779a57a499002d12d07d92e0, type: 3}
   m_Name: EnemyStanItemInfo
   m_EditorClassIdentifier: 
-  useSe: {fileID: 0}
+  useSe: {fileID: 11400000, guid: 3f4e968a5953efd4896a676770419698, type: 2}
   isImmediate: 0
-  initAnimation: {fileID: 0}
-  description: 
-  duration: 10
+  initAnimation: {fileID: 7400000, guid: 89c05b64b7dcd6a42bfb61cc3db3aa6c, type: 2}
+  description: "\u5168\u3066\u306E\u6575\u3092{duration}\u79D2\u9593\u30B9\u30BF\u30F3\u3055\u305B\u308B"
+  duration: 5

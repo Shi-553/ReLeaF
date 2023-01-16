@@ -16,8 +16,5 @@ namespace ReLeaf
         public LocalTilePos WeakLocalTilePos => weakLocalTilePos;
 
 
-        [SerializeField, Rename("ダメージモーションで移動する最大値")]
-        float damageMotionXMax = 0.1f;
-        public float DamageMotionXMax => damageMotionXMax;
     }
 }

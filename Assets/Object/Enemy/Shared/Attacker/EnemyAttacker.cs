@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -67,8 +67,13 @@ namespace ReLeaf
         public virtual void Stop()
         {
             if (AttackCo != null)
+            {
                 StopCoroutine(AttackCo);
+                AttackCo = null;
+            }
             attackMarkerManager.ResetAllMarker();
+            Transition = AttackTransition.None;
+            OnChangeTransition?.Invoke(Transition);
         }
 
         protected IEnumerator AttackImpl()

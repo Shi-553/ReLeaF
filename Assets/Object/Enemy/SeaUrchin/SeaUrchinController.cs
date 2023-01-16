@@ -18,7 +18,7 @@ namespace ReLeaf
 
         void Update()
         {
-            if (!GameRuleManager.Singleton.IsPlaying || core.IsDeath)
+            if (!GameRuleManager.Singleton.IsPlaying || !core.IsValid)
                 return;
             if (enemyAttacker.IsAttack)
                 return;
