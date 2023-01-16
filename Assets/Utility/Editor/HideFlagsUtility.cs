@@ -4,6 +4,7 @@ using UnityEngine;
 public static class HideFlagsUtility
 {
     [MenuItem("Help/Hide Flags/Show All Objects")]
+    [MenuItem("Tools/Hide Flags/Show All Objects")]
     private static void ShowAll()
     {
         foreach (var go in Resources.FindObjectsOfTypeAll<GameObject>())
