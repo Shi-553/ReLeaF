@@ -142,8 +142,6 @@ namespace ReLeaf
 
         float damagedTime = 0;
         Coroutine damageMotionCo;
-        Vector3 spriteOriginalLocalPos;
-
         void DamagedMotion()
         {
             var currentTime = Time.time;
@@ -160,7 +158,9 @@ namespace ReLeaf
 
             damagedTime = currentTime;
         }
-
+        Vector3 spriteOriginalLocalPos;
+        Color damagedColor = new(1, 0.5f, 0.5f);
+        float damagedOneMotionDuration = 0.1f;
         IEnumerator DamagedMotionWait()
         {
             var spriteTransform = sprite.transform;
@@ -170,22 +170,41 @@ namespace ReLeaf
             if (spriteTransform.localPosition.x < spriteOriginalLocalPos.x)
                 (targetFirst, targetSecond) = (targetSecond, targetFirst);
 
-            for (int i = 0; i < 5; i++)
+            float time = 0;
+
+            var color = Color.white;
+            var wasFlashing = color != sprite.color;
+
+            while (true)
             {
-                spriteTransform.localPosition = Vector3.Lerp(spriteTransform.localPosition, targetFirst, 0.5f);
+                Vector3 target;
+
+                if (time < damagedOneMotionDuration)
+                    target = targetFirst;
+                else if (time < damagedOneMotionDuration * 2)
+                    target = targetSecond;
+                else if (time < damagedOneMotionDuration * 3)
+                    target = spriteOriginalLocalPos;
+                else
+                    break;
+
+                spriteTransform.localPosition = Vector3.Lerp(spriteTransform.localPosition, target, 0.5f);
+
+
+                bool isFlashing = (((int)(time / damagedOneMotionDuration)) % 2) == 0;
+                if (wasFlashing)
+                    isFlashing = !isFlashing;
+
+                var currentColor = isFlashing ? damagedColor : color;
+
+                if (currentColor != sprite.color)
+                    sprite.color = currentColor;
+
                 yield return null;
-            }
-            for (int i = 0; i < 5; i++)
-            {
-                spriteTransform.localPosition = Vector3.Lerp(spriteTransform.localPosition, targetSecond, 0.5f);
-                yield return null;
-            }
-            for (int i = 0; i < 5; i++)
-            {
-                spriteTransform.localPosition = Vector3.Lerp(spriteTransform.localPosition, spriteOriginalLocalPos, 0.5f);
-                yield return null;
+                time += Time.deltaTime;
             }
             spriteTransform.localPosition = spriteOriginalLocalPos;
+            sprite.color = color;
             damageMotionCo = null;
         }
 

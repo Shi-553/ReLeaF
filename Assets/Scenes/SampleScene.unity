@@ -2926,6 +2926,18 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 260062785}
     m_Modifications:
+    - target: {fileID: 3893573754564588802, guid: 0a16bc3a012ecb3438f3c4b69748b1d0, type: 3}
+      propertyPath: m_Color.b
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3893573754564588802, guid: 0a16bc3a012ecb3438f3c4b69748b1d0, type: 3}
+      propertyPath: m_Color.g
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3893573754564588802, guid: 0a16bc3a012ecb3438f3c4b69748b1d0, type: 3}
+      propertyPath: m_Color.r
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 5442024061459843501, guid: 0a16bc3a012ecb3438f3c4b69748b1d0, type: 3}
       propertyPath: m_Name
       value: SeaUrchin
