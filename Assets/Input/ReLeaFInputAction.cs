@@ -679,6 +679,17 @@ namespace ReLeaf
                 },
                 {
                     ""name"": """",
+                    ""id"": ""17c583a8-8fa2-4073-9d09-85b9a987d684"",
+                    ""path"": ""<Gamepad>/rightTrigger"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Gamepad"",
+                    ""action"": ""Submit"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
                     ""id"": ""5ecabe72-b2c7-4111-a451-a30188101e44"",
                     ""path"": ""<Mouse>/position"",
                     ""interactions"": """",
