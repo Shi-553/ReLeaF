@@ -273,6 +273,7 @@ MonoBehaviour:
   speed: 8
   minDistance: 1
   nearThreshold: 0.1
+  sprite: {fileID: 5602146041309804555}
 --- !u!114 &5602146042616845204
 MonoBehaviour:
   m_ObjectHideFlags: 0

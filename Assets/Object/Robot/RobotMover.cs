@@ -17,6 +17,10 @@ namespace ReLeaf
         float nearThreshold = 0.1f;
         float NearThreshold => UseManualOperation ? manualNearThreshold : nearThreshold;
 
+        [SerializeField]
+        SpriteRenderer sprite;
+        public SpriteRenderer Sprite => sprite;
+
         public Vector2 Move { get; set; }
         public bool IsMove => Move != Vector2.zero;
         public bool IsLeft { get; private set; }

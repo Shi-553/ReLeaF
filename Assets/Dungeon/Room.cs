@@ -99,7 +99,7 @@ namespace ReLeaf
         {
             using var _ = RobotGreening.Singleton.StartGreening();
 
-            RobotMover.Singleton.GetComponentInChildren<SpriteRenderer>().sortingOrder++;
+            RobotMover.Singleton.Sprite.sortingOrder++;
 
             RoomVirtualCamera.Singleton.BeginRoomBlast(
                 DungeonManager.Singleton.TilePosToWorld(minTile),
@@ -131,7 +131,7 @@ namespace ReLeaf
             RoomVirtualCamera.Singleton.EndRoomBlast();
             RobotMover.Singleton.IsStop = false;
 
-            RobotMover.Singleton.GetComponentInChildren<SpriteRenderer>().sortingOrder--;
+            RobotMover.Singleton.Sprite.sortingOrder--;
             RobotMover.Singleton.UpdateManualOperation(PlayerCore.Singleton.transform.position, 50, true, 1);
         }
         IEnumerator Attack()
