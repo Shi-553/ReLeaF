@@ -39,25 +39,28 @@ namespace ReLeaf
         }
 
         const string OUTER_WALL_NAME = "OuterWall";
-        public Transform OuterWall
+        Transform outerWall;
+        public Transform OuterWall => outerWall = (outerWall != null) ? outerWall : Find(OUTER_WALL_NAME);
+
+        const string SPAWN_LAKE_NAME = "SpawnLake";
+        Transform spawnLake;
+        public Transform SpawnLake => spawnLake = (spawnLake != null) ? spawnLake : Find(SPAWN_LAKE_NAME);
+
+        Transform Find(string name)
         {
-            get
+            var roots = EditorSceneManager.GetActiveScene().GetRootGameObjects();
+
+            var obj = roots.FirstOrDefault(g => g.name == name);
+            if (obj == null)
             {
-                var roots = EditorSceneManager.GetActiveScene().GetRootGameObjects();
-
-                var obj = roots.FirstOrDefault(g => g.name == OUTER_WALL_NAME);
-                if (obj == null)
+                foreach (var root in roots)
                 {
-                    foreach (var root in roots)
-                    {
-                        var t = root.transform.Find(OUTER_WALL_NAME);
-                        if (t != null)
-                            return t;
-                    }
+                    var t = root.transform.Find(name);
+                    if (t != null)
+                        return t;
                 }
-
-                return obj.transform;
             }
+            return obj.transform;
         }
 
         private void OnGUI()
@@ -139,10 +142,9 @@ namespace ReLeaf
                 minY--;
                 maxY++;
 
-                var outerWallTrans = OuterWall;
-                var maskTrans = outerWallTrans.GetChild(0);
+                var maskTrans = OuterWall.GetChild(0);
 
-                outerWallTrans.gameObject.SetActive(true);
+                OuterWall.gameObject.SetActive(true);
 
                 Vector3 centerPos = TilePosToWorld(new Vector2(minX + maxX, minY + maxY) / 2);
                 Vector3 fixedCenterPos = TilePosToWorld(new Vector2Int(minX + maxX, minY + maxY) / 2);
@@ -151,11 +153,16 @@ namespace ReLeaf
 
                 fixedCenterPos.z = -0.495f;
                 centerPos.z = -0.495f;
-                outerWallTrans.position = fixedCenterPos;
+                OuterWall.position = fixedCenterPos;
 
                 maskTrans.localScale = new Vector2(maxX - minX + 1, maxY - minY + 1) / 2;
                 maskTrans.localScale -= maskTrans.localScale / 100.0f;
                 maskTrans.position = centerPos;
+
+
+                centerPos.z = 1.0f;
+                SpawnLake.position = centerPos;
+                SpawnLake.localScale = maskTrans.localScale;
 
                 for (int x = minX; x <= maxX; x++)
                 {

@@ -27,12 +27,5 @@ namespace ReLeaf
         {
             spawnLake.transform.SetParent(disabledLake, true);
         }
-
-#if UNITY_EDITOR
-        private void OnDrawGizmosSelected()
-        {
-            Gizmos.DrawWireCube(transform.position, transform.lossyScale);
-        }
-#endif
     }
 }
