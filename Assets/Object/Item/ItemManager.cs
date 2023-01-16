@@ -28,19 +28,23 @@ namespace ReLeaf
             private set
             {
                 itemCount = value;
+
+
                 if (itemCount == 0)
                 {
                     Selector.gameObject.SetActive(false);
                 }
                 else
                 {
+                    // update index
+                    if (itemCount == index)
+                    {
+                        index--;
+                    }
                     Selector.gameObject.SetActive(true);
                     Selector.transform.position = Current.transform.position;
                 }
 
-                // update index
-                if (itemCount == index)
-                    Index--;
 
                 UpdateDescription();
             }
