@@ -11,7 +11,7 @@ namespace ReLeaf
         [SerializeField]
         RectTransform backGround;
 
-        Vector3 zeroPos;
+        Transform pivot;
 
         public override bool DontDestroyOnLoad => false;
 
@@ -19,15 +19,15 @@ namespace ReLeaf
         {
             if (isFirstInit)
             {
+                pivot = transform.GetChild(0);
                 ResetItemDescription();
-                zeroPos = transform.position;
             }
         }
 
         public void SetItemDescription(string text, Vector3 offset)
         {
             gameObject.SetActive(true);
-            transform.position = zeroPos + offset;
+            pivot.localPosition = offset;
             textMeshPro.text = text;
             textMeshPro.ForceMeshUpdate();
 
