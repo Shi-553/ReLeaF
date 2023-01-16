@@ -39,6 +39,8 @@ namespace ReLeaf
         [SerializeField]
         AudioInfo seEnemyDamaged;
 
+        [SerializeField]
+        SpriteRenderer sprite;
 
         int greeningCount = 0;
 
@@ -49,6 +51,8 @@ namespace ReLeaf
             TryGetComponent(out enemyMover);
             HP = enemyDamageableInfo.HPMax;
             TryGetComponent(out attacker);
+
+            spriteOriginalLocalPos = sprite.transform.localPosition;
         }
         private IEnumerator Death()
         {
@@ -116,6 +120,7 @@ namespace ReLeaf
                 return;
             }
         }
+
         public void Damaged(float atk)
         {
             if (HP == 0)
@@ -131,7 +136,59 @@ namespace ReLeaf
             }
             HP -= atk;
             SEManager.Singleton.Play(seEnemyDamaged, enemyMover.WorldCenter);
+
+            DamagedMotion();
         }
+
+        float damagedTime = 0;
+        Coroutine damageMotionCo;
+        Vector3 spriteOriginalLocalPos;
+
+        void DamagedMotion()
+        {
+            var currentTime = Time.time;
+
+            if (currentTime - damagedTime > 0.1f)
+            {
+                if (damageMotionCo != null)
+                {
+                    StopCoroutine(damageMotionCo);
+                }
+
+                damageMotionCo = StartCoroutine(DamagedMotionWait());
+            }
+
+            damagedTime = currentTime;
+        }
+
+        IEnumerator DamagedMotionWait()
+        {
+            var spriteTransform = sprite.transform;
+            var targetFirst = spriteOriginalLocalPos + Vector3.right * enemyDamageableInfo.DamageMotionXMax;
+            var targetSecond = spriteOriginalLocalPos - Vector3.right * enemyDamageableInfo.DamageMotionXMax;
+
+            if (spriteTransform.localPosition.x < spriteOriginalLocalPos.x)
+                (targetFirst, targetSecond) = (targetSecond, targetFirst);
+
+            for (int i = 0; i < 5; i++)
+            {
+                spriteTransform.localPosition = Vector3.Lerp(spriteTransform.localPosition, targetFirst, 0.5f);
+                yield return null;
+            }
+            for (int i = 0; i < 5; i++)
+            {
+                spriteTransform.localPosition = Vector3.Lerp(spriteTransform.localPosition, targetSecond, 0.5f);
+                yield return null;
+            }
+            for (int i = 0; i < 5; i++)
+            {
+                spriteTransform.localPosition = Vector3.Lerp(spriteTransform.localPosition, spriteOriginalLocalPos, 0.5f);
+                yield return null;
+            }
+            spriteTransform.localPosition = spriteOriginalLocalPos;
+            damageMotionCo = null;
+        }
+
 
         private void OnTriggerEnter2D(Collider2D collision)
         {
