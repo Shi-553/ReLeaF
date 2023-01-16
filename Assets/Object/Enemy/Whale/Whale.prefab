@@ -33,8 +33,7 @@ Transform:
   - {fileID: 4259055798260498217}
   - {fileID: 3910535788445653822}
   - {fileID: 4499686259979100841}
-  - {fileID: 6136435493380076145}
-  - {fileID: 2173307079525493773}
+  - {fileID: 8633422139557479512}
   m_Father: {fileID: 8780205405150213191}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -205,11 +204,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   enemyDamageableInfo: {fileID: 11400000, guid: 7ae50f6831aed274da2870a60542ef0d, type: 2}
-  <HP>k__BackingField: 0
+  hp: 0
   specialPowerPrefab: {fileID: 0}
   weakMarkerManager: {fileID: 2990406055205962186}
   seEnemyDeath: {fileID: 11400000, guid: c60d38e1592a9f2488104785a0989e07, type: 2}
   seEnemyDamaged: {fileID: 11400000, guid: 4665586fb93c92845b4d2bbab34022a9, type: 2}
+  sprite: {fileID: 3893573754564588802}
 --- !u!114 &7609214511921149064
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -290,7 +290,8 @@ Transform:
   m_LocalPosition: {x: 0.15799999, y: -0.28499985, z: -0.054}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children: []
+  m_Children:
+  - {fileID: 6136435493380076145}
   m_Father: {fileID: 4844317150829214822}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: -30, y: 0, z: 0}
@@ -451,13 +452,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8242962315939319434}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.158, y: -0.285, z: 0.001}
+  m_LocalRotation: {x: 0.258819, y: -0, z: -0, w: 0.9659259}
+  m_LocalPosition: {x: 0, y: -0.027499998, z: 0.047631398}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 4844317150829214822}
-  m_RootOrder: 4
+  m_Father: {fileID: 4259055798260498217}
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &9160705606401496710
 SpriteRenderer:
@@ -615,15 +616,19 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4927692742148345419, guid: 3e7d547ed398f8a46b8649bd2dfe0501, type: 3}
+      propertyPath: m_RootOrder
+      value: 4
+      objectReference: {fileID: 0}
     - target: {fileID: 8350336118055490409, guid: 3e7d547ed398f8a46b8649bd2dfe0501, type: 3}
       propertyPath: m_Name
       value: EnemyMiniMapIcon
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 3e7d547ed398f8a46b8649bd2dfe0501, type: 3}
---- !u!224 &2173307079525493773 stripped
-RectTransform:
-  m_CorrespondingSourceObject: {fileID: 3286394657845650974, guid: 3e7d547ed398f8a46b8649bd2dfe0501, type: 3}
+--- !u!4 &8633422139557479512 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 4927692742148345419, guid: 3e7d547ed398f8a46b8649bd2dfe0501, type: 3}
   m_PrefabInstance: {fileID: 3725248479796447763}
   m_PrefabAsset: {fileID: 0}
 --- !u!1001 &5893834315183712026

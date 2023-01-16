@@ -39,6 +39,8 @@ namespace ReLeaf
         [SerializeField]
         AudioInfo seEnemyDamaged;
 
+        [SerializeField]
+        SpriteRenderer sprite;
 
         int greeningCount = 0;
 
@@ -49,6 +51,8 @@ namespace ReLeaf
             TryGetComponent(out enemyMover);
             HP = enemyDamageableInfo.HPMax;
             TryGetComponent(out attacker);
+
+            spriteOriginalLocalPos = sprite.transform.localPosition;
         }
         private IEnumerator Death()
         {
@@ -116,6 +120,7 @@ namespace ReLeaf
                 return;
             }
         }
+
         public void Damaged(float atk)
         {
             if (HP == 0)
@@ -131,7 +136,78 @@ namespace ReLeaf
             }
             HP -= atk;
             SEManager.Singleton.Play(seEnemyDamaged, enemyMover.WorldCenter);
+
+            DamagedMotion();
         }
+
+        float damagedTime = 0;
+        Coroutine damageMotionCo;
+        void DamagedMotion()
+        {
+            var currentTime = Time.time;
+
+            if (currentTime - damagedTime > 0.1f)
+            {
+                if (damageMotionCo != null)
+                {
+                    StopCoroutine(damageMotionCo);
+                }
+
+                damageMotionCo = StartCoroutine(DamagedMotionWait());
+            }
+
+            damagedTime = currentTime;
+        }
+        Vector3 spriteOriginalLocalPos;
+        Color damagedColor = new(1, 0.5f, 0.5f);
+        float damagedOneMotionDuration = 0.1f;
+        IEnumerator DamagedMotionWait()
+        {
+            var spriteTransform = sprite.transform;
+            var targetFirst = spriteOriginalLocalPos + Vector3.right * enemyDamageableInfo.DamageMotionXMax;
+            var targetSecond = spriteOriginalLocalPos - Vector3.right * enemyDamageableInfo.DamageMotionXMax;
+
+            if (spriteTransform.localPosition.x < spriteOriginalLocalPos.x)
+                (targetFirst, targetSecond) = (targetSecond, targetFirst);
+
+            float time = 0;
+
+            var color = Color.white;
+            var wasFlashing = color != sprite.color;
+
+            while (true)
+            {
+                Vector3 target;
+
+                if (time < damagedOneMotionDuration)
+                    target = targetFirst;
+                else if (time < damagedOneMotionDuration * 2)
+                    target = targetSecond;
+                else if (time < damagedOneMotionDuration * 3)
+                    target = spriteOriginalLocalPos;
+                else
+                    break;
+
+                spriteTransform.localPosition = Vector3.Lerp(spriteTransform.localPosition, target, 0.5f);
+
+
+                bool isFlashing = (((int)(time / damagedOneMotionDuration)) % 2) == 0;
+                if (wasFlashing)
+                    isFlashing = !isFlashing;
+
+                var currentColor = isFlashing ? damagedColor : color;
+
+                if (currentColor != sprite.color)
+                    sprite.color = currentColor;
+
+                yield return null;
+                time += Time.deltaTime;
+            }
+            spriteTransform.localPosition = spriteOriginalLocalPos;
+            sprite.color = color;
+            damageMotionCo = null;
+        }
+
 
         private void OnTriggerEnter2D(Collider2D collision)
         {
