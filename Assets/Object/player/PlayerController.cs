@@ -96,7 +96,7 @@ namespace ReLeaf
 
         public void OnUseItem(InputAction.CallbackContext context)
         {
-            if (!context.started)
+            if (!context.performed)
                 return;
 
             if (context.ReadValue<float>() != 0)
