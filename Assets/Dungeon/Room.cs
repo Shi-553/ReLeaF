@@ -128,6 +128,8 @@ namespace ReLeaf
                 target.Greening();
             }
 
+            RoomBlastRateUI.Singleton.Inactive();
+
             RoomVirtualCamera.Singleton.EndRoomBlast();
             RobotMover.Singleton.IsStop = false;
 

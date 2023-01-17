@@ -60,6 +60,7 @@ SpriteAtlas:
   - {fileID: 21300000, guid: 124a4dc23b9bc00418f0b75f5353dc9b, type: 3}
   - {fileID: 21300000, guid: 87270a13324ed59459585189c54c1b07, type: 3}
   - {fileID: 21300000, guid: b6a9fb9351e9a994184007605c409bab, type: 3}
+  - {fileID: 21300000, guid: f238dba3a2eb9a743a5261d7e2f0528e, type: 3}
   - {fileID: 21300000, guid: bb60830456fbd9d479169e2f24db90ae, type: 3}
   - {fileID: 21300000, guid: 253b02340c4b8b04bb39526142995d96, type: 3}
   - {fileID: 21300000, guid: 2f6286a41b11aa644adb5257ee4fe043, type: 3}
@@ -98,6 +99,7 @@ SpriteAtlas:
   - {fileID: 21300000, guid: a017b8c80e9a9f34cb4387982b30df63, type: 3}
   - {fileID: 21300000, guid: 180d9cc9299e87d478bf8307e482edcf, type: 3}
   - {fileID: 21300000, guid: 6c28e5e9a921989418787c579ad905f5, type: 3}
+  - {fileID: 21300000, guid: f6669de9904227044ad5d7d7239e0692, type: 3}
   - {fileID: 21300000, guid: f875150a2144c774298ef3976900cb6b, type: 3}
   - {fileID: 21300000, guid: eb3dfd9a62aac354fbf4364cc182f527, type: 3}
   - {fileID: 21300000, guid: 4b82f3baf8b25ee4699ba5fa4b736a1d, type: 3}
@@ -128,6 +130,7 @@ SpriteAtlas:
   - ui_clear_2
   - ui_gage_HP
   - stage_button_3_passive
+  - ui_blast_gage
   - ui_gage_item
   - ui_green_body
   - ui_start
@@ -166,6 +169,7 @@ SpriteAtlas:
   - stage_button_3_active
   - stage_button_5_active
   - stage_button_2_passive
+  - ui_blast_body
   - ui_green_back
   - douga
   - ui_face_3

@@ -4,7 +4,7 @@ using Utility;
 
 namespace ReLeaf
 {
-    public class RoomGreeningRateUI : SingletonBase<RoomGreeningRateUI>
+    public class RoomBlastRateUI : SingletonBase<RoomBlastRateUI>
     {
         [SerializeField]
         Slider slider;
@@ -25,9 +25,9 @@ namespace ReLeaf
         private void OnChangeRoom(Room room)
         {
             if (room == null)
+            {
                 Inactive();
-            else
-                Active();
+            }
         }
 
         public void Active()

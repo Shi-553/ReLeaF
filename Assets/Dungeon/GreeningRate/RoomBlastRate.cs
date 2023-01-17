@@ -1,6 +1,6 @@
 namespace ReLeaf
 {
-    public class RoomGreeningRate : GreeningRateBase
+    public class RoomBlastRate : GreeningRateBase
     {
         Room room;
 
@@ -13,8 +13,11 @@ namespace ReLeaf
 
         private void OnChangeRoom(Room playerRoom)
         {
-            if (playerRoom == room)
-                RoomGreeningRateUI.Singleton.SetValue(ValueRate);
+            if (playerRoom == room && ValueRate <= 1.0f)
+            {
+                RoomBlastRateUI.Singleton.Active();
+                RoomBlastRateUI.Singleton.SetValue(ValueRate);
+            }
         }
 
         protected override void CalculateMaxGreeningCount()
