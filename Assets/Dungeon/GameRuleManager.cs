@@ -158,6 +158,8 @@ namespace ReLeaf
         }
         IEnumerator WaitGreening()
         {
+            PlayerController.Singleton.ReLeafInputAction.Disable();
+
             yield return StartCoroutine(AllGreening.Singleton.StartGreeningWithPlayer());
             gameclearObj.SetActive(true);
             SEManager.Singleton.Play(clearBGM);
