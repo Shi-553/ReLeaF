@@ -140,6 +140,8 @@ namespace ReLeaf
         HashSet<TileObject> underTiles = new(20);
         HashSet<Vector2Int> waitGreeningTiles = new(10);
 
+        bool isForeachingWaitGreeningTiles = false;
+
         bool CanSowSeed => GameRuleManager.Singleton.IsPlaying && !isKnockback && IsMove;
 
         public override bool DontDestroyOnLoad => false;
@@ -210,10 +212,12 @@ namespace ReLeaf
 
             if (waitGreeningTiles.Count > 0 && CanSowSeed)
             {
+                isForeachingWaitGreeningTiles = true;
                 foreach (var underTile in waitGreeningTiles)
                 {
                     SowSeed(underTile);
                 }
+                isForeachingWaitGreeningTiles = false;
                 waitGreeningTiles.Clear();
             }
         }
@@ -265,7 +269,7 @@ namespace ReLeaf
                 return;
 
 
-            if (!CanSowSeed)
+            if (!CanSowSeed && !isForeachingWaitGreeningTiles)
             {
                 waitGreeningTiles.Add(tileObject.TilePos);
                 return;
@@ -286,7 +290,7 @@ namespace ReLeaf
 
             underTiles.Remove(tileObject);
 
-            if (!CanSowSeed)
+            if (!CanSowSeed && !isForeachingWaitGreeningTiles)
             {
                 waitGreeningTiles.Remove(tileObject.TilePos);
             }
