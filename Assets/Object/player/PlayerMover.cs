@@ -269,9 +269,10 @@ namespace ReLeaf
                 return;
 
 
-            if (!CanSowSeed && !isForeachingWaitGreeningTiles)
+            if (!CanSowSeed)
             {
-                waitGreeningTiles.Add(tileObject.TilePos);
+                if (!isForeachingWaitGreeningTiles)
+                    waitGreeningTiles.Add(tileObject.TilePos);
                 return;
             }
 
