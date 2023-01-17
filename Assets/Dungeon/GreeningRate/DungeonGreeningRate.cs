@@ -10,7 +10,7 @@ namespace ReLeaf
         {
             foreach (var tile in DungeonManager.Singleton.TileDic.Values)
             {
-                if (tile.CanOrAleeadyGreening(true))
+                if (tile.CanOrAleadyGreening(true))
                 {
                     MaxGreeningCount++;
                 }

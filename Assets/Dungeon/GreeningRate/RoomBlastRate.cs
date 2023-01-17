@@ -24,7 +24,7 @@ namespace ReLeaf
         {
             foreach (var pos in room.RoomTilePoss)
             {
-                if (DungeonManager.Singleton.TryGetTile(pos, out var tile) && tile.CanOrAleeadyGreening(true))
+                if (DungeonManager.Singleton.TryGetTile(pos, out var tile) && tile.CanOrAleadyGreening(true))
                 {
                     MaxGreeningCount++;
                 }

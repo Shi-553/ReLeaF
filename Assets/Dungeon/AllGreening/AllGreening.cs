@@ -111,7 +111,7 @@ namespace ReLeaf
                     //緑化関係なくタイルを取得
                     if (DungeonManager.Singleton.TryGetTile(pos, out var tile))
                     {
-                        if (useCamera && tile.CanOrAleeadyGreening(true))
+                        if (useCamera && tile.CanOrAleadyGreening(true))
                         {
                             if (cinemachineTargetGroup.m_Targets.Length > 100)
                             {

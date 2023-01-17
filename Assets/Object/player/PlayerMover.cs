@@ -39,6 +39,7 @@ namespace ReLeaf
         bool isKnockback = false;
 
         public event Action<Room> OnChangeRoom;
+        public event Action<Vector2Int> OnGreening;
 
         Room lastRoom;
         public Room LastRoom
@@ -243,6 +244,7 @@ namespace ReLeaf
             {
                 energyGauge.RecoveryValue(energyRecoveryPoint);
                 underTiles.Add(DungeonManager.Singleton.GetTile(tilePos));
+                OnGreening?.Invoke(tilePos);
             }
         }
 
@@ -256,7 +258,7 @@ namespace ReLeaf
                 LastRoom = entrance.Room;
 
             // 緑化できないときreturn
-            if (!tileObject.CanOrAleeadyGreening(false))
+            if (!tileObject.CanOrAleadyGreening(false))
                 return;
             // 既に処理済みの場合return
             if (!underTiles.Add(tileObject))

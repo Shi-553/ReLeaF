@@ -33,7 +33,7 @@ namespace ReLeaf
 
         public bool IsOnlyNormalFoundation => info.IsOnlyNormalFoundation;
 
-        public bool CanOrAleeadyGreening(bool useSpecial) => CanGreening(useSpecial) || IsAlreadyGreening;
+        public bool CanOrAleadyGreening(bool useSpecial) => CanGreening(useSpecial) || IsAlreadyGreening;
 
         public Vector2Int TilePos { get; set; }
         public bool IsInvincible { get; set; }

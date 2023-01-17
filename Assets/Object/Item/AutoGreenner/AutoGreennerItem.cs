@@ -18,7 +18,7 @@ namespace ReLeaf
                 {
                     continue;
                 }
-                if (tile.CanOrAleeadyGreening(false))
+                if (tile.CanOrAleadyGreening(false))
                 {
                     returns.Add(pos);
                 }

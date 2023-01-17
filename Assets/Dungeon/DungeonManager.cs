@@ -160,14 +160,14 @@ namespace ReLeaf
         public TileObject GetTile<T>(Vector2Int pos) where T : TileObject => tileDic.GetValueOrDefault(pos, null) as T;
 
 
-        public bool SowSeed(Vector2Int tilePos, bool isSpecial = false, bool isInvincible = false)
+        public bool SowSeed(Vector2Int tilePos, bool isSpecial = false, bool isInvincible = false, bool canAleadyGreening = true)
         {
             if (!TryGetTile(tilePos, out var tile))
             {
                 return false;
             }
 
-            if (tile.CanOrAleeadyGreening(isSpecial))
+            if (canAleadyGreening && tile.CanOrAleadyGreening(isSpecial))
             {
                 OnGreening?.Invoke(new GreeningInfo(tilePos, tile.IsAlreadyGreening));
 

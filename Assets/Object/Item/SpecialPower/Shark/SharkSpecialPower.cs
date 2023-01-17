@@ -26,7 +26,7 @@ namespace ReLeaf
             foreach (var weakLocalTilePos in Info.ThrustingList)
             {
                 var pos = previewdTilePos + weakLocalTilePos;
-                if (!DungeonManager.Singleton.TryGetTile(pos, out var tile) || !tile.CanOrAleeadyGreening(true))
+                if (!DungeonManager.Singleton.TryGetTile(pos, out var tile) || !tile.CanOrAleadyGreening(true))
                 {
                     continue;
                 }
