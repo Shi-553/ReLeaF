@@ -26,7 +26,8 @@ namespace ReLeaf
         public bool IsValid => !IsDeath && !IsStan;
 
         public bool IsDeath { get; private set; }
-        public bool IsStan { get; private set; }
+        public int stanCount = 0;
+        public bool IsStan => stanCount > 0;
 
 
         EnemyMover enemyMover;
@@ -167,14 +168,17 @@ namespace ReLeaf
 
         public void Stan()
         {
-            IsStan = true;
-            ResetWeekMarker();
-            attacker.Stop();
-            enemyAnimationBase.StanAnimation();
+            stanCount++;
+            if (IsStan)
+            {
+                ResetWeekMarker();
+                attacker.Stop();
+                enemyAnimationBase.StanAnimation();
+            }
         }
         public void UnStan()
         {
-            IsStan = false;
+            stanCount--;
         }
     }
 }
