@@ -10,7 +10,8 @@ namespace ReLeaf
         Prepare,
         Playing,
         GameClear,
-        GameOver
+        GameOver,
+        Pause
     }
     public class GameRuleManager : SingletonBase<GameRuleManager>
     {
@@ -34,7 +35,7 @@ namespace ReLeaf
         public bool IsGameClear => State == GameRuleState.GameClear;
         public bool IsGameOver => State == GameRuleState.GameOver;
 
-        public void Pause() => state = GameRuleState.Prepare;
+        public void Pause() => state = GameRuleState.Pause;
         public void UnPause() => state = GameRuleState.Playing;
 
         public bool isWaitFinish;

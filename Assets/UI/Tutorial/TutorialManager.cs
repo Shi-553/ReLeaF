@@ -207,6 +207,7 @@ namespace ReLeaf
             PlayerController.Singleton.ReLeafInputAction?.Disable();
 
             itemManager.CanUse = false;
+            itemManager.CanThrow = false;
             {
                 AddItem(itemPrefab1);
                 AddItem(itemPrefab2);
@@ -217,15 +218,20 @@ namespace ReLeaf
                 yield return WaitClick();
             }
 
+            itemManager.CanThrow = true;
             PlayerController.Singleton.ReLeafInputAction?.Enable();
             {
                 var selectActionString = PlayerController.Singleton.PlayerInput.currentControlScheme == "Gamepad" ?
                 $"<sprite name=LEFTSHOLDER><sprite name=RIGHTSHOLDER>" :
                 $"<sprite name=SCROLL/Y>";
-                text.text = $"使うアイテムを{selectActionString}で切り替えてみよう！";
-                yield return new WaitUntil(() => itemManager.Index != 0);
-                yield return new WaitForSeconds(2);
+
+                var throwActionString = GetActionSpriteTag(PlayerController.Singleton.ReLeafInputAction.Player.ThrowItem);
+
+                text.text = $"{selectActionString}で切り替えて、{throwActionString}で捨ててみよう！";
+                yield return new WaitUntil(() => itemManager.Index != 0 || itemManager.ItemCount < 3);
+                yield return new WaitForSeconds(3);
             }
+            itemManager.CanThrow = false;
 
             PlayerController.Singleton.ReLeafInputAction?.Disable();
             {
@@ -238,6 +244,7 @@ namespace ReLeaf
                 yield return WaitClick();
             }
             itemManager.CanUse = true;
+            itemManager.CanThrow = true;
 
 
             GameRuleManager.Singleton.UnPause();

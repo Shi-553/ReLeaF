@@ -20,6 +20,7 @@ namespace ReLeaf
 
 
         public bool CanUse { get; set; } = true;
+        public bool CanThrow { get; set; } = true;
 
         int itemCount = 0;
         public int ItemCount
@@ -128,9 +129,9 @@ namespace ReLeaf
 
         public void ThrowItem()
         {
-            if (!CanUse)
+            if (!CanThrow)
                 return;
-            if (!GameRuleManager.Singleton.IsPlaying)
+            if (GameRuleManager.Singleton.IsPrepare)
                 return;
             if (ItemCount == 0)
                 return;
@@ -158,7 +159,7 @@ namespace ReLeaf
         {
             if (!CanUse)
                 yield break;
-            if (!GameRuleManager.Singleton.IsPlaying)
+            if (GameRuleManager.Singleton.IsPrepare)
                 yield break;
             if (ItemCount == 0)
                 yield break;
