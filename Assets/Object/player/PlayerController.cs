@@ -148,5 +148,12 @@ namespace ReLeaf
             SetItemDir(context.ReadValue<Vector2>());
         }
 
+        public void OnThrowItem(InputAction.CallbackContext context)
+        {
+            if (!context.performed)
+                return;
+
+            itemManager.ThrowItem();
+        }
     }
 }

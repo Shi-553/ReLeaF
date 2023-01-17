@@ -82,6 +82,15 @@ namespace ReLeaf
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": true
+                },
+                {
+                    ""name"": ""ThrowItem"",
+                    ""type"": ""Button"",
+                    ""id"": ""bc1e344e-547f-48f6-b1fb-53bf8dbef637"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -208,6 +217,17 @@ namespace ReLeaf
                 },
                 {
                     ""name"": """",
+                    ""id"": ""c0d9c960-1d44-4dc7-85a8-3c06f2ad7edf"",
+                    ""path"": ""<Mouse>/rightButton"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard&Mouse"",
+                    ""action"": ""UseItem"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
                     ""id"": ""84d552f9-0410-4835-9755-f54576e927fc"",
                     ""path"": ""<Mouse>/scroll/y"",
                     ""interactions"": """",
@@ -251,39 +271,6 @@ namespace ReLeaf
                     ""isPartOfComposite"": true
                 },
                 {
-                    ""name"": ""QE"",
-                    ""id"": ""c3013633-2fbf-4747-9287-580e5e368ddd"",
-                    ""path"": ""1DAxis"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""SelectItem"",
-                    ""isComposite"": true,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": ""negative"",
-                    ""id"": ""cf7e9ca6-f614-4b81-9678-6f1059a55c6c"",
-                    ""path"": ""<Keyboard>/q"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": ""Keyboard&Mouse"",
-                    ""action"": ""SelectItem"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": true
-                },
-                {
-                    ""name"": ""positive"",
-                    ""id"": ""0207d123-5e31-4a70-b529-ecfdf903fd2a"",
-                    ""path"": ""<Keyboard>/e"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": ""Keyboard&Mouse"",
-                    ""action"": ""SelectItem"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": true
-                },
-                {
                     ""name"": """",
                     ""id"": ""448d035a-50aa-45b7-8bff-3f4f88831aeb"",
                     ""path"": ""<Mouse>/delta"",
@@ -291,6 +278,28 @@ namespace ReLeaf
                     ""processors"": """",
                     ""groups"": ""Keyboard&Mouse"",
                     ""action"": ""Aim"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""39624e04-a497-49e2-8c5d-fd5f03c399f1"",
+                    ""path"": ""<Keyboard>/q"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard&Mouse"",
+                    ""action"": ""ThrowItem"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""bd9a7a1f-eea1-4c9f-822d-97dd6a3888e9"",
+                    ""path"": ""<Gamepad>/buttonSouth"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Gamepad"",
+                    ""action"": ""ThrowItem"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -784,6 +793,7 @@ namespace ReLeaf
             m_Player_Look = m_Player.FindAction("Look", throwIfNotFound: true);
             m_Player_UseItem = m_Player.FindAction("UseItem", throwIfNotFound: true);
             m_Player_SelectItem = m_Player.FindAction("SelectItem", throwIfNotFound: true);
+            m_Player_ThrowItem = m_Player.FindAction("ThrowItem", throwIfNotFound: true);
             // UI
             m_UI = asset.FindActionMap("UI", throwIfNotFound: true);
             m_UI_Navigate = m_UI.FindAction("Navigate", throwIfNotFound: true);
@@ -856,6 +866,7 @@ namespace ReLeaf
         private readonly InputAction m_Player_Look;
         private readonly InputAction m_Player_UseItem;
         private readonly InputAction m_Player_SelectItem;
+        private readonly InputAction m_Player_ThrowItem;
         public struct PlayerActions
         {
             private @ReLeafInputAction m_Wrapper;
@@ -866,6 +877,7 @@ namespace ReLeaf
             public InputAction @Look => m_Wrapper.m_Player_Look;
             public InputAction @UseItem => m_Wrapper.m_Player_UseItem;
             public InputAction @SelectItem => m_Wrapper.m_Player_SelectItem;
+            public InputAction @ThrowItem => m_Wrapper.m_Player_ThrowItem;
             public InputActionMap Get() { return m_Wrapper.m_Player; }
             public void Enable() { Get().Enable(); }
             public void Disable() { Get().Disable(); }
@@ -893,6 +905,9 @@ namespace ReLeaf
                     @SelectItem.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnSelectItem;
                     @SelectItem.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnSelectItem;
                     @SelectItem.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnSelectItem;
+                    @ThrowItem.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnThrowItem;
+                    @ThrowItem.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnThrowItem;
+                    @ThrowItem.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnThrowItem;
                 }
                 m_Wrapper.m_PlayerActionsCallbackInterface = instance;
                 if (instance != null)
@@ -915,6 +930,9 @@ namespace ReLeaf
                     @SelectItem.started += instance.OnSelectItem;
                     @SelectItem.performed += instance.OnSelectItem;
                     @SelectItem.canceled += instance.OnSelectItem;
+                    @ThrowItem.started += instance.OnThrowItem;
+                    @ThrowItem.performed += instance.OnThrowItem;
+                    @ThrowItem.canceled += instance.OnThrowItem;
                 }
             }
         }
@@ -1037,6 +1055,7 @@ namespace ReLeaf
             void OnLook(InputAction.CallbackContext context);
             void OnUseItem(InputAction.CallbackContext context);
             void OnSelectItem(InputAction.CallbackContext context);
+            void OnThrowItem(InputAction.CallbackContext context);
         }
         public interface IUIActions
         {

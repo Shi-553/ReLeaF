@@ -12,6 +12,7 @@ namespace ReLeaf
         ItemBaseInfo itemBaseInfo;
         public ItemBaseInfo ItemBaseInfo => itemBaseInfo;
 
+        new Collider2D collider2D;
         public Sprite Icon => GetComponentInChildren<SpriteRenderer>().sprite;
 
 
@@ -30,6 +31,7 @@ namespace ReLeaf
             if (isFirst)
             {
                 TryGetComponent(out animancer);
+                collider2D = GetComponentInChildren<Collider2D>();
             }
 
             animancer.Stop();
@@ -72,6 +74,12 @@ namespace ReLeaf
             StartCoroutine(RandomMove());
         }
 
+        public IEnumerator WaitCollisionDisable()
+        {
+            collider2D.enabled = false;
+            yield return new WaitForSeconds(1);
+            collider2D.enabled = true;
+        }
         public int UseCount { get; private set; }
         public bool IsUsing => UseCount > 0;
 

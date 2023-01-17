@@ -126,11 +126,39 @@ namespace ReLeaf
             return true;
         }
 
+        public void ThrowItem()
+        {
+            if (!CanUse)
+                return;
+            if (!GameRuleManager.Singleton.IsPlaying)
+                return;
+            if (ItemCount == 0)
+                return;
+
+            var throwItem = Current;
+
+            throwItem.Item.transform.position = PlayerMover.Singleton.transform.position;
+            throwItem.Item.gameObject.SetActive(true);
+            throwItem.Item.ReStart();
+            StartCoroutine(throwItem.Item.WaitCollisionDisable());
+
+            itemUIs.RemoveAt(Index);
+            itemUIs.Add(throwItem);
+
+            throwItem.Uninit();
+            ItemCount--;
+
+            for (int i = Index; i < ItemCount; i++)
+            {
+                itemUIs[i].Index = i;
+            }
+        }
+
         public IEnumerator UseItem()
         {
             if (!CanUse)
                 yield break;
-            if (GameRuleManager.Singleton.IsPrepare)
+            if (!GameRuleManager.Singleton.IsPlaying)
                 yield break;
             if (ItemCount == 0)
                 yield break;

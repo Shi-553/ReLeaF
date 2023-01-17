@@ -58,6 +58,15 @@
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": true
+                },
+                {
+                    "name": "ThrowItem",
+                    "type": "Button",
+                    "id": "bc1e344e-547f-48f6-b1fb-53bf8dbef637",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
                 }
             ],
             "bindings": [
@@ -184,6 +193,17 @@
                 },
                 {
                     "name": "",
+                    "id": "c0d9c960-1d44-4dc7-85a8-3c06f2ad7edf",
+                    "path": "<Mouse>/rightButton",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Keyboard&Mouse",
+                    "action": "UseItem",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
                     "id": "84d552f9-0410-4835-9755-f54576e927fc",
                     "path": "<Mouse>/scroll/y",
                     "interactions": "",
@@ -227,39 +247,6 @@
                     "isPartOfComposite": true
                 },
                 {
-                    "name": "QE",
-                    "id": "c3013633-2fbf-4747-9287-580e5e368ddd",
-                    "path": "1DAxis",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "SelectItem",
-                    "isComposite": true,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "negative",
-                    "id": "cf7e9ca6-f614-4b81-9678-6f1059a55c6c",
-                    "path": "<Keyboard>/q",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "Keyboard&Mouse",
-                    "action": "SelectItem",
-                    "isComposite": false,
-                    "isPartOfComposite": true
-                },
-                {
-                    "name": "positive",
-                    "id": "0207d123-5e31-4a70-b529-ecfdf903fd2a",
-                    "path": "<Keyboard>/e",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "Keyboard&Mouse",
-                    "action": "SelectItem",
-                    "isComposite": false,
-                    "isPartOfComposite": true
-                },
-                {
                     "name": "",
                     "id": "448d035a-50aa-45b7-8bff-3f4f88831aeb",
                     "path": "<Mouse>/delta",
@@ -267,6 +254,28 @@
                     "processors": "",
                     "groups": "Keyboard&Mouse",
                     "action": "Aim",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "39624e04-a497-49e2-8c5d-fd5f03c399f1",
+                    "path": "<Keyboard>/q",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Keyboard&Mouse",
+                    "action": "ThrowItem",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "bd9a7a1f-eea1-4c9f-822d-97dd6a3888e9",
+                    "path": "<Gamepad>/buttonSouth",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Gamepad",
+                    "action": "ThrowItem",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }
