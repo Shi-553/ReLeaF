@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3358804070099683387}
   - component: {fileID: 3358804070099683384}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: CM vcam1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -25,7 +25,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3358804070099683385}
   m_LocalRotation: {x: -0.258819, y: -0, z: -0, w: 0.9659259}
-  m_LocalPosition: {x: -3.0299997, y: -18.377, z: -8.15}
+  m_LocalPosition: {x: -2.95, y: -18.35, z: -8.15}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -191,7 +191,7 @@ GameObject:
   - component: {fileID: 3358804070684736723}
   - component: {fileID: 3358804070684736717}
   - component: {fileID: 3358804070684736722}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: cm
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -278,7 +278,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3358804070803513525}
   - component: {fileID: 3358804070803513530}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: VCam
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -350,7 +350,7 @@ GameObject:
   - component: {fileID: 3358804070931506296}
   - component: {fileID: 3358804070931506298}
   - component: {fileID: 3358804070931506299}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: cm
   m_TagString: Untagged
   m_Icon: {fileID: 0}
