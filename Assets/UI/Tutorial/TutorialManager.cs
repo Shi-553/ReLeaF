@@ -1,7 +1,6 @@
 using Pickle;
 using System.Collections;
 using System.Linq;
-using System.Text.RegularExpressions;
 using TMPro;
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -280,13 +279,10 @@ namespace ReLeaf
                 {
                     action.GetBindingDisplayString(i, out string device, out var add);
 
-                    displayString += add.ToUpper();
+                    displayString = add.ToUpper();
+                    break;
                 }
             }
-
-            if (displayString.Length == 4 && new Regex("^[WASD]{4}$", RegexOptions.IgnoreCase).IsMatch(displayString))
-                displayString = "WASD";
-
             return $"<sprite name={displayString}>";
         }
 
