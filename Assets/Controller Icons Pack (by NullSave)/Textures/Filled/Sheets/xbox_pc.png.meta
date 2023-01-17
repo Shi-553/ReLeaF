@@ -546,7 +546,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: xbox_pc_21
+      name: WEAK
       rect:
         serializedVersion: 2
         x: 0
@@ -693,7 +693,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: xbox_pc_28
+      name: Q
       rect:
         serializedVersion: 2
         x: 0
@@ -818,6 +818,27 @@ TextureImporter:
       indices: 
       edges: []
       weights: []
+    - serializedVersion: 2
+      name: ATTACK
+      rect:
+        serializedVersion: 2
+        x: 128
+        y: 0
+        width: 128
+        height: 128
+      alignment: 4
+      pivot: {x: 0, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: fe76adb0967140543be24917648ffa9f
+      internalID: -658714885
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
     outline: []
     physicsShape: []
     bones: []
@@ -833,7 +854,6 @@ TextureImporter:
       xbox_pc_30: 87945187
       xbox_pc_33: 880632353
       xbox_pc_26: -1779707530
-      xbox_pc_28: -1494269675
       xbox_pc_23: -1451728619
       xbox_pc_4: 1177224162
       xbox_pc_9: -81422956
@@ -844,6 +864,7 @@ TextureImporter:
       xbox_pc_24: -12323976
       xbox_pc_2: -1122747552
       xbox_pc_27: 15187532
+      Q: -1494269675
       xbox_pc_12: -291168026
       xbox_pc_14: 2083459895
       xbox_pc_18: 1173384771
@@ -851,8 +872,9 @@ TextureImporter:
       xbox_pc_10: 1095789019
       xbox_pc_22: 1205437171
       xbox_pc_1: -1390846228
+      WEAK: -1534154586
+      ATTACK: -658714885
       xbox_pc_7: 1036232358
-      xbox_pc_21: -1534154586
       xbox_pc_0: 1612167642
       xbox_pc_6: -1638469064
       xbox_pc_13: -2077984800

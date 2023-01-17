@@ -208,8 +208,8 @@ MonoBehaviour:
     m_Unicode: 65534
     m_GlyphIndex: 21
     m_Scale: 1
-    m_Name: xbox_pc_21
-    m_HashCode: 1701619133
+    m_Name: WEAK
+    m_HashCode: 3192856
   - m_ElementType: 2
     m_Unicode: 65534
     m_GlyphIndex: 22
@@ -282,6 +282,12 @@ MonoBehaviour:
     m_Scale: 1
     m_Name: SPACE
     m_HashCode: 100083556
+  - m_ElementType: 2
+    m_Unicode: 65534
+    m_GlyphIndex: 34
+    m_Scale: 1
+    m_Name: ATTACK
+    m_HashCode: -1806299320
   m_SpriteGlyphTable:
   - m_Index: 0
     m_Metrics:
@@ -827,5 +833,21 @@ MonoBehaviour:
     m_AtlasIndex: 0
     m_ClassDefinitionType: 0
     sprite: {fileID: 880632353, guid: 18cd0fc1b1c23b64c981da43d31248ec, type: 3}
+  - m_Index: 34
+    m_Metrics:
+      m_Width: 128
+      m_Height: 128
+      m_HorizontalBearingX: -0
+      m_HorizontalBearingY: 90
+      m_HorizontalAdvance: 128
+    m_GlyphRect:
+      m_X: 128
+      m_Y: 0
+      m_Width: 128
+      m_Height: 128
+    m_Scale: 2
+    m_AtlasIndex: 0
+    m_ClassDefinitionType: 0
+    sprite: {fileID: -658714885, guid: 18cd0fc1b1c23b64c981da43d31248ec, type: 3}
   spriteInfoList: []
   fallbackSpriteAssets: []
