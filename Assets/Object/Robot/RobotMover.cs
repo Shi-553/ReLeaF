@@ -70,7 +70,7 @@ namespace ReLeaf
 
         void LateUpdate()
         {
-            if (GameRuleManager.Singleton.IsPrepare)
+            if (!GameRuleManager.Singleton.IsPlaying)
                 return;
 
             if (IsStop)

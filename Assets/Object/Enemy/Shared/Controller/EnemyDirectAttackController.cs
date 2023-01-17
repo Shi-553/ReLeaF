@@ -40,7 +40,7 @@ namespace ReLeaf
 
         void Update()
         {
-            if (GameRuleManager.Singleton.IsPrepare || !core.IsValid)
+            if (!GameRuleManager.Singleton.IsPlaying || !core.IsValid)
             {
                 hasTarget = false;
                 return;

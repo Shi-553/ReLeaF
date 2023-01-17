@@ -140,7 +140,7 @@ namespace ReLeaf
         HashSet<TileObject> underTiles = new(20);
         HashSet<Vector2Int> waitGreeningTiles = new(10);
 
-        bool CanSowSeed => !GameRuleManager.Singleton.IsPrepare && !isKnockback && IsMove;
+        bool CanSowSeed => GameRuleManager.Singleton.IsPlaying && !isKnockback && IsMove;
 
         public override bool DontDestroyOnLoad => false;
 
@@ -157,7 +157,7 @@ namespace ReLeaf
 
         void Update()
         {
-            if (GameRuleManager.Singleton.IsPrepare)
+            if (!GameRuleManager.Singleton.IsPlaying)
                 return;
 
             OldTilePos = TilePos;

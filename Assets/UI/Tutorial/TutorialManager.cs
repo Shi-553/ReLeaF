@@ -3,6 +3,7 @@ using System.Collections;
 using System.Linq;
 using TMPro;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
 using UnityEngine.UI;
 using Utility;
@@ -79,13 +80,13 @@ namespace ReLeaf
             GameRuleManager.Singleton.Pause();
             {
                 text.text = "ロボットと協力して砂漠を緑化しよう！";
-                yield return WaitClick();
+                yield return WaitButton();
             }
 
             {
                 text.text = "緑化ゲージを満タンにするとクリア！";
                 greeningRateMask.SetActive(true);
-                yield return WaitClick();
+                yield return WaitButton();
                 greeningRateMask.SetActive(false);
             }
 
@@ -137,23 +138,24 @@ namespace ReLeaf
 
             {
                 text.text = "湖から敵が湧いちゃった！";
-                yield return WaitClick();
+                yield return WaitButton();
             }
             {
-                text.text = "赤い攻撃マスは避けよう！";
-                yield return WaitClick();
+                text.text = "攻撃マス<sprite name=ATTACK>は避けよう！";
+                yield return WaitButton();
             }
 
             GameRuleManager.Singleton.UnPause();
             PlayerController.Singleton.ReLeafInputAction?.Enable();
             {
-                text.text = "黄色い弱点マスを踏んで倒そう！";
+                text.text = "弱点マス<sprite name=WEAK>を踏んで倒そう！";
                 yield return new WaitUntil(() => enemys.All(e => e == null || e.gameObject == null));
             }
 
             var itemManager = PlayerController.Singleton.GetComponentInChildren<ItemManager>();
 
             itemManager.CanUse = false;
+            itemManager.CanThrow = false;
             {
                 text.text = "ナイス！！落としたアイテムを拾おう！";
 
@@ -214,7 +216,7 @@ namespace ReLeaf
 
 
                 text.text = $"アイテムは５つまで持てるよ！";
-                yield return WaitClick();
+                yield return WaitButton();
             }
 
             itemManager.CanThrow = true;
@@ -235,12 +237,12 @@ namespace ReLeaf
             PlayerController.Singleton.ReLeafInputAction?.Disable();
             {
                 text.text = $"OK！！ここからは実戦だよ！";
-                yield return WaitClick();
+                yield return WaitButton();
             }
 
             {
                 text.text = "緑化ゲージを満タンにしてクリアしよう！";
-                yield return WaitClick();
+                yield return WaitButton();
             }
             itemManager.CanUse = true;
             itemManager.CanThrow = true;
@@ -304,7 +306,8 @@ namespace ReLeaf
         }
 
 
-        IEnumerator WaitClick()
+
+        IEnumerator WaitButton()
         {
             nextButton.gameObject.SetActive(true);
             nextButton.onClick.AddListener(OnClick);
@@ -312,7 +315,18 @@ namespace ReLeaf
             var nowCount = eventCount;
 
             yield return null;
-            yield return new WaitUntil(() => eventCount != nowCount || Mouse.current.leftButton.wasReleasedThisFrame);
+
+            while (true)
+            {
+                if (Mouse.current.leftButton.wasReleasedThisFrame)
+                {
+                    nextButton.OnPointerClick(new(EventSystem.current));
+                }
+                if (eventCount != nowCount)
+                    break;
+                yield return null;
+            }
+
 
             nextButton.gameObject.SetActive(false);
             nextButton.onClick.RemoveListener(OnClick);
