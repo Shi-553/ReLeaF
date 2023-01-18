@@ -31,7 +31,7 @@ namespace ReLeaf
         {
             foreach (var face in faces)
             {
-                if (face.maxHPRate > value)
+                if (face.maxHPRate >= value)
                 {
                     image.sprite = face.sprite;
                     break;
