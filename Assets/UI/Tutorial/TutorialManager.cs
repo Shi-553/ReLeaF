@@ -224,7 +224,7 @@ namespace ReLeaf
             {
                 var selectActionString = PlayerController.Singleton.PlayerInput.currentControlScheme == "Gamepad" ?
                 $"<sprite name=LEFTSHOLDER><sprite name=RIGHTSHOLDER>" :
-                $"<sprite name=SCROLL/Y>";
+                $"<sprite name=SCROLL_Y>";
 
                 var throwActionString = GetActionSpriteTag(PlayerController.Singleton.ReLeafInputAction.Player.ThrowItem);
 
