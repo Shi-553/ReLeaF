@@ -88,10 +88,12 @@ namespace ReLeaf
             AddRoomTile(pos + Vector2Int.right);
         }
 
+        Coroutine co;
+        public bool IsRoomBlastNow => co != null;
         public void GreeningRoom()
         {
             if (GameRuleManager.Singleton.IsPlaying)
-                StartCoroutine(RoomBlast());
+                co = StartCoroutine(RoomBlast());
         }
 
 
@@ -135,6 +137,8 @@ namespace ReLeaf
 
             RobotMover.Singleton.Sprite.sortingOrder--;
             RobotMover.Singleton.UpdateManualOperation(PlayerCore.Singleton.transform.position, 50, true, 1);
+
+            co = null;
         }
         IEnumerator Attack()
         {

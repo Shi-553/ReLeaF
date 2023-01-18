@@ -40,6 +40,9 @@ namespace ReLeaf
         OnEnterChecker secoundEnterChecker;
 
         [SerializeField]
+        OnEnterChecker thirdEnterChecker;
+
+        [SerializeField]
         WallRemover thirdWallRemover;
 
         [SerializeField, Pickle]
@@ -200,7 +203,7 @@ namespace ReLeaf
 
             secoundWallRemover.RemoveWall();
             {
-                text.text = "右のエリアに進もう！";
+                text.text = "右の通路に進もう！";
                 yield return WaitOnEnter(secoundEnterChecker);
             }
 
@@ -233,13 +236,45 @@ namespace ReLeaf
                 yield return new WaitForSeconds(3);
             }
             itemManager.CanThrow = false;
+            PlayerController.Singleton.ReLeafInputAction?.Enable();
+            GameRuleManager.Singleton.UnPause();
+
+            {
+                text.text = $"OK！！さらに進んでルームに入ろう！";
+                yield return WaitOnEnter(thirdEnterChecker);
+            }
 
             PlayerController.Singleton.ReLeafInputAction?.Disable();
             {
-                text.text = $"OK！！ここからは実戦だよ！";
+                text.text = "ルームではブラストゲージが出てくるよ！";
                 yield return WaitButton();
             }
+            var blastRate = PlayerMover.Singleton.LastRoom.GetComponent<RoomBlastRate>();
 
+            {
+                text.text = "緑化してブラストゲージをためて…";
+                yield return WaitButton();
+                PlayerMover.Singleton.Dir = Vector2.right;
+                yield return new WaitUntil(() => blastRate.ValueRate >= 1.0f);
+                PlayerMover.Singleton.Dir = Vector2.zero;
+            }
+            {
+                text.text = $"MAXにすると{ACTION_TEXT_COLOR}ルームブラスト{NORMAL_TEXT_COLOR}が発動！";
+                yield return WaitButton();
+            }
+            {
+                text.transform.parent.gameObject.SetActive(false);
+                yield return new WaitUntil(() => !PlayerMover.Singleton.LastRoom.IsRoomBlastNow);
+                text.transform.parent.gameObject.SetActive(true);
+            }
+            {
+                text.text = "積極的に狙ってみよう！";
+                yield return WaitButton();
+            }
+            {
+                text.text = "チュートリアルはここまで！";
+                yield return WaitButton();
+            }
             {
                 text.text = "緑化ゲージを満タンにしてクリアしよう！";
                 yield return WaitButton();
