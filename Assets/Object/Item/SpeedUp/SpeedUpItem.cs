@@ -8,7 +8,7 @@ namespace ReLeaf
     {
         SpeedUpItemInfo Info => ItemBaseInfo as SpeedUpItemInfo;
 
-        public override void PreviewRange(Vector2Int tilePos, Vector2Int dir, List<Vector2Int> returns)
+        public override void PreviewRange(Vector2Int tilePos, Vector2Int dir, HashSet<Vector2Int> returns)
         {
         }
 

@@ -84,7 +84,7 @@ namespace ReLeaf
 
         Vector3 itemOffset;
 
-        List<Vector2Int> previews = new();
+        HashSet<Vector2Int> previews = new();
 
         Coroutine useCo;
 

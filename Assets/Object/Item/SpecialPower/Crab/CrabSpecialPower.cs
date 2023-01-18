@@ -12,7 +12,7 @@ namespace ReLeaf
         protected override ISowSeedSpecialPowerInfo SowSeedSpecialPowerInfo => Info;
 
 
-        public override void PreviewRange(Vector2Int tilePos, Vector2Int dir, List<Vector2Int> returns)
+        public override void PreviewRange(Vector2Int tilePos, Vector2Int dir, HashSet<Vector2Int> returns)
         {
             if (!IsUsing)
                 base.PreviewRange(tilePos, dir, returns);

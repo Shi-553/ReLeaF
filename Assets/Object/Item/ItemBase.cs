@@ -85,7 +85,7 @@ namespace ReLeaf
 
         public bool IsFinishUse { protected set; get; }
 
-        public abstract void PreviewRange(Vector2Int tilePos, Vector2Int dir, List<Vector2Int> returns);
+        public abstract void PreviewRange(Vector2Int tilePos, Vector2Int dir, HashSet<Vector2Int> returns);
         public IEnumerator Use(Vector2Int tilePos, Vector2Int dir)
         {
             UseCount++;

@@ -9,19 +9,34 @@ namespace ReLeaf
     {
         AutoGreennerItemInfo Info => ItemBaseInfo as AutoGreennerItemInfo;
 
-        public override void PreviewRange(Vector2Int tilePos, Vector2Int dir, List<Vector2Int> returns)
+        void Add(HashSet<Vector2Int> returns, Vector2Int pos)
         {
-            foreach (var range in Info.Ranges)
+            if (!DungeonManager.Singleton.TryGetTile(pos, out var tile))
             {
-                var pos = tilePos + range;
-                if (!DungeonManager.Singleton.TryGetTile(pos, out var tile))
-                {
-                    continue;
-                }
-                if (tile.CanOrAleadyGreening(false))
-                {
-                    returns.Add(pos);
-                }
+                return;
+            }
+            if (tile.CanOrAleadyGreening(false))
+            {
+                returns.Add(pos);
+            }
+        }
+
+        public override void PreviewRange(Vector2Int tilePos, Vector2Int dir, HashSet<Vector2Int> returns)
+        {
+            var min = Info.Ranges.MinBy(pos => pos.x + pos.y).element;
+            var max = -min;
+
+            Add(returns, tilePos);
+
+            for (int x = min.x; x <= max.x; x++)
+            {
+                Add(returns, tilePos + new Vector2Int(x, min.y));
+                Add(returns, tilePos + new Vector2Int(x, max.y));
+            }
+            for (int y = min.y; y <= max.y; y++)
+            {
+                Add(returns, tilePos + new Vector2Int(min.x, y));
+                Add(returns, tilePos + new Vector2Int(max.x, y));
             }
         }
 

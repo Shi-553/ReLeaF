@@ -12,7 +12,7 @@ namespace ReLeaf
 
         Vector2Int target;
 
-        public override void PreviewRange(Vector2Int tilePos, Vector2Int dir, List<Vector2Int> returns)
+        public override void PreviewRange(Vector2Int tilePos, Vector2Int dir, HashSet<Vector2Int> returns)
         {
             if (!IsUsing)
                 target = tilePos + (dir * Info.Distance);
