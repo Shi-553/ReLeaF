@@ -174,6 +174,7 @@ namespace ReLeaf
         {
             PlayerCore.Singleton.gameObject.SetActive(false);
             RobotMover.Singleton.gameObject.SetActive(false);
+            ItemDescription.Singleton.ResetItemDescription();
 
             foreach (var item in FindObjectsOfType<ItemBase>())
             {
