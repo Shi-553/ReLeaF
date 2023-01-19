@@ -38,11 +38,9 @@ namespace ReLeaf
                 {
                     // update index
                     if (itemCount == index)
-                    {
                         index--;
-                    }
                     Selector.gameObject.SetActive(true);
-                    Selector.transform.position = Current.transform.position;
+                    Selector.transform.position = Current.GetItemWorldPos();
                 }
 
 
@@ -58,6 +56,7 @@ namespace ReLeaf
             {
                 index = (ItemCount != 0) ? ((value + ItemCount) % ItemCount) : 0;
                 UpdateDescription();
+                Selector.transform.position = Current.GetItemWorldPos();
             }
             get => index;
         }
@@ -135,6 +134,12 @@ namespace ReLeaf
                 return;
             if (ItemCount == 0)
                 return;
+            var now = Time.time;
+
+            if (now - beforeUseTime < 0.3f)
+                return;
+
+            beforeUseTime = now;
 
             var throwItem = Current;
 
@@ -147,13 +152,14 @@ namespace ReLeaf
             itemUIs.Add(throwItem);
 
             throwItem.Uninit();
-            ItemCount--;
 
             for (int i = Index; i < ItemCount; i++)
             {
                 itemUIs[i].Index = i;
             }
+            ItemCount--;
         }
+        float beforeUseTime = -1;
 
         public IEnumerator UseItem()
         {
@@ -163,6 +169,12 @@ namespace ReLeaf
                 yield break;
             if (ItemCount == 0)
                 yield break;
+            var now = Time.time;
+
+            if (now - beforeUseTime < 0.3f)
+                yield break;
+
+            beforeUseTime = now;
 
             var useItem = Current;
 
@@ -181,12 +193,12 @@ namespace ReLeaf
             itemUIs.Add(useItem);
 
             useItem.Uninit();
-            ItemCount--;
 
             for (int i = Index; i < ItemCount; i++)
             {
                 itemUIs[i].Index = i;
             }
+            ItemCount--;
 
             useCo = null;
 
@@ -212,7 +224,6 @@ namespace ReLeaf
 
         private void Update()
         {
-            Selector.transform.position = Current.transform.position;
 
             if (mover.WasChangedTilePosThisFrame || WasChangedItemDirThisFrame || previewd != Current)
             {
