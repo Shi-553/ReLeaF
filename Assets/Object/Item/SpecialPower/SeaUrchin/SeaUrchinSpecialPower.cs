@@ -37,6 +37,7 @@ namespace ReLeaf
             mover.GetComponent<RobotAnimation>().Thrust();
 
             yield return new WaitForSeconds(0.5f);
+            GamepadVibrator.Singleton.Vibrate(GamepadVibrator.VibrationStrength.Normal, 0.3f);
             SEManager.Singleton.Play(Info.SeUrchinSpecial);
             yield return base.UseImpl(target, dir);
 

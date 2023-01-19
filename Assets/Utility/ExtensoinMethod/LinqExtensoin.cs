@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 
 namespace Utility
@@ -84,6 +84,34 @@ namespace Utility
                     {
                         max = candidate;
                         maxKey = candidateProjected;
+                        maxIndex = index;
+                    }
+                    index++;
+                }
+                return (max, maxIndex);
+            }
+        }
+
+        public static (TSource element, int index) MaxBy<TSource>(this IEnumerable<TSource> source, IComparer<TSource> comparer = null)
+        {
+            if (source == null) throw new ArgumentNullException("source");
+            comparer = comparer == null ? Comparer<TSource>.Default : comparer;
+
+            using (var sourceIterator = source.GetEnumerator())
+            {
+                if (!sourceIterator.MoveNext())
+                {
+                    throw new InvalidOperationException("Sequence contains no elements");
+                }
+                var max = sourceIterator.Current;
+                int index = 0;
+                int maxIndex = 0;
+                while (sourceIterator.MoveNext())
+                {
+                    var candidate = sourceIterator.Current;
+                    if (comparer.Compare(candidate, max) > 0)
+                    {
+                        max = candidate;
                         maxIndex = index;
                     }
                     index++;

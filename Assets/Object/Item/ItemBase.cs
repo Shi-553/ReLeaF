@@ -92,6 +92,7 @@ namespace ReLeaf
 
             if (UseCount == 1)
             {
+                GamepadVibrator.Singleton.Vibrate(GamepadVibrator.VibrationStrength.Normal, 0.1f);
                 SEManager.Singleton.Play(itemBaseInfo.UseSe);
                 yield return UseImpl(tilePos, dir);
                 IsFinishUse = true;

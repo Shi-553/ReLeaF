@@ -16,6 +16,7 @@ namespace ReLeaf
 
         protected override IEnumerator UseImpl(Vector2Int tilePos, Vector2Int dir)
         {
+            GamepadVibrator.Singleton.Vibrate(GamepadVibrator.VibrationStrength.Normal, 0.3f);
             IsFinishUse = true;
 
             List<EnemyCore> cores = new();

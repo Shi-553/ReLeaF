@@ -35,6 +35,8 @@ namespace ReLeaf
         }
         protected override IEnumerator UseImpl(Vector2Int tilePos, Vector2Int dir)
         {
+            GamepadVibrator.Singleton.Vibrate(GamepadVibrator.VibrationStrength.Weak, 1.0f, out var vibrateState);
+
             GlobalCoroutine.Singleton.StartCoroutine(WaitRunning());
 
             GlobalCoroutine.Singleton.StartCoroutine(MovePlayer(dir));
@@ -121,9 +123,12 @@ namespace ReLeaf
                 yield return null;
             }
 
+            GamepadVibrator.Singleton.FinishVibrate(vibrateState);
+
             mover.IsStop = true;
             mover.GetComponent<RobotAnimation>().Thrust();
             yield return new WaitForSeconds(0.5f);
+            GamepadVibrator.Singleton.Vibrate(GamepadVibrator.VibrationStrength.Normal, 0.3f);
             SEManager.Singleton.Play(Info.SeSharkSpecial);
             foreach (var localPos in Info.ThrustingList)
             {

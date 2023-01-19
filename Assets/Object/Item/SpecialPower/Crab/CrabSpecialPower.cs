@@ -55,6 +55,7 @@ namespace ReLeaf
 
             SEManager.Singleton.Play(Info.SeCrabSpecial);
 
+            GamepadVibrator.Singleton.Vibrate(GamepadVibrator.VibrationStrength.Normal, 0.3f);
             Vector2Int currentTilePos = tilePos + Vector2Int.one;
             while (true)
             {

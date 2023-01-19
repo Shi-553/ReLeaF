@@ -15,6 +15,7 @@ namespace ReLeaf
         public void Greening()
         {
             IsGreening = true;
+            GamepadVibrator.Singleton.Vibrate(GamepadVibrator.VibrationStrength.Normal, 0.2f);
             SpawnLakeManager.Singleton.ChangeToDisabledLake(this);
         }
     }

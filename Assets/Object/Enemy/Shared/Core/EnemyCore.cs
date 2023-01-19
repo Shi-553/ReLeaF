@@ -60,6 +60,7 @@ namespace ReLeaf
         {
             HP = 0;
             SEManager.Singleton.Play(seEnemyDeath, enemyMover.WorldCenter);
+            GamepadVibrator.Singleton.Vibrate(GamepadVibrator.VibrationStrength.Normal, 0.5f);
 
             attacker.Stop();
 
@@ -140,6 +141,7 @@ namespace ReLeaf
             SEManager.Singleton.Play(seEnemyDamaged, enemyMover.WorldCenter);
 
             enemyAnimationBase.DamagedMotion();
+            GamepadVibrator.Singleton.Vibrate(GamepadVibrator.VibrationStrength.Weak, 0.1f);
         }
 
 

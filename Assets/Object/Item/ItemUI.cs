@@ -28,7 +28,7 @@ namespace ReLeaf
             image.sprite = item.Icon;
             image.useSpriteMesh = true;
             gameObject.SetActive(true);
-            transform.localPosition = GetItemLocalPos(Index);
+            transform.localPosition = GetItemLocalPos();
         }
 
         public void Uninit()
@@ -41,11 +41,12 @@ namespace ReLeaf
 
         void Update()
         {
-            var targetPos = GetItemLocalPos(Index);
+            var targetPos = GetItemLocalPos();
             transform.localPosition = Vector3.SmoothDamp(transform.localPosition, targetPos, ref velocity, smoothTime, maxSpeed);
 
         }
 
-        Vector3 GetItemLocalPos(int i) => Offset * i;
+        public Vector3 GetItemLocalPos() => Offset * Index;
+        public Vector3 GetItemWorldPos() => transform.parent.position + GetItemLocalPos();
     }
 }

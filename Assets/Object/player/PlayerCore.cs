@@ -94,7 +94,7 @@ namespace ReLeaf
 
         public void Damaged(float damage, Vector3 impulse)
         {
-            
+
             if (!GameRuleManager.Singleton.IsPlaying)
                 return;
             if (IsInvincible)
@@ -107,6 +107,7 @@ namespace ReLeaf
                 return;
             }
 
+            GamepadVibrator.Singleton.Vibrate(GamepadVibrator.VibrationStrength.Strong, 0.3f);
             damagedTime = Time.time;
 
             if (hpGauge.ConsumeValue(damage))
