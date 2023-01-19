@@ -187,7 +187,7 @@ namespace ReLeaf
             AddRoomTileInEdior(pos + Vector2Int.right);
         }
 
-        private void OnDrawGizmosSelected()
+        private void OnDrawGizmos()
         {
             roomTilePoss.Clear();
             AddRoomTileInEdior((Vector2Int)DungeonManager.Singleton.Tilemap.WorldToCell(transform.position));
@@ -195,9 +195,6 @@ namespace ReLeaf
             {
                 Gizmos.DrawSphere(DungeonManager.Singleton.TilePosToWorld(pos), 0.1f);
             }
-        }
-        private void OnDrawGizmos()
-        {
             Gizmos.DrawSphere(transform.position, 0.15f);
         }
 

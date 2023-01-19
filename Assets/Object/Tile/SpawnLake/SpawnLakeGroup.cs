@@ -122,7 +122,7 @@ namespace ReLeaf
             AddRoomTileInEdior(pos + Vector2Int.left);
             AddRoomTileInEdior(pos + Vector2Int.right);
         }
-        private void OnDrawGizmosSelected()
+        private void OnDrawGizmos()
         {
             spawnLakeDic.Clear();
             AddRoomTileInEdior((Vector2Int)DungeonManager.Singleton.Tilemap.WorldToCell(transform.position));
@@ -133,10 +133,7 @@ namespace ReLeaf
                 world.z -= 0.1f;
                 Gizmos.DrawSphere(world, 0.1f);
             }
-        }
-        private void OnDrawGizmos()
-        {
-            Gizmos.color = Color.red;
+
             Gizmos.DrawSphere(transform.position, 0.15f);
         }
 
