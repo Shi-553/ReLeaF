@@ -68,10 +68,13 @@ namespace ReLeaf
             GameRuleManager.Singleton.OnChangeState += OnChangeState;
         }
 
+
         private void OnChangeState(GameRuleState obj)
         {
             if (obj == GameRuleState.Playing)
             {
+                GameRuleManager.Singleton.OnChangeState -= OnChangeState;
+
                 gameObject.SetActive(true);
                 StartCoroutine(TutorialMain());
             }
@@ -79,7 +82,9 @@ namespace ReLeaf
 
         IEnumerator TutorialMain()
         {
-            PlayerController.Singleton.ReLeafInputAction?.Disable();
+            crabSpawn.CanSpawn = false;
+            crabSpawn.Stop();
+
             GameRuleManager.Singleton.Pause();
             {
                 text.text = "ロボットと協力して砂漠を緑化しよう！";
@@ -93,7 +98,6 @@ namespace ReLeaf
                 greeningRateMask.SetActive(false);
             }
 
-            PlayerController.Singleton.ReLeafInputAction?.Enable();
             GameRuleManager.Singleton.UnPause();
 
             {
@@ -116,7 +120,6 @@ namespace ReLeaf
                 var actionString = GetActionSpriteTag(PlayerController.Singleton.ReLeafInputAction.Player.Dash);
 
                 text.text = $"移動中に{actionString}でEPを使ってダッシュ！";
-                PlayerMover.Singleton.IsDash = false;
                 yield return WaitAction(PlayerController.Singleton.ReLeafInputAction.Player.Dash);
             }
 
@@ -137,7 +140,6 @@ namespace ReLeaf
             var enemys = crabSpawn.SpawnAllNow();
 
             GameRuleManager.Singleton.Pause();
-            PlayerController.Singleton.ReLeafInputAction?.Disable();
 
             {
                 text.text = "湖から敵が湧いちゃった！";
@@ -149,7 +151,6 @@ namespace ReLeaf
             }
 
             GameRuleManager.Singleton.UnPause();
-            PlayerController.Singleton.ReLeafInputAction?.Enable();
             {
                 text.text = "弱点マス<sprite name=WEAK>を踏んで倒そう！";
                 yield return new WaitUntil(() => enemys.All(e => e == null || e.gameObject == null));
@@ -208,7 +209,6 @@ namespace ReLeaf
             }
 
             GameRuleManager.Singleton.Pause();
-            PlayerController.Singleton.ReLeafInputAction?.Disable();
 
             itemManager.CanUse = false;
             itemManager.CanThrow = false;
@@ -223,7 +223,7 @@ namespace ReLeaf
             }
 
             itemManager.CanThrow = true;
-            PlayerController.Singleton.ReLeafInputAction?.Enable();
+            PlayerController.Singleton.ChangeToPlayer();
             {
                 var selectActionString = PlayerController.Singleton.PlayerInput.currentControlScheme == "Gamepad" ?
                 $"<sprite name=LEFTSHOLDER><sprite name=RIGHTSHOLDER>" :
@@ -236,7 +236,6 @@ namespace ReLeaf
                 yield return new WaitForSeconds(3);
             }
             itemManager.CanThrow = false;
-            PlayerController.Singleton.ReLeafInputAction?.Enable();
             GameRuleManager.Singleton.UnPause();
 
             {
@@ -244,12 +243,12 @@ namespace ReLeaf
                 yield return WaitOnEnter(thirdEnterChecker);
             }
 
-            PlayerController.Singleton.ReLeafInputAction?.Disable();
+            PlayerController.Singleton.ChangeToUI();
             {
                 text.text = "ルームではブラストゲージが出てくるよ！";
                 yield return WaitButton();
             }
-            var blastRate = PlayerMover.Singleton.LastRoom.GetComponent<RoomBlastRate>();
+            var blastRate = PlayerMover.Singleton.Room.GetComponent<RoomBlastRate>();
 
             {
                 text.text = "緑化してブラストゲージをためて…";
@@ -262,11 +261,14 @@ namespace ReLeaf
                 text.text = $"MAXにすると{ACTION_TEXT_COLOR}ルームブラスト{NORMAL_TEXT_COLOR}が発動！";
                 yield return WaitButton();
             }
+
+            if (PlayerMover.Singleton.Room.IsRoomBlastNow)
             {
                 text.transform.parent.gameObject.SetActive(false);
-                yield return new WaitUntil(() => !PlayerMover.Singleton.LastRoom.IsRoomBlastNow);
+                yield return new WaitUntil(() => !PlayerMover.Singleton.Room.IsRoomBlastNow);
                 text.transform.parent.gameObject.SetActive(true);
             }
+
             {
                 text.text = "積極的に狙ってみよう！";
                 yield return WaitButton();
@@ -283,8 +285,7 @@ namespace ReLeaf
             itemManager.CanThrow = true;
 
 
-            GameRuleManager.Singleton.UnPause();
-            PlayerController.Singleton.ReLeafInputAction?.Enable();
+            PlayerController.Singleton.ChangeToPlayer();
 
             sharkSpawn.Targets.ForEach(t => t.StartSpawnInterval());
             thirdWallRemover.RemoveWall();
@@ -378,11 +379,7 @@ namespace ReLeaf
         }
         IEnumerator WaitAction(InputAction action)
         {
-            if (action.WasPerformedThisFrame())
-            {
-                yield return new WaitUntil(() => action.WasReleasedThisFrame());
-            }
-            yield return new WaitUntil(() => action.WasPerformedThisFrame());
+            yield return new WaitUntil(() => action.IsPressed());
 
             yield return new WaitForSeconds(2);
         }

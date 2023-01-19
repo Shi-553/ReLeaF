@@ -338,7 +338,7 @@ namespace ReLeaf
                 },
                 {
                     ""name"": ""Point"",
-                    ""type"": ""Value"",
+                    ""type"": ""PassThrough"",
                     ""id"": ""4da8b9c1-acfb-48bf-9d6a-93871b47db0b"",
                     ""expectedControlType"": ""Vector2"",
                     ""processors"": """",
@@ -347,7 +347,7 @@ namespace ReLeaf
                 },
                 {
                     ""name"": ""LeftClick"",
-                    ""type"": ""Button"",
+                    ""type"": ""PassThrough"",
                     ""id"": ""be48c9ef-b02a-4158-bec3-8e76dac9707b"",
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",

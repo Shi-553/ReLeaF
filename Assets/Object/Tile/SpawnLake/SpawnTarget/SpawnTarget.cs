@@ -64,7 +64,10 @@ namespace ReLeaf
         }
         public void StartSpawnInterval()
         {
-            StopSpawnInterval();
+            if (coroutine != null)
+            {
+                return;
+            }
             coroutine = StartCoroutine(StartSpawnIntervalImpl());
         }
         IEnumerator StartSpawnIntervalImpl()

@@ -33,7 +33,7 @@ namespace ReLeaf
 
         protected override void UpdateValue()
         {
-            OnChangeRoom(PlayerMover.Singleton.LastRoom);
+            OnChangeRoom(PlayerMover.Singleton.Room);
         }
         protected override void Finish()
         {

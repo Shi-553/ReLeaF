@@ -52,7 +52,7 @@ namespace ReLeaf
         {
             if (ContainsRoom(PlayerMover.Singleton.TilePos))
             {
-                PlayerMover.Singleton.LastRoom = this;
+                PlayerMover.Singleton.Room = this;
             }
         }
 

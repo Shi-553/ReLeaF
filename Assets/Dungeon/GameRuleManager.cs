@@ -35,8 +35,20 @@ namespace ReLeaf
         public bool IsGameClear => State == GameRuleState.GameClear;
         public bool IsGameOver => State == GameRuleState.GameOver;
 
-        public void Pause() => state = GameRuleState.Pause;
-        public void UnPause() => state = GameRuleState.Playing;
+        GameRuleState pausedState;
+        public void Pause()
+        {
+            if (State == GameRuleState.Pause)
+                return;
+
+            pausedState = State;
+            State = GameRuleState.Pause;
+        }
+        public void UnPause()
+        {
+            if (State == GameRuleState.Pause)
+                State = pausedState;
+        }
 
         public bool isWaitFinish;
         public bool IsWaitFinish
@@ -159,7 +171,7 @@ namespace ReLeaf
         }
         IEnumerator WaitGreening()
         {
-            PlayerController.Singleton.ReLeafInputAction.Disable();
+            PlayerController.Singleton.ChangeToUI();
 
             yield return StartCoroutine(AllGreening.Singleton.StartGreeningWithPlayer());
             gameclearObj.SetActive(true);

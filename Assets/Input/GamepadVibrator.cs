@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
 using Utility;
 
@@ -29,7 +30,7 @@ namespace ReLeaf
 
 
 
-        public override bool DontDestroyOnLoad => false;
+        public override bool DontDestroyOnLoad => true;
         protected override void Init(bool isFirstInit, bool callByAwake)
         {
             if (isFirstInit)
@@ -37,11 +38,27 @@ namespace ReLeaf
                 vibrationStrengthDic = vibrationStrengths.ToDictionary(v => v.strength, v => v);
 
             }
-            if (callByAwake)
-            {
-                UpdateIsGamepad(PlayerController.Singleton.PlayerInput);
-                PlayerController.Singleton.PlayerInput.onControlsChanged += UpdateIsGamepad;
-            }
+        }
+        protected override void UninitBeforeSceneUnload(bool isDestroy)
+        {
+            AllStop();
+        }
+        protected override void UninitAfterSceneUnload(bool isDestroy)
+        {
+            AllStop();
+        }
+        void AllStop()
+        {
+            waits.Clear();
+            Gamepad.current.SetMotorSpeeds(0, 0);
+            isCurrentVibration = false;
+        }
+
+        private void Start()
+        {
+            var playerInput = EventSystem.current.GetComponent<PlayerInput>();
+            UpdateIsGamepad(playerInput);
+            playerInput.onControlsChanged += UpdateIsGamepad;
         }
 
         bool isGamePad = false;

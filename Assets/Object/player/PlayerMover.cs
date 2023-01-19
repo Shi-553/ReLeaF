@@ -41,16 +41,16 @@ namespace ReLeaf
         public event Action<Room> OnChangeRoom;
         public event Action<Vector2Int> OnGreening;
 
-        Room lastRoom;
-        public Room LastRoom
+        Room room;
+        public Room Room
         {
-            get => lastRoom;
+            get => room;
             set
             {
-                if (lastRoom != value)
+                if (room != value)
                 {
-                    lastRoom = value;
-                    OnChangeRoom?.Invoke(LastRoom);
+                    room = value;
+                    OnChangeRoom?.Invoke(Room);
                 }
             }
         }
@@ -259,7 +259,7 @@ namespace ReLeaf
                 return;
 
             if (tileObject.TileType == TileType.Entrance && tileObject is EntranceTile entrance)
-                LastRoom = entrance.Room;
+                Room = entrance.Room;
 
             // 緑化できないときreturn
             if (!tileObject.CanOrAleadyGreening(false))
@@ -286,7 +286,7 @@ namespace ReLeaf
             if (tileObject.TileType == TileType.Entrance && tileObject is EntranceTile entrance)
             {
                 if (!entrance.Room.ContainsRoom(TilePos))
-                    LastRoom = null;
+                    Room = null;
             }
 
             underTiles.Remove(tileObject);

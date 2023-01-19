@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
 using Utility;
 
@@ -26,32 +27,71 @@ namespace ReLeaf
                 TryGetComponent(out mover);
 
                 ReLeafInputAction = new ReLeafInputAction();
-                TryGetComponent(out playerInput);
-                PlayerInput.defaultActionMap = ReLeafInputAction.Player.Get().name;
-                PlayerInput.actions = ReLeafInputAction.asset;
-                ReLeafInputAction.Player.SetCallbacks(this);
+                ReLeafInputAction.Enable();
+
+                ReLeafInputAction.UI.Disable();
+                ReLeafInputAction.Player.Enable();
 
                 itemManager = GetComponentInChildren<ItemManager>();
 
                 SetCursorLock(true);
             }
         }
+
         private void Start()
         {
+
+            EventSystem.current.TryGetComponent(out playerInput);
+            PlayerInput.actions = ReLeafInputAction.asset;
+            ReLeafInputAction.Player.SetCallbacks(this);
+
             SceneLoader.Singleton.OnChangePause += OnChangePause;
+            GameRuleManager.Singleton.OnChangeState += OnChangeState;
         }
+
+        private void OnChangeState(GameRuleState state)
+        {
+            if (state == GameRuleState.Pause)
+            {
+                ChangeToUI();
+            }
+            else
+            {
+                ChangeToPlayer();
+            }
+        }
+
+        bool canChange = false;
         private void OnChangePause(bool sw)
         {
             SetCursorLock(!sw);
 
             if (sw)
             {
-                ReLeafInputAction.Disable();
+                canChange = ChangeToUI();
             }
             else
             {
-                ReLeafInputAction.Enable();
+                if (canChange)
+                    ChangeToPlayer();
+                canChange = false;
             }
+        }
+        public bool ChangeToPlayer()
+        {
+            if (ReLeafInputAction.Player.enabled && !ReLeafInputAction.UI.enabled)
+                return false;
+            ReLeafInputAction.UI.Disable();
+            ReLeafInputAction.Player.Enable();
+            return true;
+        }
+        public bool ChangeToUI()
+        {
+            if (!ReLeafInputAction.Player.enabled && ReLeafInputAction.UI.enabled)
+                return false;
+            ReLeafInputAction.UI.Enable();
+            ReLeafInputAction.Player.Disable();
+            return true;
         }
 
         void SetCursorLock(bool sw)

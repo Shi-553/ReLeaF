@@ -853,12 +853,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Navigation:
-    m_Mode: 2
+    m_Mode: 4
     m_WrapAround: 0
-    m_SelectOnUp: {fileID: 0}
+    m_SelectOnUp: {fileID: 1791416828}
     m_SelectOnDown: {fileID: 0}
     m_SelectOnLeft: {fileID: 0}
-    m_SelectOnRight: {fileID: 0}
+    m_SelectOnRight: {fileID: 1791416828}
   m_Transition: 1
   m_Colors:
     m_NormalColor: {r: 1, g: 1, b: 1, a: 0}
@@ -1546,7 +1546,7 @@ Canvas:
   m_Enabled: 1
   serializedVersion: 3
   m_RenderMode: 1
-  m_Camera: {fileID: 0}
+  m_Camera: {fileID: 929176213}
   m_PlaneDistance: 5
   m_PixelPerfect: 0
   m_ReceivesEvents: 1
@@ -1793,6 +1793,7 @@ Transform:
   - {fileID: 1913449412}
   - {fileID: 975323588}
   - {fileID: 1901915499}
+  - {fileID: 2069868665}
   m_Father: {fileID: 0}
   m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -2122,15 +2123,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8490829843986022922, guid: 7b86956310467cc499b30ab5246e1404, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0
+      value: 4.44
       objectReference: {fileID: 0}
     - target: {fileID: 8490829843986022922, guid: 7b86956310467cc499b30ab5246e1404, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0
+      value: -6.9
       objectReference: {fileID: 0}
     - target: {fileID: 8490829843986022922, guid: 7b86956310467cc499b30ab5246e1404, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0
+      value: -17.75
       objectReference: {fileID: 0}
     - target: {fileID: 8490829843986022922, guid: 7b86956310467cc499b30ab5246e1404, type: 3}
       propertyPath: m_LocalRotation.w
@@ -2165,6 +2166,11 @@ PrefabInstance:
 --- !u!4 &929176212 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 8490829843986022922, guid: 7b86956310467cc499b30ab5246e1404, type: 3}
+  m_PrefabInstance: {fileID: 929176211}
+  m_PrefabAsset: {fileID: 0}
+--- !u!20 &929176213 stripped
+Camera:
+  m_CorrespondingSourceObject: {fileID: 523518180277268234, guid: 7b86956310467cc499b30ab5246e1404, type: 3}
   m_PrefabInstance: {fileID: 929176211}
   m_PrefabAsset: {fileID: 0}
 --- !u!1001 &940996824
@@ -3405,6 +3411,17 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 3840499904778959769, guid: db9edc26f4891e541ab0b7eb14e52f50, type: 3}
   m_PrefabInstance: {fileID: 1839165478}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1791416828 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 3840499904778959844, guid: db9edc26f4891e541ab0b7eb14e52f50, type: 3}
+  m_PrefabInstance: {fileID: 1839165478}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &1839165478
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -3977,6 +3994,57 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c39f4f50730baa34f80f0c9f716e9a6f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!1 &2069868664
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2069868665}
+  - component: {fileID: 2069868666}
+  m_Layer: 0
+  m_Name: GamepadVibrator
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2069868665
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2069868664}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 680637147}
+  m_RootOrder: 6
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2069868666
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2069868664}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 411b7e637ea7396499c01049fb1d59d1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  vibrationStrengths:
+  - strength: 0
+    power: 0.1
+  - strength: 1
+    power: 0.2
+  - strength: 2
+    power: 0.4
 --- !u!1001 &2132581492
 PrefabInstance:
   m_ObjectHideFlags: 0
