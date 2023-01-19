@@ -989,7 +989,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   <MaxGreeningCount>k__BackingField: 0
-  targetRate: 0.1
+  targetRate: 0.05
   value: 0
 --- !u!114 &172863455
 MonoBehaviour:
@@ -9702,7 +9702,7 @@ Tilemap:
       m_TileIndex: 10
       m_TileSpriteIndex: 4294967295
       m_TileMatrixIndex: 0
-      m_TileColorIndex: 2
+      m_TileColorIndex: 4
       m_TileObjectToInstantiateIndex: 5
       dummyAlignment: 0
       m_AllTileFlags: 0
@@ -10332,7 +10332,7 @@ Tilemap:
       m_TileIndex: 10
       m_TileSpriteIndex: 4294967295
       m_TileMatrixIndex: 0
-      m_TileColorIndex: 2
+      m_TileColorIndex: 4
       m_TileObjectToInstantiateIndex: 5
       dummyAlignment: 0
       m_AllTileFlags: 0
@@ -16872,7 +16872,7 @@ Tilemap:
       m_TileIndex: 10
       m_TileSpriteIndex: 4294967295
       m_TileMatrixIndex: 0
-      m_TileColorIndex: 2
+      m_TileColorIndex: 4
       m_TileObjectToInstantiateIndex: 5
       dummyAlignment: 0
       m_AllTileFlags: 0
@@ -20002,7 +20002,7 @@ Tilemap:
       m_TileIndex: 10
       m_TileSpriteIndex: 4294967295
       m_TileMatrixIndex: 0
-      m_TileColorIndex: 2
+      m_TileColorIndex: 4
       m_TileObjectToInstantiateIndex: 5
       dummyAlignment: 0
       m_AllTileFlags: 0
@@ -20012,7 +20012,7 @@ Tilemap:
       m_TileIndex: 10
       m_TileSpriteIndex: 4294967295
       m_TileMatrixIndex: 0
-      m_TileColorIndex: 2
+      m_TileColorIndex: 4
       m_TileObjectToInstantiateIndex: 5
       dummyAlignment: 0
       m_AllTileFlags: 0
@@ -20022,7 +20022,7 @@ Tilemap:
       m_TileIndex: 10
       m_TileSpriteIndex: 4294967295
       m_TileMatrixIndex: 0
-      m_TileColorIndex: 2
+      m_TileColorIndex: 4
       m_TileObjectToInstantiateIndex: 5
       dummyAlignment: 0
       m_AllTileFlags: 0
@@ -30469,11 +30469,11 @@ Tilemap:
     m_Data: {r: 0.5377358, g: 0.21074374, b: 0, a: 1}
   - m_RefCount: 1457
     m_Data: {r: 0.9528302, g: 0.77501184, b: 0.32060635, a: 1}
-  - m_RefCount: 20
+  - m_RefCount: 14
     m_Data: {r: 1, g: 1, b: 1, a: 1}
   - m_RefCount: 42
     m_Data: {r: 1, g: 0, b: 0.78107977, a: 1}
-  - m_RefCount: 6
+  - m_RefCount: 12
     m_Data: {r: 0, g: 1, b: 0.86274505, a: 1}
   m_TileObjectToInstantiateArray:
   - m_RefCount: 1058
