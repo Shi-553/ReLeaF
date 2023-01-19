@@ -347,24 +347,30 @@ namespace ReLeaf
             nextButton.gameObject.SetActive(true);
             nextButton.onClick.AddListener(OnClick);
 
+            InputSystem.onAfterUpdate += OnAfterUpdate;
             var nowCount = eventCount;
 
             yield return null;
 
             while (true)
             {
-                if (Mouse.current.leftButton.wasReleasedThisFrame)
-                {
-                    nextButton.OnPointerClick(new(EventSystem.current));
-                }
                 if (eventCount != nowCount)
                     break;
                 yield return null;
             }
 
+            InputSystem.onAfterUpdate -= OnAfterUpdate;
 
             nextButton.gameObject.SetActive(false);
             nextButton.onClick.RemoveListener(OnClick);
+        }
+        void OnAfterUpdate()
+        {
+            if (Mouse.current.leftButton.wasReleasedThisFrame)
+            {
+                eventCount++;
+                nextButton.OnPointerClick(new(EventSystem.current));
+            }
         }
         void OnClick()
         {
