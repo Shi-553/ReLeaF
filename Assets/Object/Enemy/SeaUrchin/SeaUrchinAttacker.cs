@@ -86,7 +86,7 @@ namespace ReLeaf
             var poss = selects[enemyMover.DirNotZero.ToDirection().ToInt32()].InitWorldPositions;
             foreach (var pos in poss)
             {
-                var spine = Instantiate(seaUrchinAttackInfo.SpinePrefab, pos, Quaternion.identity);
+                var spine = Instantiate(seaUrchinAttackInfo.SpinePrefab, pos, Quaternion.identity, transform.parent);
                 spine.Init(enemyMover.DirNotZero);
                 currentAttackers.Add(spine);
             }
