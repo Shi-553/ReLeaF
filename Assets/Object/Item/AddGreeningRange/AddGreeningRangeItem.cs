@@ -2,13 +2,14 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Utility;
 
 namespace ReLeaf
 {
     public class AddGreeningRangeItem : ItemBase
     {
         AddGreeningRangeItemInfo Info => ItemBaseInfo as AddGreeningRangeItemInfo;
-
+        public AudioInfo addRange;
 
         Queue<TimePos> lateGreenings = new();
 
