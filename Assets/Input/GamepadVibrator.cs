@@ -36,9 +36,9 @@ namespace ReLeaf
             if (isFirstInit)
             {
                 vibrationStrengthDic = vibrationStrengths.ToDictionary(v => v.strength, v => v);
-
             }
         }
+
         protected override void UninitBeforeSceneUnload(bool isDestroy)
         {
             AllStop();
@@ -50,8 +50,12 @@ namespace ReLeaf
         void AllStop()
         {
             waits.Clear();
-            Gamepad.current.SetMotorSpeeds(0, 0);
             isCurrentVibration = false;
+            if (!isGamePad)
+            {
+                return;
+            }
+            Gamepad.current.SetMotorSpeeds(0, 0);
         }
 
         private void Start()
@@ -59,7 +63,30 @@ namespace ReLeaf
             var playerInput = EventSystem.current.GetComponent<PlayerInput>();
             UpdateIsGamepad(playerInput);
             playerInput.onControlsChanged += UpdateIsGamepad;
+
+            SceneLoader.Singleton.OnChangePause += OnChangePause;
         }
+        private void OnChangePause(bool isPause)
+        {
+            if (Gamepad.current == null)
+            {
+                return;
+            }
+            if (isPause)
+            {
+                if (isCurrentVibration)
+                    Gamepad.current.SetMotorSpeeds(0, 0);
+            }
+            else
+            {
+                if (isCurrentVibration)
+                {
+                    var power = vibrationStrengthDic[current.strength].power;
+                    Gamepad.current.SetMotorSpeeds(power, power);
+                }
+            }
+        }
+
 
         bool isGamePad = false;
         private void UpdateIsGamepad(PlayerInput playerInput)
@@ -131,6 +158,8 @@ namespace ReLeaf
                     waits.Clear();
                 return;
             }
+            if (SceneLoader.Singleton.IsPause)
+                return;
 
             if (isCurrentVibration && current.finishTime < Time.time)
                 needUpdate = true;
