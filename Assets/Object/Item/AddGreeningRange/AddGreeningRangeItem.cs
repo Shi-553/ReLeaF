@@ -9,7 +9,7 @@ namespace ReLeaf
     public class AddGreeningRangeItem : ItemBase
     {
         AddGreeningRangeItemInfo Info => ItemBaseInfo as AddGreeningRangeItemInfo;
-        public AudioInfo addRange;
+       
 
         Queue<TimePos> lateGreenings = new();
 
