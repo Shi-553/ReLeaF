@@ -101,6 +101,18 @@ TextureImporter:
     overridden: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: WebGL
+    maxTextureSize: 4096
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 0
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
     serializedVersion: 2
     sprites:
@@ -852,7 +864,7 @@ TextureImporter:
     nameFileIdTable:
       xbox_pc_33: -3398110612904090576
       xbox_pc_30: 6559322173501676240
-      xbox_pc_25: -6080304252555726388
+      RIGHTSHOLDER: 0
       SPACE: 0
       xbox_pc_9: 8660822007105767068
       xbox_pc_17: 4149497956533795302
@@ -873,8 +885,8 @@ TextureImporter:
       RIGHTTRIGGER: 0
       xbox_pc_31: 7813189306963446230
       xbox_pc_3: 6863974680941412074
-      xbox_pc_16: 3321895551514757180
       xbox_pc_23: 4746578111311344297
+      xbox_pc_16: 3321895551514757180
       xbox_pc_19: -6831429203350576815
       W: 0
       xbox_pc_26: -3194370683592893681
@@ -894,8 +906,8 @@ TextureImporter:
       xbox_pc_0: 1372433225173751871
       xbox_pc_8: -1911734184704410249
       xbox_pc_5: 7775427023773102539
+      xbox_pc_25: -6080304252555726388
       LEFTTRIGGER: 0
-      RIGHTSHOLDER: 0
   spritePackingTag: 
   pSDRemoveMatte: 0
   pSDShowRemoveMatteOption: 0
