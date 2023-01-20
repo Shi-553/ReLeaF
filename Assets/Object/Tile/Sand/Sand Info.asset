@@ -12,13 +12,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 50d2a8cd0648b2b468773354e530cdbb, type: 3}
   m_Name: Sand Info
   m_EditorClassIdentifier: 
-  tileType: -1
-  canEnemyMove: 0
+  tileType: 0
+  canEnemyMove: 1
   canEnemyAttack: 0
   canEnemyMoveAttack: 0
-  canGreening: 0
-  canGreeningUseSpecial: 0
+  canGreening: 1
+  canGreeningUseSpecial: 1
   isAlreadyGreening: 0
   isOnlyNormalFoundation: 0
-  roomMat: {fileID: 0}
-  noRoomMat: {fileID: 0}
+  roomMat: {fileID: 2100000, guid: 98040de0a491e8944bcbad1c000ccfb2, type: 2}
+  noRoomMat: {fileID: 2100000, guid: d37d05eadaa7e794cbfc2e5bbb891969, type: 2}
