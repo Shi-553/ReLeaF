@@ -12,9 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fa348be7177ed5b408bdb92299b80049, type: 3}
   m_Name: AddGreeningRangeItem Info
   m_EditorClassIdentifier: 
-  useSe: {fileID: 11400000, guid: 5d1d7acd0c8abe345bde8cdee18141c0, type: 2}
+  useSe: {fileID: 0}
   isImmediate: 0
   initAnimation: {fileID: 7400000, guid: 89c05b64b7dcd6a42bfb61cc3db3aa6c, type: 2}
   description: "{duration}\u79D2\u9593\u3001\u7DD1\u5316\u7BC4\u56F2\u3092\u62E1\u5927"
-  duration: 10
   addRange: 0.25
+  duration: 10
