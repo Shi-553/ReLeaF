@@ -112,7 +112,7 @@ namespace ReLeaf
             SetCursorLock(false);
             if (SceneLoader.Singleton != null)
                 SceneLoader.Singleton.OnChangePause -= OnChangePause;
-            ReLeafInputAction?.Disable();
+            ReLeafInputAction.Player.SetCallbacks(null);
         }
 
         void SetItemDir(Vector2 value)

@@ -567,7 +567,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: xbox_pc_22
+      name: BUTTONSOUTH
       rect:
         serializedVersion: 2
         x: 128
@@ -851,10 +851,10 @@ TextureImporter:
     secondaryTextures: []
     nameFileIdTable:
       xbox_pc_19: 1192978497
-      xbox_pc_23: -1451728619
+      LEFTTRIGGER: -741298594
       W: 87945187
       xbox_pc_26: -1779707530
-      xbox_pc_25: -1251575242
+      RIGHTSHOLDER: 1173384771
       LEFTBUTTON: -1768423610
       xbox_pc_4: 1177224162
       SPACE: 880632353
@@ -867,7 +867,6 @@ TextureImporter:
       xbox_pc_12: -291168026
       B: 15187532
       RIGHTSTICK: -81422956
-      xbox_pc_22: 1205437171
       xbox_pc_10: 1095789019
       xbox_pc_1: -1390846228
       WEAK: -1534154586
@@ -883,8 +882,9 @@ TextureImporter:
       RIGHTTRIGGER: 2000020547
       xbox_pc_3: 1516024415
       xbox_pc_31: -1577166906
-      LEFTTRIGGER: -741298594
-      RIGHTSHOLDER: 1173384771
+      BUTTONSOUTH: 1205437171
+      xbox_pc_23: -1451728619
+      xbox_pc_25: -1251575242
   spritePackingTag: 
   pSDRemoveMatte: 0
   pSDShowRemoveMatteOption: 0

@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 7d05483f66a84e240863781c74d45b36
+guid: a9151ea620eb94f4b8418bd8fb678870
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -126,7 +126,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: LEFTTRIGGER
+      name: xbox_pc_5
       rect:
         serializedVersion: 2
         x: 0
@@ -140,533 +140,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 00000000000000000800000000000000
-      internalID: 0
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: xbox_pc_17
-      rect:
-        serializedVersion: 2
-        x: 0
-        y: 264
-        width: 128
-        height: 128
-      alignment: 9
-      pivot: {x: 0, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: 6e9f76f086af59930800000000000000
-      internalID: 4149497956533795302
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: RIGHTSHOLDER
-      rect:
-        serializedVersion: 2
-        x: 0
-        y: 396
-        width: 128
-        height: 128
-      alignment: 9
-      pivot: {x: 0, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: 00000000000000000800000000000000
-      internalID: 0
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: xbox_pc_19
-      rect:
-        serializedVersion: 2
-        x: 0
-        y: 528
-        width: 128
-        height: 128
-      alignment: 9
-      pivot: {x: 0, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: 1512f028553e131a0800000000000000
-      internalID: -6831429203350576815
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: RIGHTTRIGGER
-      rect:
-        serializedVersion: 2
-        x: 0
-        y: 660
-        width: 128
-        height: 128
-      alignment: 9
-      pivot: {x: 0, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: 00000000000000000800000000000000
-      internalID: 0
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: xbox_pc_22
-      rect:
-        serializedVersion: 2
-        x: 0
-        y: 792
-        width: 128
-        height: 128
-      alignment: 9
-      pivot: {x: 0, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: 75f9664782dd99d40800000000000000
-      internalID: 5591743578178494295
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: xbox_pc_15
-      rect:
-        serializedVersion: 2
-        x: 132
-        y: 0
-        width: 128
-        height: 128
-      alignment: 9
-      pivot: {x: 0, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: c4f4fca189f2e3840800000000000000
-      internalID: 5205650549618200396
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: xbox_pc_23
-      rect:
-        serializedVersion: 2
-        x: 264
-        y: 0
-        width: 128
-        height: 128
-      alignment: 9
-      pivot: {x: 0, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: 9a27b5fc4ab3fd140800000000000000
-      internalID: 4746578111311344297
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: xbox_pc_25
-      rect:
-        serializedVersion: 2
-        x: 396
-        y: 0
-        width: 128
-        height: 128
-      alignment: 9
-      pivot: {x: 0, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: cc17e144f7b6e9ba0800000000000000
-      internalID: -6080304252555726388
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: xbox_pc_26
-      rect:
-        serializedVersion: 2
-        x: 528
-        y: 0
-        width: 128
-        height: 128
-      alignment: 9
-      pivot: {x: 0, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: f0b168ba9c05ba3d0800000000000000
-      internalID: -3194370683592893681
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: B
-      rect:
-        serializedVersion: 2
-        x: 660
-        y: 0
-        width: 128
-        height: 128
-      alignment: 9
-      pivot: {x: 0, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: 00000000000000000800000000000000
-      internalID: 0
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: SCROLL_Y
-      rect:
-        serializedVersion: 2
-        x: 792
-        y: 0
-        width: 128
-        height: 128
-      alignment: 9
-      pivot: {x: 0, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: 00000000000000000800000000000000
-      internalID: 0
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: W
-      rect:
-        serializedVersion: 2
-        x: 132
-        y: 132
-        width: 128
-        height: 128
-      alignment: 9
-      pivot: {x: 0, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: 00000000000000000800000000000000
-      internalID: 0
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: xbox_pc_31
-      rect:
-        serializedVersion: 2
-        x: 132
-        y: 264
-        width: 128
-        height: 128
-      alignment: 9
-      pivot: {x: 0, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: 6d9cf6457460e6c60800000000000000
-      internalID: 7813189306963446230
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: xbox_pc_24
-      rect:
-        serializedVersion: 2
-        x: 132
-        y: 396
-        width: 128
-        height: 128
-      alignment: 9
-      pivot: {x: 0, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: bb3ca9cd079110f70800000000000000
-      internalID: 9151623890321720251
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: LEFTBUTTON
-      rect:
-        serializedVersion: 2
-        x: 132
-        y: 528
-        width: 128
-        height: 128
-      alignment: 9
-      pivot: {x: 0, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: 00000000000000000800000000000000
-      internalID: 0
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: LEFTSHOLDER
-      rect:
-        serializedVersion: 2
-        x: 132
-        y: 660
-        width: 128
-        height: 128
-      alignment: 9
-      pivot: {x: 0, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: 00000000000000000800000000000000
-      internalID: 0
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: xbox_pc_12
-      rect:
-        serializedVersion: 2
-        x: 132
-        y: 792
-        width: 128
-        height: 128
-      alignment: 9
-      pivot: {x: 0, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: 6b1869fe788368a40800000000000000
-      internalID: 5370041762177253814
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Q
-      rect:
-        serializedVersion: 2
-        x: 264
-        y: 132
-        width: 128
-        height: 128
-      alignment: 9
-      pivot: {x: 0, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: 26fbbb212ee6cc960800000000000000
-      internalID: 7623590186487365474
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: WEAK
-      rect:
-        serializedVersion: 2
-        x: 396
-        y: 132
-        width: 128
-        height: 128
-      alignment: 9
-      pivot: {x: 0, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: 04e9f9676d7e895b0800000000000000
-      internalID: -5361280448085385664
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: xbox_pc_0
-      rect:
-        serializedVersion: 2
-        x: 528
-        y: 132
-        width: 128
-        height: 128
-      alignment: 9
-      pivot: {x: 0, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: f38dc603fbcdb0310800000000000000
-      internalID: 1372433225173751871
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: xbox_pc_1
-      rect:
-        serializedVersion: 2
-        x: 660
-        y: 132
-        width: 128
-        height: 128
-      alignment: 9
-      pivot: {x: 0, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: bc3713b6b28dfcac0800000000000000
-      internalID: -3832607076875406389
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: xbox_pc_2
-      rect:
-        serializedVersion: 2
-        x: 792
-        y: 132
-        width: 128
-        height: 128
-      alignment: 9
-      pivot: {x: 0, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: 8f7d5c1a286cd9670800000000000000
-      internalID: 8547205932181215224
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: xbox_pc_3
-      rect:
-        serializedVersion: 2
-        x: 264
-        y: 264
-        width: 128
-        height: 128
-      alignment: 9
-      pivot: {x: 0, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: aeeb9ccfa9cb14f50800000000000000
-      internalID: 6863974680941412074
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: xbox_pc_13
-      rect:
-        serializedVersion: 2
-        x: 264
-        y: 396
-        width: 128
-        height: 128
-      alignment: 9
-      pivot: {x: 0, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: 791e046b01aaea890800000000000000
-      internalID: -7444826145242947177
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: xbox_pc_4
-      rect:
-        serializedVersion: 2
-        x: 264
-        y: 528
-        width: 128
-        height: 128
-      alignment: 9
-      pivot: {x: 0, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: 60c52467936be9f50800000000000000
-      internalID: 6890144837836889094
+      spriteID: bc1f7f0aeadd7eb60800000000000000
+      internalID: 7775427023773102539
       vertices: []
       indices: 
       edges: []
@@ -675,8 +150,8 @@ TextureImporter:
       name: xbox_pc_6
       rect:
         serializedVersion: 2
-        x: 264
-        y: 660
+        x: 0
+        y: 264
         width: 128
         height: 128
       alignment: 9
@@ -696,8 +171,8 @@ TextureImporter:
       name: xbox_pc_7
       rect:
         serializedVersion: 2
-        x: 264
-        y: 792
+        x: 0
+        y: 396
         width: 128
         height: 128
       alignment: 9
@@ -714,53 +189,11 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: LEFTSTICK
-      rect:
-        serializedVersion: 2
-        x: 396
-        y: 264
-        width: 128
-        height: 128
-      alignment: 9
-      pivot: {x: 0, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: 00000000000000000800000000000000
-      internalID: 0
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: RIGHTSTICK
-      rect:
-        serializedVersion: 2
-        x: 528
-        y: 264
-        width: 128
-        height: 128
-      alignment: 9
-      pivot: {x: 0, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: 00000000000000000800000000000000
-      internalID: 0
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
       name: xbox_pc_10
       rect:
         serializedVersion: 2
-        x: 660
-        y: 264
+        x: 0
+        y: 528
         width: 128
         height: 128
       alignment: 9
@@ -780,8 +213,8 @@ TextureImporter:
       name: xbox_pc_11
       rect:
         serializedVersion: 2
-        x: 792
-        y: 264
+        x: 0
+        y: 660
         width: 128
         height: 128
       alignment: 9
@@ -798,7 +231,574 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: xbox_pc_5
+      name: xbox_pc_12
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 792
+        width: 128
+        height: 128
+      alignment: 9
+      pivot: {x: 0, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 6b1869fe788368a40800000000000000
+      internalID: 5370041762177253814
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: xbox_pc_4
+      rect:
+        serializedVersion: 2
+        x: 132
+        y: 0
+        width: 128
+        height: 128
+      alignment: 9
+      pivot: {x: 0, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 60c52467936be9f50800000000000000
+      internalID: 6890144837836889094
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: xbox_pc_13
+      rect:
+        serializedVersion: 2
+        x: 264
+        y: 0
+        width: 128
+        height: 128
+      alignment: 9
+      pivot: {x: 0, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 791e046b01aaea890800000000000000
+      internalID: -7444826145242947177
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: xbox_pc_17
+      rect:
+        serializedVersion: 2
+        x: 396
+        y: 0
+        width: 128
+        height: 128
+      alignment: 9
+      pivot: {x: 0, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 6e9f76f086af59930800000000000000
+      internalID: 4149497956533795302
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: xbox_pc_19
+      rect:
+        serializedVersion: 2
+        x: 528
+        y: 0
+        width: 128
+        height: 128
+      alignment: 9
+      pivot: {x: 0, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 1512f028553e131a0800000000000000
+      internalID: -6831429203350576815
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BUTTONSOUTH
+      rect:
+        serializedVersion: 2
+        x: 660
+        y: 0
+        width: 128
+        height: 128
+      alignment: 9
+      pivot: {x: 0, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 15f544a1153099b20800000000000000
+      internalID: 3141545861935554385
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: xbox_pc_23
+      rect:
+        serializedVersion: 2
+        x: 792
+        y: 0
+        width: 128
+        height: 128
+      alignment: 9
+      pivot: {x: 0, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 9a27b5fc4ab3fd140800000000000000
+      internalID: 4746578111311344297
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: xbox_pc_24
+      rect:
+        serializedVersion: 2
+        x: 132
+        y: 132
+        width: 128
+        height: 128
+      alignment: 9
+      pivot: {x: 0, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: bb3ca9cd079110f70800000000000000
+      internalID: 9151623890321720251
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: xbox_pc_25
+      rect:
+        serializedVersion: 2
+        x: 132
+        y: 264
+        width: 128
+        height: 128
+      alignment: 9
+      pivot: {x: 0, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: cc17e144f7b6e9ba0800000000000000
+      internalID: -6080304252555726388
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: xbox_pc_15
+      rect:
+        serializedVersion: 2
+        x: 132
+        y: 396
+        width: 128
+        height: 128
+      alignment: 9
+      pivot: {x: 0, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c4f4fca189f2e3840800000000000000
+      internalID: 5205650549618200396
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: xbox_pc_26
+      rect:
+        serializedVersion: 2
+        x: 132
+        y: 528
+        width: 128
+        height: 128
+      alignment: 9
+      pivot: {x: 0, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f0b168ba9c05ba3d0800000000000000
+      internalID: -3194370683592893681
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: xbox_pc_3
+      rect:
+        serializedVersion: 2
+        x: 132
+        y: 660
+        width: 128
+        height: 128
+      alignment: 9
+      pivot: {x: 0, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: aeeb9ccfa9cb14f50800000000000000
+      internalID: 6863974680941412074
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: xbox_pc_1
+      rect:
+        serializedVersion: 2
+        x: 132
+        y: 792
+        width: 128
+        height: 128
+      alignment: 9
+      pivot: {x: 0, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: bc3713b6b28dfcac0800000000000000
+      internalID: -3832607076875406389
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: B
+      rect:
+        serializedVersion: 2
+        x: 264
+        y: 132
+        width: 128
+        height: 128
+      alignment: 9
+      pivot: {x: 0, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 43e17a1d4f08bdae0800000000000000
+      internalID: -1523482259957014988
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: LEFTBUTTON
+      rect:
+        serializedVersion: 2
+        x: 396
+        y: 132
+        width: 128
+        height: 128
+      alignment: 9
+      pivot: {x: 0, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 197fc96a4d77c25b0800000000000000
+      internalID: -5391802898657249391
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: LEFTSHOLDER
+      rect:
+        serializedVersion: 2
+        x: 528
+        y: 132
+        width: 128
+        height: 128
+      alignment: 9
+      pivot: {x: 0, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b7db269bb93456990800000000000000
+      internalID: -7393428877149553285
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: LEFTSTICK
+      rect:
+        serializedVersion: 2
+        x: 660
+        y: 132
+        width: 128
+        height: 128
+      alignment: 9
+      pivot: {x: 0, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 4960034f1fdbb3ae0800000000000000
+      internalID: -1568451198326929772
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: LEFTTRIGGER
+      rect:
+        serializedVersion: 2
+        x: 792
+        y: 132
+        width: 128
+        height: 128
+      alignment: 9
+      pivot: {x: 0, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: caaddbe028f2c2e80800000000000000
+      internalID: -8202128585708938580
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Q
+      rect:
+        serializedVersion: 2
+        x: 264
+        y: 264
+        width: 128
+        height: 128
+      alignment: 9
+      pivot: {x: 0, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 26fbbb212ee6cc960800000000000000
+      internalID: 7623590186487365474
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: xbox_pc_2
+      rect:
+        serializedVersion: 2
+        x: 264
+        y: 396
+        width: 128
+        height: 128
+      alignment: 9
+      pivot: {x: 0, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 8f7d5c1a286cd9670800000000000000
+      internalID: 8547205932181215224
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: RIGHTSHOLDER
+      rect:
+        serializedVersion: 2
+        x: 264
+        y: 528
+        width: 128
+        height: 128
+      alignment: 9
+      pivot: {x: 0, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d8b4d3a7dd88988d0800000000000000
+      internalID: -2843591204887770227
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: RIGHTTRIGGER
+      rect:
+        serializedVersion: 2
+        x: 264
+        y: 660
+        width: 128
+        height: 128
+      alignment: 9
+      pivot: {x: 0, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 10d9acf7b125482f0800000000000000
+      internalID: -971561341543604991
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SCROLL_Y
+      rect:
+        serializedVersion: 2
+        x: 264
+        y: 792
+        width: 128
+        height: 128
+      alignment: 9
+      pivot: {x: 0, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b630f5d0966449430800000000000000
+      internalID: 3788730603535270763
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SPACE
+      rect:
+        serializedVersion: 2
+        x: 396
+        y: 264
+        width: 128
+        height: 128
+      alignment: 9
+      pivot: {x: 0, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d339285017fda65f0800000000000000
+      internalID: -762551510369135811
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: W
+      rect:
+        serializedVersion: 2
+        x: 528
+        y: 264
+        width: 128
+        height: 128
+      alignment: 9
+      pivot: {x: 0, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c31e59777b0e97640800000000000000
+      internalID: 5078337133426893116
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: WEAK
+      rect:
+        serializedVersion: 2
+        x: 660
+        y: 264
+        width: 128
+        height: 128
+      alignment: 9
+      pivot: {x: 0, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 04e9f9676d7e895b0800000000000000
+      internalID: -5361280448085385664
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: xbox_pc_0
+      rect:
+        serializedVersion: 2
+        x: 792
+        y: 264
+        width: 128
+        height: 128
+      alignment: 9
+      pivot: {x: 0, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f38dc603fbcdb0310800000000000000
+      internalID: 1372433225173751871
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: RIGHTSTICK
       rect:
         serializedVersion: 2
         x: 396
@@ -812,14 +812,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: bc1f7f0aeadd7eb60800000000000000
-      internalID: 7775427023773102539
+      spriteID: 3f05cbae29ed24900800000000000000
+      internalID: 667340417389056243
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: SPACE
+      name: xbox_pc_31
       rect:
         serializedVersion: 2
         x: 396
@@ -833,8 +833,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 00000000000000000800000000000000
-      internalID: 0
+      spriteID: 6d9cf6457460e6c60800000000000000
+      internalID: 7813189306963446230
       vertices: []
       indices: 
       edges: []
@@ -850,52 +850,41 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      xbox_pc_33: -3398110612904090576
-      xbox_pc_30: 6559322173501676240
+      xbox_pc_19: -6831429203350576815
+      xbox_pc_23: 4746578111311344297
+      W: 5078337133426893116
+      xbox_pc_26: -3194370683592893681
       xbox_pc_25: -6080304252555726388
-      SPACE: 0
-      xbox_pc_9: 8660822007105767068
+      LEFTBUTTON: -5391802898657249391
+      xbox_pc_4: 6890144837836889094
+      SPACE: -762551510369135811
       xbox_pc_17: 4149497956533795302
       xbox_pc_15: 5205650549618200396
-      xbox_pc_2: 8547205932181215224
-      xbox_pc_12: 5370041762177253814
-      xbox_pc_14: 1106309050610713019
-      RIGHTSTICK: 0
-      xbox_pc_10: 9181670322943419722
-      WEAK: -5361280448085385664
-      xbox_pc_1: -3832607076875406389
-      ATTACK: 1160086691768176176
-      xbox_pc_7: -6735138634237626353
-      LEFTSTICK: 0
-      xbox_pc_13: -7444826145242947177
-      xbox_pc_6: -8096097813070077266
-      xbox_pc_29: -6271640411740140816
-      RIGHTTRIGGER: 0
-      xbox_pc_31: 7813189306963446230
-      xbox_pc_3: 6863974680941412074
-      xbox_pc_16: 3321895551514757180
-      xbox_pc_23: 4746578111311344297
-      xbox_pc_19: -6831429203350576815
-      W: 0
-      xbox_pc_26: -3194370683592893681
-      LEFTBUTTON: 0
-      xbox_pc_4: 6890144837836889094
-      xbox_pc_32: -7802866142180577572
       xbox_pc_11: -746266198540466722
       xbox_pc_24: 9151623890321720251
-      xbox_pc_27: -809375988500695306
       Q: 7623590186487365474
-      B: 0
-      xbox_pc_18: -6466002691477492567
-      xbox_pc_20: -7052409323454658965
-      xbox_pc_22: 5591743578178494295
-      SCROLL_Y: 0
-      LEFTSHOLDER: 0
+      xbox_pc_2: 8547205932181215224
+      xbox_pc_12: 5370041762177253814
+      B: -1523482259957014988
+      RIGHTSTICK: 667340417389056243
+      xbox_pc_10: 9181670322943419722
+      xbox_pc_1: -3832607076875406389
+      SCROLL_Y: 3788730603535270763
+      LEFTSHOLDER: -7393428877149553285
+      WEAK: -5361280448085385664
+      ATTACK: 1160086691768176176
+      xbox_pc_7: -6735138634237626353
+      LEFTSTICK: -1568451198326929772
+      xbox_pc_6: -8096097813070077266
+      xbox_pc_13: -7444826145242947177
       xbox_pc_0: 1372433225173751871
-      xbox_pc_8: -1911734184704410249
       xbox_pc_5: 7775427023773102539
-      LEFTTRIGGER: 0
-      RIGHTSHOLDER: 0
+      RIGHTTRIGGER: -971561341543604991
+      xbox_pc_3: 6863974680941412074
+      xbox_pc_31: 7813189306963446230
+      BUTTONSOUTH: 3141545861935554385
+      LEFTTRIGGER: -8202128585708938580
+      RIGHTSHOLDER: -2843591204887770227
   spritePackingTag: 
   pSDRemoveMatte: 0
   pSDShowRemoveMatteOption: 0
