@@ -55,7 +55,7 @@ namespace ReLeaf
             {
                 return;
             }
-            Gamepad.current.SetMotorSpeeds(0, 0);
+            gamePad.SetMotorSpeeds(0, 0);
         }
 
         private void Start()
@@ -68,30 +68,37 @@ namespace ReLeaf
         }
         private void OnChangePause(bool isPause)
         {
-            if (Gamepad.current == null)
+            if (!isGamePad)
             {
                 return;
             }
             if (isPause)
             {
                 if (isCurrentVibration)
-                    Gamepad.current.SetMotorSpeeds(0, 0);
+                    gamePad.SetMotorSpeeds(0, 0);
             }
             else
             {
                 if (isCurrentVibration)
                 {
                     var power = vibrationStrengthDic[current.strength].power;
-                    Gamepad.current.SetMotorSpeeds(power, power);
+                    gamePad.SetMotorSpeeds(power, power);
                 }
             }
         }
 
 
         bool isGamePad = false;
+        Gamepad gamePad;
         private void UpdateIsGamepad(PlayerInput playerInput)
         {
             isGamePad = playerInput.currentControlScheme == "Gamepad";
+
+            foreach (var pad in Gamepad.all)
+            {
+                pad.SetMotorSpeeds(0, 0);
+            }
+            gamePad = isGamePad ? Gamepad.current : null;
         }
 
         HashSet<VibrationState> waits = new();
@@ -172,7 +179,7 @@ namespace ReLeaf
             if (waits.Count == 0)
             {
                 isCurrentVibration = false;
-                Gamepad.current.SetMotorSpeeds(0, 0);
+                gamePad.SetMotorSpeeds(0, 0);
                 return;
             }
 
@@ -183,7 +190,7 @@ namespace ReLeaf
             waits.RemoveWhere(v => v.finishTime <= current.finishTime);
 
             var power = vibrationStrengthDic[current.strength].power;
-            Gamepad.current.SetMotorSpeeds(power, power);
+            gamePad.SetMotorSpeeds(power, power);
         }
 
 
