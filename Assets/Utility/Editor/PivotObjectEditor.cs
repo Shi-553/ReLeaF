@@ -1,3 +1,4 @@
+using DebugLogExtension;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -123,6 +124,7 @@ namespace EditorScripts
     {
         public override void OnToolGUI(EditorWindow window)
         {
+            Tools.pivotMode = PivotMode.Pivot;
 
             // これ以降に定義されるGUIの変更を監視する
             EditorGUI.BeginChangeCheck();
@@ -167,6 +169,7 @@ namespace EditorScripts
                 var deltaPosition = pos - Tools.handlePosition;
                 var deltaRotate = rotate * Quaternion.Inverse(Tools.handleRotation);
 
+                deltaPosition.DebugLog();
                 var poss = parentAndChilds.Select(t => t.position).ToArray();
                 var rotates = parentAndChilds.Select(t => t.rotation).ToArray();
 
@@ -174,15 +177,13 @@ namespace EditorScripts
                 // その差分を現在ヒエラルキーで選択しているすべてのオブジェクトに対して適用する
                 for (int i = 0; i < parentCount; i++)
                 {
-                    parentAndChilds[i].rotation = deltaRotate * rotates[i];
-                    parentAndChilds[i].position = poss[i] + deltaPosition;
+                    parentAndChilds[i].SetPositionAndRotation(poss[i] + deltaPosition, deltaRotate * rotates[i]);
                 }
 
                 // その子供に影響のないようにする
                 for (int i = parentCount; i < parentAndChilds.Length; i++)
                 {
-                    parentAndChilds[i].rotation = rotates[i];
-                    parentAndChilds[i].position = poss[i];
+                    parentAndChilds[i].SetPositionAndRotation(poss[i], rotates[i]);
                 }
             }
         }
