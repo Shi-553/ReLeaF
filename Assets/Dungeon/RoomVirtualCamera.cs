@@ -9,6 +9,7 @@ namespace ReLeaf
         CinemachineVirtualCamera virtualCamera;
         CinemachineTargetGroup cinemachineTarget;
         Transform minTrans, maxTrans;
+        public AudioInfo seRoomBlast;
 
         public override bool DontDestroyOnLoad => false;
 
@@ -32,6 +33,7 @@ namespace ReLeaf
         }
         public void BeginRoomBlast(Vector3 min, Vector3 max)
         {
+            SEManager.Singleton.Play(seRoomBlast);
             minTrans.position = min;
             maxTrans.position = max;
             virtualCamera.Priority = 20;

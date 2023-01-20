@@ -9,7 +9,7 @@ namespace ReLeaf
     public class EnemyStanItem : ItemBase
     {
         EnemyStanItemInfo Info => ItemBaseInfo as EnemyStanItemInfo;
-
+        
         public override void PreviewRange(Vector2Int tilePos, Vector2Int dir, HashSet<Vector2Int> returns)
         {
         }
@@ -24,6 +24,7 @@ namespace ReLeaf
             RoomManager.Singleton.GetAllEnemyCores(cores);
 
             cores.ForEach(core => core.Stan());
+           
 
             yield return new WaitForSeconds(Info.Duration);
 

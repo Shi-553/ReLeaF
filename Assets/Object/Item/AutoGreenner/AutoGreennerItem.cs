@@ -8,7 +8,7 @@ namespace ReLeaf
     public class AutoGreennerItem : ItemBase
     {
         AutoGreennerItemInfo Info => ItemBaseInfo as AutoGreennerItemInfo;
-
+  
         void Add(HashSet<Vector2Int> returns, Vector2Int pos)
         {
             if (!DungeonManager.Singleton.TryGetTile(pos, out var tile))
@@ -54,6 +54,8 @@ namespace ReLeaf
 
             List<Vector2Int> target = new(buffetLength);
             List<Vector2Int> buffer = new(buffetLength);
+
+      
 
             target.Add(tilePos);
 

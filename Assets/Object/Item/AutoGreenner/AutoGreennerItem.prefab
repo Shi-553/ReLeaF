@@ -165,6 +165,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   itemBaseInfo: {fileID: 11400000, guid: 7bb551fe75255804f995a30bb151487c, type: 2}
+  greeningAuto: {fileID: 11400000, guid: 2545d66e7020d1e489830ccedaec32da, type: 2}
 --- !u!58 &4384070283387547719
 CircleCollider2D:
   m_ObjectHideFlags: 0
