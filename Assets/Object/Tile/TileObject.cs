@@ -1,10 +1,10 @@
-﻿using UnityEngine;
+using UnityEngine;
 using UnityEngine.Tilemaps;
 using Utility;
 
 namespace ReLeaf
 {
-    public class TileObject : PoolableMonoBehaviour
+    public class TileObject : PoolableMonoBehaviour, ISetRoom
     {
         [SerializeField]
         TileObjectInfo info;
@@ -45,5 +45,7 @@ namespace ReLeaf
         {
             IsInvincible = false;
         }
+        public Room Room { get; private set; }
+        public virtual void SetRoom(Room room) => Room = room;
     }
 }

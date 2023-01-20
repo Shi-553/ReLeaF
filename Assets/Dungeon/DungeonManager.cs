@@ -208,6 +208,8 @@ namespace ReLeaf
 
             if (TryGetTile(pos, out var afterTile))
             {
+                afterTile.SetRoom(before.Room);
+
                 if (before.HasParent)
                     afterTile.Parent = before.Parent;
 
