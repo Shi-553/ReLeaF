@@ -6,7 +6,6 @@ namespace Utility
     public class Rigidbody2DMover : MonoBehaviour
     {
         Rigidbody2D rigid;
-        Vector2 move;
 
         public bool UseUnScaledTime { get; set; } = false;
         float DeltaTime => UseUnScaledTime ? Time.unscaledDeltaTime : Time.deltaTime;
@@ -20,16 +19,23 @@ namespace Utility
 
         }
 
+        Vector2 move;
+        Vector2 beforeMove;
         public void MoveDelta(Vector2 m)
         {
-            move += DeltaTime * m;
+            move += m;
+        }
+        private void LateUpdate()
+        {
+            beforeMove = move;
+            move = Vector2.zero;
         }
         private void FixedUpdate()
         {
-            IsMove = move != Vector2.zero;
+            IsMove = beforeMove != Vector2.zero;
 
-            rigid.MovePosition(Position + move);
-            move = Vector2.zero;
+            if (IsMove)
+                rigid.MovePosition(Position + DeltaTime * beforeMove);
         }
 
     }
