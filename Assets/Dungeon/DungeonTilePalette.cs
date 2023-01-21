@@ -21,7 +21,6 @@ namespace ReLeaf
         {
             if (isFirstInit)
             {
-                terrainTileArrays.ForEach(arr => arr.Sort());
 
                 var dic = terrainTileArrays.ToDictionary(t => t.tiles.First().CurrentTileObject.TileType, t => t.tiles);
 

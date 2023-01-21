@@ -1,7 +1,6 @@
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.Linq;
 using UnityEngine;
 using UnityEngine.Tilemaps;
 using Utility;
@@ -14,12 +13,6 @@ namespace ReLeaf
         [SerializeField]
         public TerrainTile[] tiles;
 
-        public void Sort()
-        {
-            tiles = tiles
-                .OrderBy(t => (t.CurrentTileObject as IMultipleVisual).VisualType)
-                .ToArray();
-        }
     }
     [ClassSummary("タイルマップマネージャー")]
     public class DungeonManager : SingletonBase<DungeonManager>

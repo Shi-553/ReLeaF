@@ -5171,7 +5171,6 @@ MonoBehaviour:
     - {fileID: 11400000, guid: 0990de19b010e804cbbe751cea55c8be, type: 2}
     - {fileID: 11400000, guid: 81a1563989d403044b505a819f2a84ff, type: 2}
     - {fileID: 11400000, guid: 9421bdc41130d9b459fc14ced76c705b, type: 2}
-    - {fileID: 11400000, guid: 9421bdc41130d9b459fc14ced76c705b, type: 2}
     - {fileID: 11400000, guid: 59abaac76a44b514ea291579e71fc49e, type: 2}
     - {fileID: 11400000, guid: bd5b88351b5b8854c901cec879eee8d6, type: 2}
   - tiles:
