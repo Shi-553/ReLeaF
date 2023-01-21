@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections;
 using System.Linq;
 using UnityEngine;
@@ -212,17 +212,19 @@ namespace Utility
         {
             Time.timeScale = 0;
 
-            foreach (var obj in Current.GetRootGameObjects())
-            {
-                obj.SetActive(false);
-            }
-            yield return SceneManager.UnloadSceneAsync(Current.buildIndex);
-
-            Debug.Log($"Unoverride to <b>{CurrentType}</b>");
+            var pauseScene = Current;
 
             Current = Background.Value;
             Background = null;
             SceneManager.SetActiveScene(Current);
+            Debug.Log($"Unoverride to <b>{CurrentType}</b>");
+
+            foreach (var obj in pauseScene.GetRootGameObjects())
+            {
+                obj.SetActive(false);
+            }
+            yield return SceneManager.UnloadSceneAsync(pauseScene.buildIndex);
+
 
 
             OnChangePause?.Invoke(false);
