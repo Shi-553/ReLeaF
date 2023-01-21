@@ -346,13 +346,18 @@ namespace ReLeaf
         IEnumerator WaitButton()
         {
             nextButton.gameObject.SetActive(true);
-            nextButton.onClick.AddListener(OnClick);
 
-            InputSystem.onAfterUpdate += OnAfterUpdate;
+            PlayerController.Singleton.ReLeafInputAction.UI.Submit.started += Submit;
+            PlayerController.Singleton.ReLeafInputAction.UI.LeftClick.performed += Submit;
             var nowCount = eventCount;
 
             yield return null;
 
+            if (EventSystem.current.currentInputModule != null)
+            {
+                EventSystem.current.currentInputModule.enabled = false;
+                EventSystem.current.currentInputModule.enabled = true;
+            }
             while (true)
             {
                 if (eventCount != nowCount)
@@ -360,23 +365,21 @@ namespace ReLeaf
                 yield return null;
             }
 
-            InputSystem.onAfterUpdate -= OnAfterUpdate;
+            PlayerController.Singleton.ReLeafInputAction.UI.Submit.started -= Submit;
+            PlayerController.Singleton.ReLeafInputAction.UI.LeftClick.performed -= Submit;
 
             nextButton.gameObject.SetActive(false);
-            nextButton.onClick.RemoveListener(OnClick);
         }
-        void OnAfterUpdate()
+
+        private void Submit(InputAction.CallbackContext obj)
         {
-            if (Mouse.current.leftButton.wasReleasedThisFrame)
-            {
-                eventCount++;
-                nextButton.OnPointerClick(new(EventSystem.current));
-            }
-        }
-        void OnClick()
-        {
+            if (SceneLoader.Singleton.IsPause || obj.ReadValue<float>() == 0)
+                return;
+
+            nextButton.OnPointerClick(new(EventSystem.current));
             eventCount++;
         }
+
         IEnumerator WaitAction(InputAction action)
         {
             yield return new WaitUntil(() => action.IsPressed());

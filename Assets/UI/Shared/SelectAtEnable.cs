@@ -1,4 +1,4 @@
-﻿using UnityEngine;
+using UnityEngine;
 using UnityEngine.EventSystems;
 using Utility;
 
@@ -24,15 +24,7 @@ namespace ReLeaf
         {
             if (EventSystem.current != null)
             {
-
                 EventSystemUtility.SetSelectedGameObjectNoFade(Target);
-
-                if (EventSystem.current.currentInputModule != null)
-                {
-                    EventSystem.current.currentInputModule.enabled = false;
-                    EventSystem.current.currentInputModule.enabled = true;
-
-                }
             }
 
         }

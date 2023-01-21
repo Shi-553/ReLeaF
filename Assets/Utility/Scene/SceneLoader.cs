@@ -164,6 +164,13 @@ namespace Utility
 
             OnFinishFadein?.Invoke();
 
+
+            if (EventSystem.current.currentInputModule != null)
+            {
+                EventSystem.current.currentInputModule.enabled = false;
+                EventSystem.current.currentInputModule.enabled = true;
+            }
+
         }
 
         public void OverrideScene(SceneType scene)
@@ -207,6 +214,13 @@ namespace Utility
             $"Override to <b>{CurrentType}</b>".DebugLog();
 
             changeing = null;
+
+
+            if (EventSystem.current.currentInputModule != null)
+            {
+                EventSystem.current.currentInputModule.enabled = false;
+                EventSystem.current.currentInputModule.enabled = true;
+            }
         }
 
         IEnumerator UnoverrideAsync()
@@ -237,6 +251,13 @@ namespace Utility
                 .ForEach((t) => t.Item1.interactable = t.Item2);
 
             EventSystemUtility.SetSelectedGameObjectNoFade(oldSelected);
+
+
+            if (EventSystem.current.currentInputModule != null)
+            {
+                EventSystem.current.currentInputModule.enabled = false;
+                EventSystem.current.currentInputModule.enabled = true;
+            }
         }
 
 #endif
