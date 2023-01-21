@@ -1,4 +1,5 @@
-﻿using System;
+using DebugLogExtension;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -46,7 +47,7 @@ namespace Utility
                 if (enumerablePool is Pool pool)
                     return pool;
 
-                Debug.LogError("Aleady Using");
+                "Aleady Using".DebugLogError();
                 return null;
             }
 
@@ -78,7 +79,7 @@ namespace Utility
                 if (enumerablePool is PoolArray array)
                     return array;
 
-                Debug.LogError("Aleady Using");
+                "Aleady Using".DebugLogError();
                 return null;
             }
 
@@ -118,7 +119,7 @@ namespace Utility
 
 #if UNITY_EDITOR
             if (p == null)
-                Debug.LogError("Pool Prefab null!!!");
+                "Pool Prefab null!!!".DebugLogError();
 #endif
 
             DefaultCapacity = defaultCapacity;
@@ -240,7 +241,7 @@ namespace Utility
                 if (pools[index] is Pool pool)
                     return pool;
 
-                Debug.LogError("Aleady Using");
+                "Aleady Using".DebugLogError();
                 return null;
             }
 
@@ -267,7 +268,7 @@ namespace Utility
                 if (pools[index] is PoolArray array)
                     return array;
 
-                Debug.LogError("Aleady Using");
+                "Aleady Using".DebugLogError();
                 return null;
             }
 

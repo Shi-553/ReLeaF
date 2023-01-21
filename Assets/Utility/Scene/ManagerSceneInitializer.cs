@@ -1,4 +1,5 @@
-﻿using System;
+using DebugLogExtension;
+using System;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -16,7 +17,7 @@ namespace Utility
             }
             else
             {
-                Debug.LogWarning("Manager scene not found.");
+                "Manager scene not found.".DebugLogWarning();
             }
         }
 #endif

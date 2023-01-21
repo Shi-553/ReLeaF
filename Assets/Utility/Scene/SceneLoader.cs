@@ -1,3 +1,4 @@
+using DebugLogExtension;
 using System;
 using System.Collections;
 using System.Linq;
@@ -51,7 +52,7 @@ namespace Utility
             Current = SceneManager.GetActiveScene();
             if (Current.name == "" && Current.path == "")
             {
-                Debug.LogWarning("ビルド設定にないので上手く遷移しないかも");
+                "ビルド設定にないので上手く遷移しないかも".DebugLogWarning();
             }
             fadeImage = loading.GetComponentInChildren<Image>();
         }
@@ -137,7 +138,7 @@ namespace Utility
             Current = SceneManager.GetSceneByBuildIndex(type.GetBuildIndex());
             SceneManager.SetActiveScene(Current);
 
-            Debug.Log($"Changed to <b>{CurrentType}</b>");
+            $"Changed to <b>{CurrentType}</b>".DebugLog();
             yield return null;
 
             Time.timeScale = 1;
@@ -203,7 +204,7 @@ namespace Utility
             Current = SceneManager.GetSceneByBuildIndex(scene.GetBuildIndex());
             SceneManager.SetActiveScene(Current);
 
-            Debug.Log($"Override to <b>{CurrentType}</b>");
+            $"Override to <b>{CurrentType}</b>".DebugLog();
 
             changeing = null;
         }
@@ -217,7 +218,7 @@ namespace Utility
             Current = Background.Value;
             Background = null;
             SceneManager.SetActiveScene(Current);
-            Debug.Log($"Unoverride to <b>{CurrentType}</b>");
+            $"Unoverride to <b>{CurrentType}</b>".DebugLog();
 
             foreach (var obj in pauseScene.GetRootGameObjects())
             {
