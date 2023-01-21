@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+using DebugLogExtension;
+using UnityEngine;
 
 namespace Utility
 {
@@ -18,6 +19,7 @@ namespace Utility
         {
             if (this == null)
                 return;
+            GetType().DebugLog();
             Destroy(gameObject);
         }
         public virtual void OnGetPool()
