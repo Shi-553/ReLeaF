@@ -47,6 +47,5 @@ namespace ReLeaf
         }
 
         public Vector3 GetItemLocalPos() => Offset * Index;
-        public Vector3 GetItemWorldPos() => transform.parent.position + GetItemLocalPos();
     }
 }

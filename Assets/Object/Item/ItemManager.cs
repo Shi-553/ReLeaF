@@ -40,7 +40,7 @@ namespace ReLeaf
                     if (itemCount == index)
                         index--;
                     Selector.gameObject.SetActive(true);
-                    Selector.transform.position = Current.GetItemWorldPos();
+                    Selector.transform.localPosition = Current.GetItemLocalPos();
                 }
 
 
@@ -56,7 +56,7 @@ namespace ReLeaf
             {
                 index = (ItemCount != 0) ? ((value + ItemCount) % ItemCount) : 0;
                 UpdateDescription();
-                Selector.transform.position = Current.GetItemWorldPos();
+                Selector.transform.localPosition = Current.GetItemLocalPos();
             }
             get => index;
         }
@@ -69,7 +69,7 @@ namespace ReLeaf
             else
             {
                 var description = Current.Item.ItemBaseInfo.Description;
-                ItemDescription.Singleton.SetItemDescription(description, itemOffset * Index);
+                ItemDescription.Singleton.SetItemDescription(description, Current.GetItemLocalPos());
             }
         }
         ItemUI Current => itemUIs[index];
