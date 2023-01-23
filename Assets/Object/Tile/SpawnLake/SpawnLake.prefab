@@ -144,6 +144,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   enabledLake: {fileID: 8061256242064378231}
   disabledLake: {fileID: 6109399508640483313}
+  seLakeClean: {fileID: 11400000, guid: c7bbbb0f4d0447846831f1b02b71c6a5, type: 2}
 --- !u!1 &6605961037822139586
 GameObject:
   m_ObjectHideFlags: 0

@@ -57,6 +57,9 @@ namespace ReLeaf
         [SerializeField]
         SpawnLakeGroup sharkSpawn;
 
+        [SerializeField]
+        AudioInfo seTutorialRight;
+
         readonly static string ACTION_TEXT_COLOR = "<color=#1A4FF3>";
         readonly static string NORMAL_TEXT_COLOR = "<color=black>";
 
@@ -108,6 +111,7 @@ namespace ReLeaf
 
             {
                 text.text = "いいね！！";
+                SEManager.Singleton.Play(seTutorialRight);
                 yield return new WaitForSeconds(niceWaitTime);
             }
 
@@ -125,6 +129,7 @@ namespace ReLeaf
 
             {
                 text.text = "最高！！！！";
+                SEManager.Singleton.Play(seTutorialRight);
                 yield return new WaitForSeconds(niceWaitTime);
             }
 
@@ -162,6 +167,7 @@ namespace ReLeaf
             itemManager.CanThrow = false;
             {
                 text.text = "ナイス！！落としたアイテムを拾おう！";
+                SEManager.Singleton.Play(seTutorialRight);
 
                 float time = Time.time;
                 yield return new WaitUntil(() => itemManager.ItemCount != 0);
@@ -199,6 +205,7 @@ namespace ReLeaf
 
             {
                 text.text = "ブラボー！！敵が湧かなくなったよ！";
+                SEManager.Singleton.Play(seTutorialRight);
                 yield return new WaitForSeconds(autoNextWaitTime);
             }
 
@@ -240,6 +247,7 @@ namespace ReLeaf
 
             {
                 text.text = $"OK！！さらに進んでルームに入ろう！";
+                SEManager.Singleton.Play(seTutorialRight);
                 yield return WaitOnEnter(thirdEnterChecker);
             }
 
