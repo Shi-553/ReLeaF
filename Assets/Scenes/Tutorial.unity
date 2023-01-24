@@ -2278,6 +2278,7 @@ MonoBehaviour:
   itemPrefab3: {fileID: 7938020037131085787, guid: 5289edd1e12710349bbcf55dc3c85a3d, type: 3}
   crabSpawn: {fileID: 793525190}
   sharkSpawn: {fileID: 1415990328}
+  seTutorialRight: {fileID: 11400000, guid: 5c389ca9539f7b64f81f8e6a77472caa, type: 2}
 --- !u!114 &1015560490
 MonoBehaviour:
   m_ObjectHideFlags: 0

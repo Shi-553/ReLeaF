@@ -12,8 +12,9 @@ namespace ReLeaf
         Transform enabledLake;
         [SerializeField]
         Transform disabledLake;
+        [SerializeField]
+        AudioInfo seLakeClean;
 
-       
         protected override void Init(bool isFirstInit, bool callByAwake)
         {
         }
@@ -25,6 +26,7 @@ namespace ReLeaf
 
         public void ChangeToDisabledLake(SpawnLake spawnLake)
         {
+            SEManager.Singleton.Play(seLakeClean);
             spawnLake.transform.SetParent(disabledLake, true);
         }
     }
