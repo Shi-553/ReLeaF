@@ -14,6 +14,7 @@ namespace ReLeaf
             TryGetComponent(out room);
             base.Start();
             PlayerMover.Singleton.OnChangeRoom += OnChangeRoom;
+            OnChangeRoom(PlayerMover.Singleton.Room);
 
             foreach (var enemyCore in GetComponentsInChildren<EnemyCore>())
             {
