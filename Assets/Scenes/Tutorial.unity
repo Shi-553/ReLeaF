@@ -2273,6 +2273,7 @@ MonoBehaviour:
   secoundEnterChecker: {fileID: 1648104708}
   thirdEnterChecker: {fileID: 236343884}
   thirdWallRemover: {fileID: 110621260}
+  crabItemPrefab: {fileID: -6083101988017198484, guid: 48ac2c60bb094d24d9740abe1079d5d8, type: 3}
   itemPrefab1: {fileID: 6731807928956945642, guid: a279d59259f9c974eb0021e601f68a5d, type: 3}
   itemPrefab2: {fileID: 7257267185993172739, guid: b6cf4becd0f06c4478a2cdbbbee21a1f, type: 3}
   itemPrefab3: {fileID: 7938020037131085787, guid: 5289edd1e12710349bbcf55dc3c85a3d, type: 3}

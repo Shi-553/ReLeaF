@@ -46,6 +46,8 @@ namespace ReLeaf
         WallRemover thirdWallRemover;
 
         [SerializeField, Pickle]
+        ItemBase crabItemPrefab;
+        [SerializeField, Pickle]
         ItemBase itemPrefab1;
         [SerializeField, Pickle]
         ItemBase itemPrefab2;
@@ -199,7 +201,7 @@ namespace ReLeaf
 
                 yield return new WaitForSeconds(2);
 
-                AddItem(itemPrefab1);
+                AddItem(crabItemPrefab);
             }
 
 
