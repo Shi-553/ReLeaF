@@ -21,8 +21,8 @@ namespace ReLeaf
                 base.PreviewRange(tilePos, dir, returns);
                 return;
             }
-
-            previewdTilePos = DungeonManager.Singleton.WorldToTilePos(RobotMover.Singleton.transform.position);
+            if (isRunning)
+                previewdTilePos = DungeonManager.Singleton.WorldToTilePos(RobotMover.Singleton.transform.position);
             foreach (var weakLocalTilePos in Info.ThrustingList)
             {
                 var pos = previewdTilePos + weakLocalTilePos;
