@@ -43,6 +43,8 @@ namespace ReLeaf
             if (PlayerMover.Singleton.Room == room && !AnyRoomBlastTargetCount)
             {
                 RoomBlastRateUI.Singleton.Inactive();
+                if (ValueRate < 1.0f)
+                    DestroyAllUI.Singleton.ShowDestroyAll();
             }
         }
 
