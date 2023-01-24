@@ -38,8 +38,8 @@ namespace Utility
 
                         if (singletonInstance != null)
                         {
-                            singletonInstance.Init(true, false);
                             isInitialized = true;
+                            singletonInstance.Init(true, false);
                         }
                         else
                         {
@@ -62,12 +62,15 @@ namespace Utility
                 return;
             }
 
-            Init(!isInitialized, true);
-            if (!isInitialized)
+            var isInit = isInitialized;
+
+            if (!isInit)
             {
                 isInitialized = true;
                 singletonInstance = this as T;
             }
+            Init(!isInit, true);
+
         }
 
 
