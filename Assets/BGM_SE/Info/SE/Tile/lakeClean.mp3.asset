@@ -13,4 +13,4 @@ MonoBehaviour:
   m_Name: lakeClean.mp3
   m_EditorClassIdentifier: 
   clip: {fileID: 8300000, guid: 10e9db890057053418e912d7b5ab2241, type: 3}
-  volume: 0.1
+  volume: 0.15
