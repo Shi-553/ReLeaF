@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dafdad6bb71a8d349b2148c8f02c5f91, type: 3}
   m_Name: HPRecoverInfo
   m_EditorClassIdentifier: 
+  itemType: 3
   useSe: {fileID: 11400000, guid: 49241ce48b6d67146ba2695c9daa009b, type: 2}
   isImmediate: 0
   initAnimation: {fileID: 7400000, guid: 89c05b64b7dcd6a42bfb61cc3db3aa6c, type: 2}

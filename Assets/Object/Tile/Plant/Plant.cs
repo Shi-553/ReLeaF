@@ -41,7 +41,7 @@ namespace ReLeaf
         Coroutine growCo;
         public bool IsFouceGrowing { get; private set; }
 
-        protected virtual void Awake()
+        protected void Awake()
         {
             plantMeshRenderer = plantObjRoot.GetComponentInChildren<MeshRenderer>();
         }

@@ -5166,6 +5166,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   terrainTiles:
   - {fileID: 11400000, guid: 001da747823b07f45a2ab13eb1073cbe, type: 2}
+  - {fileID: 11400000, guid: 6090388b197480f4482422603d16b514, type: 2}
   terrainTileArrays:
   - tiles:
     - {fileID: 11400000, guid: 0990de19b010e804cbbe751cea55c8be, type: 2}
@@ -5176,6 +5177,9 @@ MonoBehaviour:
   - tiles:
     - {fileID: 11400000, guid: 166d001927ca49442b7b421b1722cf0f, type: 2}
     - {fileID: 11400000, guid: 50bc7626ef87ea74d8380e4cd10e9200, type: 2}
+  - tiles:
+    - {fileID: 11400000, guid: 91e63bea85a0d134383a89075a5e72a0, type: 2}
+    - {fileID: 11400000, guid: c9b9e9a917e3d6c45ad27c8701b7e18a, type: 2}
 --- !u!1 &8131149917786195263
 GameObject:
   m_ObjectHideFlags: 0

@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 495b4c4168d5d7844afece2954a42a7e, type: 3}
   m_Name: AutoGreennerItemInfo
   m_EditorClassIdentifier: 
+  itemType: 1
   useSe: {fileID: 11400000, guid: 2545d66e7020d1e489830ccedaec32da, type: 2}
   isImmediate: 0
   initAnimation: {fileID: 7400000, guid: 89c05b64b7dcd6a42bfb61cc3db3aa6c, type: 2}

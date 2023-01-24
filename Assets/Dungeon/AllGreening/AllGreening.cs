@@ -34,6 +34,9 @@ namespace ReLeaf
 
         public IEnumerator StartGreening(Vector2Int tilePos, bool useCamera, bool isFouce = false)
         {
+
+            yield return TileCulling.Singleton.StopCulling();
+
             if (isStartGreening)
             {
                 if (isFouce)

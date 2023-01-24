@@ -1079,13 +1079,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 10d0b6ec76a936e459b7a7d9939f8841, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  enemyType: 3
   enemyDamageableInfo: {fileID: 11400000, guid: 47f3fb6460f899e48be3927196f19a7d, type: 2}
   hp: 0
   specialPowerPrefab: {fileID: 6485002026488200213, guid: 0f51aeaf37149ba4585ae0bc3eb13d41, type: 3}
   weakMarkerManager: {fileID: 2990406055205962186}
   seEnemyDeath: {fileID: 11400000, guid: c60d38e1592a9f2488104785a0989e07, type: 2}
   seEnemyDamaged: {fileID: 11400000, guid: 4665586fb93c92845b4d2bbab34022a9, type: 2}
-  sprite: {fileID: 3893573754564588802}
 --- !u!50 &7484773499943557005
 Rigidbody2D:
   serializedVersion: 4

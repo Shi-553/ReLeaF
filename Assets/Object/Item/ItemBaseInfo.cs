@@ -3,10 +3,26 @@ using Utility;
 
 namespace ReLeaf
 {
+    public enum ItemType
+    {
+        AddGreeningRange,
+        AutoGreening,
+        EnemyStan,
+        HPRecover,
+        CrabSpecialPower,
+        SharkSpecialPower,
+        SeaUrchineSpecialPower,
+        SpeedUp,
+        Max
+    }
     [ClassSummary("{asset.dirname}のパラメータ")]
     [CreateAssetMenu(menuName = "Item/ItemBaseInfo")]
     public class ItemBaseInfo : ScriptableObject
     {
+        [SerializeField]
+        ItemType itemType;
+        public ItemType ItemType => itemType;
+
         [SerializeField, Rename("使用時のSE")]
         protected AudioInfo useSe;
         public AudioInfo UseSe => useSe;

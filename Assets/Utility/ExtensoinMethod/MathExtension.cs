@@ -57,12 +57,12 @@ namespace Utility
                     value -= weightTable[i];
                 }
 
-                throw new System.Exception("‚ ‚è‚¦‚ñ‚í");
+                throw new System.Exception("ã‚ã‚Šãˆã‚“ã‚");
             }
         }
 
         /// <summary>
-        /// ãŒü‚«‚ğƒfƒtƒHƒ‹ƒg‚Æ‚µ‚½Quotanion
+        /// ä¸Šå‘ãã‚’ãƒ‡ãƒ•ã‚©ãƒ«ãƒˆã¨ã—ãŸQuotanion
         /// </summary>
         public static Quaternion GetRotation(this Vector2Int dir)
         {
@@ -166,6 +166,12 @@ namespace Utility
                 return Direction.RIGHT;
 
             return Direction.NONE;
+        }
+
+        static public int Mod(int x, int m)
+        {
+            int r = x % m;
+            return r < 0 ? r + m : r;
         }
     }
 }

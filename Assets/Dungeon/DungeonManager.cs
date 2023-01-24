@@ -87,28 +87,28 @@ namespace ReLeaf
             if (isFirstInit)
             {
                 TileDic = new(tileDic);
-            }
-            if (callByAwake)
-            {
-                tilemap.RefreshAllTiles();
-#if UNITY_EDITOR
-                for (int i = 0; i < (int)TileType.Max; i++)
-                {
-                    tileCounts.Add((TileType)i, 0);
-                }
-                foreach (var tile in tileDic.Values)
-                {
-                    tileCounts[tile.TileType]++;
-                }
-                foreach (var pair in tileCounts)
-                {
-                    if (pair.Value == 0)
-                        continue;
-                    selealizeTileCounts.Add(new(pair.Key, pair.Value));
-                }
 
-#endif
             }
+        }
+        private void Start()
+        {
+            tilemap.RefreshAllTiles();
+#if UNITY_EDITOR
+            for (int i = 0; i < (int)TileType.Max; i++)
+            {
+                tileCounts.Add((TileType)i, 0);
+            }
+            foreach (var tile in tileDic.Values)
+            {
+                tileCounts[tile.TileType]++;
+            }
+            foreach (var pair in tileCounts)
+            {
+                if (pair.Value == 0)
+                    continue;
+                selealizeTileCounts.Add(new(pair.Key, pair.Value));
+            }
+#endif
         }
         protected override void UninitBeforeSceneUnload(bool isDestroy)
         {

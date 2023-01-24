@@ -10,21 +10,11 @@ namespace ReLeaf
 
         protected override void Init(bool isFirstInit, bool callByAwake)
         {
-            if (isFirstInit)
-            {
-                Rooms = GetComponentsInChildren<Room>();
-            }
         }
 
-        List<EnemyCore> allEnemyCores = new();
-
-        /// <summary>
-        /// GC free and Temporary
-        /// </summary>
-        public IReadOnlyList<EnemyCore> GetTempAllEnemyCores()
+        private void Start()
         {
-            GetAllEnemyCores(allEnemyCores);
-            return allEnemyCores;
+            Rooms = GetComponentsInChildren<Room>();
         }
 
         public void GetAllEnemyCores(List<EnemyCore> enemyCores)

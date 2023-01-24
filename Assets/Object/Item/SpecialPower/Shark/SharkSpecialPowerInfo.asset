@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a15223c52d10644478a10f158f0304bb, type: 3}
   m_Name: SharkSpecialPowerInfo
   m_EditorClassIdentifier: 
+  itemType: 5
   useSe: {fileID: 11400000, guid: 3f4e968a5953efd4896a676770419698, type: 2}
   isImmediate: 0
   initAnimation: {fileID: 7400000, guid: 89c05b64b7dcd6a42bfb61cc3db3aa6c, type: 2}

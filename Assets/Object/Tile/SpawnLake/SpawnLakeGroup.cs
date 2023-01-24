@@ -20,7 +20,7 @@ namespace ReLeaf
         public bool IsGreening => spawnLakeDic.All(t => t.Value.IsGreening);
 
 
-        void Awake()
+        void Start()
         {
             PlayerMover.Singleton.OnChangeRoom += OnChangeRoom;
             GameRuleManager.Singleton.OnChangeState += OnChangeState;

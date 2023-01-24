@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1f8227aa779a57a499002d12d07d92e0, type: 3}
   m_Name: EnemyStanItemInfo
   m_EditorClassIdentifier: 
+  itemType: 2
   useSe: {fileID: 11400000, guid: 205c70e9883d1094ebd299a2c42e9d47, type: 2}
   isImmediate: 0
   initAnimation: {fileID: 7400000, guid: 89c05b64b7dcd6a42bfb61cc3db3aa6c, type: 2}

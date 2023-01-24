@@ -6,8 +6,21 @@ using Utility;
 
 namespace ReLeaf
 {
+    public enum EnemyType
+    {
+        None,
+        Shark,
+        Crab,
+        SeaUrchin,
+        Whale
+    }
+
     public class EnemyCore : MonoBehaviour, IEnemyDamageable, IRoomBlastTarget
     {
+        [SerializeField]
+        EnemyType enemyType;
+        public EnemyType EnemyType => enemyType;
+
         [SerializeField]
         EnemyDamageableInfo enemyDamageableInfo;
 
@@ -26,7 +39,7 @@ namespace ReLeaf
         public bool IsValid => !IsDeath && !IsStan;
 
         public bool IsDeath { get; private set; }
-        public int stanCount = 0;
+        int stanCount = 0;
         public bool IsStan => stanCount > 0;
 
 

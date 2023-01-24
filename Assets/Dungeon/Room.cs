@@ -27,7 +27,6 @@ namespace ReLeaf
         Vector2Int maxTile;
         Vector2Int minTile;
 
-        public Transform EnemyRoot { get; private set; }
 
         public void Awake()
         {
@@ -36,16 +35,13 @@ namespace ReLeaf
             maxTile = tilePos;
             minTile = tilePos;
 
+            roomTilePoss.Clear();
             AddRoomTile(tilePos);
 
             foreach (var setRoom in GetComponentsInChildren<ISetRoom>())
             {
                 setRoom.SetRoom(this);
             }
-
-
-            var enemy = GetComponentInChildren<EnemyCore>();
-            EnemyRoot = enemy != null ? enemy.transform.parent : transform;
 
         }
         private void Start()
@@ -54,6 +50,32 @@ namespace ReLeaf
             {
                 PlayerMover.Singleton.Room = this;
             }
+        }
+
+        public void InitRoomTileEarly()
+        {
+            roomTilePoss.Clear();
+            AddRoomTileEarly(DungeonManager.Singleton.WorldToTilePos(transform.position));
+        }
+        void AddRoomTileEarly(Vector2Int pos)
+        {
+            var tile = DungeonManager.Singleton.Tilemap.GetTile<TerrainTile>((Vector3Int)pos);
+            if (tile == null)
+                return;
+
+            if (tile.CurrentTileObject.TileType == TileType.Wall)
+                return;
+
+            if (!roomTilePoss.Add(pos))
+                return;
+
+            if (tile.CurrentTileObject.TileType == TileType.Entrance)
+                return;
+
+            AddRoomTileEarly(pos + Vector2Int.up);
+            AddRoomTileEarly(pos + Vector2Int.down);
+            AddRoomTileEarly(pos + Vector2Int.left);
+            AddRoomTileEarly(pos + Vector2Int.right);
         }
 
         void AddRoomTile(Vector2Int pos)
@@ -99,6 +121,8 @@ namespace ReLeaf
 
         IEnumerator RoomBlast()
         {
+            yield return TileCulling.Singleton.StopCulling();
+
             using var _ = RobotGreening.Singleton.StartGreening();
 
             RobotMover.Singleton.Sprite.sortingOrder++;
@@ -139,6 +163,9 @@ namespace ReLeaf
             RobotMover.Singleton.UpdateManualOperation(PlayerCore.Singleton.transform.position, 50, true, 1);
 
             co = null;
+
+            yield return new WaitForSeconds(1);
+            yield return TileCulling.Singleton.RestartCulling();
         }
         IEnumerator Attack()
         {
@@ -164,7 +191,8 @@ namespace ReLeaf
 
 
 #if UNITY_EDITOR
-        void AddRoomTileInEdior(Vector2Int pos)
+
+        void AddRoomTileInEditor(Vector2Int pos)
         {
             var tile = DungeonManager.Singleton.Tilemap.GetTile<TerrainTile>((Vector3Int)pos);
             if (tile == null)
@@ -181,16 +209,15 @@ namespace ReLeaf
             if (tile.CurrentTileObject.TileType == TileType.Entrance)
                 return;
 
-            AddRoomTileInEdior(pos + Vector2Int.up);
-            AddRoomTileInEdior(pos + Vector2Int.down);
-            AddRoomTileInEdior(pos + Vector2Int.left);
-            AddRoomTileInEdior(pos + Vector2Int.right);
+            AddRoomTileInEditor(pos + Vector2Int.up);
+            AddRoomTileInEditor(pos + Vector2Int.down);
+            AddRoomTileInEditor(pos + Vector2Int.left);
+            AddRoomTileInEditor(pos + Vector2Int.right);
         }
-
         private void OnDrawGizmos()
         {
             roomTilePoss.Clear();
-            AddRoomTileInEdior((Vector2Int)DungeonManager.Singleton.Tilemap.WorldToCell(transform.position));
+            AddRoomTileInEditor((Vector2Int)DungeonManager.Singleton.Tilemap.WorldToCell(transform.position));
             foreach (var pos in roomTilePoss)
             {
                 Gizmos.DrawSphere(DungeonManager.Singleton.TilePosToWorld(pos), 0.1f);

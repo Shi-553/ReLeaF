@@ -9,7 +9,7 @@ namespace ReLeaf
         public int MaxGreeningCount { get; protected set; }
 
         [SerializeField, Rename("目標緑化率")]
-        float targetRate = 0.7f;
+        public float targetRate = 0.7f;
 
         [SerializeField, ReadOnly]
         float value;

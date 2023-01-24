@@ -40,6 +40,7 @@ namespace ReLeaf
 
         public event Action<Room> OnChangeRoom;
         public event Action<Vector2Int> OnGreening;
+        public event Action<Vector2Int> OnChangeTilePos;
 
         Room room;
         public Room Room
@@ -153,6 +154,8 @@ namespace ReLeaf
                 TryGetComponent(out mover);
                 isKnockback = false;
                 energyGauge.Slider = PlayerStatusUI.Singleton.EnelgySlider;
+                TilePos = DungeonManager.Singleton.WorldToTilePos(transform.position);
+                OldTilePos = TilePos;
             }
         }
 
@@ -220,6 +223,9 @@ namespace ReLeaf
                 isForeachingWaitGreeningTiles = false;
                 waitGreeningTiles.Clear();
             }
+
+            if (WasChangedTilePosThisFrame)
+                OnChangeTilePos?.Invoke(TilePos);
         }
         public IEnumerator KnockBack(Vector3 impulse)
         {
