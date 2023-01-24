@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Linq;
 using UnityEngine;
@@ -20,6 +21,9 @@ namespace ReLeaf
 
         public Vector2Int TilePos { get; private set; }
         public Vector3 WorldPos { get; private set; }
+
+        public event Action<EnemyMover> OnSpawnEnemy;
+
         private void Awake()
         {
             TilePos = DungeonManager.Singleton.WorldToTilePos(transform.position);
@@ -50,6 +54,7 @@ namespace ReLeaf
 
             StartCoroutine(co);
 
+            OnSpawnEnemy?.Invoke(enemy);
             return enemy;
         }
 

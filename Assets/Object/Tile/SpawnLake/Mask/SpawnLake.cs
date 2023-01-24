@@ -1,3 +1,5 @@
+using System;
+
 namespace ReLeaf
 {
     public class SpawnLake : TileObject
@@ -6,6 +8,8 @@ namespace ReLeaf
 
         public override bool CanGreening(bool useSpecial) => useSpecial && !IsGreening;
         public override bool IsAlreadyGreening => IsGreening;
+
+        public event Action OnGreening;
 
         protected override void Start()
         {
@@ -17,6 +21,8 @@ namespace ReLeaf
             IsGreening = true;
             GamepadVibrator.Singleton.Vibrate(GamepadVibrator.VibrationStrength.Normal, 0.2f);
             SpawnLakeManager.Singleton.ChangeToDisabledLake(this);
+
+            OnGreening?.Invoke();
         }
     }
 }

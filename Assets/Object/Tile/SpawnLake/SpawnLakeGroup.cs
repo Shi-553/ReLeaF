@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
@@ -19,12 +20,11 @@ namespace ReLeaf
         public bool CanSpawn { get; set; } = true;
         public bool IsGreening => spawnLakeDic.All(t => t.Value.IsGreening);
 
-
-        void Start()
+        void Awake()
         {
+
             PlayerMover.Singleton.OnChangeRoom += OnChangeRoom;
             GameRuleManager.Singleton.OnChangeState += OnChangeState;
-
             transform.GetComponentsInChildren(targets);
             targets.ForEach(t => t.Group = this);
 
@@ -32,6 +32,15 @@ namespace ReLeaf
 
             if (spawnLakeDic.Count == 0)
                 Debug.LogWarning("湖がない", gameObject);
+
+            spawnLakeDic.Values.ForEach(s => s.OnGreening += OnGreening);
+        }
+        public event Action OnGreeningAll;
+
+        private void OnGreening()
+        {
+            if (IsGreening)
+                OnGreeningAll?.Invoke();
         }
 
         void AddTarget(Vector2Int pos)

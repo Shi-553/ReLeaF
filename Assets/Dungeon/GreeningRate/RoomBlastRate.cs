@@ -1,19 +1,53 @@
+using Utility;
+
 namespace ReLeaf
 {
     public class RoomBlastRate : GreeningRateBase
     {
         Room room;
 
+        int roomBlastTargetCount = 0;
+        public bool AnyRoomBlastTargetCount => roomBlastTargetCount > 0;
+
         protected override void Start()
         {
             TryGetComponent(out room);
             base.Start();
             PlayerMover.Singleton.OnChangeRoom += OnChangeRoom;
+
+            foreach (var enemyCore in GetComponentsInChildren<EnemyCore>())
+            {
+                enemyCore.OnDeath += Greening;
+                roomBlastTargetCount++;
+            }
+            foreach (var spawnLakeGroups in GetComponentsInChildren<SpawnLakeGroup>())
+            {
+                spawnLakeGroups.Targets.ForEach(t => t.OnSpawnEnemy += OnSpawnEnemy);
+                spawnLakeGroups.OnGreeningAll += Greening;
+                roomBlastTargetCount++;
+            }
+
+
+        }
+
+        private void OnSpawnEnemy(EnemyMover mover)
+        {
+            mover.GetComponent<EnemyCore>().OnDeath += Greening;
+            roomBlastTargetCount++;
+        }
+
+        private void Greening()
+        {
+            roomBlastTargetCount--;
+            if (PlayerMover.Singleton.Room == room && !AnyRoomBlastTargetCount)
+            {
+                RoomBlastRateUI.Singleton.Inactive();
+            }
         }
 
         private void OnChangeRoom(Room playerRoom)
         {
-            if (playerRoom == room && ValueRate <= 1.0f)
+            if (playerRoom == room && ValueRate <= 1.0f && AnyRoomBlastTargetCount)
             {
                 RoomBlastRateUI.Singleton.Active();
                 RoomBlastRateUI.Singleton.SetValue(ValueRate);
@@ -37,7 +71,8 @@ namespace ReLeaf
         }
         protected override void Finish()
         {
-            room.GreeningRoom();
+            if (AnyRoomBlastTargetCount)
+                room.GreeningRoom();
         }
 
 
