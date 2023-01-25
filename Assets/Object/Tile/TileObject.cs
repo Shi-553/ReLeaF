@@ -38,7 +38,7 @@ namespace ReLeaf
         public Vector2Int TilePos { get; set; }
         public bool IsInvincible { get; set; }
 
-        new Collider2D collider2D;
+        Collider2D tileCollider;
 
         bool enableCollider = true;
         public bool EnableCollider
@@ -50,8 +50,8 @@ namespace ReLeaf
                     return;
 
                 enableCollider = value;
-                if (collider2D != null)
-                    collider2D.enabled = value;
+                if (tileCollider != null)
+                    tileCollider.enabled = value;
             }
         }
         MeshRenderer[] renderers;
@@ -79,7 +79,7 @@ namespace ReLeaf
 
         protected virtual void Start()
         {
-            collider2D = GetComponentInChildren<Collider2D>();
+            tileCollider = GetComponentInChildren<Collider2D>();
             renderers = GetComponentsInChildren<MeshRenderer>(true);
         }
         protected override void InitImpl()
