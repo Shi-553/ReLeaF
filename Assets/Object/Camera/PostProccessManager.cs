@@ -9,11 +9,11 @@ namespace ReLeaf
     public class PostProccessManager : SingletonBase<PostProccessManager>
     {
         ColorAdjustments colorAdjustments;
-        float lightModeColor;
         [SerializeField]
         float changeDuration = 0.5f;
         [SerializeField]
         float darkModeColor = 0.4f;
+        float lightModeColor = 0.9649041f;
 
         public override bool DontDestroyOnLoad => false;
 
@@ -26,9 +26,15 @@ namespace ReLeaf
                     .TryGet(out colorAdjustments);
 
                 lightModeColor = colorAdjustments.colorFilter.value.r;
+
             }
         }
+        protected override void OnDestroy()
+        {
+            base.OnDestroy();
 
+            colorAdjustments.colorFilter.value = new(lightModeColor, lightModeColor, lightModeColor, colorAdjustments.colorFilter.value.a);
+        }
         public void ToDarkMode()
         {
             if (co != null)
