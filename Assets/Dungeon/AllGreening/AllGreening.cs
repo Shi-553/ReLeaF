@@ -75,6 +75,13 @@ namespace ReLeaf
 
         IEnumerator Greening(Vector2Int startPos)
         {
+            foreach (var tile in DungeonManager.Singleton.TileDic.Values)
+            {
+                if (tile is Plant plant)
+                {
+                    plant.IsInvincible = true;
+                }
+            }
             // 負荷の低いうちにおおよそ確保しておく
             var worldStartPos = DungeonManager.Singleton.TilePosToWorld(startPos);
 
