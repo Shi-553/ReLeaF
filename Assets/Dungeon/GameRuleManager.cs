@@ -116,11 +116,14 @@ namespace ReLeaf
             SEManager.Singleton.Play(seReady);
             yield return NotificationUI.Singleton.Notice(NotificationUI.NotificationType.GameReady, 1.0f);
 
+            var co = NotificationUI.Singleton.Notice(NotificationUI.NotificationType.GameStart, 1.0f);
+
+            yield return new WaitForSeconds(0.1f);
             SEManager.Singleton.Play(seStart);
 
             State = GameRuleState.Playing;
 
-            yield return NotificationUI.Singleton.Notice(NotificationUI.NotificationType.GameStart, 1.0f);
+            yield return co;
 
             BGMManager.Singleton.Play(bgmStage1);
         }
