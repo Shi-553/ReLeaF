@@ -64,7 +64,7 @@ Camera:
   m_Depth: 0
   m_CullingMask:
     serializedVersion: 2
-    m_Bits: 1025
+    m_Bits: 9217
   m_RenderingPath: -1
   m_TargetTexture: {fileID: 8400000, guid: 53b35ed9a3fabb74296e37535b786220, type: 2}
   m_TargetDisplay: 0
@@ -637,7 +637,6 @@ MonoBehaviour:
       list:
       - {fileID: 11400000, guid: 2d647e75c15227948b952e1175a315c4, type: 2}
       - {fileID: 11400000, guid: 0c1d8da08c8bdec43b11e9983dfc3b81, type: 2}
-  seSpeedUp: {fileID: 11400000, guid: 772e8f02ac89f7e4cad4fa2f5e89e4c5, type: 2}
 --- !u!50 &7234929495377642534
 Rigidbody2D:
   serializedVersion: 4
@@ -717,7 +716,6 @@ MonoBehaviour:
   damagedFlashingInterval: 0.1
   damagedFlashingAlpha: 0.5
   seDamaged: {fileID: 11400000, guid: 7aa91e4919feaf5489e7df122751deb0, type: 2}
-  seRecovered: {fileID: 0}
   seInvincible: {fileID: 11400000, guid: 36dc8438661aba44ca60426cb040d2a6, type: 2}
 --- !u!58 &285955042789145649
 CircleCollider2D:
