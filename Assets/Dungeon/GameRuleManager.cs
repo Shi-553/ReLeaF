@@ -178,6 +178,7 @@ namespace ReLeaf
         /// </summary>
         void Finish()
         {
+            PlayerController.Singleton.ChangeToUI();
             PlayerCore.Singleton.gameObject.SetActive(false);
             RobotMover.Singleton.gameObject.SetActive(false);
             ItemDescription.Singleton.ResetItemDescription();
