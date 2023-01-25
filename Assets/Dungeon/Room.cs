@@ -149,6 +149,8 @@ namespace ReLeaf
             RoomBlastRateUI.Singleton.Inactive();
             RoomVirtualCamera.Singleton.EndRoomBlast();
 
+            if (GameRuleManager.Singleton.IsFinished)
+                yield break;
 
             PostProccessManager.Singleton.ToLightMode();
 
