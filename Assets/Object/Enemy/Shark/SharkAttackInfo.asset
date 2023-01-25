@@ -17,4 +17,4 @@ MonoBehaviour:
   atk: 3
   speed: 20
   range: 5
-  knockBackPower: 4
+  knockBackPower: 30

@@ -32,6 +32,7 @@ namespace Utility
         }
         private void FixedUpdate()
         {
+            rigid.velocity = Vector2.zero;
             IsMove = beforeMove != Vector2.zero;
 
             if (IsMove)
