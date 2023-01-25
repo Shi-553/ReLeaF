@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 1966247940048921173}
   - component: {fileID: 1966247940048921195}
   - component: {fileID: 1966247940048921172}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: ship
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -93,7 +93,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1966247940178139650}
   - component: {fileID: -6322426331666612731}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: OBJ_ship
   m_TagString: Wall
   m_Icon: {fileID: 0}
@@ -141,7 +141,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1501109080177847379}
   - component: {fileID: 6527016432067015666}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: model
   m_TagString: Wall
   m_Icon: {fileID: 0}
@@ -200,6 +200,14 @@ PrefabInstance:
     - target: {fileID: 3556380978872311179, guid: 0a23d3c8b511bb24f8f933f85e9e5160, type: 3}
       propertyPath: m_Name
       value: sand
+      objectReference: {fileID: 0}
+    - target: {fileID: 3556380978872311179, guid: 0a23d3c8b511bb24f8f933f85e9e5160, type: 3}
+      propertyPath: m_Layer
+      value: 13
+      objectReference: {fileID: 0}
+    - target: {fileID: 3660980644157755159, guid: 0a23d3c8b511bb24f8f933f85e9e5160, type: 3}
+      propertyPath: m_Layer
+      value: 13
       objectReference: {fileID: 0}
     - target: {fileID: 4135835703703190571, guid: 0a23d3c8b511bb24f8f933f85e9e5160, type: 3}
       propertyPath: m_RootOrder

@@ -22,6 +22,8 @@ namespace ReLeaf
             GamepadVibrator.Singleton.Vibrate(GamepadVibrator.VibrationStrength.Normal, 0.2f);
             SpawnLakeManager.Singleton.ChangeToDisabledLake(this);
 
+            var worldPos = DungeonManager.Singleton.TilePosToWorld(TilePos);
+            TileEffectManager.Singleton.SetEffect(TileEffectType.Blast, worldPos);
             OnGreening?.Invoke();
         }
     }

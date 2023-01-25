@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7086116008421973517}
   - component: {fileID: 6047236915248241953}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: model
   m_TagString: Wall
   m_Icon: {fileID: 0}
@@ -76,7 +76,7 @@ GameObject:
   - component: {fileID: 5379185326975055411}
   - component: {fileID: 5379185326975055409}
   - component: {fileID: 5379185326975055408}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: wood2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -158,7 +158,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5379185327012916814}
   - component: {fileID: 3140086363204884295}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: OBJ_house
   m_TagString: Wall
   m_Icon: {fileID: 0}
@@ -207,7 +207,7 @@ GameObject:
   - component: {fileID: 5379185327592977312}
   - component: {fileID: 5379185327592977318}
   - component: {fileID: 5379185327592977313}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: wood3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -290,7 +290,7 @@ GameObject:
   - component: {fileID: 5379185327797672910}
   - component: {fileID: 5379185327797672908}
   - component: {fileID: 5379185327797672911}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: wood4
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -373,7 +373,7 @@ GameObject:
   - component: {fileID: 5379185327848102609}
   - component: {fileID: 5379185327848102615}
   - component: {fileID: 5379185327848102614}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: door
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -456,7 +456,7 @@ GameObject:
   - component: {fileID: 5379185328195343082}
   - component: {fileID: 5379185328195343080}
   - component: {fileID: 5379185328195343083}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: wood2 (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -539,7 +539,7 @@ GameObject:
   - component: {fileID: 5379185328519989661}
   - component: {fileID: 5379185328519989635}
   - component: {fileID: 5379185328519989634}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: wood
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -622,7 +622,7 @@ GameObject:
   - component: {fileID: 5379185328740072880}
   - component: {fileID: 5379185328740072886}
   - component: {fileID: 5379185328740072881}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: wall
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -704,6 +704,14 @@ PrefabInstance:
     - target: {fileID: 3556380978872311179, guid: 0a23d3c8b511bb24f8f933f85e9e5160, type: 3}
       propertyPath: m_Name
       value: sand
+      objectReference: {fileID: 0}
+    - target: {fileID: 3556380978872311179, guid: 0a23d3c8b511bb24f8f933f85e9e5160, type: 3}
+      propertyPath: m_Layer
+      value: 13
+      objectReference: {fileID: 0}
+    - target: {fileID: 3660980644157755159, guid: 0a23d3c8b511bb24f8f933f85e9e5160, type: 3}
+      propertyPath: m_Layer
+      value: 13
       objectReference: {fileID: 0}
     - target: {fileID: 4135835703703190571, guid: 0a23d3c8b511bb24f8f933f85e9e5160, type: 3}
       propertyPath: m_RootOrder

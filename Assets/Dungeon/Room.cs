@@ -121,11 +121,16 @@ namespace ReLeaf
 
         IEnumerator RoomBlast()
         {
+            List<IRoomBlastTarget> targets = new();
+            GetComponentsInChildren(targets);
+
+            targets = targets.Where(t => t.CanGreening()).ToList();
+            if (targets.Count == 0)
+                yield break;
+
+            targets.ForEach(g => g.BeginGreening());
+
             yield return TileCulling.Singleton.StopCulling();
-
-            using var _ = RobotGreening.Singleton.StartGreening();
-
-            RobotMover.Singleton.Sprite.sortingOrder++;
 
             RoomVirtualCamera.Singleton.BeginRoomBlast(
                 DungeonManager.Singleton.TilePosToWorld(minTile),
@@ -134,59 +139,19 @@ namespace ReLeaf
             var blendTime = Camera.main.GetComponent<CinemachineBrain>().m_DefaultBlend.m_Time;
             yield return new WaitForSeconds(blendTime);
 
-            List<IRoomBlastTarget> targets = new();
+            NotificationUI.Singleton.Notice(NotificationUI.NotificationType.Blast, 1);
+            yield return new WaitForSeconds(0.5f);
+            targets.ForEach(t => t.Greening());
 
-            GetComponentsInChildren(targets);
-
-            targets = targets.Where(t => t.CanGreening()).ToList();
-
-            targets.ForEach(g => g.BeginGreening());
-
-            targets.Sort((a, b) =>
-            (int)((a.Position - RobotMover.Singleton.transform.position).sqrMagnitude - (b.Position - RobotMover.Singleton.transform.position).sqrMagnitude));
-
-            for (int i = 0; i < targets.Count; i++)
-            {
-                var target = targets[i];
-
-                yield return Move(target);
-                yield return Attack();
-                target.Greening();
-            }
-
+            yield return new WaitForSeconds(0.5f);
             RoomBlastRateUI.Singleton.Inactive();
-
             RoomVirtualCamera.Singleton.EndRoomBlast();
-            RobotMover.Singleton.IsStop = false;
 
-            RobotMover.Singleton.Sprite.sortingOrder--;
-            RobotMover.Singleton.UpdateManualOperation(PlayerCore.Singleton.transform.position, 50, true, 1);
-
-            co = null;
 
             yield return new WaitForSeconds(1);
             yield return TileCulling.Singleton.RestartCulling();
-        }
-        IEnumerator Attack()
-        {
-            RobotMover.Singleton.IsStop = true;
-            RobotMover.Singleton.GetComponent<RobotAnimation>().Thrust();
-            yield return new WaitForSeconds(0.5f);
 
-        }
-        IEnumerator Move(IRoomBlastTarget target)
-        {
-            RobotMover.Singleton.IsStop = false;
-            while (true)
-            {
-                var targetPos = target.Position;
-
-                RobotMover.Singleton.UpdateManualOperation(targetPos, 50, true, 1);
-
-                yield return null;
-                if (!RobotMover.Singleton.UseManualOperation)
-                    yield break;
-            }
+            co = null;
         }
 
 

@@ -110,6 +110,7 @@ SpriteAtlas:
   - {fileID: 21300000, guid: 327ae4dc2472cda479c695f29a7cfb32, type: 3}
   - {fileID: 21300000, guid: 48dc544d2e8e1a44ebaa99ca47c66ee9, type: 3}
   - {fileID: 21300000, guid: faa7668d3be9df749a9460f43ac24bb2, type: 3}
+  - {fileID: 21300000, guid: 235592cd5e703b34bbbbb2ef31ba5fbe, type: 3}
   - {fileID: 21300000, guid: 2ea7a3dd048e9de45bcdc723b36f7d15, type: 3}
   - {fileID: 21300000, guid: efd927fd4f112524ebc699dfc69ecff9, type: 3}
   - {fileID: 21300000, guid: 2b95bb0e301a33a4db6a4472897142e8, type: 3}
@@ -180,6 +181,7 @@ SpriteAtlas:
   - cirlce
   - stage_button_6_passive
   - ui_face_1
+  - ui_blast
   - stage_button_6_active
   - ui_over_ilust
   - stage_button_2_active

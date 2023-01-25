@@ -1,4 +1,4 @@
-﻿using UnityEngine;
+using UnityEngine;
 using Utility;
 
 namespace ReLeaf
@@ -7,6 +7,7 @@ namespace ReLeaf
     {
         ToLeaf,
         ToSand,
+        Blast,
         Max
     }
     [ClassSummary("タイルエフェクト情報")]

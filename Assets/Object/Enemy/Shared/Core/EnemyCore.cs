@@ -82,7 +82,11 @@ namespace ReLeaf
             {
                 for (int y = 0; y < enemyMover.TileSize.y; y++)
                 {
-                    DungeonManager.Singleton.SowSeed(new Vector2Int(enemyMover.TilePos.x + x, enemyMover.TilePos.y + y), true);
+                    var pos = new Vector2Int(enemyMover.TilePos.x + x, enemyMover.TilePos.y + y);
+                    DungeonManager.Singleton.SowSeed(pos, true);
+
+                    var worldPos = DungeonManager.Singleton.TilePosToWorld(pos);
+                    TileEffectManager.Singleton.SetEffect(TileEffectType.Blast, worldPos);
                 }
             }
 

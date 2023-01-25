@@ -69,10 +69,6 @@ namespace ReLeaf
 
 
         [SerializeField]
-        GameObject gameReadyObj;
-        [SerializeField]
-        GameObject gamestartObj;
-        [SerializeField]
         GameObject gameclearObj;
         [SerializeField]
         GameObject gameoverObj;
@@ -116,17 +112,15 @@ namespace ReLeaf
         IEnumerator WaitReady()
         {
             yield return new WaitForSeconds(0.5f);
-            gameReadyObj.SetActive(true);
+
             SEManager.Singleton.Play(seReady);
-            yield return new WaitForSeconds(1);
-            gameReadyObj.SetActive(false);
-            gamestartObj.SetActive(true);
+            yield return NotificationUI.Singleton.Notice(NotificationUI.NotificationType.GameReady, 1.0f);
+
             SEManager.Singleton.Play(seStart);
 
             State = GameRuleState.Playing;
 
-            yield return new WaitForSeconds(1);
-            gamestartObj.SetActive(false);
+            yield return NotificationUI.Singleton.Notice(NotificationUI.NotificationType.GameStart, 1.0f);
 
             BGMManager.Singleton.Play(bgmStage1);
         }

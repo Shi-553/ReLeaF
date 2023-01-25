@@ -44,7 +44,7 @@ namespace ReLeaf
             {
                 RoomBlastRateUI.Singleton.Inactive();
                 if (ValueRate < 1.0f)
-                    DestroyAllUI.Singleton.ShowDestroyAll();
+                    NotificationUI.Singleton.Notice(NotificationUI.NotificationType.DestroyAll, 3);
             }
         }
 

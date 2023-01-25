@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5978878467600750410}
   - component: {fileID: 700480944283043951}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: model
   m_TagString: Wall
   m_Icon: {fileID: 0}
@@ -69,7 +69,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3682836576834569587}
   - component: {fileID: -7913552390301891449}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: OBJ_solt_2_1
   m_TagString: Wall
   m_Icon: {fileID: 0}
@@ -118,7 +118,7 @@ GameObject:
   - component: {fileID: 3682836577230552881}
   - component: {fileID: 3682836577230552894}
   - component: {fileID: 3682836577230552895}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: SM_solt_3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -200,6 +200,14 @@ PrefabInstance:
     - target: {fileID: 3556380978872311179, guid: 0a23d3c8b511bb24f8f933f85e9e5160, type: 3}
       propertyPath: m_Name
       value: sand
+      objectReference: {fileID: 0}
+    - target: {fileID: 3556380978872311179, guid: 0a23d3c8b511bb24f8f933f85e9e5160, type: 3}
+      propertyPath: m_Layer
+      value: 13
+      objectReference: {fileID: 0}
+    - target: {fileID: 3660980644157755159, guid: 0a23d3c8b511bb24f8f933f85e9e5160, type: 3}
+      propertyPath: m_Layer
+      value: 13
       objectReference: {fileID: 0}
     - target: {fileID: 4135835703703190571, guid: 0a23d3c8b511bb24f8f933f85e9e5160, type: 3}
       propertyPath: m_RootOrder
