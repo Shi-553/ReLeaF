@@ -66,7 +66,7 @@ Camera:
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
-    m_Bits: 8799
+    m_Bits: 8287
   m_RenderingPath: -1
   m_TargetTexture: {fileID: 0}
   m_TargetDisplay: 0
@@ -219,7 +219,7 @@ Camera:
   m_Depth: 0
   m_CullingMask:
     serializedVersion: 2
-    m_Bits: 6568
+    m_Bits: 7080
   m_RenderingPath: -1
   m_TargetTexture: {fileID: 0}
   m_TargetDisplay: 0
@@ -308,6 +308,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2849413711710839429}
   - component: {fileID: 4001135580222829599}
+  - component: {fileID: 935736043455974971}
   m_Layer: 0
   m_Name: Global Volume
   m_TagString: Untagged
@@ -347,6 +348,20 @@ MonoBehaviour:
   blendDistance: 0
   weight: 1
   sharedProfile: {fileID: 11400000, guid: 5dce4c8ded7ff0e4c811cbc390e39a9c, type: 2}
+--- !u!114 &935736043455974971
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 569457975528685093}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2a6ab5b5725807445a953cc5aeea6605, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  changeDuration: 0.5
+  darkModeColor: 0.4
 --- !u!1 &1735165316881561157
 GameObject:
   m_ObjectHideFlags: 0

@@ -118,7 +118,6 @@ namespace ReLeaf
                 co = StartCoroutine(RoomBlast());
         }
 
-
         IEnumerator RoomBlast()
         {
             List<IRoomBlastTarget> targets = new();
@@ -127,6 +126,8 @@ namespace ReLeaf
             targets = targets.Where(t => t.CanGreening()).ToList();
             if (targets.Count == 0)
                 yield break;
+
+            PostProccessManager.Singleton.ToDarkMode();
 
             targets.ForEach(g => g.BeginGreening());
 
@@ -137,16 +138,19 @@ namespace ReLeaf
                 DungeonManager.Singleton.TilePosToWorld(maxTile));
 
             var blendTime = Camera.main.GetComponent<CinemachineBrain>().m_DefaultBlend.m_Time;
-            yield return new WaitForSeconds(blendTime);
+            yield return new WaitForSeconds(blendTime + 0.1f);
 
             var co = NotificationUI.Singleton.Notice(NotificationUI.NotificationType.Blast, 1);
             yield return new WaitForSeconds(0.1f);
             targets.ForEach(t => t.Greening());
 
             yield return co;
+
             RoomBlastRateUI.Singleton.Inactive();
             RoomVirtualCamera.Singleton.EndRoomBlast();
 
+
+            PostProccessManager.Singleton.ToLightMode();
 
             yield return new WaitForSeconds(1);
             yield return TileCulling.Singleton.RestartCulling();
