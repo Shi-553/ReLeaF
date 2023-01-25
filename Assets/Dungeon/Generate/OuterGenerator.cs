@@ -1,6 +1,6 @@
 using System.Linq;
-using UnityEditor.SceneManagement;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.Tilemaps;
 
 namespace ReLeaf
@@ -40,7 +40,7 @@ namespace ReLeaf
 
         Transform Find(string name)
         {
-            var roots = EditorSceneManager.GetActiveScene().GetRootGameObjects();
+            var roots = SceneManager.GetActiveScene().GetRootGameObjects();
 
             var obj = roots.FirstOrDefault(g => g.name == name);
             if (obj == null)
