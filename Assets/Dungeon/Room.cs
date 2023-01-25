@@ -140,10 +140,10 @@ namespace ReLeaf
             yield return new WaitForSeconds(blendTime);
 
             NotificationUI.Singleton.Notice(NotificationUI.NotificationType.Blast, 1);
-            yield return new WaitForSeconds(0.5f);
+            yield return new WaitForSeconds(0.1f);
             targets.ForEach(t => t.Greening());
 
-            yield return new WaitForSeconds(0.5f);
+            yield return new WaitForSeconds(0.9f);
             RoomBlastRateUI.Singleton.Inactive();
             RoomVirtualCamera.Singleton.EndRoomBlast();
 
