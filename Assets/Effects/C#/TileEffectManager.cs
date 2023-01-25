@@ -11,7 +11,7 @@ namespace ReLeaf
 
         PoolArray pool;
 
-        public override bool DontDestroyOnLoad => false;
+        public override bool DontDestroyOnLoad => true;
 
         protected override void Init(bool isFirstInit, bool callByAwake)
         {

@@ -5,7 +5,7 @@ namespace ReLeaf
 {
     public class DamageValueEffectManager : SingletonBase<DamageValueEffectManager>
     {
-        public override bool DontDestroyOnLoad => false;
+        public override bool DontDestroyOnLoad => true;
 
         Pool effectPool;
         [SerializeField]
