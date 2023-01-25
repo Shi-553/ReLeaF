@@ -149,10 +149,10 @@ namespace ReLeaf
             RoomBlastRateUI.Singleton.Inactive();
             RoomVirtualCamera.Singleton.EndRoomBlast();
 
-            if (GameRuleManager.Singleton.IsFinished)
-                yield break;
 
             PostProccessManager.Singleton.ToLightMode();
+            if (GameRuleManager.Singleton.IsFinished)
+                yield break;
 
             yield return new WaitForSeconds(1);
             yield return TileCulling.Singleton.RestartCulling();
