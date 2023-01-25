@@ -19,7 +19,8 @@ namespace Utility
         {
             if (this == null)
                 return;
-            GetType().DebugLog();
+            if (Application.isEditor)
+                GetType().DebugLog();
             Destroy(gameObject);
         }
         public virtual void OnGetPool()
