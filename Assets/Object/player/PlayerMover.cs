@@ -288,7 +288,7 @@ namespace ReLeaf
 
             if (tileObject.TileType == TileType.Entrance && tileObject is EntranceTile entrance)
             {
-                if (!entrance.Room.ContainsRoom(TilePos))
+                if (entrance.Room != null && !entrance.Room.ContainsRoom(TilePos))
                     Room = null;
             }
 
