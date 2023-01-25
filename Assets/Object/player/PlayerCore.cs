@@ -75,8 +75,6 @@ namespace ReLeaf
         [SerializeField]
         AudioInfo seDamaged;
         [SerializeField]
-        AudioInfo seRecovered;
-        [SerializeField]
         AudioInfo seInvincible;
 
         float damagedTime;
@@ -139,7 +137,6 @@ namespace ReLeaf
 
         public void HPRecoverAll()
         {
-            SEManager.Singleton.Play(seRecovered);
             hpGauge.RecoveryValue(hpGauge.ValueMax);
         }
     }
