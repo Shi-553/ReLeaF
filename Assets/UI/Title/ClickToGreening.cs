@@ -16,7 +16,7 @@ namespace ReLeaf
                 if (hit)
                 {
                     var tilePos = DungeonManager.Singleton.WorldToTilePos(hit.point);
-                    GlobalCoroutine.Singleton.StartCoroutine(FindObjectOfType<AllGreening>().StartGreening(tilePos, false, true));
+                    GlobalCoroutine.Singleton.StartCoroutine(AllGreening.Singleton.StartGreening(tilePos, false, true));
                 }
             });
         }
