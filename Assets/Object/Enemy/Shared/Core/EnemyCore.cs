@@ -77,6 +77,7 @@ namespace ReLeaf
 
             attacker.Stop();
 
+            ResetWeekMarker();
             for (int x = 0; x < enemyMover.TileSize.x; x++)
             {
                 for (int y = 0; y < enemyMover.TileSize.y; y++)
@@ -84,7 +85,6 @@ namespace ReLeaf
                     DungeonManager.Singleton.SowSeed(new Vector2Int(enemyMover.TilePos.x + x, enemyMover.TilePos.y + y), true);
                 }
             }
-            ResetWeekMarker();
 
             OnDeath?.Invoke();
 
@@ -129,12 +129,8 @@ namespace ReLeaf
         {
             if (HP == 0)
                 return;
-            if (weakMarkerManager.ResetMarker(tilePos))
-            {
-                greeningCount++;
-                Damaged(atk * greeningCount);
-                return;
-            }
+            greeningCount++;
+            Damaged(atk * greeningCount);
         }
 
         public void Damaged(float atk)

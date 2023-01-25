@@ -8,24 +8,26 @@ namespace ReLeaf
         {
             enemyDamageable = damageable;
 
-            if (DungeonManager.Singleton.TryGetTile<Plant>(tilePos, out var plant))
+            if (DungeonManager.Singleton.TryGetTile<Plant>(TilePos, out var plant))
             {
                 plant.IsSetWeakMarker = true;
             }
         }
         protected override void UninitImpl()
         {
-            if (DungeonManager.Singleton != null && DungeonManager.Singleton.TryGetTile<Plant>(tilePos, out var plant))
+            if (DungeonManager.Singleton != null && DungeonManager.Singleton.TryGetTile<Plant>(TilePos, out var plant))
             {
                 plant.IsSetWeakMarker = false;
             }
         }
-        public override void OnGreening(DungeonManager.GreeningInfo info)
+        public override bool OnGreening(DungeonManager.GreeningInfo info)
         {
-            if (info.tilePos == tilePos)
+            if (info.tilePos == TilePos)
             {
-                enemyDamageable.DamagedGreening(tilePos, 1);
+                enemyDamageable.DamagedGreening(TilePos, 1);
+                return true;
             }
+            return false;
         }
     }
 }

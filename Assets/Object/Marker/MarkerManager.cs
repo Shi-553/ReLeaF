@@ -1,6 +1,5 @@
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.Linq;
 using UnityEngine;
 using Utility;
 
@@ -10,6 +9,9 @@ namespace ReLeaf
     {
 
         Dictionary<Vector2Int, MarkerBase> markers = new();
+
+        // Dictionaryをforeachで回しながら削除できないので
+        List<MarkerBase> markerBuffers = new();
 
         public ReadOnlyDictionary<Vector2Int, MarkerBase> Markers;
 
@@ -57,22 +59,11 @@ namespace ReLeaf
             }
             using var _ = GetPool<T>().Get<T>(out var marker);
 
-            marker.transform.position = worldPos;
-            marker.transform.rotation = rotation;
+            marker.transform.SetPositionAndRotation(worldPos, rotation);
 
             markers.Add(worldTilePos, marker);
-
+            markerBuffers.Add(marker);
             return marker;
-        }
-
-        public bool ResetMarker(Vector2Int worldTilePos)
-        {
-            if (markers.Remove(worldTilePos, out var marker))
-            {
-                pool.Release(marker);
-                return true;
-            }
-            return false;
         }
 
         public void ResetAllMarker()
@@ -81,6 +72,7 @@ namespace ReLeaf
             {
                 return;
             }
+            canGreeningForeach = false;
 
             foreach (var marker in markers.Values)
             {
@@ -88,17 +80,34 @@ namespace ReLeaf
                     pool.Release(marker);
             }
             markers.Clear();
+            markerBuffers.Clear();
 
         }
+        bool canGreeningForeach = false;
         private void OnGreening(DungeonManager.GreeningInfo info)
         {
             if (this != null && !gameObject.activeSelf)
                 return;
 
-            foreach (var key in markers.ToArray())
+            canGreeningForeach = true;
+            for (int i = 0; i < markerBuffers.Count; i++)
             {
-                key.Value.OnGreening(info);
+                var marker = markerBuffers[i];
+                if (marker != null)
+                {
+                    if (marker.OnGreening(info))
+                    {
+                        if (markers.Remove(marker.TilePos))
+                        {
+                            pool.Release(marker);
+                        }
+                        if (!canGreeningForeach)
+                            return;
+                        markerBuffers[i] = null;
+                    }
+                }
             }
+            canGreeningForeach = false;
         }
     }
 }
