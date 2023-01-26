@@ -56,7 +56,8 @@ namespace ReLeaf
             float time = 0;
             while (true)
             {
-                var current = Mathf.Lerp(before.r, targetColor, time / changeDuration);
+                var t = Mathf.Min(1, time / changeDuration);
+                var current = Mathf.Lerp(before.r, targetColor, t);
 
                 colorAdjustments.colorFilter.value = new(current, current, current, before.a);
                 yield return null;
