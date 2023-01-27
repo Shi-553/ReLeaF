@@ -22,7 +22,7 @@ namespace ReLeaf
                 return;
             }
             if (isRunning)
-                previewdTilePos = DungeonManager.Singleton.WorldToTilePos(RobotMover.Singleton.transform.position);
+                previewdTilePos = PlayerMover.Singleton.TilePos;
             foreach (var weakLocalTilePos in Info.ThrustingList)
             {
                 var pos = previewdTilePos + weakLocalTilePos;
