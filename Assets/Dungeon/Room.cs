@@ -140,11 +140,11 @@ namespace ReLeaf
             var blendTime = Camera.main.GetComponent<CinemachineBrain>().m_DefaultBlend.m_Time;
             yield return new WaitForSeconds(blendTime + 0.1f);
 
-            var co = NotificationUI.Singleton.Notice(NotificationUI.NotificationType.Blast, 1);
+            var noticeCo = NotificationUI.Singleton.Notice(NotificationUI.NotificationType.Blast, 1);
             yield return new WaitForSeconds(0.1f);
             targets.ForEach(t => t.Greening());
 
-            yield return co;
+            yield return noticeCo;
 
             RoomBlastRateUI.Singleton.Inactive();
             RoomVirtualCamera.Singleton.EndRoomBlast();
