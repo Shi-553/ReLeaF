@@ -2148,7 +2148,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   <MaxGreeningCount>k__BackingField: 0
-  targetRate: 0.55
+  targetRate: 0.53
   value: 0
 --- !u!114 &1716499409
 MonoBehaviour:
