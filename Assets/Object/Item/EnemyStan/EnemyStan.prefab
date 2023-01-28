@@ -105,7 +105,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 51c3f2dc7dfa3f0408a5407bdf584d39, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 408849e21c72f114ab88ccf6a964ad04, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -165,7 +165,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   itemBaseInfo: {fileID: 11400000, guid: 7284f3df75219dd42bb79b0770298d00, type: 2}
-  enemyStan: {fileID: 11400000, guid: 205c70e9883d1094ebd299a2c42e9d47, type: 2}
 --- !u!58 &4384070283387547719
 CircleCollider2D:
   m_ObjectHideFlags: 0
