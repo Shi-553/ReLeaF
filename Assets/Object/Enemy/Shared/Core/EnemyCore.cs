@@ -165,7 +165,7 @@ namespace ReLeaf
             {
                 if (collision.TryGetComponent<Plant>(out var plant) && plant.IsInvincible)
                 {
-                    Damaged(999);
+                    Damaged(9999);
                 }
             }
         }
@@ -177,7 +177,7 @@ namespace ReLeaf
         }
         public void Greening()
         {
-            Damaged(999);
+            Damaged(9999);
         }
 
 

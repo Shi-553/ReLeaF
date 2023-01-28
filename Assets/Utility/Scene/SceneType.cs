@@ -14,6 +14,18 @@ public enum SceneType
 
     Tutorial = 7,
 
+    stage1 = 8,
+
+    stage2 = 9,
+
+    stage3 = 10,
+
+    stage4 = 11,
+
+    stage5 = 12,
+
+    stage6 = 13,
+
 }
 public static class SceneTypeExtension
 {
@@ -26,6 +38,12 @@ public static class SceneTypeExtension
           SceneType.Menu => 2,              
           SceneType.SampleScene => 3,              
           SceneType.Tutorial => 4,              
+          SceneType.stage1 => 5,              
+          SceneType.stage2 => 6,              
+          SceneType.stage3 => 7,              
+          SceneType.stage4 => 8,              
+          SceneType.stage5 => 9,              
+          SceneType.stage6 => 10,              
           _ => 0,                                
       };                                         
    }
@@ -42,6 +60,12 @@ public static class SceneTypeExtension
           2 => SceneType.Menu,              
           3 => SceneType.SampleScene,              
           4 => SceneType.Tutorial,              
+          5 => SceneType.stage1,              
+          6 => SceneType.stage2,              
+          7 => SceneType.stage3,              
+          8 => SceneType.stage4,              
+          9 => SceneType.stage5,              
+          10 => SceneType.stage6,              
           _ => 0,                                
       };                                         
    }

@@ -13,6 +13,7 @@ namespace ReLeaf
         SharkSpecialPower,
         SeaUrchineSpecialPower,
         SpeedUp,
+        WhaleSpecialPower,
         Max
     }
     [ClassSummary("{asset.dirname}のパラメータ")]

@@ -105,6 +105,7 @@ SpriteAtlas:
   - {fileID: 616156991, guid: 5ab77553eb8b53548b921a1994a66f6f, type: 3}
   - {fileID: 21300000, guid: d818cd63e609bbd42964f41e571f1019, type: 3}
   - {fileID: 21300000, guid: c0e187b3409748240ab251bd37064940, type: 3}
+  - {fileID: 21300000, guid: 4eecb00534e2bfe4d861a6abf1b3066e, type: 3}
   - {fileID: -145370474, guid: bba63c35942e0f7408f4abaed3b4ace9, type: 3}
   - {fileID: -2056190887, guid: bba63c35942e0f7408f4abaed3b4ace9, type: 3}
   - {fileID: 2124868060, guid: bba63c35942e0f7408f4abaed3b4ace9, type: 3}
@@ -390,6 +391,7 @@ SpriteAtlas:
   - spriteseet_Crabwalk_idou_ver2_5
   - item_sp_uni
   - robotfollow_runL
+  - item_sp_kuzira
   - spriteseet_whale_dfeat_18
   - spriteseet_whale_dfeat_19
   - spriteseet_whale_dfeat_10

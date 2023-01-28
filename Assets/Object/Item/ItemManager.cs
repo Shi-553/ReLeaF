@@ -187,6 +187,12 @@ namespace ReLeaf
 
             useCo = StartCoroutine(useItem.Item.Use(mover.TilePos, ItemDir));
 
+            if (!useItem.Item.IsUsing)
+            {
+                useCo = null;
+                yield break;
+            }
+
             yield return new WaitUntil(() => useItem.Item.IsFinishUse);
 
             itemUIs.RemoveAt(Index);

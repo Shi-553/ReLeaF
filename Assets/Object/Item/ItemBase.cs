@@ -80,7 +80,7 @@ namespace ReLeaf
             yield return new WaitForSeconds(1);
             itemCollider.enabled = true;
         }
-        public int UseCount { get; private set; }
+        public int UseCount { get; protected set; }
         public bool IsUsing => UseCount > 0;
 
         public bool IsFinishUse { protected set; get; }
@@ -95,8 +95,11 @@ namespace ReLeaf
                 GamepadVibrator.Singleton.Vibrate(GamepadVibrator.VibrationStrength.Normal, 0.1f);
                 SEManager.Singleton.Play(itemBaseInfo.UseSe);
                 yield return UseImpl(tilePos, dir);
-                IsFinishUse = true;
-                Destroy(gameObject);
+                if (IsUsing)
+                {
+                    IsFinishUse = true;
+                    Destroy(gameObject);
+                }
             }
 
         }
