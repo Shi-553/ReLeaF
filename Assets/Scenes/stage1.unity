@@ -2233,19 +2233,19 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 276260407388137133, guid: 7b86956310467cc499b30ab5246e1404, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -4.47
+      value: -3.0299997
       objectReference: {fileID: 0}
     - target: {fileID: 276260407388137133, guid: 7b86956310467cc499b30ab5246e1404, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -20.69
+      value: -18.377
       objectReference: {fileID: 0}
     - target: {fileID: 523518180277268233, guid: 7b86956310467cc499b30ab5246e1404, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -4.47
+      value: -3.0299997
       objectReference: {fileID: 0}
     - target: {fileID: 523518180277268233, guid: 7b86956310467cc499b30ab5246e1404, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -20.69
+      value: -18.377
       objectReference: {fileID: 0}
     - target: {fileID: 1735165316881561157, guid: 7b86956310467cc499b30ab5246e1404, type: 3}
       propertyPath: m_Name
@@ -2382,7 +2382,7 @@ GameObject:
   - component: {fileID: 9020821008736504436}
   - component: {fileID: 9020821008736504435}
   - component: {fileID: 9020821008736504437}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: Tilemap
   m_TagString: Wall
   m_Icon: {fileID: 0}
