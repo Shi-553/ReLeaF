@@ -206,7 +206,7 @@ MonoBehaviour:
   enemyType: 4
   enemyDamageableInfo: {fileID: 11400000, guid: 7ae50f6831aed274da2870a60542ef0d, type: 2}
   hp: 0
-  specialPowerPrefab: {fileID: 0}
+  specialPowerPrefab: {fileID: 6551798159950371833, guid: b777575842a651a488cfff41c4be8191, type: 3}
   weakMarkerManager: {fileID: 2990406055205962186}
   seEnemyDeath: {fileID: 11400000, guid: c60d38e1592a9f2488104785a0989e07, type: 2}
   seEnemyDamaged: {fileID: 11400000, guid: 4665586fb93c92845b4d2bbab34022a9, type: 2}
