@@ -614,9 +614,9 @@ MonoBehaviour:
   moveSpeed: 5
   dashSpeedMagnification: 2
   knockBackDampingRate: 0.9
-  dashConsumeEnergy: 4
-  energyRecoveryPoint: 0.11
-  energyAutoRecoveryPoint: 0.05
+  dashConsumeEnergy: 3.9
+  energyRecoveryPoint: 0.15
+  energyAutoRecoveryPoint: 0.3
   energyGauge: {fileID: 5839813641606943567}
   rangeCollider: {fileID: 285955042789145649}
   seSandMove:
