@@ -26,7 +26,7 @@ public enum SceneType
 
     stage6 = 13,
 
-    End = 14,
+    stage7 = 14,
 
 }
 public static class SceneTypeExtension
@@ -46,7 +46,7 @@ public static class SceneTypeExtension
           SceneType.stage4 => 8,              
           SceneType.stage5 => 9,              
           SceneType.stage6 => 10,              
-          SceneType.End => 11,              
+          SceneType.stage7 => 11,              
           _ => 0,                                
       };                                         
    }
@@ -69,7 +69,7 @@ public static class SceneTypeExtension
           8 => SceneType.stage4,              
           9 => SceneType.stage5,              
           10 => SceneType.stage6,              
-          11 => SceneType.End,              
+          11 => SceneType.stage7,              
           _ => 0,                                
       };                                         
    }

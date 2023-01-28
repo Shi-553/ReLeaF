@@ -55,6 +55,7 @@ SpriteAtlas:
   - {fileID: 21300000, guid: 7c6de301370232a478bb239907316d8a, type: 3}
   - {fileID: 21300000, guid: b54f0061a95619f47be9892b40a900b9, type: 3}
   - {fileID: 21300000, guid: 31fa2381953c37b48806adb9d8f37ac3, type: 3}
+  - {fileID: 21300000, guid: fb83b2b11bfb34b4c8e4425ddbd9e1ae, type: 3}
   - {fileID: 21300000, guid: 5f04c602d0451374c849707aab53c383, type: 3}
   - {fileID: 21300000, guid: 730275627c784294f957061b2d6a030d, type: 3}
   - {fileID: 21300000, guid: 124a4dc23b9bc00418f0b75f5353dc9b, type: 3}
@@ -126,6 +127,7 @@ SpriteAtlas:
   - menu_button_backtitle
   - frame
   - stage_button_1_active
+  - stage_button_7_active
   - T_dark
   - stage_button_select
   - ui_clear_2
