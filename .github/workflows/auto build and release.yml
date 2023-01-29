@@ -57,7 +57,7 @@ jobs:
       - name: FileMove
         run: |
              pwsh -command "Move-Item ./build/StandaloneWindows64 ./build/ReLeaF"
-        
+             pwsh -command "Move-Item ./*.txt ./build/ReLeaF"
       - name: Check
         run: pwsh -command "If( -not ( Test-Path ./build/ReLeaF/* )){ exit 1 }"
         
